@@ -32,4 +32,4 @@ Language Development
 Appointment
 -----------
 
-TODO: Info on appointment/change processes.
+TBD: Info on appointment/change processes.

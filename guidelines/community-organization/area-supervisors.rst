@@ -61,4 +61,4 @@ Consensus Building
 Appointment
 -----------
 
-TODO: Info on appointment/change processes.
+Area Supervisors are appointed by the Sponsor.

@@ -1,3 +1,5 @@
+.. _oval-mailing-lists:
+
 OVAL Mailing Lists
 ==================
 

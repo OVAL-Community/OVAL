@@ -45,4 +45,4 @@ As proposals to the language are received in the language development process, w
 Appointment
 -----------
 
-TODO: Info on appointment/change processes.
+Members of the Leadership Board are appointed by the Sponsor. All OVAL Board members participating during the time MITRE was the OVAL Sponsor have been carried forward as members of the Leadership Board.
