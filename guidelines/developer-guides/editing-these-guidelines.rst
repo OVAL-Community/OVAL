@@ -1,3 +1,5 @@
+.. _editing-these-guidelines:
+
 Editing These Guidelines
 ========================
 

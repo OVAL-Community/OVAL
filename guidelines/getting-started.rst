@@ -1,3 +1,5 @@
+.. _getting-started:
+
 Gettting Started
 ================
 
@@ -53,6 +55,3 @@ Next Steps
 ----------
 
 A list of ways to learn more (read the docs, view additional resources, etc.)
-
-
-

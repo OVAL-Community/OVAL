@@ -1,3 +1,5 @@
+.. _create-an-issue:
+
 Create an Issue
 ===============
 

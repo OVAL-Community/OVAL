@@ -1,3 +1,5 @@
+.. _oval-support-declarations:
+
 OVAL Support Declarations
 =========================
 

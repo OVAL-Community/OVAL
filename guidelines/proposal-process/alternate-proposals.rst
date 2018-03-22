@@ -1,3 +1,5 @@
+.. _alternate-proposals:
+
 Alternate Proposals
 ===================
 
