@@ -1,9 +1,11 @@
+.. _oval-design-principles:
+
 OVAL Design Principles
 ======================
 
 Requirements language in this document are defined in `RFC 2119 <https://www.ietf.org/rfc/rfc2119.txt>`_.
-Design principles are categorized as generally applicable or applicable to the versions as indicated. An 
-update mechanism is built into the language development process to account for the fact that new design 
+Design principles are categorized as generally applicable or applicable to the versions as indicated. An
+update mechanism is built into the language development process to account for the fact that new design
 principles may be desired in the future.
 
 General OVAL Design Princples

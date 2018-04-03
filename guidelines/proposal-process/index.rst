@@ -1,3 +1,5 @@
+.. _proposal-process:
+
 Proposal Process
 ================
 
@@ -18,7 +20,7 @@ High-level overview of proposal process steps with links into more detailed sect
 .. toctree::
    :caption: Proposal Process
    :maxdepth: 2
-   :hidden:   
+   :hidden:
 
    create-an-issue
    initial-proposal

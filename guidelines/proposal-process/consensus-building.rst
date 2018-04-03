@@ -1,3 +1,5 @@
+.. _consensus-building:
+
 Consensus Building
 ==================
 

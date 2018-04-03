@@ -1,3 +1,5 @@
+.. _specifications:
+
 OVAL Specifications
 ===================
 
