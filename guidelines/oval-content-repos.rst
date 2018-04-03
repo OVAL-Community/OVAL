@@ -1,3 +1,5 @@
+.. _oval-content-repositories:
+
 OVAL Content Repositories
 =========================
 

@@ -1,7 +1,9 @@
+.. _editing-these-guidelines:
+
 Editing These Guidelines
 ========================
 
-Are you interested in contributing a change to these guidelines? If so, thank you! 
+Are you interested in contributing a change to these guidelines? If so, thank you!
 
 This document is intended to help you get up and running.
 
@@ -28,13 +30,13 @@ need to install a few Python modules::
   . ./venv/bin/activate
 
   # install required python modules
-  pip install -r tool/requirements.txt
+  pip install -r tools/requirements.txt
 
 Building the Guidelines
 -----------------------
 
 On Windows::
-  
+
   make.bat
 
 On Mac/Linux::
@@ -51,7 +53,7 @@ Using reStructuredText
 These guidelines are written in reStructuredText. Learn more here:
 
 * `Sphinx reStructuredText Primer <>http://www.sphinx-doc.org/en/master/rest.html#source-code`
-* `Offical reStructuredText Documentation <http://docutils.sourceforge.net/rst.html>` 
+* `Offical reStructuredText Documentation <http://docutils.sourceforge.net/rst.html>`
 
 Important Guideline Guidelines
 ------------------------------

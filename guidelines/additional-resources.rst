@@ -1,3 +1,5 @@
+.. _addtional-resources:
+
 Additional Resources
 =====================
 

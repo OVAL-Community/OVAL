@@ -3,6 +3,8 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
+.. _welcome-to-the-guidelines:
+
 Welcome to The OVAL Community Guidelines!
 =========================================
 
@@ -36,7 +38,7 @@ Info about license and link to license page.
 
 .. toctree::
    :caption: The Guidelines
-   :maxdepth: 2   
+   :maxdepth: 2
 
    getting-started
    oval-schema-documentation/index
@@ -51,4 +53,3 @@ Info about license and link to license page.
    mailing-lists
    additional-resources
    terms-of-use
-   

@@ -1,3 +1,5 @@
+.. _initial-proposal:
+
 Initial Proposal
 ================
 
