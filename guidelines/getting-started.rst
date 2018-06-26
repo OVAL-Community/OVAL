@@ -1,7 +1,7 @@
 .. _getting-started:
 
-Gettting Started
-================
+Getting Started
+===============
 
 Are you new to OVAL? Wondering what it is and how it's used? Read on!
 
