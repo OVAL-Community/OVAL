@@ -18,7 +18,7 @@ General Responsibilities
 In general, the Sponsor will:
 
 * Function as the OVAL account owner: own all project resources such as GitHub account containing repos, mailing list accounts, etc.
-* Manage Area Supervisor appointments to ensure that each [Area of Responsibility](https://github.com/CISecurity/oval-governance-update/blob/master/process_artifacts/areas-of-responsibility.md) has at least one Area Supervisor.
+* Manage Area Supervisor appointments to ensure that each `Area of Responsibility <https://github.com/CISecurity/oval-governance-update/blob/master/process_artifacts/areas-of-responsibility.md>`_ has at least one Area Supervisor.
 
 Language Governance Responsibilities
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
