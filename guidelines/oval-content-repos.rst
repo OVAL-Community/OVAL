@@ -24,7 +24,7 @@ The ALTEX-SOFT repository OVALdb consist of OVAL Definitions that correspond to 
 |Ubuntu|
 ^^^^^^^^
 .. |Ubuntu| image:: images/canonical.png
-   :width: 139x
+   :width: 139px
    :height: 19px
 
 This page provides OVAL xml content for the latest Ubuntu operating system versions.
