@@ -34,11 +34,11 @@ Get Involved
 
 | `Language Proposal Process <http://oval-community-guidelines.readthedocs.io/en/latest/proposal-process/index.html>`_
 | `OVAL Community GitHub <https://github.com/OVAL-Community/OVAL>`_
-
+|
 | `Contributing OVAL Content <https://github.com/CISecurity/OVALRepo/blob/master/CONTRIBUTING.md>`_
 | `CIS OVAL Repository <https://github.com/CISecurity/OVALRepo>`_
-
-`Mailing Lists <http://oval-community-guidelines.readthedocs.io/en/latest/mailing-lists.html>`_
+|
+| `Mailing Lists <http://oval-community-guidelines.readthedocs.io/en/latest/mailing-lists.html>`_
 
 License
 -------
