@@ -8,32 +8,42 @@
 Welcome to The OVAL Community Guidelines!
 =========================================
 
-Welcome message tbd.
+Welcome to the guidelines for OVAL, the Open Vulnerability and Assessment Language. These guidelines are designed to explain everything you need to know to start contributing to OVAL (or link you to places to ask questions, should the explanations not suffice), as well as provide a variety of standards and resources to the community.
 
 What is OVAL?
 -------------
 
-Brief description of OVAL for someone who's never heard of it. Link to OVAL Intro.
+OVAL is an open language built by security experts, system administrators, and software developers to universalize assessment and reporting on the state of computer systems.
 
 Who is the OVAL Community?
 --------------------------
 
-Brief description of the community and it's role is maintaining OVAL.
+The `OVAL Community <http://oval-community-guidelines.readthedocs.io/en/latest/community-organization/index.html>`_ is the group responsible for proposals about anything and everything OVAL related. It comprises general members, Area Supervisors, the `Leadership Board <https://oval.cisecurity.org/community/board_members>`_, and the `Sponsor <https://www.cisecurity.org/>`_. The community maintains, fixes, and improves OVAL through an established governance process.
 
 Learn More
 ----------
 
-Links into guidelines pages that have more info about OVAL and related resources (Repos, mailing lists, etc.)
+`OVAL Community <http://oval-community-guidelines.readthedocs.io/en/latest/community-organization/index.html>`_
+`Repository Registry <http://oval-community-guidelines.readthedocs.io/en/latest/oval-content-repos.html>`_
+`CIS OVAL Repository (GitHub) <https://github.com/CISecurity/OVALRepo>`_
+`CIS OVAL Repository (Static Site) <https://oval.cisecurity.org>`_
+`Mailing Lists <http://oval-community-guidelines.readthedocs.io/en/latest/mailing-lists.html>`_
 
 Get Involved
 ------------
 
-List of ways to get involved with links to relevant pages (community org, proposal process, mailing list)
+`Language Proposal Process <http://oval-community-guidelines.readthedocs.io/en/latest/proposal-process/index.html>`_
+`OVAL Community GitHub <https://github.com/OVAL-Community/OVAL>`_
+
+`Contributing OVAL Content <https://github.com/CISecurity/OVALRepo/blob/master/CONTRIBUTING.md>`_
+`CIS OVAL Repository <https://github.com/CISecurity/OVALRepo>`_
+
+`Mailing Lists <http://oval-community-guidelines.readthedocs.io/en/latest/mailing-lists.html>`_
 
 License
 -------
 
-Info about license and link to license page.
+`Terms of Use <http://oval-community-guidelines.readthedocs.io/en/latest/terms-of-use.html>`_
 
 
 .. toctree::
