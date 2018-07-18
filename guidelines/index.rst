@@ -23,20 +23,20 @@ The `OVAL Community <http://oval-community-guidelines.readthedocs.io/en/latest/c
 Learn More
 ----------
 
-`OVAL Community <http://oval-community-guidelines.readthedocs.io/en/latest/community-organization/index.html>`_
-`Repository Registry <http://oval-community-guidelines.readthedocs.io/en/latest/oval-content-repos.html>`_
-`CIS OVAL Repository (GitHub) <https://github.com/CISecurity/OVALRepo>`_
-`CIS OVAL Repository (Static Site) <https://oval.cisecurity.org>`_
-`Mailing Lists <http://oval-community-guidelines.readthedocs.io/en/latest/mailing-lists.html>`_
+| `OVAL Community <http://oval-community-guidelines.readthedocs.io/en/latest/community-organization/index.html>`_
+| `Repository Registry <http://oval-community-guidelines.readthedocs.io/en/latest/oval-content-repos.html>`_
+| `CIS OVAL Repository (GitHub) <https://github.com/CISecurity/OVALRepo>`_
+| `CIS OVAL Repository (Static Site) <https://oval.cisecurity.org>`_
+| `Mailing Lists <http://oval-community-guidelines.readthedocs.io/en/latest/mailing-lists.html>`_
 
 Get Involved
 ------------
 
-`Language Proposal Process <http://oval-community-guidelines.readthedocs.io/en/latest/proposal-process/index.html>`_
-`OVAL Community GitHub <https://github.com/OVAL-Community/OVAL>`_
+| `Language Proposal Process <http://oval-community-guidelines.readthedocs.io/en/latest/proposal-process/index.html>`_
+| `OVAL Community GitHub <https://github.com/OVAL-Community/OVAL>`_
 
-`Contributing OVAL Content <https://github.com/CISecurity/OVALRepo/blob/master/CONTRIBUTING.md>`_
-`CIS OVAL Repository <https://github.com/CISecurity/OVALRepo>`_
+| `Contributing OVAL Content <https://github.com/CISecurity/OVALRepo/blob/master/CONTRIBUTING.md>`_
+| `CIS OVAL Repository <https://github.com/CISecurity/OVALRepo>`_
 
 `Mailing Lists <http://oval-community-guidelines.readthedocs.io/en/latest/mailing-lists.html>`_
 
