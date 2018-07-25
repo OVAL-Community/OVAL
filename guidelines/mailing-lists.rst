@@ -8,8 +8,10 @@ OVAL_Repository_
 
 .. _OVAL_Repository: http://lists.cisecurity.org/mailman/listinfo/oval_repository_lists.cisecurity.org
 
-'OVAL_Developer <http://lists.cisecurity.org/mailman/listinfo/oval_developer_lists.cisecurity.org>'_
+OVAL_Developer_
   A list used to discuss OVAL as a language and to provide support to its implementation community.
+
+.. _OVAL_Developer: http://lists.cisecurity.org/mailman/listinfo/oval_developer_lists.cisecurity.org
 
 OVAL_Board
   A list intended to be used by members of the OVAL Board for Board-related discussions. Participation on this list is by invitation.
