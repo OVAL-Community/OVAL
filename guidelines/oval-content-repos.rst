@@ -3,7 +3,7 @@
 OVAL Content Repositories
 =========================
 
-Intro tbd.
+OVAL Content Repositories exist to preserve OVAL definitions and make them available for public use. While the `CIS Repository <https://oval.cisecurity.org/repository>`_ is the official repository, others exist that contain content specific to operating systems, applications, and software vendors.
 
 Repositories
 ------------
