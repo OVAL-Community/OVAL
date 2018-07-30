@@ -15,7 +15,50 @@ In general, members of the leadership board are:
 Leadership Board Members
 ------------------------
 
-TODO: List of members.
+* Current Members
+  * `Assuria Limited<https://www.assuria-online.com/>`_ - Chris Wood
+  * `BeyondTrust, Inc.<https://www.beyondtrust.com/>`_ - Morey Haber
+  * `HPE<https://www.hp.com/country/us/en/uc/welcome.html>`_ - TBD
+  * `IBM<https://www.ibm.com/>`_ - TBD
+  * `McAfee<https://www.mcafee.com/>`_ - Kent Landfield
+  * `Joval Continuous Monitoring<https://joval.org/>`_ - David Solin
+  * `Cisco Systems, Inc.<https://www.cisco.com/>`_ - Panos Kampanakis, Omar Santos
+  * `Modulo<https://www.modulo.com/>`_ - Alberto Bastos
+  * `Qualys, Inc.<https://www.qualys.com/>`_ - Tigran Gevorgyan
+  * `SecPod Technologies<https://www.secpod.com/>`_ - Chandrashekhar B
+  * `Symantec Corporation<https://www.symantec.com/>`_ - Jamie Cromer, Amaresh Shirsat
+  * `ThreatGuard, Inc.<https://www.threatguard.com/>`_ - Randy Taylor
+  * `VMware<https://www.vmware.com/>`_ - Dennis Moreau
+  * `Center for Internet Security<https://www.cisecurity.org>`_ - William Munyan, Adam Montville
+  * `Depository Trust & Clearing Corporation (DTCC)<https://www.dtcc.com/>`_ - Dale Rich
+  * `Rockport Systems<https://www.rockportsystems.com/>`_ - Carl Banzhof
+  * `Unified Compliance<https://www.unifiedcompliance.com/>`_ - Stephen Pillero
+  * Individual - Blake Frantz, Nils Puhlmann
+  * `Red Hat, Inc.<https://www.redhat.com/>`_ - Martin Preisler
+  * `National Institute of Standards and Technology<https://www.nist.gov/>`_ - Melanie Cook, Dave Waltermire
+  * `SPAWAR, U.S. Navy<https://www.spawar.navy.mil/>`_ - Jack Vander Pol
+
+
+* Past Members
+  * Emeritus
+    * Jay Beale
+    * Anton Chuvakin
+    * Mark Cox
+    * Javier Fernandez-Sanguino
+    * Robert Hollis
+    * Matt Hansbury
+  * Former
+    * Melissa Albanese
+    * Anthony Busciglio
+    * Nick Connor
+    * Pat Fetty
+    * Jay Graver
+    * Gary Miliefsky
+    * Stephen Quinn
+    * Noah Salzman
+    * Amol Sarwate
+    * Michael Tan
+    * Eric Walker
 
 Responsibilities
 ----------------
