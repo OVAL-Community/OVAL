@@ -47,6 +47,7 @@ Leadership Board Members
     * Javier Fernandez-Sanguino
     * Robert Hollis
     * Matt Hansbury
+    * Tim "TK" Keanini
   * Former
     * Melissa Albanese
     * Anthony Busciglio
