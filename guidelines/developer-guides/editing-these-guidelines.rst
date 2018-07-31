@@ -12,9 +12,9 @@ Prerequisites
 
 You'll need the following in order to get started:
 
-# A fork of `The OVAL Community github repository <https://github.com/OVAL-Community/OVAL>`
-# A local working copy of your fork
-# Python 3.x
+#. A fork of `The OVAL Community github repository <https://github.com/OVAL-Community/OVAL>`
+#. A local working copy of your fork
+#. Python 3.x
 
 Initial Setup
 -------------
