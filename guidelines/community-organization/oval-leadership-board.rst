@@ -95,7 +95,7 @@ As proposals to the language are received in the language development process, w
 
 Appointment
 -----------
-New members of the Leadership Board are nominated by one or more existing members of the Leadership Board. Appointment to the board is confirmed by a simple majority vote by the Leadership Board as a whole. [#]_ The Sponsor will consider suggestions for Leadership Board appointments from the OVAL Community at large. Such suggestions should be directed to oval@cisecurity.org.
+New members of the Leadership Board are nominated by one or more existing members of the Leadership Board. Appointment to the board is confirmed by a simple majority vote by the Leadership Board as a whole. [#]_ The Sponsor will facilitate such votes in a timely basis.
 
 .. rubric: Footnotes
 
