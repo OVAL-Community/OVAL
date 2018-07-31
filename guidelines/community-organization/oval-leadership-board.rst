@@ -17,7 +17,7 @@ Leadership Board Members
 
 * Current Members
   * Organizational
-  
+
     * `Assuria Limited <https://www.assuria-online.com/>`_ - Chris Wood
     * `BeyondTrust, Inc. <https://www.beyondtrust.com/>`_ - Morey Haber
     * `Center for Internet Security <https://www.cisecurity.org>`_ - William Munyan, Adam Montville
@@ -25,7 +25,7 @@ Leadership Board Members
     * `Depository Trust & Clearing Corporation (DTCC) <https://www.dtcc.com/>`_ - Dale Rich
     * `HPE <https://www.hp.com/country/us/en/uc/welcome.html>`_ - TBD
     * `IBM <https://www.ibm.com/>`_ - TBD
-    * `Joval Continuous Monitoring <https://joval.org/>`_ - David Solin
+    * `Joval Continuous Monitoring <https://joval.org/>`_ - David Solin, David Ries
     * `McAfee <https://www.mcafee.com/>`_ - Kent Landfield
     * `Modulo <https://www.modulo.com/>`_ - Alberto Bastos
     * `National Institute of Standards and Technology <https://www.nist.gov/>`_ - Melanie Cook, Dave Waltermire
