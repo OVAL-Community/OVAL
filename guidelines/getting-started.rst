@@ -8,13 +8,9 @@ Are you new to OVAL? Wondering what it is and how it's used? Read on!
 What is OVAL?
 -------------
 
-OVAL is an open, standardized assertion language written in xml. With the goal of easing interoperability between security tools, it includes content for vulnerability assessment, configuration management, system inventory, and patch management.
+OVAL is an open, standardized assertion language written in xml. With the goal of easing interoperability between security tools, it includes content for vulnerability assessment, configuration management, system inventory, and patch management. Security experts, system administrators, and software developers from industry, government, and academia have collaborated to write OVAL, and this consensus is one of its greatest attributes.
 
 Anyone can write OVAL, and we welcome new contributors.
-
-A standard format that outlines the necessary security-relevant configuration information and encodes the precise details of a specific issue
-An open alternative to closed, proprietary, and replicate efforts
-An effort that is supported by a community of security experts, system administrators, and software developers from industry, government, and academia
 
 OVAL Use Cases
 --------------
@@ -75,7 +71,20 @@ Related Standards
 
 OVAL's role in relation to XCCDF, SCE, CPE, Datastreams, etc.
 
+XCCDF
+  text
+
+SCE
+  text
+
+CPE
+  text
+
+Datastreams
+  text
+
 Next Steps
 ----------
 
 A list of ways to learn more (read the docs, view additional resources, etc.)
+* `Additional Resources <http://oval-community-guidelines.readthedocs.io/en/latest/additional-resources.html>`_
