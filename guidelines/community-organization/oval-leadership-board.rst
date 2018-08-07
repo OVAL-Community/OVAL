@@ -16,8 +16,9 @@ Leadership Board Members
 ------------------------
 
 * Current Members
+
   * Organizational
-  
+
     * `Assuria Limited <https://www.assuria-online.com/>`_ - Chris Wood
     * `BeyondTrust, Inc. <https://www.beyondtrust.com/>`_ - Morey Haber
     * `Center for Internet Security <https://www.cisecurity.org>`_ - William Munyan, Adam Montville
@@ -25,7 +26,7 @@ Leadership Board Members
     * `Depository Trust & Clearing Corporation (DTCC) <https://www.dtcc.com/>`_ - Dale Rich
     * `HPE <https://www.hp.com/country/us/en/uc/welcome.html>`_ - TBD
     * `IBM <https://www.ibm.com/>`_ - TBD
-    * `Joval Continuous Monitoring <https://joval.org/>`_ - David Solin
+    * `Joval Continuous Monitoring <https://joval.org/>`_ - David Solin, David Ries
     * `McAfee <https://www.mcafee.com/>`_ - Kent Landfield
     * `Modulo <https://www.modulo.com/>`_ - Alberto Bastos
     * `National Institute of Standards and Technology <https://www.nist.gov/>`_ - Melanie Cook, Dave Waltermire
@@ -94,7 +95,7 @@ As proposals to the language are received in the language development process, w
 
 Appointment
 -----------
-Members of the Leadership Board are appointed by the Sponsor with guidance being provided by the existing Leadership Board. [#]_ The Sponsor will consider suggestions for Leadership Board appointments from the OVAL Community at large. Such suggestions should be directed to oval@cisecurity.org.
+New members of the Leadership Board are nominated by one or more existing members of the Leadership Board. Appointment to the board is confirmed by a simple majority vote by the Leadership Board as a whole. [#]_ The Sponsor will facilitate such votes in a timely basis.
 
 .. rubric: Footnotes
 
