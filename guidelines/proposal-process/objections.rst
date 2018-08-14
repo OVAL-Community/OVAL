@@ -28,7 +28,7 @@ How To
     - Include each existing :ref:`oval-design-principles`, if any, that the Proposal conflicts with and how it conflicts
     - Include each proposed new Design Principle, if any, along with a general justification for the Design Principle and how it conflicts with the Proposal
     - Include a link to the `First Steps`_ you have taken
-#. Add resolution steps here 
+#. The relevant Area Supervisor will give the community at least 7 days to weigh in on the Objection and then, when appropriate in their judgement, assess consensus and process the Objection accordingly.
 
 FAQs
 ----
