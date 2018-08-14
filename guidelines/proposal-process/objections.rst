@@ -18,9 +18,9 @@ Before making an Objection:
 How To
 ------
 
-#. Complete the `First Steps`_ above
-#. Identify the specific :ref:`oval-design-principles` that the Proposal conflicts with. Or, if the Proposal does not conflict with an existing Design Principle, you may draft and propose a new Design Principle.
-#. Create a `New Issue <https://github.com/CISecurity/oval-governance-update/issues/new>`_ as follows:
+1. Complete the `First Steps`_ above
+2. Identify the specific :ref:`oval-design-principles` that the Proposal conflicts with. Or, if the Proposal does not conflict with an existing Design Principle, you may draft and propose a new Design Principle.
+3. Create a `New Issue <https://github.com/CISecurity/oval-governance-update/issues/new>`_ as follows:
   - Title Format: ``Objection: Proposal PR #<pull-request-#>``
   - Area Label: add any ``<Area:area-name>`` labels attached to the PR
   - Type Label: add the ``Type:Objection``
@@ -28,7 +28,7 @@ How To
     - Include each existing :ref:`oval-design-principles`, if any, that the Proposal conflicts with and how it conflicts
     - Include each proposed new Design Principle, if any, along with a general justification for the Design Principle and how it conflicts with the Proposal
     - Include a link to the `First Steps`_ you have taken
-#. The relevant Area Supervisor will give the community at least 7 days to weigh in on the Objection and then, when appropriate in their judgement, assess consensus and process the Objection accordingly.
+4. The relevant Area Supervisor will give the community at least 7 days to weigh in on the Objection and then, when appropriate in their judgement, assess consensus and process the Objection accordingly.
 
 FAQs
 ----
