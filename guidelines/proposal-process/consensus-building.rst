@@ -7,6 +7,11 @@ The intent behind consensus in the context of the OVAL Community is the notion o
 
 How To
 ------
+TODO: Describe the flow-chart.
+
+
+About Consensus
+---------------
 
 Because our process is open to the possibility of accepting proposals that may not enjoy wide interest, it may end up being the case that a proposal achieves rough consensus, even though only two or three parties support it (everyone else may be completely indifferent). In this situation, there are no objections to the proposal, but there's also not necessarily a critical mass of support. In this case, there is no harm in such a minimally supported proposal "making it through" - there are, after all, no objections to the proposal, and we must assume that those interested in that particular area are paying attention enough to otherwise object. In other words, this is why we have the desire to retain and keep interested and active Area Supervisors.
 
@@ -57,4 +62,4 @@ Documentation Links
 
 .. :rubric Footnotes
 
-.. [#] `Doodle Polls <https://doodle.com/create-choice>`_ are a good way to conduct simple polls.
+.. [#] Doodle Polls (see `this <https://doodle.com/create-choice>`_) are a good way to conduct simple polls.
