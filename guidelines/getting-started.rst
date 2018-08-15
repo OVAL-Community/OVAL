@@ -162,13 +162,13 @@ Related Standards
 -----------------
 
 XCCDF
-  The **`eXtensible Configuration Checklist Description Format <https://csrc.nist.gov/projects/security-content-automation-protocol/scap-specifications/xccdf>`_** language describes security checklists. Documents in this format may reference OVAL components or documents, as well as ones from other standards, creating a portable and flexible checklist.
+  The `**eXtensible Configuration Checklist Description Format** <https://csrc.nist.gov/projects/security-content-automation-protocol/scap-specifications/xccdf>`_ language describes security checklists. Documents in this format may reference OVAL components or documents, as well as ones from other standards, creating a portable and flexible checklist.
 
 SCE
-  The **`Script Check Engine <https://www.open-scap.org/features/other-standards/sce/>`_** complements OVAL with scripts that check things that OVAL cannot or does not. SCE results files are created as an XML. By using XLST transformations, OVAL and SCE results can be aggregated into a single HTML file or PDF document.
+  The `**Script Check Engine** <https://www.open-scap.org/features/other-standards/sce/>`_ complements OVAL with scripts that check things that OVAL cannot or does not. SCE results files are created as an XML. By using XLST transformations, OVAL and SCE results can be aggregated into a single HTML file or PDF document.
 
 CPE
-  The **`Common Platform Enumeration <https://cpe.mitre.org/specification/>`_** provides a standard naming scheme for IT platforms and systems. OVAL uses it to consistently identify the target platforms of checks and definitions.
+  The `**Common Platform Enumeration** <https://cpe.mitre.org/specification/>`_ provides a standard naming scheme for IT platforms and systems. OVAL uses it to consistently identify the target platforms of checks and definitions.
 
 Datastreams
   **Datastream** is a format that consolidates multiple SCAP components into a single file (including OVAL).
