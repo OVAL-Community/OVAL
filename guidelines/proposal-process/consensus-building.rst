@@ -10,13 +10,13 @@ How To
 
 Because our process is open to the possibility of accepting proposals that may not enjoy wide interest, it may end up being the case that a proposal achieves rough consensus, even though only two or three parties support it (everyone else may be completely indifferent). In this situation, there are no objections to the proposal, but there's also not necessarily a critical mass of support. In this case, there is no harm in such a minimally supported proposal "making it through" - there are, after all, no objections to the proposal, and we must assume that those interested in that particular area are paying attention enough to otherwise object. In other words, this is why we have the desire to retain and keep interested and active Area Supervisors.
 
-Reaching consensus is really about carrying on a conversation. Because each proposal is submitted as a GitHub issue, such conversation should be conducted via that GitHub issue, so that the entire community sees the conversation as it unfolds, and therefore has an opportunity to opine, should they have an opinion worth stating.
+Reaching consensus is really about carrying on a conversation. Because each proposal is composed of a GitHub issue and pull request, such conversation should be conducted via those GitHub constructs, so that the entire community sees the conversation as it unfolds, and therefore has an opportunity to opine, should they have an opinion worth stating.
 
-It is the responsibiltiy of all interested parties to achieve consensus. Getting to consensus is not necessarily the Area Supervisor's responsibility, nor is it exclusively the proposer's responsibility. Here are some guidelines that may help in reaching consensus:
+It is the responsibility of all interested parties to achieve consensus. Getting to consensus is not necessarily the Area Supervisor's responsibility, nor is it exclusively the proposer's responsibility. Here are some guidelines that may help in reaching consensus:
 
 - Ensure the proposal is clearly scoped
 - List each concern participants have about the proposal
-- Use quick, simple polls to quickly guage interest in a solution[#]_
+- Use quick, simple polls to quickly guage interest in a solution [#]_
 - Understand that lack of disagreement is *more important* than total agreement
 - Rough consensus is achieved when all issues are addressed, but not necessarily accommodated
 - Rough consensus is *not* about for and against cohorts
