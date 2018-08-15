@@ -37,3 +37,16 @@ Mechanics (naming, versioning, etc.)
 * Changes SHOULD NOT break backwards compatibility within their major version (i.e. 5.x, 6.x, etc.)
 * OVAL constructs MUST conform to naming conventions (http://ovalproject.github.io/getting-started/best-practices/#4-naming-conventions)
 * OVAL constructs MUST follow the versioning policy
+
+OVAL Use Cases
+--------------
+
+* **Security Advisory Distribution:** allows application and operating system vendors to release advisories in a machine-readable format, moving authoring of technical details of a vulnerability from second-hand (e.g. scanner product developers) to first-hand (product developers)
+* **Vulnerability Assessment:** increases transparency into vulnerability management process, quality of checks, and ease of feature comparison between tools
+* **Patch Management:** allows patch management vendors to quickly consume data from multiple sources
+* **Configuration Management:** eliminates the need for IT professionals to translate paper configuration documents into something that can be applied and enforced
+* **System Inventory:** shifts burden of inventory definition from best guesses by system inventory tool vendors to authoritative knowledge sources including application and operating system authors
+* **Malware Artifact Hunting:** provides a standardized format for encoding malware artifacts
+* **Network Access Control (NAC):** standardizes policy expression for policy checking and enforcement when an endpoint requests access to a network and on an ongoing basis for continued policy conformance
+* **Auditing and Centralized Audit Validation:** captures machine configuration information that allows organizations to monitor, track, and reconstruct the transition of a system’s configuration from one state to another
+* **Security Information Management Systems:** simplifies the interoperability of SIMS with a standardized data exchange format
