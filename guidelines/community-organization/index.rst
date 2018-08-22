@@ -8,7 +8,7 @@ Note that requirements langauge used within this section is defined by RFC2119_.
 The OVAL Community includes:
 
 * :ref:`community-members`: Responsible for maintaining OVAL and these governance processes by creating issues, reviewing issues, creating change proposals, collaborating on change proposals, reviewing change proposals and generally contributing to this consensus-driven process.
-* :ref:`oval-leadership-board`: Steers the OVAL mission and use cases, assists (when needed) with consensus calls, is instrumental in updating design principles, and is responsible for selecting the Official Release(s)..
+* :ref:`oval-leadership-board`: Steers the OVAL mission and use cases, assists (when needed) with consensus calls, is instrumental in updating design principles, and is responsible for selecting the Official Release(s).
 * :ref:`area-supervisors`: An Area Supervisor is responsible for the day-to-day management of its appointed area.
 * :ref:`oval-sponsor`: Mainly handles logistics for managing OVAL resources, managing area supervisor appointments, operating the OVAL Repository, and so on.
 
