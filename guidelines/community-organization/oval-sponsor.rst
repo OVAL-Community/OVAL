@@ -32,4 +32,4 @@ Language Development
 Appointment
 -----------
 
-In the event of the Sponsor relinquishing their role, they will nominate a new Sponsor to fill the role. If they do not nominate a replacement, the issue will be brought to the Leadership Board to select a new Sponsor. Nominees for this role must have the support of DHS.
+In the event of the Sponsor relinquishing their role, they will nominate a new Sponsor to fill the role. If they do not nominate a replacement, the issue will be brought to the Leadership Board to select a new Sponsor.
