@@ -7,8 +7,29 @@ The intent behind consensus in the context of the OVAL Community is the notion o
 
 How To
 ------
-TODO: Describe the flow-chart.
+The consensus building process involves four roles: Proposer, Objector, Area Supervisor, Leadership Board. Not all roles are involved in each instance of conensus building.
 
+Initial Proposal
+^^^^^^^^^^^^^^^^
+The consensus process begins when a Proposer makes a proposal (see `Initial Proposal <https://oval-community-guidelines.readthedocs.io/en/latest/proposal-process/initial-proposal.html>`_). At this point, the 45-day clock is started - if no objections/issues are raised within this 45-day period, the proposal moves directly into Consensus Call, as described below. From time to time, an initial proposal may be a response to another proposal for which one or more issues have been raised.
+
+Objection Handling
+^^^^^^^^^^^^^^^^^^
+After an initial proposal, one or more issues may be raised by anyone in the community. We refer to anyone raising such an issue as an Objector, even though some objections may be be, for example, a clarifying question. When an issue is raised, it will fall into one of the following categories:
+
+- **Clarifying question:** The Proposer must provide an answer to the question within a reasonable amount of time.
+- **Objection based on existing, or presumed missing, Design Principle:** Sometimes a proposal may be in violation of an existing Design Principle. When this is the case, the proper response is to simply address the objection as such. From time to time we expect to update our Design Principles based on an objection. When this is the case, the Proposer, Objector, and Area Supervisor work to update the Design Principle according to this process.
+- **Objection based on some other reason (i.e. unnecessary or technically unsound proposal):** The Proposer works to reasonably address the objection.
+
+In each of the above scenarios, an entire discussion may result, and at some point there will be a conclusion to the discussion. From time to time the conclusion might be a perceived impasse. Additionally, an *alternate proposal* may be created (see `Alternate Proposals <https://oval-community-guidelines.readthedocs.io/en/latest/proposal-process/alternate-proposals.html>`_).
+
+When all issues and resulting discussions are concluded, then the process moves to into Consensus Call.
+
+Consensus Call
+^^^^^^^^^^^^^^
+The purpose of a Consensus Call is to provide a 14-day period during which community members who may have missed the initial proposal and subsequent discussions have an opportunity to opine. The Area Supervisor determines when an effort is ready for a Consensus Call. From time to time, the Leadership Board may be consulted when a consensus call is too difficult for an Area Supervisor to judge.
+
+Once consensus has been reached (see About Consensus below) as judged by the Area Supervisor and the 14-day Consensus Call has come to a close, the proposal moves to release (see `Release Process <https://oval-community-guidelines.readthedocs.io/en/latest/proposal-process/release-process.html>`_).
 
 About Consensus
 ---------------
