@@ -20,29 +20,53 @@ OVAL is primarily used for assessing vulnerabilities in security configurations.
 OVAL Structure
 --------------
 
-OVAL is made up of:
+OVAL can be broken down into a series of components that ... is made up of:
+
+|Definitions|
+^^^^^^^^^^^^^
+.. |Definitions| image:: images/oval_component_1.png
+   :width: 500px
+   :height: 170px
 
 definitions
   Definitions are specifications of what endpoint information should be checked and what corresponding values are expected to be found, as well as how to interpret the results of that comparison. They comprise one or more tests, which taken together represent an externally meaningful datum, such as a vulnerability state or inventory status.
+|
 
+|Tests|
+^^^^^^^
+.. |Tests| image:: images/oval_component_2.png
+    :width: 500px
+    :height: 170px
 
 tests
   Tests are the concrete building blocks of definitions. They specify the relationship between an OVAL Object and zero or more OVAL States, matching the information to be collected with the corresponding values expected to be found.
+|
 
+|Objects|
+^^^^^^^^^
+.. |Objects| image:: images/oval_component_3.png
+    :width: 500px
+    :height: 170px
 
 objects
   Objects define what should be collected from an endpoint.
 
   *A concrete OVAL Object may define a set of 0 or more OVAL Behaviors. OVAL Behaviors are actions that can further specify the set of OVAL Items that match an OVAL Object.*
+|
 
+|States|
+^^^^^^^^
+.. |States| image:: images/oval_component_3.png
+    :width: 500px
+    :height: 170px
 
 states
   States are the expected values from an object that are compared to the information collected from an endpoint.
-
+|
 
 variables
   Variables provide a way to group one or more values for consistent reference within other OVAL content.
-
+|
 
 An Annotated Sample
 -------------------
