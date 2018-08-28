@@ -8,4 +8,4 @@ Community Members are responsible for maintaining OVAL and these governance proc
 Join Us
 -------
 
-Joining the OVAL Community is free and all you need to do is join one of our :ref:`oval-mailing-lists` and make a contribution, whiether that be asking questions, answering questions, making language proposals or contributions of other kinds. Invitation to join community with suggestions (join the mailing list, raise issues, etc.).
+Joining the OVAL Community is free and all you need to do is join one of our :ref:`oval-mailing-lists` and make a contribution, whether that be asking questions, answering questions, making language proposals or contributions of other kinds.
