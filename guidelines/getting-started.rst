@@ -20,7 +20,15 @@ OVAL is primarily used for assessing vulnerabilities in security configurations.
 OVAL Structure
 --------------
 
-OVAL can be broken down into a series of components that ... is made up of:
+OVAL can be broken down into a series of components that together represent a check, validation, or idea. This can generally be expressed as a prose sentence:
+
+|Prose|
+^^^^^^^^^^^^^
+.. |Prose| image:: images/oval_component_0.png
+   :width: 500px
+   :height: 170px
+
+This is expressed as a definition, which references or includes the other components as seen below.
 
 |Definitions|
 ^^^^^^^^^^^^^
@@ -56,7 +64,7 @@ objects
 
 |States|
 ^^^^^^^^
-.. |States| image:: images/oval_component_3.png
+.. |States| image:: images/oval_component_4.png
     :width: 500px
     :height: 170px
 
