@@ -9,16 +9,21 @@ The initial proposal submission MUST include an abstract, describing the problem
 
 Within the technical documentation, contributors MAY include links to updated OVAL language schema files, links to new OVAL schema files, and descriptive information for any elements being added to OVAL.  The element descriptions MUST include name, datatype, and description.  Contributors MAY include schema or schematron validations in the proposal as well.  Finally, the technical documentation SHOULD include proposed collection methods for any new/updated schema elements.  For example, if a new test/object/state is being added to OVAL which require parsing of command-line output, the appropriate commands and command options SHOULD be included, potentially including links to relevant "man" pages.  Any required API documentation SHOULD also be linked.
 
-(This may change - Based on the subsequent modification/acceptance of the proposal, workflow may dictage that sample content/results should come later)
+(This may change - Based on the subsequent modification/acceptance of the proposal, workflow may dictate that sample content/results should come later)
 
-Following the technical documentation, contributors SHOULD include sample content which implementers can use for testing purposes.  If the proposal author(s) have already implemented the functionality represented in the proposal, sample content plus OVAL results SHOULD be included.
+Following the technical documentation, contributors MAY include sample content, from which implementers can begin the review and consensus process.  If the proposal author(s) have already implemented the functionality represented in the proposal, sample content plus OVAL results MAY be included.
 
 How To
 ------
 
-The initial proposal process begins with a pull request.  The title of the pull request MUST follow the format "Proposal: <Title>"
+The initial proposal process MUST begin with a pull request.  
+* The title of the pull request MUST follow the ``Proposal: <Title>`` naming convention
+* The labels for the pull request MUST
+	* correspond to the label assigned to the issue for which this proposal was initiated, as noted in the `create an issue <https://oval-community-guidelines.readthedocs.io/en/latest/proposal-process/create-an-issue.html>`_ section, and
+	* contain any ``<Area: area-name>`` labels as needed.
+* The body of the pull request MUST include a reference to the issue for which this proposal was initiated.
 
-Step-by-step instuctions including CLI samples if appropriate.
+Submission of the pull request affirms the intent to begin the `consensus building <https://oval-community-guidelines.readthedocs.io/en/latest/proposal-process/consensus-building.html>`_ process, and to begin the 45-day comment period.
 
 FAQs
 ----
