@@ -47,8 +47,6 @@ How To
      - Add a comment to the Objection Issue indicating that it was not accepted
      - Close the Objection Issue
 
-Add detail for supervisor actions: if accepted, if rejected
-
 FAQs
 ----
 
