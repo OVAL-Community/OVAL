@@ -37,7 +37,7 @@ How To
    - If the Objection is accepted, the Supervisor will:
 
      - Add a comment to the Proposal PR indicating that the Objection was accepted
-     - Reject the Propsal PR
+     - Reject the Proposal PR
      - Add a comment to the Objection Issue indicating that it was accepted
      - Close the Objection Issue
 
