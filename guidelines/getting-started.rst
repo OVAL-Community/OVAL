@@ -8,7 +8,7 @@ Are you new to OVAL? Wondering what it is and how it's used? Read on!
 What is OVAL?
 -------------
 
-OVAL is an open, standardized assertion language written in xml. Used by the U.S. Government, the Center for Internet Security, Cisco, and McAfee, among many others, it is the most mature and widely adopted open source standard for security assessment. With the goal of easing interoperability between security tools, it includes content for vulnerability assessment, configuration management, system inventory, and patch management. Security experts, system administrators, and software developers from industry, government, and academia have collaborated to write OVAL, and this consensus is one of its greatest attributes.
+OVAL is an open, standardized assertion language written in XML. Used by the U.S. Government, the Center for Internet Security, Cisco, and McAfee, among many others, it is the most mature and widely adopted open source standard for security assessment. With the goal of easing interoperability between security tools, it includes content for vulnerability assessment, configuration management, system inventory, and patch management. Security experts, system administrators, and software developers from industry, government, and academia have collaborated to write OVAL, and this consensus is one of its greatest attributes.
 
 Anyone can write OVAL, and we always welcome new contributors.
 
@@ -25,19 +25,24 @@ OVAL is made up of:
 definitions
   Definitions are specifications of what endpoint information should be checked and what corresponding values are expected to be found, as well as how to interpret the results of that comparison. They comprise one or more tests, which taken together represent an externally meaningful datum, such as a vulnerability state or inventory status.
 
+
 tests
   Tests are the concrete building blocks of definitions. They specify the relationship between an OVAL Object and zero or more OVAL States, matching the information to be collected with the corresponding values expected to be found.
+
 
 objects
   Objects define what should be collected from an endpoint.
 
   *A concrete OVAL Object may define a set of 0 or more OVAL Behaviors. OVAL Behaviors are actions that can further specify the set of OVAL Items that match an OVAL Object.*
 
+
 states
   States are the expected values from an object that are compared to the information collected from an endpoint.
 
+
 variables
   Variables provide a way to group one or more values for consistent reference within other OVAL content.
+
 
 An Annotated Sample
 -------------------
@@ -162,18 +167,22 @@ Related Standards
 -----------------
 
 XCCDF
-  The `**eXtensible Configuration Checklist Description Format** <https://csrc.nist.gov/projects/security-content-automation-protocol/scap-specifications/xccdf>`_ language describes security checklists. Documents in this format may reference OVAL components or documents, as well as ones from other standards, creating a portable and flexible checklist.
+  The `eXtensible Configuration Checklist Description Format <https://csrc.nist.gov/projects/security-content-automation-protocol/scap-specifications/xccdf>`_ language describes security checklists. Documents in this format may reference OVAL components or documents, as well as ones from other standards, creating a portable and flexible checklist.
+
 
 SCE
-  The `**Script Check Engine** <https://www.open-scap.org/features/other-standards/sce/>`_ complements OVAL with scripts that check things that OVAL cannot or does not. SCE results files are created as an XML. By using XLST transformations, OVAL and SCE results can be aggregated into a single HTML file or PDF document.
+  The `Script Check Engine <https://www.open-scap.org/features/other-standards/sce/>`_ complements OVAL with scripts that check things that OVAL cannot or does not. SCE results files are created as an XML. By using XLST transformations, OVAL and SCE results can be aggregated into a single HTML file or PDF document.
+
 
 CPE
-  The `**Common Platform Enumeration** <https://cpe.mitre.org/specification/>`_ provides a standard naming scheme for IT platforms and systems. OVAL uses it to consistently identify the target platforms of checks and definitions.
+  The `Common Platform Enumeration <https://cpe.mitre.org/specification/>`_ provides a standard naming scheme for IT platforms and systems. OVAL uses it to consistently identify the target platforms of checks and definitions.
+
 
 Datastreams
   **Datastream** is a format that consolidates multiple SCAP components into a single file (including OVAL).
 
   **ARF**, or the **Asset Reporting Format**, is also called Result Datastream. It consolidates multiple results files into one.
+
 
 Next Steps
 ----------
