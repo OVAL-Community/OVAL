@@ -7,7 +7,7 @@ The Proposal Process is the way we collaborate to improve OVAL, including:
 
 - Fixing a defect in the OVAL schemas or documentation
 - Adding new features, tests, or platforms
-- Updating the Developer Guides, Content Repositories & most other information on this site
+- Updating these Guidelines (e.g. the Developer Guides, Content Repository Listings, etc.)
 - Updating this Proposal Process itself! 
 
 In fact, the only things that are NOT updated via the Proposal Process are:
@@ -26,7 +26,7 @@ Here is a quick rundown of the process. Please click through the links to read m
 #. :ref:`alternate-proposals`: community members may submit Alternate Proposals for resolving the Issue
 #. :ref:`objections`: community members may also Object to a Proposal if they think it conflicts with an OVAL Design Principle
 #. :ref:`consensus-building`: the relevant Area Supervisor decides when there is Rough Consensus for adopting a Proposal
-#. :ref:`release-process`: the adopted Propsoal is released into Development and considered for release into Stable and Official
+#. :ref:`release-process`: the adopted Proposal is released into Development and considered for release into Stable and Official
 
 .. toctree::
    :caption: Proposal Process
