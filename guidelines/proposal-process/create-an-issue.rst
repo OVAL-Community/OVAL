@@ -20,7 +20,16 @@ Labels
 How To
 ------
 
-Creating an issue is very straightforward.  Simply navigate a web browser to `the OVAL Community <https://github.com/OVAL-Community/OVAL/issues>`_ and click the "New Issue" button.  Add an appropriate title and issue information, describing the issue or question as clearly and succinctly as possible.  Once the issue has been created, assign a label by clicking the small "gear" icon adjacent to the "Labels" indicator on the right-hand-side of the page.  Select the appropriate labels prior to clicking the "Submit new issue" button.
+Creating an issue is very straightforward.  Simply navigate a web browser to `the OVAL Community <https://github.com/OVAL-Community/OVAL/issues>`_ and click the "New Issue" button.  At this point, the issue creator has options.  A number of issue templates exist to assist contributors:
+
+* **Proposal**: This template allows contributors to easily propose additions or changes to the OVAL language.
+* **Alternate Proposal**: This template allows contributors to offer an alternative to an existing proposal.
+* **Objection**: This template allows contributors to object to, or raise issues regarding an existing proposal.
+* **Bug**:  This template allows contributors to log an issue with existing OVAL language elements.
+
+Clicking the "Get started" button adjacent to the issue template navigates the user to a pre-filled issue.  The contributor may then "fill in the blanks" in the issue template to create the specific ticket.
+
+If none of the issue templates are applicable to the type of issue being created, the contributor can click the "Open a regular issue" link.  Add an appropriate title and issue information, describing the issue or question as clearly and succinctly as possible.  Select the appropriate issue label(s) by clicking the small "gear" icon adjacent to the "Labels" indicator on the right-hand-side of the page, and submit the issue to the community by clicking the "Submit new issue" button.
 
 FAQs
 ----
