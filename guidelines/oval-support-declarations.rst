@@ -211,7 +211,7 @@ OpenVAS
 | *Declared July 6, 2012*
 | *www.openvas.org/*
 |
-| OpenVAS is a vulnerability management and vulnerability scanning software framework. A feed service allows regular updates of Network Vulnerability tests (NVTs). The main security scan phase of the application collects security information about each host in the network being scanned. Subsequently, comprehensive OVAL-related processing is possible. his includes exporting system characteristics for the whole network, and applying the applications reporting framework according to OVAL Definitions.
+| OpenVAS is a vulnerability management and vulnerability scanning software framework. A feed service allows regular updates of Network Vulnerability Tests (NVTs). The main security scan phase of the application collects security information about each host in the network being scanned. Subsequently, comprehensive OVAL-related processing is possible. This includes exporting system characteristics for the whole network, and applying the applications reporting framework according to OVAL Definitions.
 |
 |   `OpenVAS <http://www.openvas.org/software.html>`_
 |   *Vulnerability Management*
