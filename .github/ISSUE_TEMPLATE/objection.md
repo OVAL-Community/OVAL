@@ -1,3 +1,9 @@
+---
+name: Objection
+about: Raise an Objection to an active Proposal
+
+---
+
 How to Raise an Objection:
 1. Review the guidelines at https://oval-community-guidelines.readthedocs.io/en/latest/proposal-process/objections.html
 2. Format this Issue's Title as follows: Objection to #<pull-request-#>: <proposal-title>
@@ -15,4 +21,5 @@ How to Raise an Objection:
 
 ## CONFLICTS WITH PROPOSED NEW DESIGN PRINCIPLE(S)
 (list each new Design Principle you are proposing, if any, along with a general justification for the Design Principle and how it conflicts with the Proposal)
+
 
