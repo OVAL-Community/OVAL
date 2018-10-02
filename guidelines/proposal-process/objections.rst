@@ -20,7 +20,7 @@ How To
 
 1. Complete the `First Steps`_ above
 2. Identify the specific :ref:`oval-design-principles` that the Proposal conflicts with. Or, if the Proposal does not conflict with an existing Design Principle, you may draft and propose a new Design Principle.
-3. Create a `New Issue Using the Objection Templace<https://github.com/OVAL-Community/OVAL/issues/new?template=objection.md>`_ as follows:
+3. Create a `New Issue Using the Objection Template <https://github.com/OVAL-Community/OVAL/issues/new?template=objection.md>`_.
 4. Add a comment to the Proposal PR linking to the Objection Issue
 5. The relevant Area Supervisor will give the community a reasonable amount of time (at least a few days) to weigh in on the Objection and then, when appropriate in their judgement, :ref:`assess consensus<consensus-building>`.
 
