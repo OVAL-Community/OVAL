@@ -20,17 +20,7 @@ How To
 
 1. Complete the `First Steps`_ above
 2. Identify the specific :ref:`oval-design-principles` that the Proposal conflicts with. Or, if the Proposal does not conflict with an existing Design Principle, you may draft and propose a new Design Principle.
-3. Create a `New Issue <https://github.com/CISecurity/oval-governance-update/issues/new>`_ as follows:
-
-   - Title Format: ``Objection to #<pull-request-#>: <proposal-title>``
-   - Area Label: add any ``Area:<area-name>`` labels attached to the PR
-   - Type Label: add the ``Type:Objection``
-   - Comments:
-
-     - Include a link to the `First Steps`_ you have taken
-     - Include each existing :ref:`Design Principles<oval-design-principles>`, if any, that the Proposal conflicts with and how it conflicts
-     - Include each proposed new Design Principle, if any, along with a general justification for the Design Principle and how it conflicts with the Proposal
-
+3. Create a `New Issue Using the Objection Templace<https://github.com/OVAL-Community/OVAL/issues/new?template=objection.md>`_ as follows:
 4. Add a comment to the Proposal PR linking to the Objection Issue
 5. The relevant Area Supervisor will give the community a reasonable amount of time (at least a few days) to weigh in on the Objection and then, when appropriate in their judgement, :ref:`assess consensus<consensus-building>`.
 
