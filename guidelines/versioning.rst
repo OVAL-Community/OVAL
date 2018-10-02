@@ -1,6 +1,6 @@
 .. _versioning:
 
-Versioning
-==========
+OVAL Versioning
+===============
 
-Details of release streams, release policies/schedules and versioning policies.
+Details of OVAL core and platform versioning schemes.
