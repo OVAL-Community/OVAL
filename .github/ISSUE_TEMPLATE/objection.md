@@ -5,13 +5,13 @@ about: Raise an Objection to an active Proposal
 ---
 
 How to Raise an Objection:
+
 1. Review the guidelines at https://oval-community-guidelines.readthedocs.io/en/latest/proposal-process/objections.html
 2. Format this Issue's Title as follows: Objection to #<pull-request-#>: <proposal-title>
 3. Add all Area:<area-name> labels attached to the PR to this Issue
 4. Add the Type:Objection label to this issue
 5. Complete the sections below
 6. Add a comment to the Proposal PR linking to this Objection Issue
-
 
 ## FIRST STEPS TAKEN
 (add links to "first steps" you have taken to collaborate, allow time and suggest a better way)
