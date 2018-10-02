@@ -11,7 +11,7 @@ How to Raise an Objection:
 4. Add the Type:Objection label to this issue
 5. Complete the sections below
 6. Add a comment to the Proposal PR linking to this Objection Issue
-----------------------------------------------------------------------------------------------
+
 
 ## FIRST STEPS TAKEN
 (add links to "first steps" you have taken to collaborate, allow time and suggest a better way)
