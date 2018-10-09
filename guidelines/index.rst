@@ -60,6 +60,7 @@ License
    community-organization/index
    proposal-process/index
    developer-guides/index
+   release-streams
    versioning
    oval-content-repos
    oval-support-declarations

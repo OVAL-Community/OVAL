@@ -50,7 +50,7 @@ On Mac/Linux::
 Using Sphinx Auto Build/Reload (Windows/Max/Linux)::
 
   cd guidelines
-  sphinx-autobuild . ../_build/html
+  sphinx-autobuild . ./_build/html
 
 Using reStructuredText
 ----------------------
