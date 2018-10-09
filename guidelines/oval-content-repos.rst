@@ -93,7 +93,7 @@ The Security Content Automation Program (SCAP) is a public free repository of se
    :width: 150px
    :height: 58px
 
-The Positive Technologies repository of OVAL content consists of OVAL Definitions collected from various sources. Created May 2012.
+The Positive Technologies repository of OVAL content consists of OVAL Definitions collected from various sources. Created May 2012. **Note that this repository is currently inactive but is being reworked as of October 2018.**
 
 `Click here for the Positive Technologies Repository <http://oval.ptsecurity.com>`_
 
