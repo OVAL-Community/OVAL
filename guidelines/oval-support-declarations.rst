@@ -18,11 +18,11 @@ Altex-Soft
 |   `Altex-Soft OVALdb <https://ovaldb.altx-soft.ru/>`_
 |   *Web-Based OVAL Repository Database*
 |
-|   [ ] Authoring Tool
-|   [ ] Definition Evaluator
+|   [  ] Authoring Tool
+|   [  ] Definition Evaluator
 |   [X] Definition Repository
-|   [ ] Results Consumer
-|   [ ] System Characteristics Producer
+|   [  ] Results Consumer
+|   [  ] System Characteristics Producer
 |
 |   `RedCheck <https://www.redcheck.ru/>`_
 |   *Vulnerability, Patch, and Compliance Assessment*
@@ -417,7 +417,7 @@ VMware
 ^^^^^^
 
 | *http://www.vmware.com/*
-| 
+|
 |   `Enhanced SCAP Content Editor <https://labs.vmware.com/flings/vmware-modified-enhanced-scap-content-editor>`_
 |   *OVAL Authoring Tool*
 |
