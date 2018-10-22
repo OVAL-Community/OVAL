@@ -130,6 +130,35 @@ Defense Information Systems Agency Field Security Operations (DISA FSO)
 |
 
 
+Information-Technology Promotion Agency
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+| *Declared January 30, 2012*
+| *www.altex-soft.com*
+| *www.altx-soft.ru*]
+|
+|  IPA offers two products for JVN Security Content Automation Framework. Version Checker is an OVAL-based, free, easy-to-use scanner that allows people to easily check whether the software installed on their PC is the latest version. With just one mouse click, people can check the versions of multiple software. The results are easy to understand: a tick mark signifies the latest version and a cross mark signifies an obsolete version. If the software is not the latest version, users can easily access the vendor's download website with just a few clicks. MyJVN API is a software interface to access and utilize vulnerability countermeasure information and OVAL repository stored in JVN and JVN iPedia. To enable application developers to use data through an open interface, JVN iPedia has adopted SCAP, a set of standards for describing vulnerability countermeasure information.
+|
+|   `MyJVN API <https://ovaldb.altx-soft.ru/>`_
+|   *Vulnerability Assessment and Configuration Management*
+|
+|   [ ] Authoring Tool
+|   [ ] Definition Evaluator
+|   [X] Definition Repository
+|   [ ] Results Consumer
+|   [ ] System Characteristics Producer
+|
+|   `MyJVN Version Checker <https://www.redcheck.ru/>`_
+|   *Vulnerability Assessment*
+|
+|   [ ] Authoring Tool
+|   [X] Definition Evaluator
+|   [ ] Definition Repository
+|   [ ] Results Consumer
+|   [ ] System Characteristics Producer
+|
+
+
 Institute for Information Industry
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -243,6 +272,25 @@ Red Hat, Inc.
 |
 
 
+Resolver
+^^^^^^^^
+
+| *Declared February 26, 2014*
+| *www.resolver.com*
+|
+| In order to promote open standards and leveraging existing tools already deployed as authoritative sources of risk, threat, security, governance, and compliance audit details, Resolver's big data risk management software platform, Resolver RiskVision, consumes OVAL Definitions, OVAL Results, and OVAL System Characteristics via its user interface or via data connectors. As a consumer of OVAL attributes, RiskVision supports OVAL 5.10.1 and prior versions. In addition, RiskVision accommodates SCAP in its 'XCCDF and OVAL' import tool.
+|
+|   `Resolver RiskVision <https://www.resolver.com/risk-vision-information-security-software/>`_
+|   *Big Data Risk Management Software*
+|
+|   [ ] Authoring Tool
+|   [ ] Definition Evaluator
+|   [ ] Definition Repository
+|   [X] Results Consumer
+|   [ ] System Characteristics Producer
+|
+
+
 SecPod Technologies
 ^^^^^^^^^^^^^^^^^^^
 
@@ -251,7 +299,7 @@ SecPod Technologies
 |
 | SecPod is an information security research and development company offering services in the area of threat detection and management. SecPod supports OVAL, an open standard to provide security automation. SecPod SCAP Feed is a service providing Vulnerability, Inventory, Compliance, and Patch definitions covering majority of the CVE's for various operating systems, enterprise servers, and applications. The feed, also hosted as a repository, is backed with professional support, can be integrated into vendor products, and also consumed by end users. SecPod Saner is a light-weight, easy-to-use enterprise grade vulnerability mitigation software that proactively assesses and secures endpoint systems. SecPod Saner adopts OVAL natively consuming the SCAP feed from the SecPod SCAP Repo content repository.
 |
-|   `SecPod SCAP Feed <hhttp://www.scaprepo.com/>`_
+|   `SecPod SCAP Feed <http://www.scaprepo.com/>`_
 |   *OVAL Repository*
 |
 |   [ ] Authoring Tool
@@ -289,6 +337,96 @@ SPAWAR Systems Center Atlantic
 |   [X] System Characteristics Producer
 |
 
+
+SUSE
+^^^^
+
+| *Declared February 28, 2014*
+| *www.secpod.com*
+|
+| Our customers need an index of fixed security incidents indexed by product, RPM package name, and version for use in their security compliance checking. As they are using a wide range of checking tools inventing a new format would have caused unnecessary work on all sides. We have chosen to use the OVAL format for publishing this data, which is in our eyes the accepted industry standard format for this purpose.
+|
+|   `SUSE Linux Enterprise OVAL Information <http://ftp.suse.com/pub/projects/security/oval/>`_
+|   *Database*
+|
+|   [ ] Authoring Tool
+|   [ ] Definition Evaluator
+|   [X] Definition Repository
+|   [ ] Results Consumer
+|   [ ] System Characteristics Producer
+|
+|   `SUSE Manager 1.7 <https://www.suse.com/products/suse-manager/>`_
+|   *Linux Patch and Configuration Management*
+|
+|   [ ] Authoring Tool
+|   [X] Definition Evaluator
+|   [ ] Definition Repository
+|   [X] Results Consumer
+|   [X] System Characteristics Producer
+|
+
+
+ToolsWatch
+^^^^^^^^^^
+
+| *Declared April 14, 2015*
+| *http://www.toolswatch.org/*
+|
+| SSA (Security System Analyzer) is free non-intrusive OVAL/XCCDF host-based security analyzer and compliance tool. It introduces a new simplified way to rely on open standards such OVAL and XCCDF to report compliance issues. SSA has adopted the OVAL standard as part of its vulnerability validation process. As a result, SSA consumes the Definitions and solely relies on the OVAL and XCCDF interpreters. vFeed provides a full aggregated, cross-linked and standardized Vulnerability Database based on CVE and standards such as OVAL, CPE, CWE, CAPEC, CVSS etc. Therefore, it introduces a new simplified XML format that expands the vulnerability coverage and correlation around the CVE. vFeed has adopted the OVAL as part of its correlation and aggregation capability. As a result, vFeed consumes the OVAL XML definitions, extract and map variables to expand the CVEs data.
+|
+|   `SSA - Security System Analyzer <https://code.google.com/p/ssa/>`_
+|   *Security Scanner and Compliance Assessment Software*
+|
+|   [X] Authoring Tool
+|   [X] Definition Evaluator
+|   [ ] Definition Repository
+|   [X] Results Consumer
+|   [X] System Characteristics Producer
+|
+|   `vFeed API and Vulnerability Database Community <https://github.com/toolswatch/vFeed>`_
+|   *Vulnerability and Threats Database*
+|
+|   [ ] Authoring Tool
+|   [ ] Definition Evaluator
+|   [X] Definition Repository
+|   [X] Results Consumer
+|   [ ] System Characteristics Producer
+|
+
+
+Tripwire, Inc.
+^^^^^^^^^^^^^^
+
+| *Declared October 19, 2010*
+| *http://www.tripwire.com/*
+|
+| Tripwire provides a comprehensive suite of file integrity, policy compliance, and log and event management solutions. Tripwire Enterprise automates change detection and misconfiguration correction to reduce risk of exploits and breaches. Tripwire Enterprise provides SCAP functionality that includes the ability to process OVAL content.
+|
+|   `Tripwire Enterprise <http://www.tripwire.com/it-security-software/scm/tripwire-enterprise/>`_
+|   *Security Configuration Management*
+|
+|   [ ] Authoring Tool
+|   [X] Definition Evaluator
+|   [ ] Definition Repository
+|   [X] Results Consumer
+|   [X] System Characteristics Producer
+|
+
+
+VMware
+^^^^^^
+
+| *http://www.vmware.com/*
+|
+|   `Enhanced SCAP Content Editor <https://labs.vmware.com/flings/vmware-modified-enhanced-scap-content-editor>`_
+|   *OVAL Authoring Tool*
+|
+|   [X] Authoring Tool
+|   [ ] Definition Evaluator
+|   [ ] Definition Repository
+|   [ ] Results Consumer
+|   [ ] System Characteristics Producer
+|
 
 Updating the List
 -----------------

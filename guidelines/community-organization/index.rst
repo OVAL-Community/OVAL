@@ -3,7 +3,7 @@
 Community Organization
 ======================
 
-Note that requirements langauge used within this section is defined by RFC2119_.
+Note that requirements language used within this section is defined by RFC2119_.
 
 The OVAL Community includes:
 
