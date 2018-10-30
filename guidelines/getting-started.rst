@@ -179,15 +179,26 @@ Below is a sample OVAL definition file::
 OVAL Features
 -------------
 
-OVAL is a powerful language that supports:
+* XML- and assertion-based language
+* semantic implementation-neutral content authoring
+* supports enforcement of script-free, read-only policy
+* supports content reuse
+* complex first order logic
+* variables in a variety of functions for string manipulation
+* supports technology-neutral policy authoring
+* extensible
+* supports trust management through digital signatures and verifications
+* automatically checkable for conformance with standard
 
-* high-level feature list
-* ...
+Use OVAL to:
+
+* make implementation-neutral assertions about platforms and their files and registry keys
+* separate policy content from implementation
+* separate security collection and evaluation
+
 
 The OVAL Schemas
 ----------------
-
-What the schemas are for, reading docs, using for validation, etc.
 
 OVAL comprises a set of schemas, which correspond to unique Models that establish the logical framework for making assertions about the posture of an endpoint. The Models provide the building blocks for representing the expected and actual states of endpoints and the results of the comparison of those elements.
 
@@ -214,7 +225,7 @@ Datastreams
   **Datastream** is a format that consolidates multiple SCAP components into a single file (including OVAL).
 
   **ARF**, or the **Asset Reporting Format**, is also called Result Datastream. It consolidates multiple results files into one.
-| 
+|
 
 Next Steps
 ----------
