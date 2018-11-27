@@ -8,7 +8,7 @@ Are you new to OVAL? Wondering what it is and how it's used? Read on!
 What is OVAL?
 -------------
 
-OVAL is an open, standardized assertion language written in XML. Used by the U.S. Government, the Center for Internet Security, Cisco, and McAfee, among many others, it is the most mature and widely adopted open source standard for security assessment. With the goal of easing interoperability between security tools, it includes content for vulnerability assessment, configuration management, system inventory, and patch management. Security experts, system administrators, and software developers from industry, government, and academia have collaborated to write OVAL, and this consensus is one of its greatest attributes.
+OVAL is an open, standardized assertion language written in XML that standardizes how to assess and report on the machine state of computer systems. Used by the U.S. Government, the Center for Internet Security, Cisco, and McAfee, among many others, it is the most mature and widely adopted open source standard for security assessment. With the goal of easing interoperability between security tools, it includes content for vulnerability assessment, configuration management, system inventory, and patch management. Security experts, system administrators, and software developers from industry, government, and academia have collaborated to write OVAL, and this consensus is one of its greatest attributes.
 
 Anyone can write OVAL, and we always welcome new contributors.
 
@@ -179,9 +179,9 @@ Below is a sample OVAL definition file::
 OVAL Features
 -------------
 
-* XML- and assertion-based language
-* semantic implementation-neutral content authoring
-* supports enforcement of script-free, read-only policy
+* XML- and assertion-based language 
+* implementation-neutral, semantic content authoring
+* enables enforcement of script-free, read-only policy
 * supports content reuse
 * complex first order logic
 * variables in a variety of functions for string manipulation
@@ -189,11 +189,14 @@ OVAL Features
 * extensible
 * supports trust management through digital signatures and verifications
 * automatically checkable for conformance with standard
+* brings consistency and transparency to the results produced by security scanning tools
+* assists in the exchange of machine-readable information between security tools
+* reduces the need for IT Security Professionals to learn the proprietary languages of each of their tools
 
-Use OVAL to:
+**Use OVAL to:**
 
-* make implementation-neutral assertions about platforms and their files and registry keys
-* separate policy content from implementation
+* make implementation-neutral assertions about platforms and their machine states (e.g. files, registry keys, etc.)
+* express policy content without defining implementation method
 * separate security collection and evaluation
 
 
