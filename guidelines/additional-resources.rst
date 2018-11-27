@@ -21,5 +21,6 @@ Historical and archived information regarding previous versions of OVAL, prior s
 
 * `MITRE OVAL Homepage <http://oval.mitre.org/>`_ *Deprecated website containing historical OVAL data.*
 * `MITRE OVAL Archives <http://oval.mitre.org/archive/>`_ *The OVAL Language archives.*
+* `OVAL Mailing List Archives <http://making-security-measurable.1364806.n2.nabble.com/OVAL-Open-Vulnerability-and-Assessment-Language-f20093.html>`_ *An archive of OVAL-related mailing list discussions.*
 * `OVAL Language Schemas <https://github.com/OVALProject/Language>`_ *Up to and including OVAL v5.11.2, the OVAL Language GitHub repository provides the official OVAL language documentation, schemas, and tools used in the development of OVAL interpreters.*
 * `OVAL Language Sandbox <https://github.com/OVALProject/Sandbox>`_ *The OVAL Language Sandbox, hosted on GitHub.com, provides a collaborative environment for the community to propose and develop experimental capabilities for the OVAL Language.*
