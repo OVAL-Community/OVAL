@@ -44,13 +44,3 @@ The initial proposal process MUST begin with a pull request.
 * The body of the pull request MUST include a reference to the issue for which this proposal was initiated.
 
 Submission of the pull request affirms the intent to begin the `consensus building <https://oval-community-guidelines.readthedocs.io/en/latest/proposal-process/consensus-building.html>`_ process, and to begin the 45-day comment period.
-
-FAQs
-----
-
-Some FAQs about steps and any associated process details.
-
-Documentation Links
--------------------
-
-Links to process docs?
