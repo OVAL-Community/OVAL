@@ -42,8 +42,3 @@ FAQs
 
 What if my Objection is not accepted and the Proposal is accepted? 
   You may follow the Proposal Process to further improve OVAL.
-
-Documentation Links
--------------------
-
-Links to process docs?
