@@ -197,7 +197,6 @@ OVAL Features
 
 * make implementation-neutral assertions about platforms and their machine states (e.g. files, registry keys, etc.)
 * express policy content without defining implementation method
-* separate security collection and evaluation
 
 
 The OVAL Schemas
