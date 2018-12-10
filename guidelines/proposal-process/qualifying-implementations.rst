@@ -19,7 +19,7 @@ In order to be considered Stable, a proposal MUST have at least 15 points of Qua
 * 10 points will be granted for each Qualifying Implementation submitted by an organization that has successfully completed a recognized 3rd-party OVAL testing program (see list below) so long as the Qualifying Implementation uses the same implementation that was tested
 * 10 points will be granted for each Qualifying Implementation accompanied by documentation of comprehensive UNIT test coverage (as determined by the Area Supervisor)
 
-When a Qualifying Implementation qualifies for multiple scores, only the highest single score will be counted.
+In some cases, a single Qualifying Implementation may be found in multiple products. When this is the case, all product instances including that Qualifying Implementation are considered a single Qualifying Implementation. When this happens, only the highest score from the set of product instances can be used for the particular Qualifying Implementation.
 
 Recognized 3rd-party OVAL testing Programs
 ------------------------------------------
