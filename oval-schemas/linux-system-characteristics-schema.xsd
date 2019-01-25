@@ -15,7 +15,7 @@
                <schema>Linux System Characteristics</schema>
                <version>5.11.1:1.2</version>
                <date>11/30/2016 09:00:00 AM</date>
-               <terms_of_use>For the portion subject to the copyright in the United States: Copyright (c) 2016 United States Government. All rights reserved. Copyright (c) 2016, Center for Internet Security. All rights reserved. The contents of this file are subject to the terms of the OVAL License located at https://oval.cisecurity.org/terms. See the OVAL License for the specific language governing permissions and limitations for use of this schema. When distributing copies of the OVAL Schema, this license header must be included.</terms_of_use>
+               <terms_of_use>Copyright (c) 2016, Center for Internet Security. All rights reserved.  The contents of this file are subject to the terms of the OVAL License located at https://oval.cisecurity.org/terms. See the OVAL License for the specific language governing permissions and limitations for use of this schema.  When distributing copies of the OVAL Schema, this license header must be included.</terms_of_use>
                <sch:ns prefix="oval-sc" uri="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5"/>
                <sch:ns prefix="linux-sc" uri="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#linux"/>
               <sch:ns prefix="xsi" uri="http://www.w3.org/2001/XMLSchema-instance"/>
@@ -324,6 +324,74 @@
                               <xsd:element name="loadable" type="oval-sc:EntityItemBoolType" minOccurs="0" maxOccurs="1">
                                    <xsd:annotation>
                                         <xsd:documentation>The loadable element is true when the collected kernel module is allowed to be loaded; false otherwise.</xsd:documentation>
+                                   </xsd:annotation>
+                              </xsd:element>
+                         </xsd:sequence>
+                    </xsd:extension>
+               </xsd:complexContent>
+          </xsd:complexType>
+     </xsd:element>
+     <!-- =============================================================================== -->
+     <!-- ================================  LSMOD ITEM  ================================= -->
+     <!-- =============================================================================== -->
+     <xsd:element name="lsmod_item" substitutionGroup="oval-sc:item">
+          <xsd:annotation>
+               <xsd:documentation>
+                    "lsmod" is a trivial program which nicely formats the contents of the /proc/modules, showing what loadable kernel modules are currently loaded.  Each item extends 
+                    the standard ItemType as defined in the oval-system-characteristics-schema and one should refer to the ItemType description for more information.
+               </xsd:documentation>
+          </xsd:annotation>
+          <xsd:complexType>
+               <xsd:complexContent>
+                    <xsd:extension base="oval-sc:ItemType">
+                         <xsd:sequence>
+                              <xsd:element name="module_name" type="oval-sc:EntityItemStringType" minOccurs="0" maxOccurs="1">
+                                   <xsd:annotation>
+                                        <xsd:documentation>The name of the currently loaded module</xsd:documentation>
+                                   </xsd:annotation>
+                              </xsd:element>
+                              <xsd:element name="module_size" type="oval-sc:EntityItemIntType" minOccurs="0" maxOccurs="1">
+                                   <xsd:annotation>
+                                        <xsd:documentation>Denotes the size of the module (not memory used)</xsd:documentation>
+                                   </xsd:annotation>
+                              </xsd:element>
+                              <xsd:element name="used_by" type="oval-sc:EntityItemStringType" minOccurs="0" maxOccurs="1">
+                                   <xsd:annotation>
+                                        <xsd:documentation>
+                                             "Used by" denotes each module's use count and a list of referring modules. The "Used by" list is sometimes incomplete.  If the module 
+                                             controls its own unloading via a can_unload routine then the use count displayed by lsmod is always -1, irrespective of the real use count.
+                                        </xsd:documentation>
+                                   </xsd:annotation>
+                              </xsd:element>
+                         </xsd:sequence>
+                    </xsd:extension>
+               </xsd:complexContent>
+          </xsd:complexType>
+     </xsd:element>
+     <!-- =============================================================================== -->
+     <!-- ==============================  MODPROBE ITEM  =============================== -->
+     <!-- =============================================================================== -->
+     <xsd:element name="modprobe_item" substitutionGroup="oval-sc:item">
+          <xsd:annotation>
+               <xsd:documentation>The modprobe_item captures limited information, parsing the output of the "modprobe -n -v [module_name]" command.</xsd:documentation>
+               <xsd:documentation>
+                    Collection of a modprobe_item is determined by the "modprobe -n -v module_name" command.  Due to the limitations of the modprobe command, and its
+                    requirement for a specific module_name, only the "equals" operation is supported, as there is no method to collect this information otherwise.  To support 
+                    other collection methods, variable references should be used to collect specific module names for use in collection here.
+               </xsd:documentation>
+          </xsd:annotation>
+          <xsd:complexType>
+               <xsd:complexContent>
+                    <xsd:extension base="oval-sc:ItemType">
+                         <xsd:sequence>
+                              <xsd:element name="module_name" type="oval-sc:EntityItemStringType" minOccurs="0" maxOccurs="1">
+                                   <xsd:annotation>
+                                        <xsd:documentation>The name of the kernel module for which information was collected</xsd:documentation>
+                                   </xsd:annotation>
+                              </xsd:element>
+                              <xsd:element name="modprobe_line" type="oval-sc:EntityItemStringType" minOccurs="0" maxOccurs="unbounded">
+                                   <xsd:annotation>
+                                        <xsd:documentation>The modprobe_line element represents a single line of output from the "modprobe -n -v [module_name]" command.</xsd:documentation>
                                    </xsd:annotation>
                               </xsd:element>
                          </xsd:sequence>
