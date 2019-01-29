@@ -772,10 +772,19 @@
                                         <xsd:documentation>Denotes the size of the kernel module (not memory used)</xsd:documentation>
                                    </xsd:annotation>
                               </xsd:element>
+                              <xsd:element name="use_count" type="oval-def:EntityStateIntType" minOccurs="0" maxOccurs="1">
+                                   <xsd:annotation>
+                                        <xsd:documentation>
+                                             "Use Count" denotes each kernel module's use count and a list of referring modules. The "Used by" list is sometimes 
+                                             incomplete.  If the module controls its own unloading via a can_unload routine then the use count displayed 
+                                             by lsmod is always -1, irrespective of the real use count.
+                                        </xsd:documentation>
+                                   </xsd:annotation>
+                              </xsd:element>
                               <xsd:element name="used_by" type="oval-def:EntityStateStringType" minOccurs="0" maxOccurs="1">
                                    <xsd:annotation>
                                         <xsd:documentation>
-                                             "Used by" denotes each kernel module's use count and a list of referring modules. The "Used by" list is sometimes 
+                                             "Used by" denotes each kernel module's list of referring modules. The "Used by" list is sometimes 
                                              incomplete.  If the module controls its own unloading via a can_unload routine then the use count displayed 
                                              by lsmod is always -1, irrespective of the real use count.
                                         </xsd:documentation>
