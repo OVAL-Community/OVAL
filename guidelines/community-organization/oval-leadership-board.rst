@@ -31,7 +31,7 @@ Leadership Board Members
     * `Modulo <https://www.modulo.com/>`_ - Alberto Bastos
     * `National Institute of Standards and Technology <https://www.nist.gov/>`_ - Melanie Cook, Dave Waltermire
     * `Qualys, Inc. <https://www.qualys.com/>`_ - Tigran Gevorgyan
-    * `Red Hat, Inc. <https://www.redhat.com/>`_ - Martin Preisler
+    * `Red Hat, Inc. <https://www.redhat.com/>`_ - Šimon Lukašík, Matej Tyc
     * `Rockport Systems <https://www.rockportsystems.com/>`_ - Carl Banzhof
     * `SecPod Technologies <https://www.secpod.com/>`_ - Chandrashekhar B
     * `SPAWAR, U.S. Navy <https://www.spawar.navy.mil/>`_ - Jack Vander Pol
@@ -70,6 +70,7 @@ Leadership Board Members
     * Amol Sarwate
     * Michael Tan
     * Eric Walker
+    * Martin Preisler
 
 Responsibilities
 ----------------
