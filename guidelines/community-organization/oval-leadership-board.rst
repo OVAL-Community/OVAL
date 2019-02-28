@@ -25,7 +25,7 @@ Leadership Board Members
     * `Cisco Systems, Inc. <https://www.cisco.com/>`_ - Panos Kampanakis, Omar Santos
     * `Depository Trust & Clearing Corporation (DTCC) <https://www.dtcc.com/>`_ - Dale Rich
     * `HPE <https://www.hp.com/country/us/en/uc/welcome.html>`_ - TBD
-    * `IBM <https://www.ibm.com/>`_ - TBD
+    * `IBM <https://www.ibm.com/>`_ - Luigi Pichetti
     * `Joval Continuous Monitoring <https://joval.org/>`_ - David Solin, David Ries
     * `McAfee <https://www.mcafee.com/>`_ - Kent Landfield
     * `Modulo <https://www.modulo.com/>`_ - Alberto Bastos
@@ -70,7 +70,9 @@ Leadership Board Members
     * Amol Sarwate
     * Michael Tan
     * Eric Walker
+    * Kurt Seifried
     * Martin Preisler
+    * Rosario Gangemi
 
 Responsibilities
 ----------------
