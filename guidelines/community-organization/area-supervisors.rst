@@ -15,8 +15,8 @@ The following list bounds the different areas of responsibility that may be mana
 - Apple Schemas (iOS, Macintosh) - David Solin, Joval
 - Cisco Schemas (ASA, CatOS, IOS, IOS XE, PixOS) - Omar Santos, Cisco
 - FreeBSD Schemas - David Solin, Joval
-- HP-UX Schemas - TBD
-- IBM AIX Schemas - TBD
+- HP-UX Schemas - John Ulmer, US Navy SPAWAR
+- IBM AIX Schemas - John Ulmer, US Navy SPAWAR
 - Linux Schemas - Šimon Lukašík, Red Hat
 - UNIX Schemas - Šimon Lukašík, Red Hat
 - Sun Solaris Schemas - Jarrett Lu, Oracle
