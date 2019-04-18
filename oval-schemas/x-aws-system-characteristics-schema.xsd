@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:oval-sc="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5"
+            xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5"
+            xmlns:x-aws-sc="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#aws"
+            xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+            targetNamespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#aws"
+            elementFormDefault="qualified" version="5.11">
+	<xsd:import namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5" schemaLocation="oval-system-characteristics-schema.xsd"/>
+	<xsd:annotation>
+		<xsd:documentation>The following is a description of the elements, types, and attributes that compose the AWS-specific system characteristic items found in Open Vulnerability and Assessment Language (OVAL).  Each item is an extension of the standard item element defined in the Core System Characteristic Schema.  Through extension, each item inherits a set of elements and attributes that are shared amongst all OVAL Items.  Each item is described in detail and should provide the information necessary to understand what each element and attribute represents.  This document is intended for developers and assumes some familiarity with XML.  A high level description of the interaction between the different tests and their relationship to the Core System Characteristic Schema is not outlined here.</xsd:documentation>
+		<xsd:documentation>The OVAL Schema is maintained by the OVAL Community. For more information, including how to get involved in the project and how to submit change requests, please visit the OVAL website at http://oval.cisecurity.org.</xsd:documentation>
+		<xsd:appinfo>
+		     <schema>AWS Foundations System Characteristics</schema>
+		     <version>5.11.2</version>
+		     <date>04/09/2019 09:00:00 AM</date>
+		      <terms_of_use>For the portion subject to the copyright in the United States: Copyright (c) 2016 United States Government. All Rights Reserved. Copyright (c) 2016, Center for Internet Security. All rights reserved. The contents of this file are subject to the terms of the OVAL License located at https://oval.cisecurity.org/terms. See the OVAL License for the specific language governing permissions and limitations for use of this schema. When distributing copies of the OVAL Schema, this license header must be included.</terms_of_use>
+			<sch:ns prefix="oval-sc" uri="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5"/>
+			<sch:ns prefix="x-aws-sc" uri="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#aws"/>
+		    <sch:ns prefix="xsi" uri="http://www.w3.org/2001/XMLSchema-instance"/>
+		</xsd:appinfo>
+	</xsd:annotation>
+	<!-- =============================================================================== -->
+	<!-- ==========================  IAM PASSWORD POLICY ITEM  ========================= -->
+	<!-- =============================================================================== -->
+	<xsd:element name="passwordpolicy_item" substitutionGroup="oval-sc:item">
+		<xsd:annotation>
+			<xsd:documentation>
+				The passwordpolicy_item holds information about the IAM Password Policy.  It extends the 
+				standard ItemType as defined in the oval-system-characteristics schema and one should refer 
+				to the ItemType description for more information.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="oval-sc:ItemType">
+					<xsd:sequence>
+						<xsd:element name="allow_users_to_change_password" type="oval-sc:EntityItemBoolType" minOccurs="1" maxOccurs="1">
+							<xsd:annotation>
+								<xsd:documentation></xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<xsd:element name="require_lowercase_characters" type="oval-sc:EntityItemBoolType" minOccurs="1" maxOccurs="1">
+							<xsd:annotation>
+								<xsd:documentation></xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<xsd:element name="require_uppercase_characters" type="oval-sc:EntityItemBoolType" minOccurs="1" maxOccurs="1">
+							<xsd:annotation>
+								<xsd:documentation></xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<xsd:element name="minimum_password_length" type="oval-sc:EntityItemIntType" minOccurs="1" maxOccurs="1">
+							<xsd:annotation>
+								<xsd:documentation></xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<xsd:element name="require_numbers" type="oval-sc:EntityItemBoolType" minOccurs="1" maxOccurs="1">
+							<xsd:annotation>
+								<xsd:documentation></xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<xsd:element name="password_reuse_prevention" type="oval-sc:EntityItemIntType" minOccurs="1" maxOccurs="1">
+							<xsd:annotation>
+								<xsd:documentation></xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<xsd:element name="hard_expiry" type="oval-sc:EntityItemBoolType" minOccurs="1" maxOccurs="1">
+							<xsd:annotation>
+								<xsd:documentation></xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<xsd:element name="require_symbols" type="oval-sc:EntityItemBoolType" minOccurs="1" maxOccurs="1">
+							<xsd:annotation>
+								<xsd:documentation></xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<xsd:element name="max_password_age" type="oval-sc:EntityItemIntType" minOccurs="1" maxOccurs="1">
+							<xsd:annotation>
+								<xsd:documentation></xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<xsd:element name="expire_passwords" type="oval-sc:EntityItemBoolType" minOccurs="1" maxOccurs="1">
+							<xsd:annotation>
+								<xsd:documentation></xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<!-- =============================================================================== -->
+	<!-- =============================================================================== -->
+	<!-- =============================================================================== -->
+</xsd:schema>
