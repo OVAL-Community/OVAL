@@ -775,15 +775,18 @@
                               <xsd:element name="use_count" type="oval-def:EntityStateIntType" minOccurs="0" maxOccurs="1">
                                    <xsd:annotation>
                                         <xsd:documentation>
-                                             "Use Count" denotes each kernel module's use count.  If the module controls its own unloading via a 
-                                             can_unload routine then the use count displayed by lsmod is always -1, irrespective of the real use count.
+                                             "Use Count" denotes each kernel module's use count and a list of referring modules. The "Used by" list is sometimes 
+                                             incomplete.  If the module controls its own unloading via a can_unload routine then the use count displayed 
+                                             by lsmod is always -1, irrespective of the real use count.
                                         </xsd:documentation>
                                    </xsd:annotation>
                               </xsd:element>
                               <xsd:element name="used_by" type="oval-def:EntityStateStringType" minOccurs="0" maxOccurs="1">
                                    <xsd:annotation>
                                         <xsd:documentation>
-                                             "Used by" denotes each kernel module's list of referring modules. The "Used by" list is sometimes incomplete and may be empty.
+                                             "Used by" denotes each kernel module's list of referring modules. The "Used by" list is sometimes 
+                                             incomplete.  If the module controls its own unloading via a can_unload routine then the use count displayed 
+                                             by lsmod is always -1, irrespective of the real use count.
                                         </xsd:documentation>
                                    </xsd:annotation>
                               </xsd:element>
@@ -902,6 +905,133 @@
                               <xsd:element name="modprobe_line" type="oval-def:EntityStateStringType" minOccurs="0" maxOccurs="1">
                                    <xsd:annotation>
                                         <xsd:documentation>The modprobe_line element represents a single line of output from the "modprobe -n -v [module_name]" command.</xsd:documentation>
+                                   </xsd:annotation>
+                              </xsd:element>
+                         </xsd:sequence>
+                    </xsd:extension>
+               </xsd:complexContent>
+          </xsd:complexType>
+     </xsd:element>
+     <!-- =============================================================================== -->
+     <!-- ============================  KERNEL MODULE TEST  ============================= -->
+     <!-- =============================================================================== -->
+     <xsd:element name="kernelmodule_test" substitutionGroup="oval-def:test">
+          <xsd:annotation>
+               <xsd:documentation>
+                    The kernelmodule_test is used to check the loaded/loadability status for a given kernel module. It extends the standard TestType as defined in the oval-definitions-schema 
+                    and one should refer to the TestType description for more information. The required object element references a kernelmodule_object and the optional state 
+                    element specifies the data to check.
+               </xsd:documentation>
+               <xsd:appinfo>
+                    <oval:element_mapping>
+                         <oval:test>kernelmodule_test</oval:test>
+                         <oval:object>kernelmodule_object</oval:object>
+                         <oval:state>kernelmodule_state</oval:state>
+                         <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#linux">kernelmodule_item</oval:item>
+                    </oval:element_mapping>
+               </xsd:appinfo>
+               <xsd:appinfo>
+                    <sch:pattern id="linux-def_kernelmodule_test">
+                         <sch:rule context="linux-def:kernelmodule_test/linux-def:object">
+                              <sch:assert test="@object_ref=ancestor::oval-def:oval_definitions/oval-def:objects/linux-def:kernelmodule_object/@id"><sch:value-of select="../@id"/> - the object child element of a kernelmodule_test must reference a kernelmodule_object</sch:assert>
+                         </sch:rule>
+                         <sch:rule context="linux-def:kernelmodule_test/linux-def:state">
+                              <sch:assert test="@state_ref=ancestor::oval-def:oval_definitions/oval-def:states/linux-def:kernelmodule_state/@id"><sch:value-of select="../@id"/> - the state child element of a kernelmodule_test must reference a kernelmodule_state</sch:assert>
+                         </sch:rule>
+                    </sch:pattern>
+               </xsd:appinfo>
+          </xsd:annotation>
+          <xsd:complexType>
+               <xsd:complexContent>
+                    <xsd:extension base="oval-def:TestType">
+                         <xsd:sequence>
+                              <xsd:element name="object" type="oval-def:ObjectRefType" />
+                              <xsd:element name="state" type="oval-def:StateRefType" minOccurs="0" maxOccurs="unbounded"/>
+                         </xsd:sequence>
+                    </xsd:extension>
+               </xsd:complexContent>
+          </xsd:complexType>
+     </xsd:element>
+     <xsd:element name="kernelmodule_object" substitutionGroup="oval-def:object">
+          <xsd:annotation>
+               <xsd:documentation>
+                    The kernelmodule_object element is used by the kernelmodule_test to specify those modules for which information will be collected.  This object, 
+                    using the specified module_name, will collect information on the current loaded and loadable status of the module.
+               </xsd:documentation>
+               <xsd:documentation>
+                    By default modprobe loads modules from subdirectories located in the /lib/modules/$(uname -r) directory. Usually the files have an extension of .ko, 
+                    so they can be listed like this:  find /lib/modules/$(uname -r) -type f -name '*.ko*'.  An example line of output from this command would look like:
+                    /lib/modules/3.10.0-693.21.1.el7.x86_64/kernel/sound/usb/line6/snd-usb-pod.ko.xz.  In this case, the module name would be "snd-usb-pod".  This 
+                    information may be useful when needing to collect kernel module information based on operators other than "equals", such as pattern matching.
+               </xsd:documentation>
+               <xsd:documentation>
+                    To populate the "loaded" element for a kernelmodule_item, the specified module name must appear in the output of the "lsmod" command.  "lsmod" is a 
+                    trivial program which nicely formats the contents of the /proc/modules, showing what kernel modules are currently loaded.
+               </xsd:documentation>
+               <xsd:documentation>
+                    To populate the "loadable" element for a kernelmodule_item, implementors should explore the output of the "modprobe -n -v [module_name]" command.  If 
+                    the output of this command contains a line reading "install /bin/true" then the module is NOT loadable.  Another option is to parse the output of the 
+                    "modprobe --showconfig" command.  Similarly, if an output line matches "install [module_name] /bin/true", then the module is NOT loadable.
+               </xsd:documentation>
+               <xsd:documentation>A kernelmodule_object consists of a single module_name entity that identifies the package being checked.</xsd:documentation>
+               <xsd:appinfo>
+                    <sch:pattern id="linux-def_kernelmodule_object_verify_filter_state">
+                         <sch:rule context="linux-def:kernelmodule_object//oval-def:filter">
+                              <sch:let name="parent_object" value="ancestor::linux-def:kernelmodule_object"/>
+                              <sch:let name="parent_object_id" value="$parent_object/@id"/>
+                              <sch:let name="state_ref" value="."/>
+                              <sch:let name="reffed_state" value="ancestor::oval-def:oval_definitions/oval-def:states/*[@id=$state_ref]"/>
+                              <sch:let name="state_name" value="local-name($reffed_state)"/>
+                              <sch:let name="state_namespace" value="namespace-uri($reffed_state)"/>
+                              <sch:assert test="(($state_namespace='http://oval.mitre.org/XMLSchema/oval-definitions-5#linux') and ($state_name='kernelmodule_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
+                         </sch:rule>
+                    </sch:pattern>
+               </xsd:appinfo>
+          </xsd:annotation>
+          <xsd:complexType>
+               <xsd:complexContent>
+                    <xsd:extension base="oval-def:ObjectType">
+                         <xsd:sequence>
+                              <xsd:choice>
+                                   <xsd:element ref="oval-def:set"/>
+                                   <xsd:sequence>
+                                        <xsd:element name="module_name" type="oval-def:EntityObjectStringType">
+                                             <xsd:annotation>
+                                                  <xsd:documentation>This is the name of the kernel module to collect.</xsd:documentation>
+                                             </xsd:annotation>
+                                        </xsd:element>
+                                        <xsd:element ref="oval-def:filter" minOccurs="0" maxOccurs="unbounded"/>
+                                   </xsd:sequence>
+                              </xsd:choice>
+                         </xsd:sequence>
+                    </xsd:extension>
+               </xsd:complexContent>
+          </xsd:complexType>
+     </xsd:element>
+     <xsd:element name="kernelmodule_state" substitutionGroup="oval-def:state">
+          <xsd:annotation>
+               <xsd:documentation>
+                    The kernelmodule_state element defines the different information that can be used to evaluate the specified 
+                    kernel module. Please refer to the individual elements in the schema for more details about what each represents.
+               </xsd:documentation>
+          </xsd:annotation>
+          <xsd:complexType>
+               <xsd:complexContent>
+                    <xsd:extension base="oval-def:StateType">
+                         <xsd:sequence>
+                              <xsd:element name="module_name" type="oval-def:EntityStateStringType" minOccurs="0" maxOccurs="1">
+                                   <xsd:annotation>
+                                        <xsd:documentation>The name of the kernel module for which information was collected</xsd:documentation>
+                                   </xsd:annotation>
+                              </xsd:element>
+                              <xsd:element name="loaded" type="oval-def:EntityStateBoolType" minOccurs="0" maxOccurs="1">
+                                   <xsd:annotation>
+                                        <xsd:documentation>The loaded element is true when the collected kernel module is currently loaded; false otherwise.</xsd:documentation>
+                                   </xsd:annotation>
+                              </xsd:element>
+                              <xsd:element name="loadable" type="oval-def:EntityStateBoolType" minOccurs="0" maxOccurs="1">
+                                   <xsd:annotation>
+                                        <xsd:documentation>The loadable element is true when the collected kernel module is allowed to be loaded; false otherwise.</xsd:documentation>
                                    </xsd:annotation>
                               </xsd:element>
                          </xsd:sequence>

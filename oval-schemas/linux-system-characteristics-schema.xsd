@@ -358,7 +358,7 @@
                               <xsd:element name="use_count" type="oval-sc:EntityItemIntType" minOccurs="0" maxOccurs="1">
                                    <xsd:annotation>
                                         <xsd:documentation>
-                                             "Use Count" denotes each module's use count. If the module controls its own unloading via a can_unload 
+                                             "Use Count" denotes each module's use count and a list of referring modules. If the module controls its own unloading via a can_unload 
                                              routine then the use count displayed by lsmod is always -1, irrespective of the real use count.
                                         </xsd:documentation>
                                    </xsd:annotation>
@@ -366,7 +366,7 @@
                               <xsd:element name="used_by" type="oval-sc:EntityItemStringType" minOccurs="0" maxOccurs="unbounded">
                                    <xsd:annotation>
                                         <xsd:documentation>
-                                             "Used by" denotes each module's list of referring modules. The "Used by" list is sometimes incomplete and may be empty.
+                                             "Used by" denotes each module's use count and a list of referring modules. The "Used by" list is sometimes incomplete and may be blank.
                                         </xsd:documentation>
                                    </xsd:annotation>
                               </xsd:element>
@@ -399,6 +399,44 @@
                               <xsd:element name="modprobe_line" type="oval-sc:EntityItemStringType" minOccurs="0" maxOccurs="unbounded">
                                    <xsd:annotation>
                                         <xsd:documentation>The modprobe_line element represents a single line of output from the "modprobe -n -v [module_name]" command.</xsd:documentation>
+                                   </xsd:annotation>
+                              </xsd:element>
+                         </xsd:sequence>
+                    </xsd:extension>
+               </xsd:complexContent>
+          </xsd:complexType>
+     </xsd:element>
+     <!-- =============================================================================== -->
+     <!-- ==============================  KERNELMODULE ITEM  =============================== -->
+     <!-- =============================================================================== -->
+     <xsd:element name="kernelmodule_item" substitutionGroup="oval-sc:item">
+          <xsd:annotation>
+               <xsd:documentation>The kernelmodule_item captures limited information, parsing the output of the "modprobe -n -v [module_name]" command.</xsd:documentation>
+               <xsd:documentation>
+                    Need a combo of "lsmod", "modprobe -n -v" and potentially searching ""
+                    
+                    Collection of a modprobe_item is determined by the "modprobe -n -v module_name" command.  Due to the limitations of the modprobe command, and its
+                    requirement for a specific module_name, only the "equals" operation is supported, as there is no method to collect this information otherwise.  To support 
+                    other collection methods, variable references should be used to collect specific module names for use in collection here.
+               </xsd:documentation>
+          </xsd:annotation>
+          <xsd:complexType>
+               <xsd:complexContent>
+                    <xsd:extension base="oval-sc:ItemType">
+                         <xsd:sequence>
+                              <xsd:element name="module_name" type="oval-sc:EntityItemStringType" minOccurs="0" maxOccurs="1">
+                                   <xsd:annotation>
+                                        <xsd:documentation>The name of the kernel module for which information was collected</xsd:documentation>
+                                   </xsd:annotation>
+                              </xsd:element>
+                              <xsd:element name="loaded" type="oval-sc:EntityItemBoolType" minOccurs="0" maxOccurs="1">
+                                   <xsd:annotation>
+                                        <xsd:documentation>The loaded element is true when the collected kernel module is currently loaded; false otherwise.</xsd:documentation>
+                                   </xsd:annotation>
+                              </xsd:element>
+                              <xsd:element name="loadable" type="oval-sc:EntityItemBoolType" minOccurs="0" maxOccurs="1">
+                                   <xsd:annotation>
+                                        <xsd:documentation>The loadable element is true when the collected kernel module is allowed to be loaded; false otherwise.</xsd:documentation>
                                    </xsd:annotation>
                               </xsd:element>
                          </xsd:sequence>

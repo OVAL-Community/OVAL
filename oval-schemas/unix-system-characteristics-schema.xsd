@@ -1033,6 +1033,38 @@
           </xsd:complexType>
      </xsd:element>
      <!-- =============================================================================== -->
+     <!-- ================================  SSHD ITEM  ================================== -->
+     <!-- =============================================================================== -->
+     <xsd:element name="sshd_item" substitutionGroup="oval-sc:item">
+          <xsd:annotation>
+               <xsd:documentation>
+                    The sshd_item stores information retrieved from the local system about sshd parameters and their respective value(s).
+                    Information is collected from the target endpoint using the "sshd -T [NAME]" command and output values are parsed.  Each 
+                    output line begins with the name of the SSHD parameter, followed by a space, and potentially a tokenized list of values.
+                    It has been found that some parameter values are comma-delimited while some are space-delimited.  Implementers of this
+                    collection should account for both delimiters in SSHD parameter values.
+               </xsd:documentation>
+          </xsd:annotation>
+          <xsd:complexType>
+               <xsd:complexContent>
+                    <xsd:extension base="oval-sc:ItemType">
+                         <xsd:sequence>
+                              <xsd:element name="name" type="oval-sc:EntityItemStringType" minOccurs="0" maxOccurs="1">
+                                   <xsd:annotation>
+                                        <xsd:documentation>The name element contains a string that represents the name of a sshd parameter that was collected from the local system.</xsd:documentation>
+                                   </xsd:annotation>
+                              </xsd:element>
+                              <xsd:element name="value" type="oval-sc:EntityItemAnySimpleType" minOccurs="0" maxOccurs="unbounded">
+                                   <xsd:annotation>
+                                        <xsd:documentation>The value element contains a string that represents the current value(s) for the specified sshd parameter on the local system.</xsd:documentation>
+                                   </xsd:annotation>
+                              </xsd:element>
+                         </xsd:sequence>
+                    </xsd:extension>
+               </xsd:complexContent>
+          </xsd:complexType>
+     </xsd:element>
+     <!-- =============================================================================== -->
      <!-- ===========================  SYMLINK ITEM  ==================================== -->
      <!-- =============================================================================== -->
      <xsd:element name="symlink_item" substitutionGroup="oval-sc:item">
