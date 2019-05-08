@@ -461,9 +461,9 @@
                                      <xsd:annotation>
                                            <xsd:documentation>The instance entity calls out which match of the pattern is being represented by this item.  The first match is given an instance value of 1, the second match is given an instance value of 2, and so on.  The main purpose of this entity is too provide uniqueness for different textfilecontent_items that results from multiple matches of a given pattern against the same file.</xsd:documentation>
                                            <xsd:appinfo>
-                                                 <sch:pattern id="win-sc_tfc_i">
-                                                       <sch:rule context="win-sc:textfilecontent_item/win-sc:instance">
-                                                             <sch:assert test="string-length(.) = 0 or number(.) &lt; 1"><sch:value-of select="../@id"/> - the value of instance must be greater than one</sch:assert>
+                                                 <sch:pattern id="ind-sc_tfc_i">
+                                                       <sch:rule context="ind-sc:textfilecontent_item/ind-sc:instance">
+                                                           <sch:assert test="number(.) &gt;= 1"><sch:value-of select="../@id"/> - the value of instance must be greater than or equal to one</sch:assert>
                                                        </sch:rule>
                                                  </sch:pattern>
                                            </xsd:appinfo>

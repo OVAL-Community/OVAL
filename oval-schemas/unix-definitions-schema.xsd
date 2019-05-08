@@ -276,7 +276,7 @@
                                                 <xsd:appinfo>
                                                       <sch:pattern id="unix-def_file_gid">
                                                             <sch:rule context="unix-def:file_state/unix-def:group_id">
-                                                                  <sch:assert test="string-length(.) = 0 or number(.) &lt; 0"><sch:value-of select="../@id"/> - the value of group_id must be greater than zero</sch:assert>
+                                                                  <sch:assert test="(@var_ref and string-length(.)=0) or (number(.) &gt;= 0)"><sch:value-of select="../@id"/> - the value of group_id must be greater than or equal to zero, or empty if var_ref is used.</sch:assert>
                                                             </sch:rule>
                                                       </sch:pattern>
                                                 </xsd:appinfo>
@@ -302,7 +302,7 @@
                                                 <xsd:appinfo>
                                                       <sch:pattern id="unix-def_file_uid">
                                                             <sch:rule context="unix-def:file_state/unix-def:user_id">
-                                                                  <sch:assert test="string-length(.) = 0 or number(.) &lt; 0"><sch:value-of select="../@id"/> - the value of user_id must be greater than zero</sch:assert>
+                                                                  <sch:assert test="(@var_ref and string-length(.)=0) or (number(.) &gt;= 0)"><sch:value-of select="../@id"/> - the value of user_id must be greater than or equal to zero, or empty if var_ref is used.</sch:assert>
                                                             </sch:rule>
                                                       </sch:pattern>
                                                 </xsd:appinfo>

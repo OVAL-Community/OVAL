@@ -1480,9 +1480,9 @@
                                           <xsd:annotation>
                                                 <xsd:documentation>The instance entity calls out a specific match of the pattern. This can only be a positive integer.</xsd:documentation>
                                                 <xsd:appinfo>
-                                                      <sch:pattern id="win-def_tfc54_i">
-                                                            <sch:rule context="win-def:textfilecontent54_state/win-def:instance">
-                                                                  <sch:assert test="string-length(.) = 0 or number(.) &lt; 1"><sch:value-of select="../@id"/> - the value of instance must be greater than one</sch:assert>
+                                                      <sch:pattern id="ind-def_tfc54_i">
+                                                            <sch:rule context="ind-def:textfilecontent54_state/ind-def:instance">
+                                                                  <sch:assert test="(@var_ref and string-length(.)=0) or (number(.) &gt;= 1)"><sch:value-of select="../@id"/> - the value of instance must be greater than or equal to one, or empty if var_ref is used.</sch:assert>
                                                             </sch:rule>
                                                       </sch:pattern>
                                                 </xsd:appinfo>

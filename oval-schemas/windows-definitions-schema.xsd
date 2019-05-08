@@ -3688,7 +3688,7 @@
                                                 <xsd:appinfo>
                                                       <sch:pattern id="win-def_lps_fl">
                                                             <sch:rule context="win-def:lockoutpolicy_state/win-def:force_logoff">
-                                                                  <sch:assert test="string-length(.) = 0 or number(.) &lt; 0"><sch:value-of select="../@id"/> - the value of force_logoff must be greater than or equal to zero</sch:assert>
+                                                                  <sch:assert test="(@var_ref and string-length(.)=0) or (number(.) &gt;= 0)"><sch:value-of select="../@id"/> - the value of force_logoff must be greater than or equal to zero, or empty if var_ref is used.</sch:assert>
                                                             </sch:rule>
                                                       </sch:pattern>
                                                 </xsd:appinfo>
@@ -3700,7 +3700,7 @@
                                                 <xsd:appinfo>
                                                       <sch:pattern id="win-def_lps_ld">
                                                             <sch:rule context="win-def:lockoutpolicy_state/win-def:lockout_duration">
-                                                                  <sch:assert test="string-length(.) = 0 or number(.) &lt; 0"><sch:value-of select="../@id"/> - the value of lockout_duration must be greater than or equal to zero</sch:assert>
+                                                                  <sch:assert test="(@var_ref and string-length(.)=0) or (number(.) &gt;= 0)"><sch:value-of select="../@id"/> - the value of lockout_duration must be greater than or equal to zero, or empty if var_ref is used.</sch:assert>
                                                             </sch:rule>
                                                       </sch:pattern>
                                                 </xsd:appinfo>
@@ -4161,7 +4161,7 @@
                                                 <xsd:appinfo>
                                                       <sch:pattern id="win-def_pwp_mpa">
                                                             <sch:rule context="win-def:passwordpolicy_state/win-def:max_passwd_age">
-                                                                  <sch:assert test="number(.) &lt; 0"><sch:value-of select="../@id"/> - the value of max_passwd_age must be greater than or equal to zero</sch:assert>
+                                                                  <sch:assert test="(@var_ref and string-length(.)=0) or (number(.) &gt;= 0)"><sch:value-of select="../@id"/> - the value of max_passwd_age must be greater than or equal to zero, or empty if var_ref is used.</sch:assert>
                                                             </sch:rule>
                                                       </sch:pattern>
                                                 </xsd:appinfo>
