@@ -1619,7 +1619,7 @@
                               <oval:test>plist511_test</oval:test>
                               <oval:object>plist511_object</oval:object>
                               <oval:state>plist511_state</oval:state>
-                              <oval:item>plist_item</oval:item>
+                              <oval:item>plist511_item</oval:item>
                         </oval:element_mapping>
                   </xsd:appinfo>
                   <xsd:appinfo>
