@@ -9480,6 +9480,11 @@
                                 <xsd:documentation>This value is reserved for system use.</xsd:documentation>
                             </xsd:annotation>
                         </xsd:enumeration>
+                        <xsd:enumeration value="">
+                              <xsd:annotation>
+                                    <xsd:documentation>The empty string value is permitted here to allow for empty elements associated with variable references.</xsd:documentation>
+                              </xsd:annotation>
+                        </xsd:enumeration>
                   </xsd:restriction>
             </xsd:simpleContent>
       </xsd:complexType>
