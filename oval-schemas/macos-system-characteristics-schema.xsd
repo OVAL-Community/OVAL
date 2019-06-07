@@ -825,19 +825,19 @@
                <xsd:complexContent>
                     <xsd:extension base="oval-sc:ItemType">
                          <xsd:sequence>
-                              <xsd:element name="target_user" type="oval-sc:EntityItemStringType" minOccurs="0" maxOccurs="1" nillable="true">
-                                   <xsd:annotation>
-                                        <xsd:documentation>The target_user element specifies the user whose password policy information was collected. If xsi:nil="true", the item specifies the global policy.</xsd:documentation>
-                                   </xsd:annotation>
-                              </xsd:element>
                               <xsd:element name="username" type="oval-sc:EntityItemStringType" minOccurs="0" maxOccurs="1" nillable="true">
                                    <xsd:annotation>
-                                        <xsd:documentation>The username element specifies the username of the authenticator.</xsd:documentation>
+                                        <xsd:documentation>The username element specifies the user whose password policy information was collected. If xsi:nil="true", the item specifies the global policy.</xsd:documentation>
                                    </xsd:annotation>
                               </xsd:element>
-                              <xsd:element name="userpass" type="oval-sc:EntityItemStringType" minOccurs="0" maxOccurs="1" nillable="true">
+                              <xsd:element name="authenticator" type="oval-sc:EntityItemStringType" minOccurs="0" maxOccurs="1" nillable="true">
                                    <xsd:annotation>
-                                        <xsd:documentation>The userpass element specifies the password of the authenticator as specified by the username element.</xsd:documentation>
+                                        <xsd:documentation>The authenticator element specifies the username of the authenticator.</xsd:documentation>
+                                   </xsd:annotation>
+                              </xsd:element>
+                              <xsd:element name="authenticator_password" type="oval-sc:EntityItemStringType" minOccurs="0" maxOccurs="1" nillable="true">
+                                   <xsd:annotation>
+                                        <xsd:documentation>The authenticator_password element specifies the password of the authenticator as specified by the authenticator element.</xsd:documentation>
                                    </xsd:annotation>
                               </xsd:element>
                               <xsd:element name="directory_node" type="oval-sc:EntityItemStringType" minOccurs="0" maxOccurs="1" nillable="true">

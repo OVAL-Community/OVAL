@@ -2193,7 +2193,7 @@
       <!-- =============================================================================== -->
       <xsd:element name="pwpolicy512_test" substitutionGroup="oval-def:test">
             <xsd:annotation>
-                  <xsd:documentation>This test retrieves password policy data from the 'pwpolicy -getaccountpolicies -u target_user [-a username] [-p userpass] [-n directory_node]' output where username, userpass, and directory_node are optional. Please see the 'pwpolicy' man page for additional information.</xsd:documentation>
+                  <xsd:documentation>This test retrieves password policy data from the 'pwpolicy -getaccountpolicies -u username [-a authenticator] [-p authenticator_password] [-n directory_node]' output where authenticator, authenticator_password, and directory_node are optional. Please see the 'pwpolicy' man page for additional information.</xsd:documentation>
                   <xsd:appinfo>
                         <oval:element_mapping>
                               <oval:test>pwpolicy512_test</oval:test>
@@ -2248,31 +2248,31 @@
                                     <xsd:choice>
                                           <xsd:element ref="oval-def:set"/>
                                           <xsd:sequence>
-                                                <xsd:element name="target_user" type="oval-def:EntityObjectStringType" nillable="true">
-                                                      <xsd:annotation>
-                                                            <xsd:documentation>The target_user element specifies the user whose password policy information should be collected. If an operation other than equals is specified, the users on the system should be enumerated and the 'pwpolicy' command should be issued for each user that matches the target_user element. If the xsi:nil attribute is set to true, the global policy should be retrieved.</xsd:documentation>
-                                                      </xsd:annotation>
-                                                </xsd:element>
                                                 <xsd:element name="username" type="oval-def:EntityObjectStringType" nillable="true">
                                                       <xsd:annotation>
-                                                            <xsd:documentation>The username element specifies the username of the authenticator. If the xsi:nil attribute is set to true, authentication to the directory node will not be performed (i.e. the '-a' and '-p' command line options will not be specified when issuing the 'pwpolicy' command) and the xsi:nil attribute of the userpass element should also be set to true.</xsd:documentation>
+                                                            <xsd:documentation>The username element specifies the user whose password policy information should be collected. If an operation other than equals is specified, the users on the system should be enumerated and the 'pwpolicy' command should be issued for each user that matches the username element. If the xsi:nil attribute is set to true, the global policy should be retrieved.</xsd:documentation>
+                                                      </xsd:annotation>
+                                                </xsd:element>
+                                                <xsd:element name="authenticator" type="oval-def:EntityObjectStringType" nillable="true">
+                                                      <xsd:annotation>
+                                                            <xsd:documentation>The authenticator element specifies the username of the authenticator. If the xsi:nil attribute is set to true, authentication to the directory node will not be performed (i.e. the '-a' and '-p' command line options will not be specified when issuing the 'pwpolicy' command) and the xsi:nil attribute of the authenticator_password element should also be set to true.</xsd:documentation>
                                                             <xsd:appinfo>
-                                                                  <sch:pattern id="macos-def_pwp512objusername">
-                                                                        <sch:rule context="macos-def:pwpolicy512_object/macos-def:username">
-                                                                              <sch:assert test="not((@xsi:nil='1' or @xsi:nil='true')) or ../macos-def:userpass/@xsi:nil='true' or ../macos-def:userpass/@xsi:nil='1'"><sch:value-of select="../@id"/> - userpass entity must be nil when username entity is nil</sch:assert>
+                                                                  <sch:pattern id="macos-def_pwp512objauthenticator">
+                                                                        <sch:rule context="macos-def:pwpolicy512_object/macos-def:authenticator">
+                                                                              <sch:assert test="not((@xsi:nil='1' or @xsi:nil='true')) or ../macos-def:authenticator_password/@xsi:nil='true' or ../macos-def:authenticator_password/@xsi:nil='1'"><sch:value-of select="../@id"/> - authenticator_password entity must be nil when username entity is nil</sch:assert>
                                                                         </sch:rule>
                                                                   </sch:pattern>
                                                             </xsd:appinfo>
                                                       </xsd:annotation>
                                                 </xsd:element>
-                                                <xsd:element name="userpass" type="oval-def:EntityObjectStringType" nillable="true">
+                                                <xsd:element name="authenticator_password" type="oval-def:EntityObjectStringType" nillable="true">
                                                       <xsd:annotation>
-                                                            <xsd:documentation>The userpass element specifies the password of the authenticator as specified by the username element. If the xsi:nil attribute is set to true, authentication to the directory node will not be performed (i.e. the '-a' and '-p' command line options will not be specified when issuing the 'pwpolicy' command) and the xsi:nil attribute of the username element should also be set to true.</xsd:documentation>
+                                                            <xsd:documentation>The authenticator_password element specifies the password of the authenticator as specified by the username element. If the xsi:nil attribute is set to true, authentication to the directory node will not be performed (i.e. the '-a' and '-p' command line options will not be specified when issuing the 'pwpolicy' command) and the xsi:nil attribute of the username element should also be set to true.</xsd:documentation>
                                                             <xsd:appinfo>
-                                                                  <sch:pattern id="macos-def_pwp512objuserpass">
-                                                                        <sch:rule context="macos-def:pwpolicy512_object/macos-def:userpass">
-                                                                              <sch:assert test="not(@operation) or @operation='equals'"><sch:value-of select="../@id"/> - operation attribute for the userpass entity of a pwpolicy512_object should be 'equals', note that this overrules the general operation attribute validation (i.e. follow this one)</sch:assert>
-                                                                              <sch:assert test="not((@xsi:nil='1' or @xsi:nil='true')) or ../macos-def:username/@xsi:nil='true' or ../macos-def:username/@xsi:nil='1'"><sch:value-of select="../@id"/> - username entity must be nil when userpass entity is nil</sch:assert>
+                                                                  <sch:pattern id="macos-def_pwp512objauthpass">
+                                                                        <sch:rule context="macos-def:pwpolicy512_object/macos-def:authenticator_password">
+                                                                              <sch:assert test="not(@operation) or @operation='equals'"><sch:value-of select="../@id"/> - operation attribute for the authenticator_password entity of a pwpolicy512_object should be 'equals', note that this overrules the general operation attribute validation (i.e. follow this one)</sch:assert>
+                                                                              <sch:assert test="not((@xsi:nil='1' or @xsi:nil='true')) or ../macos-def:authenticator/@xsi:nil='true' or ../macos-def:authenticator/@xsi:nil='1'"><sch:value-of select="../@id"/> - authenticator entity must be nil when authenticator_password entity is nil</sch:assert>
                                                                         </sch:rule>
                                                                   </sch:pattern>
                                                             </xsd:appinfo>
@@ -2318,19 +2318,19 @@
                   <xsd:complexContent>
                         <xsd:extension base="oval-def:StateType">
                               <xsd:sequence>
-                                    <xsd:element name="target_user" type="oval-def:EntityStateStringType" minOccurs="0" maxOccurs="1">
-                                          <xsd:annotation>
-                                                <xsd:documentation>The target_user element specifies the user whose password policy information should be collected.</xsd:documentation>
-                                          </xsd:annotation>
-                                    </xsd:element>
                                     <xsd:element name="username" type="oval-def:EntityStateStringType" minOccurs="0" maxOccurs="1">
                                           <xsd:annotation>
-                                                <xsd:documentation>The username element specifies the username of the authenticator.</xsd:documentation>
+                                                <xsd:documentation>The username element specifies the user whose password policy information should be collected.</xsd:documentation>
                                           </xsd:annotation>
                                     </xsd:element>
-                                    <xsd:element name="userpass" type="oval-def:EntityStateStringType" minOccurs="0" maxOccurs="1">
+                                    <xsd:element name="authenticator" type="oval-def:EntityStateStringType" minOccurs="0" maxOccurs="1">
                                           <xsd:annotation>
-                                                <xsd:documentation>The userpass element specifies the password of the authenticator as specified by the username element.</xsd:documentation>
+                                                <xsd:documentation>The authenticator element specifies the username of the authenticator.</xsd:documentation>
+                                          </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="authenticator_password" type="oval-def:EntityStateStringType" minOccurs="0" maxOccurs="1">
+                                          <xsd:annotation>
+                                                <xsd:documentation>The authenticator_password element specifies the password of the authenticator as specified by the authenticator element.</xsd:documentation>
                                           </xsd:annotation>
                                     </xsd:element>
                                     <xsd:element name="directory_node" type="oval-def:EntityStateStringType" minOccurs="0" maxOccurs="1">
