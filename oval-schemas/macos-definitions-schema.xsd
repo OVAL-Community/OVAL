@@ -13,9 +13,9 @@
             <xsd:documentation>The OVAL Schema is maintained by the OVAL Community. For more information, including how to get involved in the project and how to submit change requests, please visit the OVAL website at http://oval.cisecurity.org.</xsd:documentation>
             <xsd:appinfo>
                   <schema>MacOS Definition</schema>
-                  <version>5.11.1:1.2</version>
-                  <date>11/30/2016 09:00:00 AM</date>
-                  <terms_of_use>For the portion subject to the copyright in the United States: Copyright (c) 2016 United States Government. All rights reserved. Copyright (c) 2016, Center for Internet Security. All rights reserved. The contents of this file are subject to the terms of the OVAL License located at https://oval.cisecurity.org/terms. See the OVAL License for the specific language governing permissions and limitations for use of this schema. When distributing copies of the OVAL Schema, this license header must be included.</terms_of_use>
+                  <version>5.11.1:1.3</version>
+                  <date>05/24/2019 09:00:00 AM</date>
+                  <terms_of_use>For the portion subject to the copyright in the United States: Copyright (c) 2016 United States Government. All rights reserved. Copyright (c) 2019, Center for Internet Security. All rights reserved. The contents of this file are subject to the terms of the OVAL License located at https://oval.cisecurity.org/terms. See the OVAL License for the specific language governing permissions and limitations for use of this schema. When distributing copies of the OVAL Schema, this license header must be included.</terms_of_use>
                   <sch:ns prefix="oval-def" uri="http://oval.mitre.org/XMLSchema/oval-definitions-5"/>
                   <sch:ns prefix="macos-def" uri="http://oval.mitre.org/XMLSchema/oval-definitions-5#macos"/>
                   <sch:ns prefix="xsi" uri="http://www.w3.org/2001/XMLSchema-instance"/>
@@ -1619,7 +1619,7 @@
                               <oval:test>plist511_test</oval:test>
                               <oval:object>plist511_object</oval:object>
                               <oval:state>plist511_state</oval:state>
-                              <oval:item>plist_item</oval:item>
+                              <oval:item>plist511_item</oval:item>
                         </oval:element_mapping>
                   </xsd:appinfo>
                   <xsd:appinfo>
