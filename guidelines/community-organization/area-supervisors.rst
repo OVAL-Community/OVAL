@@ -10,20 +10,20 @@ Area Supervisors
 
 The following list bounds the different areas of responsibility that may be managed by a given Area Supervisor. No Area Supervisors have yet been appointed.
 
-- Foundation Schemas (i.e. Core, Common, Independent, Results, Variables and Directives Schemas)
-- Android Schemas
-- Apple Schemas (iOS, Macintosh)
-- Cisco Schemas (ASA, CatOS, IOS, IOS XE, PixOS)
-- FreeBSD Schemas
-- HP-UX Schemas
-- IBM AIX Schemas
-- Linux Schemas
-- UNIX Schemas
-- Sun Solaris Schemas
-- Juniper JunOS Schemas
-- NETCONF Schemas
-- Microsoft Schemas (i.e. Microsoft Windows, SharePoint)
-- Vmware Schemas (i.e. ESX)
+- Foundation Schemas (i.e. Core, Common, Independent, Results, Variables and Directives Schemas) - Bill Munyan, CIS
+- Android Schemas - Chandrashakar B, SecPod
+- Apple Schemas (iOS, Macintosh) - David Solin, Joval
+- Cisco Schemas (ASA, CatOS, IOS, IOS XE, PixOS) - Omar Santos, Cisco
+- FreeBSD Schemas - David Solin, Joval
+- HP-UX Schemas - John Ulmer, US Navy SPAWAR
+- IBM AIX Schemas - John Ulmer, US Navy SPAWAR
+- Linux Schemas - Šimon Lukašík, Red Hat
+- UNIX Schemas - Šimon Lukašík, Red Hat
+- Sun Solaris Schemas - Jarrett Lu, Oracle
+- Juniper JunOS Schemas - David Solin, Joval
+- NETCONF Schemas - David Solin, Joval
+- Microsoft Schemas (i.e. Microsoft Windows, SharePoint) - Jack Vander Pol, US Navy SPAWAR
+- Vmware Schemas (i.e. ESX) - TBD
 
 Responsibilities
 ----------------

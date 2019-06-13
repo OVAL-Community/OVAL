@@ -12,9 +12,11 @@ Prerequisites
 
 You'll need the following in order to get started:
 
-# A fork of `The OVAL Community github repository <https://github.com/OVAL-Community/OVAL>`
-# A local working copy of your fork
-# Python 3.x
+#. A fork of `The OVAL Community github repository`_
+#. A local working copy of your fork
+#. Python 3.x
+
+.. _The OVAL Community github repository: https://github.com/OVAL-Community/OVAL
 
 Initial Setup
 -------------
@@ -37,23 +39,29 @@ Building the Guidelines
 
 On Windows::
 
+  cd guidelines
   make.bat
 
 On Mac/Linux::
 
+  cd guidelines
   make html
 
 Using Sphinx Auto Build/Reload (Windows/Max/Linux)::
 
-  sphinx-autobuild . \_build/html
+  cd guidelines
+  sphinx-autobuild . ./_build/html
 
 Using reStructuredText
 ----------------------
 
 These guidelines are written in reStructuredText. Learn more here:
 
-* `Sphinx reStructuredText Primer <>http://www.sphinx-doc.org/en/master/rest.html#source-code`
-* `Offical reStructuredText Documentation <http://docutils.sourceforge.net/rst.html>`
+* `Sphinx reStructuredText Primer`_
+* `Offical reStructuredText Documentation`_
+
+.. _Sphinx reStructuredText Primer: http://www.sphinx-doc.org/en/master/rest.html#source-code
+.. _Offical reStructuredText Documentation: http://docutils.sourceforge.net/rst.html
 
 Important Guideline Guidelines
 ------------------------------
