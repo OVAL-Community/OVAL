@@ -32,6 +32,7 @@ The purpose of a Consensus Call is to provide a 14-day period during which commu
 It is suggested that Area Supervisors send an email out to the `OVAL mailing lists <https://oval-community-guidelines.readthedocs.io/en/latest/mailing-lists.html>`_ to initiate the 14-day period. A default template is provided below but may be changed or replaced as needed.
 
 OVAL Community,
+
 A current issue exists in the OVAL Community repository [include link] which documents [description of the problem].  A fix has been made and pull request created [include link].  [This Area Supervisor] has reviewed the changes and is satisfied they resolve the issues, and therefore this message intends to begin the formal consensus call for merging the changes into the “development” branch of the OVAL language repository; moving it along in the process.
 If no objections exist by [date 14 days from today], the PR will be merged.  Please examine the issue and the PR and raise objections or voice approval in the comments area of the pull request.
 
