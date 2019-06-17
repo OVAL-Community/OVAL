@@ -1049,7 +1049,7 @@
                <xsd:complexContent>
                     <xsd:extension base="oval-sc:ItemType">
                          <xsd:sequence>
-                              <xsd:element name="selinux_status" type="oval-sc:EntityItemStringType" minOccurs="0" maxOccurs="1">
+                              <xsd:element name="selinux_status" type="linux-sc:EntityItemSEStatusType" minOccurs="0" maxOccurs="1">
                                    <xsd:annotation>
                                         <xsd:documentation>Indicates whether SELinux module itself is enabled or disabled on your system.</xsd:documentation>
                                    </xsd:annotation>
@@ -1472,6 +1472,35 @@
                     <xsd:enumeration value="">
                          <xsd:annotation>
                               <xsd:documentation>The empty string value is permitted here to allow for detailed error reporting.</xsd:documentation>
+                         </xsd:annotation>
+                    </xsd:enumeration>
+               </xsd:restriction>
+          </xsd:simpleContent>
+     </xsd:complexType>
+     <xsd:complexType name="EntityItemSEStatusType">
+          <xsd:annotation>
+               <xsd:documentation>
+                    The EntityItemSEStatusType complex type restricts a string value to the set of SEStatus 
+                    values that indicate whether SELinux module itself is enabled or disabled on your system. Keep 
+                    in mind that even though this may say enabled, but SELinux might still be not technically 
+                    enabled (enforced), which is really indicated by the "current_mode" value.
+               </xsd:documentation>
+          </xsd:annotation>
+          <xsd:simpleContent>
+               <xsd:restriction base="oval-sc:EntityItemStringType">
+                    <xsd:enumeration value="enabled">
+                         <xsd:annotation>
+                              <xsd:documentation>Indicates SELinux is enabled</xsd:documentation>
+                         </xsd:annotation>
+                    </xsd:enumeration>
+                    <xsd:enumeration value="disabled">
+                         <xsd:annotation>
+                              <xsd:documentation>Indicates SELinux is disabled</xsd:documentation>
+                         </xsd:annotation>
+                    </xsd:enumeration>
+                    <xsd:enumeration value="">
+                         <xsd:annotation>
+                              <xsd:documentation>The empty string value is permitted here to allow for empty elements associated with variable references.</xsd:documentation>
                          </xsd:annotation>
                     </xsd:enumeration>
                </xsd:restriction>
