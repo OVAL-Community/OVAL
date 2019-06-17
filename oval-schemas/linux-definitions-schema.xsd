@@ -2376,12 +2376,17 @@
                                         <xsd:documentation>This indicates whether SELinux is currently enforcing the policies or not utilizing the following values enforcing, permissive, disabled.</xsd:documentation>
                                    </xsd:annotation>
                               </xsd:element>
-                              <xsd:element name="mode_from_config" type="linux-def:EntityStateSEStatusModeType" minOccurs="0" maxOccurs="1">
+                              <xsd:element name="mode_from_config_file" type="linux-def:EntityStateSEStatusModeType" minOccurs="0" maxOccurs="1">
                                    <xsd:annotation>
                                         <xsd:documentation>Displays the mode from config file. </xsd:documentation>
                                    </xsd:annotation>
                               </xsd:element>
                               <xsd:element name="loaded_policy_name" type="linux-def:EntityStateSEStatusPolicyType" minOccurs="0" maxOccurs="1">
+                                   <xsd:annotation>
+                                        <xsd:documentation>Displays what type of SELinux policy is currently loaded. In pretty much all common situations, you’ll see “targeted” as the SELinux policy, as that is the default policy.</xsd:documentation>
+                                   </xsd:annotation>
+                              </xsd:element>
+                              <xsd:element name="policy_from_config_file" type="linux-def:EntityStateSEStatusPolicyType" minOccurs="0" maxOccurs="1">
                                    <xsd:annotation>
                                         <xsd:documentation>Displays what type of SELinux policy is currently loaded. In pretty much all common situations, you’ll see “targeted” as the SELinux policy, as that is the default policy.</xsd:documentation>
                                    </xsd:annotation>
