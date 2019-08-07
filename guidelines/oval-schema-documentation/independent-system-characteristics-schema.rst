@@ -11,13 +11,13 @@ The OVAL Schema is maintained by the OVAL Community. For more information, inclu
 Item Listing  
 ---------------------------------------------------------
 * :ref:`family_item`  
-* :ref:`filehash_item` (Deprecated)  
+* :ref:`filehash_item`  
 * :ref:`filehash58_item`  
-* :ref:`environmentvariable_item` (Deprecated)  
+* :ref:`environmentvariable_item`  
 * :ref:`environmentvariable58_item`  
 * :ref:`ldap_item`  
-* :ref:`ldap57_item` (Deprecated)  
-* :ref:`sql_item` (Deprecated)  
+* :ref:`ldap57_item`  
+* :ref:`sql_item`  
 * :ref:`sql57_item`  
 * :ref:`textfilecontent_item`  
 * :ref:`variable_item`  
@@ -51,8 +51,8 @@ ______________
   
 < filehash_item > (Deprecated)  
 ---------------------------------------------------------
-**Deprecation Info**:  
-
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 * Deprecated As Of Version 5.8  
 * Reason: Replaced by the filehash58_item which allows the hash algorithm to be specified when collecting data. See the filehash58_item.  
 * Comment: This item has been deprecated and may be removed in a future version of the language.  
@@ -131,7 +131,8 @@ ______________
   
 < environmentvariable_item > (Deprecated)  
 ---------------------------------------------------------
-**Deprecation Info**:  
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 * Deprecated As Of Version 5.8  
 * Reason: Replaced by the environmentvariable58_item. This item allows the hash algorithm to be specified. See the filehash58_item.  
 * Comment: This object has been deprecated and may be removed in a future version of the language.  
@@ -226,7 +227,8 @@ ______________
   
 < ldap57_item > (Deprecated)  
 ---------------------------------------------------------
-**Deprecation Info**:  
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 * Deprecated As Of Version 5.11.2  
 * Reason: Use the original ldap_item. The ldap57_test suffers from ambiguity; it was never adequately specified, and it does not even seem possible to have structured data in the context of the enumerated LdaptypeTypes. Use the original ldap_test instead.  
 * Comment: This test has been deprecated and will be removed in version 6.0 of the language.  
@@ -268,7 +270,8 @@ ______________
   
 < sql_item > (Deprecated)  
 ---------------------------------------------------------
-**Deprecation Info**:  
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 * Deprecated As Of Version 5.7  
 * Reason: Replaced by the sql57_item. This item allows for single fields to be selected from a database. A new item was created to allow more than one field to be selected in one statement. See the sql57_item.  
 * Comment: This object has been deprecated and may be removed in a future version of the language.  
@@ -714,10 +717,16 @@ The EntityItemLdaptypeType complex type restricts a string value to a specific s
       - | Telex Number, corresponding to OID 1.3.6.1.4.1.1466.115.121.1.52  
     * - LDAPTYPE_UTC_TIME  
       - | UTC Time, corresponding to OID 1.3.6.1.4.1.1466.115.121.1.53  
-    * - ~~LDAPTYPE_TIMESTAMP~~  
-      - | ~~The data is of a time stamp in seconds.~~<br/>**Deprecated As Of Version 5.7**<br/>**Reason:** This value was accidently carried over from the win-sc:EntityItemAdstypeType as it was used as a template for the ind-sc:EntityItemLdaptypeType.<br/>**Comment:** This value has been deprecated and will be removed in version 6.0 of the language.<br/>  
-    * - ~~LDAPTYPE_EMAIL~~  
-      - | ~~The data is of an e-mail message.~~<br/>**Deprecated As Of Version 5.7**<br/>**Reason:** This value was accidently carried over from the win-sc:EntityItemAdstypeType as it was used as a template for the ind-sc:EntityItemLdaptypeType.<br/>**Comment:** This value has been deprecated and will be removed in version 6.0 of the language.<br/>  
+    * - LDAPTYPE_TIMESTAMP (Deprecated)  
+      - | The data is of a time stamp in seconds.  
+        | **Deprecated As Of Version 5.7  
+        | **Reason:** This value was accidently carried over from the win-sc:EntityItemAdstypeType as it was used as a template for the ind-sc:EntityItemLdaptypeType.  
+        | **Comment:** This value has been deprecated and will be removed in version 6.0 of the language.  
+    * - LDAPTYPE_EMAIL (Deprecated)  
+      - | The data is of an e-mail message.  
+        | **Deprecated As Of Version 5.7  
+        | **Reason:** This value was accidently carried over from the win-sc:EntityItemAdstypeType as it was used as a template for the ind-sc:EntityItemLdaptypeType.  
+        | **Comment:** This value has been deprecated and will be removed in version 6.0 of the language.  
     * -   
       - | The empty string value is permitted here to allow for detailed error reporting.  
   
