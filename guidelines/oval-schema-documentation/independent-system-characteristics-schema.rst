@@ -52,6 +52,7 @@ ______________
 < filehash_item > (Deprecated)  
 ---------------------------------------------------------
 **Deprecation Info**:  
+
 * Deprecated As Of Version 5.8  
 * Reason: Replaced by the filehash58_item which allows the hash algorithm to be specified when collecting data. See the filehash58_item.  
 * Comment: This item has been deprecated and may be removed in a future version of the language.  
