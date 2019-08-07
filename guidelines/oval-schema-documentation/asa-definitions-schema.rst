@@ -32,11 +32,19 @@ The acl test is used to check the properties of specific output lines from an AC
 
 **Extends:** [oval-def:TestType](oval-definitions-schema.md#TestType) 
 
-.. csv-table:: Elements  
-    :header-rows: 1  
-    :header: "Child Elements", "Type (MinOccurs..MaxOccurs)", "Desc."  
-    "object", "[oval-def:ObjectRefType](oval-definitions-schema.md#ObjectRefType)  (1..1) ", ""  
-    "state", "[oval-def:StateRefType](oval-definitions-schema.md#StateRefType)  (0..unbounded) ", ""  
+.. list-table:: Elements
+    :header-rows: 1
+
+    * - Child Elements
+      - Type (MinOccurs..MaxOccurs)
+      - Desc.
+    * - object
+      - [oval-def:ObjectRefType](oval-definitions-schema.md#ObjectRefType)  (1..1)
+      - N/A
+    * - state
+      - [oval-def:StateRefType](oval-definitions-schema.md#StateRefType)  (0..unbounded)
+      - N/A
+
   
 < acl_object >  
 ---------------------------------------------------------
