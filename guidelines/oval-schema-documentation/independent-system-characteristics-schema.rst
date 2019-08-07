@@ -371,9 +371,9 @@ Child Elements
     * - instance  
       - oval-sc:EntityItemIntType (0..1)  
       - The instance entity calls out which match of the pattern is being represented by this item. The first match is given an instance value of 1, the second match is given an instance value of 2, and so on. The main purpose of this entity is too provide uniqueness for different textfilecontent_items that results from multiple matches of a given pattern against the same file.  
-    * - ~~line~~  
-      - ~~oval-sc:EntityItemStringType (0..1~~)  
-      - ~~The line element represents a line in the file and is represented using a regular expression.~~  
+    * - line (Deprecated)  
+      - oval-sc:EntityItemStringType (0..1)  
+      - The line element represents a line in the file and is represented using a regular expression.  
     * - text  
       - oval-sc:EntityItemAnySimpleType (0..1)  
       - The text entity represents the block of text that matched the specified pattern.  
@@ -719,12 +719,12 @@ The EntityItemLdaptypeType complex type restricts a string value to a specific s
       - | UTC Time, corresponding to OID 1.3.6.1.4.1.1466.115.121.1.53  
     * - LDAPTYPE_TIMESTAMP (Deprecated)  
       - | The data is of a time stamp in seconds.  
-        | **Deprecated As Of Version 5.7  
+        | **Deprecated As Of Version:** 5.7  
         | **Reason:** This value was accidently carried over from the win-sc:EntityItemAdstypeType as it was used as a template for the ind-sc:EntityItemLdaptypeType.  
         | **Comment:** This value has been deprecated and will be removed in version 6.0 of the language.  
     * - LDAPTYPE_EMAIL (Deprecated)  
       - | The data is of an e-mail message.  
-        | **Deprecated As Of Version 5.7  
+        | **Deprecated As Of Version:** 5.7  
         | **Reason:** This value was accidently carried over from the win-sc:EntityItemAdstypeType as it was used as a template for the ind-sc:EntityItemLdaptypeType.  
         | **Comment:** This value has been deprecated and will be removed in version 6.0 of the language.  
     * -   

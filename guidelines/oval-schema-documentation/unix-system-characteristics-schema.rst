@@ -17,11 +17,11 @@ Item Listing
 * :ref:`inetd_item`  
 * :ref:`interface_item`  
 * :ref:`password_item`  
-* :ref:`process_item` (Deprecated)  
+* :ref:`process_item`  
 * :ref:`process58_item`  
 * :ref:`routingtable_item`  
 * :ref:`runlevel_item`  
-* :ref:`sccs_item` (Deprecated)  
+* :ref:`sccs_item`  
 * :ref:`shadow_item`  
 * :ref:`symlink_item`  
 * :ref:`sysctl_item`  
@@ -350,7 +350,8 @@ ______________
   
 < process_item > (Deprecated)  
 ---------------------------------------------------------
-**Deprecation Info**:  
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 * Deprecated As Of Version 5.8  
 * Reason: The process_item has been deprecated and replaced by the process58_item. The entity 'command' was changed to 'command_line' in the process58_item to accurately describe what information is collected. Please see the process58_item for additional information.  
   
@@ -529,7 +530,8 @@ ______________
   
 < sccs_item > (Deprecated)  
 ---------------------------------------------------------
-**Deprecation Info**:  
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 * Deprecated As Of Version 5.10  
 * Reason: The sccs_item has been deprecated because the Source Code Control System (SCCS) is obsolete.  The sccs_item may be removed in a future version of the language.  
   

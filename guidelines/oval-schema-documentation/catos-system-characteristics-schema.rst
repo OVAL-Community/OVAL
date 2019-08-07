@@ -115,13 +115,13 @@ Child Elements
     * - catos_release  
       - oval-sc:EntityItemVersionType (0..1)  
       - The catos_release entity specifies the release version of CatOS.  
-    * - ~~catos_major_release~~  
-      - ~~oval-sc:EntityItemVersionType (0..1~~)  
-      - ~~~~  
-    * - ~~catos_individual_release~~  
-      - ~~oval-sc:EntityItemIntType (0..1~~)  
-      - ~~~~  
-    * - ~~catos_version_id~~  
-      - ~~oval-sc:EntityItemStringType (0..1~~)  
-      - ~~~~  
+    * - catos_major_release (Deprecated)  
+      - oval-sc:EntityItemVersionType (0..1)  
+      -   
+    * - catos_individual_release (Deprecated)  
+      - oval-sc:EntityItemIntType (0..1)  
+      -   
+    * - catos_version_id (Deprecated)  
+      - oval-sc:EntityItemStringType (0..1)  
+      -   
   

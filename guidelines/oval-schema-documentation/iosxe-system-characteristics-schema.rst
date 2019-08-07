@@ -92,15 +92,15 @@ Child Elements
     * - Child Elements  
       - Type (MinOccurs..MaxOccurs)  
       - Desc.  
-    * - ~~platform~~  
-      - ~~oval-sc:EntityItemStringType (0..1~~)  
-      - ~~The platform entity specifies the platform that is running the IOS-XE software. For example if could be asr1000.~~  
-    * - ~~rp~~  
-      - ~~oval-sc:EntityItemIntType (0..1~~)  
-      - ~~The rp entity specifies the routing processor running the IOS-XE software.~~  
-    * - ~~pkg~~  
-      - ~~oval-sc:EntityItemStringType (0..1~~)  
-      - ~~The pkg entity specifies the consolidated IOS-XE packages in the image. For example it could be adventservicesk9.~~  
+    * - platform (Deprecated)  
+      - oval-sc:EntityItemStringType (0..1)  
+      - The platform entity specifies the platform that is running the IOS-XE software. For example if could be asr1000.  
+    * - rp (Deprecated)  
+      - oval-sc:EntityItemIntType (0..1)  
+      - The rp entity specifies the routing processor running the IOS-XE software.  
+    * - pkg (Deprecated)  
+      - oval-sc:EntityItemStringType (0..1)  
+      - The pkg entity specifies the consolidated IOS-XE packages in the image. For example it could be adventservicesk9.  
     * - version_string  
       - oval-sc:EntityItemStringType (0..1)  
       - The train entity specifies the entire IOS-XE version string, for example, '03.13.02.S'.  
@@ -116,12 +116,12 @@ Child Elements
     * - train  
       - oval-sc:EntityItemStringType (0..1)  
       - The train entity specifies the train piece of the version string. The value is a string and in the example 03.13.02.S the train is 'S'.  
-    * - ~~ios_release~~  
-      - ~~oval-sc:EntityItemStringType (0..1~~)  
-      - ~~The ios_release entity specifies the IOS release the IOS-XE was derived from. The value is an string and in the example ASR1000rp1-ipbasek9.03.04.02.122-33.SR.bin the ios_release version is '122-33'~~  
-    * - ~~ios_train~~  
-      - ~~oval-sc:EntityItemStringType (0..1~~)  
-      - ~~The ios_train entity specifies the IOS release the IOS-XE was derived from. The value is an integer and in the example ASR1000rp1-ipbasek9.03.04.02.122-33.SR.bin the ios_release version is 'SR'~~  
+    * - ios_release (Deprecated)  
+      - oval-sc:EntityItemStringType (0..1)  
+      - The ios_release entity specifies the IOS release the IOS-XE was derived from. The value is an string and in the example ASR1000rp1-ipbasek9.03.04.02.122-33.SR.bin the ios_release version is '122-33'  
+    * - ios_train (Deprecated)  
+      - oval-sc:EntityItemStringType (0..1)  
+      - The ios_train entity specifies the IOS release the IOS-XE was derived from. The value is an integer and in the example ASR1000rp1-ipbasek9.03.04.02.122-33.SR.bin the ios_release version is 'SR'  
   
 ______________
   
@@ -205,9 +205,9 @@ Child Elements
     * - ipv6_urpf_command  
       - oval-sc:EntityItemStringType (0..1)  
       - Element with the uRPF command for IPv6 under the interface.  
-    * - ~~urpf_command~~  
-      - ~~oval-sc:EntityItemStringType (0..1~~)  
-      - ~~Element with the uRPF command under the interface.~~  
+    * - urpf_command (Deprecated)  
+      - oval-sc:EntityItemStringType (0..1)  
+      - Element with the uRPF command under the interface.  
     * - switchport_trunk_encapsulation  
       - iosxe-sc:EntityItemTrunkEncapType (0..1)  
       - Element with the switchport trunk encapsulation option configured on the interface (if applicable).  
@@ -637,8 +637,11 @@ The EntityItemRoutingAuthTypeStringType complex type restricts a string value to
       - (No Description)  
     * - MESSAGE_DIGEST  
       - (No Description)  
-    * - ~~NULL~~  
-      - | <br/>**Deprecated As Of Version 5.11.2:1.0**<br/>**Reason:** The NULL authentication area type is never declared in an interface ip ospf command context.<br/>**Comment:** This RoutingAuthTypeStringType enumeration value has been deprecated and may be removed in a future version of the language.<br/>  
+    * - NULL (Deprecated)  
+      - |   
+        | **Deprecated As Of Version:** 5.11.2:1.0  
+        | **Reason:** The NULL authentication area type is never declared in an interface ip ospf command context.  
+        | **Comment:** This RoutingAuthTypeStringType enumeration value has been deprecated and may be removed in a future version of the language.  
     * -   
       - | The empty string value is permitted here to allow for empty elements associated with error conditions.  
   
@@ -793,8 +796,11 @@ The EntityItemAccessListUseType complex type restricts a string value to a speci
       - (No Description)  
     * - VTY  
       - (No Description)  
-    * - ~~NONE~~  
-      - | <br/>**Deprecated As Of Version 5.11.2:1.0**<br/>**Reason:** The EntityStateSimpleBaseType check_existence attribute serves the same purpose as this enumeration value.<br/>**Comment:** This AccessListUseType enumeration value has been deprecated and may be removed in a future version of the language.<br/>  
+    * - NONE (Deprecated)  
+      - |   
+        | **Deprecated As Of Version:** 5.11.2:1.0  
+        | **Reason:** The EntityStateSimpleBaseType check_existence attribute serves the same purpose as this enumeration value.  
+        | **Comment:** This AccessListUseType enumeration value has been deprecated and may be removed in a future version of the language.  
     * -   
       - | The empty string value is permitted here to allow for empty elements associated with error conditions.  
   

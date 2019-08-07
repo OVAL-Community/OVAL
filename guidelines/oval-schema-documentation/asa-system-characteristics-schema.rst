@@ -161,9 +161,9 @@ Child Elements
     * - ipv6_urpf_command  
       - oval-sc:EntityItemStringType (0..1)  
       - Element with the uRPF command for IPv6 under the interface.  
-    * - ~~urpf_command~~  
-      - ~~oval-sc:EntityItemStringType (0..1~~)  
-      - ~~Element with the uRPF command under the interface.~~  
+    * - urpf_command (Deprecated)  
+      - oval-sc:EntityItemStringType (0..1)  
+      - Element with the uRPF command under the interface.  
   
 ______________
   

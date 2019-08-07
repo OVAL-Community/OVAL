@@ -279,7 +279,8 @@ ______________
   
 < patch_test > (Deprecated)  
 ---------------------------------------------------------
-**Deprecation Info**:  
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 * Deprecated As Of Version 5.3  
 * Reason: Replaced by the patch53_test. The patch_name entity was removed from the patch_object element, and replaced with the swtype, area_patched, and patch_base entities, because the patch_name element can be constructed from the swtype, area_patched, and patch_base entities. Likewise, the patch_name entity was removed from the patch_state element for the same reason. Also, a behaviors entity was added to the patch_object to allow the object to match both the original patch and any superseding patches. A new test was created to reflect these changes. See the patch53_test.  
 * Comment: This test has been deprecated and will be removed in version 6.0 of the language.  
@@ -307,7 +308,8 @@ Child Elements
   
 < patch_object > (Deprecated)  
 ---------------------------------------------------------
-**Deprecation Info**:  
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 * Deprecated As Of Version 5.3  
 * Reason: Replaced by the patch53_object. The patch_name entity was removed from the patch_object element, and replaced with the swtype, area_patched, and patch_base entities, because the patch_name element can be constructed from the swtype, area_patched, and patch_base entities. Also, a behaviors entity was added to the patch_object to allow the object to match both the original patch and any superseding patches. A new object was created to reflect these changes. See the patch53_object.  
 * Comment: This object has been deprecated and will be removed in version 6.0 of the language.  
@@ -330,7 +332,8 @@ Child Elements
   
 < patch_state > (Deprecated)  
 ---------------------------------------------------------
-**Deprecation Info**:  
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 * Deprecated As Of Version 5.3  
 * Reason: Replaced by the patch53_state. The patch_name entity was removed from the patch_state element, and replaced with the swtype, area_patched, and patch_base entities, because the patch_name element can be constructed from the swtype, area_patched, and patch_base entities. A new state was created to reflect these changes. See the patch53_state.  
 * Comment: This state has been deprecated and will be removed in version 6.0 of the language.  

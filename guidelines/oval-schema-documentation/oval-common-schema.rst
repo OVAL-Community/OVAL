@@ -215,8 +215,11 @@ The CheckEnumeration simple type defines acceptable check values, which are used
       - | A value of 'all' means that a final result of true is given if all the individual results under consideration are true.  
     * - at least one  
       - | A value of 'at least one' means that a final result of true is given if at least one of the individual results under consideration is true.  
-    * - ~~none exist~~  
-      - | ~~A value of 'none exists' means that a test evaluates to true if no matching object exists that satisfy the data requirements.~~<br/>**Deprecated As Of Version 5.3**<br/>**Reason:** Replaced by the 'none satisfy' value. In version 5.3 of the OVAL Language, the checking of existence and state were separated into two distinct checks CheckEnumeration (state) and ExistenceEnumeration (existence). Since CheckEnumeration is now used to specify how many objects should satisfy a given state for a test to return true, and no longer used for specifying how many objects must exist for a test to return true, a value of 'none exist' is no longer needed. See the 'none satisfy' value.<br/>**Comment:** This value has been deprecated and will be removed in version 6.0 of the language.<br/>  
+    * - none exist (Deprecated)  
+      - | A value of 'none exists' means that a test evaluates to true if no matching object exists that satisfy the data requirements.  
+        | **Deprecated As Of Version:** 5.3  
+        | **Reason:** Replaced by the 'none satisfy' value. In version 5.3 of the OVAL Language, the checking of existence and state were separated into two distinct checks CheckEnumeration (state) and ExistenceEnumeration (existence). Since CheckEnumeration is now used to specify how many objects should satisfy a given state for a test to return true, and no longer used for specifying how many objects must exist for a test to return true, a value of 'none exist' is no longer needed. See the 'none satisfy' value.  
+        | **Comment:** This value has been deprecated and will be removed in version 6.0 of the language.  
     * - none satisfy  
       - | A value of 'none satisfy' means that a final result of true is given if none the individual results under consideration are true.  
     * - only one  

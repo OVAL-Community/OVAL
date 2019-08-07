@@ -48,7 +48,8 @@ Child Elements
   
 < notes > (Deprecated)  
 ---------------------------------------------------------
-**Deprecation Info**:  
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 * Deprecated As Of Version 5.11.1  
 * Reason: Replaced by the oval:notes element.  
 * Comment: This object has been deprecated and may be removed in a future version of the language.  

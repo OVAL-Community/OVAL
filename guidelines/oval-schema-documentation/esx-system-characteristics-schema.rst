@@ -32,9 +32,9 @@ Child Elements
     * - Child Elements  
       - Type (MinOccurs..MaxOccurs)  
       - Desc.  
-    * - ~~patch_number~~  
-      - ~~oval-sc:EntityItemStringType (0..1~~)  
-      - ~~This is the patch number which identifies the patch being checked in current VMware ESX server. Many of the security bulletins for VMWARE ESX Server contain non-numerical characters in the patch number, therefore this entity has a datatype of string.~~  
+    * - patch_number (Deprecated)  
+      - oval-sc:EntityItemStringType (0..1)  
+      - This is the patch number which identifies the patch being checked in current VMware ESX server. Many of the security bulletins for VMWARE ESX Server contain non-numerical characters in the patch number, therefore this entity has a datatype of string.  
     * - patch_name  
       - oval-sc:EntityItemStringType (0..1)  
       - The patch_name entity indetifies the name of the patch. For example: ESX-200603 or ESX350-200904401-BG. The value of this entity should correspond to the values returned under the "name" column of the "esxupdate query" command.  

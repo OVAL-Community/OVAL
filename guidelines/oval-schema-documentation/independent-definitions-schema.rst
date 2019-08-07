@@ -84,7 +84,8 @@ ______________
   
 < filehash_test > (Deprecated)  
 ---------------------------------------------------------
-**Deprecation Info**:  
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 * Deprecated As Of Version 5.8  
 * Reason: Replaced by the filehash58_test.  
 * Comment: This object has been deprecated and may be removed in a future version of the language.  
@@ -112,7 +113,8 @@ Child Elements
   
 < filehash_object > (Deprecated)  
 ---------------------------------------------------------
-**Deprecation Info**:  
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 * Deprecated As Of Version 5.8  
 * Reason: Replaced by the filehash58_object.  
 * Comment: This object has been deprecated and may be removed in a future version of the language.  
@@ -152,7 +154,8 @@ Child Elements
   
 < filehash_state > (Deprecated)  
 ---------------------------------------------------------
-**Deprecation Info**:  
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 * Deprecated As Of Version 5.8  
 * Reason: Replaced by the filehash58_state.  
 * Comment: This object has been deprecated and may be removed in a future version of the language.  
@@ -295,7 +298,8 @@ ______________
   
 < environmentvariable_test > (Deprecated)  
 ---------------------------------------------------------
-**Deprecation Info**:  
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 * Deprecated As Of Version 5.8  
 * Reason: Replaced by the environmentvariable58_test.  
 * Comment: This object has been deprecated and may be removed in a future version of the language.  
@@ -323,7 +327,8 @@ Child Elements
   
 < environmentvariable_object > (Deprecated)  
 ---------------------------------------------------------
-**Deprecation Info**:  
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 * Deprecated As Of Version 5.8  
 * Reason: Replaced by the environmentvariable58_object.  
 * Comment: This object has been deprecated and may be removed in a future version of the language.  
@@ -348,7 +353,8 @@ Child Elements
   
 < environmentvariable_state > (Deprecated)  
 ---------------------------------------------------------
-**Deprecation Info**:  
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 * Deprecated As Of Version 5.8  
 * Reason: Replaced by the environmentvariable58_state.  
 * Comment: This object has been deprecated and may be removed in a future version of the language.  
@@ -563,7 +569,8 @@ ______________
   
 < ldap57_test > (Deprecated)  
 ---------------------------------------------------------
-**Deprecation Info**:  
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 * Deprecated As Of Version 5.11.2  
 * Reason: Use the original ldap_test. The ldap57_test suffers from ambiguity; it was never adequately specified, and it does not even seem possible to have structured data in the context of the enumerated LdaptypeTypes. Use the original ldap_test instead.  
 * Comment: This test has been deprecated and will be removed in version 6.0 of the language.  
@@ -593,7 +600,8 @@ Child Elements
   
 < ldap57_object > (Deprecated)  
 ---------------------------------------------------------
-**Deprecation Info**:  
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 * Deprecated As Of Version 5.11.2  
 * Reason: Use the original ldap_object. The ldap57_test suffers from ambiguity; it was never adequately specified, and it does not even seem possible to have structured data in the context of the enumerated LdaptypeTypes. Use the original ldap_test instead.  
 * Comment: This test has been deprecated and will be removed in version 6.0 of the language.  
@@ -632,7 +640,8 @@ Child Elements
   
 < ldap57_state > (Deprecated)  
 ---------------------------------------------------------
-**Deprecation Info**:  
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 * Deprecated As Of Version 5.11.2  
 * Reason: Use the original ldap_state. The ldap57_test suffers from ambiguity; it was never adequately specified, and it does not even seem possible to have structured data in the context of the enumerated LdaptypeTypes. Use the original ldap_test instead.  
 * Comment: This test has been deprecated and will be removed in version 6.0 of the language.  
@@ -676,7 +685,8 @@ ______________
   
 < sql_test > (Deprecated)  
 ---------------------------------------------------------
-**Deprecation Info**:  
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 * Deprecated As Of Version 5.7  
 * Reason: Replaced by the sql57_test. This test allows for single fields to be selected from a database. A new test was created to allow more than one field to be selected in one statement. See the sql57_test.  
 * Comment: This object has been deprecated and may be removed in a future version of the language.  
@@ -704,7 +714,8 @@ Child Elements
   
 < sql_object > (Deprecated)  
 ---------------------------------------------------------
-**Deprecation Info**:  
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 * Deprecated As Of Version 5.7  
 * Reason: Replaced by the sql57_object. This object allows for single fields to be selected from a database. A new object was created to allow more than one field to be selected in one statement. See the sql57_object.  
 * Comment: This object has been deprecated and may be removed in a future version of the language.  
@@ -738,7 +749,8 @@ Child Elements
   
 < sql_state > (Deprecated)  
 ---------------------------------------------------------
-**Deprecation Info**:  
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 * Deprecated As Of Version 5.7  
 * Reason: Replaced by the sql57_state. This state allows for single fields to be selected from a database. A new state was created to allow more than one field to be selected in one statement. See the sql57_state.  
 * Comment: This state has been deprecated and may be removed in a future version of the language.  
@@ -1005,7 +1017,8 @@ ______________
   
 < textfilecontent_test > (Deprecated)  
 ---------------------------------------------------------
-**Deprecation Info**:  
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 * Deprecated As Of Version 5.4  
 * Reason: Replaced by the textfilecontent54_test. Support for multi-line pattern matching and multi-instance matching was added. Therefore, a new test was created to reflect these changes. See the textfilecontent54_test.  
 * Comment: This test has been deprecated and will be removed in version 6.0 of the language.  
@@ -1033,7 +1046,8 @@ Child Elements
   
 < textfilecontent_object > (Deprecated)  
 ---------------------------------------------------------
-**Deprecation Info**:  
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 * Deprecated As Of Version 5.4  
 * Reason: Replaced by the textfilecontent54_object. Support for multi-line pattern matching and multi-instance matching was added. Therefore, a new object was created to reflect these changes. See the textfilecontent54_object.  
 * Comment: This object has been deprecated and will be removed in version 6.0 of the language.  
@@ -1067,7 +1081,8 @@ Child Elements
   
 < textfilecontent_state > (Deprecated)  
 ---------------------------------------------------------
-**Deprecation Info**:  
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 * Deprecated As Of Version 5.4  
 * Reason: Replaced by the textfilecontent54_state. Support for multi-line pattern matching and multi-instance matching was added. Therefore, a new state was created to reflect these changes. See the textfilecontent54_state.  
 * Comment: This state has been deprecated and will be removed in version 6.0 of the language.  
@@ -1688,10 +1703,16 @@ The EntityStateLdaptypeType complex type restricts a string value to a specific 
       - | Telex Number, corresponding to OID 1.3.6.1.4.1.1466.115.121.1.52  
     * - LDAPTYPE_UTC_TIME  
       - | UTC Time, corresponding to OID 1.3.6.1.4.1.1466.115.121.1.53  
-    * - ~~LDAPTYPE_TIMESTAMP~~  
-      - | ~~The data is of a time stamp in seconds.~~<br/>**Deprecated As Of Version 5.7**<br/>**Reason:** This value was accidently carried over from the win-def:EntityStateAdstypeType as it was used as a template for the ind-def:EntityStateLdaptypeType.<br/>**Comment:** This value has been deprecated and will be removed in version 6.0 of the language.<br/>  
-    * - ~~LDAPTYPE_EMAIL~~  
-      - | ~~The data is of an e-mail message.~~<br/>**Deprecated As Of Version 5.7**<br/>**Reason:** This value was accidently carried over from the win-def:EntityStateAdstypeType as it was used as a template for the ind-def:EntityStateLdaptypeType.<br/>**Comment:** This value has been deprecated and will be removed in version 6.0 of the language.<br/>  
+    * - LDAPTYPE_TIMESTAMP (Deprecated)  
+      - | The data is of a time stamp in seconds.  
+        | **Deprecated As Of Version:** 5.7  
+        | **Reason:** This value was accidently carried over from the win-def:EntityStateAdstypeType as it was used as a template for the ind-def:EntityStateLdaptypeType.  
+        | **Comment:** This value has been deprecated and will be removed in version 6.0 of the language.  
+    * - LDAPTYPE_EMAIL (Deprecated)  
+      - | The data is of an e-mail message.  
+        | **Deprecated As Of Version:** 5.7  
+        | **Reason:** This value was accidently carried over from the win-def:EntityStateAdstypeType as it was used as a template for the ind-def:EntityStateLdaptypeType.  
+        | **Comment:** This value has been deprecated and will be removed in version 6.0 of the language.  
     * -   
       - | The empty string value is permitted here to allow for empty elements associated with variable references.  
   

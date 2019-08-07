@@ -18,7 +18,8 @@ ______________
   
 < httpd_test > (Deprecated)  
 ---------------------------------------------------------
-**Deprecation Info**:  
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 * Deprecated As Of Version 5.8  
 * Reason: The httpd_test does not specify how to detect instances of httpd and cannot be reasonably specified to allow for products to detect all instances of httpd across platforms, packaging systems, and typical user compiled and configured installations. Without a proper definition of how to identify instances of httpd products will not reliably produce consistent assessment results because they will naturally utilize different approaches to locating instances of httpd which will lead to differences in the set of collected instances of https.  
 * Comment: This test has been deprecated and may be removed in a future version of the language.  
@@ -46,7 +47,8 @@ Child Elements
   
 < httpd_object > (Deprecated)  
 ---------------------------------------------------------
-**Deprecation Info**:  
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 * Deprecated As Of Version 5.8  
 * Reason: The httpd_object does not specify how to detect instances of httpd and cannot be reasonably specified to allow for products to detect all instances of httpd across platforms, packaging systems, and typical user compiled and configured installations. Without a proper definition of how to identify instances of httpd products will not reliably produce consistent assessment results because they will naturally utilize different approaches to locating instances of httpd which will lead to differences in the set of collected instances of https.  
 * Comment: This object has been deprecated and may be removed in a future version of the language.  
@@ -59,7 +61,8 @@ The httpd_object element is used by a httpd test to define the different httpd b
   
 < httpd_state > (Deprecated)  
 ---------------------------------------------------------
-**Deprecation Info**:  
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 * Deprecated As Of Version 5.8  
 * Reason: The httpd_state does not specify how to detect instances of httpd and cannot be reasonably specified to allow for products to detect all instances of httpd across platforms, packaging systems, and typical user compiled and configured installations. Without a proper definition of how to identify instances of httpd products will not reliably produce consistent assessment results because they will naturally utilize different approaches to locating instances of httpd which will lead to differences in the set of collected instances of https.  
 * Comment: This state has been deprecated and may be removed in a future version of the language.  
