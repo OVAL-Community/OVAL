@@ -12,7 +12,7 @@ Thanks to Omar Santos and Panos Kampanakis of Cisco for providing these tests.
 
 Test Listing  
 ---------------------------------------------------------
-* `acl_test <#acl_test>`_  
+* :ref:`acl_test`
 * `class_map_test <#class_map_test>`_  
 * `interface_test <#interface_test>`_  
 * `line_test <#line_test>`_  
@@ -25,7 +25,9 @@ Test Listing
 * `version_test <#version_test>`_  
   
 ______________
-  
+
+.. _acl_test:
+
 < acl_test >  
 ---------------------------------------------------------
 The acl test is used to check the properties of specific output lines from an ACL configuration.
@@ -34,6 +36,7 @@ The acl test is used to check the properties of specific output lines from an AC
 
 .. list-table:: Elements  
     :header-rows: 1  
+
     * - Child Elements  
       - Type (MinOccurs..MaxOccurs)  
       - Desc.  
@@ -54,6 +57,7 @@ An acl object consists of a an acl name and an IP version entity that is the nam
 
 .. list-table:: Elements  
     :header-rows: 1  
+
     * - Child Elements  
       - Type (MinOccurs..MaxOccurs)  
       - Desc.  
@@ -75,6 +79,7 @@ The acl_state element defines the different information that can be used to eval
 
 .. list-table:: Elements  
     :header-rows: 1  
+    
     * - Child Elements  
       - Type (MinOccurs..MaxOccurs)  
       - Desc.  
