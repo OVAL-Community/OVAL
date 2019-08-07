@@ -10,7 +10,7 @@ The OVAL Schema is maintained by the OVAL Community. For more information, inclu
 
 Item Listing  
 ---------------------------------------------------------
-* :ref:`httpd_item` (Deprecated)  
+* :ref:`httpd_item`  
   
 ______________
   
@@ -18,7 +18,8 @@ ______________
   
 < httpd_item > (Deprecated)  
 ---------------------------------------------------------
-**Deprecation Info**:  
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 * Deprecated As Of Version 5.8  
 * Reason: The httpd_item does not specify how to detect instances of httpd and cannot be reasonably specified to allow for products to detect all instances of httpd across platforms, packaging systems, and typical user compiled and configured installations. Without a proper definition of how to identify instances of httpd products will not reliably produce consistent assessment results because they will naturally utilize different approaches to locating instances of httpd which will lead to differences in the set of collected instances of https.  
 * Comment: This item has been deprecated and may be removed in a future version of the language.  

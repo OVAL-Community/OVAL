@@ -10,8 +10,8 @@ The OVAL Schema is maintained by the OVAL Community. For more information, inclu
 
 Item Listing  
 ---------------------------------------------------------
-* :ref:`accesstoken_item` (Deprecated)  
-* :ref:`activedirectory_item` (Deprecated)  
+* :ref:`accesstoken_item`  
+* :ref:`activedirectory_item`  
 * :ref:`activedirectory57_item`  
 * :ref:`auditeventpolicy_item`  
 * :ref:`auditeventpolicysubcategories_item`  
@@ -20,7 +20,7 @@ Item Listing
 * :ref:`file_item`  
 * :ref:`fileauditedpermissions_item`  
 * :ref:`fileeffectiverights_item`  
-* :ref:`group_item` (Deprecated)  
+* :ref:`group_item`  
 * :ref:`group_sid_item`  
 * :ref:`interface_item`  
 * :ref:`junction_item`  
@@ -45,11 +45,11 @@ Item Listing
 * :ref:`sid_sid_item`  
 * :ref:`systemmetric_item`  
 * :ref:`uac_item`  
-* :ref:`user_item` (Deprecated)  
+* :ref:`user_item`  
 * :ref:`user_sid_item`  
 * :ref:`userright_item`  
 * :ref:`volume_item`  
-* :ref:`wmi_item` (Deprecated)  
+* :ref:`wmi_item`  
 * :ref:`wmi57_item`  
 * :ref:`wuaupdatesearcher_item`  
   
@@ -59,7 +59,8 @@ ______________
   
 < accesstoken_item > (Deprecated)  
 ---------------------------------------------------------
-**Deprecation Info**:  
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 * Deprecated As Of Version 5.11  
 * Reason: Replaced by the userright_item. The accesstoken_test suffers from scalability issues when run on a domain controller and should not be used. See the userright_item.  
 * Comment: This object has been deprecated and may be removed in a future version of the language.  
@@ -221,7 +222,8 @@ ______________
   
 < activedirectory_item > (Deprecated)  
 ---------------------------------------------------------
-**Deprecation Info**:  
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 * Deprecated As Of Version 5.11.1:1.2  
 * Reason: Use the original activedirectory_item. The activedirectory57_test suffers from ambiguity; it was never adequately specified, and it does not even seem possible to have structured data in the context of the enumerated AdstypeTypes. Use the original activedirectory_test instead.  
 * Comment: This object has been deprecated and may be removed in a future version of the language.  
@@ -375,9 +377,9 @@ Child Elements
     * - kerberos_service_ticket_operations  
       - win-sc:EntityItemAuditType (0..1)  
       - Audit the events produced by Kerberos service ticket requests. This state corresponds with the following GUID specified in ntsecapi.h: 0cce9240-69ae-11d9-bed3-505054503030. This state corresponds with the following Advanced Audit Policy: Account Logon: Audit Kerberos Service Ticket Operations  
-    * - ~~kerberos_ticket_events~~  
-      - ~~win-sc:EntityItemAuditType (0..1~~)  
-      - ~~Audit the events produced during the validation of Kerberos tickets provided for a user account logon request.~~  
+    * - kerberos_ticket_events (Deprecated)  
+      - win-sc:EntityItemAuditType (0..1)  
+      - Audit the events produced during the validation of Kerberos tickets provided for a user account logon request.  
     * - other_account_logon_events  
       - win-sc:EntityItemAuditType (0..1)  
       - Audit the events produced by changes to user accounts that are not covered by other events in the Account Logon category. This state corresponds with the following GUID specified in ntsecapi.h: 0cce9241-69ae-11d9-bed3-505054503030. This state corresponds with the following Advanced Audit Policy: Account Logon: Audit Other Account Logon Events  
@@ -730,9 +732,9 @@ Child Elements
     * - trustee_sid  
       - oval-sc:EntityItemStringType (0..1)  
       - The trustee_sid entity specifies the SID that associated a user, group, system, or program (such as a Windows service).  
-    * - ~~trustee_name~~  
-      - ~~oval-sc:EntityItemStringType (0..1~~)  
-      - ~~This element specifies the trustee name associated with this particular SACL. A trustee can be a user, group, or program (such as a Windows service). In Windows, trustee names are case-insensitive. As a result, it is recommended that the case-insensitive operations are used for this entity. In a domain environment, trustee names should be identified in the form: "domain\trustee name". For local trustee names use: "computer name\trustee name". For built-in accounts on the system, use the trustee name without a domain.~~  
+    * - trustee_name (Deprecated)  
+      - oval-sc:EntityItemStringType (0..1)  
+      - This element specifies the trustee name associated with this particular SACL. A trustee can be a user, group, or program (such as a Windows service). In Windows, trustee names are case-insensitive. As a result, it is recommended that the case-insensitive operations are used for this entity. In a domain environment, trustee names should be identified in the form: "domain\trustee name". For local trustee names use: "computer name\trustee name". For built-in accounts on the system, use the trustee name without a domain.  
     * - standard_delete  
       - win-sc:EntityItemAuditType (0..1)  
       - The right to delete the object.  
@@ -824,9 +826,9 @@ Child Elements
     * - trustee_sid  
       - oval-sc:EntityItemStringType (0..1)  
       - The trustee_sid entity specifies the SID that associated a user, group, system, or program (such as a Windows service).  
-    * - ~~trustee_name~~  
-      - ~~oval-sc:EntityItemStringType (0..1~~)  
-      - ~~This element specifies the trustee name associated with this particular DACL. A trustee can be a user, group, or program (such as a Windows service). In Windows, trustee names are case-insensitive. As a result, it is recommended that the case-insensitive operations are used for this entity. In a domain environment, trustee names should be identified in the form: "domain\trustee name". For local trustee names use: "computer name\trustee name". For built-in accounts on the system, use the trustee name without a domain.~~  
+    * - trustee_name (Deprecated)  
+      - oval-sc:EntityItemStringType (0..1)  
+      - This element specifies the trustee name associated with this particular DACL. A trustee can be a user, group, or program (such as a Windows service). In Windows, trustee names are case-insensitive. As a result, it is recommended that the case-insensitive operations are used for this entity. In a domain environment, trustee names should be identified in the form: "domain\trustee name". For local trustee names use: "computer name\trustee name". For built-in accounts on the system, use the trustee name without a domain.  
     * - standard_delete  
       - oval-sc:EntityItemBoolType (0..1)  
       - The right to delete the object.  
@@ -894,7 +896,8 @@ ______________
   
 < group_item > (Deprecated)  
 ---------------------------------------------------------
-**Deprecation Info**:  
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 * Deprecated As Of Version 5.11  
 * Reason: Replaced by the group_sid_item. This item uses trustee names for identifying accounts on the system.  Trustee names are not unique and the group_sid_item, which uses trustee SIDs which are unique, should be used instead. See the group_sid_item.  
 * Comment: This object has been deprecated and may be removed in a future version of the language.  
@@ -1624,9 +1627,9 @@ Child Elements
     * - trustee_sid  
       - oval-sc:EntityItemStringType (0..1)  
       - The security identifier (SID) of the specified trustee name.  
-    * - ~~trustee_name~~  
-      - ~~oval-sc:EntityItemStringType (0..1~~)  
-      - ~~This element specifies the trustee name associated with this particular DACL. A trustee can be a user, group, or program (such as a Windows service). In Windows, trustee names are case-insensitive. As a result, it is recommended that the case-insensitive operations are used for this entity. In a domain environment, trustee names should be identified in the form: "domain\trustee name". For local trustee names use: "computer name\trustee name". For built-in accounts on the system, use the trustee name without a domain.~~  
+    * - trustee_name (Deprecated)  
+      - oval-sc:EntityItemStringType (0..1)  
+      - This element specifies the trustee name associated with this particular DACL. A trustee can be a user, group, or program (such as a Windows service). In Windows, trustee names are case-insensitive. As a result, it is recommended that the case-insensitive operations are used for this entity. In a domain environment, trustee names should be identified in the form: "domain\trustee name". For local trustee names use: "computer name\trustee name". For built-in accounts on the system, use the trustee name without a domain.  
     * - standard_delete  
       - win-sc:EntityItemAuditType (0..1)  
       - The right to delete the object.  
@@ -1639,9 +1642,9 @@ Child Elements
     * - standard_write_owner  
       - win-sc:EntityItemAuditType (0..1)  
       - The right to change the owner in the object's security descriptor.  
-    * - ~~standard_synchronize~~  
-      - ~~win-sc:EntityItemAuditType (0..1~~)  
-      - ~~The right to use the object for synchronization. This enables a thread to wait until the object is in the signaled state. Some object types do not support this access right.~~  
+    * - standard_synchronize (Deprecated)  
+      - win-sc:EntityItemAuditType (0..1)  
+      - The right to use the object for synchronization. This enables a thread to wait until the object is in the signaled state. Some object types do not support this access right.  
     * - access_system_security  
       - win-sc:EntityItemAuditType (0..1)  
       - Indicates access to a system access control list (SACL).  
@@ -1715,9 +1718,9 @@ Child Elements
     * - trustee_sid  
       - oval-sc:EntityItemStringType (0..1)  
       - The trustee_sid entity specifies the SID that associated a user, group, system, or program (such as a Windows service).  
-    * - ~~trustee_name~~  
-      - ~~oval-sc:EntityItemStringType (0..1~~)  
-      - ~~This element specifies the trustee name associated with this particular DACL. A trustee can be a user, group, or program (such as a Windows service). In Windows, trustee names are case-insensitive. As a result, it is recommended that the case-insensitive operations are used for this entity. In a domain environment, trustee names should be identified in the form: "domain\trustee name". For local trustee names use: "computer name\trustee name". For built-in accounts on the system, use the trustee name without a domain.~~  
+    * - trustee_name (Deprecated)  
+      - oval-sc:EntityItemStringType (0..1)  
+      - This element specifies the trustee name associated with this particular DACL. A trustee can be a user, group, or program (such as a Windows service). In Windows, trustee names are case-insensitive. As a result, it is recommended that the case-insensitive operations are used for this entity. In a domain environment, trustee names should be identified in the form: "domain\trustee name". For local trustee names use: "computer name\trustee name". For built-in accounts on the system, use the trustee name without a domain.  
     * - standard_delete  
       - oval-sc:EntityItemBoolType (0..1)  
       - The right to delete the object.  
@@ -1730,9 +1733,9 @@ Child Elements
     * - standard_write_owner  
       - oval-sc:EntityItemBoolType (0..1)  
       - The right to change the owner in the object's security descriptor.  
-    * - ~~standard_synchronize~~  
-      - ~~oval-sc:EntityItemBoolType (0..1~~)  
-      - ~~The right to use the object for synchronization. This enables a thread to wait until the object is in the signaled state. Some object types do not support this access right.~~  
+    * - standard_synchronize (Deprecated)  
+      - oval-sc:EntityItemBoolType (0..1)  
+      - The right to use the object for synchronization. This enables a thread to wait until the object is in the signaled state. Some object types do not support this access right.  
     * - access_system_security  
       - oval-sc:EntityItemBoolType (0..1)  
       - Indicates access to a system access control list (SACL).  
@@ -2208,7 +2211,8 @@ ______________
   
 < user_item > (Deprecated)  
 ---------------------------------------------------------
-**Deprecation Info**:  
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 * Deprecated As Of Version 5.11  
 * Reason: Replaced by the user_sid_item. This item uses trustee names for identifying accounts on the system. Trustee names are not unique and the user_sid_item, which uses trustee SIDs which are unique, should be used instead. See the user_sid_item.  
 * Comment: This object has been deprecated and may be removed in a future version of the language.  
@@ -2440,7 +2444,8 @@ ______________
   
 < wmi_item > (Deprecated)  
 ---------------------------------------------------------
-**Deprecation Info**:  
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 * Deprecated As Of Version 5.7  
 * Reason: Replaced by the wmi57_item. This item allows for single fields to be selected from WMI. A new item was created to allow more than one field to be selected in one statement. See the wmi57_item.  
 * Comment: This object has been deprecated and may be removed in a future version of the language.  
@@ -2979,8 +2984,11 @@ The EntityItemRegistryTypeType defines the different values that are valid for t
       - | The reg_binary type is used by registry keys that specify binary data in any form.  
     * - reg_dword  
       - | The reg_dword type is used by registry keys that specify an unsigned 32-bit integer.  
-    * - ~~reg_dword_little_endian~~  
-      - | ~~The reg_dword_little_endian type is used by registry keys that specify an unsigned 32-bit little-endian integer. It is designed to run on little-endian computer architectures.~~<br/>**Deprecated As Of Version 5.11.1:1.1**<br/>**Reason:** Defined to have same value as reg_dword.<br/>**Comment:** This registry type enumeration value has been deprecated and may be removed in a future version of the language.<br/>  
+    * - reg_dword_little_endian (Deprecated)  
+      - | The reg_dword_little_endian type is used by registry keys that specify an unsigned 32-bit little-endian integer. It is designed to run on little-endian computer architectures.  
+        | **Deprecated As Of Version:** 5.11.1:1.1  
+        | **Reason:** Defined to have same value as reg_dword.  
+        | **Comment:** This registry type enumeration value has been deprecated and may be removed in a future version of the language.  
     * - reg_dword_big_endian  
       - | The reg_dword_big_endian type is used by registry keys that specify an unsigned 32-bit big-endian integer. It is designed to run on big-endian computer architectures.  
     * - reg_expand_sz  
@@ -2993,8 +3001,11 @@ The EntityItemRegistryTypeType defines the different values that are valid for t
       - | The reg_none type is used by registry keys that have no defined value type.  
     * - reg_qword  
       - | The reg_qword type is used by registry keys that specify an unsigned 64-bit integer.  
-    * - ~~reg_qword_little_endian~~  
-      - | ~~The reg_qword_little_endian type is used by registry keys that specify an unsigned 64-bit integer in little-endian computer architectures.~~<br/>**Deprecated As Of Version 5.11.1:1.1**<br/>**Reason:** Defined to have same value as reg_qword.<br/>**Comment:** This registry type enumeration value has been deprecated and may be removed in a future version of the language.<br/>  
+    * - reg_qword_little_endian (Deprecated)  
+      - | The reg_qword_little_endian type is used by registry keys that specify an unsigned 64-bit integer in little-endian computer architectures.  
+        | **Deprecated As Of Version:** 5.11.1:1.1  
+        | **Reason:** Defined to have same value as reg_qword.  
+        | **Comment:** This registry type enumeration value has been deprecated and may be removed in a future version of the language.  
     * - reg_sz  
       - | The reg_sz type is used by registry keys that specify a single null-terminated string.  
     * - reg_resource_list  

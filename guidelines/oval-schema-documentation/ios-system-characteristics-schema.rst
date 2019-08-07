@@ -138,9 +138,9 @@ Child Elements
     * - ip_directed_broadcast_command  
       - Restriction of oval-sc:EntityItemAnySimpleType. See schema for details. (0..1)  
       - Element that is true if the directed broadcast command is enabled on the interface. The default is false.  
-    * - ~~no_ip_directed_broadcast_command~~  
-      - ~~oval-sc:EntityItemStringType (0..1~~)  
-      - ~~~~  
+    * - no_ip_directed_broadcast_command (Deprecated)  
+      - oval-sc:EntityItemStringType (0..1)  
+      -   
     * - proxy_arp_command  
       - Restriction of oval-sc:EntityItemAnySimpleType. See schema for details. (0..1)  
       - Element that is true if the proxy_arp command is enabled on the interface. The default is true.  
@@ -171,9 +171,9 @@ Child Elements
     * - ipv6_urpf_command  
       - oval-sc:EntityItemStringType (0..1)  
       - Element with the uRPF command for IPv6 under the interface.  
-    * - ~~urpf_command~~  
-      - ~~oval-sc:EntityItemStringType (0..1~~)  
-      - ~~Element with the uRPF command under the interface.~~  
+    * - urpf_command (Deprecated)  
+      - oval-sc:EntityItemStringType (0..1)  
+      - Element with the uRPF command under the interface.  
     * - switchport_trunk_encapsulation  
       - ios-sc:EntityItemTrunkEncapType (0..1)  
       - Element with the switchport trunk encapsulation option configured on the interface (if applicable).  
@@ -567,12 +567,12 @@ Child Elements
     * - Child Elements  
       - Type (MinOccurs..MaxOccurs)  
       - Desc.  
-    * - ~~major_release~~  
-      - ~~oval-sc:EntityItemStringType (0..1~~)  
-      - ~~The major_release is a combination of train and rebuild information and is used by Cisco advisories to identify major releases.~~  
-    * - ~~train_number~~  
-      - ~~oval-sc:EntityItemStringType (0..1~~)  
-      - ~~The train number is the dotted version that starts a version string. For example the version string 12.2(3)T has a train number of 12.2.~~  
+    * - major_release (Deprecated)  
+      - oval-sc:EntityItemStringType (0..1)  
+      - The major_release is a combination of train and rebuild information and is used by Cisco advisories to identify major releases.  
+    * - train_number (Deprecated)  
+      - oval-sc:EntityItemStringType (0..1)  
+      - The train number is the dotted version that starts a version string. For example the version string 12.2(3)T has a train number of 12.2.  
     * - major_version  
       - oval-sc:EntityItemIntType (0..1)  
       - The major_version entity specifies the major version piece of the version string. The value is an integer and in the example 12.4(9)T0a the major version is '12'.  
@@ -663,8 +663,11 @@ The EntityItemAccessListUseType complex type restricts a string value to a speci
       - (No Description)  
     * - VTY  
       - (No Description)  
-    * - ~~NONE~~  
-      - | <br/>**Deprecated As Of Version 5.11.2:1.0**<br/>**Reason:** The EntityStateSimpleBaseType check_existence attribute serves the same purpose as this enumeration value.<br/>**Comment:** This AccessListUseType enumeration value has been deprecated and may be removed in a future version of the language.<br/>  
+    * - NONE (Deprecated)  
+      - |   
+        | **Deprecated As Of Version:** 5.11.2:1.0  
+        | **Reason:** The EntityStateSimpleBaseType check_existence attribute serves the same purpose as this enumeration value.  
+        | **Comment:** This AccessListUseType enumeration value has been deprecated and may be removed in a future version of the language.  
     * -   
       - | The empty string value is permitted here to allow for detailed error reporting.  
   
@@ -685,8 +688,11 @@ The EntityItemRoutingAuthTypeStringType complex type restricts a string value to
       - (No Description)  
     * - MESSAGE_DIGEST  
       - (No Description)  
-    * - ~~NULL~~  
-      - | <br/>**Deprecated As Of Version 5.11.2:1.0**<br/>**Reason:** The NULL authentication area type is never declared in an interface ip ospf command context.<br/>**Comment:** This RoutingAuthTypeStringType enumeration value has been deprecated and may be removed in a future version of the language.<br/>  
+    * - NULL (Deprecated)  
+      - |   
+        | **Deprecated As Of Version:** 5.11.2:1.0  
+        | **Reason:** The NULL authentication area type is never declared in an interface ip ospf command context.  
+        | **Comment:** This RoutingAuthTypeStringType enumeration value has been deprecated and may be removed in a future version of the language.  
     * -   
       - | The empty string value is permitted here to allow for detailed error reporting.  
   

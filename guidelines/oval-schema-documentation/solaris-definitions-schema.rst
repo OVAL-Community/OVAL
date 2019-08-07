@@ -887,7 +887,8 @@ ______________
   
 < patch_test > (Deprecated)  
 ---------------------------------------------------------
-**Deprecation Info**:  
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 * Deprecated As Of Version 5.4  
 * Reason: Replaced by the patch54_test. The new test includes additional functionality that allows the object element to match both the original patch and any superseding patches. As a result of this new functionality, the patch_object was also expanded to include behaviors and version entities. See the patch54_test.  
 * Comment: This test has been deprecated and will be removed in version 6.0 of the language.  
@@ -946,7 +947,8 @@ Child Elements
   
 < patch_object > (Deprecated)  
 ---------------------------------------------------------
-**Deprecation Info**:  
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 * Deprecated As Of Version 5.4  
 * Reason: Replaced by the patch54_object. Due to the additional functionality that allows the object element to match both the original patch and any superseding patches, a new object was created that includes behaviors and version entities. See the patch54_object.  
 * Comment: This object has been deprecated and will be removed in version 6.0 of the language.  

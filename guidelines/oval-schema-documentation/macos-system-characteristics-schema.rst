@@ -17,14 +17,14 @@ Item Listing
 * :ref:`corestorage_item`  
 * :ref:`diskutil_item`  
 * :ref:`gatekeeper_item`  
-* :ref:`inetlisteningserver_item` (Deprecated)  
+* :ref:`inetlisteningserver_item`  
 * :ref:`inetlisteningserver510_item`  
 * :ref:`keychain_item`  
 * :ref:`launchd_item`  
 * :ref:`nvram_item`  
-* :ref:`plist_item` (Deprecated)  
+* :ref:`plist_item`  
 * :ref:`plist511_item`  
-* :ref:`pwpolicy_item` (Deprecated)  
+* :ref:`pwpolicy_item`  
 * :ref:`pwpolicy59_item`  
 * :ref:`rlimit_item`  
 * :ref:`softwareupdate_item`  
@@ -237,7 +237,8 @@ ______________
   
 < inetlisteningserver_item > (Deprecated)  
 ---------------------------------------------------------
-**Deprecation Info**:  
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 * Deprecated As Of Version 5.10  
 * Reason: The inetlisteningserver_item has been deprecated and replaced by the inetlisteningserver510_item. The name of an application cannot be used to uniquely identify an application that is listening on the network. As a result, the inetlisteningserver510_object utilizes the protocol, local_address, and local_port entities to uniquely identify an application listening on the network. Please see the inetlisteningserver510_item for additional information.  
   
@@ -420,7 +421,8 @@ ______________
   
 < plist_item > (Deprecated)  
 ---------------------------------------------------------
-**Deprecation Info**:  
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 * Deprecated As Of Version 5.11.2:1.0  
 * Reason: The plist_item has been deprecated and replaced by the plist511_item. The plist_item cannot express the context hierarchy required to differentiate between nodes with identical names. As a result, it is not possible to address a particular node when the order of their parent nodes is indeterminate. The plist511_item was added to address this deficiency. See the plist511_item.  
   
@@ -492,7 +494,8 @@ ______________
   
 < pwpolicy_item > (Deprecated)  
 ---------------------------------------------------------
-**Deprecation Info**:  
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 * Deprecated As Of Version 5.9  
 * Reason: Replaced by the pwpolicy59_item. The username, userpass, and directory_node entities in the pwpolicy_item were underspecified and as a result their meaning was uncertain. A new item was created to resolve this issue. See the pwpolicy59_item.  
 * Comment: This item has been deprecated and may be removed in a future version of the language.  
@@ -955,7 +958,8 @@ The EntityItemPermissionCompareType complex type restricts a string value to mor
   
 == EntityItemPlistTypeType == (Deprecated)  
 ---------------------------------------------------------
-**Deprecation Info**:  
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 * Deprecated As Of Version 5.11.2:1.0  
 * Reason: Used only by the deprecated plist_item.  
 * Comment: This enumeration has been deprecated and may be removed in a future version of the language.  

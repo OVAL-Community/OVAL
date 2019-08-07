@@ -468,7 +468,8 @@ ______________
   
 < inetlisteningservers_test > (Deprecated)  
 ---------------------------------------------------------
-**Deprecation Info**:  
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 * Deprecated As Of Version 5.10  
 * Reason: The inetlisteningservers_test has been deprecated and replaced by the inetlisteningserver510_test. The name of an application cannot be used to uniquely identify an application that is listening on the network. As a result, the inetlisteningserver510_object utilizes the protocol, local_address, and local_port entities to uniquely identify an application listening on the network. Please see the inetlisteningserver510_test for additional information.  
   
@@ -495,7 +496,8 @@ Child Elements
   
 < inetlisteningservers_object > (Deprecated)  
 ---------------------------------------------------------
-**Deprecation Info**:  
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 * Deprecated As Of Version 5.10  
 * Reason: The inetlisteningservers_object has been deprecated and replaced by the inetlisteningserver510_object. The name of an application cannot be used to uniquely identify an application that is listening on the network. As a result, the inetlisteningserver510_object utilizes the protocol, local_address, and local_port entities to uniquely identify an application listening on the network. Please see the inetlisteningserver510_object for additional information.  
   
@@ -522,7 +524,8 @@ Child Elements
   
 < inetlisteningservers_state > (Deprecated)  
 ---------------------------------------------------------
-**Deprecation Info**:  
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 * Deprecated As Of Version 5.10  
 * Reason: The inetlisteningservers_state has been deprecated and replaced by the inetlisteningserver510_state. The name of an application cannot be used to uniquely identify an application that is listening on the network. As a result, the inetlisteningserver510_object utilizes the protocol, local_address, and local_port entities to uniquely identify an application listening on the network. Please see the inetlisteningserver510_state for additional information.  
   
@@ -899,7 +902,8 @@ ______________
   
 < plist_test > (Deprecated)  
 ---------------------------------------------------------
-**Deprecation Info**:  
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 * Deprecated As Of Version 5.10  
 * Reason: Replaced by the plist510_test. This test references the plist_object which does not contain an instance entity. As a result, it is not possible to differentiate between two preference keys that have the same name using the plist_object. The plist510_test was added to address this deficiency. See the plist510_test.  
 * Comment: This test has been deprecated and may be removed in a future version of the language.  
@@ -927,7 +931,8 @@ Child Elements
   
 < plist_object > (Deprecated)  
 ---------------------------------------------------------
-**Deprecation Info**:  
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 * Deprecated As Of Version 5.10  
 * Reason: Replaced by the plist510_object. This object does not contain an instance entity. As a result, it is not possible to differentiate between two preference keys that have the same name using this object. The plist510_object was added to address this deficiency. See the plist510_object.  
 * Comment: This object has been deprecated and may be removed in a future version of the language.  
@@ -961,7 +966,8 @@ Child Elements
   
 < plist_state > (Deprecated)  
 ---------------------------------------------------------
-**Deprecation Info**:  
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 * Deprecated As Of Version 5.10  
 * Reason: Replaced by the plist510_state. This state is used in conjunction with the plist_object which does not contain an instance entity. As a result, it is not possible to differentiate between two preference keys that have the same name using the plist_object. The plist510_state was added to address this deficiency. See the plist510_state.  
 * Comment: This object has been deprecated and may be removed in a future version of the language.  
@@ -1003,7 +1009,8 @@ ______________
   
 < plist510_test > (Deprecated)  
 ---------------------------------------------------------
-**Deprecation Info**:  
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 * Deprecated As Of Version 5.11.2:1.0  
 * Reason: Replaced by the plist511_test. This test references the plist_object which cannot express the context hierarchy required to differentiate between nodes with identical names. As a result, it is not possible to address a particular node when the order of their parent nodes is indeterminate. The plist511_test was added to address this deficiency. See the plist511_test.  
 * Comment: This test has been deprecated and may be removed in a future version of the language.  
@@ -1031,7 +1038,8 @@ Child Elements
   
 < plist510_object > (Deprecated)  
 ---------------------------------------------------------
-**Deprecation Info**:  
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 * Deprecated As Of Version 5.11.2:1.0  
 * Reason: Replaced by the plist511_object. This object cannot express the context hierarchy required to differentiate between nodes with identical names. As a result, it is not possible to address a particular node when the order of their parent nodes is indeterminate. The plist511_object was added to address this deficiency. See the plist511_object.  
 * Comment: This object has been deprecated and may be removed in a future version of the language.  
@@ -1068,7 +1076,8 @@ Child Elements
   
 < plist510_state > (Deprecated)  
 ---------------------------------------------------------
-**Deprecation Info**:  
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 * Deprecated As Of Version 5.11.2:1.0  
 * Reason: Replaced by the plist511_state. This state is used in conjunction with the plist510_object which cannot express the context hierarchy required to differentiate between nodes with identical names. As a result, it is not possible to address a particular node when the order of their parent nodes is indeterminate. The plist511_state was added to address this deficiency. See the plist511_state.  
 * Comment: This object has been deprecated and may be removed in a future version of the language.  
@@ -1193,7 +1202,8 @@ ______________
   
 < pwpolicy_test > (Deprecated)  
 ---------------------------------------------------------
-**Deprecation Info**:  
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 * Deprecated As Of Version 5.9  
 * Reason: Replaced by the pwpolicy59_test. The username, userpass, and directory_node entities in the pwpolicy_object, pwpolicy_state, and pwpolicy_item were underspecified and as a result their meaning was uncertain. A new test was created to resolve this issue. See the pwpolicy59_test.  
 * Comment: This test has been deprecated and may be removed in a future version of the language.  
@@ -1221,7 +1231,8 @@ Child Elements
   
 < pwpolicy_object > (Deprecated)  
 ---------------------------------------------------------
-**Deprecation Info**:  
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 * Deprecated As Of Version 5.9  
 * Reason: Replaced by the pwpolicy59_object. The username, userpass, and directory_node entities in the pwpolicy_object were underspecified and as a result their meaning was uncertain. A new object was created to resolve this issue. See the pwpolicy59_object.  
 * Comment: This object has been deprecated and may be removed in a future version of the language.  
@@ -1255,7 +1266,8 @@ Child Elements
   
 < pwpolicy_state > (Deprecated)  
 ---------------------------------------------------------
-**Deprecation Info**:  
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 * Deprecated As Of Version 5.9  
 * Reason: Replaced by the pwpolicy59_state. The username, userpass, and directory_node entities in the pwpolicy_state were underspecified and as a result their meaning was uncertain. A new state was created to resolve this issue. See the pwpolicy59_state.  
 * Comment: This state has been deprecated and may be removed in a future version of the language.  
@@ -2003,7 +2015,8 @@ The EntityStatePermissionCompareType complex type restricts a string value to mo
   
 == EntityStatePlistTypeType == (Deprecated)  
 ---------------------------------------------------------
-**Deprecation Info**:  
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 * Deprecated As Of Version 5.11.2:1.0  
 * Reason: Used only by the deprecated plist_state and plist510_state.  
 * Comment: This enumeration has been deprecated and may be removed in a future version of the language.  

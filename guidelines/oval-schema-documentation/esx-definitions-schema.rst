@@ -130,7 +130,8 @@ ______________
   
 < patch_test > (Deprecated)  
 ---------------------------------------------------------
-**Deprecation Info**:  
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 * Deprecated As Of Version 5.6  
 * Reason: Replaced by the patch56_test. The deprecated patch_test has a bug where the patch name entity is defined as a string in the object yet is defined as an int in the state.  Additional state entities have also been added to the new patch56_test.  
 * Comment: This test has been deprecated and will be removed in version 6.0 of the language.  
@@ -158,7 +159,8 @@ Child Elements
   
 < patch_object > (Deprecated)  
 ---------------------------------------------------------
-**Deprecation Info**:  
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 * Deprecated As Of Version 5.6  
 * Reason: Replaced by the patch56_object. The deprecated patch_test has a bug where the patch name entity is defined as a string in the object yet is defined as an int in the state.  Additional state entities have also been added to the new patch56_test.  
 * Comment: This object has been deprecated and will be removed in version 6.0 of the language.  
@@ -188,7 +190,8 @@ Child Elements
   
 < patch_state > (Deprecated)  
 ---------------------------------------------------------
-**Deprecation Info**:  
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 * Deprecated As Of Version 5.6  
 * Reason: Replaced by the patch56_state. The deprecated patch_test has a bug where the patch name entity is defined as a string in the object yet is defined as an int in the state.  Additional state entities have also been added to the new patch56_test.  
 * Comment: This object has been deprecated and will be removed in version 6.0 of the language.  
@@ -216,7 +219,8 @@ Child Elements
   
 == PatchBehaviors == (Deprecated)  
 ---------------------------------------------------------
-**Deprecation Info**:  
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 * Deprecated As Of Version 5.6  
 * Reason: Replaced by Patch56Behaviors. The deprecated patch_test has a bug where the patch name entity is defined as a string in the object yet is defined as an int in the state.  Additional state entities have also been added to the new patch56_test.  
 * Comment: These behaviors have been deprecated and will be removed in version 6.0 of the language.  

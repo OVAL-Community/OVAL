@@ -65,7 +65,8 @@ ______________
   
 < accesstoken_test > (Deprecated)  
 ---------------------------------------------------------
-**Deprecation Info**:  
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 * Deprecated As Of Version 5.11  
 * Reason: Replaced by the userright_test. This accesstoken_test suffers from scalability issues when run on a domain controller and should not be used. See the userright_test.  
 * Comment: This test has been deprecated and will be removed in version 6.0 of the language.  
@@ -93,7 +94,8 @@ Child Elements
   
 < accesstoken_object > (Deprecated)  
 ---------------------------------------------------------
-**Deprecation Info**:  
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 * Deprecated As Of Version 5.11  
 * Reason: Replaced by the userright_object. The accesstoken_test suffers from scalability issues when run on a domain controller and should not be used. See the userright_object.  
 * Comment: This object has been deprecated and will be removed in version 6.0 of the language.  
@@ -126,7 +128,8 @@ Child Elements
   
 < accesstoken_state > (Deprecated)  
 ---------------------------------------------------------
-**Deprecation Info**:  
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 * Deprecated As Of Version 5.11  
 * Reason: Replaced by the userright_state. The accesstoken_test suffers from scalability issues when run on a domain controller and should not be used. See the userright_state.  
 * Comment: This state has been deprecated and will be removed in version 6.0 of the language.  
@@ -286,7 +289,8 @@ Child Elements
   
 == AccesstokenBehaviors == (Deprecated)  
 ---------------------------------------------------------
-**Deprecation Info**:  
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 * Deprecated As Of Version 5.11  
 * Reason: Replaced by the userright_test. The AccesstokenBehaviors complex type is used by the accesstoken_test which suffers from scalability issues when run on a domain controller and should not be used. As a result, the AccesstokenBehaviors complex type is no longer needed. See the userright_test.  
 * Comment: This complex type has been deprecated and will be removed in version 6.0 of the language.  
@@ -403,7 +407,8 @@ ______________
   
 < activedirectory57_test > (Deprecated)  
 ---------------------------------------------------------
-**Deprecation Info**:  
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 * Deprecated As Of Version 5.11.1:1.2  
 * Reason: Use the original activedirectory_test. The activedirectory57_test suffers from ambiguity; it was never adequately specified, and it does not even seem possible to have structured data in the context of the enumerated AdstypeTypes. Use the original activedirectory_test instead.  
 * Comment: This test has been deprecated and will be removed in version 6.0 of the language.  
@@ -433,7 +438,8 @@ Child Elements
   
 < activedirectory57_object > (Deprecated)  
 ---------------------------------------------------------
-**Deprecation Info**:  
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 * Deprecated As Of Version 5.11.1:1.2  
 * Reason: Use the original activedirectory_object. The activedirectory57_test suffers from ambiguity; it was never adequately specified, and it does not even seem possible to have structured data in the context of the enumerated AdstypeTypes. Use the original activedirectory_test instead.  
 * Comment: This object has been deprecated and will be removed in version 6.0 of the language.  
@@ -471,7 +477,8 @@ Child Elements
   
 < activedirectory57_state > (Deprecated)  
 ---------------------------------------------------------
-**Deprecation Info**:  
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 * Deprecated As Of Version 5.11.1:1.2  
 * Reason: Use the original activedirectory_state. The activedirectory57_test suffers from ambiguity; it was never adequately specified, and it does not even seem possible to have structured data in the context of the enumerated AdstypeTypes. Use the original activedirectory_test instead.  
 * Comment: This state has been deprecated and will be removed in version 6.0 of the language.  
@@ -644,9 +651,9 @@ Child Elements
     * - kerberos_service_ticket_operations  
       - win-def:EntityStateAuditType (0..1)  
       - Audit the events produced by Kerberos service ticket requests. This state corresponds with the following GUID specified in ntsecapi.h: 0cce9240-69ae-11d9-bed3-505054503030. This state corresponds with the following Advanced Audit Policy: Account Logon: Audit Kerberos Service Ticket Operations  
-    * - ~~kerberos_ticket_events~~  
-      - ~~win-def:EntityStateAuditType (0..1~~)  
-      - ~~Audit the events produced during the validation of Kerberos tickets provided for a user account logon request.~~  
+    * - kerberos_ticket_events (Deprecated)  
+      - win-def:EntityStateAuditType (0..1)  
+      - Audit the events produced during the validation of Kerberos tickets provided for a user account logon request.  
     * - other_account_logon_events  
       - win-def:EntityStateAuditType (0..1)  
       - Audit the events produced by changes to user accounts that are not covered by other events in the Account Logon category. This state corresponds with the following GUID specified in ntsecapi.h: 0cce9241-69ae-11d9-bed3-505054503030. This state corresponds with the following Advanced Audit Policy: Account Logon: Audit Other Account Logon Events  
@@ -1368,7 +1375,8 @@ ______________
   
 < fileauditedpermissions_test > (Deprecated)  
 ---------------------------------------------------------
-**Deprecation Info**:  
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 * Deprecated As Of Version 5.3  
 * Reason: Replaced by the fileauditedpermissions53_test. This test uses a trustee_name element for identifying trustees. Trustee names are not unique, and a new test was created to use trustee SIDs, which are unique. See the fileauditedpermissions53_test.  
 * Comment: This test has been deprecated and will be removed in version 6.0 of the language.  
@@ -1396,7 +1404,8 @@ Child Elements
   
 < fileauditedpermissions_object > (Deprecated)  
 ---------------------------------------------------------
-**Deprecation Info**:  
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 * Deprecated As Of Version 5.3  
 * Reason: Replaced by the fileauditedpermissions53_object. This object uses a trustee_name element for identifying trustees. Trustee names are not unique, and a new object was created to use trustee SIDs, which are unique. See the fileauditedpermissions53_object.  
 * Comment: This object has been deprecated and will be removed in version 6.0 of the language.  
@@ -1432,7 +1441,8 @@ Child Elements
   
 < fileauditedpermissions_state > (Deprecated)  
 ---------------------------------------------------------
-**Deprecation Info**:  
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 * Deprecated As Of Version 5.3  
 * Reason: Replaced by the fileauditedpermissions53_state. This state uses a trustee_name element for identifying trustees. Trustee names are not unique, and a new state was created to use trustee SIDs, which are unique. See the fileauditedpermissions53_state.  
 * Comment: This state has been deprecated and will be removed in version 6.0 of the language.  
@@ -1523,7 +1533,8 @@ Child Elements
   
 == FileAuditPermissionsBehaviors == (Deprecated)  
 ---------------------------------------------------------
-**Deprecation Info**:  
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 * Deprecated As Of Version 5.3  
 * Reason: Replaced by the FileAuditPermissionsBehaviors53. The FileAuditPermissionsBehaviors complex type is used by the fileauditedpermissions_test which uses a trustee_name element for identifying trustees. Trustee names are not unique, and a new test was created to use trustee SIDs, which are unique. This new test utilizes the FileAuditPermissionsBehaviors53 complex type, and as a result, the FileAuditPermissionsBehaviors complex type is no longer needed.  
 * Comment: This complex type has been deprecated and will be removed in version 6.0 of the language.  
@@ -1739,7 +1750,8 @@ ______________
   
 < fileeffectiverights_test > (Deprecated)  
 ---------------------------------------------------------
-**Deprecation Info**:  
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 * Deprecated As Of Version 5.3  
 * Reason: Replaced by the fileeffectiverights53_test. This test uses a trustee_name element for identifying trustees. Trustee names are not unique, and a new test was created to use trustee SIDs, which are unique. See the fileeffectiverights53_test.  
 * Comment: This test has been deprecated and will be removed in version 6.0 of the language.  
@@ -1767,7 +1779,8 @@ Child Elements
   
 < fileeffectiverights_object > (Deprecated)  
 ---------------------------------------------------------
-**Deprecation Info**:  
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 * Deprecated As Of Version 5.3  
 * Reason: Replaced by the fileeffectiverights_object. This object uses a trustee_name element for identifying trustees. Trustee names are not unique, and a new object was created to use trustee SIDs, which are unique. See the fileeffectiverights53_object.  
 * Comment: This object has been deprecated and will be removed in version 6.0 of the language.  
@@ -1803,7 +1816,8 @@ Child Elements
   
 < fileeffectiverights_state > (Deprecated)  
 ---------------------------------------------------------
-**Deprecation Info**:  
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 * Deprecated As Of Version 5.3  
 * Reason: Replaced by the fileeffectiverights53_state. This state uses a trustee_name element for identifying trustees. Trustee names are not unique, and a new state was created to use trustee SIDs, which are unique. See the fileeffectiverights53_state.  
 * Comment: This state has been deprecated and will be removed in version 6.0 of the language.  
@@ -1894,7 +1908,8 @@ Child Elements
   
 == FileEffectiveRightsBehaviors == (Deprecated)  
 ---------------------------------------------------------
-**Deprecation Info**:  
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 * Deprecated As Of Version 5.3  
 * Reason: Replaced by the FileEffectiveRightsBehaviors53. The FileEffectiveRightsBehaviors complex type is used by the fileeffectiverights_test which uses a trustee_name element for identifying trustees. Trustee names are not unique, and a new test was created to use trustee SIDs, which are unique. This new test utilizes the FileEffectiveRightsBehaviors53 complex type, and as a result, the FileEffectiveRightsBehaviors complex type is no longer needed.  
 * Comment: This complex type has been deprecated and will be removed in version 6.0 of the language.  
@@ -1927,7 +1942,8 @@ ______________
   
 < group_test > (Deprecated)  
 ---------------------------------------------------------
-**Deprecation Info**:  
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 * Deprecated As Of Version 5.11  
 * Reason: Replaced by the group_sid_test. This test uses trustee names for identifying accounts on the system. Trustee names are not unique and the group_sid_test, which uses trustee SIDs which are unique, should be used instead. See the group_sid_test.  
 * Comment: This test has been deprecated and will be removed in version 6.0 of the language.  
@@ -1955,7 +1971,8 @@ Child Elements
   
 < group_object > (Deprecated)  
 ---------------------------------------------------------
-**Deprecation Info**:  
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 * Deprecated As Of Version 5.11  
 * Reason: Replaced by the group_sid_object. This object uses trustee names for identifying accounts on the system. Trustee names are not unique and the group_sid_object, which uses trustee SIDs which are unique, should be used instead. See the group_sid_object.  
 * Comment: This object has been deprecated and will be removed in version 6.0 of the language.  
@@ -1983,7 +2000,8 @@ Child Elements
   
 < group_state > (Deprecated)  
 ---------------------------------------------------------
-**Deprecation Info**:  
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 * Deprecated As Of Version 5.11  
 * Reason: Replaced by the group_sid_state. This state uses trustee names for identifying accounts on the system. Trustee names are not unique and the group_sid_state, which uses trustee SIDs which are unique, should be used instead. See the group_sid_state.  
 * Comment: This state has been deprecated and will be removed in version 6.0 of the language.  
@@ -3180,7 +3198,8 @@ ______________
   
 < process_test > (Deprecated)  
 ---------------------------------------------------------
-**Deprecation Info**:  
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 * Deprecated As Of Version 5.8  
 * Reason: The process_test has been deprecated and replaced by the process58_test. The command line of a process cannot be used to uniquely identify a process. As a result, the pid entity was added to the process58_object. Please see the process58_test for additional information.  
   
@@ -3207,7 +3226,8 @@ Child Elements
   
 < process_object > (Deprecated)  
 ---------------------------------------------------------
-**Deprecation Info**:  
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 * Deprecated As Of Version 5.8  
 * Reason: The process_object has been deprecated and replaced by the process58_object. The command line of a process cannot be used to uniquely identify a process. As a result, the pid entity was added to the process58_object. Please see the process58_object for additional information.  
   
@@ -3233,7 +3253,8 @@ Child Elements
   
 < process_state > (Deprecated)  
 ---------------------------------------------------------
-**Deprecation Info**:  
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 * Deprecated As Of Version 5.8  
 * Reason: The process_state has been deprecated and replaced by the process58_state. The command line of a process cannot be used to uniquely identify a process. As a result, the pid entity was added to the process58_object. Please see the process58_state for additional information.  
   
@@ -3591,9 +3612,9 @@ Child Elements
     * - standard_write_owner  
       - win-def:EntityStateAuditType (0..1)  
       - The right to change the owner in the object's Security Descriptor.  
-    * - ~~standard_synchronize~~  
-      - ~~win-def:EntityStateAuditType (0..1~~)  
-      - ~~The right to use the object for synchronization. This enables a thread to wait until the object is in the signaled state. Some object types do not support this access right.~~  
+    * - standard_synchronize (Deprecated)  
+      - win-def:EntityStateAuditType (0..1)  
+      - The right to use the object for synchronization. This enables a thread to wait until the object is in the signaled state. Some object types do not support this access right.  
     * - access_system_security  
       - win-def:EntityStateAuditType (0..1)  
       - Indicates access to a system access control list (SACL).  
@@ -3672,7 +3693,8 @@ ______________
   
 < regkeyauditedpermissions_test > (Deprecated)  
 ---------------------------------------------------------
-**Deprecation Info**:  
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 * Deprecated As Of Version 5.3  
 * Reason: Replaced by the regkeyauditedpermissions53_test. This test uses a trustee_name element for identifying trustees. Trustee names are not unique, and a new test was created to use trustee SIDs, which are unique. See the regkeyauditedpermissions53_test.  
 * Comment: This test has been deprecated and will be removed in version 6.0 of the language.  
@@ -3700,7 +3722,8 @@ Child Elements
   
 < regkeyauditedpermissions_object > (Deprecated)  
 ---------------------------------------------------------
-**Deprecation Info**:  
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 * Deprecated As Of Version 5.3  
 * Reason: Replaced by the regkeyauditedpermissions53_object. This object uses a trustee_name element for identifying trustees. Trustee names are not unique, and a new object was created to use trustee SIDs, which are unique. See the regkeyauditedpermissions53_object.  
 * Comment: This object has been deprecated and will be removed in version 6.0 of the language.  
@@ -3736,7 +3759,8 @@ Child Elements
   
 < regkeyauditedpermissions_state > (Deprecated)  
 ---------------------------------------------------------
-**Deprecation Info**:  
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 * Deprecated As Of Version 5.3  
 * Reason: Replaced by the regkeyauditedpermissions53_state. This state uses a trustee_name element for identifying trustees. Trustee names are not unique, and a new state was created to use trustee SIDs, which are unique. See the regkeyauditedpermissions53_state.  
 * Comment: This state has been deprecated and will be removed in version 6.0 of the language.  
@@ -3827,7 +3851,8 @@ Child Elements
   
 == RegkeyAuditPermissionsBehaviors == (Deprecated)  
 ---------------------------------------------------------
-**Deprecation Info**:  
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 * Deprecated As Of Version 5.3  
 * Reason: Replaced by the RegkeyAuditPermissionsBehaviors53. The RegkeyAuditPermissionsBehaviors complex type is used by the regkeyauditedpermissions_test which uses a trustee_name element for identifying trustees. Trustee names are not unique, and a new test was created to use trustee SIDs, which are unique. This new test utilizes the RegkeyAuditPermissionsBehaviors53 complex type, and as a result, the RegkeyAuditPermissionsBehaviors complex type is no longer needed.  
 * Comment: This complex type has been deprecated and will be removed in version 6.0 of the language.  
@@ -3950,9 +3975,9 @@ Child Elements
     * - standard_write_owner  
       - oval-def:EntityStateBoolType (0..1)  
       - The right to change the owner in the object's Security Descriptor.  
-    * - ~~standard_synchronize~~  
-      - ~~oval-def:EntityStateBoolType (0..1~~)  
-      - ~~The right to use the object for synchronization. This enables a thread to wait until the object is in the signaled state. Some object types do not support this access right.~~  
+    * - standard_synchronize (Deprecated)  
+      - oval-def:EntityStateBoolType (0..1)  
+      - The right to use the object for synchronization. This enables a thread to wait until the object is in the signaled state. Some object types do not support this access right.  
     * - access_system_security  
       - oval-def:EntityStateBoolType (0..1)  
       - Indicates access to a system access control list (SACL).  
@@ -4031,7 +4056,8 @@ ______________
   
 < regkeyeffectiverights_test > (Deprecated)  
 ---------------------------------------------------------
-**Deprecation Info**:  
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 * Deprecated As Of Version 5.3  
 * Reason: Replaced by the regkeyeffectiverights53_test. This test uses a trustee_name element for identifying trustees. Trustee names are not unique, and a new test was created to use trustee SIDs, which are unique. See the regkeyeffectiverights53_test.  
 * Comment: This test has been deprecated and will be removed in version 6.0 of the language.  
@@ -4059,7 +4085,8 @@ Child Elements
   
 < regkeyeffectiverights_object > (Deprecated)  
 ---------------------------------------------------------
-**Deprecation Info**:  
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 * Deprecated As Of Version 5.3  
 * Reason: Replaced by the regkeyeffectiverights53_object. This object uses a trustee_name element for identifying trustees. Trustee names are not unique, and a new object was created to use trustee SIDs, which are unique. See the regkeyeffectiverights53_object.  
 * Comment: This object has been deprecated and will be removed in version 6.0 of the language.  
@@ -4091,7 +4118,8 @@ Child Elements
   
 < regkeyeffectiverights_state > (Deprecated)  
 ---------------------------------------------------------
-**Deprecation Info**:  
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 * Deprecated As Of Version 5.3  
 * Reason: Replaced by the regkeyeffectiverights53_state. This state uses a trustee_name element for identifying trustees. Trustee names are not unique, and a new state was created to use trustee SIDs, which are unique. See the regkeyeffectiverights53_state.  
 * Comment: This state has been deprecated and will be removed in version 6.0 of the language.  
@@ -4182,7 +4210,8 @@ Child Elements
   
 == RegkeyEffectiveRightsBehaviors == (Deprecated)  
 ---------------------------------------------------------
-**Deprecation Info**:  
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 * Deprecated As Of Version 5.3  
 * Reason: Replaced by the RegkeyEffectiveRightsBehaviors53. The RegkeyEffectiveRightsBehaviors complex type is used by the regkeyeffectiverights_test which uses a trustee_name element for identifying trustees. Trustee names are not unique, and a new test was created to use trustee SIDs, which are unique. This new test utilizes the RegkeyEffectiveRightsBehaviors53 complex type, and as a result, the RegkeyEffectiveRightsBehaviors complex type is no longer needed.  
 * Comment: This complex type has been deprecated and will be removed in version 6.0 of the language.  
@@ -5177,7 +5206,8 @@ ______________
   
 < user_test > (Deprecated)  
 ---------------------------------------------------------
-**Deprecation Info**:  
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 * Deprecated As Of Version 5.11  
 * Reason: Replaced by the user_sid55_test. This test uses trustee names for identifying accounts on the system. Trustee names are not unique and the user_sid55_test, which uses trustee SIDs which are unique, should be used instead. See the user_sid55_test.  
 * Comment: This test has been deprecated and will be removed in version 6.0 of the language.  
@@ -5205,7 +5235,8 @@ Child Elements
   
 < user_object > (Deprecated)  
 ---------------------------------------------------------
-**Deprecation Info**:  
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 * Deprecated As Of Version 5.11  
 * Reason: Replaced by the user_sid55_object. This object uses trustee names for identifying accounts on the system. Trustee names are not unique and the user_sid55_object, which uses trustee SIDs which are unique, should be used instead. See the user_sid55_object.  
 * Comment: This object has been deprecated and will be removed in version 6.0 of the language.  
@@ -5233,7 +5264,8 @@ Child Elements
   
 < user_state > (Deprecated)  
 ---------------------------------------------------------
-**Deprecation Info**:  
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 * Deprecated As Of Version 5.11  
 * Reason: Replaced by the user_sid55_state. This state uses trustee names for identifying accounts on the system. Trustee names are not unique and the user_sid55_state, which uses trustee SIDs which are unique, should be used instead. See the user_sid55_state.  
 * Comment: This state has been deprecated and will be removed in version 6.0 of the language.  
@@ -5388,7 +5420,8 @@ ______________
   
 < user_sid_test > (Deprecated)  
 ---------------------------------------------------------
-**Deprecation Info**:  
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 * Deprecated As Of Version 5.5  
 * Reason: Replaced by the user_sid55_test. This test uses user and group elements that are incorrectly named. A new test was created to change the element names to their correct values which are user_sid and group_sid. See the user_sid55_test.  
 * Comment: This test has been deprecated and will be removed in version 6.0 of the language.  
@@ -5416,7 +5449,8 @@ Child Elements
   
 < user_sid_object > (Deprecated)  
 ---------------------------------------------------------
-**Deprecation Info**:  
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 * Deprecated As Of Version 5.5  
 * Reason: Replaced by the user_sid55_object. This object uses a user element that is incorrectly named. A new object was created to change the element name to its correct value which is user_sid. See the user_sid55_object.  
 * Comment: This object has been deprecated and will be removed in version 6.0 of the language.  
@@ -5441,7 +5475,8 @@ Child Elements
   
 < user_sid_state > (Deprecated)  
 ---------------------------------------------------------
-**Deprecation Info**:  
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 * Deprecated As Of Version 5.5  
 * Reason: Replaced by the user_sid55_state. This state uses user and group elements that are incorrectly named. A new state was created to change the element names to their correct values which are user_sid and group_sid. See the user_sid55_state.  
 * Comment: This state has been deprecated and will be removed in version 6.0 of the language.  
@@ -5691,7 +5726,8 @@ ______________
   
 < wmi_test > (Deprecated)  
 ---------------------------------------------------------
-**Deprecation Info**:  
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 * Deprecated As Of Version 5.7  
 * Reason: Replaced by the wmi57_test. This test only allows for single fields to be selected from WMI. A new test was created to allow more than one field to be selected in one statement. See the wmi57_test.  
 * Comment: This test has been deprecated and may be removed in a future version of the language.  
@@ -5719,7 +5755,8 @@ Child Elements
   
 < wmi_object > (Deprecated)  
 ---------------------------------------------------------
-**Deprecation Info**:  
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 * Deprecated As Of Version 5.7  
 * Reason: Replaced by the wmi57_object. This object allows for single fields to be selected from WMI. A new object was created to allow more than one field to be selected in one statement. See the wmi57_object.  
 * Comment: This object has been deprecated and may be removed in a future version of the language.  
@@ -5747,7 +5784,8 @@ Child Elements
   
 < wmi_state > (Deprecated)  
 ---------------------------------------------------------
-**Deprecation Info**:  
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 * Deprecated As Of Version 5.7  
 * Reason: Replaced by the wmi57_state. This object allows for single fields to be selected from WMI. A new state was created to allow more than one field to be selected in one statement. See the wmi57_state.  
 * Comment: This state has been deprecated and may be removed in a future version of the language.  
@@ -6145,8 +6183,11 @@ The EntityStateFileTypeType complex type restricts a string value to a specific 
   
     * - Value  
       - Description  
-    * - ~~FILE_ATTRIBUTE_DIRECTORY~~  
-      - | ~~The handle identifies a directory.~~<br/>**Deprecated As Of Version 5.11.1:1.2**<br/>**Reason:** In version 5.11.1:1.2 of the OVAL Language windows schema, a file_attributes entity was added to the file_state, obviating the need to overload this attribute with the file-type enumeration.<br/>**Comment:** This value has been deprecated and will be removed in version 6.0 of the language.<br/>  
+    * - FILE_ATTRIBUTE_DIRECTORY (Deprecated)  
+      - | The handle identifies a directory.  
+        | **Deprecated As Of Version:** 5.11.1:1.2  
+        | **Reason:** In version 5.11.1:1.2 of the OVAL Language windows schema, a file_attributes entity was added to the file_state, obviating the need to overload this attribute with the file-type enumeration.  
+        | **Comment:** This value has been deprecated and will be removed in version 6.0 of the language.  
     * - FILE_TYPE_CHAR  
       - | The specified file is a character file, typically an LPT device or a console.  
     * - FILE_TYPE_DISK  
@@ -6475,8 +6516,11 @@ The EntityStateRegistryTypeType complex type defines the different values that a
       - | The reg_binary type is used by registry keys that specify binary data in any form.  
     * - reg_dword  
       - | The reg_dword type is used by registry keys that specify an unsigned 32-bit integer.  
-    * - ~~reg_dword_little_endian~~  
-      - | ~~The reg_dword_little_endian type is used by registry keys that specify an unsigned 32-bit little-endian integer. It is designed to run on little-endian computer architectures.~~<br/>**Deprecated As Of Version 5.11.1:1.1**<br/>**Reason:** Defined to have same value as reg_dword.<br/>**Comment:** This registry type enumeration value has been deprecated and may be removed in a future version of the language.<br/>  
+    * - reg_dword_little_endian (Deprecated)  
+      - | The reg_dword_little_endian type is used by registry keys that specify an unsigned 32-bit little-endian integer. It is designed to run on little-endian computer architectures.  
+        | **Deprecated As Of Version:** 5.11.1:1.1  
+        | **Reason:** Defined to have same value as reg_dword.  
+        | **Comment:** This registry type enumeration value has been deprecated and may be removed in a future version of the language.  
     * - reg_dword_big_endian  
       - | The reg_dword_big_endian type is used by registry keys that specify an unsigned 32-bit big-endian integer. It is designed to run on big-endian computer architectures.  
     * - reg_expand_sz  
@@ -6489,8 +6533,11 @@ The EntityStateRegistryTypeType complex type defines the different values that a
       - | The reg_none type is used by registry keys that have no defined value type.  
     * - reg_qword  
       - | The reg_qword type is used by registry keys that specify an unsigned 64-bit integer.  
-    * - ~~reg_qword_little_endian~~  
-      - | ~~The reg_qword_little_endian type is used by registry keys that specify an unsigned 64-bit integer in little-endian computer architectures.~~<br/>**Deprecated As Of Version 5.11.1:1.1**<br/>**Reason:** Defined to have same value as reg_qword.<br/>**Comment:** This registry type enumeration value has been deprecated and may be removed in a future version of the language.<br/>  
+    * - reg_qword_little_endian (Deprecated)  
+      - | The reg_qword_little_endian type is used by registry keys that specify an unsigned 64-bit integer in little-endian computer architectures.  
+        | **Deprecated As Of Version:** 5.11.1:1.1  
+        | **Reason:** Defined to have same value as reg_qword.  
+        | **Comment:** This registry type enumeration value has been deprecated and may be removed in a future version of the language.  
     * - reg_sz  
       - | The reg_sz type is used by registry keys that specify a single null-terminated string.  
     * - reg_resource_list  
@@ -6669,10 +6716,16 @@ It is also important to note that special shared resources are those reserved fo
       - | The STYPE_IPC_TEMPORARY type means that the shared resource is a temporary interprocess communication. The DWORD value that this corresponds to is 0x40000003.  
     * - STYPE_IPC_SPECIAL_TEMPORARY  
       - | The STYPE_IPC_SPECIAL_TEMPORARY type means that the shared resource is a temporary, special interprocess communication. The DWORD value that this corresponds to is 0xC0000003.  
-    * - ~~STYPE_SPECIAL~~  
-      - | ~~The STYPE_SPECIAL type means that this is a special share reserved for interprocess communication (IPC$) or remote administration of the server (ADMIN$). Can also refer to administrative shares such as C$, D$, E$, and so forth. The DWORD value that this corresponds to is 0x40000000.~~<br/>**Deprecated As Of Version 5.6**<br/>**Reason:** In version 5.6 of the OVAL Language, the EntityStateSharedResourceTypeType was changed to include all of the different shared resource types as specified in Microsoft's documentation of the shi2_type member of the SHARE_INFO_2 structure. As a result, the STYPE_SPECIAL value by itself is no longer valid because it would actually be equal to the value STYPE_DISKTREE_SPECIAL (0x80000000) which is STYPE_DISKTREE (0x00000000) OR'd with STYPE_SPECIAL (0x80000000).<br/>**Comment:** This value has been deprecated and will be removed in version 6.0 of the language.<br/>  
-    * - ~~STYPE_TEMPORARY~~  
-      - | ~~The STYPE_TEMPORARY type means that the shared resource is a temporary share. The DWORD value that this corresponds to is 0x80000000.~~<br/>**Deprecated As Of Version 5.6**<br/>**Reason:** In version 5.6 of the OVAL Language, the EntityStateSharedResourceTypeType was changed to include all of the different shared resource types as specified in Microsoft's documentation of the shi2_type member of the SHARE_INFO_2 structure. As a result, the STYPE_TEMPORARY value by itself is no longer valid because it would actually be equal to the value STYPE_DISKTREE_TEMPORARY (0x40000000) which is STYPE_DISKTREE (0x00000000) OR'd with STYPE_TEMPORARY (0x40000000).<br/>**Comment:** This value has been deprecated and will be removed in version 6.0 of the language.<br/>  
+    * - STYPE_SPECIAL (Deprecated)  
+      - | The STYPE_SPECIAL type means that this is a special share reserved for interprocess communication (IPC$) or remote administration of the server (ADMIN$). Can also refer to administrative shares such as C$, D$, E$, and so forth. The DWORD value that this corresponds to is 0x40000000.  
+        | **Deprecated As Of Version:** 5.6  
+        | **Reason:** In version 5.6 of the OVAL Language, the EntityStateSharedResourceTypeType was changed to include all of the different shared resource types as specified in Microsoft's documentation of the shi2_type member of the SHARE_INFO_2 structure. As a result, the STYPE_SPECIAL value by itself is no longer valid because it would actually be equal to the value STYPE_DISKTREE_SPECIAL (0x80000000) which is STYPE_DISKTREE (0x00000000) OR'd with STYPE_SPECIAL (0x80000000).  
+        | **Comment:** This value has been deprecated and will be removed in version 6.0 of the language.  
+    * - STYPE_TEMPORARY (Deprecated)  
+      - | The STYPE_TEMPORARY type means that the shared resource is a temporary share. The DWORD value that this corresponds to is 0x80000000.  
+        | **Deprecated As Of Version:** 5.6  
+        | **Reason:** In version 5.6 of the OVAL Language, the EntityStateSharedResourceTypeType was changed to include all of the different shared resource types as specified in Microsoft's documentation of the shi2_type member of the SHARE_INFO_2 structure. As a result, the STYPE_TEMPORARY value by itself is no longer valid because it would actually be equal to the value STYPE_DISKTREE_TEMPORARY (0x40000000) which is STYPE_DISKTREE (0x00000000) OR'd with STYPE_TEMPORARY (0x40000000).  
+        | **Comment:** This value has been deprecated and will be removed in version 6.0 of the language.  
     * -   
       - | The empty string value is permitted here to allow for empty elements associated with variable references.  
   
