@@ -10,8 +10,6 @@ The following is a description of the elements, types, and attributes that compo
 
 The OVAL Schema is maintained by The MITRE Corporation and developed by the public OVAL Community. For more information, including how to get involved in the project and how to submit change requests, please visit the OVAL website at http://oval.mitre.org.
 
-______________
-  
 .. _oval_variables:  
   
 < oval_variables >  
@@ -20,7 +18,6 @@ The oval_variables element is the root of an OVAL Variable Document. Its purpose
 
 Child Elements  
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  
 .. list-table:: Elements  
     :header-rows: 1  
   
@@ -47,7 +44,6 @@ The VariablesType complex type is a container for one or more variable elements.
 
 Child Elements  
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  
 .. list-table:: Elements  
     :header-rows: 1  
   
@@ -68,7 +64,6 @@ The notes section of a variable should be used to hold information that might be
 
 Attributes  
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  
 .. list-table:: Attributes  
     :header-rows: 1  
   
@@ -91,7 +86,6 @@ Attributes
   
 Child Elements  
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  
 .. list-table:: Elements  
     :header-rows: 1  
   
