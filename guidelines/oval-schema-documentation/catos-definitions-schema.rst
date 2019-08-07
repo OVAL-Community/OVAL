@@ -254,7 +254,8 @@ ______________
   
 < version_test > (Deprecated)  
 ---------------------------------------------------------
-**Deprecation Info**:  
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 * Deprecated As Of Version 5.5  
 * Reason: Replaced by the version55_test. Due to the fact it's not clear on how to separate the CatOS version, it was decided that the catos_major_release, catos_individual_release, and catos_version_id entities would be combined into a new single entity catos_release. A new test was created to reflect these changes. See the version55_test.  
 * Comment: This test has been deprecated and will be removed in version 6.0 of the language.  
@@ -284,7 +285,8 @@ Child Elements
   
 < version_object > (Deprecated)  
 ---------------------------------------------------------
-**Deprecation Info**:  
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 * Deprecated As Of Version 5.5  
 * Reason: Replaced by the version55_object. Due to the fact it's not clear on how to separate the CatOS version, it was decided that the catos_major_release, catos_individual_release, and catos_version_id entities would be combined into a new single entity catos_release. A new object was created to reflect these changes. See the version55_object.  
 * Comment: This object has been deprecated and will be removed in version 6.0 of the language.  
@@ -297,7 +299,8 @@ The version_object element is used by a version test to define the different ver
   
 < version_state > (Deprecated)  
 ---------------------------------------------------------
-**Deprecation Info**:  
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 * Deprecated As Of Version 5.5  
 * Reason: Replaced by the version55_state. Due to the fact it's not clear on how to separate the CatOS version, it was decided that the catos_major_release, catos_individual_release, and catos_version_id entities would be combined into a new single entity catos_release. A new state was created to reflect these changes. See the version55_state.  
 * Comment: This state has been deprecated and will be removed in version 6.0 of the language.  

@@ -332,9 +332,9 @@ Child Elements
     * - ip_directed_broadcast_command  
       - Restriction of oval-def:EntityStateAnySimpleType. See schema for details. (0..1)  
       - Directed broadcast command enabled on the interface. The default is false.  
-    * - ~~no_ip_directed_broadcast_command~~  
-      - ~~oval-def:EntityStateStringType (0..1~~)  
-      - ~~~~  
+    * - no_ip_directed_broadcast_command (Deprecated)  
+      - oval-def:EntityStateStringType (0..1)  
+      -   
     * - proxy_arp_command  
       - Restriction of oval-def:EntityStateAnySimpleType. See schema for details. (0..1)  
       - Element that is true if the proxy_arp command is enabled on the interface. The default is true.  
@@ -365,9 +365,9 @@ Child Elements
     * - ipv6_urpf_command  
       - oval-def:EntityStateStringType (0..1)  
       - The IPv6 uRPF command under the interface.  
-    * - ~~urpf_command~~  
-      - ~~oval-def:EntityStateStringType (0..1~~)  
-      - ~~The uRPF command under the interface.~~  
+    * - urpf_command (Deprecated)  
+      - oval-def:EntityStateStringType (0..1)  
+      - The uRPF command under the interface.  
     * - switchport_trunk_encapsulation  
       - ios-def:EntityStateTrunkEncapType (0..1)  
       - The switchport trunk encapsulation option configured on the interface (if applicable).  
@@ -1323,7 +1323,8 @@ ______________
   
 < version_test > (Deprecated)  
 ---------------------------------------------------------
-**Deprecation Info**:  
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 * Deprecated As Of Version 5.5  
 * Reason: Replaced by the version55_test. Additional IOS version components were added to the version_state in order to support a wider range of IOS version strings. Also, the major_release and train_number entities were removed from the version_state element. A new test was created to reflect these changes. See the version55_test.  
 * Comment: This test has been deprecated and will be removed in version 6.0 of the language.  
@@ -1351,7 +1352,8 @@ Child Elements
   
 < version_object > (Deprecated)  
 ---------------------------------------------------------
-**Deprecation Info**:  
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 * Deprecated As Of Version 5.5  
 * Reason: Replaced by the version55_object. Additional IOS version components were added to the version_state in order to support a wider range of IOS version strings.  Also, the major_release and train_number entities were removed from the version_state element. A new object was created to reflect these changes. See the version55_object.  
 * Comment: This object has been deprecated and will be removed in version 6.0 of the language.  
@@ -1364,7 +1366,8 @@ The version_object element is used by a version test to define the different ver
   
 < version_state > (Deprecated)  
 ---------------------------------------------------------
-**Deprecation Info**:  
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 * Deprecated As Of Version 5.5  
 * Reason: Replaced by the version55_state. Additional IOS version components were added to the version_state in order to support a wider range of IOS version strings.  Also, the major_release and train_number entities were removed from this version_state element. A new state was created to reflect these changes. See the version55_state.  
 * Comment: This state has been deprecated and will be removed in version 6.0 of the language.  
@@ -1507,8 +1510,11 @@ The EntityStateAccessListUseType complex type restricts a string value to a spec
       - (No Description)  
     * - VTY  
       - (No Description)  
-    * - ~~NONE~~  
-      - | <br/>**Deprecated As Of Version 5.11.2:1.0**<br/>**Reason:** The EntityStateSimpleBaseType check_existence attribute serves the same purpose as this enumeration value.<br/>**Comment:** This AccessListUseType enumeration value has been deprecated and may be removed in a future version of the language.<br/>  
+    * - NONE (Deprecated)  
+      - |   
+        | **Deprecated As Of Version:** 5.11.2:1.0  
+        | **Reason:** The EntityStateSimpleBaseType check_existence attribute serves the same purpose as this enumeration value.  
+        | **Comment:** This AccessListUseType enumeration value has been deprecated and may be removed in a future version of the language.  
     * -   
       - | The empty string value is permitted here to allow for empty elements associated with variable references.  
   
@@ -1529,8 +1535,11 @@ The EntityStateRoutingAuthTypeStringType complex type restricts a string value t
       - (No Description)  
     * - MESSAGE_DIGEST  
       - (No Description)  
-    * - ~~NULL~~  
-      - | <br/>**Deprecated As Of Version 5.11.2:1.0**<br/>**Reason:** The NULL authentication area type is never declared in an interface ip ospf command context.<br/>**Comment:** This RoutingAuthTypeStringType enumeration value has been deprecated and may be removed in a future version of the language.<br/>  
+    * - NULL (Deprecated)  
+      - |   
+        | **Deprecated As Of Version:** 5.11.2:1.0  
+        | **Reason:** The NULL authentication area type is never declared in an interface ip ospf command context.  
+        | **Comment:** This RoutingAuthTypeStringType enumeration value has been deprecated and may be removed in a future version of the language.  
     * -   
       - | The empty string value is permitted here to allow for empty elements associated with variable references.  
   
@@ -1696,7 +1705,8 @@ ______________
   
 == EntityStateTrainIdentifierType == (Deprecated)  
 ---------------------------------------------------------
-**Deprecation Info**:  
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 * Deprecated As Of Version 5.5  
 * Reason: Additional IOS version components were added to the version_state in order to support a wider range of IOS version strings. Also, the train_number entity, which uses this enumeration, was removed from the version_state element. As a result, this enumeration is no longer needed.  
 * Comment: This enumeration has been deprecated and will be removed in version 6.0 of the language.  

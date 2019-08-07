@@ -746,9 +746,9 @@ Child Elements
     * - quotaname  
       - oval-def:EntityStateStringType (0..1)  
       - The quota name is the name of quota template for a site collection.  
-    * - ~~url~~  
-      - ~~oval-def:EntityStateStringType (0..1~~)  
-      - ~~The URL is the full URL to the root Web site of the site collection, including host name, port number, and path.~~  
+    * - url (Deprecated)  
+      - oval-def:EntityStateStringType (0..1)  
+      - The URL is the full URL to the root Web site of the site collection, including host name, port number, and path.  
   
 ______________
   
@@ -847,7 +847,8 @@ ______________
   
 < spjobdefinition_test > (Deprecated)  
 ---------------------------------------------------------
-**Deprecation Info**:  
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 * Deprecated As Of Version 5.10  
 * Reason: Replaced by the spjobdefinition510_test. This test does not uniquely identify a single job definition. A new test was created to use displaynames, which are unique. See the spjobdefinition510_test.  
 * Comment: This test has been deprecated and will be removed in version 6.0 of the language.  
@@ -875,7 +876,8 @@ Child Elements
   
 < spjobdefinition_object > (Deprecated)  
 ---------------------------------------------------------
-**Deprecation Info**:  
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 * Deprecated As Of Version 5.10  
 * Reason: Replaced by the spjobdefinition510_object. This test does not uniquely identify a single job definition. A new object was created to use displaynames, which are unique. See the spjobdefinition510_object.  
 * Comment: This test has been deprecated and will be removed in version 6.0 of the language.  
@@ -905,7 +907,8 @@ Child Elements
   
 < spjobdefinition_state > (Deprecated)  
 ---------------------------------------------------------
-**Deprecation Info**:  
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 * Deprecated As Of Version 5.10  
 * Reason: Replaced by the spjobdefinition510_state. This state does not uniquely identify a single job definition. A new state was created to use displaynames, which are unique. See the spjobdefinition510_state.  
 * Comment: This test has been deprecated and will be removed in version 6.0 of the language.  

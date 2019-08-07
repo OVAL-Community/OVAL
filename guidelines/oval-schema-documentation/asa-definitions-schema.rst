@@ -308,9 +308,9 @@ Child Elements
     * - ipv6_urpf_command  
       - oval-def:EntityStateStringType (0..1)  
       - The IPv6 uRPF command under the interface.  
-    * - ~~urpf_command~~  
-      - ~~oval-def:EntityStateStringType (0..1~~)  
-      - ~~The uRPF command under the interface.~~  
+    * - urpf_command (Deprecated)  
+      - oval-def:EntityStateStringType (0..1)  
+      - The uRPF command under the interface.  
   
 ______________
   

@@ -20,7 +20,7 @@ Item Listing
 * :ref:`spsiteadministration_item`  
 * :ref:`spsite_item`  
 * :ref:`spcrawlrule_item`  
-* :ref:`spjobdefinition_item` (Deprecated)  
+* :ref:`spjobdefinition_item`  
 * :ref:`spjobdefinition510_item`  
 * :ref:`bestbet_item`  
 * :ref:`infopolicycoll_item`  
@@ -457,7 +457,8 @@ ______________
   
 < spjobdefinition_item > (Deprecated)  
 ---------------------------------------------------------
-**Deprecation Info**:  
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 * Deprecated As Of Version 5.10  
 * Reason: Replaced by the spjobdefinition510_item. This item does not uniquely identify a single job definition. A new state was created to use displaynames, which are unique. See the spjobdefinition510_item.  
 * Comment: This item has been deprecated and may be removed in a future version of the language.  

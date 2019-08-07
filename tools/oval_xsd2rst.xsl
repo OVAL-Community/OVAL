@@ -72,19 +72,7 @@
 			<xsl:text>Item Listing</xsl:text><xsl:value-of select="$md_br" />
 			<xsl:value-of select="$rst_h2" />
 			<xsl:for-each select="xsd:element[contains(@name, '_item')]">
-				<xsl:text>* </xsl:text>
-				<xsl:choose>
-					<xsl:when test="./xsd:annotation/xsd:appinfo/oval:deprecated_info">
-						<xsl:text>:ref:`</xsl:text>
-						<xsl:value-of select="@name"/>
-						<xsl:text>` (Deprecated)</xsl:text>
-					</xsl:when>
-					<xsl:otherwise>
-						<xsl:text>:ref:`</xsl:text>
-						<xsl:value-of select="@name"/>
-						<xsl:text>`</xsl:text>
-					</xsl:otherwise>
-				</xsl:choose>
+				<xsl:text>* :ref:`</xsl:text><xsl:value-of select="@name"/><xsl:text>`</xsl:text>
 				<xsl:value-of select="$md_br" />			
 			</xsl:for-each>
 			<xsl:value-of select="$md_br" />
@@ -484,25 +472,24 @@
 		
 		<xsl:for-each select="xsd:restriction/xsd:enumeration">
 			<xsl:text>    * - </xsl:text>
-			<xsl:if test="./xsd:annotation/xsd:appinfo/oval:deprecated_info">~~</xsl:if>
 			<xsl:value-of select="@value"/>
-			<xsl:if test="./xsd:annotation/xsd:appinfo/oval:deprecated_info">~~</xsl:if> 
+			<xsl:if test="./xsd:annotation/xsd:appinfo/oval:deprecated_info"> (Deprecated)</xsl:if>
 			<xsl:value-of select="$md_br" />
 			
 			<xsl:choose>
 				<xsl:when test="xsd:annotation">
 					<xsl:text>      - | </xsl:text>
 					<xsl:for-each select="xsd:annotation/xsd:documentation">
-						<xsl:if test="../xsd:appinfo/oval:deprecated_info">~~</xsl:if>
 						<xsl:value-of select="normalize-space(.)"/>
-						<xsl:if test="../xsd:appinfo/oval:deprecated_info">~~</xsl:if>
 					</xsl:for-each>
 					<xsl:for-each select="xsd:annotation/xsd:appinfo/oval:deprecated_info">
-						<xsl:text>&lt;br/&gt;</xsl:text>
-						<xsl:text>**Deprecated As Of Version </xsl:text><xsl:value-of select="./oval:version"/><xsl:text>**&lt;br/&gt;</xsl:text>
-						<xsl:text>**Reason:** </xsl:text><xsl:value-of select="./oval:reason"/><xsl:text>&lt;br/&gt;</xsl:text>
+						<xsl:value-of select="$md_br" />
+						<xsl:text>        | **Deprecated As Of Version:** </xsl:text><xsl:value-of select="./oval:version"/>
+						<xsl:value-of select="$md_br" />
+						<xsl:text>        | **Reason:** </xsl:text><xsl:value-of select="./oval:reason"/>
 						<xsl:if test="./oval:comment">
-							<xsl:text>**Comment:** </xsl:text><xsl:value-of select="./oval:comment"/><xsl:text>&lt;br/&gt;</xsl:text>
+							<xsl:value-of select="$md_br" />
+							<xsl:text>        | **Comment:** </xsl:text><xsl:value-of select="./oval:comment"/>
 						</xsl:if>
 					</xsl:for-each>
 				</xsl:when>
@@ -549,8 +536,10 @@
 	
 	<xsl:template name="deprecation_info">
 		<xsl:param name="depInfo" required="yes" as="node()"/>
-		<xsl:text>**Deprecation Info**:</xsl:text>
-		<xsl:value-of select="$md_br"/>
+		
+		<xsl:text>Deprecation Info</xsl:text>
+		<xsl:value-of select="$md_br" />
+		<xsl:value-of select="$rst_h3" />
 		<xsl:text>* Deprecated As Of Version </xsl:text><xsl:value-of select="$depInfo/oval:version"/><xsl:value-of select="$md_br"/>
 		<xsl:text>* Reason: </xsl:text><xsl:value-of select="$depInfo/oval:reason"/><xsl:value-of select="$md_br"/>
 		<xsl:if test="$depInfo/oval:comment">
@@ -563,8 +552,6 @@
 		
 		<!-- Child Element -->
 		<xsl:text>    * - </xsl:text>
-		<xsl:if test="./xsd:annotation/xsd:appinfo/oval:deprecated_info">~~</xsl:if>
-		
 		<xsl:choose>
 			<xsl:when test="@ref">
 				<xsl:call-template name="dictionary_link">
@@ -577,14 +564,11 @@
 			<xsl:otherwise><xsl:value-of select="@name"/></xsl:otherwise>
 		</xsl:choose>
 		
-		<xsl:if test="./xsd:annotation/xsd:appinfo/oval:deprecated_info">~~</xsl:if>
+		<xsl:if test="./xsd:annotation/xsd:appinfo/oval:deprecated_info"> (Deprecated)</xsl:if>
 		<xsl:value-of select="$md_br" />
-		
 		
 		<!-- Type (Min..Max) -->
 		<xsl:text>      - </xsl:text>
-		<xsl:if test="./xsd:annotation/xsd:appinfo/oval:deprecated_info">~~</xsl:if>
-		
 		<xsl:choose>
 			<xsl:when test="not(@type)">
 				<xsl:choose>
@@ -608,37 +592,27 @@
 		</xsl:choose>
 
 		<xsl:text> (</xsl:text>
-
 		<xsl:choose>
 			<xsl:when test="@minOccurs"><xsl:value-of select="@minOccurs"/></xsl:when>
 			<xsl:when test="ancestor::xsd:complexType/@name = 'CriteriaType'"><xsl:value-of select="parent::xsd:choice/@minOccurs"/></xsl:when>
 			<xsl:when test="ancestor::xsd:element/@name = 'external_variable'"><xsl:value-of select="parent::xsd:choice/@minOccurs"/></xsl:when>
 			<xsl:otherwise><xsl:text>1</xsl:text></xsl:otherwise>
 		</xsl:choose>
-
 		<xsl:text>..</xsl:text>
-
 		<xsl:choose>
 			<xsl:when test="@maxOccurs"><xsl:value-of select="@maxOccurs"/></xsl:when>
 			<xsl:when test="ancestor::xsd:complexType/@name = 'CriteriaType'"><xsl:value-of select="parent::xsd:choice/@maxOccurs"/></xsl:when>
 			<xsl:when test="ancestor::xsd:element/@name = 'external_variable'"><xsl:value-of select="parent::xsd:choice/@maxOccurs"/></xsl:when>
 			<xsl:otherwise><xsl:text>1</xsl:text></xsl:otherwise>
 		</xsl:choose>
-
-		<xsl:if test="./xsd:annotation/xsd:appinfo/oval:deprecated_info">~~</xsl:if>
 		<xsl:text>)</xsl:text>
 		<xsl:value-of select="$md_br" />
 		
-		
 		<!-- Description -->
 		<xsl:text>      - </xsl:text>
-		<xsl:if test="./xsd:annotation/xsd:appinfo/oval:deprecated_info">~~</xsl:if>
-
 		<xsl:for-each select="./xsd:annotation/xsd:documentation">
 			<xsl:value-of select="normalize-space(.)"/>
-		</xsl:for-each>			
-
-		<xsl:if test="./xsd:annotation/xsd:appinfo/oval:deprecated_info">~~</xsl:if>
+		</xsl:for-each>
 		<xsl:value-of select="$md_br" />
 	</xsl:template>
 
