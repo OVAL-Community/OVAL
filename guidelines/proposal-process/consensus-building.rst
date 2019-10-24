@@ -27,7 +27,14 @@ When all issues and resulting discussions are concluded, then the process moves 
 
 Consensus Call
 ^^^^^^^^^^^^^^
-The purpose of a Consensus Call is to provide a 14-day period during which community members who may have missed the initial proposal and subsequent discussions have an opportunity to opine. The Area Supervisor determines when an effort is ready for a Consensus Call. From time to time, the Leadership Board may be consulted when a consensus call is too difficult for an Area Supervisor to judge.
+The purpose of a Consensus Call is to provide a 14-day period during which community members who may have missed the initial proposal and subsequent discussions have an opportunity to opine. The Area Supervisor determines when an effort is ready for a Consensus Call. From time to time, the Leadership Board may be consulted when a consensus call is too difficult for an Area Supervisor to judge. Consensus Calls should be closed at 11:59 PM UTC on the date 14 days from the opening of the call.
+
+It is suggested that Area Supervisors send an email out to the `OVAL Developer mailing list <http://lists.cisecurity.org/mailman/listinfo/oval_developer_lists.cisecurity.org>`_ to initiate the 14-day period. A default template is provided below but may be changed or replaced as needed.
+
+OVAL Community,
+
+A current issue exists in the OVAL Community repository [include link] which documents [description of the problem].  A fix has been made and pull request created [include link].  [This Area Supervisor] has reviewed the changes and is satisfied they resolve the issues, and therefore this message intends to begin the formal consensus call for merging the changes into the “development” branch of the OVAL language repository; moving it along in the process.
+If no objections exist by [date 14 days from today], the PR will be merged.  Please examine the issue and the PR and raise objections or voice approval in the comments area of the pull request.
 
 Once consensus has been reached (see About Consensus below) as judged by the Area Supervisor and the 14-day Consensus Call has come to a close, the proposal moves to release (see `Release Process <https://oval-community-guidelines.readthedocs.io/en/latest/proposal-process/release-process.html>`_).
 
@@ -42,7 +49,7 @@ It is the responsibility of all interested parties to achieve consensus. Getting
 
 - Ensure the proposal is clearly scoped
 - List each concern participants have about the proposal
-- Use quick, simple polls to quickly guage interest in a solution [#]_
+- Use quick, simple polls to quickly gauge interest in a solution [#]_
 - Understand that lack of disagreement is *more important* than total agreement
 - Rough consensus is achieved when all issues are addressed, but not necessarily accommodated
 - Rough consensus is *not* about for and against cohorts
@@ -59,9 +66,9 @@ FAQs
 * **Egalitarianism:** No one person's voice necessarily carries any more weight than an other's.
 * **Solution-mindedness:** Always keep the solution in mind, which helps to avoid any perceived inter-organizational/-personal conflicts
 
-**What are the benefits of using a consensus processs?**
+**What are the benefits of using a consensus process?**
 
-An ideal outcome of a consensus process is that everyone is enthusiastically supportive of a proposal. However, the well-known aphroism states, "perfect is the enemy of the good". The real benefit of a consensus process is that parties with sometimes differing perspectives and needs are satisfied, if not necessarily emhpatically pleased, with a given solution.
+An ideal outcome of a consensus process is that everyone is enthusiastically supportive of a proposal. However, the well-known aphorism states, "perfect is the enemy of the good". The real benefit of a consensus process is that parties with sometimes differing perspectives and needs are satisfied, if not necessarily emhpatically pleased, with a given solution.
 
 **Does consenting to a solution mean it's my first choice?**
 
