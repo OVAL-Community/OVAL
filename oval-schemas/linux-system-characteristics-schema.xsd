@@ -294,6 +294,44 @@
           </xsd:complexType>
      </xsd:element>
      <!-- =============================================================================== -->
+     <!-- ==============================  KERNELMODULE ITEM  =============================== -->
+     <!-- =============================================================================== -->
+     <xsd:element name="kernelmodule_item" substitutionGroup="oval-sc:item">
+          <xsd:annotation>
+               <xsd:documentation>The kernelmodule_item captures limited information, parsing the output of the "modprobe -n -v [module_name]" command.</xsd:documentation>
+               <xsd:documentation>
+                    Need a combo of "lsmod", "modprobe -n -v" and potentially searching ""
+                    
+                    Collection of a modprobe_item is determined by the "modprobe -n -v module_name" command.  Due to the limitations of the modprobe command, and its
+                    requirement for a specific module_name, only the "equals" operation is supported, as there is no method to collect this information otherwise.  To support 
+                    other collection methods, variable references should be used to collect specific module names for use in collection here.
+               </xsd:documentation>
+          </xsd:annotation>
+          <xsd:complexType>
+               <xsd:complexContent>
+                    <xsd:extension base="oval-sc:ItemType">
+                         <xsd:sequence>
+                              <xsd:element name="module_name" type="oval-sc:EntityItemStringType" minOccurs="0" maxOccurs="1">
+                                   <xsd:annotation>
+                                        <xsd:documentation>The name of the kernel module for which information was collected</xsd:documentation>
+                                   </xsd:annotation>
+                              </xsd:element>
+                              <xsd:element name="loaded" type="oval-sc:EntityItemBoolType" minOccurs="0" maxOccurs="1">
+                                   <xsd:annotation>
+                                        <xsd:documentation>The loaded element is true when the collected kernel module is currently loaded; false otherwise.</xsd:documentation>
+                                   </xsd:annotation>
+                              </xsd:element>
+                              <xsd:element name="loadable" type="oval-sc:EntityItemBoolType" minOccurs="0" maxOccurs="1">
+                                   <xsd:annotation>
+                                        <xsd:documentation>The loadable element is true when the collected kernel module is allowed to be loaded; false otherwise.</xsd:documentation>
+                                   </xsd:annotation>
+                              </xsd:element>
+                         </xsd:sequence>
+                    </xsd:extension>
+               </xsd:complexContent>
+          </xsd:complexType>
+     </xsd:element>
+     <!-- =============================================================================== -->
      <!-- =============================  PARTITION ITEM  ================================ -->
      <!-- =============================================================================== -->
      <xsd:element name="partition_item" substitutionGroup="oval-sc:item">
@@ -1001,6 +1039,47 @@
           </xsd:complexType>
      </xsd:element>
      <!-- =============================================================================== -->
+     <!-- ===============================  SESTATUS ITEM  =============================== -->
+     <!-- =============================================================================== -->
+     <xsd:element name="sestatus_item" substitutionGroup="oval-sc:item">
+          <xsd:annotation>
+               <xsd:documentation>The SEStatus Item displays various information about the current SEStatus policy. This item maps the counts of profiles and processes as per the results of the "sestatus" command. Each item extends the standard ItemType as defined in the oval-system-characteristics-schema and one should refer to the ItemType description for more information.</xsd:documentation>
+          </xsd:annotation>
+          <xsd:complexType>
+               <xsd:complexContent>
+                    <xsd:extension base="oval-sc:ItemType">
+                         <xsd:sequence>
+                              <xsd:element name="selinux_status" type="linux-sc:EntityItemSEStatusType" minOccurs="0" maxOccurs="1">
+                                   <xsd:annotation>
+                                        <xsd:documentation>Indicates whether SELinux module itself is enabled or disabled on your system.</xsd:documentation>
+                                   </xsd:annotation>
+                              </xsd:element>
+                              <xsd:element name="current_mode" type="linux-sc:EntityItemSEStatusModeType" minOccurs="0" maxOccurs="1">
+                                   <xsd:annotation>
+                                        <xsd:documentation>This indicates whether SELinux is currently enforcing the policies or not utilizing the following values enforcing, permissive, disabled.</xsd:documentation>
+                                   </xsd:annotation>
+                              </xsd:element>
+                              <xsd:element name="mode_from_config_file" type="linux-sc:EntityItemSEStatusModeType" minOccurs="0" maxOccurs="1">
+                                   <xsd:annotation>
+                                        <xsd:documentation>Displays the mode from config file. </xsd:documentation>
+                                   </xsd:annotation>
+                              </xsd:element>
+                              <xsd:element name="loaded_policy_name" type="linux-sc:EntityItemSEStatusPolicyType" minOccurs="0" maxOccurs="1">
+                                   <xsd:annotation>
+                                        <xsd:documentation>Displays what type of SELinux policy is currently loaded. In pretty much all common situations, you’ll see “targeted” as the SELinux policy, as that is the default policy.</xsd:documentation>
+                                   </xsd:annotation>
+                              </xsd:element>
+                              <xsd:element name="policy_from_config_file" type="linux-sc:EntityItemSEStatusPolicyType" minOccurs="0" maxOccurs="1">
+                                   <xsd:annotation>
+                                        <xsd:documentation>Displays what type of SELinux policy is present in the SELinux configuration.</xsd:documentation>
+                                   </xsd:annotation>
+                              </xsd:element>
+                         </xsd:sequence>
+                    </xsd:extension>
+               </xsd:complexContent>
+          </xsd:complexType>
+     </xsd:element>
+     <!-- =============================================================================== -->
      <!-- ==========================  SLACKWARE PKG INFO ITEM  ========================== -->
      <!-- =============================================================================== -->
      <xsd:element name="slackwarepkginfo_item" substitutionGroup="oval-sc:item">
@@ -1398,6 +1477,93 @@
                     <xsd:enumeration value="">
                          <xsd:annotation>
                               <xsd:documentation>The empty string value is permitted here to allow for detailed error reporting.</xsd:documentation>
+                         </xsd:annotation>
+                    </xsd:enumeration>
+               </xsd:restriction>
+          </xsd:simpleContent>
+     </xsd:complexType>
+     <xsd:complexType name="EntityItemSEStatusType">
+          <xsd:annotation>
+               <xsd:documentation>
+                    The EntityItemSEStatusType complex type restricts a string value to the set of SEStatus 
+                    values that indicate whether SELinux module itself is enabled or disabled on your system. Keep 
+                    in mind that even though this may say enabled, but SELinux might still be not technically 
+                    enabled (enforced), which is really indicated by the "current_mode" value.
+               </xsd:documentation>
+          </xsd:annotation>
+          <xsd:simpleContent>
+               <xsd:restriction base="oval-sc:EntityItemStringType">
+                    <xsd:enumeration value="enabled">
+                         <xsd:annotation>
+                              <xsd:documentation>Indicates SELinux is enabled</xsd:documentation>
+                         </xsd:annotation>
+                    </xsd:enumeration>
+                    <xsd:enumeration value="disabled">
+                         <xsd:annotation>
+                              <xsd:documentation>Indicates SELinux is disabled</xsd:documentation>
+                         </xsd:annotation>
+                    </xsd:enumeration>
+                    <xsd:enumeration value="">
+                         <xsd:annotation>
+                              <xsd:documentation>The empty string value is permitted here to allow for empty elements associated with variable references.</xsd:documentation>
+                         </xsd:annotation>
+                    </xsd:enumeration>
+               </xsd:restriction>
+          </xsd:simpleContent>
+     </xsd:complexType>
+     <xsd:complexType name="EntityItemSEStatusModeType">
+          <xsd:annotation>
+               <xsd:documentation>The EntityItemSEStatusModeType complex type restricts a string value to the set of SEStatus Current Mode values. The empty string is also allowed to support the empty element associated with variable references. Note that when using pattern matches and variables care must be taken to ensure that the regular expression and variable values align with the enumerated values</xsd:documentation>
+          </xsd:annotation>
+          <xsd:simpleContent>
+               <xsd:restriction base="oval-sc:EntityItemStringType">
+                    <xsd:enumeration value="enforcing">
+                         <xsd:annotation>
+                              <xsd:documentation>'enforcing' indicates that SELinux security policy is enforced (i.e SELinux is enabled).</xsd:documentation>
+                         </xsd:annotation>
+                    </xsd:enumeration>
+                    <xsd:enumeration value="pemissive">
+                         <xsd:annotation>
+                              <xsd:documentation>'permissive' indicates that SELinux prints warnings instead of enforcing. This is helpful during debugging purpose when you want to know what would SELinux potentially block (without really blocking it) by looking at the SELinux logs.</xsd:documentation>
+                         </xsd:annotation>
+                    </xsd:enumeration>
+                    <xsd:enumeration value="disabled">
+                         <xsd:annotation>
+                              <xsd:documentation>'disabled' indicates no SELinux policy is loaded. </xsd:documentation>
+                         </xsd:annotation>
+                    </xsd:enumeration>
+                    <xsd:enumeration value="">
+                         <xsd:annotation>
+                              <xsd:documentation>The empty string value is permitted here to allow for empty elements associated with variable references.</xsd:documentation>
+                         </xsd:annotation>
+                    </xsd:enumeration>
+               </xsd:restriction>
+          </xsd:simpleContent>
+     </xsd:complexType>
+     <xsd:complexType name="EntityItemSEStatusPolicyType">
+          <xsd:annotation>
+               <xsd:documentation>The EntityItemSEStatusPolicyType complex type restricts a string value to the set of SEStatus Loaded Policy Name values. The empty string is also allowed to support the empty element associated with variable references. Note that when using pattern matches and variables care must be taken to ensure that the regular expression and variable values align with the enumerated values</xsd:documentation>
+          </xsd:annotation>
+          <xsd:simpleContent>
+               <xsd:restriction base="oval-sc:EntityItemStringType">
+                    <xsd:enumeration value="targeted">
+                         <xsd:annotation>
+                              <xsd:documentation>'targeted' indicates that only targeted processes are protected by SELinux.</xsd:documentation>
+                         </xsd:annotation>
+                    </xsd:enumeration>
+                    <xsd:enumeration value="minimum">
+                         <xsd:annotation>
+                              <xsd:documentation>'minimum' indicates is a slight modification of targeted policy. Only few selected processes are protected in this case.</xsd:documentation>
+                         </xsd:annotation>
+                    </xsd:enumeration>
+                    <xsd:enumeration value="mls">
+                         <xsd:annotation>
+                              <xsd:documentation>'mls' indicates Multi Level Security protection. MLS is pretty complex and pretty much not used in most situations. </xsd:documentation>
+                         </xsd:annotation>
+                    </xsd:enumeration>
+                    <xsd:enumeration value="">
+                         <xsd:annotation>
+                              <xsd:documentation>The empty string value is permitted here to allow for empty elements associated with variable references.</xsd:documentation>
                          </xsd:annotation>
                     </xsd:enumeration>
                </xsd:restriction>

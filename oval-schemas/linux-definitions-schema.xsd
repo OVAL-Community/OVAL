@@ -559,6 +559,133 @@
           </xsd:complexType>
      </xsd:element>
      <!-- =============================================================================== -->
+     <!-- ============================  KERNEL MODULE TEST  ============================= -->
+     <!-- =============================================================================== -->
+     <xsd:element name="kernelmodule_test" substitutionGroup="oval-def:test">
+          <xsd:annotation>
+               <xsd:documentation>
+                    The kernelmodule_test is used to check the loaded/loadability status for a given kernel module. It extends the standard TestType as defined in the oval-definitions-schema 
+                    and one should refer to the TestType description for more information. The required object element references a kernelmodule_object and the optional state 
+                    element specifies the data to check.
+               </xsd:documentation>
+               <xsd:appinfo>
+                    <oval:element_mapping>
+                         <oval:test>kernelmodule_test</oval:test>
+                         <oval:object>kernelmodule_object</oval:object>
+                         <oval:state>kernelmodule_state</oval:state>
+                         <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#linux">kernelmodule_item</oval:item>
+                    </oval:element_mapping>
+               </xsd:appinfo>
+               <xsd:appinfo>
+                    <sch:pattern id="linux-def_kernelmodule_test">
+                         <sch:rule context="linux-def:kernelmodule_test/linux-def:object">
+                              <sch:assert test="@object_ref=ancestor::oval-def:oval_definitions/oval-def:objects/linux-def:kernelmodule_object/@id"><sch:value-of select="../@id"/> - the object child element of a kernelmodule_test must reference a kernelmodule_object</sch:assert>
+                         </sch:rule>
+                         <sch:rule context="linux-def:kernelmodule_test/linux-def:state">
+                              <sch:assert test="@state_ref=ancestor::oval-def:oval_definitions/oval-def:states/linux-def:kernelmodule_state/@id"><sch:value-of select="../@id"/> - the state child element of a kernelmodule_test must reference a kernelmodule_state</sch:assert>
+                         </sch:rule>
+                    </sch:pattern>
+               </xsd:appinfo>
+          </xsd:annotation>
+          <xsd:complexType>
+               <xsd:complexContent>
+                    <xsd:extension base="oval-def:TestType">
+                         <xsd:sequence>
+                              <xsd:element name="object" type="oval-def:ObjectRefType" />
+                              <xsd:element name="state" type="oval-def:StateRefType" minOccurs="0" maxOccurs="unbounded"/>
+                         </xsd:sequence>
+                    </xsd:extension>
+               </xsd:complexContent>
+          </xsd:complexType>
+     </xsd:element>
+     <xsd:element name="kernelmodule_object" substitutionGroup="oval-def:object">
+          <xsd:annotation>
+               <xsd:documentation>
+                    The kernelmodule_object element is used by the kernelmodule_test to specify those modules for which information will be collected.  This object, 
+                    using the specified module_name, will collect information on the current loaded and loadable status of the module.
+               </xsd:documentation>
+               <xsd:documentation>
+                    By default modprobe loads modules from subdirectories located in the /lib/modules/$(uname -r) directory. Usually the files have an extension of .ko, 
+                    so they can be listed like this:  find /lib/modules/$(uname -r) -type f -name '*.ko*'.  An example line of output from this command would look like:
+                    /lib/modules/3.10.0-693.21.1.el7.x86_64/kernel/sound/usb/line6/snd-usb-pod.ko.xz.  In this case, the module name would be "snd-usb-pod".  This 
+                    information may be useful when needing to collect kernel module information based on operators other than "equals", such as pattern matching.
+               </xsd:documentation>
+               <xsd:documentation>
+                    To populate the "loaded" element for a kernelmodule_item, the specified module name must appear in the output of the "lsmod" command.  "lsmod" is a 
+                    trivial program which nicely formats the contents of the /proc/modules, showing what kernel modules are currently loaded.
+               </xsd:documentation>
+               <xsd:documentation>
+                    To populate the "loadable" element for a kernelmodule_item, implementors should explore the output of the "modprobe -n -v [module_name]" command.  If 
+                    the output of this command contains a line reading "install /bin/true" then the module is NOT loadable.  Another option is to parse the output of the 
+                    "modprobe --showconfig" command.  Similarly, if an output line matches "install [module_name] /bin/true", then the module is NOT loadable.
+               </xsd:documentation>
+               <xsd:documentation>A kernelmodule_object consists of a single module_name entity that identifies the package being checked.</xsd:documentation>
+               <xsd:appinfo>
+                    <sch:pattern id="linux-def_kernelmodule_object_verify_filter_state">
+                         <sch:rule context="linux-def:kernelmodule_object//oval-def:filter">
+                              <sch:let name="parent_object" value="ancestor::linux-def:kernelmodule_object"/>
+                              <sch:let name="parent_object_id" value="$parent_object/@id"/>
+                              <sch:let name="state_ref" value="."/>
+                              <sch:let name="reffed_state" value="ancestor::oval-def:oval_definitions/oval-def:states/*[@id=$state_ref]"/>
+                              <sch:let name="state_name" value="local-name($reffed_state)"/>
+                              <sch:let name="state_namespace" value="namespace-uri($reffed_state)"/>
+                              <sch:assert test="(($state_namespace='http://oval.mitre.org/XMLSchema/oval-definitions-5#linux') and ($state_name='kernelmodule_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
+                         </sch:rule>
+                    </sch:pattern>
+               </xsd:appinfo>
+          </xsd:annotation>
+          <xsd:complexType>
+               <xsd:complexContent>
+                    <xsd:extension base="oval-def:ObjectType">
+                         <xsd:sequence>
+                              <xsd:choice>
+                                   <xsd:element ref="oval-def:set"/>
+                                   <xsd:sequence>
+                                        <xsd:element name="module_name" type="oval-def:EntityObjectStringType">
+                                             <xsd:annotation>
+                                                  <xsd:documentation>This is the name of the kernel module to collect.</xsd:documentation>
+                                             </xsd:annotation>
+                                        </xsd:element>
+                                        <xsd:element ref="oval-def:filter" minOccurs="0" maxOccurs="unbounded"/>
+                                   </xsd:sequence>
+                              </xsd:choice>
+                         </xsd:sequence>
+                    </xsd:extension>
+               </xsd:complexContent>
+          </xsd:complexType>
+     </xsd:element>
+     <xsd:element name="kernelmodule_state" substitutionGroup="oval-def:state">
+          <xsd:annotation>
+               <xsd:documentation>
+                    The kernelmodule_state element defines the different information that can be used to evaluate the specified 
+                    kernel module. Please refer to the individual elements in the schema for more details about what each represents.
+               </xsd:documentation>
+          </xsd:annotation>
+          <xsd:complexType>
+               <xsd:complexContent>
+                    <xsd:extension base="oval-def:StateType">
+                         <xsd:sequence>
+                              <xsd:element name="module_name" type="oval-def:EntityStateStringType" minOccurs="0" maxOccurs="1">
+                                   <xsd:annotation>
+                                        <xsd:documentation>The name of the kernel module for which information was collected</xsd:documentation>
+                                   </xsd:annotation>
+                              </xsd:element>
+                              <xsd:element name="loaded" type="oval-def:EntityStateBoolType" minOccurs="0" maxOccurs="1">
+                                   <xsd:annotation>
+                                        <xsd:documentation>The loaded element is true when the collected kernel module is currently loaded; false otherwise.</xsd:documentation>
+                                   </xsd:annotation>
+                              </xsd:element>
+                              <xsd:element name="loadable" type="oval-def:EntityStateBoolType" minOccurs="0" maxOccurs="1">
+                                   <xsd:annotation>
+                                        <xsd:documentation>The loadable element is true when the collected kernel module is allowed to be loaded; false otherwise.</xsd:documentation>
+                                   </xsd:annotation>
+                              </xsd:element>
+                         </xsd:sequence>
+                    </xsd:extension>
+               </xsd:complexContent>
+          </xsd:complexType>
+     </xsd:element>
+     <!-- =============================================================================== -->
      <!-- ===============================  PARTITION TEST  ============================== -->
      <!-- =============================================================================== -->
      <xsd:element name="partition_test" substitutionGroup="oval-def:test">
@@ -2186,6 +2313,90 @@
           </xsd:complexType>
      </xsd:element>
      <!-- =============================================================================== -->
+     <!-- ===============================  SESTATUS TEST  =============================== -->
+     <!-- =============================================================================== -->
+     <xsd:element name="sestatus_test" substitutionGroup="oval-def:test">
+          <xsd:annotation>
+               <xsd:documentation>The SEStatus Test is used to check properties representing the counts of profiles and processes as per the results of the "sestatus" command. It extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information. The required object element references an sestatus_object and the optional state element specifies the data to check.</xsd:documentation>
+               <xsd:appinfo>
+                    <oval:element_mapping>
+                         <oval:test>sestatus_test</oval:test>
+                         <oval:object>sestatus_object</oval:object>
+                         <oval:state>sestatus_state</oval:state>
+                         <oval:item>sestatus_item</oval:item>
+                    </oval:element_mapping>
+               </xsd:appinfo>
+               <xsd:appinfo>
+                    <sch:pattern id="suse-def_sestatus_tst">
+                         <sch:rule context="linux-def:sestatus_test/linux-def:object">
+                              <sch:assert test="@object_ref = ancestor::oval-def:oval_definitions/oval-def:objects/linux-def:sestatus_object/@id"><sch:value-of select="../@id"/> - the object child element of a sestatus_test must reference a sestatus_object</sch:assert>
+                         </sch:rule>
+                         <sch:rule context="linux-def:sestatus_test/linux-def:state">
+                              <sch:assert test="@state_ref = ancestor::oval-def:oval_definitions/oval-def:states/linux-def:sestatus_state/@id"><sch:value-of select="../@id"/> - the state child element of a sestatustest must reference a sestatus_state</sch:assert>
+                         </sch:rule>
+                    </sch:pattern>
+               </xsd:appinfo>
+          </xsd:annotation>
+          <xsd:complexType>
+               <xsd:complexContent>
+                    <xsd:extension base="oval-def:TestType">
+                         <xsd:sequence>
+                              <xsd:element name="object" type="oval-def:ObjectRefType"/>
+                              <xsd:element name="state" type="oval-def:StateRefType" minOccurs="0" maxOccurs="unbounded"/>
+                         </xsd:sequence>
+                    </xsd:extension>
+               </xsd:complexContent>
+          </xsd:complexType>
+     </xsd:element>
+     <xsd:element name="sestatus_object" substitutionGroup="oval-def:object">
+          <xsd:annotation>
+               <xsd:documentation>The sestatus_object element is used by a sestatus test to define the different information about the current SEStatus polciy. There is actually only one object relating to SEStatus and this is the system as a whole. Therefore, there are no child entities defined. Any OVAL Test written to check SEStatus will reference the same sestatus_object which is basically an empty object element.</xsd:documentation>
+          </xsd:annotation>
+          <xsd:complexType>
+               <xsd:complexContent>
+                    <xsd:extension base="oval-def:ObjectType"/>
+               </xsd:complexContent>
+          </xsd:complexType>
+     </xsd:element>
+     <xsd:element name="sestatus_state" substitutionGroup="oval-def:state">
+          <xsd:annotation>
+               <xsd:documentation>The SEStatus Item displays various information about the current SEStatus policy. This item maps the counts of profiles and processes as per the results of the "sestatus" command. Please refer to the individual elements in the schema for more details about what each represents.</xsd:documentation>
+          </xsd:annotation>
+          <xsd:complexType>
+               <xsd:complexContent>
+                    <xsd:extension base="oval-def:StateType">
+                         <xsd:sequence>
+                              <xsd:element name="selinux_status" type="linux-def:EntityStateSEStatusType" minOccurs="0" maxOccurs="1">
+                                   <xsd:annotation>
+                                        <xsd:documentation>Indicates whether SELinux module itself is enabled or disabled on your system.</xsd:documentation>
+                                   </xsd:annotation>
+                              </xsd:element>
+                              <xsd:element name="current_mode" type="linux-def:EntityStateSEStatusModeType" minOccurs="0" maxOccurs="1">
+                                   <xsd:annotation>
+                                        <xsd:documentation>This indicates whether SELinux is currently enforcing the policies or not utilizing the following values enforcing, permissive, disabled.</xsd:documentation>
+                                   </xsd:annotation>
+                              </xsd:element>
+                              <xsd:element name="mode_from_config_file" type="linux-def:EntityStateSEStatusModeType" minOccurs="0" maxOccurs="1">
+                                   <xsd:annotation>
+                                        <xsd:documentation>Displays the mode from config file. </xsd:documentation>
+                                   </xsd:annotation>
+                              </xsd:element>
+                              <xsd:element name="loaded_policy_name" type="linux-def:EntityStateSEStatusPolicyType" minOccurs="0" maxOccurs="1">
+                                   <xsd:annotation>
+                                        <xsd:documentation>Displays what type of SELinux policy is currently loaded. In pretty much all common situations, you’ll see “targeted” as the SELinux policy, as that is the default policy.</xsd:documentation>
+                                   </xsd:annotation>
+                              </xsd:element>
+                              <xsd:element name="policy_from_config_file" type="linux-def:EntityStateSEStatusPolicyType" minOccurs="0" maxOccurs="1">
+                                   <xsd:annotation>
+                                        <xsd:documentation>Displays what type of SELinux policy is currently loaded. In pretty much all common situations, you’ll see “targeted” as the SELinux policy, as that is the default policy.</xsd:documentation>
+                                   </xsd:annotation>
+                              </xsd:element>
+                         </xsd:sequence>
+                    </xsd:extension>
+               </xsd:complexContent>
+          </xsd:complexType>
+     </xsd:element>
+     <!-- =============================================================================== -->
      <!-- ==========================  SLACKWARE PKG INFO TEST  ========================== -->
      <!-- =============================================================================== -->
      <xsd:element name="slackwarepkginfo_test" substitutionGroup="oval-def:test">
@@ -2852,6 +3063,93 @@
                     <xsd:enumeration value="ETH_P_ARCNET">
                          <xsd:annotation>
                               <xsd:documentation>1A for ArcNet.</xsd:documentation>
+                         </xsd:annotation>
+                    </xsd:enumeration>
+                    <xsd:enumeration value="">
+                         <xsd:annotation>
+                              <xsd:documentation>The empty string value is permitted here to allow for empty elements associated with variable references.</xsd:documentation>
+                         </xsd:annotation>
+                    </xsd:enumeration>
+               </xsd:restriction>
+          </xsd:simpleContent>
+     </xsd:complexType>
+     <xsd:complexType name="EntityStateSEStatusType">
+          <xsd:annotation>
+               <xsd:documentation>
+                    The EntityItemSEStatusType complex type restricts a string value to the set of SEStatus 
+                    values that indicate whether SELinux module itself is enabled or disabled on your system. Keep 
+                    in mind that even though this may say enabled, but SELinux might still be not technically 
+                    enabled (enforced), which is really indicated by the "current_mode" value.
+               </xsd:documentation>
+          </xsd:annotation>
+          <xsd:simpleContent>
+               <xsd:restriction base="oval-def:EntityStateStringType">
+                    <xsd:enumeration value="enabled">
+                         <xsd:annotation>
+                              <xsd:documentation>Indicates SELinux is enabled</xsd:documentation>
+                         </xsd:annotation>
+                    </xsd:enumeration>
+                    <xsd:enumeration value="disabled">
+                         <xsd:annotation>
+                              <xsd:documentation>Indicates SELinux is disabled</xsd:documentation>
+                         </xsd:annotation>
+                    </xsd:enumeration>
+                    <xsd:enumeration value="">
+                         <xsd:annotation>
+                              <xsd:documentation>The empty string value is permitted here to allow for empty elements associated with variable references.</xsd:documentation>
+                         </xsd:annotation>
+                    </xsd:enumeration>
+               </xsd:restriction>
+          </xsd:simpleContent>
+     </xsd:complexType>
+     <xsd:complexType name="EntityStateSEStatusModeType">
+          <xsd:annotation>
+               <xsd:documentation>The EntityItemSEStatusModeType complex type restricts a string value to the set of SEStatus Current Mode values. The empty string is also allowed to support the empty element associated with variable references. Note that when using pattern matches and variables care must be taken to ensure that the regular expression and variable values align with the enumerated values</xsd:documentation>
+          </xsd:annotation>
+          <xsd:simpleContent>
+               <xsd:restriction base="oval-def:EntityStateStringType">
+                    <xsd:enumeration value="enforcing">
+                         <xsd:annotation>
+                              <xsd:documentation>'enforcing' indicates that SELinux security policy is enforced (i.e SELinux is enabled).</xsd:documentation>
+                         </xsd:annotation>
+                    </xsd:enumeration>
+                    <xsd:enumeration value="pemissive">
+                         <xsd:annotation>
+                              <xsd:documentation>'permissive' indicates that SELinux prints warnings instead of enforcing. This is helpful during debugging purpose when you want to know what would SELinux potentially block (without really blocking it) by looking at the SELinux logs</xsd:documentation>
+                         </xsd:annotation>
+                    </xsd:enumeration>
+                    <xsd:enumeration value="disabled">
+                         <xsd:annotation>
+                              <xsd:documentation>'disabled' indicates no SELinux policy is loaded. </xsd:documentation>
+                         </xsd:annotation>
+                    </xsd:enumeration>
+                    <xsd:enumeration value="">
+                         <xsd:annotation>
+                              <xsd:documentation>The empty string value is permitted here to allow for empty elements associated with variable references.</xsd:documentation>
+                         </xsd:annotation>
+                    </xsd:enumeration>
+               </xsd:restriction>
+          </xsd:simpleContent>
+     </xsd:complexType>
+     <xsd:complexType name="EntityStateSEStatusPolicyType">
+          <xsd:annotation>
+               <xsd:documentation>The EntityItemSEStatusPolicyType complex type restricts a string value to the set of SEStatus Loaded Policy Name values. The empty string is also allowed to support the empty element associated with variable references. Note that when using pattern matches and variables care must be taken to ensure that the regular expression and variable values align with the enumerated values</xsd:documentation>
+          </xsd:annotation>
+          <xsd:simpleContent>
+               <xsd:restriction base="oval-def:EntityStateStringType">
+                    <xsd:enumeration value="targeted">
+                         <xsd:annotation>
+                              <xsd:documentation>'targeted' indicates that only targeted processes are protected by SELinux.</xsd:documentation>
+                         </xsd:annotation>
+                    </xsd:enumeration>
+                    <xsd:enumeration value="minimum">
+                         <xsd:annotation>
+                              <xsd:documentation>'minimum' indicates is a slight modification of targeted policy. Only few selected processes are protected in this case.</xsd:documentation>
+                         </xsd:annotation>
+                    </xsd:enumeration>
+                    <xsd:enumeration value="mls">
+                         <xsd:annotation>
+                              <xsd:documentation>'mls' indicates Multi Level Security protection. MLS is pretty complex and pretty much not used in most situations. </xsd:documentation>
                          </xsd:annotation>
                     </xsd:enumeration>
                     <xsd:enumeration value="">
