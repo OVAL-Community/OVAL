@@ -13,8 +13,8 @@
             <xsd:documentation>The OVAL Schema is maintained by the OVAL Community. For more information, including how to get involved in the project and how to submit change requests, please visit the OVAL website at http://oval.cisecurity.org.</xsd:documentation>
             <xsd:appinfo>
                   <schema>MacOS Definition</schema>
-                  <version>5.11.1:1.3</version>
-                  <date>05/24/2019 09:00:00 AM</date>
+                  <version>5.11.1:1.4</version>
+                  <date>04/03/2019 09:00:00 AM</date>
                   <terms_of_use>For the portion subject to the copyright in the United States: Copyright (c) 2016 United States Government. All rights reserved. Copyright (c) 2019, Center for Internet Security. All rights reserved. The contents of this file are subject to the terms of the OVAL License located at https://oval.cisecurity.org/terms. See the OVAL License for the specific language governing permissions and limitations for use of this schema. When distributing copies of the OVAL Schema, this license header must be included.</terms_of_use>
                   <sch:ns prefix="oval-def" uri="http://oval.mitre.org/XMLSchema/oval-definitions-5"/>
                   <sch:ns prefix="macos-def" uri="http://oval.mitre.org/XMLSchema/oval-definitions-5#macos"/>
@@ -942,6 +942,131 @@
                                     <xsd:element name="user_id" type="oval-def:EntityStateIntType" minOccurs="0" maxOccurs="1">
                                           <xsd:annotation>
                                                 <xsd:documentation>The numeric user id, or uid, is the third column of each user's entry in /etc/passwd. It represents the owner, and thus privilege level, of the specified program.</xsd:documentation>
+                                          </xsd:annotation>
+                                    </xsd:element>
+                              </xsd:sequence>
+                        </xsd:extension>
+                  </xsd:complexContent>
+            </xsd:complexType>
+      </xsd:element>
+      <!-- =============================================================================== -->
+      <!-- ============================  INSTALL HISTORY TEST  =========================== -->
+      <!-- =============================================================================== -->
+      <xsd:element name="installhistory_test" substitutionGroup="oval-def:test">
+            <xsd:annotation>
+                  <xsd:documentation>
+                        The installhistory_test is used to inspect the install history (SPInstallHistoryDataType) section of the system_profiler command
+                        output. It extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description
+                        for more information.  The required object element references an installhistory_object and the optional state element references
+                        an installhistory_state that specifies the information to check.
+                  </xsd:documentation>
+                  <xsd:appinfo>
+                        <oval:element_mapping>
+                              <oval:test>installhistory_test</oval:test>
+                              <oval:object>installhistory_object</oval:object>
+                              <oval:state>installhistory_state</oval:state>
+                              <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#macos">installhistory_item</oval:item>
+                        </oval:element_mapping>
+                  </xsd:appinfo>
+                  <xsd:appinfo>
+                        <sch:pattern id="macos-def_installhistorytst">
+                              <sch:rule context="macos-def:installhistory_test/macos-def:object">
+                                    <sch:assert test="@object_ref=ancestor::oval-def:oval_definitions/oval-def:objects/macos-def:installhistory_object/@id"><sch:value-of select="../@id"/> - the object child element of an installhistory_test must reference an installhistory_object</sch:assert>
+                              </sch:rule>
+                              <sch:rule context="macos-def:installhistory_test/macos-def:state">
+                                    <sch:assert test="@state_ref=ancestor::oval-def:oval_definitions/oval-def:states/macos-def:installhistory_state/@id"><sch:value-of select="../@id"/> - the state child element of an installhistory_test must reference an installhistory_state</sch:assert>
+                              </sch:rule>
+                        </sch:pattern>
+                  </xsd:appinfo>
+            </xsd:annotation>
+            <xsd:complexType>
+                  <xsd:complexContent>
+                        <xsd:extension base="oval-def:TestType">
+                              <xsd:sequence>
+                                    <xsd:element name="object" type="oval-def:ObjectRefType" />
+                                    <xsd:element name="state" type="oval-def:StateRefType" minOccurs="0" maxOccurs="unbounded"/>
+                              </xsd:sequence>
+                        </xsd:extension>
+                  </xsd:complexContent>
+            </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="installhistory_object" substitutionGroup="oval-def:object">
+            <xsd:annotation>
+                  <xsd:documentation>
+                        The installhistory_object is used by an installhistory_test to define the scope of software install history on the local system that should be
+                        collected using the "system_profiler SPInstallHistoryDataType" command. Each object extends the standard ObjectType as defined in the
+                        oval-definitions-schema and one should refer to the ObjectType description for more information. The common set element allows complex objects
+                        to be created using filters and set logic. Again, please refer to the description of the set element in the oval-definitions-schema.
+                  </xsd:documentation>
+                  <xsd:appinfo>
+                        <sch:pattern id="macos-def_installhistory_object_verify_filter_state">
+                              <sch:rule context="macos-def:installhistory_object//oval-def:filter">
+                                    <sch:let name="parent_object" value="ancestor::macos-def:installhistory_object"/>
+                                    <sch:let name="parent_object_id" value="$parent_object/@id"/>
+                                    <sch:let name="state_ref" value="."/>
+                                    <sch:let name="reffed_state" value="ancestor::oval-def:oval_definitions/oval-def:states/*[@id=$state_ref]"/>
+                                    <sch:let name="state_name" value="local-name($reffed_state)"/>
+                                    <sch:let name="state_namespace" value="namespace-uri($reffed_state)"/>
+                                    <sch:assert test="(($state_namespace='http://oval.mitre.org/XMLSchema/oval-definitions-5#macos') and ($state_name='installhistory_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
+                              </sch:rule>
+                        </sch:pattern>
+                  </xsd:appinfo>
+            </xsd:annotation>
+            <xsd:complexType>
+                  <xsd:complexContent>
+                        <xsd:extension base="oval-def:ObjectType">
+                              <xsd:sequence>
+                                    <xsd:choice>
+                                          <xsd:element ref="oval-def:set"/>
+                                          <xsd:sequence>
+                                                <xsd:element name="name" type="oval-def:EntityObjectStringType">
+                                                      <xsd:annotation>
+                                                            <xsd:documentation>
+                                                                  The name element specifies the name(s) of the software item which should be collected from the local
+                                                                  system.
+                                                            </xsd:documentation>
+                                                      </xsd:annotation>
+                                                </xsd:element>
+                                                <xsd:element ref="oval-def:filter" minOccurs="0" maxOccurs="unbounded"/>
+                                          </xsd:sequence>
+                                    </xsd:choice>
+                              </xsd:sequence>
+                        </xsd:extension>
+                  </xsd:complexContent>
+            </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="installhistory_state" substitutionGroup="oval-def:state">
+            <xsd:annotation>
+                  <xsd:documentation>The installhistory_state contains entities that are used to check against installed software.</xsd:documentation>
+            </xsd:annotation>
+            <xsd:complexType>
+                  <xsd:complexContent>
+                        <xsd:extension base="oval-def:StateType">
+                              <xsd:sequence>
+                                    <xsd:element name="name" type="oval-def:EntityStateStringType" minOccurs="0" maxOccurs="1">
+                                          <xsd:annotation>
+                                                <xsd:documentation>The name element contains a string that represents the name of a software title that was collected from the local system.</xsd:documentation>
+                                          </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="install_version" type="oval-def:EntityStateVersionType" minOccurs="0" maxOccurs="1">
+                                          <xsd:annotation>
+                                                <xsd:documentation>
+                                                      The install_version element contains the version of an installed software item.
+                                                </xsd:documentation>
+                                          </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="install_date" type="oval-def:EntityStateIntType" minOccurs="0" maxOccurs="1">
+                                          <xsd:annotation>
+                                                <xsd:documentation>
+                                                      The install_date element contains the date that a software item was installed on the system. The value is an integer expressing the number of seconds which have passed since the epoch, midnight GMT Jan 1, 1970.
+                                                </xsd:documentation>
+                                          </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="package_source" type="macos-def:EntityStatePackageSourceType" minOccurs="0" maxOccurs="1">
+                                          <xsd:annotation>
+                                                <xsd:documentation>
+                                                      The package_source element contains the source type of an installed software item.
+                                                </xsd:documentation>
                                           </xsd:annotation>
                                     </xsd:element>
                               </xsd:sequence>
@@ -2878,6 +3003,22 @@
                         <xsd:enumeration value="SPStartupItemDataType"/>
                         <xsd:enumeration value="SPSyncServicesDataType"/>
                         <xsd:enumeration value="SPUniversalAccessDataType"/>
+                        <xsd:enumeration value="SPCameraDataType"/>
+                        <xsd:enumeration value="SPCardReaderDataType"/>
+                        <xsd:enumeration value="SPConfigurationProfileDataType"/>
+                        <xsd:enumeration value="SPDisabledSoftwareDataType"/>
+                        <xsd:enumeration value="SPiBridgeDataType"/>
+                        <xsd:enumeration value="SPInstallHistoryDataType"/>
+                        <xsd:enumeration value="SPInternationalDataType"/>
+                        <xsd:enumeration value="SPLegacySoftwareDataType"/>
+                        <xsd:enumeration value="SPNVMeDataType"/>
+                        <xsd:enumeration value="SPPrintersSoftwareDataType"/>
+                        <xsd:enumeration value="SPRawCameraDataType"/>
+                        <xsd:enumeration value="SPSecureElementDataType"/>
+                        <xsd:enumeration value="SPSmartCardsDataType"/>
+                        <xsd:enumeration value="SPSPIDataType"/>
+                        <xsd:enumeration value="SPStorageDataType"/>
+                        <xsd:enumeration value="SPThunderboltDataType"/>
                         <xsd:enumeration value="">
                               <xsd:annotation>
                                     <xsd:documentation>The empty string value is permitted here to allow for empty elements associated with variable references.</xsd:documentation>
@@ -2930,6 +3071,22 @@
                         <xsd:enumeration value="SPStartupItemDataType"/>
                         <xsd:enumeration value="SPSyncServicesDataType"/>
                         <xsd:enumeration value="SPUniversalAccessDataType"/>
+                        <xsd:enumeration value="SPCameraDataType"/>
+                        <xsd:enumeration value="SPCardReaderDataType"/>
+                        <xsd:enumeration value="SPConfigurationProfileDataType"/>
+                        <xsd:enumeration value="SPDisabledSoftwareDataType"/>
+                        <xsd:enumeration value="SPiBridgeDataType"/>
+                        <xsd:enumeration value="SPInstallHistoryDataType"/>
+                        <xsd:enumeration value="SPInternationalDataType"/>
+                        <xsd:enumeration value="SPLegacySoftwareDataType"/>
+                        <xsd:enumeration value="SPNVMeDataType"/>
+                        <xsd:enumeration value="SPPrintersSoftwareDataType"/>
+                        <xsd:enumeration value="SPRawCameraDataType"/>
+                        <xsd:enumeration value="SPSecureElementDataType"/>
+                        <xsd:enumeration value="SPSmartCardsDataType"/>
+                        <xsd:enumeration value="SPSPIDataType"/>
+                        <xsd:enumeration value="SPStorageDataType"/>
+                        <xsd:enumeration value="SPThunderboltDataType"/>
                         <xsd:enumeration value="">
                               <xsd:annotation>
                                     <xsd:documentation>The empty string value is permitted here to allow for empty elements associated with variable references.</xsd:documentation>
@@ -3018,6 +3175,20 @@
                         <xsd:enumeration value="">
                               <xsd:annotation>
                                     <xsd:documentation>The empty string value is permitted here to allow for empty elements associated with variable references.</xsd:documentation>
+                              </xsd:annotation>
+                        </xsd:enumeration>
+                  </xsd:restriction>
+            </xsd:simpleContent>
+      </xsd:complexType>
+      <xsd:complexType name="EntityStatePackageSourceType">
+            <xsd:simpleContent>
+                  <xsd:restriction base="oval-def:EntityStateStringType">
+                        <xsd:enumeration value="Apple"/>
+                        <xsd:enumeration value="AppStore"/>
+                        <xsd:enumeration value="ThirdParty"/>
+                        <xsd:enumeration value="">
+                              <xsd:annotation>
+                                    <xsd:documentation>The empty string value is permitted here to allow for detailed error reporting.</xsd:documentation>
                               </xsd:annotation>
                         </xsd:enumeration>
                   </xsd:restriction>

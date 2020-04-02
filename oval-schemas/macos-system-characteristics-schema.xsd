@@ -13,8 +13,8 @@
           <xsd:documentation>The OVAL Schema is maintained by the OVAL Community. For more information, including how to get involved in the project and how to submit change requests, please visit the OVAL website at http://oval.cisecurity.org.</xsd:documentation>
           <xsd:appinfo>
                <schema>MacOS System Characteristics</schema>
-               <version>5.11.1:1.2</version>
-               <date>11/30/2016 09:00:00 AM</date>
+               <version>5.11.1:1.4</version>
+               <date>04/03/2020 09:00:00 AM</date>
                 <terms_of_use>For the portion subject to the copyright in the United States: Copyright (c) 2016 United States Government. All rights reserved. Copyright (c) 2016, Center for Internet Security. All rights reserved. The contents of this file are subject to the terms of the OVAL License located at https://oval.cisecurity.org/terms. See the OVAL License for the specific language governing permissions and limitations for use of this schema. When distributing copies of the OVAL Schema, this license header must be included.</terms_of_use>
                <sch:ns prefix="oval-sc" uri="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5"/>
                <sch:ns prefix="macos-sc" uri="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#macos"/>
@@ -412,6 +412,55 @@
                               <xsd:element name="user_id" type="oval-sc:EntityItemIntType" minOccurs="0" maxOccurs="1">
                                    <xsd:annotation>
                                         <xsd:documentation>The numeric user id, or uid, is the third column of each user's entry in /etc/passwd. It represents the owner, and thus privilege level, of the specified program.</xsd:documentation>
+                                   </xsd:annotation>
+                              </xsd:element>
+                         </xsd:sequence>
+                    </xsd:extension>
+               </xsd:complexContent>
+          </xsd:complexType>
+     </xsd:element>
+     <!-- =============================================================================== -->
+     <!-- ==========================  INSTALL HISTORY ITEM  ============================= -->
+     <!-- =============================================================================== -->
+     <xsd:element name="installhistory_item" substitutionGroup="oval-sc:item">
+          <xsd:annotation>
+               <xsd:documentation>
+                    The installhistory_item stores information retrieved from the system_profiler about installed software on the device.
+                    Information is collected from the target endpoint using the "system_profiler SPInstallHistoryDataType" command
+                    and output values are parsed from the XML output.
+               </xsd:documentation>
+          </xsd:annotation>
+          <xsd:complexType>
+               <xsd:complexContent>
+                    <xsd:extension base="oval-sc:ItemType">
+                         <xsd:sequence>
+                              <xsd:element name="name" type="oval-sc:EntityItemStringType" minOccurs="0" maxOccurs="1">
+                                   <xsd:annotation>
+                                        <xsd:documentation>
+                                             The name element contains the name of the software history entry represented by the item.
+                                        </xsd:documentation>
+                                   </xsd:annotation>
+                              </xsd:element>
+                              <xsd:element name="install_version" type="oval-sc:EntityItemVersionType" minOccurs="0" maxOccurs="1">
+                                   <xsd:annotation>
+                                        <xsd:documentation>
+                                             The install_version element contains the version of the installed software item.
+                                        </xsd:documentation>
+                                   </xsd:annotation>
+                              </xsd:element>
+                              <xsd:element name="install_date" type="oval-sc:EntityItemIntType" minOccurs="0" maxOccurs="1">
+                                   <xsd:annotation>
+                                        <xsd:documentation>
+                                             The install_date element contains the date that the software item was installed on the system. The value is an
+                                             integer expressing the number of seconds which have passed since the epoch, midnight GMT Jan 1, 1970.
+                                        </xsd:documentation>
+                                   </xsd:annotation>
+                              </xsd:element>
+                              <xsd:element name="package_source" type="macos-sc:EntityItemPackageSourceType" minOccurs="0" maxOccurs="1">
+                                   <xsd:annotation>
+                                        <xsd:documentation>
+                                             The package_source element contains the source of the installed software item.
+                                        </xsd:documentation>
                                    </xsd:annotation>
                               </xsd:element>
                          </xsd:sequence>
@@ -1183,6 +1232,22 @@
                     <xsd:enumeration value="SPStartupItemDataType"/>
                     <xsd:enumeration value="SPSyncServicesDataType"/>
                     <xsd:enumeration value="SPUniversalAccessDataType"/>
+                    <xsd:enumeration value="SPCameraDataType"/>
+                    <xsd:enumeration value="SPCardReaderDataType"/>
+                    <xsd:enumeration value="SPConfigurationProfileDataType"/>
+                    <xsd:enumeration value="SPDisabledSoftwareDataType"/>
+                    <xsd:enumeration value="SPiBridgeDataType"/>
+                    <xsd:enumeration value="SPInstallHistoryDataType"/>
+                    <xsd:enumeration value="SPInternationalDataType"/>
+                    <xsd:enumeration value="SPLegacySoftwareDataType"/>
+                    <xsd:enumeration value="SPNVMeDataType"/>
+                    <xsd:enumeration value="SPPrintersSoftwareDataType"/>
+                    <xsd:enumeration value="SPRawCameraDataType"/>
+                    <xsd:enumeration value="SPSecureElementDataType"/>
+                    <xsd:enumeration value="SPSmartCardsDataType"/>
+                    <xsd:enumeration value="SPSPIDataType"/>
+                    <xsd:enumeration value="SPStorageDataType"/>
+                    <xsd:enumeration value="SPThunderboltDataType"/>
                     <xsd:enumeration value="">
                          <xsd:annotation>
                               <xsd:documentation>The empty string value is permitted here to allow for detailed error reporting.</xsd:documentation>
@@ -1268,6 +1333,20 @@
                               <xsd:documentation>The CFDictionary type is used to describe a preference key that has a collection of key-value pairs. Note that the collection of CFDictionary values is not supported. If an attempt is made to collect a CFDictionary value, an error should be reported.</xsd:documentation>
                          </xsd:annotation>
                     </xsd:enumeration>
+                    <xsd:enumeration value="">
+                         <xsd:annotation>
+                              <xsd:documentation>The empty string value is permitted here to allow for detailed error reporting.</xsd:documentation>
+                         </xsd:annotation>
+                    </xsd:enumeration>
+               </xsd:restriction>
+          </xsd:simpleContent>
+     </xsd:complexType>
+     <xsd:complexType name="EntityItemPackageSourceType">
+          <xsd:simpleContent>
+               <xsd:restriction base="oval-sc:EntityItemStringType">
+                    <xsd:enumeration value="Apple"/>
+                    <xsd:enumeration value="AppStore"/>
+                    <xsd:enumeration value="ThirdParty"/>
                     <xsd:enumeration value="">
                          <xsd:annotation>
                               <xsd:documentation>The empty string value is permitted here to allow for detailed error reporting.</xsd:documentation>
