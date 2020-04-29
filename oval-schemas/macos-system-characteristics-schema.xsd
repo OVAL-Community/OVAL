@@ -444,7 +444,8 @@
                               <xsd:element name="install_version" type="oval-sc:EntityItemVersionType" minOccurs="0" maxOccurs="1">
                                    <xsd:annotation>
                                         <xsd:documentation>
-                                             The install_version element contains the version of the installed software item.
+                                             The install_version element contains the version of the installed software item. When this entry is blank or
+                                             made up of only white-space, the status of the entity should be "does not exist".
                                         </xsd:documentation>
                                    </xsd:annotation>
                               </xsd:element>
