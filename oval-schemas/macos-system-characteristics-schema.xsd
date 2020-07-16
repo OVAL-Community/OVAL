@@ -872,6 +872,38 @@
           </xsd:complexType>
      </xsd:element>
      <!-- =============================================================================== -->
+     <!-- =============================  PROFILES ITEM  ================================= -->
+     <!-- =============================================================================== -->
+     <xsd:element name="profiles_item" substitutionGroup="oval-sc:item">
+          <xsd:annotation>
+               <xsd:documentation>
+                    The profiles_item stores information about the status of device configuration profiles on the machine.
+               </xsd:documentation>
+          </xsd:annotation>
+          <xsd:complexType>
+               <xsd:complexContent>
+                    <xsd:extension base="oval-sc:ItemType">
+                         <xsd:sequence>
+                              <xsd:element name="mdm_enrolled" type="oval-sc:EntityItemBoolType" minOccurs="0" maxOccurs="1">
+                                   <xsd:annotation>
+                                        <xsd:documentation>
+                                             The status element describes whether the device is enrolled in MDM.
+                                        </xsd:documentation>
+                                   </xsd:annotation>
+                              </xsd:element>
+                              <xsd:element name="dep_enrolled" type="oval-sc:EntityItemBoolType" minOccurs="0" maxOccurs="1">
+                                   <xsd:annotation>
+                                        <xsd:documentation>
+                                             The status element describes whether the device is enrolled in MDM via DEP.
+                                        </xsd:documentation>
+                                   </xsd:annotation>
+                              </xsd:element>
+                         </xsd:sequence>
+                    </xsd:extension>
+               </xsd:complexContent>
+          </xsd:complexType>
+     </xsd:element>
+     <!-- =============================================================================== -->
      <!-- ===============================  PWPOLICY ITEM  =============================== -->
      <!-- =============================================================================== -->
      <xsd:element name="pwpolicy_item" substitutionGroup="oval-sc:item">

@@ -2453,6 +2453,92 @@ i     <!-- =====================================================================
             </xsd:complexType>
       </xsd:element>
       <!-- =============================================================================== -->
+      <!-- ===============================  PROFILES TEST  =============================== -->
+      <!-- =============================================================================== -->
+      <xsd:element name="profiles_test" substitutionGroup="oval-def:test">
+            <xsd:annotation>
+                  <xsd:documentation>
+                        The profiles_test is used to test aspects of the device configuration profiles installed on the device.  It extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information.  The required object element references an profiles_object and the optional state element references an profiles_state that specifies the information to check.
+                  </xsd:documentation>
+                  <xsd:appinfo>
+                        <oval:element_mapping>
+                              <oval:test>profiles_test</oval:test>
+                              <oval:object>profiles_object</oval:object>
+                              <oval:state>profiles_state</oval:state>
+                              <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#macos">profiles_item</oval:item>
+                        </oval:element_mapping>
+                  </xsd:appinfo>
+                  <xsd:appinfo>
+                        <sch:pattern id="macos-def_profilestst">
+                              <sch:rule context="macos-def:profiles_test/macos-def:object">
+                                    <sch:assert test="@object_ref=ancestor::oval-def:oval_definitions/oval-def:objects/macos-def:profiles_object/@id"><sch:value-of select="../@id"/> - the object child element of an profiles_test must reference an profiles_object</sch:assert>
+                              </sch:rule>
+                              <sch:rule context="macos-def:profiles_test/macos-def:state">
+                                    <sch:assert test="@state_ref=ancestor::oval-def:oval_definitions/oval-def:states/macos-def:profiles_state/@id"><sch:value-of select="../@id"/> - the state child element of an profiles_test must reference an profiles_state</sch:assert>
+                              </sch:rule>
+                        </sch:pattern>
+                  </xsd:appinfo>
+            </xsd:annotation>
+            <xsd:complexType>
+                  <xsd:complexContent>
+                        <xsd:extension base="oval-def:TestType">
+                              <xsd:sequence>
+                                    <xsd:element name="object" type="oval-def:ObjectRefType" />
+                                    <xsd:element name="state" type="oval-def:StateRefType" minOccurs="0" maxOccurs="unbounded"/>
+                              </xsd:sequence>
+                        </xsd:extension>
+                  </xsd:complexContent>
+            </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="profiles_object" substitutionGroup="oval-def:object">
+            <xsd:annotation>
+                  <xsd:documentation>
+                        The profiles_object is used by a profiles_test to query the status of the 'profiles status -type enrollment' command. It is a singleton object.
+                  </xsd:documentation>
+                  <xsd:appinfo>
+                        <sch:pattern id="macos-def_profiles_object_verify_filter_state">
+                              <sch:rule context="macos-def:profiles_object//oval-def:filter">
+                                    <sch:let name="parent_object" value="ancestor::macos-def:profiles_object"/>
+                                    <sch:let name="parent_object_id" value="$parent_object/@id"/>
+                                    <sch:let name="state_ref" value="."/>
+                                    <sch:let name="reffed_state" value="ancestor::oval-def:oval_definitions/oval-def:states/*[@id=$state_ref]"/>
+                                    <sch:let name="state_name" value="local-name($reffed_state)"/>
+                                    <sch:let name="state_namespace" value="namespace-uri($reffed_state)"/>
+                                    <sch:assert test="(($state_namespace='http://oval.mitre.org/XMLSchema/oval-definitions-5#macos') and ($state_name='profiles_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
+                              </sch:rule>
+                        </sch:pattern>
+                  </xsd:appinfo>
+            </xsd:annotation>
+            <xsd:complexType>
+                  <xsd:complexContent>
+                        <xsd:extension base="oval-def:ObjectType"></xsd:extension>
+                  </xsd:complexContent>
+            </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="profiles_state" substitutionGroup="oval-def:state">
+            <xsd:annotation>
+                  <xsd:documentation>The profiles_state is used to check the MDM enrollment status.</xsd:documentation>
+            </xsd:annotation>
+            <xsd:complexType>
+                  <xsd:complexContent>
+                        <xsd:extension base="oval-def:StateType">
+                              <xsd:sequence>
+                                    <xsd:element name="mdm_enrolled" type="oval-def:EntityStateBoolType" minOccurs="0" maxOccurs="1">
+                                          <xsd:annotation>
+                                                <xsd:documentation>The status element describes whether the device is enrolled in MDM.</xsd:documentation>
+                                          </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="dep_enrolled" type="oval-def:EntityStateBoolType" minOccurs="0" maxOccurs="1">
+                                          <xsd:annotation>
+                                                <xsd:documentation>The status element describes whether the device is enrolled in MDM via DEP.</xsd:documentation>
+                                          </xsd:annotation>
+                                    </xsd:element>
+                              </xsd:sequence>
+                        </xsd:extension>
+                  </xsd:complexContent>
+            </xsd:complexType>
+      </xsd:element>
+      <!-- =============================================================================== -->
       <!-- ===============================  PWPOLICY TEST  =============================== -->
       <!-- =============================================================================== -->
       <xsd:element name="pwpolicy_test" substitutionGroup="oval-def:test">
