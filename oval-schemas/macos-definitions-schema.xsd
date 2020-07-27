@@ -3587,7 +3587,7 @@ i     <!-- =====================================================================
                                                 <xsd:documentation>Specifies whether the power button can be used to cause the computer to sleep.</xsd:documentation>
                                           </xsd:annotation>
                                     </xsd:element>
-                                    <xsd:element name="restartpowerfailure" type="oval-def:EntityStateBoolType" minOccurs="1" maxOccurs="1">
+                                    <xsd:element name="restartpowerfailure" type="oval-def:EntityStateBoolType" minOccurs="0" maxOccurs="1">
                                           <xsd:annotation>
                                                 <xsd:documentation>Specifies whether the computer will restart after a power failure.</xsd:documentation>
                                           </xsd:annotation>
