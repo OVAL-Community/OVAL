@@ -20,24 +20,17 @@ Current Members
 
 * Organizational
 
-  * `Assuria Limited <https://www.assuria-online.com/>`_ - Chris Wood
-  * `BeyondTrust, Inc. <https://www.beyondtrust.com/>`_ - Morey Haber
   * `Center for Internet Security <https://www.cisecurity.org>`_ - William Munyan, Adam Montville
-  * `Cisco Systems, Inc. <https://www.cisco.com/>`_ - Panos Kampanakis, Omar Santos
+  * `Cisco Systems, Inc. <https://www.cisco.com/>`_ - Omar Santos
   * `Depository Trust & Clearing Corporation (DTCC) <https://www.dtcc.com/>`_ - Dale Rich
-  * `HPE <https://www.hp.com/country/us/en/uc/welcome.html>`_ - TBD
-  * `IBM <https://www.ibm.com/>`_ - Luigi Pichetti
   * `Joval Continuous Monitoring <https://joval.org/>`_ - David Solin, David Ries
   * `McAfee <https://www.mcafee.com/>`_ - Kent Landfield
   * `Modulo <https://www.modulo.com/>`_ - Alberto Bastos
   * `National Institute of Standards and Technology <https://www.nist.gov/>`_ - Melanie Cook, Dave Waltermire
   * `Qualys, Inc. <https://www.qualys.com/>`_ - Tigran Gevorgyan
   * `Red Hat, Inc. <https://www.redhat.com/>`_ - Šimon Lukašík, Matej Tyc
-  * `Rockport Systems <https://www.rockportsystems.com/>`_ - Carl Banzhof
   * `SecPod Technologies <https://www.secpod.com/>`_ - Chandrashekhar B
   * `SPAWAR, U.S. Navy <https://www.spawar.navy.mil/>`_ - Jack Vander Pol
-  * `Symantec Corporation <https://www.symantec.com/>`_ - Jamie Cromer, Amaresh Shirsat
-  * `ThreatGuard, Inc. <https://www.threatguard.com/>`_ - Randy Taylor
   * `Unified Compliance <https://www.unifiedcompliance.com/>`_ - Stephen Pillero
   * `VMware <https://www.vmware.com/>`_ - Dennis Moreau
 
@@ -51,30 +44,39 @@ Past Members
 
 * Emeritus
 
-  * Jay Beale
   * Anton Chuvakin
-  * Mark Cox
   * Javier Fernandez-Sanguino
-  * Robert Hollis
+  * Jay Beale
+  * Mark Cox
   * Matt Hansbury
+  * Robert Hollis
   * Tim "TK" Keanini
+  
 
 * Former
 
-  * Melissa Albanese
-  * Anthony Busciglio
-  * Nick Connor
-  * Pat Fetty
-  * Jay Graver
-  * Gary Miliefsky
-  * Stephen Quinn
-  * Noah Salzman
   * Amol Sarwate
-  * Michael Tan
+  * Anthony Busciglio
+  * Carl Banzhof
+  * Chris Wood
   * Eric Walker
+  * Gary Miliefsky
+  * Jamie Cromer
+  * Jay Graver
   * Kurt Seifried
+  * Luigi Pichetti
   * Martin Preisler
+  * Melissa Albanese
+  * Michael Tan
+  * Morey Haber
+  * Nick Connor
+  * Noah Salzman
+  * Panos Kampanakis
+  * Pat Fetty
+  * Randy Taylor
   * Rosario Gangemi
+  * Stephen Quinn
+
 
 Responsibilities
 ----------------
@@ -153,7 +155,7 @@ The OVAL Leadership Board will be required to vote on the following matters.
 * Approval of an official OVAL release
 * Approval of new OVAL Leadership Board members
 
-Lastly, a vote may be requested for any other issue deemed necessary by the OVAL Leadership Board or the Sponsor. 
+Lastly, a vote may be requested for any other issue deemed necessary by the OVAL Leadership Board or the Sponsor.
 Each request will be considered on a case-by-case by the Sponsor to see if it is within the Board's responsibilities as described herein. If a request falls within one of these areas, the request will be processed and a vote will be announced. To request a vote, a member can either publicly send a message to the Board mailing list or privately send a message to the Sponsor.
 
 Who May Vote?
