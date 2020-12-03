@@ -30,7 +30,7 @@ Current Members
   * `Qualys, Inc. <https://www.qualys.com/>`_ - Tigran Gevorgyan
   * `Red Hat, Inc. <https://www.redhat.com/>`_ - Šimon Lukašík, Matej Tyc
   * `SecPod Technologies <https://www.secpod.com/>`_ - Chandrashekhar B
-  * `SPAWAR, U.S. Navy <https://www.spawar.navy.mil/>`_ - Jack Vander Pol
+  * `NAVWARSYSCOM, U.S. Navy <https://www.spawar.navy.mil/>`_ - Jack Vander Pol
   * `Unified Compliance <https://www.unifiedcompliance.com/>`_ - Stephen Pillero
   * `VMware <https://www.vmware.com/>`_ - Dennis Moreau
 
@@ -51,7 +51,7 @@ Past Members
   * Matt Hansbury
   * Robert Hollis
   * Tim "TK" Keanini
-  
+
 
 * Former
 
