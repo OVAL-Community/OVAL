@@ -26,8 +26,8 @@ Current Members
   * `Joval Continuous Monitoring <https://joval.org/>`_ - David Solin, David Ries
   * `McAfee <https://www.mcafee.com/>`_ - Kent Landfield
   * `Modulo <https://www.modulo.com/>`_ - Alberto Bastos
-  * `National Institute of Standards and Technology <https://www.nist.gov/>`_ - Melanie Cook, Dave Waltermire
-  * `Qualys, Inc. <https://www.qualys.com/>`_ - Tigran Gevorgyan
+  * `National Institute of Standards and Technology <https://www.nist.gov/>`_ - Stephen Banghart
+  * `Qualys, Inc. <https://www.qualys.com/>`_ - Hariom Singh
   * `Red Hat, Inc. <https://www.redhat.com/>`_ - Šimon Lukašík, Matej Tyc
   * `SecPod Technologies <https://www.secpod.com/>`_ - Chandrashekhar B
   * `NAVWARSYSCOM, U.S. Navy <https://www.spawar.navy.mil/>`_ - Jack Vander Pol
