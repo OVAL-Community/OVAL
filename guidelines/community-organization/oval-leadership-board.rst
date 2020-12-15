@@ -23,6 +23,7 @@ Current Members
   * `Center for Internet Security <https://www.cisecurity.org>`_ - William Munyan, Adam Montville
   * `Cisco Systems, Inc. <https://www.cisco.com/>`_ - Omar Santos
   * `Depository Trust & Clearing Corporation (DTCC) <https://www.dtcc.com/>`_ - Dale Rich
+  * `HCL Group <https://hcl.com/>`_ - Rosario Gangemi
   * `Joval Continuous Monitoring <https://joval.org/>`_ - David Solin, David Ries
   * `McAfee <https://www.mcafee.com/>`_ - Kent Landfield
   * `Modulo <https://www.modulo.com/>`_ - Alberto Bastos
@@ -74,7 +75,6 @@ Past Members
   * Panos Kampanakis
   * Pat Fetty
   * Randy Taylor
-  * Rosario Gangemi
   * Stephen Quinn
 
 
