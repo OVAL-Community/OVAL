@@ -3974,6 +3974,11 @@
           </xsd:annotation>
           <xsd:simpleContent>
                <xsd:restriction base="oval-sc:EntityItemStringType">
+                    <xsd:enumeration value="FILE_ATTRIBUTE_DIRECTORY">
+                         <xsd:annotation>
+                              <xsd:documentation>The handle identifies a directory.</xsd:documentation>
+                         </xsd:annotation>
+                    </xsd:enumeration>
                     <xsd:enumeration value="FILE_TYPE_CHAR">
                          <xsd:annotation>
                               <xsd:documentation>The specified file is a character file, typically an LPT device or a console.</xsd:documentation>
