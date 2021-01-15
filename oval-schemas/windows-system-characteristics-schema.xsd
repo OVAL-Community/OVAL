@@ -4054,6 +4054,20 @@
                     <xsd:enumeration value="FILE_ATTRIBUTE_DIRECTORY">
                          <xsd:annotation>
                               <xsd:documentation>The handle identifies a directory.</xsd:documentation>
+							  <xsd:appinfo>
+								  <oval:deprecated_info>
+										<oval:version>5.11.1:1.2</oval:version>
+										<oval:reason>In version 5.11.1:1.2 of the OVAL Language windows schema, FILE_ATTRIBUTE_DIRECTORY was added to EntityItemFileAttributeType.</oval:reason>
+										<oval:comment>This value has been deprecated and will be removed in version 6.0 of the language.</oval:comment>
+								  </oval:deprecated_info>
+								  <sch:pattern id="win-sc_file_attribute_directory_value_dep">
+										<sch:rule context="oval-sc:oval_system_characteristics/oval-sc:system_data/win-sc:file_item/win-sc:filetype">
+											<sch:report test=".='FILE_ATTRIBUTE_DIRECTORY'">
+                                                       DEPRECATED ELEMENT VALUE IN: file_item ELEMENT VALUE: <sch:value-of select="."/>
+                                            </sch:report>
+										</sch:rule>
+								  </sch:pattern>
+							  </xsd:appinfo>
                          </xsd:annotation>
                     </xsd:enumeration>
                     <xsd:enumeration value="FILE_TYPE_CHAR">
