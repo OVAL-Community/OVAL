@@ -8385,6 +8385,248 @@
                   </xsd:complexContent>
             </xsd:complexType>
       </xsd:element>
+	  <!-- =============================================================================== -->
+      <!-- =============================  APPCMD TEST  =============================== -->
+      <!-- =============================================================================== -->
+      <xsd:element name="appcmd_test" substitutionGroup="oval-def:test">
+            <xsd:annotation>
+                    <xsd:documentation>The appcmd_test is one of two tests used to gather Microsoft Internet Information Server (IIS) configuration settings. It is used to gather Apppool, Site, and VDir settings. The second of the two tests is appcmdlistconfig_test which is used to gather Webserver, Site, and VDir settings. Note Webserver and Application Pool (Apppool) data gathering are limited to one of the two tests respectively. Whereas certain website (Site) and virtual directory (VDir) data gathering are found in both or either test. In test content development certain data gathering attempts for Site or VDir could only be done utilizing one test or the other.  Meaning to be able capture larger sets of Site or VDir data both tests may be needed to gather all data.</xsd:documentation>
+					<xsd:appinfo>
+                        <oval:element_mapping>
+                              <oval:test>appcmd_test</oval:test>
+                              <oval:object>appcmd_object</oval:object>
+                              <oval:state>appcmd_state</oval:state>
+                              <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#windows">appcmd_item</oval:item>
+                        </oval:element_mapping>
+                  </xsd:appinfo>
+                  <xsd:appinfo>
+                        <sch:pattern id="win-def_appcmdtst">
+                              <sch:rule context="win-def:appcmd_test/win-def:object">
+                                    <sch:assert test="@object_ref=ancestor::oval-def:oval_definitions/oval-def:objects/win-def:appcmd_object/@id"><sch:value-of select="../@id"/> - the object child element of a appcmd_test must reference a appcmd_object</sch:assert>
+                              </sch:rule>
+                              <sch:rule context="win-def:appcmd_test/win-def:state">
+                                    <sch:assert test="@state_ref=ancestor::oval-def:oval_definitions/oval-def:states/win-def:appcmd_state/@id"><sch:value-of select="../@id"/> - the state child element of a appcmd_test must reference a appcmd_state</sch:assert>
+                              </sch:rule>
+                        </sch:pattern>
+                  </xsd:appinfo>
+            </xsd:annotation>
+            <xsd:complexType>
+                  <xsd:complexContent>
+                        <xsd:extension base="oval-def:TestType">
+                              <xsd:sequence>
+                                    <xsd:element name="object" type="oval-def:ObjectRefType"/>
+                                    <xsd:element name="state" type="oval-def:StateRefType" minOccurs="0" maxOccurs="unbounded"/>
+                              </xsd:sequence>
+                        </xsd:extension>
+                  </xsd:complexContent>
+            </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="appcmd_object" substitutionGroup="oval-def:object">
+            <xsd:annotation>
+                  <xsd:documentation>The appcmd_object is used to gather Apppool, Site, and VDir IIS settings.</xsd:documentation>
+                  <xsd:appinfo>
+                        <sch:pattern id="win-def_appcmd_object_verify_filter_state">
+                              <sch:rule context="win-def:appcmd_object//oval-def:filter">
+                                    <sch:let name="parent_object" value="ancestor::win-def:appcmd_object"/>
+                                    <sch:let name="parent_object_id" value="$parent_object/@id"/>
+                                    <sch:let name="state_ref" value="."/>
+                                    <sch:let name="reffed_state" value="ancestor::oval-def:oval_definitions/oval-def:states/*[@id=$state_ref]"/>
+                                    <sch:let name="state_name" value="local-name($reffed_state)"/>
+                                    <sch:let name="state_namespace" value="namespace-uri($reffed_state)"/>
+                                    <sch:assert test="(($state_namespace='http://oval.mitre.org/XMLSchema/oval-definitions-5#windows') and ($state_name='appcmd_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
+                              </sch:rule>
+                        </sch:pattern>
+                  </xsd:appinfo>
+            </xsd:annotation>
+            <xsd:complexType>
+                  <xsd:complexContent>
+                        <xsd:extension base="oval-def:ObjectType">
+                              <xsd:sequence>
+                                    <xsd:choice>
+                                          <xsd:element ref="oval-def:set"/>
+                                          <xsd:sequence>
+                                              <xsd:element name="identifier_type" type="win-def:EntityObjectAppCmdIdentifierType" minOccurs="1" maxOccurs="1">
+                                                      <xsd:annotation>
+                                                            <xsd:documentation>The identifier_type defines the identifier type (Apppool, Site, or VDir).</xsd:documentation>
+                                                      </xsd:annotation>
+                                                </xsd:element>
+												<xsd:element name="identifier" type="oval-def:EntityObjectStringType" minOccurs="1" maxOccurs="1">
+                                                      <xsd:annotation>
+                                                            <xsd:documentation>The identifier defines information about the location of the found result (apppool name, vdir name or site name).</xsd:documentation>
+                                                      </xsd:annotation>
+                                                </xsd:element>
+												<xsd:element name="parameter" type="oval-def:EntityObjectStringType" minOccurs="1" maxOccurs="1">
+                                                      <xsd:annotation>
+                                                            <xsd:documentation>The parameter value defines the location of the setting.</xsd:documentation>
+                                                      </xsd:annotation>
+                                                </xsd:element>
+                                                <xsd:element ref="oval-def:filter" minOccurs="0" maxOccurs="unbounded"/>
+                                          </xsd:sequence>
+                                    </xsd:choice>
+                              </xsd:sequence>
+                        </xsd:extension>
+                  </xsd:complexContent>
+            </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="appcmd_state" substitutionGroup="oval-def:state">
+            <xsd:complexType>
+                  <xsd:annotation>
+                        <xsd:documentation>The appcmd_state is used to gather Apppool, Site, and VDir IIS settings.</xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:complexContent>
+                        <xsd:extension base="oval-def:StateType">
+                              <xsd:sequence>
+                                    <xsd:element name="identifier_type" type="win-def:EntityStateAppCmdIdentifierType" minOccurs="0" maxOccurs="1">
+										  <xsd:annotation>
+												<xsd:documentation>The identifier_type defines the identifier type (Apppool, Site, or VDir).</xsd:documentation>
+										  </xsd:annotation>
+									</xsd:element>
+                                    <xsd:element name="identifier" type="oval-def:EntityStateStringType" minOccurs="0" maxOccurs="1">
+                                          <xsd:annotation>
+                                                <xsd:documentation>The identifier defines information about the location of the found result (such as apppool name or site name).</xsd:documentation>
+                                          </xsd:annotation>
+                                    </xsd:element>
+									<xsd:element name="parameter" type="oval-def:EntityStateStringType" minOccurs="0" maxOccurs="1">
+                                          <xsd:annotation>
+                                                <xsd:documentation>The parameter value defines the location of the setting.</xsd:documentation>
+                                          </xsd:annotation>
+                                    </xsd:element>
+									<xsd:element name="result" type="oval-def:EntityStateStringType" minOccurs="0" maxOccurs="1">
+                                          <xsd:annotation>
+                                                <xsd:documentation>The value of the collected setting.</xsd:documentation>
+                                          </xsd:annotation>
+                                    </xsd:element>
+                              </xsd:sequence>
+                        </xsd:extension>
+                  </xsd:complexContent>
+            </xsd:complexType>
+      </xsd:element>
+      <!-- =============================================================================== -->
+      <!-- =============================  APPCMDLISTCONFIG TEST  =============================== -->
+      <!-- =============================================================================== -->
+      <xsd:element name="appcmdlistconfig_test" substitutionGroup="oval-def:test">
+            <xsd:annotation>
+                  <xsd:documentation>The appcmdlistconfig_test is one of two tests used to gather Microsoft Internet Information Server (IIS) configuration settings. It is used to gather Webserver, Site, and VDir settings. The second of the two tests is appcmd_test which is used to gather Apppool, Site, and VDir settings. Note Webserver and Application Pool (Apppool) data gathering are limited to one of the two tests respectively. Whereas certain website (Site) and virtual directory (VDir) data gathering are found in both or either test. In test content development certain data gathering attempts for Site or VDir could only be done utilizing one test or the other.  Meaning to be able capture larger sets of Site or VDir data both tests may be needed to gather all data.</xsd:documentation>
+                  <xsd:appinfo>
+                        <oval:element_mapping>
+                              <oval:test>appcmdlistconfig_test</oval:test>
+                              <oval:object>appcmdlistconfig_object</oval:object>
+                              <oval:state>appcmdlistconfig_state</oval:state>
+                              <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#windows">appcmdlistconfig_item</oval:item>
+                        </oval:element_mapping>
+                  </xsd:appinfo>
+                  <xsd:appinfo>
+                        <sch:pattern id="win-def_appcmdlistconfigtst">
+                              <sch:rule context="win-def:appcmdlistconfig_test/win-def:object">
+                                    <sch:assert test="@object_ref=ancestor::oval-def:oval_definitions/oval-def:objects/win-def:appcmdlistconfig_object/@id"><sch:value-of select="../@id"/> - the object child element of a appcmdlistconfig_test must reference a appcmdlistconfig_object</sch:assert>
+                              </sch:rule>
+                              <sch:rule context="win-def:appcmdlistconfig_test/win-def:state">
+                                    <sch:assert test="@state_ref=ancestor::oval-def:oval_definitions/oval-def:states/win-def:appcmdlistconfig_state/@id"><sch:value-of select="../@id"/> - the state child element of a appcmdlistconfig_test must reference a appcmdlistconfig_state</sch:assert>
+                              </sch:rule>
+                        </sch:pattern>
+                  </xsd:appinfo>
+            </xsd:annotation>
+            <xsd:complexType>
+                  <xsd:complexContent>
+                        <xsd:extension base="oval-def:TestType">
+                              <xsd:sequence>
+                                    <xsd:element name="object" type="oval-def:ObjectRefType"/>
+                                    <xsd:element name="state" type="oval-def:StateRefType" minOccurs="0" maxOccurs="unbounded"/>
+                              </xsd:sequence>
+                        </xsd:extension>
+                  </xsd:complexContent>
+            </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="appcmdlistconfig_object" substitutionGroup="oval-def:object">
+            <xsd:annotation>
+                  <xsd:documentation>The appcmdlistconfig_object is used to gather Webserver, Site, and VDir IIS settings.</xsd:documentation>
+                  <xsd:appinfo>
+                        <sch:pattern id="win-def_appcmdlistconfig_object_verify_filter_state">
+                              <sch:rule context="win-def:appcmdlistconfig_object//oval-def:filter">
+                                    <sch:let name="parent_object" value="ancestor::win-def:appcmdlistconfig_object"/>
+                                    <sch:let name="parent_object_id" value="$parent_object/@id"/>
+                                    <sch:let name="state_ref" value="."/>
+                                    <sch:let name="reffed_state" value="ancestor::oval-def:oval_definitions/oval-def:states/*[@id=$state_ref]"/>
+                                    <sch:let name="state_name" value="local-name($reffed_state)"/>
+                                    <sch:let name="state_namespace" value="namespace-uri($reffed_state)"/>
+                                    <sch:assert test="(($state_namespace='http://oval.mitre.org/XMLSchema/oval-definitions-5#windows') and ($state_name='appcmdlistconfig_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
+                              </sch:rule>
+                        </sch:pattern>
+                  </xsd:appinfo>
+            </xsd:annotation>
+            <xsd:complexType>
+                  <xsd:complexContent>
+                        <xsd:extension base="oval-def:ObjectType">
+                              <xsd:sequence>
+                                    <xsd:choice>
+                                          <xsd:element ref="oval-def:set"/>
+                                          <xsd:sequence>
+                                                <xsd:element name="identifier_type" type="win-def:EntityObjectAppCmdListConfigIdentifierType" minOccurs="1" maxOccurs="1">
+                                                      <xsd:annotation>
+                                                            <xsd:documentation>The identifier_type defines the identifier type (Webserver, Site, or VDir).</xsd:documentation>
+                                                      </xsd:annotation>
+                                                </xsd:element>
+												<xsd:element name="identifier" type="oval-def:EntityObjectStringType" minOccurs="1" maxOccurs="1" nillable="true">
+                                                      <xsd:annotation>
+                                                            <xsd:documentation>The identifier defines the location of the found result (vdir name or site name). If the xsi:nil attribute is set to true, the identifier element is not used and the identifier_type must be set to Webserver. xsi:nil attribute should not be set to true if the identifier_type is set to Site or VDir.</xsd:documentation>
+                                                      </xsd:annotation>
+                                                </xsd:element>
+												<xsd:element name="section" type="oval-def:EntityObjectStringType" minOccurs="1" maxOccurs="1">
+                                                      <xsd:annotation>
+                                                            <xsd:documentation>The section value defines the section which contains the parameter.</xsd:documentation>
+                                                      </xsd:annotation>
+                                                </xsd:element>
+												<xsd:element name="parameter" type="oval-def:EntityObjectStringType" minOccurs="1" maxOccurs="1">
+                                                      <xsd:annotation>
+                                                            <xsd:documentation>The parameter value defines the location of the configuration setting.</xsd:documentation>
+                                                      </xsd:annotation>
+                                                </xsd:element>
+                                                <xsd:element ref="oval-def:filter" minOccurs="0" maxOccurs="unbounded"/>
+                                          </xsd:sequence>
+                                    </xsd:choice>
+                              </xsd:sequence>
+                        </xsd:extension>
+                  </xsd:complexContent>
+            </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="appcmdlistconfig_state" substitutionGroup="oval-def:state">
+            <xsd:complexType>
+                  <xsd:annotation>
+                        <xsd:documentation>The appcmdlistconfig_state is used to gather Webserver, Site, and VDir IIS settings.</xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:complexContent>
+                        <xsd:extension base="oval-def:StateType">
+                              <xsd:sequence>
+                                    <xsd:element name="identifier_type" type="win-def:EntityStateAppCmdListConfigIdentifierType" minOccurs="0" maxOccurs="1">
+										  <xsd:annotation>
+												<xsd:documentation>The identifier_type defines the identifier type (Webserver, Site, or VDir).</xsd:documentation>
+										  </xsd:annotation>
+									</xsd:element>
+                                    <xsd:element name="identifier" type="oval-def:EntityStateStringType" minOccurs="0" maxOccurs="1">
+                                          <xsd:annotation>
+                                                <xsd:documentation>The identifier defines the location of the found result (vdir name or site name). If the identifier_type is set to Webserver, the identifier is not populated.</xsd:documentation>
+                                          </xsd:annotation>
+                                    </xsd:element>
+									<xsd:element name="section" type="oval-def:EntityStateStringType" minOccurs="0" maxOccurs="1">
+                                          <xsd:annotation>
+                                                <xsd:documentation>The section value defines the section which contains the parameter.</xsd:documentation>
+                                          </xsd:annotation>
+                                    </xsd:element>
+									<xsd:element name="parameter" type="oval-def:EntityStateStringType" minOccurs="0" maxOccurs="1">
+                                          <xsd:annotation>
+                                                <xsd:documentation>The parameter value defines the location of the configuration setting.</xsd:documentation>
+                                          </xsd:annotation>
+                                    </xsd:element>
+									<xsd:element name="result" type="oval-def:EntityStateStringType" minOccurs="0" maxOccurs="1">
+                                          <xsd:annotation>
+                                                <xsd:documentation>The value of the collected setting.</xsd:documentation>
+                                          </xsd:annotation>
+                                    </xsd:element>
+                              </xsd:sequence>
+                        </xsd:extension>
+                  </xsd:complexContent>
+            </xsd:complexType>
+      </xsd:element>
       <!-- =============================================================================== -->
       <!-- ================================  VOLUME TEST  ================================ -->
       <!-- =============================================================================== -->
@@ -11383,6 +11625,122 @@
                                     <xsd:documentation>The empty string value is permitted here to allow for empty elements associated with variable references.</xsd:documentation>
                               </xsd:annotation>
                         </xsd:enumeration>
+                  </xsd:restriction>
+            </xsd:simpleContent>
+      </xsd:complexType>
+	   <xsd:complexType name="EntityStateAppCmdIdentifierType">
+            <xsd:annotation>
+                  <xsd:documentation>The EntityStateAppCmdIdentifierType restricts a string value to a set of allowed appcmd objects.</xsd:documentation>
+            </xsd:annotation>
+            <xsd:simpleContent>
+                  <xsd:restriction base="oval-def:EntityObjectStringType">
+                        <xsd:enumeration value="Site">
+                              <xsd:annotation>
+                                    <xsd:documentation>Administration of virtual sites</xsd:documentation>
+                              </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="VDir">
+                              <xsd:annotation>
+                                    <xsd:documentation>Administration of virtual directories</xsd:documentation>
+                              </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="Apppool">
+                              <xsd:annotation>
+                                    <xsd:documentation>Administration of application pools</xsd:documentation>
+                              </xsd:annotation>
+                        </xsd:enumeration>
+						<xsd:enumeration value="">
+							<xsd:annotation>
+								  <xsd:documentation>The empty string value is permitted here to allow for empty elements associated with variable references.</xsd:documentation>
+							</xsd:annotation>
+						</xsd:enumeration>
+                  </xsd:restriction>
+            </xsd:simpleContent>
+      </xsd:complexType>
+	   <xsd:complexType name="EntityObjectAppCmdIdentifierType">
+            <xsd:annotation>
+                  <xsd:documentation>The EntityObjectAppCmdIdentifierType restricts a string value to a set of allowed appcmd objects.</xsd:documentation>
+            </xsd:annotation>
+            <xsd:simpleContent>
+                  <xsd:restriction base="oval-def:EntityObjectStringType">
+                        <xsd:enumeration value="Site">
+                              <xsd:annotation>
+                                    <xsd:documentation>Administration of virtual sites</xsd:documentation>
+                              </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="VDir">
+                              <xsd:annotation>
+                                    <xsd:documentation>Administration of virtual directories</xsd:documentation>
+                              </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="Apppool">
+                              <xsd:annotation>
+                                    <xsd:documentation>Administration of application pools</xsd:documentation>
+                              </xsd:annotation>
+                        </xsd:enumeration>
+						<xsd:enumeration value="">
+							<xsd:annotation>
+								  <xsd:documentation>The empty string value is permitted here to allow for empty elements associated with variable references.</xsd:documentation>
+							</xsd:annotation>
+						</xsd:enumeration>
+                  </xsd:restriction>
+            </xsd:simpleContent>
+      </xsd:complexType>
+	   <xsd:complexType name="EntityStateAppCmdListConfigIdentifierType">
+            <xsd:annotation>
+                  <xsd:documentation>The EntityStateAppCmdListConfigIdentifierType restricts a string value to a set of allowed appcmd objects.</xsd:documentation>
+            </xsd:annotation>
+            <xsd:simpleContent>
+                  <xsd:restriction base="oval-def:EntityObjectStringType">
+                        <xsd:enumeration value="Site">
+                              <xsd:annotation>
+                                    <xsd:documentation>Administration of virtual sites</xsd:documentation>
+                              </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="VDir">
+                              <xsd:annotation>
+                                    <xsd:documentation>Administration of virtual directories</xsd:documentation>
+                              </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="Webserver">
+                              <xsd:annotation>
+                                    <xsd:documentation>Server level configuration</xsd:documentation>
+                              </xsd:annotation>
+                        </xsd:enumeration>
+						<xsd:enumeration value="">
+							<xsd:annotation>
+								  <xsd:documentation>The empty string value is permitted here to allow for empty elements associated with variable references.</xsd:documentation>
+							</xsd:annotation>
+						</xsd:enumeration>
+                  </xsd:restriction>
+            </xsd:simpleContent>
+      </xsd:complexType>
+	  	  <xsd:complexType name="EntityObjectAppCmdListConfigIdentifierType">
+            <xsd:annotation>
+                  <xsd:documentation>The EntityObjectAppCmdListConfigIdentifierType restricts a string value to a set of allowed appcmd objects.</xsd:documentation>
+            </xsd:annotation>
+            <xsd:simpleContent>
+                  <xsd:restriction base="oval-def:EntityObjectStringType">
+                        <xsd:enumeration value="Site">
+                              <xsd:annotation>
+                                    <xsd:documentation>Administration of virtual sites</xsd:documentation>
+                              </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="VDir">
+                              <xsd:annotation>
+                                    <xsd:documentation>Administration of virtual directories</xsd:documentation>
+                              </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="Webserver">
+                              <xsd:annotation>
+                                    <xsd:documentation>Server level configuration</xsd:documentation>
+                              </xsd:annotation>
+                        </xsd:enumeration>
+						<xsd:enumeration value="">
+							<xsd:annotation>
+								  <xsd:documentation>The empty string value is permitted here to allow for empty elements associated with variable references.</xsd:documentation>
+							</xsd:annotation>
+						</xsd:enumeration>
                   </xsd:restriction>
             </xsd:simpleContent>
       </xsd:complexType>
