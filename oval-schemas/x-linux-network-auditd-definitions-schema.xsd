@@ -1,0 +1,392 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:linux-def="http://oval.mitre.org/XMLSchema/oval-definitions-5#linux" xmlns:sch="http://purl.oclc.org/dsdl/schematron" targetNamespace="http://oval.mitre.org/XMLSchema/oval-definitions-5#linux" elementFormDefault="qualified" version="5.10">
+  <xsd:import namespace="http://oval.mitre.org/XMLSchema/oval-definitions-5" schemaLocation="oval-definitions-schema.xsd" />
+  <xsd:import namespace="http://oval.mitre.org/XMLSchema/oval-common-5" schemaLocation="oval-common-schema.xsd" />
+  <xsd:annotation>
+    <xsd:documentation>The following is a description of the elements, types, and attributes that compose the Linux specific tests found in Open Vulnerability and Assessment Language (OVAL). Each test is an extension of the standard test element defined in the Core Definition Schema. Through extension, each test inherits a set of elements and attributes that are shared amongst all OVAL tests. Each test is described in detail and should provide the information necessary to understand what each element and attribute represents. This document is intended for developers and assumes some familiarity with XML. A high level description of the interaction between the different tests and their relationship to the Core Definition Schema is not outlined here.</xsd:documentation>
+    <xsd:documentation>The OVAL Schema is maintained by The MITRE Corporation and developed by the public OVAL Community. For more information, including how to get involved in the project and how to submit change requests, please visit the OVAL website at http://oval.mitre.org.</xsd:documentation>
+    <xsd:appinfo>
+      <schema>Linux Definition</schema>
+      <version>5.11.2</version>
+      <date>2/26/2013 12:57:23 PM</date>
+      <terms_of_use>Copyright (c) 2002-2013, The MITRE Corporation. All rights reserved. The contents of this file are subject to the terms of the OVAL License located at http://oval.mitre.org/oval/about/termsofuse.html. See the OVAL License for the specific language governing permissions and limitations for use of this schema. When distributing copies of the OVAL Schema, this license header must be included.</terms_of_use>
+      <sch:ns prefix="oval-def" uri="http://oval.mitre.org/XMLSchema/oval-definitions-5" />
+      <sch:ns prefix="linux-def" uri="http://oval.mitre.org/XMLSchema/oval-definitions-5#linux" />
+      <sch:ns prefix="xsi" uri="http://www.w3.org/2001/XMLSchema-instance" />
+    </xsd:appinfo>
+  </xsd:annotation>
+  <!-- =============================================================================== -->
+  <!-- ==============================  AUDITD LINE TEST  ============================= -->
+  <!-- =============================================================================== -->
+     <!-- Originaly authored by French Ministry of Army (DGA-MI) -->
+  <xsd:element name="auditdline_test" substitutionGroup="oval-def:test">
+    <xsd:annotation>
+      <xsd:documentation>The auditdline_test is used to check the living rules of the auditd service. It extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information. The required object element references a auditdline_object and the optional state element specifies the data to check.</xsd:documentation>
+      <xsd:appinfo>
+        <oval:element_mapping>
+          <oval:test>auditdline_test</oval:test>
+          <oval:object>auditdline_object</oval:object>
+          <oval:state>auditdline_state</oval:state>
+          <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#linux">auditdline_item</oval:item>
+        </oval:element_mapping>
+      </xsd:appinfo>
+      <xsd:appinfo>
+        <sch:pattern id="linux-def_auditdlinetst">
+          <sch:rule context="linux-def:auditdline_test/linux-def:object">
+            <sch:assert test="@object_ref=ancestor::oval-def:oval_definitions/oval-def:objects/linux-def:auditdline_object/@id"><sch:value-of select="../@id"/> - the object child element of a auditdline_test must reference a auditdline_object</sch:assert>
+          </sch:rule>
+          <sch:rule context="linux-def:auditdline_test/linux-def:state">
+            <sch:assert test="@state_ref=ancestor::oval-def:oval_definitions/oval-def:states/linux-def:auditdline_state/@id"><sch:value-of select="../@id"/> - the state child element of a auditdline_test must reference a auditdline_state</sch:assert>
+          </sch:rule>
+        </sch:pattern>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:complexContent>
+        <xsd:extension base="oval-def:TestType">
+          <xsd:sequence>
+            <xsd:element name="object" type="oval-def:ObjectRefType" />
+            <xsd:element name="state" type="oval-def:StateRefType" minOccurs="0" maxOccurs="unbounded"/>
+          </xsd:sequence>
+        </xsd:extension>
+      </xsd:complexContent>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="auditdline_object" substitutionGroup="oval-def:object">
+    <xsd:annotation>
+      <xsd:documentation>The auditdline_object element is used by a auditdline_test to define the object to be evaluated. Each object extends the standard ObjectType as defined in the oval-definitions-schema and one should refer to the ObjectType description for more information. The common set element allows complex objects to be created using filters and set logic. Again, please refer to the description of the set element in the oval-definitions-schema.</xsd:documentation>
+      <xsd:documentation>A auditdline_object consists of an filter_key entity that is the same as the -k parameter of the auditctl -l command.</xsd:documentation>
+      <xsd:appinfo>
+        <sch:pattern id="linux-def_auditdline_object_verify_filter_state">
+          <sch:rule context="linux-def:auditdline_object//oval-def:filter">
+            <sch:let name="parent_object" value="ancestor::linux-def:auditdline_object"/>
+            <sch:let name="parent_object_id" value="$parent_object/@id"/>
+            <sch:let name="state_ref" value="."/>
+            <sch:let name="reffed_state" value="ancestor::oval-def:oval_definitions/oval-def:states/*[@id=$state_ref]"/>
+            <sch:let name="state_name" value="local-name($reffed_state)"/>
+            <sch:let name="state_namespace" value="namespace-uri($reffed_state)"/>
+            <sch:assert test="(($state_namespace='http://oval.mitre.org/XMLSchema/oval-definitions-5#linux') and ($state_name='auditdline_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
+          </sch:rule>
+        </sch:pattern>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:complexContent>
+        <xsd:extension base="oval-def:ObjectType">
+          <xsd:sequence>
+            <xsd:choice>
+              <xsd:element ref="oval-def:set"/>
+              <xsd:sequence>
+                <xsd:element name="filter_key" type="oval-def:EntityObjectStringType" nillable="true">
+                  <xsd:annotation>
+                    <xsd:documentation>As described in the auditctl(8) manpage, the filter key is an arbitrary string of text that can be up to 31 bytes long. It can uniquely identify the audit records produced by a rule. You may have more than one key on a rule.</xsd:documentation>
+                    <xsd:documentation>If the xsi:nil attribute is set to true, all auditd rules must be present in the system characteristics (auditdline_item).</xsd:documentation>
+                  </xsd:annotation>
+                </xsd:element>
+                <xsd:element ref="oval-def:filter" minOccurs="0" maxOccurs="unbounded"/>
+              </xsd:sequence>
+            </xsd:choice>
+          </xsd:sequence>
+        </xsd:extension>
+      </xsd:complexContent>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="auditdline_state" substitutionGroup="oval-def:state">
+    <xsd:annotation>
+      <xsd:documentation>The auditdline_state element defines the different information that can be used to evaluate the auditd rules. This includes the filter key, the corresponding rule and the line number of the rule. Please refer to the individual elements in the schema for more details about what each represents.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:complexContent>
+        <xsd:extension base="oval-def:StateType">
+          <xsd:sequence>
+            <xsd:element name="filter_key" type="oval-def:EntityStateStringType" minOccurs="0" maxOccurs="1">
+              <xsd:annotation>
+                <xsd:documentation>As described in the auditctl(8) manpage, the filter key is an arbitrary string of text that can be up to 31 bytes long. It can uniquely identify the audit records produced by a rule. You may have more than one key on a rule.</xsd:documentation>
+              </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="audit_line" type="oval-def:EntityStateStringType" minOccurs="0" maxOccurs="1">
+              <xsd:annotation>
+                <xsd:documentation>A rule written on a single line like returned by the auditctl -k command.</xsd:documentation>
+              </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="line_number" type="oval-def:EntityStateIntType" minOccurs="0" maxOccurs="1">
+              <xsd:annotation>
+                <xsd:documentation>The line number of the rule, which can be considered as the rule number regarding that there is one rule per line. This number starts at 1 which means that the number of the first rule returned is 1.</xsd:documentation>
+              </xsd:annotation>
+            </xsd:element>
+          </xsd:sequence>
+        </xsd:extension>
+      </xsd:complexContent>
+    </xsd:complexType>
+  </xsd:element>
+  
+  <!-- =============================================================================== -->
+  <!-- ==========================  NETWORK FIREWALL TEST  ============================ -->
+  <!-- =============================================================================== -->
+     <!-- Originaly authored by French Ministry of Army (DGA-MI) -->
+  <xsd:element name="networkfirewall_test" substitutionGroup="oval-def:test">
+    <xsd:annotation>
+      <xsd:documentation>The networkfirewall_test is used to check the living filtering rules of the network firewall on a UNIX system. It extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information. The required object element references a auditdline_object and the optional state element specifies the data to check.</xsd:documentation>
+      <xsd:appinfo>
+        <oval:element_mapping>
+          <oval:test>networkfirewall_test</oval:test>
+          <oval:object>networkfirewall_object</oval:object>
+          <oval:state>networkfirewall_state</oval:state>
+          <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#linux">networkfirewall_item</oval:item>
+        </oval:element_mapping>
+      </xsd:appinfo>
+      <xsd:appinfo>
+        <sch:pattern id="linux-def_networkfirewalltst">
+          <sch:rule context="linux-def:networkfirewall_test/linux-def:object">
+            <sch:assert test="@object_ref=ancestor::oval-def:oval_definitions/oval-def:objects/linux-def:networkfirewall_object/@id"><sch:value-of select="../@id"/> - the object child element of a networkfirewall_test must reference a networkfirewall_object</sch:assert>
+          </sch:rule>
+          <sch:rule context="linux-def:networkfirewall_test/linux-def:state">
+            <sch:assert test="@state_ref=ancestor::oval-def:oval_definitions/oval-def:states/linux-def:networkfirewall_state/@id"><sch:value-of select="../@id"/> - the state child element of a networkfirewall_test must reference a networkfirewall_state</sch:assert>
+          </sch:rule>
+        </sch:pattern>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:complexContent>
+        <xsd:extension base="oval-def:TestType">
+          <xsd:sequence>
+            <xsd:element name="object" type="oval-def:ObjectRefType" />
+            <xsd:element name="state" type="oval-def:StateRefType" minOccurs="0" maxOccurs="unbounded"/>
+          </xsd:sequence>
+        </xsd:extension>
+      </xsd:complexContent>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="networkfirewall_object" substitutionGroup="oval-def:object">
+    <xsd:annotation>
+      <xsd:documentation>The networkfirewall_object element is used by a networkfirewall_test to define the object to be evaluated. Each object extends the standard ObjectType as defined in the oval-definitions-schema and one should refer to the ObjectType description for more information. The common set element allows complex objects to be created using filters and set logic. Again, please refer to the description of the set element in the oval-definitions-schema.</xsd:documentation>
+      <xsd:documentation>A networkfirewall_object provides an abstration to check authorized and blocked packets based on network interfaces and direction of the trafic.</xsd:documentation>
+      <xsd:appinfo>
+        <sch:pattern id="linux-def_networkfirewall_object_verify_filter_state">
+          <sch:rule context="linux-def:networkfirewall_object//oval-def:filter">
+            <sch:let name="parent_object" value="ancestor::linux-def:networkfirewall_object"/>
+            <sch:let name="parent_object_id" value="$parent_object/@id"/>
+            <sch:let name="state_ref" value="."/>
+            <sch:let name="reffed_state" value="ancestor::oval-def:oval_definitions/oval-def:states/*[@id=$state_ref]"/>
+            <sch:let name="state_name" value="local-name($reffed_state)"/>
+            <sch:let name="state_namespace" value="namespace-uri($reffed_state)"/>
+            <sch:assert test="(($state_namespace='http://oval.mitre.org/XMLSchema/oval-definitions-5#linux') and ($state_name='networkfirewall_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
+          </sch:rule>
+        </sch:pattern>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:complexContent>
+        <xsd:extension base="oval-def:ObjectType">
+          <xsd:sequence>
+            <xsd:choice>
+              <xsd:element ref="oval-def:set"/>
+              <xsd:sequence>
+                <xsd:element name="packet_direction" type="linux-def:EntityObjectPacketDirectionType">
+                  <xsd:annotation>
+                    <xsd:documentation>The direction (incoming, outgoing or forwarding) of the network packets.</xsd:documentation>
+                  </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="input_interface" type="oval-def:EntityObjectStringType" nillable="true">
+                  <xsd:annotation>
+                    <xsd:documentation>This is the name of the input interface (eth0, eth1, fw0, etc.).</xsd:documentation>
+                    <xsd:documentation>The xsi:nil attribute must set to true only when the attribute packet_direction is set to outgoing.</xsd:documentation>
+                  </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="output_interface" type="oval-def:EntityObjectStringType" nillable="true">
+                  <xsd:annotation>
+                    <xsd:documentation>This is the name of the output interface (eth0, eth1, fw0, etc.).</xsd:documentation>
+                    <xsd:documentation>The xsi:nil attribute must set to true only when the attribute packet_direction is set to incoming.</xsd:documentation>
+                  </xsd:annotation>
+                </xsd:element>
+                <!-- TODO : add schematron test to check consistency between nillable value (*_interface) and packet_direction) -->
+                <xsd:element name="filtering_action" type="linux-def:EntityObjectFilteringActionType" nillable="true">
+                  <xsd:annotation>
+                    <xsd:documentation>Action that can be taken on a network packet by the network firewall based on its configuration.</xsd:documentation>
+                  </xsd:annotation>
+                </xsd:element>
+                <xsd:element ref="oval-def:filter" minOccurs="0" maxOccurs="unbounded"/>
+              </xsd:sequence>
+            </xsd:choice>
+          </xsd:sequence>
+        </xsd:extension>
+      </xsd:complexContent>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="networkfirewall_state" substitutionGroup="oval-def:state">
+    <xsd:annotation>
+      <xsd:documentation>The networkfirewall_state element defines the different information that can be used to evaluate the network firewall configuration. This includes the packet direction, the network interfaces, the filter action, the protocol, and pairs of address/port for both source and destination. Please refer to the individual elements in the schema for more details about what each represents.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:complexContent>
+        <xsd:extension base="oval-def:StateType">
+          <xsd:sequence>
+            <xsd:element name="packet_direction" type="linux-def:EntityStatePacketDirectionType" minOccurs="0" maxOccurs="1">
+              <xsd:annotation>
+                <xsd:documentation>The direction (incoming, outgoing or forwarding) of the network packets.</xsd:documentation>
+              </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="input_interface" type="oval-def:EntityStateStringType" minOccurs="0" maxOccurs="1">
+              <xsd:annotation>
+                <xsd:documentation>This is the name of the input interface (eth0, eth1, fw0, etc.).</xsd:documentation>
+              </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="output_interface" type="oval-def:EntityStateStringType" minOccurs="0" maxOccurs="1">
+              <xsd:annotation>
+                <xsd:documentation>This is the name of the output interface (eth0, eth1, fw0, etc.).</xsd:documentation>
+              </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="filtering_action" type="linux-def:EntityStateFilteringActionType" minOccurs="0" maxOccurs="1">
+              <xsd:annotation>
+                <xsd:documentation>Action taken on a network packet by the network firewall based on its configuration.</xsd:documentation>
+              </xsd:annotation>
+            </xsd:element>
+            <!-- 
+              Two ways of handling protocol attribute seen in Linux schema : 
+              - iflisteners_state.protocol with linux-def:EntityStateProtocolType
+              - inetlisteningservers_state.protocol with oval-def:EntityStateStringType
+              
+              The second seems simpler and is used here. Wrong choice ?
+            -->
+            <xsd:element name="transport_protocol" type="oval-def:EntityStateStringType" minOccurs="0" maxOccurs="1">
+              <xsd:annotation>
+                <xsd:documentation>The transport_protocol entity defines the specific transport-layer protocol, in lowercase: sctp, tcp or udp.</xsd:documentation>
+              </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="source_inet_address" type="oval-def:EntityStateIPAddressStringType" minOccurs="0" maxOccurs="1">
+              <xsd:annotation>
+                <xsd:documentation>Source address of the packets. According to this OVAL datatype, it describes any IPv4/IPv6 address, address prefix, or its string representation. Note that the IP address can be IPv4 or IPv6.</xsd:documentation>
+              </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="source_port" type="oval-def:EntityStateIntType" minOccurs="0" maxOccurs="1">
+              <xsd:annotation>
+                <xsd:documentation>Source port of the packets.</xsd:documentation>
+              </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="destination_inet_address" type="oval-def:EntityStateIPAddressStringType" minOccurs="0" maxOccurs="1">
+              <xsd:annotation>
+                <xsd:documentation>Destination address of the packets. According to this OVAL datatype, it describes any IPv4/IPv6 address, address prefix, or its string representation. Note that the IP address can be IPv4 or IPv6.</xsd:documentation>
+              </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="destination_port" type="oval-def:EntityStateIntType" minOccurs="0" maxOccurs="1">
+              <xsd:annotation>
+                <xsd:documentation>Destination port of the packets.</xsd:documentation>
+              </xsd:annotation>
+            </xsd:element>
+          </xsd:sequence>
+        </xsd:extension>
+      </xsd:complexContent>
+    </xsd:complexType>
+  </xsd:element>
+
+  <!-- =============================================================================== -->
+  <!-- =============================================================================== -->
+  <!-- =============================================================================== -->
+  <xsd:complexType name="EntityObjectPacketDirectionType">
+    <xsd:annotation>
+      <xsd:documentation>The EntityObjectPacketDirectionType complex type restricts a string value to a specific set of values that specify the direction of network packets. The empty string is also allowed to support empty elements associated with variable references.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:restriction base="oval-def:EntityObjectStringType">
+        <xsd:enumeration value="INCOMING">
+          <xsd:annotation>
+            <xsd:documentation>Incoming packets.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:enumeration>
+        <xsd:enumeration value="OUTGOING">
+          <xsd:annotation>
+            <xsd:documentation>Outgoing packets.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:enumeration>
+        <xsd:enumeration value="FORWARDING">
+          <xsd:annotation>
+            <xsd:documentation>Forwarding packets.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:enumeration>
+        <xsd:enumeration value="">
+          <xsd:annotation>
+            <xsd:documentation>The empty string value is permitted here to allow for empty elements associated with variable references.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:enumeration> 
+      </xsd:restriction>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="EntityStatePacketDirectionType">
+    <xsd:annotation>
+      <xsd:documentation>The EntityStatePacketDirectionType complex type restricts a string value to a specific set of values that specify the direction of network packets. The empty string is also allowed to support empty elements associated with variable references.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:restriction base="oval-def:EntityStateStringType">
+        <xsd:enumeration value="INCOMING">
+          <xsd:annotation>
+            <xsd:documentation>Incoming packets.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:enumeration>
+        <xsd:enumeration value="OUTGOING">
+          <xsd:annotation>
+            <xsd:documentation>Outgoing packets.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:enumeration>
+        <xsd:enumeration value="FORWARDING">
+          <xsd:annotation>
+            <xsd:documentation>Forwarding packets.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:enumeration>
+        <xsd:enumeration value="">
+          <xsd:annotation>
+            <xsd:documentation>The empty string value is permitted here to allow for empty elements associated with variable references.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:enumeration> 
+      </xsd:restriction>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="EntityObjectFilteringActionType">
+    <xsd:annotation>
+      <xsd:documentation>The EntityObjectFilteringActionType complex type restricts a string value to a specific set of values that specify the filtering action of the network firewall. The empty string is also allowed to support empty elements associated with variable references.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:restriction base="oval-def:EntityObjectStringType">
+        <xsd:enumeration value="ALLOW">
+          <xsd:annotation>
+            <xsd:documentation>Network packets that are allowed by the firewall.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:enumeration>
+        <xsd:enumeration value="DENY">
+          <xsd:annotation>
+            <xsd:documentation>Network packets that are denied by the firewall.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:enumeration>
+        <xsd:enumeration value="">
+          <xsd:annotation>
+            <xsd:documentation>The empty string value is permitted here to allow for empty elements associated with variable references.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:enumeration> 
+      </xsd:restriction>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="EntityStateFilteringActionType">
+    <xsd:annotation>
+      <xsd:documentation>The EntityStateFilteringActionType complex type restricts a string value to a specific set of values that specify the filtering action of the network firewall. The empty string is also allowed to support empty elements associated with variable references.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:restriction base="oval-def:EntityStateStringType">
+        <xsd:enumeration value="ALLOW">
+          <xsd:annotation>
+            <xsd:documentation>Network packets that are allowed by the firewall.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:enumeration>
+        <xsd:enumeration value="DENY">
+          <xsd:annotation>
+            <xsd:documentation>Network packets that are denied by the firewall.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:enumeration>
+        <xsd:enumeration value="">
+          <xsd:annotation>
+            <xsd:documentation>The empty string value is permitted here to allow for empty elements associated with variable references.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:enumeration> 
+      </xsd:restriction>
+    </xsd:simpleContent>
+  </xsd:complexType>
+
+</xsd:schema>

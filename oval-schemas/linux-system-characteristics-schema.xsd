@@ -15,7 +15,7 @@
                <schema>Linux System Characteristics</schema>
                <version>5.11.1:1.2</version>
                <date>11/30/2016 09:00:00 AM</date>
-               <terms_of_use>For the portion subject to the copyright in the United States: Copyright (c) 2016 United States Government. All rights reserved. Copyright (c) 2016, Center for Internet Security. All rights reserved. The contents of this file are subject to the terms of the OVAL License located at https://oval.cisecurity.org/terms. See the OVAL License for the specific language governing permissions and limitations for use of this schema. When distributing copies of the OVAL Schema, this license header must be included.</terms_of_use>
+               <terms_of_use>Copyright (c) 2016, Center for Internet Security. All rights reserved.  The contents of this file are subject to the terms of the OVAL License located at https://oval.cisecurity.org/terms. See the OVAL License for the specific language governing permissions and limitations for use of this schema.  When distributing copies of the OVAL Schema, this license header must be included.</terms_of_use>
                <sch:ns prefix="oval-sc" uri="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5"/>
                <sch:ns prefix="linux-sc" uri="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#linux"/>
               <sch:ns prefix="xsi" uri="http://www.w3.org/2001/XMLSchema-instance"/>
@@ -1108,6 +1108,101 @@
           </xsd:complexType>
      </xsd:element>
      <!-- =============================================================================== -->
+     <!-- ==============================  AUDITD LINE ITEM  ============================= -->
+     <!-- =============================================================================== -->
+     <!-- Originaly authored by French Ministry of Army (DGA-MI) -->
+     <xsd:element name="auditdline_item" substitutionGroup="oval-sc:item">
+          <xsd:annotation>
+               <xsd:documentation>This item stores results from checking the living rules of the auditd service.</xsd:documentation>
+          </xsd:annotation>
+          <xsd:complexType>
+               <xsd:complexContent>
+                    <xsd:extension base="oval-sc:ItemType">
+                         <xsd:sequence>
+                              <xsd:element name="filter_key" type="oval-sc:EntityItemStringType" minOccurs="0" maxOccurs="1">
+                                   <xsd:annotation>
+                                        <xsd:documentation>>As described in the auditctl(8) manpage, the filter key is an arbitrary string of text that can be up to 31 bytes long. It can uniquely identify the audit records produced by a rule. You may have more than one key on a rule.</xsd:documentation>
+                                   </xsd:annotation>
+                              </xsd:element>
+                              <xsd:element name="auditline" type="oval-sc:EntityItemStringType" minOccurs="0" maxOccurs="1">
+                                   <xsd:annotation>
+                                        <xsd:documentation>A rule written on a single line like returned by the auditctl -k command.</xsd:documentation>
+                                   </xsd:annotation>
+                              </xsd:element>
+                              <xsd:element name="line_number" type="oval-sc:EntityItemIntType" minOccurs="0" maxOccurs="1">
+                                   <xsd:annotation>
+                                        <xsd:documentation>The line number of the rule, which can be considered as the rule number regarding that there is one rule per line. This number starts at 1 which means that the number of the first rule returned is 1.</xsd:documentation>
+                                   </xsd:annotation>
+                              </xsd:element>
+                         </xsd:sequence>
+                    </xsd:extension>
+               </xsd:complexContent>
+          </xsd:complexType>
+     </xsd:element>
+
+     <!-- =============================================================================== -->
+     <!-- ==========================  NETWORK FIREWALL TEST  ============================ -->
+     <!-- =============================================================================== -->
+     <!-- Originaly authored by French Ministry of Army (DGA-MI) -->
+     <xsd:element name="networkfirewall_item" substitutionGroup="oval-sc:item">
+          <xsd:annotation>
+               <xsd:documentation>This item stores results from checking the living configuration of the network firewall on a UNIX system.</xsd:documentation>
+          </xsd:annotation>
+          <xsd:complexType>
+               <xsd:complexContent>
+                    <xsd:extension base="oval-sc:ItemType">
+                         <xsd:sequence>
+                              <xsd:element name="packet_direction" type="linux-sc:EntityItemPacketDirectionType" minOccurs="0" maxOccurs="1">
+                                   <xsd:annotation>
+                                        <xsd:documentation>The direction (incoming, outgoing or forwarding) of the network packets.</xsd:documentation>
+                                   </xsd:annotation>
+                              </xsd:element>
+                              <xsd:element name="input_interface" type="oval-sc:EntityItemStringType" minOccurs="0" maxOccurs="1">
+                                   <xsd:annotation>
+                                        <xsd:documentation>This is the name of the input interface (eth0, eth1, fw0, etc.).</xsd:documentation>
+                                   </xsd:annotation>
+                              </xsd:element>
+                              <xsd:element name="output_interface" type="oval-sc:EntityItemStringType" minOccurs="0" maxOccurs="1">
+                                   <xsd:annotation>
+                                        <xsd:documentation>This is the name of the output interface (eth0, eth1, fw0, etc.).</xsd:documentation>
+                                   </xsd:annotation>
+                              </xsd:element>
+                              <xsd:element name="filtering_action" type="linux-sc:EntityItemFilteringActionType" minOccurs="0" maxOccurs="1">
+                                   <xsd:annotation>
+                                        <xsd:documentation>Action taken on a network packet by the network firewall based on its configuration.</xsd:documentation>
+                                   </xsd:annotation>
+                              </xsd:element>
+                              <xsd:element name="transport_protocol" type="oval-sc:EntityItemStringType" minOccurs="0" maxOccurs="1">
+                                   <xsd:annotation>
+                                        <xsd:documentation>The transport_protocol entity defines the specific transport-layer protocol, in lowercase: sctp, tcp or udp.</xsd:documentation>
+                                   </xsd:annotation>
+                              </xsd:element>
+                              <xsd:element name="source_inet_address" type="oval-sc:EntityItemIPAddressStringType" minOccurs="0" maxOccurs="1">
+                                   <xsd:annotation>
+                                        <xsd:documentation>Source address of the packets. According to this OVAL datatype, it describes any IPv4/IPv6 address, address prefix, or its string representation. Note that the IP address can be IPv4 or IPv6.</xsd:documentation>
+                                   </xsd:annotation>
+                              </xsd:element>
+                              <xsd:element name="source_port" type="oval-sc:EntityItemIntType" minOccurs="0" maxOccurs="1">
+                                   <xsd:annotation>
+                                        <xsd:documentation>Source port of the packets.</xsd:documentation>
+                                   </xsd:annotation>
+                              </xsd:element>
+                              <xsd:element name="destination_inet_address" type="oval-sc:EntityItemIPAddressStringType" minOccurs="0" maxOccurs="1">
+                                   <xsd:annotation>
+                                        <xsd:documentation>Destination address of the packets. According to this OVAL datatype, it describes any IPv4/IPv6 address, address prefix, or its string representation. Note that the IP address can be IPv4 or IPv6.</xsd:documentation>
+                                   </xsd:annotation>
+                              </xsd:element>
+                              <xsd:element name="destination_port" type="oval-sc:EntityItemIntType" minOccurs="0" maxOccurs="1">
+                                   <xsd:annotation>
+                                        <xsd:documentation>Destination port of the packets.</xsd:documentation>
+                                   </xsd:annotation>
+                              </xsd:element>
+                         </xsd:sequence>
+                    </xsd:extension>
+               </xsd:complexContent>
+          </xsd:complexType>
+     </xsd:element>
+     <!-- =============================================================================== -->
      <!-- =============================================================================== -->
      <!-- =============================================================================== -->
      <xsd:complexType name="EntityItemRpmVerifyResultType">
@@ -1400,6 +1495,59 @@
                               <xsd:documentation>The empty string value is permitted here to allow for detailed error reporting.</xsd:documentation>
                          </xsd:annotation>
                     </xsd:enumeration>
+               </xsd:restriction>
+          </xsd:simpleContent>
+     </xsd:complexType>
+     <xsd:complexType name="EntityItemPacketDirectionType">
+          <xsd:annotation>
+               <xsd:documentation>The EntityItemPacketDirectionType complex type restricts a string value to a specific set of values that specify the direction of network packets. The empty string is also allowed to support empty elements associated with variable references.</xsd:documentation>
+          </xsd:annotation>
+          <xsd:simpleContent>
+               <xsd:restriction base="oval-sc:EntityItemStringType">
+                    <xsd:enumeration value="INCOMING">
+                         <xsd:annotation>
+                              <xsd:documentation>Incoming packets.</xsd:documentation>
+                         </xsd:annotation>
+                    </xsd:enumeration>
+                    <xsd:enumeration value="OUTGOING">
+                         <xsd:annotation>
+                              <xsd:documentation>Outgoing packets.</xsd:documentation>
+                         </xsd:annotation>
+                    </xsd:enumeration>
+                    <xsd:enumeration value="FORWARDING">
+                         <xsd:annotation>
+                              <xsd:documentation>Forwarding packets.</xsd:documentation>
+                         </xsd:annotation>
+                    </xsd:enumeration>
+                    <xsd:enumeration value="">
+                         <xsd:annotation>
+                              <xsd:documentation>The empty string value is permitted here to allow for empty elements associated with variable references.</xsd:documentation>
+                         </xsd:annotation>
+                    </xsd:enumeration> 
+               </xsd:restriction>
+          </xsd:simpleContent>
+     </xsd:complexType>
+     <xsd:complexType name="EntityItemFilteringActionType">
+          <xsd:annotation>
+               <xsd:documentation>The EntityItemFilteringActionType complex type restricts a string value to a specific set of values that specify the filtering action of the network firewall. The empty string is also allowed to support empty elements associated with variable references.</xsd:documentation>
+          </xsd:annotation>
+          <xsd:simpleContent>
+               <xsd:restriction base="oval-sc:EntityItemStringType">
+                    <xsd:enumeration value="ALLOW">
+                         <xsd:annotation>
+                              <xsd:documentation>Network packets that are allowed by the firewall.</xsd:documentation>
+                         </xsd:annotation>
+                    </xsd:enumeration>
+                    <xsd:enumeration value="DENY">
+                         <xsd:annotation>
+                              <xsd:documentation>Network packets that are denied by the firewall.</xsd:documentation>
+                         </xsd:annotation>
+                    </xsd:enumeration>
+                    <xsd:enumeration value="">
+                         <xsd:annotation>
+                              <xsd:documentation>The empty string value is permitted here to allow for empty elements associated with variable references.</xsd:documentation>
+                         </xsd:annotation>
+                    </xsd:enumeration> 
                </xsd:restriction>
           </xsd:simpleContent>
      </xsd:complexType>
