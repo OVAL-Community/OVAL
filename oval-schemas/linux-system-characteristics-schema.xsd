@@ -1187,6 +1187,38 @@
           </xsd:complexType>
      </xsd:element>
      <!-- =============================================================================== -->
+     <!-- ==============================  AUDITD LINE ITEM  ============================= -->
+     <!-- =============================================================================== -->
+     <!-- Originaly authored by French Ministry of Army (DGA-MI) -->
+     <xsd:element name="auditdline_item" substitutionGroup="oval-sc:item">
+          <xsd:annotation>
+               <xsd:documentation>This item stores results from checking the living rules of the auditd service.</xsd:documentation>
+          </xsd:annotation>
+          <xsd:complexType>
+               <xsd:complexContent>
+                    <xsd:extension base="oval-sc:ItemType">
+                         <xsd:sequence>
+                              <xsd:element name="filter_key" type="oval-sc:EntityItemStringType" minOccurs="0" maxOccurs="1">
+                                   <xsd:annotation>
+                                        <xsd:documentation>>As described in the auditctl(8) manpage, the filter key is an arbitrary string of text that can be up to 31 bytes long. It can uniquely identify the audit records produced by a rule. You may have more than one key on a rule.</xsd:documentation>
+                                   </xsd:annotation>
+                              </xsd:element>
+                              <xsd:element name="auditline" type="oval-sc:EntityItemStringType" minOccurs="0" maxOccurs="1">
+                                   <xsd:annotation>
+                                        <xsd:documentation>A rule written on a single line like returned by the auditctl -k command.</xsd:documentation>
+                                   </xsd:annotation>
+                              </xsd:element>
+                              <xsd:element name="line_number" type="oval-sc:EntityItemIntType" minOccurs="0" maxOccurs="1">
+                                   <xsd:annotation>
+                                        <xsd:documentation>The line number of the rule, which can be considered as the rule number regarding that there is one rule per line. This number starts at 1 which means that the number of the first rule returned is 1.</xsd:documentation>
+                                   </xsd:annotation>
+                              </xsd:element>
+                         </xsd:sequence>
+                    </xsd:extension>
+               </xsd:complexContent>
+          </xsd:complexType>
+     </xsd:element>
+     <!-- =============================================================================== -->
      <!-- =============================================================================== -->
      <!-- =============================================================================== -->
      <xsd:complexType name="EntityItemRpmVerifyResultType">

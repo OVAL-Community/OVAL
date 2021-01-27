@@ -1212,6 +1212,68 @@
           </xsd:complexType>
      </xsd:element>
      <!-- =============================================================================== -->
+     <!-- ==========================  NETWORK FIREWALL TEST  ============================ -->
+     <!-- =============================================================================== -->
+     <!-- Originaly authored by French Ministry of Army (DGA-MI) -->
+     <xsd:element name="networkfirewall_item" substitutionGroup="oval-sc:item">
+          <xsd:annotation>
+               <xsd:documentation>This item stores results from checking the living configuration of the network firewall on a UNIX system.</xsd:documentation>
+          </xsd:annotation>
+          <xsd:complexType>
+               <xsd:complexContent>
+                    <xsd:extension base="oval-sc:ItemType">
+                         <xsd:sequence>
+                              <xsd:element name="packet_direction" type="unix-sc:EntityItemPacketDirectionType" minOccurs="0" maxOccurs="1">
+                                   <xsd:annotation>
+                                        <xsd:documentation>The direction (incoming, outgoing or forwarding) of the network packets.</xsd:documentation>
+                                   </xsd:annotation>
+                              </xsd:element>
+                              <xsd:element name="input_interface" type="oval-sc:EntityItemStringType" minOccurs="0" maxOccurs="1">
+                                   <xsd:annotation>
+                                        <xsd:documentation>This is the name of the input interface (eth0, eth1, fw0, etc.).</xsd:documentation>
+                                   </xsd:annotation>
+                              </xsd:element>
+                              <xsd:element name="output_interface" type="oval-sc:EntityItemStringType" minOccurs="0" maxOccurs="1">
+                                   <xsd:annotation>
+                                        <xsd:documentation>This is the name of the output interface (eth0, eth1, fw0, etc.).</xsd:documentation>
+                                   </xsd:annotation>
+                              </xsd:element>
+                              <xsd:element name="filtering_action" type="unix-sc:EntityItemFilteringActionType" minOccurs="0" maxOccurs="1">
+                                   <xsd:annotation>
+                                        <xsd:documentation>Action taken on a network packet by the network firewall based on its configuration.</xsd:documentation>
+                                   </xsd:annotation>
+                              </xsd:element>
+                              <xsd:element name="transport_protocol" type="oval-sc:EntityItemStringType" minOccurs="0" maxOccurs="1">
+                                   <xsd:annotation>
+                                        <xsd:documentation>The transport_protocol entity defines the specific transport-layer protocol, in lowercase: sctp, tcp or udp.</xsd:documentation>
+                                   </xsd:annotation>
+                              </xsd:element>
+                              <xsd:element name="source_inet_address" type="oval-sc:EntityItemIPAddressStringType" minOccurs="0" maxOccurs="1">
+                                   <xsd:annotation>
+                                        <xsd:documentation>Source address of the packets. According to this OVAL datatype, it describes any IPv4/IPv6 address, address prefix, or its string representation. Note that the IP address can be IPv4 or IPv6.</xsd:documentation>
+                                   </xsd:annotation>
+                              </xsd:element>
+                              <xsd:element name="source_port" type="oval-sc:EntityItemIntType" minOccurs="0" maxOccurs="1">
+                                   <xsd:annotation>
+                                        <xsd:documentation>Source port of the packets.</xsd:documentation>
+                                   </xsd:annotation>
+                              </xsd:element>
+                              <xsd:element name="destination_inet_address" type="oval-sc:EntityItemIPAddressStringType" minOccurs="0" maxOccurs="1">
+                                   <xsd:annotation>
+                                        <xsd:documentation>Destination address of the packets. According to this OVAL datatype, it describes any IPv4/IPv6 address, address prefix, or its string representation. Note that the IP address can be IPv4 or IPv6.</xsd:documentation>
+                                   </xsd:annotation>
+                              </xsd:element>
+                              <xsd:element name="destination_port" type="oval-sc:EntityItemIntType" minOccurs="0" maxOccurs="1">
+                                   <xsd:annotation>
+                                        <xsd:documentation>Destination port of the packets.</xsd:documentation>
+                                   </xsd:annotation>
+                              </xsd:element>
+                         </xsd:sequence>
+                    </xsd:extension>
+               </xsd:complexContent>
+          </xsd:complexType>
+     </xsd:element>
+     <!-- =============================================================================== -->
      <!-- =============================================================================== -->
      <!-- =============================================================================== -->
      <xsd:complexType name="EntityItemCapabilityType">
