@@ -3,8 +3,8 @@
 - Agenda Bashing
 - Last meeting review
 - OVAL Stats
-- Language Submissions/Proposals
-- Language Release
+- Board Revitalization Update
+- Language Submissions/Proposals and Release
 - Any other business
 
 ## Notes
