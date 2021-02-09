@@ -8,10 +8,10 @@ An Area Supervisor is responsible for the day-to-day management of its appointed
 Area Supervisors
 ----------------
 
-The following list bounds the different areas of responsibility that may be managed by a given Area Supervisor. No Area Supervisors have yet been appointed.
+The following list bounds the different areas of responsibility that may be managed by a given Area Supervisor.
 
 - Foundation Schemas (i.e. Core, Common, Independent, Results, Variables and Directives Schemas) - Bill Munyan, CIS
-- Android Schemas - Chandrashakar B, SecPod
+- Android Schemas - Pooja Shetty, SecPod
 - Apple Schemas (iOS, Macintosh) - David Solin, Joval
 - Cisco Schemas (ASA, CatOS, IOS, IOS XE, PixOS) - Omar Santos, Cisco
 - FreeBSD Schemas - David Solin, Joval
