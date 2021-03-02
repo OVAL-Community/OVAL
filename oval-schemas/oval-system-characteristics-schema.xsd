@@ -230,10 +230,10 @@
     <!-- =============================================================================== -->
     <xsd:complexType name="SystemDataType">
         <xsd:annotation>
-            <xsd:documentation>The SystemDataType complex type is a container for one or more item elements. Each item defines a specific piece of data on the system.</xsd:documentation>
+            <xsd:documentation>The SystemDataType complex type is a container for zero or more item elements. Each item defines a specific piece of data on the system.</xsd:documentation>
         </xsd:annotation>
         <xsd:sequence>
-            <xsd:element ref="oval-sc:item" minOccurs="1" maxOccurs="unbounded"/>
+            <xsd:element ref="oval-sc:item" minOccurs="0" maxOccurs="unbounded"/>
         </xsd:sequence>
     </xsd:complexType>
     <xsd:element name="item" type="oval-sc:ItemType" abstract="true">
