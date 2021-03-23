@@ -85,7 +85,7 @@
                         <sch:let name="reffed_state" value="ancestor::oval-def:oval_definitions/oval-def:states/*[@id=$state_ref]"/>
                         <sch:let name="state_name" value="local-name($reffed_state)"/>
                         <sch:let name="state_namespace" value="namespace-uri($reffed_state)"/>
-                        <sch:assert test="(($state_namespace='http://oval.mitre.org/XMLSchema/oval-definitions-5#windows') and ($state_name='api_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
+                        <sch:assert test="(($state_namespace='http://oval.mitre.org/XMLSchema/oval-definitions-5#aws') and ($state_name='api_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
                     </sch:rule>
                 </sch:pattern>
             </xsd:appinfo>
@@ -121,7 +121,7 @@
                                         </xsd:appinfo>
                                     </xsd:annotation>
                                 </xsd:element>
-                                <xsd:element name="noun" type="oval-def:EntityObjectStringType" minOccurs="1" maxOccurs="1">
+                                <xsd:element name="noun" type="oval-def:EntityObjectStringType" nillable="true" maxOccurs="1">
                                     <xsd:annotation>
                                         <xsd:documentation>The AWS API noun.</xsd:documentation>
                                         <xsd:appinfo>
@@ -153,23 +153,23 @@
                                         <xsd:field xpath="@name"/>
                                     </xsd:unique>
                                 </xsd:element>
-                                <xsd:element name="xpath" type="oval-def:EntityObjectStringType">
+                                <xsd:element name="jsonpath" type="oval-def:EntityObjectStringType">
                                     <xsd:annotation>
                                         <xsd:documentation>
-                                            Specifies an XPath 1.0 expression to evaluate against the XML content constructed from the API 
-                                            Response object.  This XPath 1.0 expression must evaluate to a list of zero or more text values 
+                                            Specifies an JSONPath expression to evaluate against the output constructed from the API 
+                                            Response object.  This JSONPath expression must evaluate to a list of zero or more text values 
                                             which will be accessible in OVAL via instances of the value_of entity.  Any results from evaluating 
-                                            the XPath 1.0 expression other than a list of text strings (e.g., a nodes set) is considered an 
+                                            the JSONPath expression other than a list of text strings (e.g., a nodes set) is considered an 
                                             error.  The intention is that the text values be drawn from instances of a single, uniquely named 
-                                            element or attribute.  However, an OVAL interpreter is not required to verify this, so the author 
-                                            should define the XPath expression carefully.  Note that "equals" is the only valid operator for 
-                                            the xpath entity.
+                                            node or attribute.  However, an OVAL interpreter is not required to verify this, so the author 
+                                            should define the JSONPath expression carefully.  Note that "equals" is the only valid operator for 
+                                            the JSONPath entity.
                                         </xsd:documentation>
                                         <xsd:appinfo>
-                                            <sch:pattern id="ind-def_xmlobjxpath">
-                                                <sch:rule context="ind-def:xmlfilecontent_object/ind-def:xpath">
+                                            <sch:pattern id="aws-def_apiobjjsonpath">
+                                                <sch:rule context="aws-def:api_object/aws-def:jsonpath">
                                                     <sch:assert test="not(@operation) or @operation='equals'">
-                                                        <sch:value-of select="../@id"/> - operation attribute for the xpath entity of an api_object should be 'equals', note that this overrules the general operation attribute validation (i.e. follow this one)
+                                                        <sch:value-of select="../@id"/> - operation attribute for the jsonpath entity of an api_object should be 'equals', note that this overrules the general operation attribute validation (i.e. follow this one)
                                                     </sch:assert>
                                                 </sch:rule>
                                             </sch:pattern>
@@ -227,29 +227,17 @@
                                 <xsd:field xpath="@name"/>
                             </xsd:unique>
                         </xsd:element>
-                        <xsd:element name="xpath" type="oval-def:EntityStateStringType" minOccurs="0" maxOccurs="1">
+                        <xsd:element name="jsonpath" type="oval-def:EntityStateStringType" minOccurs="0" maxOccurs="1">
                             <xsd:annotation>
                                 <xsd:documentation>
-                                    Specifies an XPath 1.0 expression to evaluate against the XML content constructed from the API 
-                                    Response object.  This XPath 1.0 expression must evaluate to a list of zero or more text values 
+                                    Specifies an JSONPath expression to evaluate against the output constructed from the API 
+                                    Response object.  This JSONPath expression must evaluate to a list of zero or more text values 
                                     which will be accessible in OVAL via instances of the value_of entity.  Any results from evaluating 
-                                    the XPath 1.0 expression other than a list of text strings (e.g., a nodes set) is considered an 
+                                    the JSONPath expression other than a list of text strings (e.g., a nodes set) is considered an 
                                     error.  The intention is that the text values be drawn from instances of a single, uniquely named 
-                                    element or attribute.  However, an OVAL interpreter is not required to verify this, so the author 
-                                    should define the XPath expression carefully.  Note that "equals" is the only valid operator for 
-                                    the xpath entity.
-                                </xsd:documentation>
-                            </xsd:annotation>
-                        </xsd:element>
-                        <xsd:element name="xml_output" type="aws-def:EntityStateAnyXmlType" minOccurs="0" maxOccurs="1">
-                            <xsd:annotation>
-                                <xsd:documentation>
-                                    This element represents XML content constructed by collection components when processing
-                                    the AWS API response objects.  It is incumbent upon tools implementing this collection to
-                                    appropriately construct the XML representation of response data.
-                                    aws_api_response
-                                    api_method_name
-                                    response_data
+                                    node or attribute.  However, an OVAL interpreter is not required to verify this, so the author 
+                                    should define the JSONPath expression carefully.  Note that "equals" is the only valid operator for 
+                                    the JSONPath entity.
                                 </xsd:documentation>
                             </xsd:annotation>
                         </xsd:element>
@@ -264,6 +252,249 @@
         </xsd:complexType>
     </xsd:element>
 
+    <!-- =============================================================================== -->
+    <!-- =============================  AWS API CONTENT TEST  ========================== -->
+    <!-- =============================================================================== -->
+    <xsd:element name="apicontent_test" substitutionGroup="oval-def:test">
+        <xsd:annotation>
+            <xsd:documentation>
+                The AWS apicontent_test is used to leverage the AWS infrastructure API in order to check
+                various attributes collected from the myriad services offered by AWS. 
+                The test extends the standard TestType as defined in the oval-definitions-schema and 
+                one should refer to the TestType description for more information. The required object 
+                element references a api_object and the optional state element specifies the metadata 
+                to check.
+            </xsd:documentation>
+            <xsd:appinfo>
+                <oval:element_mapping>
+                    <oval:test>apicontent_test</oval:test>
+                    <oval:object>apicontent_object</oval:object>
+                    <oval:state>apicontent_state</oval:state>
+                    <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#aws">apicontent_item</oval:item>
+                </oval:element_mapping>
+            </xsd:appinfo>
+            <xsd:appinfo>
+                <sch:pattern id="aws-def_apicontent_test">
+                    <sch:rule context="aws-def:apicontent_test/aws-def:object">
+                        <sch:assert test="@object_ref=ancestor::oval-def:oval_definitions/oval-def:objects/aws-def:apicontent_object/@id"><sch:value-of select="../@id"/> - the object child element of a apicontent_test must reference a apicontent_object</sch:assert>
+                    </sch:rule>
+                    <sch:rule context="aws-def:api_test/aws-def:state">
+                        <sch:assert test="@state_ref=ancestor::oval-def:oval_definitions/oval-def:states/aws-def:apicontent_state/@id"><sch:value-of select="../@id"/> - the state child element of a apicontent_test must reference a apicontent_state</sch:assert>
+                    </sch:rule>
+                </sch:pattern>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="oval-def:TestType">
+                    <xsd:sequence>
+                        <xsd:element name="object" type="oval-def:ObjectRefType"/>
+                        <xsd:element name="state" type="oval-def:StateRefType" minOccurs="0" maxOccurs="unbounded"/>
+                    </xsd:sequence>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="apicontent_object" substitutionGroup="oval-def:object">
+        <xsd:annotation>
+            <xsd:documentation>
+                The apicontent_object element is used by a apicontent_test to identify the set of AWS API endpoints 
+                to use and the parameters to provide to them for checking the state of an AWS infrastructure. 
+                In order to ensure the consistency of AWS API support among OVAL interpreters as well as ensure
+                that the state of a system is not changed, every OVAL interpreter must implement the following 
+                requirements.  An OVAL interpreter must only support the processing of the verbs specified in the 
+                EntityObjectAWSVerbType.  If a verb that is not defined in this enumeration is discovered, an 
+                error should be reported and the AWS API must not be invoked.  While XML schema validation will
+                enforce this requirement, it is strongly recommended that OVAL interpreters implement a whitelist
+                of allowed AWS API verbs.  This may be accomplished by utilizing the AWS credential profile for 
+                an IAM user granted only the required permissions.
+            </xsd:documentation>
+            <xsd:appinfo>
+                <sch:pattern id="aws-def_apicontent_object_verify_filter_state">
+                    <sch:rule context="aws-def:apicontent_object//oval-def:filter">
+                        <sch:let name="parent_object" value="ancestor::aws-def:apicontent_object"/>
+                        <sch:let name="parent_object_id" value="$parent_object/@id"/>
+                        <sch:let name="state_ref" value="."/>
+                        <sch:let name="reffed_state" value="ancestor::oval-def:oval_definitions/oval-def:states/*[@id=$state_ref]"/>
+                        <sch:let name="state_name" value="local-name($reffed_state)"/>
+                        <sch:let name="state_namespace" value="namespace-uri($reffed_state)"/>
+                        <sch:assert test="(($state_namespace='http://oval.mitre.org/XMLSchema/oval-definitions-5#aws') and ($state_name='apicontent_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
+                    </sch:rule>
+                </sch:pattern>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="oval-def:ObjectType">
+                    <xsd:sequence>
+                        <xsd:choice>
+                            <xsd:element ref="oval-def:set"/>
+                            <xsd:sequence>
+                                <xsd:element name="service_name" type="aws-def:EntityObjectAWSServiceType" minOccurs="1" maxOccurs="1">
+                                    <xsd:annotation>
+                                        <xsd:documentation>The name of the AWS API service to be invoked, such as iam, s3, or apigateway (among many others).</xsd:documentation>
+                                        <xsd:appinfo>
+                                            <sch:pattern id="aws-def_apicontentobjservice_name">
+                                                <sch:rule context="aws-def:apicontent_object/aws-def:service_name">
+                                                    <sch:assert test="not(@operation) or @operation='equals'"><sch:value-of select="../@id"/> - operation attribute for the service_name entity of a apicontent_object must be 'equals'</sch:assert>
+                                                </sch:rule>
+                                            </sch:pattern>
+                                        </xsd:appinfo>
+                                    </xsd:annotation>
+                                </xsd:element>
+                                <xsd:element name="verb" type="aws-def:EntityObjectAWSVerbType" minOccurs="1" maxOccurs="1">
+                                    <xsd:annotation>
+                                        <xsd:documentation>The AWS API verb.</xsd:documentation>
+                                        <xsd:appinfo>
+                                            <sch:pattern id="aws-def_apicontentobjverb">
+                                                <sch:rule context="aws-def:apicontent_object/aws-def:verb">
+                                                    <sch:assert test="not(@operation) or @operation='equals'"><sch:value-of select="../@id"/> - operation attribute for the verb entity of a apicontent_object must be 'equals'</sch:assert>
+                                                </sch:rule>
+                                            </sch:pattern>
+                                        </xsd:appinfo>
+                                    </xsd:annotation>
+                                </xsd:element>
+                                <xsd:element name="noun" type="oval-def:EntityObjectStringType" nillable="true" maxOccurs="1">
+                                    <xsd:annotation>
+                                        <xsd:documentation>The AWS API noun.</xsd:documentation>
+                                        <xsd:appinfo>
+                                            <sch:pattern id="aws-def_apicontentobjnoun">
+                                                <sch:rule context="aws-def:apicontent_object/aws-def:noun">
+                                                    <sch:assert test="not(@operation) or @operation='equals'"><sch:value-of select="../@id"/> - operation attribute for the noun entity of a apicontent_object must be 'equals'</sch:assert>
+                                                </sch:rule>
+                                            </sch:pattern>
+                                        </xsd:appinfo>
+                                    </xsd:annotation>
+                                </xsd:element>
+                                <xsd:element name="parameters" type="oval-def:EntityObjectRecordType" nillable="true">
+                                    <xsd:annotation>
+                                        <xsd:documentation>
+                                            A list of properties (name and value pairs) as input to invoke the AWS API method. Each 
+                                            property name must be unique. When xsi:nil='true', parameters are not provided to the API 
+                                            method.
+                                        </xsd:documentation>
+                                        <xsd:appinfo>
+                                            <sch:pattern id="aws-def_apicontentobjparameters">
+                                                <sch:rule context="aws-def:apicontent_object/aws-def:parameters">
+                                                    <sch:assert test="@datatype='record'"><sch:value-of select="../@id"/> - datatype attribute for the parameters entity of a apicontent_object must be 'record'</sch:assert>
+                                                </sch:rule>
+                                            </sch:pattern>
+                                        </xsd:appinfo>
+                                    </xsd:annotation>
+                                    <xsd:unique name="UniqueApiContentObjParametersFieldName">
+                                        <xsd:selector xpath="./oval-def:field"/>
+                                        <xsd:field xpath="@name"/>
+                                    </xsd:unique>
+                                </xsd:element>
+                                <xsd:element name="pattern" type="oval-def:EntityObjectStringType">
+                                    <xsd:annotation>
+                                        <xsd:documentation>The pattern entity defines a chunk of text in a file and is represented using a regular expression. A subexpression (using parentheses) can call out a piece of the text block to test. For example, the pattern abc(.*)xyz would look for a block of text in the file that starts with abc and ends with xyz, with the subexpression being all the characters that exist in between. The value of the subexpression can then be tested using the subexpression entity of a textfilecontent54_state. Note that if the pattern, starting at the same point in the file, matches more than one block of text, then it matches the longest. For example, given a file with abcdefxyzxyzabc, then the pattern abc(.*)xyz would match the block abcdefxyzxyz. Subexpressions also match the longest possible substrings, subject to the constraint that the whole match be as long as possible, with subexpressions starting earlier in the pattern taking priority over ones starting later.</xsd:documentation>
+                                        <xsd:documentation>Note that when using regular expressions, OVAL supports a common subset of the regular expression character classes, operations, expressions and other lexical tokens defined within Perl 5's regular expression specification. For more information on the supported regular expression syntax in OVAL see: http://oval.mitre.org/language/about/re_support_5.6.html.</xsd:documentation>
+                                        <xsd:appinfo>
+                                            <sch:pattern id="aws-def_apicontentobjpattern">
+                                                <sch:rule context="aws-def:apicontent_object/aws-def:pattern">
+                                                    <sch:assert test="@operation='pattern match'"><sch:value-of select="../@id" /> - operation attribute for the pattern entity of a apicontent_object should be 'pattern match'</sch:assert>
+                                                </sch:rule>
+                                            </sch:pattern>
+                                        </xsd:appinfo>
+                                    </xsd:annotation>
+                                </xsd:element>
+                                <xsd:element name="instance" type="oval-def:EntityObjectIntType">
+                                    <xsd:annotation>
+                                        <xsd:documentation>The instance entity calls out a specific match of the pattern. It can have any integer value. If the value is a non-negative integer, the index of the specific match of the pattern is counted from the beginning of the set of matches of that pattern in the targeted file. The first match is given an instance value of 1, the second match is given an instance value of 2, and so on. For non-negative values, the 'less than' and 'less than or equal' operations imply the the object is operating only on non-negative values. Frequently, this entity will be defined as 'greater than or equal' to 1 or 'greater than' 0, either of which results in the object representing the set of all matches of the pattern.</xsd:documentation>
+                                        <xsd:documentation>Negative values are used to simplify collection of pattern match occurrences counting backwards from the final match in the targeted file. To find the final match, use an instance of -1; the penultimate match is found using an instance value of -2, and so on. For negative values, the 'greater than' and 'greater than or equal' operations imply the object is operating only on negative values. For example, searching for instances greater than or equal to -2 would yield only the last two maches.</xsd:documentation>
+                                        <xsd:documentation>Note that the main purpose of the instance item entity is to provide uniqueness for different textfilecontent_items that results from multiple matches of a given pattern against the same file, and they will always have positive values.</xsd:documentation>
+                                    </xsd:annotation>
+                                </xsd:element>
+                                <xsd:element ref="oval-def:filter" minOccurs="0" maxOccurs="unbounded"/>
+                            </xsd:sequence>
+                        </xsd:choice>
+                    </xsd:sequence>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="apicontent_state" substitutionGroup="oval-def:state">
+        <xsd:annotation>
+            <xsd:documentation>The apicontent_state allows for assertions about the response attributes generated by the invocation of an AWS API request.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="oval-def:StateType">
+                    <xsd:sequence>
+                        <xsd:element name="service_name" type="aws-def:EntityStateAWSServiceType" minOccurs="0" maxOccurs="1">
+                            <xsd:annotation>
+                                <xsd:documentation>The name of the AWS API service to be invoked, such as iam, s3, or apigateway (among many others).</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:element>
+                        <xsd:element name="verb" type="aws-def:EntityStateAWSVerbType" minOccurs="0" maxOccurs="1">
+                            <xsd:annotation>
+                                <xsd:documentation>The AWS API verb.</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:element>
+                        <xsd:element name="noun" type="oval-def:EntityStateStringType" minOccurs="0" maxOccurs="1">
+                            <xsd:annotation>
+                                <xsd:documentation>The AWS API noun.</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:element>
+                        <xsd:element name="parameters" type="oval-def:EntityStateRecordType" minOccurs="0" maxOccurs="1">
+                            <xsd:annotation>
+                                <xsd:documentation>
+                                    A list of properties (name and value pairs) as input to invoke the AWS API method. Each 
+                                    property name must be unique. When xsi:nil='true', parameters are not provided to the API 
+                                    method.
+                                </xsd:documentation>
+                                <xsd:appinfo>
+                                    <sch:pattern id="aws-def_apicontentsteparameters">
+                                        <sch:rule context="aws-def:apicontent_state/aws-def:parameters">
+                                            <sch:assert test="@datatype='record'"><sch:value-of select="../@id"/> - datatype attribute for the parameters entity of a apicontent_state must be 'record'</sch:assert>
+                                        </sch:rule>
+                                    </sch:pattern>
+                                </xsd:appinfo>
+                            </xsd:annotation>
+                            <xsd:unique name="UniqueApiContentSteParametersFieldName">
+                                <xsd:selector xpath="./oval-def:field"/>
+                                <xsd:field xpath="@name"/>
+                            </xsd:unique>
+                        </xsd:element>
+                        <xsd:element name="pattern" type="oval-def:EntityStateStringType" minOccurs="0" maxOccurs="1">
+                            <xsd:annotation>
+                                <xsd:documentation>The pattern entity represents a regular expression that is used to define a block of text.</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:element>
+                        <xsd:element name="instance" type="oval-def:EntityStateIntType" minOccurs="0" maxOccurs="1">
+                            <xsd:annotation>
+                                <xsd:documentation>The instance entity calls out a specific match of the pattern. This can only be a positive integer.</xsd:documentation>
+                                <xsd:appinfo>
+                                    <sch:pattern id="aws-def_apicontent_i">
+                                        <sch:rule context="aws-def:apicontent_state/aws-def:instance">
+                                            <sch:assert test="(@var_ref and string-length(.)=0) or (number(.) &gt;= 1)"><sch:value-of select="../@id"/> - the value of instance must be greater than or equal to one, or empty if var_ref is used.</sch:assert>
+                                        </sch:rule>
+                                    </sch:pattern>
+                                </xsd:appinfo>
+                            </xsd:annotation>
+                        </xsd:element>
+                        <xsd:element name="text" type="oval-def:EntityStateAnySimpleType" minOccurs="0" maxOccurs="1">
+                            <xsd:annotation>
+                                <xsd:documentation>The text entity represents the block of text that matched the specified pattern.</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:element>
+                        <xsd:element name="subexpression" type="oval-def:EntityStateAnySimpleType" minOccurs="0" maxOccurs="1">
+                            <xsd:annotation>
+                                <xsd:documentation>
+                                    The subexpression entity represents a value to test against the subexpression in the specified pattern. If multiple subexpressions are 
+                                    specified in the pattern, this value is tested against all of them. For example, if the pattern abc(.*)mno(.*)xyp was supplied, and 
+                                    the state specifies a subexpression value of enabled, then the test would check that both (or at least one, none, etc. depending on 
+                                    the entity_check attribute) of the subexpressions have a value of enabled.
+                                </xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+    
     <!-- =============================================================================== -->
     <!-- =========================  IAM CREDENTIAL REPORT TEST  ======================== -->
     <!-- =============================================================================== -->
@@ -1072,6 +1303,11 @@
                         <xsd:documentation>Describe</xsd:documentation>
                     </xsd:annotation>
                 </xsd:enumeration>
+                <xsd:enumeration value="LS">
+                    <xsd:annotation>
+                        <xsd:documentation>ls</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:enumeration>
                 <xsd:enumeration value="">
                     <xsd:annotation>
                         <xsd:documentation>The empty string value is permitted here to allow for detailed error reporting and variable references.</xsd:documentation>
@@ -1105,6 +1341,11 @@
                 <xsd:enumeration value="DESCRIBE">
                     <xsd:annotation>
                         <xsd:documentation>Describe</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:enumeration>
+                <xsd:enumeration value="LS">
+                    <xsd:annotation>
+                        <xsd:documentation>ls</xsd:documentation>
                     </xsd:annotation>
                 </xsd:enumeration>
                 <xsd:enumeration value="">

@@ -81,29 +81,17 @@
                                 </xsd:documentation>
                             </xsd:annotation>
                         </xsd:element>
-                        <xsd:element name="xpath" type="oval-sc:EntityItemStringType" minOccurs="0" maxOccurs="1">
+                        <xsd:element name="jsonpath" type="oval-sc:EntityItemStringType" minOccurs="0" maxOccurs="1">
                             <xsd:annotation>
                                 <xsd:documentation>
-                                    Specifies an XPath 1.0 expression to evaluate against the XML content specified by the 
-                                    xml_output entity.  This XPath 1.0 expression must evaluate to a list of zero or more text 
-                                    values which will be accessible in OVAL via instances of the value_of entity.  Any results 
-                                    from evaluating the XPath 1.0 expression other than a list of text strings (e.g., a nodes 
-                                    set) is considered an error.  The intention is that the text values be drawn from instances 
-                                    of a single, uniquely named element or attribute.  However, an OVAL interpreter is not 
-                                    required to verify this, so the author should define the XPath expression carefully.  Note 
-                                    that "equals" is the only valid operator for the xpath entity.
-                                </xsd:documentation>
-                            </xsd:annotation>
-                        </xsd:element>
-                        <xsd:element name="xml_output" type="aws-sc:EntityItemAnyXmlType" minOccurs="0" maxOccurs="1">
-                            <xsd:annotation>
-                                <xsd:documentation>
-                                    This element represents XML content constructed by collection components when processing
-                                    the AWS API response objects.  It is incumbent upon tools implementing this collection to
-                                    appropriately construct the XML representation of response data.
-                                    aws_api_response
-                                        api_method_name
-                                            response_data
+                                    Specifies an JSONPath expression to evaluate against the output constructed from the API 
+                                    Response object.  This JSONPath expression must evaluate to a list of zero or more text values 
+                                    which will be accessible in OVAL via instances of the value_of entity.  Any results from evaluating 
+                                    the JSONPath expression other than a list of text strings (e.g., a nodes set) is considered an 
+                                    error.  The intention is that the text values be drawn from instances of a single, uniquely named 
+                                    node or attribute.  However, an OVAL interpreter is not required to verify this, so the author 
+                                    should define the JSONPath expression carefully.  Note that "equals" is the only valid operator for 
+                                    the JSONPath entity.
                                 </xsd:documentation>
                             </xsd:annotation>
                         </xsd:element>
@@ -112,6 +100,108 @@
                                 <xsd:documentation>
                                     The value_of element checks the value(s) of the text node(s) or attribute(s) found. How this 
                                     is used is entirely controlled by operator attributes.
+                                </xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+    
+    <!-- =============================================================================== -->
+    <!-- ===========================  AWS API CONTENT ITEM  ============================ -->
+    <!-- =============================================================================== -->
+    <xsd:element name="apicontent_item" substitutionGroup="oval-sc:item">
+        <xsd:annotation>
+            <xsd:documentation>
+                TBD
+                It extends the standard ItemType as defined in the oval-system-characteristics schema and one should refer to 
+                the ItemType description for more information.
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="oval-sc:ItemType">
+                    <xsd:sequence>
+                        <xsd:element name="service_name" type="aws-sc:EntityItemAWSServiceType" minOccurs="0" maxOccurs="1">
+                            <xsd:annotation>
+                                <xsd:documentation>The name of the AWS API service being invoked</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:element>
+                        <xsd:element name="verb" type="aws-sc:EntityItemAWSVerbType" minOccurs="0" maxOccurs="1">
+                            <xsd:annotation>
+                                <xsd:documentation>
+                                    The verb element represents the type of operation allowed to be invoked using the
+                                    AWS API.  The enumerated list of allowed verbs restricts to those operations that
+                                    are read-only, such as "list", "get", and "describe".  For example, the 
+                                    "list-account-password-policy" API method would be split into a verb of "list" and 
+                                    a noun of "account-password-policy".
+                                </xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:element>
+                        <xsd:element name="noun" type="oval-sc:EntityItemStringType" minOccurs="0" maxOccurs="1">
+                            <xsd:annotation>
+                                <xsd:documentation>
+                                    The noun element represents the remaining part of the API method to be invoked, after
+                                    the verb portion has been removed.  For example, the "list-account-password-policy" API
+                                    method would be split into a verb of "list" and a noun of "account-password-policy".
+                                </xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:element>
+                        <xsd:element name="parameters" type="oval-sc:EntityItemRecordType" minOccurs="0" maxOccurs="1">
+                            <xsd:annotation>
+                                <xsd:documentation>
+                                    The optional parameters element describes any required request parameters to be 
+                                    provided to the AWS API call.  Examples of parameters are specific AWS regions, 
+                                    S3 bucket names, IAM user names, etc.
+                                </xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:element>
+                        <xsd:element name="pattern" type="oval-sc:EntityItemStringType" minOccurs="0" maxOccurs="1">
+                            <xsd:annotation>
+                                <xsd:documentation>
+                                    The pattern entity represents a regular expression that is used to define a block of text.  
+                                    Subexpression notation (parenthesis) is used to call out a value(s) to test against.  For 
+                                    example, the pattern abc(.*)xyz would look for a block of text in the file that starts with 
+                                    abc and ends with xyz, with the subexpression being all the characters that exist inbetween.  
+                                    Note that if the pattern can match more than one block of text starting at the same point, 
+                                    then it matches the longest. Subexpressions also match the longest possible substrings, subject 
+                                    to the constraint that the whole match be as long as possible, with subexpressions starting 
+                                    earlier in the pattern taking priority over ones starting later.
+                                </xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:element>
+                        <xsd:element name="instance" type="oval-sc:EntityItemIntType" minOccurs="0" maxOccurs="1">
+                            <xsd:annotation>
+                                <xsd:documentation>
+                                    The instance entity calls out which match of the pattern is being represented by this item.  The 
+                                    first match is given an instance value of 1, the second match is given an instance value of 2, and 
+                                    so on.  The main purpose of this entity is too provide uniqueness for different apicontent_items that 
+                                    results from multiple matches of a given pattern against the same API output.
+                                </xsd:documentation>
+                                <xsd:appinfo>
+                                    <sch:pattern id="aws-sc_apicontent_i">
+                                        <sch:rule context="aws-sc:apicontent_item/aws-sc:instance">
+                                            <sch:assert test="number(.) &gt;= 1"><sch:value-of select="../@id"/> - the value of instance must be greater than or equal to one</sch:assert>
+                                        </sch:rule>
+                                    </sch:pattern>
+                                </xsd:appinfo>
+                            </xsd:annotation>
+                        </xsd:element>
+                        <xsd:element name="text" type="oval-sc:EntityItemAnySimpleType" minOccurs="0" maxOccurs="1">
+                            <xsd:annotation>
+                                <xsd:documentation>The text entity represents the block of text that matched the specified pattern.</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:element>
+                        <xsd:element name="subexpression" type="oval-sc:EntityItemAnySimpleType" minOccurs="0" maxOccurs="unbounded">
+                            <xsd:annotation>
+                                <xsd:documentation>
+                                    The subexpression entity represents the value of a subexpression in the specified pattern.  If multiple 
+                                    subexpressions are specified in the pattern, then multiple entities are presented.  Note that the 
+                                    apicontent_state in the definition schema only allows a single subexpression entity.  This means that the 
+                                    test will check that all (or at least one, none, etc.) the subexpressions pass the same check.  This means 
+                                    that the order of multiple subexpression entities in the item does not matter.
                                 </xsd:documentation>
                             </xsd:annotation>
                         </xsd:element>
