@@ -1,5 +1,5 @@
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:oval-sc="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:aws-sc="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#aws" xmlns:sch="http://purl.oclc.org/dsdl/schematron" targetNamespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#aws" elementFormDefault="qualified" version="5.11">
-    <xsd:import namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5" schemaLocation="../oval-system-characteristics-schema.xsd"/>
+    <xsd:import namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5" schemaLocation="oval-system-characteristics-schema.xsd"/>
     
     <xsd:annotation>
         <xsd:documentation>
@@ -356,33 +356,8 @@
     </xsd:element>
     
     <!-- =============================================================================== -->
-    <!-- ================================  [NAME] ITEM  =============================== -->
-    <!-- =============================================================================== -->
-    <!--<xsd:element name="[NAME]_item" substitutionGroup="oval-sc:item">
-        <xsd:annotation>
-            <xsd:documentation> DESCRIPTION OF [NAME]_item; possibly including the command and output that's parsed to collect this item It extends the standard ItemType as defined in the oval-system-characteristics schema and one should refer to the ItemType description for more information. </xsd:documentation>
-        </xsd:annotation>
-        <xsd:complexType>
-            <xsd:complexContent>
-                <xsd:extension base="oval-sc:ItemType">
-                    <xsd:sequence>
-                        <xsd:element name="" type="oval-sc:EntityItem[TYPE]Type" minOccurs="1" maxOccurs="1">
-                            <xsd:annotation>
-                                <xsd:documentation/>
-                            </xsd:annotation>
-                        </xsd:element>
-                        <xsd:element name="xml_output" type="aws-sc:EntityItemAnyXmlType" minOccurs="0" maxOccurs="1">
-                            <xsd:annotation>
-                                <xsd:documentation/>
-                            </xsd:annotation>
-                        </xsd:element>
-                    </xsd:sequence>
-                </xsd:extension>
-            </xsd:complexContent>
-        </xsd:complexType>
-    </xsd:element>-->
-    
     <!-- ================================= TYPES ======================================= -->
+    <!-- =============================================================================== -->
     <xsd:complexType name="EntityItemAWSServiceType">
         <xsd:annotation>
             <xsd:documentation>
@@ -660,7 +635,6 @@
             </xsd:restriction>
         </xsd:simpleContent>
     </xsd:complexType>
-
     <xsd:complexType name="EntityItemAWSVerbType">
         <xsd:annotation>
             <xsd:documentation>
@@ -696,16 +670,4 @@
             </xsd:restriction>
         </xsd:simpleContent>
     </xsd:complexType>
-    
-    <xsd:complexType name="EntityItemAnyXmlType">
-        <xsd:annotation>
-            <xsd:documentation>
-                A blob of XML
-            </xsd:documentation>
-        </xsd:annotation>
-        <xsd:sequence>
-            <xsd:any minOccurs="0" maxOccurs="1" namespace="##other" processContents="lax"/>
-        </xsd:sequence>
-    </xsd:complexType>
-    
 </xsd:schema>

@@ -1,17 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:aws-def="http://oval.mitre.org/XMLSchema/oval-definitions-5#aws" xmlns:sch="http://purl.oclc.org/dsdl/schematron" targetNamespace="http://oval.mitre.org/XMLSchema/oval-definitions-5#aws" elementFormDefault="qualified" version="5.11">
     
-    <xsd:import namespace="http://oval.mitre.org/XMLSchema/oval-common-5" schemaLocation="../oval-common-schema.xsd"/>
-    <xsd:import namespace="http://oval.mitre.org/XMLSchema/oval-definitions-5" schemaLocation="../oval-definitions-schema.xsd"/>
+    <xsd:import namespace="http://oval.mitre.org/XMLSchema/oval-common-5" schemaLocation="oval-common-schema.xsd"/>
+    <xsd:import namespace="http://oval.mitre.org/XMLSchema/oval-definitions-5" schemaLocation="oval-definitions-schema.xsd"/>
     
     <xsd:annotation>
-        <xsd:documentation> The following is a description of the elements, types, and attributes that compose the specific tests required to assess Amazon Web Services (AWS) managed services found in Open Vulnerability and Assessment Language (OVAL). Each test is an extension of the standard test element defined in the Core Definition Schema. Through extension, each test inherits a set of elements and attributes that are shared amongst all OVAL tests. Each test is described in detail and should provide the information necessary to understand what each element and attribute represents. This document is intended for developers and assumes some familiarity with XML. A high level description of the interaction between the different tests and their relationship to the Core Definition Schema is not outlined here. </xsd:documentation>
-        <xsd:documentation> The OVAL Schema is maintained by the OVAL Community. For more information, including how to get involved in the project and how to submit change requests, please visit the OVAL website at http://oval.cisecurity.org. </xsd:documentation>
+        <xsd:documentation>
+            The following is a description of the elements, types, and attributes that compose the specific 
+            tests required to assess Amazon Web Services (AWS) managed services found in Open Vulnerability 
+            and Assessment Language (OVAL). Each test is an extension of the standard test element defined 
+            in the Core Definition Schema. Through extension, each test inherits a set of elements and attributes 
+            that are shared amongst all OVAL tests. Each test is described in detail and should provide the 
+            information necessary to understand what each element and attribute represents. This document is 
+            intended for developers and assumes some familiarity with XML. A high level description of the 
+            interaction between the different tests and their relationship to the Core Definition Schema is 
+            not outlined here.
+        </xsd:documentation>
+        <xsd:documentation>
+            The OVAL Schema is maintained by the OVAL Community. For more information, including how to get 
+            involved in the project and how to submit change requests, please visit the OVAL website at 
+            http://oval.cisecurity.org.
+        </xsd:documentation>
         <xsd:appinfo>
             <schema>Amazon Web Services Definition</schema>
             <version>5.11.2</version>
             <date>09/08/2019 09:00:00 AM</date>
-            <terms_of_use> For the portion subject to the copyright in the United States: Copyright (c) 2016 United States Government. All Rights Reserved. Copyright (c) 2016, Center for Internet Security. All rights reserved. The contents of this file are subject to the terms of the OVAL License located at https://oval.cisecurity.org/terms. See the OVAL License for the specific language governing permissions and limitations for use of this schema. When distributing copies of the OVAL Schema, this license header must be included. </terms_of_use>
+            <terms_of_use>
+                For the portion subject to the copyright in the United States: Copyright (c) 2016 United States 
+                Government. All Rights Reserved. Copyright (c) 2016, Center for Internet Security. All rights 
+                reserved. The contents of this file are subject to the terms of the OVAL License located at 
+                https://oval.cisecurity.org/terms. See the OVAL License for the specific language governing 
+                permissions and limitations for use of this schema. When distributing copies of the OVAL Schema, 
+                this license header must be included.
+            </terms_of_use>
+            
             <sch:ns prefix="oval-def" uri="http://oval.mitre.org/XMLSchema/oval-definitions-5"/>
             <sch:ns prefix="aws-def" uri="http://oval.mitre.org/XMLSchema/oval-definitions-5#aws"/>
             <sch:ns prefix="xsi" uri="http://www.w3.org/2001/XMLSchema-instance"/>
@@ -1275,7 +1297,6 @@
             </xsd:restriction>
         </xsd:simpleContent>
     </xsd:complexType>
-    
     <xsd:complexType name="EntityObjectAWSVerbType">
         <xsd:annotation>
             <xsd:documentation>
@@ -1355,16 +1376,5 @@
                 </xsd:enumeration>
             </xsd:restriction>
         </xsd:simpleContent>
-    </xsd:complexType>
-    
-    <xsd:complexType name="EntityStateAnyXmlType">
-        <xsd:annotation>
-            <xsd:documentation>
-                A blob of XML
-            </xsd:documentation>
-        </xsd:annotation>
-        <xsd:sequence>
-            <xsd:any minOccurs="0" maxOccurs="1" namespace="##other" processContents="lax"/>
-        </xsd:sequence>
     </xsd:complexType>
 </xsd:schema>
