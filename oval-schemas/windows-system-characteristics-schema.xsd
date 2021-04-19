@@ -3452,12 +3452,12 @@
 											<xsd:documentation>The identifier defines the location of the found result (application pool name/site name).</xsd:documentation>
 									  </xsd:annotation>
 								</xsd:element>
-								<xsd:element name="parameter" type="oval-sc:EntityItemAnySimpleType" minOccurs="0" maxOccurs="1">
+								<xsd:element name="parameter" type="oval-sc:EntityItemStringType" minOccurs="0" maxOccurs="1">
 									  <xsd:annotation>
 											<xsd:documentation>The parameter value defines the location of the setting.</xsd:documentation>
 									  </xsd:annotation>
 								</xsd:element>
-								<xsd:element name="result" type="oval-sc:EntityItemStringType" minOccurs="0" maxOccurs="1">
+								<xsd:element name="result" type="oval-sc:EntityItemAnySimpleType" minOccurs="0" maxOccurs="1">
 									  <xsd:annotation>
 											<xsd:documentation>The value of the collected collected setting.</xsd:documentation>
 									  </xsd:annotation>
