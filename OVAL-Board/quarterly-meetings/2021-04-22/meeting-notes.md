@@ -37,3 +37,5 @@ David Ries commented on his support for keeping Dale on the board, as he's histo
 1. Bill M. to review YAML file content proposal
 2. (for area supervisors mtg) Should a "cloud" area be created and who would be that AS?
 3. (for area supervisors mtg) If a new area is proposed, is there a default, temporary supervisor assigned?  Does that fall to CIS as the conservator?
+4. CIS to email board to vote on Dale Rich remaining as an Individual member
+5. CIS to email board to vote on Watson Sato joining as RedHat's second representative
