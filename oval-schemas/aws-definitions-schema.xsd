@@ -1,0 +1,1567 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:aws-def="http://oval.mitre.org/XMLSchema/oval-definitions-5#aws" xmlns:sch="http://purl.oclc.org/dsdl/schematron" targetNamespace="http://oval.mitre.org/XMLSchema/oval-definitions-5#aws" elementFormDefault="qualified" version="5.11">
+    
+    <xsd:import namespace="http://oval.mitre.org/XMLSchema/oval-common-5" schemaLocation="oval-common-schema.xsd"/>
+    <xsd:import namespace="http://oval.mitre.org/XMLSchema/oval-definitions-5" schemaLocation="oval-definitions-schema.xsd"/>
+    
+    <xsd:annotation>
+        <xsd:documentation>
+            The following is a description of the elements, types, and attributes that compose the specific 
+            tests required to assess Amazon Web Services (AWS) managed services found in Open Vulnerability 
+            and Assessment Language (OVAL). Each test is an extension of the standard test element defined 
+            in the Core Definition Schema. Through extension, each test inherits a set of elements and attributes 
+            that are shared amongst all OVAL tests. Each test is described in detail and should provide the 
+            information necessary to understand what each element and attribute represents. This document is 
+            intended for developers and assumes some familiarity with XML. A high level description of the 
+            interaction between the different tests and their relationship to the Core Definition Schema is 
+            not outlined here.
+        </xsd:documentation>
+        <xsd:documentation>
+            The OVAL Schema is maintained by the OVAL Community. For more information, including how to get 
+            involved in the project and how to submit change requests, please visit the OVAL website at 
+            http://oval.cisecurity.org.
+        </xsd:documentation>
+        <xsd:appinfo>
+            <schema>Amazon Web Services Definition</schema>
+            <version>5.11.2</version>
+            <date>09/08/2019 09:00:00 AM</date>
+            <terms_of_use>
+                For the portion subject to the copyright in the United States: Copyright (c) 2016 United States 
+                Government. All Rights Reserved. Copyright (c) 2016, Center for Internet Security. All rights 
+                reserved. The contents of this file are subject to the terms of the OVAL License located at 
+                https://oval.cisecurity.org/terms. See the OVAL License for the specific language governing 
+                permissions and limitations for use of this schema. When distributing copies of the OVAL Schema, 
+                this license header must be included.
+            </terms_of_use>
+            
+            <sch:ns prefix="oval-def" uri="http://oval.mitre.org/XMLSchema/oval-definitions-5"/>
+            <sch:ns prefix="aws-def" uri="http://oval.mitre.org/XMLSchema/oval-definitions-5#aws"/>
+            <sch:ns prefix="xsi" uri="http://www.w3.org/2001/XMLSchema-instance"/>
+        </xsd:appinfo>
+    </xsd:annotation>
+
+    <!-- =============================================================================== -->
+    <!-- ==================================  AWS API TEST  ============================== -->
+    <!-- =============================================================================== -->
+    <xsd:element name="api_test" substitutionGroup="oval-def:test">
+        <xsd:annotation>
+            <xsd:documentation>
+                The AWS api_test is used to leverage the AWS infrastructure API in order to check
+                various attributes collected from the myriad services offered by AWS. 
+                The test extends the standard TestType as defined in the oval-definitions-schema and 
+                one should refer to the TestType description for more information. The required object 
+                element references a api_object and the optional state element specifies the metadata 
+                to check.
+            </xsd:documentation>
+            <xsd:appinfo>
+                <oval:element_mapping>
+                    <oval:test>api_test</oval:test>
+                    <oval:object>api_object</oval:object>
+                    <oval:state>api_state</oval:state>
+                    <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#aws">api_item</oval:item>
+                </oval:element_mapping>
+            </xsd:appinfo>
+            <xsd:appinfo>
+                <sch:pattern id="aws-def_api_test">
+                    <sch:rule context="aws-def:api_test/aws-def:object">
+                        <sch:assert test="@object_ref=ancestor::oval-def:oval_definitions/oval-def:objects/aws-def:api_object/@id"><sch:value-of select="../@id"/> - the object child element of a api_test must reference a api_object</sch:assert>
+                    </sch:rule>
+                    <sch:rule context="aws-def:api_test/aws-def:state">
+                        <sch:assert test="@state_ref=ancestor::oval-def:oval_definitions/oval-def:states/aws-def:api_state/@id"><sch:value-of select="../@id"/> - the state child element of a api_test must reference a api_state</sch:assert>
+                    </sch:rule>
+                </sch:pattern>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="oval-def:TestType">
+                    <xsd:sequence>
+                        <xsd:element name="object" type="oval-def:ObjectRefType"/>
+                        <xsd:element name="state" type="oval-def:StateRefType" minOccurs="0" maxOccurs="unbounded"/>
+                    </xsd:sequence>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="api_object" substitutionGroup="oval-def:object">
+        <xsd:annotation>
+            <xsd:documentation>
+                The api_object element is used by a api_test to identify the set of AWS API endpoints 
+                to use and the parameters to provide to them for checking the state of an AWS infrastructure. 
+                In order to ensure the consistency of AWS API support among OVAL interpreters as well as ensure
+                that the state of a system is not changed, every OVAL interpreter must implement the following 
+                requirements.  An OVAL interpreter must only support the processing of the verbs specified in the 
+                EntityObjectAWSVerbType.  If a verb that is not defined in this enumeration is discovered, an 
+                error should be reported and the AWS API must not be invoked.  While XML schema validation will
+                enforce this requirement, it is strongly recommended that OVAL interpreters implement a whitelist
+                of allowed AWS API verbs.  This may be accomplished by utilizing the AWS credential profile for 
+                an IAM user granted only the required permissions.  Furthermore, OVAL interpreters are expected
+                to format API response objects as XML content for use by the object's XPath element value.
+            </xsd:documentation>
+            <xsd:appinfo>
+                <sch:pattern id="aws-def_api_object_verify_filter_state">
+                    <sch:rule context="aws-def:api_object//oval-def:filter">
+                        <sch:let name="parent_object" value="ancestor::aws-def:api_object"/>
+                        <sch:let name="parent_object_id" value="$parent_object/@id"/>
+                        <sch:let name="state_ref" value="."/>
+                        <sch:let name="reffed_state" value="ancestor::oval-def:oval_definitions/oval-def:states/*[@id=$state_ref]"/>
+                        <sch:let name="state_name" value="local-name($reffed_state)"/>
+                        <sch:let name="state_namespace" value="namespace-uri($reffed_state)"/>
+                        <sch:assert test="(($state_namespace='http://oval.mitre.org/XMLSchema/oval-definitions-5#aws') and ($state_name='api_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
+                    </sch:rule>
+                </sch:pattern>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="oval-def:ObjectType">
+                    <xsd:sequence>
+                        <xsd:choice>
+                            <xsd:element ref="oval-def:set"/>
+                            <xsd:sequence>
+                                <xsd:element name="service_name" type="aws-def:EntityObjectAWSServiceType" minOccurs="1" maxOccurs="1">
+                                    <xsd:annotation>
+                                        <xsd:documentation>The name of the AWS API service to be invoked, such as iam, s3, or apigateway (among many others).</xsd:documentation>
+                                        <xsd:appinfo>
+                                            <sch:pattern id="aws-def_apiobjservice_name">
+                                                <sch:rule context="aws-def:api_object/aws-def:service_name">
+                                                    <sch:assert test="not(@operation) or @operation='equals'"><sch:value-of select="../@id"/> - operation attribute for the service_name entity of a api_object must be 'equals'</sch:assert>
+                                                </sch:rule>
+                                            </sch:pattern>
+                                        </xsd:appinfo>
+                                    </xsd:annotation>
+                                </xsd:element>
+                                <xsd:element name="verb" type="aws-def:EntityObjectAWSVerbType" minOccurs="1" maxOccurs="1">
+                                    <xsd:annotation>
+                                        <xsd:documentation>The AWS API verb.</xsd:documentation>
+                                        <xsd:appinfo>
+                                            <sch:pattern id="aws-def_apiobjverb">
+                                                <sch:rule context="aws-def:api_object/aws-def:verb">
+                                                    <sch:assert test="not(@operation) or @operation='equals'"><sch:value-of select="../@id"/> - operation attribute for the verb entity of a api_object must be 'equals'</sch:assert>
+                                                </sch:rule>
+                                            </sch:pattern>
+                                        </xsd:appinfo>
+                                    </xsd:annotation>
+                                </xsd:element>
+                                <xsd:element name="noun" type="oval-def:EntityObjectStringType" nillable="true" maxOccurs="1">
+                                    <xsd:annotation>
+                                        <xsd:documentation>The AWS API noun.</xsd:documentation>
+                                        <xsd:appinfo>
+                                            <sch:pattern id="aws-def_apiobjnoun">
+                                                <sch:rule context="aws-def:api_object/aws-def:noun">
+                                                    <sch:assert test="not(@operation) or @operation='equals'"><sch:value-of select="../@id"/> - operation attribute for the noun entity of a api_object must be 'equals'</sch:assert>
+                                                </sch:rule>
+                                            </sch:pattern>
+                                        </xsd:appinfo>
+                                    </xsd:annotation>
+                                </xsd:element>
+                                <xsd:element name="parameters" type="oval-def:EntityObjectRecordType" nillable="true">
+                                    <xsd:annotation>
+                                        <xsd:documentation>
+                                            A list of properties (name and value pairs) as input to invoke the AWS API method. Each 
+                                            property name must be unique. When xsi:nil='true', parameters are not provided to the API 
+                                            method.
+                                        </xsd:documentation>
+                                        <xsd:appinfo>
+                                            <sch:pattern id="aws-def_apiobjparameters">
+                                                <sch:rule context="aws-def:api_object/aws-def:parameters">
+                                                    <sch:assert test="@datatype='record'"><sch:value-of select="../@id"/> - datatype attribute for the parameters entity of a api_object must be 'record'</sch:assert>
+                                                </sch:rule>
+                                            </sch:pattern>
+                                        </xsd:appinfo>
+                                    </xsd:annotation>
+                                    <xsd:unique name="UniqueApiObjParametersFieldName">
+                                        <xsd:selector xpath="./oval-def:field"/>
+                                        <xsd:field xpath="@name"/>
+                                    </xsd:unique>
+                                </xsd:element>
+                                <xsd:element name="jsonpath" type="oval-def:EntityObjectStringType">
+                                    <xsd:annotation>
+                                        <xsd:documentation>
+                                            Specifies an JSONPath expression to evaluate against the output constructed from the API 
+                                            Response object.  This JSONPath expression must evaluate to a list of zero or more text values 
+                                            which will be accessible in OVAL via instances of the value_of entity.  Any results from evaluating 
+                                            the JSONPath expression other than a list of text strings (e.g., a nodes set) is considered an 
+                                            error.  The intention is that the text values be drawn from instances of a single, uniquely named 
+                                            node or attribute.  However, an OVAL interpreter is not required to verify this, so the author 
+                                            should define the JSONPath expression carefully.  Note that "equals" is the only valid operator for 
+                                            the JSONPath entity.
+                                        </xsd:documentation>
+                                        <xsd:appinfo>
+                                            <sch:pattern id="aws-def_apiobjjsonpath">
+                                                <sch:rule context="aws-def:api_object/aws-def:jsonpath">
+                                                    <sch:assert test="not(@operation) or @operation='equals'">
+                                                        <sch:value-of select="../@id"/> - operation attribute for the jsonpath entity of an api_object should be 'equals', note that this overrules the general operation attribute validation (i.e. follow this one)
+                                                    </sch:assert>
+                                                </sch:rule>
+                                            </sch:pattern>
+                                        </xsd:appinfo>
+                                    </xsd:annotation>
+                                </xsd:element>
+                                <xsd:element ref="oval-def:filter" minOccurs="0" maxOccurs="unbounded"/>
+                            </xsd:sequence>
+                        </xsd:choice>
+                    </xsd:sequence>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="api_state" substitutionGroup="oval-def:state">
+        <xsd:annotation>
+            <xsd:documentation>The api_state allows for assertions about the response attributes generated by the invocation of an AWS API request.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="oval-def:StateType">
+                    <xsd:sequence>
+                        <xsd:element name="service_name" type="aws-def:EntityStateAWSServiceType" minOccurs="0" maxOccurs="1">
+                            <xsd:annotation>
+                                <xsd:documentation>The name of the AWS API service to be invoked, such as iam, s3, or apigateway (among many others).</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:element>
+                        <xsd:element name="verb" type="aws-def:EntityStateAWSVerbType" minOccurs="0" maxOccurs="1">
+                            <xsd:annotation>
+                                <xsd:documentation>The AWS API verb.</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:element>
+                        <xsd:element name="noun" type="oval-def:EntityStateStringType" minOccurs="0" maxOccurs="1">
+                            <xsd:annotation>
+                                <xsd:documentation>The AWS API noun.</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:element>
+                        <xsd:element name="parameters" type="oval-def:EntityStateRecordType" minOccurs="0" maxOccurs="1">
+                            <xsd:annotation>
+                                <xsd:documentation>
+                                    A list of properties (name and value pairs) as input to invoke the AWS API method. Each 
+                                    property name must be unique. When xsi:nil='true', parameters are not provided to the API 
+                                    method.
+                                </xsd:documentation>
+                                <xsd:appinfo>
+                                    <sch:pattern id="aws-def_apisteparameters">
+                                        <sch:rule context="aws-def:api_state/aws-def:parameters">
+                                            <sch:assert test="@datatype='record'"><sch:value-of select="../@id"/> - datatype attribute for the parameters entity of a api_state must be 'record'</sch:assert>
+                                        </sch:rule>
+                                    </sch:pattern>
+                                </xsd:appinfo>
+                            </xsd:annotation>
+                            <xsd:unique name="UniqueApiSteParametersFieldName">
+                                <xsd:selector xpath="./oval-def:field"/>
+                                <xsd:field xpath="@name"/>
+                            </xsd:unique>
+                        </xsd:element>
+                        <xsd:element name="jsonpath" type="oval-def:EntityStateStringType" minOccurs="0" maxOccurs="1">
+                            <xsd:annotation>
+                                <xsd:documentation>
+                                    Specifies an JSONPath expression to evaluate against the output constructed from the API 
+                                    Response object.  This JSONPath expression must evaluate to a list of zero or more text values 
+                                    which will be accessible in OVAL via instances of the value_of entity.  Any results from evaluating 
+                                    the JSONPath expression other than a list of text strings (e.g., a nodes set) is considered an 
+                                    error.  The intention is that the text values be drawn from instances of a single, uniquely named 
+                                    node or attribute.  However, an OVAL interpreter is not required to verify this, so the author 
+                                    should define the JSONPath expression carefully.  Note that "equals" is the only valid operator for 
+                                    the JSONPath entity.
+                                </xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:element>
+                        <xsd:element name="value_of" type="oval-def:EntityStateAnySimpleType" minOccurs="0" maxOccurs="1">
+                            <xsd:annotation>
+                                <xsd:documentation>The value_of element checks the value(s) of the text node(s) or attribute(s) found.</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+
+    <!-- =============================================================================== -->
+    <!-- =============================  AWS API CONTENT TEST  ========================== -->
+    <!-- =============================================================================== -->
+    <xsd:element name="apicontent_test" substitutionGroup="oval-def:test">
+        <xsd:annotation>
+            <xsd:documentation>
+                The AWS apicontent_test is used to leverage the AWS infrastructure API in order to check
+                various attributes collected from the myriad services offered by AWS. 
+                The test extends the standard TestType as defined in the oval-definitions-schema and 
+                one should refer to the TestType description for more information. The required object 
+                element references a api_object and the optional state element specifies the metadata 
+                to check.
+            </xsd:documentation>
+            <xsd:appinfo>
+                <oval:element_mapping>
+                    <oval:test>apicontent_test</oval:test>
+                    <oval:object>apicontent_object</oval:object>
+                    <oval:state>apicontent_state</oval:state>
+                    <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#aws">apicontent_item</oval:item>
+                </oval:element_mapping>
+            </xsd:appinfo>
+            <xsd:appinfo>
+                <sch:pattern id="aws-def_apicontent_test">
+                    <sch:rule context="aws-def:apicontent_test/aws-def:object">
+                        <sch:assert test="@object_ref=ancestor::oval-def:oval_definitions/oval-def:objects/aws-def:apicontent_object/@id"><sch:value-of select="../@id"/> - the object child element of a apicontent_test must reference a apicontent_object</sch:assert>
+                    </sch:rule>
+                    <sch:rule context="aws-def:api_test/aws-def:state">
+                        <sch:assert test="@state_ref=ancestor::oval-def:oval_definitions/oval-def:states/aws-def:apicontent_state/@id"><sch:value-of select="../@id"/> - the state child element of a apicontent_test must reference a apicontent_state</sch:assert>
+                    </sch:rule>
+                </sch:pattern>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="oval-def:TestType">
+                    <xsd:sequence>
+                        <xsd:element name="object" type="oval-def:ObjectRefType"/>
+                        <xsd:element name="state" type="oval-def:StateRefType" minOccurs="0" maxOccurs="unbounded"/>
+                    </xsd:sequence>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="apicontent_object" substitutionGroup="oval-def:object">
+        <xsd:annotation>
+            <xsd:documentation>
+                The apicontent_object element is used by a apicontent_test to identify the set of AWS API endpoints 
+                to use and the parameters to provide to them for checking the state of an AWS infrastructure. 
+                In order to ensure the consistency of AWS API support among OVAL interpreters as well as ensure
+                that the state of a system is not changed, every OVAL interpreter must implement the following 
+                requirements.  An OVAL interpreter must only support the processing of the verbs specified in the 
+                EntityObjectAWSVerbType.  If a verb that is not defined in this enumeration is discovered, an 
+                error should be reported and the AWS API must not be invoked.  While XML schema validation will
+                enforce this requirement, it is strongly recommended that OVAL interpreters implement a whitelist
+                of allowed AWS API verbs.  This may be accomplished by utilizing the AWS credential profile for 
+                an IAM user granted only the required permissions.
+            </xsd:documentation>
+            <xsd:appinfo>
+                <sch:pattern id="aws-def_apicontent_object_verify_filter_state">
+                    <sch:rule context="aws-def:apicontent_object//oval-def:filter">
+                        <sch:let name="parent_object" value="ancestor::aws-def:apicontent_object"/>
+                        <sch:let name="parent_object_id" value="$parent_object/@id"/>
+                        <sch:let name="state_ref" value="."/>
+                        <sch:let name="reffed_state" value="ancestor::oval-def:oval_definitions/oval-def:states/*[@id=$state_ref]"/>
+                        <sch:let name="state_name" value="local-name($reffed_state)"/>
+                        <sch:let name="state_namespace" value="namespace-uri($reffed_state)"/>
+                        <sch:assert test="(($state_namespace='http://oval.mitre.org/XMLSchema/oval-definitions-5#aws') and ($state_name='apicontent_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
+                    </sch:rule>
+                </sch:pattern>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="oval-def:ObjectType">
+                    <xsd:sequence>
+                        <xsd:choice>
+                            <xsd:element ref="oval-def:set"/>
+                            <xsd:sequence>
+                                <xsd:element name="service_name" type="aws-def:EntityObjectAWSServiceType" minOccurs="1" maxOccurs="1">
+                                    <xsd:annotation>
+                                        <xsd:documentation>The name of the AWS API service to be invoked, such as iam, s3, or apigateway (among many others).</xsd:documentation>
+                                        <xsd:appinfo>
+                                            <sch:pattern id="aws-def_apicontentobjservice_name">
+                                                <sch:rule context="aws-def:apicontent_object/aws-def:service_name">
+                                                    <sch:assert test="not(@operation) or @operation='equals'"><sch:value-of select="../@id"/> - operation attribute for the service_name entity of a apicontent_object must be 'equals'</sch:assert>
+                                                </sch:rule>
+                                            </sch:pattern>
+                                        </xsd:appinfo>
+                                    </xsd:annotation>
+                                </xsd:element>
+                                <xsd:element name="verb" type="aws-def:EntityObjectAWSVerbType" minOccurs="1" maxOccurs="1">
+                                    <xsd:annotation>
+                                        <xsd:documentation>The AWS API verb.</xsd:documentation>
+                                        <xsd:appinfo>
+                                            <sch:pattern id="aws-def_apicontentobjverb">
+                                                <sch:rule context="aws-def:apicontent_object/aws-def:verb">
+                                                    <sch:assert test="not(@operation) or @operation='equals'"><sch:value-of select="../@id"/> - operation attribute for the verb entity of a apicontent_object must be 'equals'</sch:assert>
+                                                </sch:rule>
+                                            </sch:pattern>
+                                        </xsd:appinfo>
+                                    </xsd:annotation>
+                                </xsd:element>
+                                <xsd:element name="noun" type="oval-def:EntityObjectStringType" nillable="true" maxOccurs="1">
+                                    <xsd:annotation>
+                                        <xsd:documentation>The AWS API noun.</xsd:documentation>
+                                        <xsd:appinfo>
+                                            <sch:pattern id="aws-def_apicontentobjnoun">
+                                                <sch:rule context="aws-def:apicontent_object/aws-def:noun">
+                                                    <sch:assert test="not(@operation) or @operation='equals'"><sch:value-of select="../@id"/> - operation attribute for the noun entity of a apicontent_object must be 'equals'</sch:assert>
+                                                </sch:rule>
+                                            </sch:pattern>
+                                        </xsd:appinfo>
+                                    </xsd:annotation>
+                                </xsd:element>
+                                <xsd:element name="parameters" type="oval-def:EntityObjectRecordType" nillable="true">
+                                    <xsd:annotation>
+                                        <xsd:documentation>
+                                            A list of properties (name and value pairs) as input to invoke the AWS API method. Each 
+                                            property name must be unique. When xsi:nil='true', parameters are not provided to the API 
+                                            method.
+                                        </xsd:documentation>
+                                        <xsd:appinfo>
+                                            <sch:pattern id="aws-def_apicontentobjparameters">
+                                                <sch:rule context="aws-def:apicontent_object/aws-def:parameters">
+                                                    <sch:assert test="@datatype='record'"><sch:value-of select="../@id"/> - datatype attribute for the parameters entity of a apicontent_object must be 'record'</sch:assert>
+                                                </sch:rule>
+                                            </sch:pattern>
+                                        </xsd:appinfo>
+                                    </xsd:annotation>
+                                    <xsd:unique name="UniqueApiContentObjParametersFieldName">
+                                        <xsd:selector xpath="./oval-def:field"/>
+                                        <xsd:field xpath="@name"/>
+                                    </xsd:unique>
+                                </xsd:element>
+                                <xsd:element name="pattern" type="oval-def:EntityObjectStringType">
+                                    <xsd:annotation>
+                                        <xsd:documentation>The pattern entity defines a chunk of text in a file and is represented using a regular expression. A subexpression (using parentheses) can call out a piece of the text block to test. For example, the pattern abc(.*)xyz would look for a block of text in the file that starts with abc and ends with xyz, with the subexpression being all the characters that exist in between. The value of the subexpression can then be tested using the subexpression entity of a textfilecontent54_state. Note that if the pattern, starting at the same point in the file, matches more than one block of text, then it matches the longest. For example, given a file with abcdefxyzxyzabc, then the pattern abc(.*)xyz would match the block abcdefxyzxyz. Subexpressions also match the longest possible substrings, subject to the constraint that the whole match be as long as possible, with subexpressions starting earlier in the pattern taking priority over ones starting later.</xsd:documentation>
+                                        <xsd:documentation>Note that when using regular expressions, OVAL supports a common subset of the regular expression character classes, operations, expressions and other lexical tokens defined within Perl 5's regular expression specification. For more information on the supported regular expression syntax in OVAL see: http://oval.mitre.org/language/about/re_support_5.6.html.</xsd:documentation>
+                                        <xsd:appinfo>
+                                            <sch:pattern id="aws-def_apicontentobjpattern">
+                                                <sch:rule context="aws-def:apicontent_object/aws-def:pattern">
+                                                    <sch:assert test="@operation='pattern match'"><sch:value-of select="../@id" /> - operation attribute for the pattern entity of a apicontent_object should be 'pattern match'</sch:assert>
+                                                </sch:rule>
+                                            </sch:pattern>
+                                        </xsd:appinfo>
+                                    </xsd:annotation>
+                                </xsd:element>
+                                <xsd:element name="instance" type="oval-def:EntityObjectIntType">
+                                    <xsd:annotation>
+                                        <xsd:documentation>The instance entity calls out a specific match of the pattern. It can have any integer value. If the value is a non-negative integer, the index of the specific match of the pattern is counted from the beginning of the set of matches of that pattern in the targeted file. The first match is given an instance value of 1, the second match is given an instance value of 2, and so on. For non-negative values, the 'less than' and 'less than or equal' operations imply the the object is operating only on non-negative values. Frequently, this entity will be defined as 'greater than or equal' to 1 or 'greater than' 0, either of which results in the object representing the set of all matches of the pattern.</xsd:documentation>
+                                        <xsd:documentation>Negative values are used to simplify collection of pattern match occurrences counting backwards from the final match in the targeted file. To find the final match, use an instance of -1; the penultimate match is found using an instance value of -2, and so on. For negative values, the 'greater than' and 'greater than or equal' operations imply the object is operating only on negative values. For example, searching for instances greater than or equal to -2 would yield only the last two maches.</xsd:documentation>
+                                        <xsd:documentation>Note that the main purpose of the instance item entity is to provide uniqueness for different textfilecontent_items that results from multiple matches of a given pattern against the same file, and they will always have positive values.</xsd:documentation>
+                                    </xsd:annotation>
+                                </xsd:element>
+                                <xsd:element ref="oval-def:filter" minOccurs="0" maxOccurs="unbounded"/>
+                            </xsd:sequence>
+                        </xsd:choice>
+                    </xsd:sequence>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="apicontent_state" substitutionGroup="oval-def:state">
+        <xsd:annotation>
+            <xsd:documentation>The apicontent_state allows for assertions about the response attributes generated by the invocation of an AWS API request.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="oval-def:StateType">
+                    <xsd:sequence>
+                        <xsd:element name="service_name" type="aws-def:EntityStateAWSServiceType" minOccurs="0" maxOccurs="1">
+                            <xsd:annotation>
+                                <xsd:documentation>The name of the AWS API service to be invoked, such as iam, s3, or apigateway (among many others).</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:element>
+                        <xsd:element name="verb" type="aws-def:EntityStateAWSVerbType" minOccurs="0" maxOccurs="1">
+                            <xsd:annotation>
+                                <xsd:documentation>The AWS API verb.</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:element>
+                        <xsd:element name="noun" type="oval-def:EntityStateStringType" minOccurs="0" maxOccurs="1">
+                            <xsd:annotation>
+                                <xsd:documentation>The AWS API noun.</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:element>
+                        <xsd:element name="parameters" type="oval-def:EntityStateRecordType" minOccurs="0" maxOccurs="1">
+                            <xsd:annotation>
+                                <xsd:documentation>
+                                    A list of properties (name and value pairs) as input to invoke the AWS API method. Each 
+                                    property name must be unique. When xsi:nil='true', parameters are not provided to the API 
+                                    method.
+                                </xsd:documentation>
+                                <xsd:appinfo>
+                                    <sch:pattern id="aws-def_apicontentsteparameters">
+                                        <sch:rule context="aws-def:apicontent_state/aws-def:parameters">
+                                            <sch:assert test="@datatype='record'"><sch:value-of select="../@id"/> - datatype attribute for the parameters entity of a apicontent_state must be 'record'</sch:assert>
+                                        </sch:rule>
+                                    </sch:pattern>
+                                </xsd:appinfo>
+                            </xsd:annotation>
+                            <xsd:unique name="UniqueApiContentSteParametersFieldName">
+                                <xsd:selector xpath="./oval-def:field"/>
+                                <xsd:field xpath="@name"/>
+                            </xsd:unique>
+                        </xsd:element>
+                        <xsd:element name="pattern" type="oval-def:EntityStateStringType" minOccurs="0" maxOccurs="1">
+                            <xsd:annotation>
+                                <xsd:documentation>The pattern entity represents a regular expression that is used to define a block of text.</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:element>
+                        <xsd:element name="instance" type="oval-def:EntityStateIntType" minOccurs="0" maxOccurs="1">
+                            <xsd:annotation>
+                                <xsd:documentation>The instance entity calls out a specific match of the pattern. It can have any integer value. If the value is a non-negative integer, the index of the specific match of the pattern is counted from the beginning of the set of matches of that pattern in the targeted file. The first match is given an instance value of 1, the second match is given an instance value of 2, and so on. For non-negative values, the 'less than' and 'less than or equal' operations imply the the object is operating only on non-negative values. Frequently, this entity will be defined as 'greater than or equal' to 1 or 'greater than' 0, either of which results in the object representing the set of all matches of the pattern.</xsd:documentation>
+                                <xsd:documentation>Negative values are used to simplify collection of pattern match occurrences counting backwards from the final match in the targeted file. To find the final match, use an instance of -1; the penultimate match is found using an instance value of -2, and so on. For negative values, the 'greater than' and 'greater than or equal' operations imply the object is operating only on negative values. For example, searching for instances greater than or equal to -2 would yield only the last two maches.</xsd:documentation>
+                                <xsd:documentation>Note that the main purpose of the instance item entity is to provide uniqueness for different textfilecontent_items that results from multiple matches of a given pattern against the same file, and they will always have positive values.</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:element>
+                        <xsd:element name="text" type="oval-def:EntityStateAnySimpleType" minOccurs="0" maxOccurs="1">
+                            <xsd:annotation>
+                                <xsd:documentation>The text entity represents the block of text that matched the specified pattern.</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:element>
+                        <xsd:element name="subexpression" type="oval-def:EntityStateAnySimpleType" minOccurs="0" maxOccurs="1">
+                            <xsd:annotation>
+                                <xsd:documentation>
+                                    The subexpression entity represents a value to test against the subexpression in the specified pattern. If multiple subexpressions are 
+                                    specified in the pattern, this value is tested against all of them. For example, if the pattern abc(.*)mno(.*)xyp was supplied, and 
+                                    the state specifies a subexpression value of enabled, then the test would check that both (or at least one, none, etc. depending on 
+                                    the entity_check attribute) of the subexpressions have a value of enabled.
+                                </xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+    
+    <!-- =============================================================================== -->
+    <!-- =========================  IAM CREDENTIAL REPORT TEST  ======================== -->
+    <!-- =============================================================================== -->
+    <xsd:element name="credentialreport_test" substitutionGroup="oval-def:test">
+        <xsd:annotation>
+            <xsd:documentation>
+                The credentialreport_test allows for the evaluation of results from generating and retrieving a Credentials Report 
+                utilizing either the AWS CLI or the AWS API.  The object is a singleton, as the credential report is generated for 
+                all users of the credentialed account being used to access the AWS environment.
+            </xsd:documentation>
+            <xsd:documentation>
+                From the AWS CLI, implementers must first generate a credential report using the "aws iam 
+                generate-credential-report" command.  Once completed, implementers can retrieve the last generated report using the 
+                "aws iam get-credential-report" command.
+            </xsd:documentation>
+            <xsd:documentation>
+                From the AWS API, implementers must first generate a credential report using the "GenerateCredentialReport" method.  Once 
+                completed, implementers can retrieve the last generated report using the "GetCredentialReport" method.
+            </xsd:documentation>
+            <xsd:documentation>
+                Once retrieved, the content of the report is a base64-encoded string that, once decoded, represents a blob of CSV.  
+                Each line of the CSV represents an item, with each comma-separated field an element in this construct.  The first 
+                line of the CSV denotes the column header, represented in this element as each field.
+            </xsd:documentation>
+            <xsd:appinfo>
+                <oval:element_mapping>
+                    <oval:test>credentialreport_test</oval:test>
+                    <oval:object>credentialreport_object</oval:object>
+                    <oval:state>credentialreport_state</oval:state>
+                    <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#aws">credentialreport_item</oval:item>
+                </oval:element_mapping>
+            </xsd:appinfo>
+            <xsd:appinfo>
+                <sch:pattern id="aws-def_credentialreporttst">
+                    <sch:rule context="aws-def:test/aws-def:object">
+                        <sch:assert test="@object_ref = ancestor::oval-def:oval_definitions/oval-def:objects/aws-def:credentialreport_object/@id"><sch:value-of select="../@id"/> - the object child element of a credentialreport_test must reference a credentialreport_object</sch:assert>
+                    </sch:rule>
+                    <sch:rule context="aws-def:test/aws-def:state">
+                        <sch:assert test="@state_ref = ancestor::oval-def:oval_definitions/oval-def:states/aws-def:credentialreport_state/@id"><sch:value-of select="../@id"/> - the state child element of a credentialreport_test must reference a credentialreport_state</sch:assert>
+                    </sch:rule>
+                </sch:pattern>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="oval-def:TestType">
+                    <xsd:sequence>
+                        <xsd:element name="object" type="oval-def:ObjectRefType"/>
+                        <xsd:element name="state" type="oval-def:StateRefType" minOccurs="0" maxOccurs="unbounded"/>
+                    </xsd:sequence>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="credentialreport_object" substitutionGroup="oval-def:object">
+        <xsd:annotation>
+            <xsd:documentation>
+                The credentialreport_object allows for the collection of results from generating and retrieving a Credentials Report 
+                utilizing either the AWS CLI or the AWS API.  The object is a singleton, as the credential report is generated for 
+                all users of the credentialed account being used to access the AWS environment.
+            </xsd:documentation>
+            <xsd:documentation>
+                From the AWS CLI, implementers must first generate a credential report using the "aws iam 
+                generate-credential-report" command.  Once completed, implementers can retrieve the last generated report using the 
+                "aws iam get-credential-report" command.
+            </xsd:documentation>
+            <xsd:documentation>
+                From the AWS API, implementers must first generate a credential report using the "GenerateCredentialReport" method.  Once 
+                completed, implementers can retrieve the last generated report using the "GetCredentialReport" method.
+            </xsd:documentation>
+            <xsd:documentation>
+                Once retrieved, the content of the report is a base64-encoded string that, once decoded, represents a blob of CSV.  
+                Each line of the CSV represents an item, with each comma-separated field an element in this construct.  The first 
+                line of the CSV denotes the column header, represented in this element as each field.
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="oval-def:ObjectType"/>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="credentialreport_state" substitutionGroup="oval-def:state">
+        <xsd:annotation>
+            <xsd:documentation>
+                The credentialreport_state allows for the examination of results from generating and retrieving a Credentials Report 
+                utilizing either the AWS CLI or the AWS API.
+            </xsd:documentation>
+            <xsd:documentation>
+                From the AWS CLI, implementers must first generate a credential report using the "aws iam 
+                generate-credential-report" command.  Once completed, implementers can retrieve the last generated report using the 
+                "aws iam get-credential-report" command.
+            </xsd:documentation>
+            <xsd:documentation>
+                From the AWS API, implementers must first generate a credential report using the "GenerateCredentialReport" method.  Once 
+                completed, implementers can retrieve the last generated report using the "GetCredentialReport" method.
+            </xsd:documentation>
+            <xsd:documentation>
+                Once retrieved, the content of the report is a base64-encoded string that, once decoded, represents a blob of CSV.  
+                Each line of the CSV represents an item, with each comma-separated field an element in this construct.  The first 
+                line of the CSV denotes the column header, represented in this element as each field.
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="oval-def:StateType">
+                    <xsd:sequence>
+                        <xsd:element name="user" type="oval-def:EntityStateStringType" minOccurs="0" maxOccurs="1">
+                            <xsd:annotation>
+                                <xsd:documentation>Specifies the AWS Get Credentials Report User </xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:element>
+                        <xsd:element name="arn" type="oval-def:EntityStateStringType" minOccurs="0" maxOccurs="1">
+                            <xsd:annotation>
+                                <xsd:documentation>Specifies the AWS Get Credentials Report User's ARN </xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:element>
+                        <xsd:element name="user_creation_time" type="oval-def:EntityStateIntType" minOccurs="0" maxOccurs="1">
+                            <xsd:annotation>
+                                <xsd:documentation>Specifies the AWS IAM Get Credentials Report User Creation Time</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:element>
+                        <xsd:element name="password_enabled" type="aws-def:EntityStateAWSEnhancedBoolType" minOccurs="0" maxOccurs="1">
+                            <xsd:annotation>
+                                <xsd:documentation>Specifies the AWS IAM Get Credentials Report Password Enabled </xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:element>
+                        <xsd:element name="password_last_used" type="oval-def:EntityStateIntType" minOccurs="0" maxOccurs="1">
+                            <xsd:annotation>
+                                <xsd:documentation>
+                                    Specifies the AWS IAM Get Credentials Report Password Last Used Date.  This date is represented numerically, but potential
+                                    values generated in the credential report are "N/A" or "not_supported".  When a value of "N/A" is encountered, this 
+                                    element value should be set to 0 (zero).  When a value of "not_supported" is encountered, this element should have no 
+                                    value set and a status of "does not exist".
+                                </xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:element>
+                        <xsd:element name="password_last_changed" type="oval-def:EntityStateIntType" minOccurs="0" maxOccurs="1">
+                            <xsd:annotation>
+                                <xsd:documentation>Specifies the AWS IAM Get Credentials Report Password Last Changed.  This date is represented numerically, 
+                                    but potential values generated in the credential report are "N/A" or "not_supported".  When a value of "N/A" is encountered, 
+                                    this element value should be set to 0 (zero).  When a value of "not_supported" is encountered, this element should have no 
+                                    value set and a status of "does not exist".
+                                </xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:element>
+                        <xsd:element name="password_next_rotation" type="oval-def:EntityStateIntType" minOccurs="0" maxOccurs="1">
+                            <xsd:annotation>
+                                <xsd:documentation>Specifies the AWS IAM Get Credentials Report Password Next Rotation.  This date is represented numerically, 
+                                    but potential values generated in the credential report are "N/A" or "not_supported".  When a value of "N/A" is encountered, 
+                                    this element value should be set to 0 (zero).  When a value of "not_supported" is encountered, this element should have no 
+                                    value set and a status of "does not exist".
+                                </xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:element>
+                        <xsd:element name="mfa_active" type="oval-def:EntityStateBoolType" minOccurs="0" maxOccurs="1">
+                            <xsd:annotation>
+                                <xsd:documentation>Specifies the AWS IAM Get Credentials Report MFA Active </xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:element>
+                        <xsd:element name="access_key_1_active" type="oval-def:EntityStateBoolType" minOccurs="0" maxOccurs="1">
+                            <xsd:annotation>
+                                <xsd:documentation>Specifies the AWS IAM Get Credentials Report Acccess Key 1 Active </xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:element>
+                        <xsd:element name="access_key_1_last_rotated" type="oval-def:EntityStateIntType" minOccurs="0" maxOccurs="1">
+                            <xsd:annotation>
+                                <xsd:documentation>Specifies the AWS IAM Get Credentials Report Access Key 1 Last Rotated.  This date is represented numerically, 
+                                    but potential values generated in the credential report are "N/A" or "not_supported".  When a value of "N/A" is encountered, 
+                                    this element value should be set to 0 (zero).  When a value of "not_supported" is encountered, this element should have no 
+                                    value set and a status of "does not exist".
+                                </xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:element>
+                        <xsd:element name="access_key_1_last_used_date" type="oval-def:EntityStateIntType" minOccurs="0" maxOccurs="1">
+                            <xsd:annotation>
+                                <xsd:documentation>Specifies the AWS IAM Get Credentials Report Access Key 1 Last Used Date.  This date is represented numerically, 
+                                    but potential values generated in the credential report are "N/A" or "not_supported".  When a value of "N/A" is encountered, 
+                                    this element value should be set to 0 (zero).  When a value of "not_supported" is encountered, this element should have no 
+                                    value set and a status of "does not exist".
+                                </xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:element>
+                        <xsd:element name="access_key_1_last_used_region" type="aws-def:EntityStateAWSRegionType" minOccurs="0" maxOccurs="1">
+                            <xsd:annotation>
+                                <xsd:documentation>Specifies the AWS IAM Get Credentials Report Access Key 1 Last Used Region </xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:element>
+                        <xsd:element name="access_key_1_last_used_service" type="aws-def:EntityStateAWSServiceType" minOccurs="0" maxOccurs="1">
+                            <xsd:annotation>
+                                <xsd:documentation>Specifies the AWS IAM Get Credentials Report Access Key 1 Last Used Service </xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:element>
+                        <xsd:element name="access_key_2_active" type="oval-def:EntityStateBoolType" minOccurs="0" maxOccurs="1">
+                            <xsd:annotation>
+                                <xsd:documentation>Specifies the AWS IAM Get Credentials Report Acccess Key 2 Active </xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:element>
+                        <xsd:element name="access_key_2_last_rotated" type="oval-def:EntityStateIntType" minOccurs="0" maxOccurs="1">
+                            <xsd:annotation>
+                                <xsd:documentation>Specifies the AWS IAM Get Credentials Report Access Key 2 Last Rotated.  This date is represented numerically, 
+                                    but potential values generated in the credential report are "N/A" or "not_supported".  When a value of "N/A" is encountered, 
+                                    this element value should be set to 0 (zero).  When a value of "not_supported" is encountered, this element should have no 
+                                    value set and a status of "does not exist".
+                                </xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:element>
+                        <xsd:element name="access_key_2_last_used_date" type="oval-def:EntityStateIntType" minOccurs="0" maxOccurs="1">
+                            <xsd:annotation>
+                                <xsd:documentation>Specifies the AWS IAM Get Credentials Report Access Key 2 Last Used Date.  This date is represented numerically, 
+                                    but potential values generated in the credential report are "N/A" or "not_supported".  When a value of "N/A" is encountered, 
+                                    this element value should be set to 0 (zero).  When a value of "not_supported" is encountered, this element should have no 
+                                    value set and a status of "does not exist".
+                                </xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:element>
+                        <xsd:element name="access_key_2_last_used_region" type="aws-def:EntityStateAWSRegionType" minOccurs="0" maxOccurs="1">
+                            <xsd:annotation>
+                                <xsd:documentation>Specifies the AWS IAM Get Credentials Report Access Key 2 Last Used Region </xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:element>
+                        <xsd:element name="access_key_2_last_used_service" type="aws-def:EntityStateAWSServiceType" minOccurs="0" maxOccurs="1">
+                            <xsd:annotation>
+                                <xsd:documentation>Specifies the AWS IAM Get Credentials Report Access Key 2 Last Used Service </xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:element>
+                        <xsd:element name="cert_1_active" type="oval-def:EntityStateBoolType" minOccurs="0" maxOccurs="1">
+                            <xsd:annotation>
+                                <xsd:documentation>Specifies the AWS IAM Get Credentials Report Cert 1 Active </xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:element>
+                        <xsd:element name="cert_1_last_rotated" type="oval-def:EntityStateIntType" minOccurs="0" maxOccurs="1">
+                            <xsd:annotation>
+                                <xsd:documentation>Specifies the AWS IAM Get Credentials Report Cert 1 Last Rotated.  This date is represented numerically, 
+                                    but potential values generated in the credential report are "N/A" or "not_supported".  When a value of "N/A" is encountered, 
+                                    this element value should be set to 0 (zero).  When a value of "not_supported" is encountered, this element should have no 
+                                    value set and a status of "does not exist".
+                                </xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:element>
+                        <xsd:element name="cert_2_active" type="oval-def:EntityStateBoolType" minOccurs="0" maxOccurs="1">
+                            <xsd:annotation>
+                                <xsd:documentation>Specifies the AWS IAM Get Credentials Report Cert 2 Active </xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:element>
+                        <xsd:element name="cert_2_last_rotated" type="oval-def:EntityStateIntType" minOccurs="0" maxOccurs="1">
+                            <xsd:annotation>
+                                <xsd:documentation>Specifies the AWS IAM Get Credentials Report Cert 2 Last Rotated.  This date is represented numerically, 
+                                    but potential values generated in the credential report are "N/A" or "not_supported".  When a value of "N/A" is encountered, 
+                                    this element value should be set to 0 (zero).  When a value of "not_supported" is encountered, this element should have no 
+                                    value set and a status of "does not exist".
+                                </xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+    
+    <!-- =============================================================================== -->
+    <!-- ================================= TYPES ======================================= -->
+    <!-- =============================================================================== -->
+    <xsd:complexType name="EntityObjectAWSServiceType">
+        <xsd:annotation>
+            <xsd:documentation>
+                The EntityObjectAWSServiceType restricts a string value to a specific set of values. 
+                These values describe the available API services that can be invoked using the AWS API. 
+                The restriction on these verbs is to restrict API operations to those that are 
+                read-only.  The empty string is also allowed to support empty elements 
+                associated with error conditions.
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleContent>
+            <xsd:restriction base="oval-def:EntityObjectStringType">
+                <xsd:enumeration value="accessanalyzer"/>
+                <xsd:enumeration value="acm"/>
+                <xsd:enumeration value="acm-pca"/>
+                <xsd:enumeration value="alexaforbusiness"/>
+                <xsd:enumeration value="amp"/>
+                <xsd:enumeration value="amplify"/>
+                <xsd:enumeration value="amplifybackend"/>
+                <xsd:enumeration value="apigateway"/>
+                <xsd:enumeration value="apigatewaymanagementapi"/>
+                <xsd:enumeration value="apigatewayv2"/>
+                <xsd:enumeration value="appconfig"/>
+                <xsd:enumeration value="appflow"/>
+                <xsd:enumeration value="appintegrations"/>
+                <xsd:enumeration value="application-autoscaling"/>
+                <xsd:enumeration value="application-insights"/>
+                <xsd:enumeration value="appmesh"/>
+                <xsd:enumeration value="appstream"/>
+                <xsd:enumeration value="appsync"/>
+                <xsd:enumeration value="athena"/>
+                <xsd:enumeration value="auditmanager"/>
+                <xsd:enumeration value="autoscaling"/>
+                <xsd:enumeration value="autoscaling-plans"/>
+                <xsd:enumeration value="backup"/>
+                <xsd:enumeration value="batch"/>
+                <xsd:enumeration value="braket"/>
+                <xsd:enumeration value="budgets"/>
+                <xsd:enumeration value="ce"/>
+                <xsd:enumeration value="chime"/>
+                <xsd:enumeration value="cli-dev"/>
+                <xsd:enumeration value="cloud9"/>
+                <xsd:enumeration value="clouddirectory"/>
+                <xsd:enumeration value="cloudformation"/>
+                <xsd:enumeration value="cloudfront"/>
+                <xsd:enumeration value="cloudhsm"/>
+                <xsd:enumeration value="cloudhsmv2"/>
+                <xsd:enumeration value="cloudsearch"/>
+                <xsd:enumeration value="cloudsearchdomain"/>
+                <xsd:enumeration value="cloudtrail"/>
+                <xsd:enumeration value="cloudwatch"/>
+                <xsd:enumeration value="codeartifact"/>
+                <xsd:enumeration value="codebuild"/>
+                <xsd:enumeration value="codecommit"/>
+                <xsd:enumeration value="codeguru-reviewer"/>
+                <xsd:enumeration value="codeguruprofiler"/>
+                <xsd:enumeration value="codepipeline"/>
+                <xsd:enumeration value="codestar"/>
+                <xsd:enumeration value="codestar-connections"/>
+                <xsd:enumeration value="codestar-notifications"/>
+                <xsd:enumeration value="cognito-identity"/>
+                <xsd:enumeration value="cognito-idp"/>
+                <xsd:enumeration value="cognito-sync"/>
+                <xsd:enumeration value="comprehend"/>
+                <xsd:enumeration value="comprehendmedical"/>
+                <xsd:enumeration value="compute-optimizer"/>
+                <xsd:enumeration value="configservice"/>
+                <xsd:enumeration value="configure"/>
+                <xsd:enumeration value="connect"/>
+                <xsd:enumeration value="connect-contact-lens"/>
+                <xsd:enumeration value="connectparticipant"/>
+                <xsd:enumeration value="cur"/>
+                <xsd:enumeration value="customer-profiles"/>
+                <xsd:enumeration value="databrew"/>
+                <xsd:enumeration value="dataexchange"/>
+                <xsd:enumeration value="datapipeline"/>
+                <xsd:enumeration value="datasync"/>
+                <xsd:enumeration value="dax"/>
+                <xsd:enumeration value="ddb"/>
+                <xsd:enumeration value="deploy"/>
+                <xsd:enumeration value="detective"/>
+                <xsd:enumeration value="devicefarm"/>
+                <xsd:enumeration value="devops-guru"/>
+                <xsd:enumeration value="directconnect"/>
+                <xsd:enumeration value="discovery"/>
+                <xsd:enumeration value="dlm"/>
+                <xsd:enumeration value="dms"/>
+                <xsd:enumeration value="docdb"/>
+                <xsd:enumeration value="ds"/>
+                <xsd:enumeration value="dynamodb"/>
+                <xsd:enumeration value="dynamodbstreams"/>
+                <xsd:enumeration value="ebs"/>
+                <xsd:enumeration value="ec2"/>
+                <xsd:enumeration value="ec2-instance-connect"/>
+                <xsd:enumeration value="ecr"/>
+                <xsd:enumeration value="ecr-public"/>
+                <xsd:enumeration value="ecs"/>
+                <xsd:enumeration value="efs"/>
+                <xsd:enumeration value="eks"/>
+                <xsd:enumeration value="elastic-inference"/>
+                <xsd:enumeration value="elasticache"/>
+                <xsd:enumeration value="elasticbeanstalk"/>
+                <xsd:enumeration value="elastictranscoder"/>
+                <xsd:enumeration value="elb"/>
+                <xsd:enumeration value="elbv2"/>
+                <xsd:enumeration value="emr"/>
+                <xsd:enumeration value="emr-containers"/>
+                <xsd:enumeration value="es"/>
+                <xsd:enumeration value="events"/>
+                <xsd:enumeration value="firehose"/>
+                <xsd:enumeration value="fms"/>
+                <xsd:enumeration value="forecast"/>
+                <xsd:enumeration value="forecastquery"/>
+                <xsd:enumeration value="frauddetector"/>
+                <xsd:enumeration value="fsx"/>
+                <xsd:enumeration value="gamelift"/>
+                <xsd:enumeration value="glacier"/>
+                <xsd:enumeration value="globalaccelerator"/>
+                <xsd:enumeration value="glue"/>
+                <xsd:enumeration value="greengrass"/>
+                <xsd:enumeration value="greengrassv2"/>
+                <xsd:enumeration value="groundstation"/>
+                <xsd:enumeration value="guardduty"/>
+                <xsd:enumeration value="health"/>
+                <xsd:enumeration value="healthlake"/>
+                <xsd:enumeration value="history"/>
+                <xsd:enumeration value="honeycode"/>
+                <xsd:enumeration value="iam"/>
+                <xsd:enumeration value="identitystore"/>
+                <xsd:enumeration value="imagebuilder"/>
+                <xsd:enumeration value="importexport"/>
+                <xsd:enumeration value="inspector"/>
+                <xsd:enumeration value="iot"/>
+                <xsd:enumeration value="iot-data"/>
+                <xsd:enumeration value="iot-jobs-data"/>
+                <xsd:enumeration value="iot1click-devices"/>
+                <xsd:enumeration value="iot1click-projects"/>
+                <xsd:enumeration value="iotanalytics"/>
+                <xsd:enumeration value="iotdeviceadvisor"/>
+                <xsd:enumeration value="iotevents"/>
+                <xsd:enumeration value="iotevents-data"/>
+                <xsd:enumeration value="iotfleethub"/>
+                <xsd:enumeration value="iotsecuretunneling"/>
+                <xsd:enumeration value="iotsitewise"/>
+                <xsd:enumeration value="iotthingsgraph"/>
+                <xsd:enumeration value="iotwireless"/>
+                <xsd:enumeration value="ivs"/>
+                <xsd:enumeration value="kafka"/>
+                <xsd:enumeration value="kendra"/>
+                <xsd:enumeration value="kinesis"/>
+                <xsd:enumeration value="kinesis-video-archived-media"/>
+                <xsd:enumeration value="kinesis-video-media"/>
+                <xsd:enumeration value="kinesis-video-signaling"/>
+                <xsd:enumeration value="kinesisanalytics"/>
+                <xsd:enumeration value="kinesisanalyticsv2"/>
+                <xsd:enumeration value="kinesisvideo"/>
+                <xsd:enumeration value="kms"/>
+                <xsd:enumeration value="lakeformation"/>
+                <xsd:enumeration value="lambda"/>
+                <xsd:enumeration value="lex-models"/>
+                <xsd:enumeration value="lex-runtime"/>
+                <xsd:enumeration value="lexv2-models"/>
+                <xsd:enumeration value="lexv2-runtime"/>
+                <xsd:enumeration value="license-manager"/>
+                <xsd:enumeration value="lightsail"/>
+                <xsd:enumeration value="location"/>
+                <xsd:enumeration value="logs"/>
+                <xsd:enumeration value="lookoutvision"/>
+                <xsd:enumeration value="machinelearning"/>
+                <xsd:enumeration value="macie"/>
+                <xsd:enumeration value="macie2"/>
+                <xsd:enumeration value="managedblockchain"/>
+                <xsd:enumeration value="marketplace-catalog"/>
+                <xsd:enumeration value="marketplace-entitlement"/>
+                <xsd:enumeration value="marketplacecommerceanalytics"/>
+                <xsd:enumeration value="mediaconnect"/>
+                <xsd:enumeration value="mediaconvert"/>
+                <xsd:enumeration value="medialive"/>
+                <xsd:enumeration value="mediapackage"/>
+                <xsd:enumeration value="mediapackage-vod"/>
+                <xsd:enumeration value="mediastore"/>
+                <xsd:enumeration value="mediastore-data"/>
+                <xsd:enumeration value="mediatailor"/>
+                <xsd:enumeration value="meteringmarketplace"/>
+                <xsd:enumeration value="mgh"/>
+                <xsd:enumeration value="migrationhub-config"/>
+                <xsd:enumeration value="mobile"/>
+                <xsd:enumeration value="mq"/>
+                <xsd:enumeration value="mturk"/>
+                <xsd:enumeration value="mwaa"/>
+                <xsd:enumeration value="neptune"/>
+                <xsd:enumeration value="network-firewall"/>
+                <xsd:enumeration value="networkmanager"/>
+                <xsd:enumeration value="opsworks"/>
+                <xsd:enumeration value="opsworks-cm"/>
+                <xsd:enumeration value="organizations"/>
+                <xsd:enumeration value="outposts"/>
+                <xsd:enumeration value="personalize"/>
+                <xsd:enumeration value="personalize-events"/>
+                <xsd:enumeration value="personalize-runtime"/>
+                <xsd:enumeration value="pi"/>
+                <xsd:enumeration value="pinpoint"/>
+                <xsd:enumeration value="pinpoint-email"/>
+                <xsd:enumeration value="pinpoint-sms-voice"/>
+                <xsd:enumeration value="polly"/>
+                <xsd:enumeration value="pricing"/>
+                <xsd:enumeration value="qldb"/>
+                <xsd:enumeration value="qldb-session"/>
+                <xsd:enumeration value="quicksight"/>
+                <xsd:enumeration value="ram"/>
+                <xsd:enumeration value="rds"/>
+                <xsd:enumeration value="rds-data"/>
+                <xsd:enumeration value="redshift"/>
+                <xsd:enumeration value="redshift-data"/>
+                <xsd:enumeration value="rekognition"/>
+                <xsd:enumeration value="resource-groups"/>
+                <xsd:enumeration value="resourcegroupstaggingapi"/>
+                <xsd:enumeration value="robomaker"/>
+                <xsd:enumeration value="route53"/>
+                <xsd:enumeration value="route53domains"/>
+                <xsd:enumeration value="route53resolver"/>
+                <xsd:enumeration value="s3"/>
+                <xsd:enumeration value="s3api"/>
+                <xsd:enumeration value="s3control"/>
+                <xsd:enumeration value="s3outposts"/>
+                <xsd:enumeration value="sagemaker"/>
+                <xsd:enumeration value="sagemaker-a2i-runtime"/>
+                <xsd:enumeration value="sagemaker-edge"/>
+                <xsd:enumeration value="sagemaker-featurestore-runtime"/>
+                <xsd:enumeration value="sagemaker-runtime"/>
+                <xsd:enumeration value="savingsplans"/>
+                <xsd:enumeration value="schemas"/>
+                <xsd:enumeration value="sdb"/>
+                <xsd:enumeration value="secretsmanager"/>
+                <xsd:enumeration value="securityhub"/>
+                <xsd:enumeration value="serverlessrepo"/>
+                <xsd:enumeration value="service-quotas"/>
+                <xsd:enumeration value="servicecatalog"/>
+                <xsd:enumeration value="servicecatalog-appregistry"/>
+                <xsd:enumeration value="servicediscovery"/>
+                <xsd:enumeration value="ses"/>
+                <xsd:enumeration value="sesv2"/>
+                <xsd:enumeration value="shield"/>
+                <xsd:enumeration value="signer"/>
+                <xsd:enumeration value="sms"/>
+                <xsd:enumeration value="snowball"/>
+                <xsd:enumeration value="sns"/>
+                <xsd:enumeration value="sqs"/>
+                <xsd:enumeration value="ssm"/>
+                <xsd:enumeration value="sso"/>
+                <xsd:enumeration value="sso-admin"/>
+                <xsd:enumeration value="sso-oidc"/>
+                <xsd:enumeration value="stepfunctions"/>
+                <xsd:enumeration value="storagegateway"/>
+                <xsd:enumeration value="sts"/>
+                <xsd:enumeration value="support"/>
+                <xsd:enumeration value="swf"/>
+                <xsd:enumeration value="synthetics"/>
+                <xsd:enumeration value="textract"/>
+                <xsd:enumeration value="timestream-query"/>
+                <xsd:enumeration value="timestream-write"/>
+                <xsd:enumeration value="transcribe"/>
+                <xsd:enumeration value="transfer"/>
+                <xsd:enumeration value="translate"/>
+                <xsd:enumeration value="waf"/>
+                <xsd:enumeration value="waf-regional"/>
+                <xsd:enumeration value="wafv2"/>
+                <xsd:enumeration value="wellarchitected"/>
+                <xsd:enumeration value="workdocs"/>
+                <xsd:enumeration value="worklink"/>
+                <xsd:enumeration value="workmail"/>
+                <xsd:enumeration value="workmailmessageflow"/>
+                <xsd:enumeration value="workspaces"/>
+                <xsd:enumeration value="xray"/>
+            </xsd:restriction>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    <xsd:complexType name="EntityStateAWSServiceType">
+        <xsd:annotation>
+            <xsd:documentation>
+                The EntityStateAWSServiceType restricts a string value to a specific set of values. 
+                These values describe the available API services that can be invoked using the AWS API. 
+                The restriction on these verbs is to restrict API operations to those that are 
+                read-only.  The empty string is also allowed to support empty elements 
+                associated with error conditions.
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleContent>
+            <xsd:restriction base="oval-def:EntityStateStringType">
+                <xsd:enumeration value="accessanalyzer"/>
+                <xsd:enumeration value="acm"/>
+                <xsd:enumeration value="acm-pca"/>
+                <xsd:enumeration value="alexaforbusiness"/>
+                <xsd:enumeration value="amp"/>
+                <xsd:enumeration value="amplify"/>
+                <xsd:enumeration value="amplifybackend"/>
+                <xsd:enumeration value="apigateway"/>
+                <xsd:enumeration value="apigatewaymanagementapi"/>
+                <xsd:enumeration value="apigatewayv2"/>
+                <xsd:enumeration value="appconfig"/>
+                <xsd:enumeration value="appflow"/>
+                <xsd:enumeration value="appintegrations"/>
+                <xsd:enumeration value="application-autoscaling"/>
+                <xsd:enumeration value="application-insights"/>
+                <xsd:enumeration value="appmesh"/>
+                <xsd:enumeration value="appstream"/>
+                <xsd:enumeration value="appsync"/>
+                <xsd:enumeration value="athena"/>
+                <xsd:enumeration value="auditmanager"/>
+                <xsd:enumeration value="autoscaling"/>
+                <xsd:enumeration value="autoscaling-plans"/>
+                <xsd:enumeration value="backup"/>
+                <xsd:enumeration value="batch"/>
+                <xsd:enumeration value="braket"/>
+                <xsd:enumeration value="budgets"/>
+                <xsd:enumeration value="ce"/>
+                <xsd:enumeration value="chime"/>
+                <xsd:enumeration value="cli-dev"/>
+                <xsd:enumeration value="cloud9"/>
+                <xsd:enumeration value="clouddirectory"/>
+                <xsd:enumeration value="cloudformation"/>
+                <xsd:enumeration value="cloudfront"/>
+                <xsd:enumeration value="cloudhsm"/>
+                <xsd:enumeration value="cloudhsmv2"/>
+                <xsd:enumeration value="cloudsearch"/>
+                <xsd:enumeration value="cloudsearchdomain"/>
+                <xsd:enumeration value="cloudtrail"/>
+                <xsd:enumeration value="cloudwatch"/>
+                <xsd:enumeration value="codeartifact"/>
+                <xsd:enumeration value="codebuild"/>
+                <xsd:enumeration value="codecommit"/>
+                <xsd:enumeration value="codeguru-reviewer"/>
+                <xsd:enumeration value="codeguruprofiler"/>
+                <xsd:enumeration value="codepipeline"/>
+                <xsd:enumeration value="codestar"/>
+                <xsd:enumeration value="codestar-connections"/>
+                <xsd:enumeration value="codestar-notifications"/>
+                <xsd:enumeration value="cognito-identity"/>
+                <xsd:enumeration value="cognito-idp"/>
+                <xsd:enumeration value="cognito-sync"/>
+                <xsd:enumeration value="comprehend"/>
+                <xsd:enumeration value="comprehendmedical"/>
+                <xsd:enumeration value="compute-optimizer"/>
+                <xsd:enumeration value="configservice"/>
+                <xsd:enumeration value="configure"/>
+                <xsd:enumeration value="connect"/>
+                <xsd:enumeration value="connect-contact-lens"/>
+                <xsd:enumeration value="connectparticipant"/>
+                <xsd:enumeration value="cur"/>
+                <xsd:enumeration value="customer-profiles"/>
+                <xsd:enumeration value="databrew"/>
+                <xsd:enumeration value="dataexchange"/>
+                <xsd:enumeration value="datapipeline"/>
+                <xsd:enumeration value="datasync"/>
+                <xsd:enumeration value="dax"/>
+                <xsd:enumeration value="ddb"/>
+                <xsd:enumeration value="deploy"/>
+                <xsd:enumeration value="detective"/>
+                <xsd:enumeration value="devicefarm"/>
+                <xsd:enumeration value="devops-guru"/>
+                <xsd:enumeration value="directconnect"/>
+                <xsd:enumeration value="discovery"/>
+                <xsd:enumeration value="dlm"/>
+                <xsd:enumeration value="dms"/>
+                <xsd:enumeration value="docdb"/>
+                <xsd:enumeration value="ds"/>
+                <xsd:enumeration value="dynamodb"/>
+                <xsd:enumeration value="dynamodbstreams"/>
+                <xsd:enumeration value="ebs"/>
+                <xsd:enumeration value="ec2"/>
+                <xsd:enumeration value="ec2-instance-connect"/>
+                <xsd:enumeration value="ecr"/>
+                <xsd:enumeration value="ecr-public"/>
+                <xsd:enumeration value="ecs"/>
+                <xsd:enumeration value="efs"/>
+                <xsd:enumeration value="eks"/>
+                <xsd:enumeration value="elastic-inference"/>
+                <xsd:enumeration value="elasticache"/>
+                <xsd:enumeration value="elasticbeanstalk"/>
+                <xsd:enumeration value="elastictranscoder"/>
+                <xsd:enumeration value="elb"/>
+                <xsd:enumeration value="elbv2"/>
+                <xsd:enumeration value="emr"/>
+                <xsd:enumeration value="emr-containers"/>
+                <xsd:enumeration value="es"/>
+                <xsd:enumeration value="events"/>
+                <xsd:enumeration value="firehose"/>
+                <xsd:enumeration value="fms"/>
+                <xsd:enumeration value="forecast"/>
+                <xsd:enumeration value="forecastquery"/>
+                <xsd:enumeration value="frauddetector"/>
+                <xsd:enumeration value="fsx"/>
+                <xsd:enumeration value="gamelift"/>
+                <xsd:enumeration value="glacier"/>
+                <xsd:enumeration value="globalaccelerator"/>
+                <xsd:enumeration value="glue"/>
+                <xsd:enumeration value="greengrass"/>
+                <xsd:enumeration value="greengrassv2"/>
+                <xsd:enumeration value="groundstation"/>
+                <xsd:enumeration value="guardduty"/>
+                <xsd:enumeration value="health"/>
+                <xsd:enumeration value="healthlake"/>
+                <xsd:enumeration value="history"/>
+                <xsd:enumeration value="honeycode"/>
+                <xsd:enumeration value="iam"/>
+                <xsd:enumeration value="identitystore"/>
+                <xsd:enumeration value="imagebuilder"/>
+                <xsd:enumeration value="importexport"/>
+                <xsd:enumeration value="inspector"/>
+                <xsd:enumeration value="iot"/>
+                <xsd:enumeration value="iot-data"/>
+                <xsd:enumeration value="iot-jobs-data"/>
+                <xsd:enumeration value="iot1click-devices"/>
+                <xsd:enumeration value="iot1click-projects"/>
+                <xsd:enumeration value="iotanalytics"/>
+                <xsd:enumeration value="iotdeviceadvisor"/>
+                <xsd:enumeration value="iotevents"/>
+                <xsd:enumeration value="iotevents-data"/>
+                <xsd:enumeration value="iotfleethub"/>
+                <xsd:enumeration value="iotsecuretunneling"/>
+                <xsd:enumeration value="iotsitewise"/>
+                <xsd:enumeration value="iotthingsgraph"/>
+                <xsd:enumeration value="iotwireless"/>
+                <xsd:enumeration value="ivs"/>
+                <xsd:enumeration value="kafka"/>
+                <xsd:enumeration value="kendra"/>
+                <xsd:enumeration value="kinesis"/>
+                <xsd:enumeration value="kinesis-video-archived-media"/>
+                <xsd:enumeration value="kinesis-video-media"/>
+                <xsd:enumeration value="kinesis-video-signaling"/>
+                <xsd:enumeration value="kinesisanalytics"/>
+                <xsd:enumeration value="kinesisanalyticsv2"/>
+                <xsd:enumeration value="kinesisvideo"/>
+                <xsd:enumeration value="kms"/>
+                <xsd:enumeration value="lakeformation"/>
+                <xsd:enumeration value="lambda"/>
+                <xsd:enumeration value="lex-models"/>
+                <xsd:enumeration value="lex-runtime"/>
+                <xsd:enumeration value="lexv2-models"/>
+                <xsd:enumeration value="lexv2-runtime"/>
+                <xsd:enumeration value="license-manager"/>
+                <xsd:enumeration value="lightsail"/>
+                <xsd:enumeration value="location"/>
+                <xsd:enumeration value="logs"/>
+                <xsd:enumeration value="lookoutvision"/>
+                <xsd:enumeration value="machinelearning"/>
+                <xsd:enumeration value="macie"/>
+                <xsd:enumeration value="macie2"/>
+                <xsd:enumeration value="managedblockchain"/>
+                <xsd:enumeration value="marketplace-catalog"/>
+                <xsd:enumeration value="marketplace-entitlement"/>
+                <xsd:enumeration value="marketplacecommerceanalytics"/>
+                <xsd:enumeration value="mediaconnect"/>
+                <xsd:enumeration value="mediaconvert"/>
+                <xsd:enumeration value="medialive"/>
+                <xsd:enumeration value="mediapackage"/>
+                <xsd:enumeration value="mediapackage-vod"/>
+                <xsd:enumeration value="mediastore"/>
+                <xsd:enumeration value="mediastore-data"/>
+                <xsd:enumeration value="mediatailor"/>
+                <xsd:enumeration value="meteringmarketplace"/>
+                <xsd:enumeration value="mgh"/>
+                <xsd:enumeration value="migrationhub-config"/>
+                <xsd:enumeration value="mobile"/>
+                <xsd:enumeration value="mq"/>
+                <xsd:enumeration value="mturk"/>
+                <xsd:enumeration value="mwaa"/>
+                <xsd:enumeration value="neptune"/>
+                <xsd:enumeration value="network-firewall"/>
+                <xsd:enumeration value="networkmanager"/>
+                <xsd:enumeration value="opsworks"/>
+                <xsd:enumeration value="opsworks-cm"/>
+                <xsd:enumeration value="organizations"/>
+                <xsd:enumeration value="outposts"/>
+                <xsd:enumeration value="personalize"/>
+                <xsd:enumeration value="personalize-events"/>
+                <xsd:enumeration value="personalize-runtime"/>
+                <xsd:enumeration value="pi"/>
+                <xsd:enumeration value="pinpoint"/>
+                <xsd:enumeration value="pinpoint-email"/>
+                <xsd:enumeration value="pinpoint-sms-voice"/>
+                <xsd:enumeration value="polly"/>
+                <xsd:enumeration value="pricing"/>
+                <xsd:enumeration value="qldb"/>
+                <xsd:enumeration value="qldb-session"/>
+                <xsd:enumeration value="quicksight"/>
+                <xsd:enumeration value="ram"/>
+                <xsd:enumeration value="rds"/>
+                <xsd:enumeration value="rds-data"/>
+                <xsd:enumeration value="redshift"/>
+                <xsd:enumeration value="redshift-data"/>
+                <xsd:enumeration value="rekognition"/>
+                <xsd:enumeration value="resource-groups"/>
+                <xsd:enumeration value="resourcegroupstaggingapi"/>
+                <xsd:enumeration value="robomaker"/>
+                <xsd:enumeration value="route53"/>
+                <xsd:enumeration value="route53domains"/>
+                <xsd:enumeration value="route53resolver"/>
+                <xsd:enumeration value="s3"/>
+                <xsd:enumeration value="s3api"/>
+                <xsd:enumeration value="s3control"/>
+                <xsd:enumeration value="s3outposts"/>
+                <xsd:enumeration value="sagemaker"/>
+                <xsd:enumeration value="sagemaker-a2i-runtime"/>
+                <xsd:enumeration value="sagemaker-edge"/>
+                <xsd:enumeration value="sagemaker-featurestore-runtime"/>
+                <xsd:enumeration value="sagemaker-runtime"/>
+                <xsd:enumeration value="savingsplans"/>
+                <xsd:enumeration value="schemas"/>
+                <xsd:enumeration value="sdb"/>
+                <xsd:enumeration value="secretsmanager"/>
+                <xsd:enumeration value="securityhub"/>
+                <xsd:enumeration value="serverlessrepo"/>
+                <xsd:enumeration value="service-quotas"/>
+                <xsd:enumeration value="servicecatalog"/>
+                <xsd:enumeration value="servicecatalog-appregistry"/>
+                <xsd:enumeration value="servicediscovery"/>
+                <xsd:enumeration value="ses"/>
+                <xsd:enumeration value="sesv2"/>
+                <xsd:enumeration value="shield"/>
+                <xsd:enumeration value="signer"/>
+                <xsd:enumeration value="sms"/>
+                <xsd:enumeration value="snowball"/>
+                <xsd:enumeration value="sns"/>
+                <xsd:enumeration value="sqs"/>
+                <xsd:enumeration value="ssm"/>
+                <xsd:enumeration value="sso"/>
+                <xsd:enumeration value="sso-admin"/>
+                <xsd:enumeration value="sso-oidc"/>
+                <xsd:enumeration value="stepfunctions"/>
+                <xsd:enumeration value="storagegateway"/>
+                <xsd:enumeration value="sts"/>
+                <xsd:enumeration value="support"/>
+                <xsd:enumeration value="swf"/>
+                <xsd:enumeration value="synthetics"/>
+                <xsd:enumeration value="textract"/>
+                <xsd:enumeration value="timestream-query"/>
+                <xsd:enumeration value="timestream-write"/>
+                <xsd:enumeration value="transcribe"/>
+                <xsd:enumeration value="transfer"/>
+                <xsd:enumeration value="translate"/>
+                <xsd:enumeration value="waf"/>
+                <xsd:enumeration value="waf-regional"/>
+                <xsd:enumeration value="wafv2"/>
+                <xsd:enumeration value="wellarchitected"/>
+                <xsd:enumeration value="workdocs"/>
+                <xsd:enumeration value="worklink"/>
+                <xsd:enumeration value="workmail"/>
+                <xsd:enumeration value="workmailmessageflow"/>
+                <xsd:enumeration value="workspaces"/>
+                <xsd:enumeration value="xray"/>
+            </xsd:restriction>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    <xsd:complexType name="EntityObjectAWSVerbType">
+        <xsd:annotation>
+            <xsd:documentation>
+                The EntityObjectAWSVerbType restricts a string value to a specific set of values. 
+                These values describe the various actions that can be invoked using the AWS API. 
+                The restriction on these verbs is to restrict API operations to those that are 
+                read-only.  The empty string is also allowed to support empty elements 
+                associated with error conditions.
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleContent>
+            <xsd:restriction base="oval-def:EntityObjectStringType">
+                <xsd:enumeration value="GET">
+                    <xsd:annotation>
+                        <xsd:documentation>Get</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:enumeration>
+                <xsd:enumeration value="LIST">
+                    <xsd:annotation>
+                        <xsd:documentation>List</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:enumeration>
+                <xsd:enumeration value="DESCRIBE">
+                    <xsd:annotation>
+                        <xsd:documentation>Describe</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:enumeration>
+                <xsd:enumeration value="LS">
+                    <xsd:annotation>
+                        <xsd:documentation>ls</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:enumeration>
+                <xsd:enumeration value="">
+                    <xsd:annotation>
+                        <xsd:documentation>The empty string value is permitted here to allow for detailed error reporting and variable references.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:enumeration>
+            </xsd:restriction>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    <xsd:complexType name="EntityStateAWSVerbType">
+        <xsd:annotation>
+            <xsd:documentation>
+                The EntityStateAWSVerbType restricts a string value to a specific set of values. 
+                These values describe the various actions that can be invoked using the AWS API. 
+                The restriction on these verbs is to restrict API operations to those that are 
+                read-only.  The empty string is also allowed to support empty elements 
+                associated with error conditions.
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleContent>
+            <xsd:restriction base="oval-def:EntityStateStringType">
+                <xsd:enumeration value="GET">
+                    <xsd:annotation>
+                        <xsd:documentation>Get</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:enumeration>
+                <xsd:enumeration value="LIST">
+                    <xsd:annotation>
+                        <xsd:documentation>List</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:enumeration>
+                <xsd:enumeration value="DESCRIBE">
+                    <xsd:annotation>
+                        <xsd:documentation>Describe</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:enumeration>
+                <xsd:enumeration value="LS">
+                    <xsd:annotation>
+                        <xsd:documentation>ls</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:enumeration>
+                <xsd:enumeration value="">
+                    <xsd:annotation>
+                        <xsd:documentation>The empty string value is permitted here to allow for detailed error reporting and variable references.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:enumeration>
+            </xsd:restriction>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    <xsd:complexType name="EntityStateAWSEnhancedBoolType">
+        <xsd:annotation>
+            <xsd:documentation>
+                The EntityStateAWSEnhancedBoolType restricts a string value to a specific set of values. 
+                These values describe the standard boolean values of TRUE and FALSE, but adds a third 
+                value of "NOT SUPPORTED". The empty string is also allowed to support empty elements 
+                associated with error conditions.
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleContent>
+            <xsd:restriction base="oval-def:EntityStateStringType">
+                <xsd:enumeration value="TRUE">
+                    <xsd:annotation>
+                        <xsd:documentation>True</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:enumeration>
+                <xsd:enumeration value="FALSE">
+                    <xsd:annotation>
+                        <xsd:documentation>False</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:enumeration>
+                <xsd:enumeration value="NOT_SUPPORTED">
+                    <xsd:annotation>
+                        <xsd:documentation>Not Supported</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:enumeration>
+                <xsd:enumeration value="">
+                    <xsd:annotation>
+                        <xsd:documentation>The empty string value is permitted here to allow for detailed error reporting and variable references.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:enumeration>
+            </xsd:restriction>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    <xsd:complexType name="EntityStateAWSRegionType">
+        <xsd:annotation>
+            <xsd:documentation>
+                Enumeration for AWS Regions
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleContent>
+            <xsd:restriction base="oval-def:EntityStateStringType">
+                <xsd:enumeration value="us-east-1">
+                    <xsd:annotation>
+                        <xsd:documentation>us-east-1</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:enumeration>
+                <xsd:enumeration value="us-east-2">
+                    <xsd:annotation>
+                        <xsd:documentation>us-east-2</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:enumeration>
+                <xsd:enumeration value="us-west-1">
+                    <xsd:annotation>
+                        <xsd:documentation>us-west-1</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:enumeration>
+                <xsd:enumeration value="us-west-2">
+                    <xsd:annotation>
+                        <xsd:documentation>us-west-2</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:enumeration>
+                <xsd:enumeration value="af-south-1">
+                    <xsd:annotation>
+                        <xsd:documentation>af-south-1</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:enumeration>
+                <xsd:enumeration value="ap-east-1">
+                    <xsd:annotation>
+                        <xsd:documentation>ap-east-1</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:enumeration>
+                <xsd:enumeration value="ap-south-1">
+                    <xsd:annotation>
+                        <xsd:documentation>ap-south-1</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:enumeration>
+                <xsd:enumeration value="ap-northeast-1">
+                    <xsd:annotation>
+                        <xsd:documentation>ap-northeast-1</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:enumeration>
+                <xsd:enumeration value="ap-northeast-2">
+                    <xsd:annotation>
+                        <xsd:documentation>ap-northeast-2</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:enumeration>
+                <xsd:enumeration value="ap-northeast-3">
+                    <xsd:annotation>
+                        <xsd:documentation>ap-northeast-3</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:enumeration>
+                <xsd:enumeration value="ap-southeast-1">
+                    <xsd:annotation>
+                        <xsd:documentation>ap-southeast-1</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:enumeration>
+                <xsd:enumeration value="ap-southeast-2">
+                    <xsd:annotation>
+                        <xsd:documentation>ap-southeast-2</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:enumeration>
+                <xsd:enumeration value="ca-central-1">
+                    <xsd:annotation>
+                        <xsd:documentation>ca-central-1</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:enumeration>
+                <xsd:enumeration value="eu-north-1">
+                    <xsd:annotation>
+                        <xsd:documentation>eu-north-1</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:enumeration>
+                <xsd:enumeration value="eu-south-1">
+                    <xsd:annotation>
+                        <xsd:documentation>eu-south-1</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:enumeration>
+                <xsd:enumeration value="eu-central-1">
+                    <xsd:annotation>
+                        <xsd:documentation>eu-central-1</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:enumeration>
+                <xsd:enumeration value="eu-west-1">
+                    <xsd:annotation>
+                        <xsd:documentation>eu-west-1</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:enumeration>
+                <xsd:enumeration value="eu-west-2">
+                    <xsd:annotation>
+                        <xsd:documentation>eu-west-2</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:enumeration>
+                <xsd:enumeration value="eu-west-3">
+                    <xsd:annotation>
+                        <xsd:documentation>eu-west-3</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:enumeration>
+                <xsd:enumeration value="me-south-1">
+                    <xsd:annotation>
+                        <xsd:documentation>me-south-1</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:enumeration>
+                <xsd:enumeration value="sa-east-1">
+                    <xsd:annotation>
+                        <xsd:documentation>sa-east-1</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:enumeration>
+                <xsd:enumeration value="">
+                    <xsd:annotation>
+                        <xsd:documentation>The empty string value is permitted here to allow for detailed error reporting and variable references.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:enumeration>
+            </xsd:restriction>
+        </xsd:simpleContent>
+    </xsd:complexType>
+</xsd:schema>
