@@ -22,14 +22,13 @@ Current Members
 
   * `Center for Internet Security <https://www.cisecurity.org>`_ - William Munyan, Adam Montville
   * `Cisco Systems, Inc. <https://www.cisco.com/>`_ - Omar Santos
-  * `Depository Trust & Clearing Corporation (DTCC) <https://www.dtcc.com/>`_ - Dale Rich
   * `HCL Group <https://hcl.com/>`_ - Rosario Gangemi
   * `Joval Continuous Monitoring <https://joval.org/>`_ - David Solin, David Ries
   * `McAfee <https://www.mcafee.com/>`_ - Kent Landfield
   * `Modulo <https://www.modulo.com/>`_ - Alberto Bastos
   * `National Institute of Standards and Technology <https://www.nist.gov/>`_ - Stephen Banghart
   * `Qualys, Inc. <https://www.qualys.com/>`_ - Hariom Singh
-  * `Red Hat, Inc. <https://www.redhat.com/>`_ - Šimon Lukašík, Matej Tyc
+  * `Red Hat, Inc. <https://www.redhat.com/>`_ - Matej Tyc, Watson Sato
   * `SecPod Technologies <https://www.secpod.com/>`_ - Chandrashekhar B
   * `NAVWARSYSCOM, U.S. Navy <https://www.spawar.navy.mil/>`_ - Jack Vander Pol
   * `Unified Compliance <https://www.unifiedcompliance.com/>`_ - Stephen Pillero
@@ -38,6 +37,7 @@ Current Members
 * Individual
 
   * Blake Frantz
+  * Dale Rich
   * Nils Puhlmann
 
 Past Members
