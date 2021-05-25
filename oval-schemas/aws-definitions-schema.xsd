@@ -119,6 +119,18 @@
                         <xsd:choice>
                             <xsd:element ref="oval-def:set"/>
                             <xsd:sequence>
+                                <xsd:element name="version" type="oval-def:EntityObjectStringType">
+                                    <xsd:annotation>
+                                        <xsd:documentation>The version entity defines the major version of the AWS API/CLI to use.</xsd:documentation>
+                                        <xsd:appinfo>
+                                            <sch:pattern id="aws-def_api_object_version">
+                                                <sch:rule context="aws-def:api_object/aws-def:version">
+                                                    <sch:assert test="not(@operation) or @operation='equals'"><sch:value-of select="../@id"/> - operation attribute for the version entity of an api_object should be 'equals', note that this overrules the general operation attribute validation (i.e. follow this one)</sch:assert>
+                                                </sch:rule>
+                                            </sch:pattern>
+                                        </xsd:appinfo>
+                                    </xsd:annotation>
+                                </xsd:element>
                                 <xsd:element name="service_name" type="aws-def:EntityObjectAWSServiceType" minOccurs="1" maxOccurs="1">
                                     <xsd:annotation>
                                         <xsd:documentation>The name of the AWS API service to be invoked, such as iam, s3, or apigateway (among many others).</xsd:documentation>
@@ -352,6 +364,18 @@
                         <xsd:choice>
                             <xsd:element ref="oval-def:set"/>
                             <xsd:sequence>
+                                <xsd:element name="version" type="oval-def:EntityObjectStringType">
+                                    <xsd:annotation>
+                                        <xsd:documentation>The version entity defines the major version of the AWS API/CLI to use.</xsd:documentation>
+                                        <xsd:appinfo>
+                                            <sch:pattern id="aws-def_apicontent_object_version">
+                                                <sch:rule context="aws-def:apicontent_object/aws-def:version">
+                                                    <sch:assert test="not(@operation) or @operation='equals'"><sch:value-of select="../@id"/> - operation attribute for the version entity of an apicontent_object should be 'equals', note that this overrules the general operation attribute validation (i.e. follow this one)</sch:assert>
+                                                </sch:rule>
+                                            </sch:pattern>
+                                        </xsd:appinfo>
+                                    </xsd:annotation>
+                                </xsd:element>
                                 <xsd:element name="service_name" type="aws-def:EntityObjectAWSServiceType" minOccurs="1" maxOccurs="1">
                                     <xsd:annotation>
                                         <xsd:documentation>The name of the AWS API service to be invoked, such as iam, s3, or apigateway (among many others).</xsd:documentation>
@@ -590,7 +614,26 @@
         </xsd:annotation>
         <xsd:complexType>
             <xsd:complexContent>
-                <xsd:extension base="oval-def:ObjectType"/>
+                <xsd:extension base="oval-def:ObjectType">
+                    <xsd:sequence>
+                        <xsd:choice>
+                            <xsd:sequence>
+                                <xsd:element name="version" type="oval-def:EntityObjectStringType">
+                                    <xsd:annotation>
+                                        <xsd:documentation>The version entity defines the major version of the AWS API/CLI to use.</xsd:documentation>
+                                        <xsd:appinfo>
+                                            <sch:pattern id="aws-def_credentialreport_object_version">
+                                                <sch:rule context="aws-def:credentialreport_object/aws-def:version">
+                                                    <sch:assert test="not(@operation) or @operation='equals'"><sch:value-of select="../@id"/> - operation attribute for the version entity of a credentialreport_object should be 'equals', note that this overrules the general operation attribute validation (i.e. follow this one)</sch:assert>
+                                                </sch:rule>
+                                            </sch:pattern>
+                                        </xsd:appinfo>
+                                    </xsd:annotation>
+                                </xsd:element>
+                            </xsd:sequence>
+                        </xsd:choice>
+                    </xsd:sequence>
+                </xsd:extension>
             </xsd:complexContent>
         </xsd:complexType>
     </xsd:element>

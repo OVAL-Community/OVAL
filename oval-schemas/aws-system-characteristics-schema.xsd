@@ -48,6 +48,11 @@
             <xsd:complexContent>
                 <xsd:extension base="oval-sc:ItemType">
                     <xsd:sequence>
+                        <xsd:element name="version" type="oval-sc:EntityItemStringType" minOccurs="0" maxOccurs="1">
+                            <xsd:annotation>
+                                <xsd:documentation>The version entity identifies the major version of the AWS API/CLI used to perform the query.</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:element>
                         <xsd:element name="service_name" type="aws-sc:EntityItemAWSServiceType" minOccurs="0" maxOccurs="1">
                             <xsd:annotation>
                                 <xsd:documentation>The name of the AWS API service being invoked</xsd:documentation>
@@ -126,6 +131,11 @@
             <xsd:complexContent>
                 <xsd:extension base="oval-sc:ItemType">
                     <xsd:sequence>
+                        <xsd:element name="version" type="oval-sc:EntityItemStringType" minOccurs="0" maxOccurs="1">
+                            <xsd:annotation>
+                                <xsd:documentation>The version entity identifies the major version of the AWS API/CLI used to perform the query.</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:element>
                         <xsd:element name="service_name" type="aws-sc:EntityItemAWSServiceType" minOccurs="0" maxOccurs="1">
                             <xsd:annotation>
                                 <xsd:documentation>The name of the AWS API service being invoked</xsd:documentation>
@@ -241,6 +251,11 @@
             <xsd:complexContent>
                 <xsd:extension base="oval-sc:ItemType">
                     <xsd:sequence>
+                        <xsd:element name="version" type="oval-sc:EntityItemStringType" minOccurs="0" maxOccurs="1">
+                            <xsd:annotation>
+                                <xsd:documentation>The version entity identifies the major version of the AWS API/CLI used to perform the query.</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:element>
                         <xsd:element name="user" type="oval-sc:EntityItemStringType" minOccurs="0" maxOccurs="1">
                             <xsd:annotation>
                                 <xsd:documentation>Specifies the AWS Get Credentials Report User </xsd:documentation>
