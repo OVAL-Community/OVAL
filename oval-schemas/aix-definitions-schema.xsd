@@ -342,6 +342,109 @@
             </xsd:complexType>
       </xsd:element>
       <!-- =============================================================================== -->
+      <!-- ================================= LSSEC TEST  ================================= -->
+      <!-- =============================================================================== -->
+      <xsd:element name="lssec_test" substitutionGroup="oval-def:test">
+            <xsd:annotation>
+                  <xsd:documentation>
+                        The lssec_test is used to check information related to the /usr/bin/lssec command and the parameters it manages. 
+                        The lssec command lists attributes stored in the security configuration stanza files. The following security configuration 
+                        files contain attributes that you can specify with the Attribute parameter.  The information being tested is based off the 
+                        /usr/bin/lssec [ -f File ] [ -s Stanza ] [ -a Attribute ] command. It extends the standard TestType as defined in the 
+                        oval-definitions-schema and one should refer to the TestType description for more information. The required object 
+                        element references a lssec_object and the optional state element specifies the value to check.
+                  </xsd:documentation>
+                  <xsd:appinfo>
+                        <sch:pattern id="aix-def_lssectst">
+                              <sch:rule context="aix-def:lssec_test/aix-def:object">
+                                    <sch:assert test="@object_ref=ancestor::oval-def:oval_definitions/oval-def:objects/aix-def:lssec_object/@id"><sch:value-of select="../@id"/> - the object child element of a <sch:name path=".."/> must reference a lssec_object</sch:assert>
+                              </sch:rule>
+                              <sch:rule context="aix-def:lssec_test/aix-def:state">
+                                    <sch:assert test="@state_ref=ancestor::oval-def:oval_definitions/oval-def:states/aix-def:lssec_state/@id"><sch:value-of select="../@id"/> - the state child element of a <sch:name path=".."/> must reference a lssec_state</sch:assert>
+                              </sch:rule>
+                        </sch:pattern>
+                  </xsd:appinfo>
+            </xsd:annotation>
+            <xsd:complexType>
+                  <xsd:complexContent>
+                        <xsd:extension base="oval-def:TestType">
+                              <xsd:sequence>
+                                    <xsd:element name="object" type="oval-def:ObjectRefType" />
+                                    <xsd:element name="state" type="oval-def:StateRefType" minOccurs="0" maxOccurs="unbounded"/>
+                              </xsd:sequence>
+                        </xsd:extension>
+                  </xsd:complexContent>
+            </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="lssec_object" substitutionGroup="oval-def:object">
+            <xsd:annotation>
+                  <xsd:documentation>The lssec_object element is used by a lssec_test to determine the collection of attributes in the security stanza files. Each object extends the standard ObjectType as defined in the oval-definitions-schema and one should refer to the ObjectType description for more information. The common set element allows complex objects to be created using filters and set logic. Again, please refer to the description of the set element in the oval-definitions-schema.</xsd:documentation>
+            </xsd:annotation>
+            <xsd:complexType>
+                  <xsd:complexContent>
+                        <xsd:extension base="oval-def:ObjectType">
+                              <xsd:sequence>
+                                    <xsd:choice>
+                                          <xsd:element ref="oval-def:set"/>
+                                          <xsd:sequence>
+                                                <xsd:element name="stanza_file" type="aix-def:EntityObjectStanzaFileType">
+                                                      <xsd:annotation>
+                                                            <xsd:documentation>The stanza_file entity is an enumeration of values representing the security configuration file containing the desired attributes.</xsd:documentation>                                                            
+                                                      </xsd:annotation>
+                                                </xsd:element>
+                                                <xsd:element name="stanza_name" type="oval-def:EntityObjectStringType">
+                                                      <xsd:annotation>
+                                                            <xsd:documentation>Specifies the name of the stanza to list.</xsd:documentation>                                                            
+                                                      </xsd:annotation>
+                                                </xsd:element>
+                                                <xsd:element name="attribute" type="oval-def:EntityObjectStringType">
+                                                      <xsd:annotation>
+                                                            <xsd:documentation>Specifies the attribute to list.</xsd:documentation>                                                            
+                                                      </xsd:annotation>
+                                                </xsd:element>
+                                                <xsd:element ref="oval-def:filter" minOccurs="0" maxOccurs="unbounded"/>
+                                          </xsd:sequence>
+                                    </xsd:choice>
+                              </xsd:sequence>
+                        </xsd:extension>
+                  </xsd:complexContent>
+            </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="lssec_state" substitutionGroup="oval-def:state">
+            <xsd:annotation>
+                  <xsd:documentation>The lssec_state element defines the different information associated with a specific call to /usr/bin/lssec. Please refer to the individual elements in the schema for more details about what each represents.</xsd:documentation>
+            </xsd:annotation>
+            <xsd:complexType>
+                  <xsd:complexContent>
+                        <xsd:extension base="oval-def:StateType">
+                              <xsd:sequence>
+                                    <xsd:element name="stanza_file" type="aix-def:EntityStateStanzaFileType">
+                                          <xsd:annotation>
+                                                <xsd:documentation>The stanza_file entity is an enumeration of values representing the security configuration file containing the desired attributes.</xsd:documentation>                                                            
+                                          </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="stanza_name" type="oval-def:EntityStateStringType">
+                                          <xsd:annotation>
+                                                <xsd:documentation>Specifies the name of the stanza to list.</xsd:documentation>                                                            
+                                          </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="attribute" type="oval-def:EntityStateStringType">
+                                          <xsd:annotation>
+                                                <xsd:documentation>Specifies the attribute to list.</xsd:documentation>                                                            
+                                          </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="value" type="oval-def:EntityStateAnySimpleType" minOccurs="0" maxOccurs="1">
+                                          <xsd:annotation>
+                                                <xsd:documentation>The value entity defines the value to check against the security parameter being examined.</xsd:documentation>
+                                          </xsd:annotation>
+                                    </xsd:element>
+                              </xsd:sequence>
+                        </xsd:extension>
+                  </xsd:complexContent>
+            </xsd:complexType>
+      </xsd:element>
+      
+      <!-- =============================================================================== -->
       <!-- ===================================  NO TEST  ================================= -->
       <!-- =============================================================================== -->
       <xsd:element name="no_test" substitutionGroup="oval-def:test">
@@ -598,6 +701,204 @@
                         <xsd:enumeration value="REMOVING">
                               <xsd:annotation>
                                     <xsd:documentation>The efix is in the process of being removed.</xsd:documentation>
+                              </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="">
+                              <xsd:annotation>
+                                    <xsd:documentation>The empty string value is permitted here to allow for empty elements associated with variable references.</xsd:documentation>
+                              </xsd:annotation>
+                        </xsd:enumeration>
+                  </xsd:restriction>
+            </xsd:simpleContent>
+      </xsd:complexType>
+      <xsd:complexType name="EntityObjectStanzaFileType">
+            <xsd:annotation>
+                  <xsd:documentation>The lssec command lists attributes stored in the security configuration stanza files. The following security configuration files contain attributes that you can specify with the Attribute parameter.</xsd:documentation>
+            </xsd:annotation>
+            <xsd:simpleContent>
+                  <xsd:restriction base="oval-def:EntityObjectStringType">
+                        <xsd:enumeration value="ENVIRON">
+                              <xsd:annotation>
+                                    <xsd:documentation>/etc/security/environ</xsd:documentation>
+                              </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="GROUP">
+                              <xsd:annotation>
+                                    <xsd:documentation>/etc/security/group</xsd:documentation>
+                              </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="HOSTS">
+                              <xsd:annotation>
+                                    <xsd:documentation>/etc/security/audit/hosts</xsd:documentation>
+                              </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="LASTLOG">
+                              <xsd:annotation>
+                                    <xsd:documentation>/etc/security/lastlog</xsd:documentation>
+                              </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="LIMITS">
+                              <xsd:annotation>
+                                    <xsd:documentation>/etc/security/limits</xsd:documentation>
+                              </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="LOGIN">
+                              <xsd:annotation>
+                                    <xsd:documentation>/etc/security/login.cfg</xsd:documentation>
+                              </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="MKUSER">
+                              <xsd:annotation>
+                                    <xsd:documentation>/usr/lib/security/mkuser.default</xsd:documentation>
+                              </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="NSCONTROL">
+                              <xsd:annotation>
+                                    <xsd:documentation>/etc/nscontrol.conf</xsd:documentation>
+                              </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="PASSWD">
+                              <xsd:annotation>
+                                    <xsd:documentation>/etc/security/passwd</xsd:documentation>
+                              </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="PORTLOG">
+                              <xsd:annotation>
+                                    <xsd:documentation>/etc/security/portlog</xsd:documentation>
+                              </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="PWDALG">
+                              <xsd:annotation>
+                                    <xsd:documentation>/etc/security/pwdalg.cfg</xsd:documentation>
+                              </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="ROLES">
+                              <xsd:annotation>
+                                    <xsd:documentation>/etc/security/roles</xsd:documentation>
+                              </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="SMITACL_USER">
+                              <xsd:annotation>
+                                    <xsd:documentation>/etc/security/smitacl.user</xsd:documentation>
+                              </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="SMITACL_GROUP">
+                              <xsd:annotation>
+                                    <xsd:documentation>/etc/security/smitacl.group</xsd:documentation>
+                              </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="USER">
+                              <xsd:annotation>
+                                    <xsd:documentation>/etc/security/user</xsd:documentation>
+                              </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="USER_ROLES">
+                              <xsd:annotation>
+                                    <xsd:documentation>/etc/security/user.roles</xsd:documentation>
+                              </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="RTCD_POLICY">
+                              <xsd:annotation>
+                                    <xsd:documentation>/etc/security/rtc/rtcd_policy.conf</xsd:documentation>
+                              </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="">
+                              <xsd:annotation>
+                                    <xsd:documentation>The empty string value is permitted here to allow for empty elements associated with variable references.</xsd:documentation>
+                              </xsd:annotation>
+                        </xsd:enumeration>
+                  </xsd:restriction>
+            </xsd:simpleContent>
+      </xsd:complexType>
+      <xsd:complexType name="EntityStateStanzaFileType">
+            <xsd:annotation>
+                  <xsd:documentation>The lssec command lists attributes stored in the security configuration stanza files. The following security configuration files contain attributes that you can specify with the Attribute parameter.</xsd:documentation>
+            </xsd:annotation>
+            <xsd:simpleContent>
+                  <xsd:restriction base="oval-def:EntityStateStringType">
+                        <xsd:enumeration value="ENVIRON">
+                              <xsd:annotation>
+                                    <xsd:documentation>/etc/security/environ</xsd:documentation>
+                              </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="GROUP">
+                              <xsd:annotation>
+                                    <xsd:documentation>/etc/security/group</xsd:documentation>
+                              </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="HOSTS">
+                              <xsd:annotation>
+                                    <xsd:documentation>/etc/security/audit/hosts</xsd:documentation>
+                              </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="LASTLOG">
+                              <xsd:annotation>
+                                    <xsd:documentation>/etc/security/lastlog</xsd:documentation>
+                              </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="LIMITS">
+                              <xsd:annotation>
+                                    <xsd:documentation>/etc/security/limits</xsd:documentation>
+                              </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="LOGIN">
+                              <xsd:annotation>
+                                    <xsd:documentation>/etc/security/login.cfg</xsd:documentation>
+                              </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="MKUSER">
+                              <xsd:annotation>
+                                    <xsd:documentation>/usr/lib/security/mkuser.default</xsd:documentation>
+                              </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="NSCONTROL">
+                              <xsd:annotation>
+                                    <xsd:documentation>/etc/nscontrol.conf</xsd:documentation>
+                              </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="PASSWD">
+                              <xsd:annotation>
+                                    <xsd:documentation>/etc/security/passwd</xsd:documentation>
+                              </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="PORTLOG">
+                              <xsd:annotation>
+                                    <xsd:documentation>/etc/security/portlog</xsd:documentation>
+                              </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="PWDALG">
+                              <xsd:annotation>
+                                    <xsd:documentation>/etc/security/pwdalg.cfg</xsd:documentation>
+                              </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="ROLES">
+                              <xsd:annotation>
+                                    <xsd:documentation>/etc/security/roles</xsd:documentation>
+                              </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="SMITACL_USER">
+                              <xsd:annotation>
+                                    <xsd:documentation>/etc/security/smitacl.user</xsd:documentation>
+                              </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="SMITACL_GROUP">
+                              <xsd:annotation>
+                                    <xsd:documentation>/etc/security/smitacl.group</xsd:documentation>
+                              </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="USER">
+                              <xsd:annotation>
+                                    <xsd:documentation>/etc/security/user</xsd:documentation>
+                              </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="USER_ROLES">
+                              <xsd:annotation>
+                                    <xsd:documentation>/etc/security/user.roles</xsd:documentation>
+                              </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="RTCD_POLICY">
+                              <xsd:annotation>
+                                    <xsd:documentation>/etc/security/rtc/rtcd_policy.conf</xsd:documentation>
                               </xsd:annotation>
                         </xsd:enumeration>
                         <xsd:enumeration value="">
