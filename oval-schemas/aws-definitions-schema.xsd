@@ -119,16 +119,9 @@
                         <xsd:choice>
                             <xsd:element ref="oval-def:set"/>
                             <xsd:sequence>
-                                <xsd:element name="version" type="oval-def:EntityObjectStringType">
+                                <xsd:element name="api_version" type="oval-def:EntityObjectVersionType" nillable="true" minOccurs="1" maxOccurs="1">
                                     <xsd:annotation>
-                                        <xsd:documentation>The version entity defines the major version of the AWS API/CLI to use.</xsd:documentation>
-                                        <xsd:appinfo>
-                                            <sch:pattern id="aws-def_api_object_version">
-                                                <sch:rule context="aws-def:api_object/aws-def:version">
-                                                    <sch:assert test="not(@operation) or @operation='equals'"><sch:value-of select="../@id"/> - operation attribute for the version entity of an api_object should be 'equals', note that this overrules the general operation attribute validation (i.e. follow this one)</sch:assert>
-                                                </sch:rule>
-                                            </sch:pattern>
-                                        </xsd:appinfo>
+                                        <xsd:documentation>The api_version entity defines the version of the AWS API/CLI to use. If xsi:nil='true', that implies it does not matter which version of the API/CLI the command refers to.</xsd:documentation>
                                     </xsd:annotation>
                                 </xsd:element>
                                 <xsd:element name="service_name" type="aws-def:EntityObjectAWSServiceType" minOccurs="1" maxOccurs="1">
@@ -226,6 +219,11 @@
             <xsd:complexContent>
                 <xsd:extension base="oval-def:StateType">
                     <xsd:sequence>
+                        <xsd:element name="api_version" type="oval-def:EntityStateVersionType" minOccurs="0" maxOccurs="1">
+                            <xsd:annotation>
+                                <xsd:documentation>The version entity defines the version of the AWS API/CLI to use.</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:element>
                         <xsd:element name="service_name" type="aws-def:EntityStateAWSServiceType" minOccurs="0" maxOccurs="1">
                             <xsd:annotation>
                                 <xsd:documentation>The name of the AWS API service to be invoked, such as iam, s3, or apigateway (among many others).</xsd:documentation>
@@ -364,16 +362,9 @@
                         <xsd:choice>
                             <xsd:element ref="oval-def:set"/>
                             <xsd:sequence>
-                                <xsd:element name="version" type="oval-def:EntityObjectStringType">
+                                <xsd:element name="api_version" type="oval-def:EntityObjectVersionType" nillable="true" minOccurs="1" maxOccurs="1">
                                     <xsd:annotation>
-                                        <xsd:documentation>The version entity defines the major version of the AWS API/CLI to use.</xsd:documentation>
-                                        <xsd:appinfo>
-                                            <sch:pattern id="aws-def_apicontent_object_version">
-                                                <sch:rule context="aws-def:apicontent_object/aws-def:version">
-                                                    <sch:assert test="not(@operation) or @operation='equals'"><sch:value-of select="../@id"/> - operation attribute for the version entity of an apicontent_object should be 'equals', note that this overrules the general operation attribute validation (i.e. follow this one)</sch:assert>
-                                                </sch:rule>
-                                            </sch:pattern>
-                                        </xsd:appinfo>
+                                        <xsd:documentation>The api_version entity defines the version of the AWS API/CLI to use. If xsi:nil='true', that implies it does not matter which version of the API/CLI the command refers to.</xsd:documentation>
                                     </xsd:annotation>
                                 </xsd:element>
                                 <xsd:element name="service_name" type="aws-def:EntityObjectAWSServiceType" minOccurs="1" maxOccurs="1">
@@ -468,6 +459,11 @@
             <xsd:complexContent>
                 <xsd:extension base="oval-def:StateType">
                     <xsd:sequence>
+                        <xsd:element name="api_version" type="oval-def:EntityStateVersionType" minOccurs="0" maxOccurs="1">
+                            <xsd:annotation>
+                                <xsd:documentation>The version entity defines the version of the AWS API/CLI to use.</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:element>
                         <xsd:element name="service_name" type="aws-def:EntityStateAWSServiceType" minOccurs="0" maxOccurs="1">
                             <xsd:annotation>
                                 <xsd:documentation>The name of the AWS API service to be invoked, such as iam, s3, or apigateway (among many others).</xsd:documentation>
@@ -537,13 +533,13 @@
     </xsd:element>
     
     <!-- =============================================================================== -->
-    <!-- =========================  IAM CREDENTIAL REPORT TEST  ======================== -->
+    <!-- =========================  IAM CREDENTIAL REPORT USER TEST  ======================== -->
     <!-- =============================================================================== -->
-    <xsd:element name="credentialreport_test" substitutionGroup="oval-def:test">
+    <xsd:element name="credentialreportuser_test" substitutionGroup="oval-def:test">
         <xsd:annotation>
             <xsd:documentation>
-                The credentialreport_test allows for the evaluation of results from generating and retrieving a Credentials Report 
-                utilizing either the AWS CLI or the AWS API.  The object is a singleton, as the credential report is generated for 
+                The credentialreportuser_test allows for the evaluation of results from generating and retrieving a Credentials Report 
+                utilizing either the AWS CLI or the AWS API, and parsing user information.  The credential report is generated for 
                 all users of the credentialed account being used to access the AWS environment.
             </xsd:documentation>
             <xsd:documentation>
@@ -562,19 +558,19 @@
             </xsd:documentation>
             <xsd:appinfo>
                 <oval:element_mapping>
-                    <oval:test>credentialreport_test</oval:test>
-                    <oval:object>credentialreport_object</oval:object>
-                    <oval:state>credentialreport_state</oval:state>
-                    <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#aws">credentialreport_item</oval:item>
+                    <oval:test>credentialreportuser_test</oval:test>
+                    <oval:object>credentialreportuser_object</oval:object>
+                    <oval:state>credentialreportuser_state</oval:state>
+                    <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#aws">credentialreportuser_item</oval:item>
                 </oval:element_mapping>
             </xsd:appinfo>
             <xsd:appinfo>
-                <sch:pattern id="aws-def_credentialreporttst">
+                <sch:pattern id="aws-def_credentialreportusertst">
                     <sch:rule context="aws-def:test/aws-def:object">
-                        <sch:assert test="@object_ref = ancestor::oval-def:oval_definitions/oval-def:objects/aws-def:credentialreport_object/@id"><sch:value-of select="../@id"/> - the object child element of a credentialreport_test must reference a credentialreport_object</sch:assert>
+                        <sch:assert test="@object_ref = ancestor::oval-def:oval_definitions/oval-def:objects/aws-def:credentialreportuser_object/@id"><sch:value-of select="../@id"/> - the object child element of a credentialreportuser_test must reference a credentialreportuser_object</sch:assert>
                     </sch:rule>
                     <sch:rule context="aws-def:test/aws-def:state">
-                        <sch:assert test="@state_ref = ancestor::oval-def:oval_definitions/oval-def:states/aws-def:credentialreport_state/@id"><sch:value-of select="../@id"/> - the state child element of a credentialreport_test must reference a credentialreport_state</sch:assert>
+                        <sch:assert test="@state_ref = ancestor::oval-def:oval_definitions/oval-def:states/aws-def:credentialreportuser_state/@id"><sch:value-of select="../@id"/> - the state child element of a credentialreportuser_test must reference a credentialreportuser_state</sch:assert>
                     </sch:rule>
                 </sch:pattern>
             </xsd:appinfo>
@@ -590,11 +586,11 @@
             </xsd:complexContent>
         </xsd:complexType>
     </xsd:element>
-    <xsd:element name="credentialreport_object" substitutionGroup="oval-def:object">
+    <xsd:element name="credentialreportuser_object" substitutionGroup="oval-def:object">
         <xsd:annotation>
             <xsd:documentation>
-                The credentialreport_object allows for the collection of results from generating and retrieving a Credentials Report 
-                utilizing either the AWS CLI or the AWS API.  The object is a singleton, as the credential report is generated for 
+                The credentialreportuser_object allows for the collection of results from generating and retrieving a Credentials Report 
+                utilizing either the AWS CLI or the AWS API.  The credential report is generated for 
                 all users of the credentialed account being used to access the AWS environment.
             </xsd:documentation>
             <xsd:documentation>
@@ -618,16 +614,14 @@
                     <xsd:sequence>
                         <xsd:choice>
                             <xsd:sequence>
-                                <xsd:element name="version" type="oval-def:EntityObjectStringType">
+                                <xsd:element name="api_version" type="oval-def:EntityObjectVersionType" nillable="true" minOccurs="1" maxOccurs="1">
                                     <xsd:annotation>
-                                        <xsd:documentation>The version entity defines the major version of the AWS API/CLI to use.</xsd:documentation>
-                                        <xsd:appinfo>
-                                            <sch:pattern id="aws-def_credentialreport_object_version">
-                                                <sch:rule context="aws-def:credentialreport_object/aws-def:version">
-                                                    <sch:assert test="not(@operation) or @operation='equals'"><sch:value-of select="../@id"/> - operation attribute for the version entity of a credentialreport_object should be 'equals', note that this overrules the general operation attribute validation (i.e. follow this one)</sch:assert>
-                                                </sch:rule>
-                                            </sch:pattern>
-                                        </xsd:appinfo>
+                                        <xsd:documentation>The api_version entity defines the version of the AWS API/CLI to use. If xsi:nil='true', that implies it does not matter which version of the API/CLI the command refers to.</xsd:documentation>
+                                    </xsd:annotation>
+                                </xsd:element>
+                                <xsd:element name="user" type="oval-def:EntityObjectStringType" minOccurs="1" maxOccurs="1">
+                                    <xsd:annotation>
+                                        <xsd:documentation>Specifies the AWS Get Credentials Report User </xsd:documentation>
                                     </xsd:annotation>
                                 </xsd:element>
                             </xsd:sequence>
@@ -637,10 +631,10 @@
             </xsd:complexContent>
         </xsd:complexType>
     </xsd:element>
-    <xsd:element name="credentialreport_state" substitutionGroup="oval-def:state">
+    <xsd:element name="credentialreportuser_state" substitutionGroup="oval-def:state">
         <xsd:annotation>
             <xsd:documentation>
-                The credentialreport_state allows for the examination of results from generating and retrieving a Credentials Report 
+                The credentialreportuser_state allows for the examination of results from generating and retrieving a Credentials Report 
                 utilizing either the AWS CLI or the AWS API.
             </xsd:documentation>
             <xsd:documentation>
@@ -662,6 +656,11 @@
             <xsd:complexContent>
                 <xsd:extension base="oval-def:StateType">
                     <xsd:sequence>
+                        <xsd:element name="api_version" type="oval-def:EntityStateVersionType" minOccurs="0" maxOccurs="1">
+                            <xsd:annotation>
+                                <xsd:documentation>The version entity defines the version of the AWS API/CLI to use.</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:element>
                         <xsd:element name="user" type="oval-def:EntityStateStringType" minOccurs="0" maxOccurs="1">
                             <xsd:annotation>
                                 <xsd:documentation>Specifies the AWS Get Credentials Report User </xsd:documentation>
@@ -715,94 +714,337 @@
                                 <xsd:documentation>Specifies the AWS IAM Get Credentials Report MFA Active </xsd:documentation>
                             </xsd:annotation>
                         </xsd:element>
-                        <xsd:element name="access_key_1_active" type="oval-def:EntityStateBoolType" minOccurs="0" maxOccurs="1">
+                    </xsd:sequence>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+    
+    <!-- =============================================================================== -->
+    <!-- =========================  IAM CREDENTIAL REPORT KEY TEST  ======================== -->
+    <!-- =============================================================================== -->
+    <xsd:element name="credentialreportkey_test" substitutionGroup="oval-def:test">
+        <xsd:annotation>
+            <xsd:documentation>
+                The credentialreportkey_test allows for the evaluation of results from generating and retrieving a Credentials Report 
+                utilizing either the AWS CLI or the AWS API and parsing user access keys.  The credential report is generated for 
+                all users of the credentialed account being used to access the AWS environment.
+            </xsd:documentation>
+            <xsd:documentation>
+                From the AWS CLI, implementers must first generate a credential report using the "aws iam 
+                generate-credential-report" command.  Once completed, implementers can retrieve the last generated report using the 
+                "aws iam get-credential-report" command.
+            </xsd:documentation>
+            <xsd:documentation>
+                From the AWS API, implementers must first generate a credential report using the "GenerateCredentialReport" method.  Once 
+                completed, implementers can retrieve the last generated report using the "GetCredentialReport" method.
+            </xsd:documentation>
+            <xsd:documentation>
+                Once retrieved, the content of the report is a base64-encoded string that, once decoded, represents a blob of CSV.  
+                Each line of the CSV represents an item, with each comma-separated field an element in this construct.  The first 
+                line of the CSV denotes the column header, represented in this element as each field.
+            </xsd:documentation>
+            <xsd:appinfo>
+                <oval:element_mapping>
+                    <oval:test>credentialreportkey_test</oval:test>
+                    <oval:object>credentialreportkey_object</oval:object>
+                    <oval:state>credentialreportkey_state</oval:state>
+                    <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#aws">credentialreportkey_item</oval:item>
+                </oval:element_mapping>
+            </xsd:appinfo>
+            <xsd:appinfo>
+                <sch:pattern id="aws-def_credentialreportkeytst">
+                    <sch:rule context="aws-def:test/aws-def:object">
+                        <sch:assert test="@object_ref = ancestor::oval-def:oval_definitions/oval-def:objects/aws-def:credentialreportkey_object/@id"><sch:value-of select="../@id"/> - the object child element of a credentialreportkey_test must reference a credentialreportkey_object</sch:assert>
+                    </sch:rule>
+                    <sch:rule context="aws-def:test/aws-def:state">
+                        <sch:assert test="@state_ref = ancestor::oval-def:oval_definitions/oval-def:states/aws-def:credentialreportkey_state/@id"><sch:value-of select="../@id"/> - the state child element of a credentialreportkey_test must reference a credentialreportkey_state</sch:assert>
+                    </sch:rule>
+                </sch:pattern>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="oval-def:TestType">
+                    <xsd:sequence>
+                        <xsd:element name="object" type="oval-def:ObjectRefType"/>
+                        <xsd:element name="state" type="oval-def:StateRefType" minOccurs="0" maxOccurs="unbounded"/>
+                    </xsd:sequence>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="credentialreportkey_object" substitutionGroup="oval-def:object">
+        <xsd:annotation>
+            <xsd:documentation>
+                The credentialreportkey_object allows for the collection of results from generating and retrieving a Credentials Report 
+                utilizing either the AWS CLI or the AWS API and parsing user access keys.  The credential report is generated for 
+                all users of the credentialed account being used to access the AWS environment.
+            </xsd:documentation>
+            <xsd:documentation>
+                From the AWS CLI, implementers must first generate a credential report using the "aws iam 
+                generate-credential-report" command.  Once completed, implementers can retrieve the last generated report using the 
+                "aws iam get-credential-report" command.
+            </xsd:documentation>
+            <xsd:documentation>
+                From the AWS API, implementers must first generate a credential report using the "GenerateCredentialReport" method.  Once 
+                completed, implementers can retrieve the last generated report using the "GetCredentialReport" method.
+            </xsd:documentation>
+            <xsd:documentation>
+                Once retrieved, the content of the report is a base64-encoded string that, once decoded, represents a blob of CSV.  
+                Each line of the CSV represents an item, with each comma-separated field an element in this construct.  The first 
+                line of the CSV denotes the column header, represented in this element as each field.
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="oval-def:ObjectType">
+                    <xsd:sequence>
+                        <xsd:choice>
+                            <xsd:sequence>
+                                <xsd:element name="api_version" type="oval-def:EntityObjectVersionType" nillable="true" minOccurs="1" maxOccurs="1">
+                                    <xsd:annotation>
+                                        <xsd:documentation>The api_version entity defines the version of the AWS API/CLI to use. If xsi:nil='true', that implies it does not matter which version of the API/CLI the command refers to.</xsd:documentation>
+                                    </xsd:annotation>
+                                </xsd:element>
+                                <xsd:element name="user" type="oval-def:EntityObjectStringType" minOccurs="1" maxOccurs="1">
+                                    <xsd:annotation>
+                                        <xsd:documentation>Specifies the AWS Get Credentials Report User </xsd:documentation>
+                                    </xsd:annotation>
+                                </xsd:element>
+                            </xsd:sequence>
+                        </xsd:choice>
+                    </xsd:sequence>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="credentialreportkey_state" substitutionGroup="oval-def:state">
+        <xsd:annotation>
+            <xsd:documentation>
+                The credentialreportkey_state allows for the examination of results from generating and retrieving a Credentials Report 
+                utilizing either the AWS CLI or the AWS API and parsing user access keys.
+            </xsd:documentation>
+            <xsd:documentation>
+                From the AWS CLI, implementers must first generate a credential report using the "aws iam 
+                generate-credential-report" command.  Once completed, implementers can retrieve the last generated report using the 
+                "aws iam get-credential-report" command.
+            </xsd:documentation>
+            <xsd:documentation>
+                From the AWS API, implementers must first generate a credential report using the "GenerateCredentialReport" method.  Once 
+                completed, implementers can retrieve the last generated report using the "GetCredentialReport" method.
+            </xsd:documentation>
+            <xsd:documentation>
+                Once retrieved, the content of the report is a base64-encoded string that, once decoded, represents a blob of CSV.  
+                Each line of the CSV represents an item, with each comma-separated field an element in this construct.  The first 
+                line of the CSV denotes the column header, represented in this element as each field.
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="oval-def:StateType">
+                    <xsd:sequence>
+                        <xsd:element name="api_version" type="oval-def:EntityStateVersionType" minOccurs="0" maxOccurs="1">
                             <xsd:annotation>
-                                <xsd:documentation>Specifies the AWS IAM Get Credentials Report Acccess Key 1 Active </xsd:documentation>
+                                <xsd:documentation>The version entity defines the version of the AWS API/CLI to use.</xsd:documentation>
                             </xsd:annotation>
                         </xsd:element>
-                        <xsd:element name="access_key_1_last_rotated" type="oval-def:EntityStateIntType" minOccurs="0" maxOccurs="1">
+                        <xsd:element name="user" type="oval-def:EntityStateStringType" minOccurs="0" maxOccurs="1">
                             <xsd:annotation>
-                                <xsd:documentation>Specifies the AWS IAM Get Credentials Report Access Key 1 Last Rotated.  This date is represented numerically, 
+                                <xsd:documentation>Specifies the AWS Get Credentials Report User </xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:element>
+                        <xsd:element name="arn" type="oval-def:EntityStateStringType" minOccurs="0" maxOccurs="1">
+                            <xsd:annotation>
+                                <xsd:documentation>Specifies the AWS Get Credentials Report User's ARN </xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:element>
+                        <xsd:element name="access_key_active" type="oval-def:EntityStateBoolType" minOccurs="0" maxOccurs="1">
+                            <xsd:annotation>
+                                <xsd:documentation>Specifies the AWS IAM Get Credentials Report Acccess Key Active </xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:element>
+                        <xsd:element name="access_key_last_rotated" type="oval-def:EntityStateIntType" minOccurs="0" maxOccurs="1">
+                            <xsd:annotation>
+                                <xsd:documentation>Specifies the AWS IAM Get Credentials Report Access Key Last Rotated.  This date is represented numerically, 
                                     but potential values generated in the credential report are "N/A" or "not_supported".  When a value of "N/A" is encountered, 
                                     this element value should be set to 0 (zero).  When a value of "not_supported" is encountered, this element should have no 
                                     value set and a status of "does not exist".
                                 </xsd:documentation>
                             </xsd:annotation>
                         </xsd:element>
-                        <xsd:element name="access_key_1_last_used_date" type="oval-def:EntityStateIntType" minOccurs="0" maxOccurs="1">
+                        <xsd:element name="access_key_last_used_date" type="oval-def:EntityStateIntType" minOccurs="0" maxOccurs="1">
                             <xsd:annotation>
-                                <xsd:documentation>Specifies the AWS IAM Get Credentials Report Access Key 1 Last Used Date.  This date is represented numerically, 
+                                <xsd:documentation>Specifies the AWS IAM Get Credentials Report Access Key Last Used Date.  This date is represented numerically, 
                                     but potential values generated in the credential report are "N/A" or "not_supported".  When a value of "N/A" is encountered, 
                                     this element value should be set to 0 (zero).  When a value of "not_supported" is encountered, this element should have no 
                                     value set and a status of "does not exist".
                                 </xsd:documentation>
                             </xsd:annotation>
                         </xsd:element>
-                        <xsd:element name="access_key_1_last_used_region" type="aws-def:EntityStateAWSRegionType" minOccurs="0" maxOccurs="1">
+                        <xsd:element name="access_key_last_used_region" type="aws-def:EntityStateAWSRegionType" minOccurs="0" maxOccurs="1">
                             <xsd:annotation>
-                                <xsd:documentation>Specifies the AWS IAM Get Credentials Report Access Key 1 Last Used Region </xsd:documentation>
+                                <xsd:documentation>Specifies the AWS IAM Get Credentials Report Access Key Last Used Region </xsd:documentation>
                             </xsd:annotation>
                         </xsd:element>
-                        <xsd:element name="access_key_1_last_used_service" type="aws-def:EntityStateAWSServiceType" minOccurs="0" maxOccurs="1">
+                        <xsd:element name="access_key_last_used_service" type="aws-def:EntityStateAWSServiceType" minOccurs="0" maxOccurs="1">
                             <xsd:annotation>
-                                <xsd:documentation>Specifies the AWS IAM Get Credentials Report Access Key 1 Last Used Service </xsd:documentation>
+                                <xsd:documentation>Specifies the AWS IAM Get Credentials Report Access Key Last Used Service </xsd:documentation>
                             </xsd:annotation>
                         </xsd:element>
-                        <xsd:element name="access_key_2_active" type="oval-def:EntityStateBoolType" minOccurs="0" maxOccurs="1">
+                    </xsd:sequence>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+    
+    <!-- =============================================================================== -->
+    <!-- =========================  IAM CREDENTIAL REPORT CERT TEST  ======================== -->
+    <!-- =============================================================================== -->
+    <xsd:element name="credentialreportcert_test" substitutionGroup="oval-def:test">
+        <xsd:annotation>
+            <xsd:documentation>
+                The credentialreportcert_test allows for the evaluation of results from generating and retrieving a Credentials Report 
+                utilizing either the AWS CLI or the AWS API and parsing user certificates.  The credential report is generated for 
+                all users of the credentialed account being used to access the AWS environment.
+            </xsd:documentation>
+            <xsd:documentation>
+                From the AWS CLI, implementers must first generate a credential report using the "aws iam 
+                generate-credential-report" command.  Once completed, implementers can retrieve the last generated report using the 
+                "aws iam get-credential-report" command.
+            </xsd:documentation>
+            <xsd:documentation>
+                From the AWS API, implementers must first generate a credential report using the "GenerateCredentialReport" method.  Once 
+                completed, implementers can retrieve the last generated report using the "GetCredentialReport" method.
+            </xsd:documentation>
+            <xsd:documentation>
+                Once retrieved, the content of the report is a base64-encoded string that, once decoded, represents a blob of CSV.  
+                Each line of the CSV represents an item, with each comma-separated field an element in this construct.  The first 
+                line of the CSV denotes the column header, represented in this element as each field.
+            </xsd:documentation>
+            <xsd:appinfo>
+                <oval:element_mapping>
+                    <oval:test>credentialreportcert_test</oval:test>
+                    <oval:object>credentialreportcert_object</oval:object>
+                    <oval:state>credentialreportcert_state</oval:state>
+                    <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#aws">credentialreportcert_item</oval:item>
+                </oval:element_mapping>
+            </xsd:appinfo>
+            <xsd:appinfo>
+                <sch:pattern id="aws-def_credentialreportcerttst">
+                    <sch:rule context="aws-def:test/aws-def:object">
+                        <sch:assert test="@object_ref = ancestor::oval-def:oval_definitions/oval-def:objects/aws-def:credentialreportcert_object/@id"><sch:value-of select="../@id"/> - the object child element of a credentialreportcert_test must reference a credentialreportcert_object</sch:assert>
+                    </sch:rule>
+                    <sch:rule context="aws-def:test/aws-def:state">
+                        <sch:assert test="@state_ref = ancestor::oval-def:oval_definitions/oval-def:states/aws-def:credentialreportcert_state/@id"><sch:value-of select="../@id"/> - the state child element of a credentialreportcert_test must reference a credentialreportcert_state</sch:assert>
+                    </sch:rule>
+                </sch:pattern>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="oval-def:TestType">
+                    <xsd:sequence>
+                        <xsd:element name="object" type="oval-def:ObjectRefType"/>
+                        <xsd:element name="state" type="oval-def:StateRefType" minOccurs="0" maxOccurs="unbounded"/>
+                    </xsd:sequence>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="credentialreportcert_object" substitutionGroup="oval-def:object">
+        <xsd:annotation>
+            <xsd:documentation>
+                The credentialreportcert_object allows for the collection of results from generating and retrieving a Credentials Report 
+                utilizing either the AWS CLI or the AWS API and parsing user certificates.  The credential report is generated for 
+                all users of the credentialed account being used to access the AWS environment.
+            </xsd:documentation>
+            <xsd:documentation>
+                From the AWS CLI, implementers must first generate a credential report using the "aws iam 
+                generate-credential-report" command.  Once completed, implementers can retrieve the last generated report using the 
+                "aws iam get-credential-report" command.
+            </xsd:documentation>
+            <xsd:documentation>
+                From the AWS API, implementers must first generate a credential report using the "GenerateCredentialReport" method.  Once 
+                completed, implementers can retrieve the last generated report using the "GetCredentialReport" method.
+            </xsd:documentation>
+            <xsd:documentation>
+                Once retrieved, the content of the report is a base64-encoded string that, once decoded, represents a blob of CSV.  
+                Each line of the CSV represents an item, with each comma-separated field an element in this construct.  The first 
+                line of the CSV denotes the column header, represented in this element as each field.
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="oval-def:ObjectType">
+                    <xsd:sequence>
+                        <xsd:choice>
+                            <xsd:sequence>
+                                <xsd:element name="api_version" type="oval-def:EntityObjectVersionType" nillable="true" minOccurs="1" maxOccurs="1">
+                                    <xsd:annotation>
+                                        <xsd:documentation>The api_version entity defines the version of the AWS API/CLI to use. If xsi:nil='true', that implies it does not matter which version of the API/CLI the command refers to.</xsd:documentation>
+                                    </xsd:annotation>
+                                </xsd:element>
+                                <xsd:element name="user" type="oval-def:EntityObjectStringType" minOccurs="1" maxOccurs="1">
+                                    <xsd:annotation>
+                                        <xsd:documentation>Specifies the AWS Get Credentials Report User </xsd:documentation>
+                                    </xsd:annotation>
+                                </xsd:element>
+                            </xsd:sequence>
+                        </xsd:choice>
+                    </xsd:sequence>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="credentialreportcert_state" substitutionGroup="oval-def:state">
+        <xsd:annotation>
+            <xsd:documentation>
+                The credentialreportcert_state allows for the examination of results from generating and retrieving a Credentials Report 
+                utilizing either the AWS CLI or the AWS API and parsing user certificates.
+            </xsd:documentation>
+            <xsd:documentation>
+                From the AWS CLI, implementers must first generate a credential report using the "aws iam 
+                generate-credential-report" command.  Once completed, implementers can retrieve the last generated report using the 
+                "aws iam get-credential-report" command.
+            </xsd:documentation>
+            <xsd:documentation>
+                From the AWS API, implementers must first generate a credential report using the "GenerateCredentialReport" method.  Once 
+                completed, implementers can retrieve the last generated report using the "GetCredentialReport" method.
+            </xsd:documentation>
+            <xsd:documentation>
+                Once retrieved, the content of the report is a base64-encoded string that, once decoded, represents a blob of CSV.  
+                Each line of the CSV represents an item, with each comma-separated field an element in this construct.  The first 
+                line of the CSV denotes the column header, represented in this element as each field.
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="oval-def:StateType">
+                    <xsd:sequence>
+                        <xsd:element name="api_version" type="oval-def:EntityStateVersionType" minOccurs="0" maxOccurs="1">
                             <xsd:annotation>
-                                <xsd:documentation>Specifies the AWS IAM Get Credentials Report Acccess Key 2 Active </xsd:documentation>
+                                <xsd:documentation>The version entity defines the version of the AWS API/CLI to use.</xsd:documentation>
                             </xsd:annotation>
                         </xsd:element>
-                        <xsd:element name="access_key_2_last_rotated" type="oval-def:EntityStateIntType" minOccurs="0" maxOccurs="1">
+                        <xsd:element name="user" type="oval-def:EntityStateStringType" minOccurs="0" maxOccurs="1">
                             <xsd:annotation>
-                                <xsd:documentation>Specifies the AWS IAM Get Credentials Report Access Key 2 Last Rotated.  This date is represented numerically, 
-                                    but potential values generated in the credential report are "N/A" or "not_supported".  When a value of "N/A" is encountered, 
-                                    this element value should be set to 0 (zero).  When a value of "not_supported" is encountered, this element should have no 
-                                    value set and a status of "does not exist".
-                                </xsd:documentation>
+                                <xsd:documentation>Specifies the AWS Get Credentials Report User </xsd:documentation>
                             </xsd:annotation>
                         </xsd:element>
-                        <xsd:element name="access_key_2_last_used_date" type="oval-def:EntityStateIntType" minOccurs="0" maxOccurs="1">
+                        <xsd:element name="arn" type="oval-def:EntityStateStringType" minOccurs="0" maxOccurs="1">
                             <xsd:annotation>
-                                <xsd:documentation>Specifies the AWS IAM Get Credentials Report Access Key 2 Last Used Date.  This date is represented numerically, 
-                                    but potential values generated in the credential report are "N/A" or "not_supported".  When a value of "N/A" is encountered, 
-                                    this element value should be set to 0 (zero).  When a value of "not_supported" is encountered, this element should have no 
-                                    value set and a status of "does not exist".
-                                </xsd:documentation>
+                                <xsd:documentation>Specifies the AWS Get Credentials Report User's ARN </xsd:documentation>
                             </xsd:annotation>
                         </xsd:element>
-                        <xsd:element name="access_key_2_last_used_region" type="aws-def:EntityStateAWSRegionType" minOccurs="0" maxOccurs="1">
+                        <xsd:element name="cert_active" type="oval-def:EntityStateBoolType" minOccurs="0" maxOccurs="1">
                             <xsd:annotation>
-                                <xsd:documentation>Specifies the AWS IAM Get Credentials Report Access Key 2 Last Used Region </xsd:documentation>
+                                <xsd:documentation>Specifies the AWS IAM Get Credentials Report Cert Active </xsd:documentation>
                             </xsd:annotation>
                         </xsd:element>
-                        <xsd:element name="access_key_2_last_used_service" type="aws-def:EntityStateAWSServiceType" minOccurs="0" maxOccurs="1">
+                        <xsd:element name="cert_last_rotated" type="oval-def:EntityStateIntType" minOccurs="0" maxOccurs="1">
                             <xsd:annotation>
-                                <xsd:documentation>Specifies the AWS IAM Get Credentials Report Access Key 2 Last Used Service </xsd:documentation>
-                            </xsd:annotation>
-                        </xsd:element>
-                        <xsd:element name="cert_1_active" type="oval-def:EntityStateBoolType" minOccurs="0" maxOccurs="1">
-                            <xsd:annotation>
-                                <xsd:documentation>Specifies the AWS IAM Get Credentials Report Cert 1 Active </xsd:documentation>
-                            </xsd:annotation>
-                        </xsd:element>
-                        <xsd:element name="cert_1_last_rotated" type="oval-def:EntityStateIntType" minOccurs="0" maxOccurs="1">
-                            <xsd:annotation>
-                                <xsd:documentation>Specifies the AWS IAM Get Credentials Report Cert 1 Last Rotated.  This date is represented numerically, 
-                                    but potential values generated in the credential report are "N/A" or "not_supported".  When a value of "N/A" is encountered, 
-                                    this element value should be set to 0 (zero).  When a value of "not_supported" is encountered, this element should have no 
-                                    value set and a status of "does not exist".
-                                </xsd:documentation>
-                            </xsd:annotation>
-                        </xsd:element>
-                        <xsd:element name="cert_2_active" type="oval-def:EntityStateBoolType" minOccurs="0" maxOccurs="1">
-                            <xsd:annotation>
-                                <xsd:documentation>Specifies the AWS IAM Get Credentials Report Cert 2 Active </xsd:documentation>
-                            </xsd:annotation>
-                        </xsd:element>
-                        <xsd:element name="cert_2_last_rotated" type="oval-def:EntityStateIntType" minOccurs="0" maxOccurs="1">
-                            <xsd:annotation>
-                                <xsd:documentation>Specifies the AWS IAM Get Credentials Report Cert 2 Last Rotated.  This date is represented numerically, 
+                                <xsd:documentation>Specifies the AWS IAM Get Credentials Report Cert Last Rotated.  This date is represented numerically, 
                                     but potential values generated in the credential report are "N/A" or "not_supported".  When a value of "N/A" is encountered, 
                                     this element value should be set to 0 (zero).  When a value of "not_supported" is encountered, this element should have no 
                                     value set and a status of "does not exist".

@@ -48,9 +48,9 @@
             <xsd:complexContent>
                 <xsd:extension base="oval-sc:ItemType">
                     <xsd:sequence>
-                        <xsd:element name="version" type="oval-sc:EntityItemStringType" minOccurs="0" maxOccurs="1">
+                        <xsd:element name="api_version" type="oval-sc:EntityItemVersionType" minOccurs="0" maxOccurs="1">
                             <xsd:annotation>
-                                <xsd:documentation>The version entity identifies the major version of the AWS API/CLI used to perform the query.</xsd:documentation>
+                                <xsd:documentation>The version entity identifies the version of the AWS API/CLI used to perform the query.</xsd:documentation>
                             </xsd:annotation>
                         </xsd:element>
                         <xsd:element name="service_name" type="aws-sc:EntityItemAWSServiceType" minOccurs="0" maxOccurs="1">
@@ -131,9 +131,9 @@
             <xsd:complexContent>
                 <xsd:extension base="oval-sc:ItemType">
                     <xsd:sequence>
-                        <xsd:element name="version" type="oval-sc:EntityItemStringType" minOccurs="0" maxOccurs="1">
+                        <xsd:element name="api_version" type="oval-sc:EntityItemVersionType" minOccurs="0" maxOccurs="1">
                             <xsd:annotation>
-                                <xsd:documentation>The version entity identifies the major version of the AWS API/CLI used to perform the query.</xsd:documentation>
+                                <xsd:documentation>The version entity identifies the version of the AWS API/CLI used to perform the query.</xsd:documentation>
                             </xsd:annotation>
                         </xsd:element>
                         <xsd:element name="service_name" type="aws-sc:EntityItemAWSServiceType" minOccurs="0" maxOccurs="1">
@@ -224,13 +224,13 @@
     </xsd:element>
     
     <!-- =============================================================================== -->
-    <!-- =========================  IAM CREDENTIAL REPORT ITEM  ======================== -->
+    <!-- =======================  IAM CREDENTIAL REPORT USER ITEM  ====================== -->
     <!-- =============================================================================== -->
-    <xsd:element name="credentialreport_item" substitutionGroup="oval-sc:item">
+    <xsd:element name="credentialreportuser_item" substitutionGroup="oval-sc:item">
         <xsd:annotation>
             <xsd:documentation>
-                The credentialreport_item stores results from generating and retrieving a Credentials Report utilizing either the AWS CLI 
-                or the AWS API.
+                The credentialreportuser_item stores results from generating and retrieving a Credentials Report utilizing either the 
+                AWS CLI or the AWS API, and parsing user information.
             </xsd:documentation>
             <xsd:documentation>
                 From the AWS CLI, implementers must first generate a credential report using the "aws iam 
@@ -251,9 +251,9 @@
             <xsd:complexContent>
                 <xsd:extension base="oval-sc:ItemType">
                     <xsd:sequence>
-                        <xsd:element name="version" type="oval-sc:EntityItemStringType" minOccurs="0" maxOccurs="1">
+                        <xsd:element name="api_version" type="oval-sc:EntityItemVersionType" minOccurs="0" maxOccurs="1">
                             <xsd:annotation>
-                                <xsd:documentation>The version entity identifies the major version of the AWS API/CLI used to perform the query.</xsd:documentation>
+                                <xsd:documentation>The version entity identifies the version of the AWS API/CLI used to perform the query.</xsd:documentation>
                             </xsd:annotation>
                         </xsd:element>
                         <xsd:element name="user" type="oval-sc:EntityItemStringType" minOccurs="0" maxOccurs="1">
@@ -311,94 +311,147 @@
                                 <xsd:documentation>Specifies the AWS IAM Get Credentials Report MFA Active </xsd:documentation>
                             </xsd:annotation>
                         </xsd:element>
-                        <xsd:element name="access_key_1_active" type="oval-sc:EntityItemBoolType" minOccurs="0" maxOccurs="1">
+                    </xsd:sequence>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+    
+    <!-- =============================================================================== -->
+    <!-- ======================  IAM CREDENTIAL REPORT KEY ITEM  ======================= -->
+    <!-- =============================================================================== -->
+    <xsd:element name="credentialreportkey_item" substitutionGroup="oval-sc:item">
+        <xsd:annotation>
+            <xsd:documentation>
+                The credentialreportkey_item stores results from generating and retrieving a Credentials Report utilizing either the AWS CLI 
+                or the AWS API, and parsing user access key information. Users may generate up to 2 access keys at a time, therefore when 
+                collecting credential report key items for a given user, anywhere from 0 to 2 items may be collected.
+            </xsd:documentation>
+            <xsd:documentation>
+                From the AWS CLI, implementers must first generate a credential report using the "aws iam 
+                generate-credential-report" command.  Once completed, implementers can retrieve the last generated report using the 
+                "aws iam get-credential-report" command.
+            </xsd:documentation>
+            <xsd:documentation>
+                From the AWS API, implementers must first generate a credential report using the "GenerateCredentialReport" method.  Once 
+                completed, implementers can retrieve the last generated report using the "GetCredentialReport" method.
+            </xsd:documentation>
+            <xsd:documentation>
+                Once retrieved, the content of the report is a base64-encoded string that, once decoded, represents a blob of CSV.  
+                Each line of the CSV represents an item, with each comma-separated field an element in this construct.  The first 
+                line of the CSV denotes the column header, represented in this element as each field.
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="oval-sc:ItemType">
+                    <xsd:sequence>
+                        <xsd:element name="api_version" type="oval-sc:EntityItemVersionType" minOccurs="0" maxOccurs="1">
                             <xsd:annotation>
-                                <xsd:documentation>Specifies the AWS IAM Get Credentials Report Acccess Key 1 Active </xsd:documentation>
+                                <xsd:documentation>The version entity identifies the version of the AWS API/CLI used to perform the query.</xsd:documentation>
                             </xsd:annotation>
                         </xsd:element>
-                        <xsd:element name="access_key_1_last_rotated" type="oval-sc:EntityItemIntType" minOccurs="0" maxOccurs="1">
+                        <xsd:element name="user" type="oval-sc:EntityItemStringType" minOccurs="0" maxOccurs="1">
                             <xsd:annotation>
-                                <xsd:documentation>Specifies the AWS IAM Get Credentials Report Access Key 1 Last Rotated.  This date is represented numerically, but potential
+                                <xsd:documentation>Specifies the AWS Get Credentials Report User </xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:element>
+                        <xsd:element name="arn" type="oval-sc:EntityItemStringType" minOccurs="0" maxOccurs="1">
+                            <xsd:annotation>
+                                <xsd:documentation>Specifies the AWS Get Credentials Report User's ARN </xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:element>
+                        <xsd:element name="access_key_active" type="oval-sc:EntityItemBoolType" minOccurs="0" maxOccurs="1">
+                            <xsd:annotation>
+                                <xsd:documentation>Specifies the AWS IAM Get Credentials Report Acccess Key Active </xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:element>
+                        <xsd:element name="access_key_last_rotated" type="oval-sc:EntityItemIntType" minOccurs="0" maxOccurs="1">
+                            <xsd:annotation>
+                                <xsd:documentation>Specifies the AWS IAM Get Credentials Report Access Key Last Rotated.  This date is represented numerically, but potential
                                     values generated in the credential report are "N/A" or "not_supported".  When a value of "N/A" is encountered, this 
                                     element value should be set to 0 (zero).  When a value of "not_supported" is encountered, this element should have no 
                                     value set and a status of "does not exist".
                                 </xsd:documentation>
                             </xsd:annotation>
                         </xsd:element>
-                        <xsd:element name="access_key_1_last_used_date" type="oval-sc:EntityItemIntType" minOccurs="0" maxOccurs="1">
+                        <xsd:element name="access_key_last_used_date" type="oval-sc:EntityItemIntType" minOccurs="0" maxOccurs="1">
                             <xsd:annotation>
-                                <xsd:documentation>Specifies the AWS IAM Get Credentials Report Access Key 1 Last Used Date.  This date is represented numerically, but potential
+                                <xsd:documentation>Specifies the AWS IAM Get Credentials Report Access Key Last Used Date.  This date is represented numerically, but potential
                                     values generated in the credential report are "N/A" or "not_supported".  When a value of "N/A" is encountered, this 
                                     element value should be set to 0 (zero).  When a value of "not_supported" is encountered, this element should have no 
                                     value set and a status of "does not exist".
                                 </xsd:documentation>
                             </xsd:annotation>
                         </xsd:element>
-                        <xsd:element name="access_key_1_last_used_region" type="aws-sc:EntityItemAWSRegionType" minOccurs="0" maxOccurs="1">
+                        <xsd:element name="access_key_last_used_region" type="aws-sc:EntityItemAWSRegionType" minOccurs="0" maxOccurs="1">
                             <xsd:annotation>
-                                <xsd:documentation>Specifies the AWS IAM Get Credentials Report Access Key 1 Last Used Region </xsd:documentation>
+                                <xsd:documentation>Specifies the AWS IAM Get Credentials Report Access Key Last Used Region </xsd:documentation>
                             </xsd:annotation>
                         </xsd:element>
-                        <xsd:element name="access_key_1_last_used_service" type="aws-sc:EntityItemAWSServiceType" minOccurs="0" maxOccurs="1">
+                        <xsd:element name="access_key_last_used_service" type="aws-sc:EntityItemAWSServiceType" minOccurs="0" maxOccurs="1">
                             <xsd:annotation>
-                                <xsd:documentation>Specifies the AWS IAM Get Credentials Report Access Key 1 Last Used Service </xsd:documentation>
+                                <xsd:documentation>Specifies the AWS IAM Get Credentials Report Access Key Last Used Service </xsd:documentation>
                             </xsd:annotation>
                         </xsd:element>
-                        <xsd:element name="access_key_2_active" type="oval-sc:EntityItemBoolType" minOccurs="0" maxOccurs="1">
+                    </xsd:sequence>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+    
+    <!-- =============================================================================== -->
+    <!-- =======================  IAM CREDENTIAL REPORT CERT ITEM  ===================== -->
+    <!-- =============================================================================== -->
+    <xsd:element name="credentialreportcert_item" substitutionGroup="oval-sc:item">
+        <xsd:annotation>
+            <xsd:documentation>
+                The credentialreportcert_item stores results from generating and retrieving a Credentials Report utilizing either the AWS CLI 
+                or the AWS API, and parses each IAM user's configured certificates. Users may generate up to 2 certs at a time, therefore when 
+                collecting credential report cert items for a given user, anywhere from 0 to 2 items may be collected.
+            </xsd:documentation>
+            <xsd:documentation>
+                From the AWS CLI, implementers must first generate a credential report using the "aws iam 
+                generate-credential-report" command.  Once completed, implementers can retrieve the last generated report using the 
+                "aws iam get-credential-report" command.
+            </xsd:documentation>
+            <xsd:documentation>
+                From the AWS API, implementers must first generate a credential report using the "GenerateCredentialReport" method.  Once 
+                completed, implementers can retrieve the last generated report using the "GetCredentialReport" method.
+            </xsd:documentation>
+            <xsd:documentation>
+                Once retrieved, the content of the report is a base64-encoded string that, once decoded, represents a blob of CSV.  
+                Each line of the CSV represents an item, with each comma-separated field an element in this construct.  The first 
+                line of the CSV denotes the column header, represented in this element as each field.
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="oval-sc:ItemType">
+                    <xsd:sequence>
+                        <xsd:element name="api_version" type="oval-sc:EntityItemVersionType" minOccurs="0" maxOccurs="1">
                             <xsd:annotation>
-                                <xsd:documentation>Specifies the AWS IAM Get Credentials Report Acccess Key 2 Active </xsd:documentation>
+                                <xsd:documentation>The version entity identifies the version of the AWS API/CLI used to perform the query.</xsd:documentation>
                             </xsd:annotation>
                         </xsd:element>
-                        <xsd:element name="access_key_2_last_rotated" type="oval-sc:EntityItemIntType" minOccurs="0" maxOccurs="1">
+                        <xsd:element name="user" type="oval-sc:EntityItemStringType" minOccurs="0" maxOccurs="1">
                             <xsd:annotation>
-                                <xsd:documentation>Specifies the AWS IAM Get Credentials Report Access Key 2 Last Rotated.  This date is represented numerically, but potential
-                                    values generated in the credential report are "N/A" or "not_supported".  When a value of "N/A" is encountered, this 
-                                    element value should be set to 0 (zero).  When a value of "not_supported" is encountered, this element should have no 
-                                    value set and a status of "does not exist".
-                                </xsd:documentation>
+                                <xsd:documentation>Specifies the AWS Get Credentials Report User </xsd:documentation>
                             </xsd:annotation>
                         </xsd:element>
-                        <xsd:element name="access_key_2_last_used_date" type="oval-sc:EntityItemIntType" minOccurs="0" maxOccurs="1">
+                        <xsd:element name="arn" type="oval-sc:EntityItemStringType" minOccurs="0" maxOccurs="1">
                             <xsd:annotation>
-                                <xsd:documentation>Specifies the AWS IAM Get Credentials Report Access Key 2 Last Used Date.  This date is represented numerically, but potential
-                                    values generated in the credential report are "N/A" or "not_supported".  When a value of "N/A" is encountered, this 
-                                    element value should be set to 0 (zero).  When a value of "not_supported" is encountered, this element should have no 
-                                    value set and a status of "does not exist".
-                                </xsd:documentation>
+                                <xsd:documentation>Specifies the AWS Get Credentials Report User's ARN </xsd:documentation>
                             </xsd:annotation>
                         </xsd:element>
-                        <xsd:element name="access_key_2_last_used_region" type="aws-sc:EntityItemAWSRegionType" minOccurs="0" maxOccurs="1">
+                        <xsd:element name="cert_active" type="oval-sc:EntityItemBoolType" minOccurs="0" maxOccurs="1">
                             <xsd:annotation>
-                                <xsd:documentation>Specifies the AWS IAM Get Credentials Report Access Key 2 Last Used Region </xsd:documentation>
+                                <xsd:documentation>Specifies the AWS IAM Get Credentials Report Cert Active </xsd:documentation>
                             </xsd:annotation>
                         </xsd:element>
-                        <xsd:element name="access_key_2_last_used_service" type="aws-sc:EntityItemAWSServiceType" minOccurs="0" maxOccurs="1">
+                        <xsd:element name="cert_last_rotated" type="oval-sc:EntityItemIntType" minOccurs="0" maxOccurs="1">
                             <xsd:annotation>
-                                <xsd:documentation>Specifies the AWS IAM Get Credentials Report Access Key 2 Last Used Service </xsd:documentation>
-                            </xsd:annotation>
-                        </xsd:element>
-                        <xsd:element name="cert_1_active" type="oval-sc:EntityItemBoolType" minOccurs="0" maxOccurs="1">
-                            <xsd:annotation>
-                                <xsd:documentation>Specifies the AWS IAM Get Credentials Report Cert 1 Active </xsd:documentation>
-                            </xsd:annotation>
-                        </xsd:element>
-                        <xsd:element name="cert_1_last_rotated" type="oval-sc:EntityItemIntType" minOccurs="0" maxOccurs="1">
-                            <xsd:annotation>
-                                <xsd:documentation>Specifies the AWS IAM Get Credentials Report Cert 1 Last Rotated.  This date is represented numerically, but potential
-                                    values generated in the credential report are "N/A" or "not_supported".  When a value of "N/A" is encountered, this 
-                                    element value should be set to 0 (zero).  When a value of "not_supported" is encountered, this element should have no 
-                                    value set and a status of "does not exist".
-                                </xsd:documentation>
-                            </xsd:annotation>
-                        </xsd:element>
-                        <xsd:element name="cert_2_active" type="oval-sc:EntityItemBoolType" minOccurs="0" maxOccurs="1">
-                            <xsd:annotation>
-                                <xsd:documentation>Specifies the AWS IAM Get Credentials Report Cert 2 Active </xsd:documentation>
-                            </xsd:annotation>
-                        </xsd:element>
-                        <xsd:element name="cert_2_last_rotated" type="oval-sc:EntityItemIntType" minOccurs="0" maxOccurs="1">
-                            <xsd:annotation>
-                                <xsd:documentation>Specifies the AWS IAM Get Credentials Report Cert 2 Last Rotated.  This date is represented numerically, but potential
+                                <xsd:documentation>Specifies the AWS IAM Get Credentials Report Cert Last Rotated.  This date is represented numerically, but potential
                                     values generated in the credential report are "N/A" or "not_supported".  When a value of "N/A" is encountered, this 
                                     element value should be set to 0 (zero).  When a value of "not_supported" is encountered, this element should have no 
                                     value set and a status of "does not exist".
