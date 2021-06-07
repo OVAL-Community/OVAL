@@ -2295,10 +2295,11 @@
       <xsd:element name="sshd_object" substitutionGroup="oval-def:object">
             <xsd:annotation>
                   <xsd:documentation>
-                        The sshd_object is used by a sshd_test to define which sshd parameters on the local system should be collected via the "sshd -T [NAME]" command. 
-                        Each object extends the standard ObjectType as defined in the oval-definitions-schema and one should refer to the ObjectType description for more 
-                        information. The common set element allows complex objects to be created using filters and set logic. Again, please refer to the description of the 
-                        set element in the oval-definitions-schema.</xsd:documentation>
+                        The sshd_object is used by a sshd_test to define which sshd parameters on the local system should be collected via the 
+                        "sshd -f [FILEPATH] -T" command. Each object extends the standard ObjectType as defined in the oval-definitions-schema and 
+                        one should refer to the ObjectType description for more information. The common set element allows complex objects to be 
+                        created using filters and set logic. Again, please refer to the description of the set element in the oval-definitions-schema.
+                  </xsd:documentation>
                   <xsd:appinfo>
                         <sch:pattern id="unix-def_sshd_object_verify_filter_state">
                               <sch:rule context="unix-def:sshd_object//oval-def:filter">
@@ -2320,6 +2321,11 @@
                                     <xsd:choice>
                                           <xsd:element ref="oval-def:set"/>
                                           <xsd:sequence>
+                                                <xsd:element name="filepath" type="oval-def:EntityObjectStringType" nillable="true">
+                                                      <xsd:annotation>
+                                                            <xsd:documentation>Specifies the name of the configuration file. If xsi:nil="true", then collect from the default filepath at /etc/ssh/sshd_config.</xsd:documentation>
+                                                      </xsd:annotation>
+                                                </xsd:element>
                                                 <xsd:element name="name" type="oval-def:EntityObjectStringType">
                                                       <xsd:annotation>
                                                             <xsd:documentation>The name element specifies the name(s) of the sshd parameter(s) that should be collected from the local system.</xsd:documentation>
@@ -2335,12 +2341,17 @@
       </xsd:element>
       <xsd:element name="sshd_state" substitutionGroup="oval-def:state">
             <xsd:annotation>
-                  <xsd:documentation>The sshd_state contains two entities that are used to check the sshd parameter name and value(s).</xsd:documentation>
+                  <xsd:documentation>The sshd_state contains entities that are used to check the sshd configuration filepath, parameter name and value(s).</xsd:documentation>
             </xsd:annotation>
             <xsd:complexType>
                   <xsd:complexContent>
                         <xsd:extension base="oval-def:StateType">
                               <xsd:sequence>
+                                    <xsd:element name="filepath" type="oval-def:EntityStateStringType" minOccurs="0" maxOccurs="1">
+                                          <xsd:annotation>
+                                                <xsd:documentation>Specifies the name of the sshd configuration file. Note the default filepath is /etc/ssh/sshd_config.</xsd:documentation>
+                                          </xsd:annotation>
+                                    </xsd:element>
                                     <xsd:element name="name" type="oval-def:EntityStateStringType" minOccurs="0" maxOccurs="1">
                                           <xsd:annotation>
                                                 <xsd:documentation>The name element contains a string that represents the name of a sshd parameter that was collected from the local system.</xsd:documentation>

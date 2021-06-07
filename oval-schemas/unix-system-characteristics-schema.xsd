@@ -1033,14 +1033,14 @@
           </xsd:complexType>
      </xsd:element>
      <!-- =============================================================================== -->
-     <!-- =========================  SSHD CONFIGURATION ITEM  =========================== -->
+     <!-- ================================  SSHD ITEM  ================================== -->
      <!-- =============================================================================== -->
-     <xsd:element name="sshdconf_item" substitutionGroup="oval-sc:item">
+     <xsd:element name="sshd_item" substitutionGroup="oval-sc:item">
           <xsd:annotation>
                <xsd:documentation>
                     The sshd_item stores information retrieved from the local system about sshd parameters and their respective value(s).
-                    Information is collected from the target endpoint using the "sshd -T [NAME]" command and output values are parsed.  Each 
-                    output line begins with the name of the SSHD parameter, followed by a space, and potentially a tokenized list of values.
+                    Information is collected from the target endpoint using the "sshd -f [FILEPATH] -T [NAME]" command and output values are parsed.  
+                    Each output line begins with the name of the SSHD parameter, followed by a space, and potentially a tokenized list of values.
                     It has been found that some parameter values are comma-delimited while some are space-delimited.  Implementers of this
                     collection should account for both delimiters in SSHD parameter values.
                </xsd:documentation>
@@ -1052,16 +1052,6 @@
                               <xsd:element name="filepath" type="oval-sc:EntityItemStringType" minOccurs="0" maxOccurs="1">
                                    <xsd:annotation>
                                         <xsd:documentation>The filepath element specifies the absolute path to the sshd configuration file on the machine. A directory cannot be specified as a filepath.</xsd:documentation>
-                                   </xsd:annotation>
-                              </xsd:element>
-                              <xsd:element name="path" type="oval-sc:EntityItemStringType" minOccurs="0" maxOccurs="1">
-                                   <xsd:annotation>
-                                        <xsd:documentation>The path element specifies the directory component of the absolute path to the sshd configuration file on the machine.</xsd:documentation>
-                                   </xsd:annotation>
-                              </xsd:element>
-                              <xsd:element name="filename" type="oval-sc:EntityItemStringType" minOccurs="0" maxOccurs="1" nillable="true">
-                                   <xsd:annotation>
-                                        <xsd:documentation>The name of the sshd configuration file. If the xsi:nil attribute is set to true, then the item being represented is the higher directory represented by the path entity.</xsd:documentation>
                                    </xsd:annotation>
                               </xsd:element>
                               <xsd:element name="name" type="oval-sc:EntityItemStringType" minOccurs="0" maxOccurs="1">
