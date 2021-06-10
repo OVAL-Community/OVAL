@@ -123,11 +123,94 @@
             </xsd:complexType>
       </xsd:element>
       <!-- =============================================================================== -->
-      <!-- ============================  LSSEC ITEM  ===================================== -->
+      <!-- ========================  DEVICE ATTRIBUTE ITEM  ============================== -->
       <!-- =============================================================================== -->
-      <xsd:element name="lssec_item" substitutionGroup="oval-sc:item">
+      <xsd:element name="deviceattribute_item" substitutionGroup="oval-sc:item">
             <xsd:annotation>
-                  <xsd:documentation>The lssec_item element defines the different information associated with a specific call to /usr/bin/lssec. Please refer to the individual elements in the schema for more details about what each represents.</xsd:documentation>
+                  <xsd:documentation>
+                        The deviceattribute_item is used to hold information related to the execution of the 
+                        /usr/sbin/lsattr -EOl [device] -a [attribute] command.
+                  </xsd:documentation>
+            </xsd:annotation>
+            <xsd:complexType>
+                  <xsd:complexContent>
+                        <xsd:extension base="oval-sc:ItemType">
+                              <xsd:sequence>
+                                    <xsd:element name="device_name" type="oval-sc:EntityItemStringType" minOccurs="0" maxOccurs="1">
+                                          <xsd:annotation>
+                                                <xsd:documentation>Specifies the device logical name in the Customized Devices object class whose attribute names or values you want displayed</xsd:documentation>
+                                          </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="attribute_name" type="oval-sc:EntityItemStringType" minOccurs="0" maxOccurs="1">
+                                          <xsd:annotation>
+                                                <xsd:documentation>Displays information for the specified attributes of a specific device or type of device</xsd:documentation>
+                                          </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="value" type="oval-sc:EntityItemAnySimpleType" minOccurs="0" maxOccurs="unbounded">
+                                          <xsd:annotation>
+                                                <xsd:documentation>The effective value of the attribute for a customized device.</xsd:documentation>
+                                          </xsd:annotation>
+                                    </xsd:element>
+                              </xsd:sequence>
+                        </xsd:extension>
+                  </xsd:complexContent>
+            </xsd:complexType>
+      </xsd:element>
+      <!-- =============================================================================== -->
+      <!-- ============================ INITTAB ITEM  ==================================== -->
+      <!-- =============================================================================== -->
+      <xsd:element name="inittab_item" substitutionGroup="oval-sc:item">
+            <xsd:annotation>
+                  <xsd:documentation>
+                        The inittab_item is used to hold information related to the /usr/sbin/lsitab command and information stored in /etc/inittab. 
+                        Currently, /usr/sbin/lsitab is used to configure records in the /etc/inittab file which controls the initialization process.
+                  </xsd:documentation>
+            </xsd:annotation>
+            <xsd:complexType>
+                  <xsd:complexContent>
+                        <xsd:extension base="oval-sc:ItemType">
+                              <xsd:sequence>
+                                    <xsd:element name="identifier" type="oval-sc:EntityItemStringType" minOccurs="0" maxOccurs="1">
+                                          <xsd:annotation>
+                                                <xsd:documentation>A string (one or more than one character) that uniquely identifies an object</xsd:documentation>
+                                          </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="runlevel" type="aix-sc:EntityItemInittabRunlevelType" minOccurs="0" maxOccurs="1">
+                                          <xsd:annotation>
+                                                <xsd:documentation>
+                                                      The run level in which this entry can be processed. Run levels effectively correspond to a 
+                                                      configuration of processes in the system. Run levels are represented by the numbers 0 through 9. 
+                                                      There are three other values that appear in the runlevel field, even though they are not true 
+                                                      run levels: a, b, and c. Entries that have these characters in the runlevel field are processed 
+                                                      only when the telinit command requests them to be run (regardless of the current run level of the system).
+                                                </xsd:documentation>
+                                          </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="action" type="aix-sc:EntityItemInittabActionType" minOccurs="0" maxOccurs="1">
+                                          <xsd:annotation>
+                                                <xsd:documentation>Tells the init command how to treat the process specified in the identifier field.</xsd:documentation>
+                                          </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="command" type="oval-sc:EntityItemStringType" minOccurs="0" maxOccurs="1">
+                                          <xsd:annotation>
+                                                <xsd:documentation>A shell command to execute.</xsd:documentation>
+                                          </xsd:annotation>
+                                    </xsd:element>
+                              </xsd:sequence>
+                        </xsd:extension>
+                  </xsd:complexContent>
+            </xsd:complexType>
+      </xsd:element>
+      <!-- =============================================================================== -->
+      <!-- ========================  SECURITY STANZA ITEM  =============================== -->
+      <!-- =============================================================================== -->
+      <xsd:element name="securitystanza_item" substitutionGroup="oval-sc:item">
+            <xsd:annotation>
+                  <xsd:documentation>
+                        The securitystanza_item element defines the different information associated with a specific call 
+                        to /usr/bin/lssec. Please refer to the individual elements in the schema for more details 
+                        about what each represents.
+                  </xsd:documentation>
             </xsd:annotation>
             <xsd:complexType>
                   <xsd:complexContent>
@@ -143,7 +226,7 @@
                                                 <xsd:documentation>Specifies the name of the stanza to list.</xsd:documentation>
                                           </xsd:annotation>
                                     </xsd:element>
-                                    <xsd:element name="attribute" type="oval-sc:EntityItemStringType">
+                                    <xsd:element name="attribute_name" type="oval-sc:EntityItemStringType">
                                           <xsd:annotation>
                                                 <xsd:documentation>Specifies the attribute to list.</xsd:documentation>
                                           </xsd:annotation>
@@ -151,6 +234,72 @@
                                     <xsd:element name="value" type="oval-sc:EntityItemAnySimpleType" minOccurs="0" maxOccurs="1">
                                           <xsd:annotation>
                                                 <xsd:documentation>The value entity defines the value to check against the security parameter being examined.</xsd:documentation>
+                                          </xsd:annotation>
+                                    </xsd:element>
+                              </xsd:sequence>
+                        </xsd:extension>
+                  </xsd:complexContent>
+            </xsd:complexType>
+      </xsd:element>
+      <!-- =============================================================================== -->
+      <!-- ===========================  USER ACCOUNT ITEM  =============================== -->
+      <!-- =============================================================================== -->
+      <xsd:element name="useraccount_item" substitutionGroup="oval-sc:item">
+            <xsd:annotation>
+                  <xsd:documentation>
+                        The useraccount_item is used to hold information related to the /usr/sbin/lsuser command and the attributes it manages. 
+                        Currently, /usr/sbin/lsuser is used to display user account attributes. The /usr/sbin/lsuser command queries the named 
+                        attribute for the provided user account(s).
+                  </xsd:documentation>
+            </xsd:annotation>
+            <xsd:complexType>
+                  <xsd:complexContent>
+                        <xsd:extension base="oval-sc:ItemType">
+                              <xsd:sequence>
+                                    <xsd:element name="username" type="oval-sc:EntityItemStringType" minOccurs="0" maxOccurs="1">
+                                          <xsd:annotation>
+                                                <xsd:documentation>The name of the user to be queried by the /usr/sbin/lsuser command.</xsd:documentation>
+                                          </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="account_attribute" type="aix-sc:EntityItemUserAccountAttributeType" minOccurs="0" maxOccurs="1">
+                                          <xsd:annotation>
+                                                <xsd:documentation>The name of the user attribute to be queried by the /usr/sbin/lsuser command. This value can include any attribute that is defined by the /usr/bin/chuser command.</xsd:documentation>
+                                          </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="value" type="oval-sc:EntityItemAnySimpleType" minOccurs="0" maxOccurs="1">
+                                          <xsd:annotation>
+                                                <xsd:documentation>The value entity defines the value assigned to the user attribute being examined.</xsd:documentation>
+                                          </xsd:annotation>
+                                    </xsd:element>
+                              </xsd:sequence>
+                        </xsd:extension>
+                  </xsd:complexContent>
+            </xsd:complexType>
+      </xsd:element>
+      <!-- =============================================================================== -->
+      <!-- ===============================  NFSO ITEM  =================================== -->
+      <!-- =============================================================================== -->
+      <xsd:element name="nfso_item" substitutionGroup="oval-sc:item">
+            <xsd:annotation>
+                  <xsd:documentation>
+                        The nfso_item is used to hold information related to the /usr/sbin/nfso command and the tunable parameters it manages. 
+                        Currently, /usr/sbin/nfso is used to configure network file system (NFS) tuning parameters. The /usr/sbin/nfso command 
+                        sets or displays current or next boot values for network tuning parameters. The /usr/sbin/nfso command queries the named 
+                        parameter, retrieves the value associated with the specified parameter, and displays it.
+                  </xsd:documentation>
+            </xsd:annotation>
+            <xsd:complexType>
+                  <xsd:complexContent>
+                        <xsd:extension base="oval-sc:ItemType">
+                              <xsd:sequence>
+                                    <xsd:element name="tunable" type="oval-sc:EntityItemStringType" minOccurs="0" maxOccurs="1">
+                                          <xsd:annotation>
+                                                <xsd:documentation>The name of the target parameter to be queried by the /usr/sbin/nfso command. Examples include nfs_max_read_size and nfs_max_write_size.</xsd:documentation>
+                                          </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="value" type="oval-sc:EntityItemAnySimpleType" minOccurs="0" maxOccurs="1">
+                                          <xsd:annotation>
+                                                <xsd:documentation>The value entity defines the value assigned to the tunable parameter being examined.</xsd:documentation>
                                           </xsd:annotation>
                                     </xsd:element>
                               </xsd:sequence>
@@ -432,6 +581,582 @@
                                     <xsd:documentation>The empty string value is permitted here to allow for empty elements associated with variable references.</xsd:documentation>
                               </xsd:annotation>
                         </xsd:enumeration>
+                  </xsd:restriction>
+            </xsd:simpleContent>
+      </xsd:complexType>
+      <xsd:complexType name="EntityItemUserAccountAttributeType">
+            <xsd:annotation>
+                  <xsd:documentation>The name of the user attribute to be queried by the /usr/sbin/lsuser command. This value can include any attribute that is defined by the /usr/bin/chuser command.</xsd:documentation>
+            </xsd:annotation>
+            <xsd:simpleContent>
+                  <xsd:restriction base="oval-sc:EntityItemStringType">
+                        <xsd:enumeration value="ACCOUNT_LOCKED">
+                        	<xsd:annotation>
+                        		<xsd:documentation>Indicates if the user account is locked</xsd:documentation>
+                        	</xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="ADMIN">
+                        	<xsd:annotation>
+                        		<xsd:documentation>Defines the administrative status of the user.</xsd:documentation>
+                        	</xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="ADMGROUPS">
+                        	<xsd:annotation>
+                        		<xsd:documentation>Defines the groups that the user administrates</xsd:documentation>
+                        	</xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="AUDITCLASSES">
+                        	<xsd:annotation>
+                        		<xsd:documentation>Defines the user's audit classes</xsd:documentation>
+                        	</xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="AUTH1">
+                              <xsd:annotation>
+                                    <xsd:documentation>Defines the primary methods for authenticating the user</xsd:documentation>
+                              </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="AUTH2">
+                              <xsd:annotation>
+                                    <xsd:documentation>Defines the secondary methods for authenticating the user</xsd:documentation>
+                              </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="CAPABILITIES">
+                        	<xsd:annotation>
+                        		<xsd:documentation>Defines the system privileges (capabilities) which are granted to a user by the login or su commands</xsd:documentation>
+                        	</xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="CORE">
+                        	<xsd:annotation>
+                        		<xsd:documentation>Specifies the soft limit for the largest core file a user's process can create</xsd:documentation>
+                        	</xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="CORE_COMPRESS">
+                        	<xsd:annotation>
+                        		<xsd:documentation>Enables or disables core file compression</xsd:documentation>
+                        	</xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="CORE_HARD">
+                        	<xsd:annotation>
+                        		<xsd:documentation>Specifies the largest core file a user's process can create</xsd:documentation>
+                        	</xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="CORE_NAMING">
+                        	<xsd:annotation>
+                        		<xsd:documentation>Selects a choice of core file naming strategies. Valid values for this attribute are On and Off</xsd:documentation>
+                        	</xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="CORE_PATH">
+                        	<xsd:annotation>
+                        		<xsd:documentation>Enables or disables core file path specification</xsd:documentation>
+                        	</xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="CORE_PATHNAME">
+                        	<xsd:annotation>
+                        		<xsd:documentation>Specifies a location to be used to place core files, if the core_path attribute is set to On</xsd:documentation>
+                        	</xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="CPU">
+                        	<xsd:annotation>
+                        		<xsd:documentation>Identifies the soft limit for the largest amount of system unit time (in seconds) that a user's process can use</xsd:documentation>
+                        	</xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="CPU_HARD">
+                        	<xsd:annotation>
+                        		<xsd:documentation>Identifies the largest amount of system unit time (in seconds) that a user's process can use</xsd:documentation>
+                        	</xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="DAEMON">
+                        	<xsd:annotation>
+                        		<xsd:documentation>Indicates whether the user specified by the Name parameter can run programs using the cron daemon or the src (system resource controller) daemon</xsd:documentation>
+                        	</xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="DATA">
+                        	<xsd:annotation>
+                        		<xsd:documentation>Specifies the soft limit for the largest data segment for a user's process</xsd:documentation>
+                        	</xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="DATA_HARD">
+                        	<xsd:annotation>
+                        		<xsd:documentation>Specifies the largest data segment for a user's process</xsd:documentation>
+                        	</xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="DCE_EXPORT">
+                        	<xsd:annotation>
+                        		<xsd:documentation>Allows the DCE registry to overwrite the local user information with the DCE user information during a DCE export operation</xsd:documentation>
+                        	</xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="DEFAULT_ROLES">
+                        	<xsd:annotation>
+                        		<xsd:documentation>Specifies the default roles for the user</xsd:documentation>
+                        	</xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="DICTIONLIST">
+                        	<xsd:annotation>
+                        		<xsd:documentation>Defines the password dictionaries used by the composition restrictions when checking new passwords</xsd:documentation>
+                        	</xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="DOMAINS">
+                        	<xsd:annotation>
+                        		<xsd:documentation>Defines the list of domains that the user belongs to</xsd:documentation>
+                        	</xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="EXPIRES">
+                        	<xsd:annotation>
+                        		<xsd:documentation>Identifies the expiration date of the account</xsd:documentation>
+                        	</xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="FSIZE">
+                        	<xsd:annotation>
+                        		<xsd:documentation>Defines the soft limit for the largest file a user's process can create or extend</xsd:documentation>
+                        	</xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="FSIZE_HARD">
+                        	<xsd:annotation>
+                        		<xsd:documentation>Defines the largest file a user's process can create or extend</xsd:documentation>
+                        	</xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="GECOS">
+                        	<xsd:annotation>
+                        		<xsd:documentation>Supplies general information about the user specified by the Name parameter</xsd:documentation>
+                        	</xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="GROUPS">
+                        	<xsd:annotation>
+                        		<xsd:documentation>Identifies the groups to which user belongs</xsd:documentation>
+                        	</xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="HISTEXPIRE">
+                        	<xsd:annotation>
+                        		<xsd:documentation>Defines the period of time (in weeks) that a user cannot reuse a password</xsd:documentation>
+                        	</xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="HISTSIZE">
+                        	<xsd:annotation>
+                        		<xsd:documentation>Defines the number of previous passwords that a user cannot reuse</xsd:documentation>
+                        	</xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="HOME">
+                        	<xsd:annotation>
+                        		<xsd:documentation>Identifies the home directory of the user specified by the Name parameter</xsd:documentation>
+                        	</xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="ID">
+                        	<xsd:annotation>
+                        		<xsd:documentation>Specifies the user ID</xsd:documentation>
+                        	</xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="LOGIN">
+                        	<xsd:annotation>
+                        		<xsd:documentation>Indicates whether the user can log in to the system with the login command</xsd:documentation>
+                        	</xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="LOGINRETRIES">
+                        	<xsd:annotation>
+                        		<xsd:documentation>Defines the number of unsuccessful login attempts allowed after the last successful login before the system locks the account</xsd:documentation>
+                        	</xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="LOGINTIMES">
+                        	<xsd:annotation>
+                        		<xsd:documentation>Defines the days and times that the user is allowed to access the system</xsd:documentation>
+                        	</xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="MAXAGE">
+                        	<xsd:annotation>
+                        		<xsd:documentation>Defines the maximum age (in weeks) of a password</xsd:documentation>
+                        	</xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="MAXEXPIRED">
+                        	<xsd:annotation>
+                        		<xsd:documentation>Defines the maximum time (in weeks) beyond the maxage value that a user can change an expired password</xsd:documentation>
+                        	</xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="MAXREPEATS">
+                        	<xsd:annotation>
+                        		<xsd:documentation>Defines the maximum number of times a character can be repeated in a new password</xsd:documentation>
+                        	</xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="MAXULOGS">
+                        	<xsd:annotation>
+                        		<xsd:documentation>Specifies the maximum number of concurrent logins per user</xsd:documentation>
+                        	</xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="MINAGE">
+                        	<xsd:annotation>
+                        		<xsd:documentation>Defines the minimum age (in weeks) a password must be before it can be changed</xsd:documentation>
+                        	</xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="MINALPHA">
+                        	<xsd:annotation>
+                        		<xsd:documentation>Defines the minimum number of alphabetic characters that must be in a new password</xsd:documentation>
+                        	</xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="MINDIFF">
+                        	<xsd:annotation>
+                        		<xsd:documentation>Defines the minimum number of characters required in a new password that were not in the old password</xsd:documentation>
+                        	</xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="MINLEN">
+                        	<xsd:annotation>
+                        		<xsd:documentation>Defines the minimum length of a password</xsd:documentation>
+                        	</xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="MINOTHER">
+                        	<xsd:annotation>
+                        		<xsd:documentation>Defines the minimum number of non-alphabetic characters that must be in a new password</xsd:documentation>
+                        	</xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="NOFILES">
+                        	<xsd:annotation>
+                        		<xsd:documentation>Defines the soft limit for the number of file descriptors a user process may have open at one time</xsd:documentation>
+                        	</xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="NOFILES_HARD">
+                        	<xsd:annotation>
+                        		<xsd:documentation>Defines the hard limit for the number of file descriptors a user process may have open at one time</xsd:documentation>
+                        	</xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="NPROC">
+                        	<xsd:annotation>
+                        		<xsd:documentation>Defines the soft limit on the number of processes a user can have running at one time</xsd:documentation>
+                        	</xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="NPROC_HARD">
+                        	<xsd:annotation>
+                        		<xsd:documentation>Defines the hard limit on the number of processes a user can have running at one time</xsd:documentation>
+                        	</xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="PGRP">
+                        	<xsd:annotation>
+                        		<xsd:documentation>Identifies the primary group of the user</xsd:documentation>
+                        	</xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="PROJECTS">
+                        	<xsd:annotation>
+                        		<xsd:documentation>Defines the list of projects to which the user's processes can be assigned</xsd:documentation>
+                        	</xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="PWDCHECKS">
+                        	<xsd:annotation>
+                        		<xsd:documentation>Defines the password restriction methods enforced on new passwords</xsd:documentation>
+                        	</xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="PWDWARNTIME">
+                        	<xsd:annotation>
+                        		<xsd:documentation>Defines the number of days before the system issues a warning that a password change is required</xsd:documentation>
+                        	</xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="RCMDS">
+                        	<xsd:annotation>
+                        		<xsd:documentation>Controls the remote execution of the r-commands (rsh, rexec, and rcp)</xsd:documentation>
+                        	</xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="RLOGIN">
+                        	<xsd:annotation>
+                        		<xsd:documentation>Permits access to the account from a remote location with the telnet orrlogin commands</xsd:documentation>
+                        	</xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="ROLES">
+                        	<xsd:annotation>
+                        		<xsd:documentation>Defines the administrative roles for this user</xsd:documentation>
+                        	</xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="RSS">
+                        	<xsd:annotation>
+                        		<xsd:documentation>The soft limit for the largest amount of physical memory a user's process can allocate</xsd:documentation>
+                        	</xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="RSS_HARD">
+                        	<xsd:annotation>
+                        		<xsd:documentation>The largest amount of physical memory a user's process can allocate</xsd:documentation>
+                        	</xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="SHELL">
+                        	<xsd:annotation>
+                        		<xsd:documentation>Defines the program run for the user at session initiation</xsd:documentation>
+                        	</xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="STACK">
+                        	<xsd:annotation>
+                        		<xsd:documentation>Specifies the soft limit for the largest process stack segment for a user's process</xsd:documentation>
+                        	</xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="STACK_HARD">
+                        	<xsd:annotation>
+                        		<xsd:documentation>Specifies the largest process stack segment of a user's process</xsd:documentation>
+                        	</xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="SU">
+                              <xsd:annotation>
+                                    <xsd:documentation>Indicates whether another user can switch to the specified user account with the su command</xsd:documentation>
+                              </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="SUGROUPS">
+                        	<xsd:annotation>
+                        		<xsd:documentation>Defines the groups that can use the su command to switch to the specified user account</xsd:documentation>
+                        	</xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="SYSENV">
+                        	<xsd:annotation>
+                        		<xsd:documentation>Identifies the system-state (protected) environment</xsd:documentation>
+                        	</xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="THREADS">
+                        	<xsd:annotation>
+                        		<xsd:documentation>Specifies the soft limit for the largest number of threads that a user process can create</xsd:documentation>
+                        	</xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="THREADS_HARD">
+                        	<xsd:annotation>
+                        		<xsd:documentation>Specifies the largest possible number of threads that a user process can create</xsd:documentation>
+                        	</xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="TPATH">
+                        	<xsd:annotation>
+                        		<xsd:documentation>Indicates the user's trusted path status</xsd:documentation>
+                        	</xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="TTYS">
+                        	<xsd:annotation>
+                        		<xsd:documentation>Defines the terminals that can access the account specified by the Name parameter</xsd:documentation>
+                        	</xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="UMASK">
+                        	<xsd:annotation>
+                        		<xsd:documentation>Determines file permissions</xsd:documentation>
+                        	</xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="USRENV">
+                        	<xsd:annotation>
+                        		<xsd:documentation>Defines the user-state (unprotected) environment</xsd:documentation>
+                        	</xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="EFS_KEYSTORE_ACCESS">
+                        	<xsd:annotation>
+                        		<xsd:documentation>Specifies the database type of the user keystore. The attribute is valid only when the system is EFS-enabled</xsd:documentation>
+                        	</xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="EFS_ADMINKS_ACCESS">
+                        	<xsd:annotation>
+                        		<xsd:documentation>Represents the database type for the efs_admin keystore. The attribute is valid only when the system is EFS-enabled</xsd:documentation>
+                        	</xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="EFS_INITIALKS_MODE">
+                        	<xsd:annotation>
+                        		<xsd:documentation>Specifies the initial mode of the user keystore. The attribute is valid only when the system is EFS-enabled</xsd:documentation>
+                        	</xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="EFS_ALLOWKSMODECHANGEBYUSER">
+                        	<xsd:annotation>
+                        		<xsd:documentation>Specifies whether the mode can be changed. The attribute is valid only when the system is EFS-enabled</xsd:documentation>
+                        	</xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="EFS_KEYSTORE_ALGO">
+                        	<xsd:annotation>
+                        		<xsd:documentation>Specifies the algorithm that is used to generate the private key of the user during the keystore creation. The attribute is valid only when the system is EFS-enabled</xsd:documentation>
+                        	</xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="EFS_FILE_ALGO">
+                        	<xsd:annotation>
+                        		<xsd:documentation>Specifies the encryption algorithm for user files. The attribute is valid only when the system is EFS-enabled</xsd:documentation>
+                        	</xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="MINSL">
+                        	<xsd:annotation>
+                        		<xsd:documentation>Defines the minimum sensitivity-clearance level that the user can have. This attribute is valid only for Trusted AIX.</xsd:documentation>
+                        	</xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="MAXSL">
+                        	<xsd:annotation>
+                        		<xsd:documentation>Defines the maximum sensitivity-clearance level that the user can have. This attribute is valid only for Trusted AIX.</xsd:documentation>
+                        	</xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="DEFSL">
+                        	<xsd:annotation>
+                        		<xsd:documentation>Defines the default sensitivity level that the user is assigned during login. This attribute is valid only for Trusted AIX.</xsd:documentation>
+                        	</xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="MINTL">
+                        	<xsd:annotation>
+                        		<xsd:documentation>Defines the minimum integrity clearance level that the user can have. This attribute is valid only for Trusted AIX.</xsd:documentation>
+                        	</xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="MAXTL">
+                        	<xsd:annotation>
+                        		<xsd:documentation>Defines the maximum integrity clearance level that the user can have. This attribute is valid only for Trusted AIX.</xsd:documentation>
+                        	</xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="DEFTL">
+                        	<xsd:annotation>
+                        		<xsd:documentation>Defines the default integrity clearance level that the user is assigned during login. This attribute is valid only for Trusted AIX.</xsd:documentation>
+                        	</xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="MINLOWERALPHA">
+                        	<xsd:annotation>
+                        		<xsd:documentation>Defines the minimum number of lower case alphabetic characters that must be in a new password</xsd:documentation>
+                        	</xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="MINUPPERALPHA">
+                        	<xsd:annotation>
+                        		<xsd:documentation>Defines the minimum number of upper case alphabetic characters that must be in a new password</xsd:documentation>
+                        	</xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="MINDIGIT">
+                        	<xsd:annotation>
+                        		<xsd:documentation>Defines the minimum number of digits that must be in a new password</xsd:documentation>
+                        	</xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="MINSPECIALCHAR">
+                        	<xsd:annotation>
+                        		<xsd:documentation>Defines the minimum number of special characters that must be in a new password</xsd:documentation>
+                        	</xsd:annotation>
+                        </xsd:enumeration>
+                  </xsd:restriction>
+            </xsd:simpleContent>
+      </xsd:complexType>
+      <xsd:complexType name="EntityItemInittabRunlevelType">
+            <xsd:annotation>
+                  <xsd:documentation>
+                        The EntityItemInittabRunlevelType describes the enumeration of runlevel values present in /etc/inittab. 
+                        The empty string value is permitted here to allow for detailed error reporting and variable references.
+                  </xsd:documentation>
+            </xsd:annotation>
+            <xsd:simpleContent>
+                  <xsd:restriction base="oval-sc:EntityItemStringType">
+                        <xsd:enumeration value="0">
+                              <xsd:annotation>
+                                    <xsd:documentation>Run levels are represented by the numbers 0 through 9</xsd:documentation>
+                              </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="1">
+                              <xsd:annotation>
+                                    <xsd:documentation>Run levels are represented by the numbers 0 through 9</xsd:documentation>
+                              </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="2">
+                              <xsd:annotation>
+                                    <xsd:documentation>Run levels are represented by the numbers 0 through 9</xsd:documentation>
+                              </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="3">
+                              <xsd:annotation>
+                                    <xsd:documentation>Run levels are represented by the numbers 0 through 9</xsd:documentation>
+                              </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="4">
+                              <xsd:annotation>
+                                    <xsd:documentation>Run levels are represented by the numbers 0 through 9</xsd:documentation>
+                              </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="5">
+                              <xsd:annotation>
+                                    <xsd:documentation>Run levels are represented by the numbers 0 through 9</xsd:documentation>
+                              </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="6">
+                              <xsd:annotation>
+                                    <xsd:documentation>Run levels are represented by the numbers 0 through 9</xsd:documentation>
+                              </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="7">
+                              <xsd:annotation>
+                                    <xsd:documentation>Run levels are represented by the numbers 0 through 9</xsd:documentation>
+                              </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="8">
+                              <xsd:annotation>
+                                    <xsd:documentation>Run levels are represented by the numbers 0 through 9</xsd:documentation>
+                              </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="9">
+                              <xsd:annotation>
+                                    <xsd:documentation>Run levels are represented by the numbers 0 through 9</xsd:documentation>
+                              </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="a">
+                              <xsd:annotation>
+                                    <xsd:documentation>There are three other values that appear in the runlevel field, even though they are not true run levels: a, b, and c. Entries that have these characters in the runlevel field are processed only when the telinit command requests them to be run (regardless of the current run level of the system).</xsd:documentation>
+                              </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="b">
+                              <xsd:annotation>
+                                    <xsd:documentation>There are three other values that appear in the runlevel field, even though they are not true run levels: a, b, and c. Entries that have these characters in the runlevel field are processed only when the telinit command requests them to be run (regardless of the current run level of the system).</xsd:documentation>
+                              </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="c">
+                              <xsd:annotation>
+                                    <xsd:documentation>There are three other values that appear in the runlevel field, even though they are not true run levels: a, b, and c. Entries that have these characters in the runlevel field are processed only when the telinit command requests them to be run (regardless of the current run level of the system).</xsd:documentation>
+                              </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="">
+                              <xsd:annotation>
+                                    <xsd:documentation>The empty string is allowed for variable references</xsd:documentation>
+                              </xsd:annotation>
+                        </xsd:enumeration>
+                  </xsd:restriction>
+            </xsd:simpleContent>
+      </xsd:complexType>
+      <xsd:complexType name="EntityItemInittabActionType">
+            <xsd:annotation>
+                  <xsd:documentation>The EntityItemInittabActionType indicates how to treat the process specified in the identifier field. The empty string value is permitted here to allow for detailed error reporting.</xsd:documentation>
+            </xsd:annotation>
+            <xsd:simpleContent>
+                  <xsd:restriction base="oval-sc:EntityItemStringType">
+                        <xsd:enumeration value="respawn">
+                              <xsd:annotation>
+                                    <xsd:documentation>If the process does not exist, start the process. Do not wait for its termination (continue scanning the /etc/inittab file). Restart the process when it dies. If the process exists, do nothing and continue scanning the /etc/inittab file.</xsd:documentation>
+                              </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="wait">
+                              <xsd:annotation>
+                                    <xsd:documentation>When the init command enters the run level that matches the entry's run level, start the process and wait for its termination</xsd:documentation>
+                              </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="once">
+                              <xsd:annotation>
+                                    <xsd:documentation>When the init command enters a run level that matches the entry's run level, start the process, and do not wait for its termination</xsd:documentation>
+                              </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="boot">
+                              <xsd:annotation>
+                                    <xsd:documentation>Process the entry only during system boot, which is when the init command reads the /etc/inittab file during system startup</xsd:documentation>
+                              </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="bootwait">
+                              <xsd:annotation>
+                                    <xsd:documentation>Process the entry the first time that the init command goes from single-user to multi-user state after the system is booted</xsd:documentation>
+                              </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="powerfail">
+                              <xsd:annotation>
+                                    <xsd:documentation>Execute the process associated with this entry only when the init command receives a power fail signal (SIGPWR)</xsd:documentation>
+                              </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="powerwait">
+                              <xsd:annotation>
+                                    <xsd:documentation>Execute the process associated with this entry only when the init command receives a power fail signal (SIGPWR), and wait until it terminates</xsd:documentation>
+                              </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="off">
+                              <xsd:annotation>
+                                    <xsd:documentation>If the process associated with this entry is currently running, send the warning signal (SIGTERM), and wait 20 seconds before terminating the process with the kill signal (SIGKILL)</xsd:documentation>
+                              </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="ondemand">
+                              <xsd:annotation>
+                                    <xsd:documentation>Functionally identical to respawn, except this action applies to the a, b, or c values, not to run levels</xsd:documentation>
+                              </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="initdefault">
+                              <xsd:annotation>
+                                    <xsd:documentation>An entry with this action is only scanned when the init command is initially invoked</xsd:documentation>
+                              </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="sysinit">
+                              <xsd:annotation>
+                                    <xsd:documentation>Entries of this type are executed before the init command tries to access the console before login</xsd:documentation>
+                              </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value=""/>
                   </xsd:restriction>
             </xsd:simpleContent>
       </xsd:complexType>
