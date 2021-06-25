@@ -2252,6 +2252,122 @@
             </xsd:complexType>
       </xsd:element>
       <!-- =============================================================================== -->
+      <!-- ==================================  SSHD TEST  ================================ -->
+      <!-- =============================================================================== -->
+      <xsd:element name="sshd_test" substitutionGroup="oval-def:test">
+            <xsd:annotation>
+                  <xsd:documentation>
+                        The sshd_test is used to check the values associated with sshd parameters that are used by the local system. It extends the 
+                        standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information. 
+                        The required object element references a sshd_object and the optional state element references a sshd_state that specifies the 
+                        information to check.
+                  </xsd:documentation>
+                  <xsd:appinfo>
+                        <oval:element_mapping>
+                              <oval:test>sshd_test</oval:test>
+                              <oval:object>sshd_object</oval:object>
+                              <oval:state>sshd_state</oval:state>
+                              <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#unix">sshd_item</oval:item>
+                        </oval:element_mapping>
+                  </xsd:appinfo>
+                  <xsd:appinfo>
+                        <sch:pattern id="unix-def_sshdtst">
+                              <sch:rule context="unix-def:sshd_test/unix-def:object">
+                                    <sch:assert test="@object_ref=ancestor::oval-def:oval_definitions/oval-def:objects/unix-def:sshd_object/@id"><sch:value-of select="../@id"/> - the object child element of a sshd_test must reference a sshd_object</sch:assert>
+                              </sch:rule>
+                              <sch:rule context="unix-def:sshd_test/unix-def:state">
+                                    <sch:assert test="@state_ref=ancestor::oval-def:oval_definitions/oval-def:states/unix-def:sshd_state/@id"><sch:value-of select="../@id"/> - the state child element of a sshd_test must reference a sshd_state</sch:assert>
+                              </sch:rule>
+                        </sch:pattern>
+                  </xsd:appinfo>
+            </xsd:annotation>
+            <xsd:complexType>
+                  <xsd:complexContent>
+                        <xsd:extension base="oval-def:TestType">
+                              <xsd:sequence>
+                                    <xsd:element name="object" type="oval-def:ObjectRefType" />
+                                    <xsd:element name="state" type="oval-def:StateRefType" minOccurs="0" maxOccurs="unbounded"/>
+                              </xsd:sequence>
+                        </xsd:extension>
+                  </xsd:complexContent>
+            </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="sshd_object" substitutionGroup="oval-def:object">
+            <xsd:annotation>
+                  <xsd:documentation>
+                        The sshd_object is used by a sshd_test to define which sshd parameters on the local system should be collected via the 
+                        "sshd -f [FILEPATH] -T" command. Each object extends the standard ObjectType as defined in the oval-definitions-schema and 
+                        one should refer to the ObjectType description for more information. The common set element allows complex objects to be 
+                        created using filters and set logic. Again, please refer to the description of the set element in the oval-definitions-schema.
+                  </xsd:documentation>
+                  <xsd:appinfo>
+                        <sch:pattern id="unix-def_sshd_object_verify_filter_state">
+                              <sch:rule context="unix-def:sshd_object//oval-def:filter">
+                                    <sch:let name="parent_object" value="ancestor::unix-def:sshd_object"/>
+                                    <sch:let name="parent_object_id" value="$parent_object/@id"/>
+                                    <sch:let name="state_ref" value="."/>
+                                    <sch:let name="reffed_state" value="ancestor::oval-def:oval_definitions/oval-def:states/*[@id=$state_ref]"/>
+                                    <sch:let name="state_name" value="local-name($reffed_state)"/>
+                                    <sch:let name="state_namespace" value="namespace-uri($reffed_state)"/>
+                                    <sch:assert test="(($state_namespace='http://oval.mitre.org/XMLSchema/oval-definitions-5#unix') and ($state_name='sshd_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
+                              </sch:rule>
+                        </sch:pattern>
+                  </xsd:appinfo>
+            </xsd:annotation>
+            <xsd:complexType>
+                  <xsd:complexContent>
+                        <xsd:extension base="oval-def:ObjectType">
+                              <xsd:sequence>
+                                    <xsd:choice>
+                                          <xsd:element ref="oval-def:set"/>
+                                          <xsd:sequence>
+                                                <xsd:element name="filepath" type="oval-def:EntityObjectStringType" nillable="true">
+                                                      <xsd:annotation>
+                                                            <xsd:documentation>Specifies the name of the configuration file. If xsi:nil="true", then collect from the default filepath at /etc/ssh/sshd_config.</xsd:documentation>
+                                                      </xsd:annotation>
+                                                </xsd:element>
+                                                <xsd:element name="name" type="oval-def:EntityObjectStringType">
+                                                      <xsd:annotation>
+                                                            <xsd:documentation>The name element specifies the name(s) of the sshd parameter(s) that should be collected from the local system.</xsd:documentation>
+                                                      </xsd:annotation>
+                                                </xsd:element>
+                                                <xsd:element ref="oval-def:filter" minOccurs="0" maxOccurs="unbounded"/>
+                                          </xsd:sequence>
+                                    </xsd:choice>
+                              </xsd:sequence>
+                        </xsd:extension>
+                  </xsd:complexContent>
+            </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="sshd_state" substitutionGroup="oval-def:state">
+            <xsd:annotation>
+                  <xsd:documentation>The sshd_state contains entities that are used to check the sshd configuration filepath, parameter name and value(s).</xsd:documentation>
+            </xsd:annotation>
+            <xsd:complexType>
+                  <xsd:complexContent>
+                        <xsd:extension base="oval-def:StateType">
+                              <xsd:sequence>
+                                    <xsd:element name="filepath" type="oval-def:EntityStateStringType" minOccurs="0" maxOccurs="1">
+                                          <xsd:annotation>
+                                                <xsd:documentation>Specifies the name of the sshd configuration file. Note the default filepath is /etc/ssh/sshd_config.</xsd:documentation>
+                                          </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="name" type="oval-def:EntityStateStringType" minOccurs="0" maxOccurs="1">
+                                          <xsd:annotation>
+                                                <xsd:documentation>The name element contains a string that represents the name of a sshd parameter that was collected from the local system.</xsd:documentation>
+                                          </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="value" type="oval-def:EntityStateAnySimpleType" minOccurs="0" maxOccurs="1">
+                                          <xsd:annotation>
+                                                <xsd:documentation>The value element contains a string that represents the value(s) associated with the specified sshd parameter.</xsd:documentation>
+                                          </xsd:annotation>
+                                    </xsd:element>
+                              </xsd:sequence>
+                        </xsd:extension>
+                  </xsd:complexContent>
+            </xsd:complexType>
+      </xsd:element>
+      <!-- =============================================================================== -->
       <!-- ================================  SYMLINK TEST  =============================== -->
       <!-- =============================================================================== -->
       <xsd:element name="symlink_test" substitutionGroup="oval-def:test">
