@@ -422,12 +422,12 @@
                   <xsd:complexContent>
                         <xsd:extension base="oval-def:StateType">
                               <xsd:sequence>
-                                    <xsd:element name="device_name" type="oval-def:EntityStateStringType">
+                                    <xsd:element name="device_name" type="oval-def:EntityStateStringType" minOccurs="0" maxOccurs="1">
                                           <xsd:annotation>
                                                 <xsd:documentation>Specifies the device logical name in the Customized Devices object class whose attribute names or values you want displayed</xsd:documentation>
                                           </xsd:annotation>
                                     </xsd:element>
-                                    <xsd:element name="attribute_name" type="oval-def:EntityStateStringType">
+                                    <xsd:element name="attribute_name" type="oval-def:EntityStateStringType" minOccurs="0" maxOccurs="1">
                                           <xsd:annotation>
                                                 <xsd:documentation>The name of the attribute of a specific device or type of device.</xsd:documentation>
                                           </xsd:annotation>
@@ -637,17 +637,17 @@
                   <xsd:complexContent>
                         <xsd:extension base="oval-def:StateType">
                               <xsd:sequence>
-                                    <xsd:element name="stanza_file" type="aix-def:EntityStateStanzaFileType">
+                                    <xsd:element name="stanza_file" type="aix-def:EntityStateStanzaFileType" minOccurs="0" maxOccurs="1">
                                           <xsd:annotation>
                                                 <xsd:documentation>The stanza_file entity is an enumeration of values representing the security configuration file containing the desired attributes.</xsd:documentation>                                                            
                                           </xsd:annotation>
                                     </xsd:element>
-                                    <xsd:element name="stanza_name" type="oval-def:EntityStateStringType">
+                                    <xsd:element name="stanza_name" type="oval-def:EntityStateStringType" minOccurs="0" maxOccurs="1">
                                           <xsd:annotation>
                                                 <xsd:documentation>Specifies the name of the stanza to list.</xsd:documentation>                                                            
                                           </xsd:annotation>
                                     </xsd:element>
-                                    <xsd:element name="attribute_name" type="oval-def:EntityStateStringType">
+                                    <xsd:element name="attribute_name" type="oval-def:EntityStateStringType" minOccurs="0" maxOccurs="1">
                                           <xsd:annotation>
                                                 <xsd:documentation>Specifies the attribute to list.</xsd:documentation>                                                            
                                           </xsd:annotation>
