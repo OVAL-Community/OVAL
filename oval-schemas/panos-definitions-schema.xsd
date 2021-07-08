@@ -2,14 +2,14 @@
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
             xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5"
             xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5"
-            xmlns:paloalto-def="http://oval.mitre.org/XMLSchema/oval-definitions-5#paloalto"
+            xmlns:panos-def="http://oval.mitre.org/XMLSchema/oval-definitions-5#panos"
             xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-            targetNamespace="http://oval.mitre.org/XMLSchema/oval-definitions-5#paloalto"
+            targetNamespace="http://oval.mitre.org/XMLSchema/oval-definitions-5#panos"
             elementFormDefault="qualified" version="5.11">
     <xsd:import namespace="http://oval.mitre.org/XMLSchema/oval-definitions-5" schemaLocation="oval-definitions-schema.xsd"/>
     <xsd:annotation>
         <xsd:documentation>
-            The following is a description of the elements, types, and attributes that compose the Palo Alto-specific 
+            The following is a description of the elements, types, and attributes that compose the Palo Alto (PAN-OS)-specific 
             tests found in Open Vulnerability and Assessment Language (OVAL). Each test is an extension 
             of the standard test element defined in the Core Definition Schema. Through extension, each test inherits a 
             set of elements and attributes that are shared amongst all OVAL tests. Each test is described in detail and 
@@ -23,7 +23,7 @@
             requests, please visit the OVAL website at http://oval.cisecurity.org.
         </xsd:documentation>
         <xsd:appinfo>
-            <schema>Palo Alto Definitions</schema>
+            <schema>Palo Alto (PAN-OS) Definitions</schema>
             <version>5.11.2:2.0</version>
             <date>03/30/2021 09:00:00 AM</date>
             <terms_of_use>
@@ -34,7 +34,7 @@
                 distributing copies of the OVAL Schema, this license header must be included.
             </terms_of_use>
             <sch:ns prefix="oval-def" uri="http://oval.mitre.org/XMLSchema/oval-definitions-5"/>
-            <sch:ns prefix="paloalto-def" uri="http://oval.mitre.org/XMLSchema/oval-definitions-5#paloalto"/>
+            <sch:ns prefix="panos-def" uri="http://oval.mitre.org/XMLSchema/oval-definitions-5#panos"/>
             <sch:ns prefix="xsi" uri="http://www.w3.org/2001/XMLSchema-instance"/>
         </xsd:appinfo>
     </xsd:annotation>
@@ -57,16 +57,16 @@
                     <oval:test>config_test</oval:test>
                     <oval:object>config_object</oval:object>
                     <oval:state>config_state</oval:state>
-                    <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#paloalto">config_item</oval:item>
+                    <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#panos">config_item</oval:item>
                 </oval:element_mapping>
             </xsd:appinfo>
             <xsd:appinfo>
-                <sch:pattern id="paloalto-def_configtst">
-                    <sch:rule context="paloalto-def:config_test/paloalto-def:object">
-                        <sch:assert test="@object_ref=ancestor::oval-def:oval_definitions/oval-def:objects/paloalto-def:config_object/@id"><sch:value-of select="../@id"/> - the object child element of a config_test must reference a config_object</sch:assert>
+                <sch:pattern id="panos-def_configtst">
+                    <sch:rule context="panos-def:config_test/panos-def:object">
+                        <sch:assert test="@object_ref=ancestor::oval-def:oval_definitions/oval-def:objects/panos-def:config_object/@id"><sch:value-of select="../@id"/> - the object child element of a config_test must reference a config_object</sch:assert>
                     </sch:rule>
-                    <sch:rule context="paloalto-def:config_test/paloalto-def:state">
-                        <sch:assert test="@state_ref=ancestor::oval-def:oval_definitions/oval-def:states/paloalto-def:config_state/@id"><sch:value-of select="../@id"/> - the state child element of a config_test must reference a config_state</sch:assert>
+                    <sch:rule context="panos-def:config_test/panos-def:state">
+                        <sch:assert test="@state_ref=ancestor::oval-def:oval_definitions/oval-def:states/panos-def:config_state/@id"><sch:value-of select="../@id"/> - the state child element of a config_test must reference a config_state</sch:assert>
                     </sch:rule>
                 </sch:pattern>
             </xsd:appinfo>
@@ -96,15 +96,15 @@
                 child nodes.
             </xsd:documentation>
             <xsd:appinfo>
-                <sch:pattern id="paloalto-def_paloalto_object_verify_filter_state">
-                    <sch:rule context="paloalto-def:paloalto_object//oval-def:filter">
-                        <sch:let name="parent_object" value="ancestor::paloalto-def:config_object"/>
+                <sch:pattern id="panos-def_paloalto_object_verify_filter_state">
+                    <sch:rule context="panos-def:paloalto_object//oval-def:filter">
+                        <sch:let name="parent_object" value="ancestor::panos-def:config_object"/>
                         <sch:let name="parent_object_id" value="$parent_object/@id"/>
                         <sch:let name="state_ref" value="."/>
                         <sch:let name="reffed_state" value="ancestor::oval-def:oval_definitions/oval-def:states/*[@id=$state_ref]"/>
                         <sch:let name="state_name" value="local-name($reffed_state)"/>
                         <sch:let name="state_namespace" value="namespace-uri($reffed_state)"/>
-                        <sch:assert test="(($state_namespace='http://oval.mitre.org/XMLSchema/oval-definitions-5#paloalto') and ($state_name='config_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
+                        <sch:assert test="(($state_namespace='http://oval.mitre.org/XMLSchema/oval-definitions-5#panos') and ($state_name='config_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
                     </sch:rule>
                 </sch:pattern>
             </xsd:appinfo>
@@ -126,8 +126,8 @@
                                             XPaths and determinining all those that do not equal a given XPath would be impossible.
                                         </xsd:documentation>
                                         <xsd:appinfo>
-                                            <sch:pattern id="paloalto-def_xmlobjxpath">
-                                                <sch:rule context="paloalto-def:config_object/paloalto-def:xpath">
+                                            <sch:pattern id="panos-def_xmlobjxpath">
+                                                <sch:rule context="panos-def:config_object/panos-def:xpath">
                                                     <sch:assert test="not(@operation) or @operation='equals'"><sch:value-of select="../@id"/> - operation attribute for the xpath entity of a config_object should be 'equals', note that this overrules the general operation attribute validation (i.e. follow this one)</sch:assert>
                                                 </sch:rule>
                                             </sch:pattern>
