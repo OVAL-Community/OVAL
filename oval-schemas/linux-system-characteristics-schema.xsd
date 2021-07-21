@@ -1198,11 +1198,27 @@
                <xsd:complexContent>
                     <xsd:extension base="oval-sc:ItemType">
                          <xsd:sequence>
-                              <xsd:element name="filter_key" type="oval-sc:EntityItemStringType" minOccurs="0" maxOccurs="1">
-                                   <xsd:annotation>
-                                        <xsd:documentation>>As described in the auditctl(8) manpage, the filter key is an arbitrary string of text that can be up to 31 bytes long. It can uniquely identify the audit records produced by a rule. You may have more than one key on a rule.</xsd:documentation>
-                                   </xsd:annotation>
-                              </xsd:element>
+                              <xsd:element name="filepath" type="oval-sc:EntityItemStringType"  minOccurs="0" maxOccurs="1">
+								 <xsd:annotation>
+								   <xsd:documentation>The filepath element specifies the path and name of a file to evaluate.</xsd:documentation>
+								   <xsd:documentation>If the xsi:nil attribute is set to true, then the rules specified are the ones executed at runtime.</xsd:documentation>
+								 </xsd:annotation>
+								</xsd:element>
+								<xsd:element name="field" type="oval-sc:EntityItemStringType" minOccurs="0" maxOccurs="1">
+								 <xsd:annotation>
+								   <xsd:documentation>As described in the auditctl(8) manpage, the field is an association of name, operation and value used to parameter the audit rule</xsd:documentation>
+								 </xsd:annotation>
+								</xsd:element>
+								<xsd:element name="syscall" type="oval-sc:EntityItemStringType" minOccurs="0" maxOccurs="1">
+								 <xsd:annotation>
+								   <xsd:documentation>As described in the auditctl(8) manpage, the syscall can be any syscall name or number. The word 'all' may also be used.</xsd:documentation>
+								 </xsd:annotation>
+								</xsd:element>
+								<xsd:element name="permission" type="oval-sc:EntityItemAuditPermissionType" minOccurs="0" maxOccurs="1">
+								 <xsd:annotation>
+								   <xsd:documentation>As described in the auditctl(8) manpage, the permission describes the action that triggers the audit record.</xsd:documentation>
+								 </xsd:annotation>
+								</xsd:element>
                               <xsd:element name="auditline" type="oval-sc:EntityItemStringType" minOccurs="0" maxOccurs="1">
                                    <xsd:annotation>
                                         <xsd:documentation>A rule written on a single line like returned by the auditctl -k command.</xsd:documentation>
@@ -1210,8 +1226,10 @@
                               </xsd:element>
                               <xsd:element name="line_number" type="oval-sc:EntityItemIntType" minOccurs="0" maxOccurs="1">
                                    <xsd:annotation>
-                                        <xsd:documentation>The line number of the rule, which can be considered as the rule number regarding that there is one rule per line. This number starts at 1 which means that the number of the first rule returned is 1.</xsd:documentation>
-                                   </xsd:annotation>
+                                        <xsd:documentation>The instance entity calls out a specific match of the pattern. It can have any integer value. If the value is a non-negative integer, the index of the specific match of the pattern is counted from the beginning of the set of matches of that pattern. The first match is given an instance value of 1, the second match is given an instance value of 2, and so on. For non-negative values, the 'less than' and 'less than or equal' operations imply the object is operating only on non-negative values. Frequently, this entity will be defined as 'greater than or equal' to 1 or 'greater than' 0, either of which results in the object representing the set of all matches of the pattern.</xsd:documentation>
+									    <xsd:documentation>Negative values are used to simplify collection of pattern match occurrences counting backwards from the final match. To find the final match, use an instance of -1; the penultimate match is found using an instance value of -2, and so on. For negative values, the 'greater than' and 'greater than or equal' operations imply the object is operating only on negative values. For example, searching for instances greater than or equal to -2 would yield only the last two maches.</xsd:documentation>
+									    <xsd:documentation>Note that the main purpose of the instance item entity is to provide uniqueness for different auditdline_items that results from multiple matches of a given pattern against the same rule collection, and they will always have positive values.</xsd:documentation>                                   
+								   </xsd:annotation>
                               </xsd:element>
                          </xsd:sequence>
                     </xsd:extension>
@@ -1591,6 +1609,40 @@
                     <xsd:enumeration value="mls">
                          <xsd:annotation>
                               <xsd:documentation>'mls' indicates Multi Level Security protection. MLS is pretty complex and pretty much not used in most situations. </xsd:documentation>
+                         </xsd:annotation>
+                    </xsd:enumeration>
+                    <xsd:enumeration value="">
+                         <xsd:annotation>
+                              <xsd:documentation>The empty string value is permitted here to allow for empty elements associated with variable references.</xsd:documentation>
+                         </xsd:annotation>
+                    </xsd:enumeration>
+               </xsd:restriction>
+          </xsd:simpleContent>
+     </xsd:complexType>
+	 <xsd:complexType name="EntityItemAuditPermissionType">
+          <xsd:annotation>
+               <xsd:documentation>The EntityItemAuditPermissionType complex type restricts a string value to the set of auditd permissions values. The empty string is also allowed to support the empty element associated with variable references. Note that when using pattern matches and variables care must be taken to ensure that the regular expression and variable values align with the enumerated values</xsd:documentation>
+          </xsd:annotation>
+          <xsd:simpleContent>
+               <xsd:restriction base="oval-def:EntityStateStringType">
+                    <xsd:enumeration value="read">
+                         <xsd:annotation>
+                              <xsd:documentation>'read' indicates the 'auditctl -p r' value.</xsd:documentation>
+                         </xsd:annotation>
+                    </xsd:enumeration>
+                    <xsd:enumeration value="write">
+                         <xsd:annotation>
+                              <xsd:documentation>'write' indicates the 'auditctl -p w' value.</xsd:documentation>
+                         </xsd:annotation>
+                    </xsd:enumeration>
+                    <xsd:enumeration value="execute">
+                         <xsd:annotation>
+                              <xsd:documentation>'execute' indicates the 'auditctl -p e' value. </xsd:documentation>
+                         </xsd:annotation>
+                    </xsd:enumeration>
+					<xsd:enumeration value="attribute_change">
+                         <xsd:annotation>
+                              <xsd:documentation>'attribute_change' indicates the 'auditctl -p a' value. </xsd:documentation>
                          </xsd:annotation>
                     </xsd:enumeration>
                     <xsd:enumeration value="">
