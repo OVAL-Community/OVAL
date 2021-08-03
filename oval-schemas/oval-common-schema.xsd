@@ -558,6 +558,11 @@ at_least_one_exists ||  0   |  0+  |  1+  |  0+  ||  Error
                          <xsd:documentation>The apple_ios value describes the iOS mobile operating system.</xsd:documentation>
                     </xsd:annotation>
                </xsd:enumeration>
+               <xsd:enumeration value="aws">
+                    <xsd:annotation>
+                         <xsd:documentation>The aws value describes the Amazon Web Services platform.</xsd:documentation>
+                    </xsd:annotation>
+               </xsd:enumeration>
                <xsd:enumeration value="catos">
                     <xsd:annotation>
                          <xsd:documentation>The catos value describes the Cisco CatOS operating system.</xsd:documentation>
@@ -581,6 +586,11 @@ at_least_one_exists ||  0   |  0+  |  1+  |  0+  ||  Error
                <xsd:enumeration value="macos">
                     <xsd:annotation>
                          <xsd:documentation>The macos value describes the Mac operating system.</xsd:documentation>
+                    </xsd:annotation>
+               </xsd:enumeration>
+               <xsd:enumeration value="panos">
+                    <xsd:annotation>
+                         <xsd:documentation>The panos value describes the Palo Alto Networks operating system.</xsd:documentation>
                     </xsd:annotation>
                </xsd:enumeration>
                <xsd:enumeration value="pixos">
