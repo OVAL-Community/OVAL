@@ -2759,7 +2759,6 @@
      <xsd:element name="auditdline_object" substitutionGroup="oval-def:object">
        <xsd:annotation>
          <xsd:documentation>The auditdline_object element is used by a auditdline_test to define the object to be evaluated. Each object extends the standard ObjectType as defined in the oval-definitions-schema and one should refer to the ObjectType description for more information. The common set element allows complex objects to be created using filters and set logic. Again, please refer to the description of the set element in the oval-definitions-schema.</xsd:documentation>
-         <xsd:documentation>A auditdline_object consists of an filter_key entity that is the same as the -k parameter of the auditctl -l command.</xsd:documentation>
          <xsd:appinfo>
            <sch:pattern id="linux_auditdline_object_verify_filter_state">
              <sch:rule context="linux:auditdline_object//oval-def:filter">
