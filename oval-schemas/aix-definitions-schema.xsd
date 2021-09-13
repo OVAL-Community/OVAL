@@ -350,8 +350,8 @@
                         The deviceattribute_test is used to hold information related to the execution of the 
                         /usr/sbin/lsattr -EOl [device] -a [attribute] command. It extends the standard TestType 
                         as defined in the oval-definitions-schema and one should refer to the TestType description 
-                        for more information. The required object element references a lssec_object and the optional 
-                        state element specifies the value to check.
+                        for more information. The required object element references a deviceattribute_object and 
+                        the optional state element specifies the value to check.
                   </xsd:documentation>
                   <xsd:appinfo>
                         <sch:pattern id="aix-def_deviceattributetst">
@@ -452,7 +452,7 @@
                         The inittab_item is used to hold information related to the /usr/sbin/lsitab command and information stored in /etc/inittab. 
                         Currently, /usr/sbin/lsitab is used to configure records in the /etc/inittab file which controls the initialization process.
                         It extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description 
-                        for more information. The required object element references a lssec_object and the optional state element specifies the value 
+                        for more information. The required object element references a inittab_object and the optional state element specifies the value 
                         to check.
                   </xsd:documentation>
                   <xsd:appinfo>
@@ -560,7 +560,7 @@
                         files contain attributes that you can specify with the Attribute parameter.  The information being tested is based off the 
                         /usr/bin/lssec [ -f File ] [ -s Stanza ] [ -a Attribute ] command. It extends the standard TestType as defined in the 
                         oval-definitions-schema and one should refer to the TestType description for more information. The required object 
-                        element references a lssec_object and the optional state element specifies the value to check.
+                        element references a securitystanza_object and the optional state element specifies the value to check.
                   </xsd:documentation>
                   <xsd:appinfo>
                         <sch:pattern id="aix-def_securitystanzatst">
@@ -673,7 +673,7 @@
                         Currently, /usr/sbin/lsuser is used to display user account attributes. The /usr/sbin/lsuser command queries the named 
                         attribute for the provided user account(s). It extends the standard TestType as defined in the 
                         oval-definitions-schema and one should refer to the TestType description for more information. The required object 
-                        element references a lssec_object and the optional state element specifies the value to check.
+                        element references a useraccount_object and the optional state element specifies the value to check.
                   </xsd:documentation>
                   <xsd:appinfo>
                         <sch:pattern id="aix-def_useraccounttst">
@@ -774,7 +774,7 @@
                         The nfso command sets or displays current or next boot values for network file system (NFS) tuning parameters.  
                         The information being tested is based off the /usr/sbin/nfso -o command. It extends the standard TestType as 
                         defined in the oval-definitions-schema and one should refer to the TestType description for more information. 
-                        The required object element references a no_object and the optional state element specifies the value to check for.
+                        The required object element references a nfso_object and the optional state element specifies the value to check for.
                   </xsd:documentation>
                   <xsd:appinfo>
                         <sch:pattern id="aix-def_nfsotst">
@@ -830,7 +830,10 @@
       </xsd:element>
       <xsd:element name="nfso_state" substitutionGroup="oval-def:state">
             <xsd:annotation>
-                  <xsd:documentation>The nfso_state element defines the different information associated with a specific call to /usr/sbin/nfso. Please refer to the individual elements in the schema for more details about what each represents.</xsd:documentation>
+                  <xsd:documentation>
+                        The nfso_state element defines the different information associated with a specific call to /usr/sbin/nfso. 
+                        Please refer to the individual elements in the schema for more details about what each represents.
+                  </xsd:documentation>
             </xsd:annotation>
             <xsd:complexType>
                   <xsd:complexContent>
