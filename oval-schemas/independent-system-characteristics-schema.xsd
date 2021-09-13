@@ -784,6 +784,11 @@
                              <xsd:documentation>The asa value describes the Cisco ASA security devices.</xsd:documentation>
                         </xsd:annotation>
                     </xsd:enumeration>
+                   <xsd:enumeration value="aws">
+                       <xsd:annotation>
+                           <xsd:documentation>The aws value describes the Amazon Web Services platform.</xsd:documentation>
+                       </xsd:annotation>
+                   </xsd:enumeration>
                     <xsd:enumeration value="catos">
                          <xsd:annotation>
                               <xsd:documentation>The catos value describes the Cisco CatOS operating system.</xsd:documentation>
@@ -809,6 +814,11 @@
                               <xsd:documentation>The macos value describes the Mac operating system.</xsd:documentation>
                          </xsd:annotation>
                     </xsd:enumeration>
+                   <xsd:enumeration value="panos">
+                       <xsd:annotation>
+                           <xsd:documentation>The panos value describes the Palo Alto Networks operating system.</xsd:documentation>
+                       </xsd:annotation>
+                   </xsd:enumeration>
                     <xsd:enumeration value="pixos">
                          <xsd:annotation>
                               <xsd:documentation>The pixos value describes the Cisco PIX operating system.</xsd:documentation>
