@@ -20,10 +20,10 @@ Current Members
 
 * Organizational
 
+  * `Arctic Wolf <https://arcticwolf.com>`_ - David Solin, David Ries
   * `Center for Internet Security <https://www.cisecurity.org>`_ - William Munyan, Adam Montville
   * `Cisco Systems, Inc. <https://www.cisco.com/>`_ - Omar Santos
   * `HCL Group <https://hcl.com/>`_ - Rosario Gangemi
-  * `Joval Continuous Monitoring <https://joval.org/>`_ - David Solin, David Ries
   * `McAfee <https://www.mcafee.com/>`_ - Kent Landfield
   * `Modulo <https://www.modulo.com/>`_ - Alberto Bastos
   * `National Institute of Standards and Technology <https://www.nist.gov/>`_ - Stephen Banghart
