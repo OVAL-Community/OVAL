@@ -10,7 +10,7 @@ Area Supervisors
 
 The following list bounds the different areas of responsibility that may be managed by a given Area Supervisor. No Area Supervisors have yet been appointed.
 
-- Foundation Schemas (i.e. Core, Common, Independent, Results, Variables and Directives Schemas) - Bill Munyan, CIS
+- Foundation Schemas (i.e. Core, Common, Independent, Results, Variables and Directives Schemas) - Sara Archacki, CIS
 - Android Schemas - Chandrashakar B, SecPod
 - Apple Schemas (iOS, Macintosh) - David Solin, Joval
 - Cisco Schemas (ASA, CatOS, IOS, IOS XE, PixOS) - Omar Santos, Cisco
