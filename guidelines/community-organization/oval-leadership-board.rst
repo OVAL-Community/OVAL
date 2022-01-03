@@ -21,7 +21,7 @@ Leadership Board Members
 
     * `Assuria Limited <https://www.assuria-online.com/>`_ - Chris Wood
     * `BeyondTrust, Inc. <https://www.beyondtrust.com/>`_ - Morey Haber
-    * `Center for Internet Security <https://www.cisecurity.org>`_ - William Munyan, Adam Montville
+    * `Center for Internet Security <https://www.cisecurity.org>`_ - Sara Archacki, Adam Montville
     * `Cisco Systems, Inc. <https://www.cisco.com/>`_ - Panos Kampanakis, Omar Santos
     * `Depository Trust & Clearing Corporation (DTCC) <https://www.dtcc.com/>`_ - Dale Rich
     * `HPE <https://www.hp.com/country/us/en/uc/welcome.html>`_ - TBD
