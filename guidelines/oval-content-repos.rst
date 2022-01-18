@@ -144,4 +144,4 @@ The SUSE Linux Enterprise OVAL Information database is an index of fixed securit
 Updating the List
 -----------------
 
-To make changes to this list; to be added, removed, or have existing content modified, submit a pull request.
+To make changes to this list; to be added, removed, or have existing content modified, 
