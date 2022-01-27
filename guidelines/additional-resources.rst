@@ -3,7 +3,7 @@
 Additional Resources
 =====================
 
-The following resources are related standards, OVAL documentation, and other helpful information. Suggested additions or deletions can be submitted to oval@cisecurity.org or through the `developer mailing list <http://lists.cisecurity.org/mailman/listinfo/oval_developer_lists.cisecurity.org>`_.
+The following resources are related standards, OVAL documentation, and other helpful information. Suggested additions or deletions can be submitted through the `developer mailing list <https://lists.cisecurity.org/list/oval_developer.lists.cisecurity.org>`_.
 
 Resources
 ---------

@@ -431,4 +431,4 @@ VMware
 Updating the List
 -----------------
 
-To add to, remove from, or edit this list, please contact oval@cisecurity.org.
+To add to, remove from, or edit this list, please submit a pull request.

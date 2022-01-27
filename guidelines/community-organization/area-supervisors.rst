@@ -17,8 +17,8 @@ The following list bounds the different areas of responsibility that may be mana
 - FreeBSD Schemas - David Solin, Joval
 - HP-UX Schemas - John Ulmer, US Navy SPAWAR
 - IBM AIX Schemas - John Ulmer, US Navy SPAWAR
-- Linux Schemas - Šimon Lukašík, Red Hat
-- UNIX Schemas - Šimon Lukašík, Red Hat
+- Linux Schemas - Watson Sato, Red Hat
+- UNIX Schemas - Watson Sato, Red Hat
 - Sun Solaris Schemas - Jarrett Lu, Oracle
 - Juniper JunOS Schemas - David Solin, Joval
 - NETCONF Schemas - David Solin, Joval

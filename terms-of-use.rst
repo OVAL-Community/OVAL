@@ -11,7 +11,7 @@ The OVAL Language and any resulting OVAL content based upon the language that is
 
 The United States Government has copyrighted the OVAL Language for the benefit of the community in order to ensure it remains a free and open standard, as well as to legally protect the ongoing use of it and any resulting content by government, vendors, and/or users. The United States Government has trademarked ® the OVAL acronym and the OVAL logo to protect its sole and ongoing use by the OVAL effort within the information security arena.
 
-Please contact oval@cisecurity.org if you require further clarification on this issue.
+Please submit through the `developer mailing list <https://lists.cisecurity.org/list/oval_developer.lists.cisecurity.org>`_, if you require further clarification on this issue.
 
 Open Vulnerability and Assessment Language (OVAL®) License
 ----------------------------------------------------------
