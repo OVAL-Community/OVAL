@@ -1,5 +1,14 @@
 .. _oval-leadership-board:
 
+Notice:
+=======
+*Posted April 25, 2024*
+ 
+**The Center for Internet Security has announced to the OVAL board that they intend to relinquish their role as the OVAL Sponsor by the end of 2024. 
+The board and CIS are working on a transition plan, including the identification of a new sponsor. 
+If your organization is interested in sponsoring this active community composed of top security experts, system administrators, and software developers 
+from industry, government, and academia, please reach out to oval@cisecurity.org.**
+
 OVAL Leadership Board
 =====================
 
@@ -20,25 +29,29 @@ Current Members
 
 * Organizational
 
-  * `Arctic Wolf <https://arcticwolf.com>`_ - David Solin, David Ries
-  * `Center for Internet Security <https://www.cisecurity.org>`_ - William Munyan, Adam Montville
+  * `Arctic Wolf <https://arcticwolf.com>`_ - Adam Biggs, Max Ullman
+  * `Canonical <https://canonical.com/>`_ - Eduardo Barretto
+  * `Center for Internet Security <https://www.cisecurity.org>`_ - Justin Burr, Tim Rosner
   * `Cisco Systems, Inc. <https://www.cisco.com/>`_ - Omar Santos
-  * `HCL Group <https://hcl.com/>`_ - Rosario Gangemi
-  * `McAfee <https://www.mcafee.com/>`_ - Kent Landfield
+  * `HCL Group <https://hcl.com/>`_ - Anurag Srivastava 
   * `Modulo <https://www.modulo.com/>`_ - Alberto Bastos
-  * `National Institute of Standards and Technology <https://www.nist.gov/>`_ - Stephen Banghart
-  * `Qualys, Inc. <https://www.qualys.com/>`_ - Hariom Singh
-  * `Red Hat, Inc. <https://www.redhat.com/>`_ - Matej Tyc, Watson Sato
-  * `SecPod Technologies <https://www.secpod.com/>`_ - Chandrashekhar B
+  * `National Institute of Standards and Technology <https://www.nist.gov/>`_ - Open
   * `NAVWARSYSCOM, U.S. Navy <https://www.spawar.navy.mil/>`_ - Jack Vander Pol
+  * `Qualys, Inc. <https://www.qualys.com/>`_ - Hariom Singh
+  * `Red Hat, Inc. <https://www.redhat.com/>`_ - Evgeny Kolesnikov, Watson Sato
+  * `SecPod Technologies <https://www.secpod.com/>`_ - Chandrashekhar B
   * `Unified Compliance <https://www.unifiedcompliance.com/>`_ - Stephen Pillero
-  * `VMware <https://www.vmware.com/>`_ - Dennis Moreau
+  * `VMware <https://www.vmware.com/>`_ - Open
+  * `Venable <https://www.venable.com/>`_ - Stephen Banghart
 
 * Individual
 
   * Blake Frantz
   * Dale Rich
+  * David Solin
+  * Kent Landfield
   * Nils Puhlmann
+  * Richard Maciel Costa
 
 Past Members
 ^^^^^^^^^^^^
@@ -46,12 +59,15 @@ Past Members
 * Emeritus
 
   * Anton Chuvakin
+  * Adam Montville
+  * David Ries
   * Javier Fernandez-Sanguino
   * Jay Beale
   * Mark Cox
   * Matt Hansbury
   * Robert Hollis
   * Tim "TK" Keanini
+  * William Munyan
 
 
 * Former
@@ -60,12 +76,14 @@ Past Members
   * Anthony Busciglio
   * Carl Banzhof
   * Chris Wood
+  * Dennis Moreau
   * Eric Walker
   * Gary Miliefsky
   * Jamie Cromer
   * Jay Graver
   * Kurt Seifried
   * Luigi Pichetti
+  * Matej Tyc
   * Martin Preisler
   * Melissa Albanese
   * Michael Tan
@@ -75,6 +93,7 @@ Past Members
   * Panos Kampanakis
   * Pat Fetty
   * Randy Taylor
+  * Rosario Gangemi
   * Stephen Quinn
 
 
