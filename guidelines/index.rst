@@ -27,7 +27,7 @@ OVAL is an open language built by security experts, system administrators, and s
 Who is the OVAL Community?
 --------------------------
 
-The `OVAL Community <http://oval-community-guidelines.readthedocs.io/en/latest/community-organization/index.html>`_ is the group responsible for proposals about anything and everything OVAL related. It comprises `Members <https://oval-community-guidelines.readthedocs.io/en/latest/community-organization/community-members.html>`_, `Area Supervisors <https://oval-community-guidelines.readthedocs.io/en/latest/community-organization/area-supervisors.html>`_, the `Leadership Board <https://oval.cisecurity.org/community/board_members>`_, and the `Sponsor <https://www.cisecurity.org/>`_. The community maintains, fixes, and improves OVAL through an established governance process.
+The `OVAL Community <http://oval-community-guidelines.readthedocs.io/en/latest/community-organization/index.html>`_ is the group responsible for proposals about anything and everything OVAL related. It comprises `Members <https://oval-community-guidelines.readthedocs.io/en/latest/community-organization/community-members.html>`_, `Area Supervisors <https://oval-community-guidelines.readthedocs.io/en/latest/community-organization/area-supervisors.html>`_, the `Leadership Board <https://oval-community-guidelines.readthedocs.io/en/latest/community-organization/oval-leadership-board.html>`_, and the `Sponsor <https://www.cisecurity.org/>`_. The community maintains, fixes, and improves OVAL through an established governance process.
 
 Learn More
 ----------
@@ -35,7 +35,6 @@ Learn More
 | `OVAL Community <http://oval-community-guidelines.readthedocs.io/en/latest/community-organization/index.html>`_
 | `Repository Registry <http://oval-community-guidelines.readthedocs.io/en/latest/oval-content-repos.html>`_
 | `CIS OVAL Repository (GitHub) <https://github.com/CISecurity/OVALRepo>`_
-| `CIS OVAL Repository (Static Site) <https://oval.cisecurity.org>`_
 | `Mailing Lists <http://oval-community-guidelines.readthedocs.io/en/latest/mailing-lists.html>`_
 
 Get Involved
