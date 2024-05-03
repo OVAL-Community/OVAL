@@ -1,5 +1,8 @@
 .. _oval-leadership-board:
 
+OVAL Leadership Board
+=====================
+
 Notice:
 =======
 *Posted April 25, 2024*
@@ -9,8 +12,6 @@ The board and CIS are working on a transition plan, including the identification
 If your organization is interested in sponsoring this active community composed of top security experts, system administrators, and software developers 
 from industry, government, and academia, please reach out to oval@cisecurity.org.**
 
-OVAL Leadership Board
-=====================
 
 In general, members of the OVAL Leadership Board are:
 
