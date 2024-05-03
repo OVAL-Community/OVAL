@@ -11,7 +11,8 @@ Welcome to The OVAL Community Guidelines!
 Welcome to the guidelines for OVAL, the Open Vulnerability and Assessment Language. These guidelines are designed to explain everything you need to know to start contributing to OVAL (or link you to places to ask questions, should the explanations not suffice), as well as provide a variety of standards and resources to the community.
 
 Notice:
-=======
+*******
+
 *Posted April 25, 2024*
  
 **The Center for Internet Security has announced to the OVAL board that they intend to relinquish their role as the OVAL Sponsor by the end of 2024. 

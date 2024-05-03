@@ -4,7 +4,8 @@ OVAL Leadership Board
 =====================
 
 Notice:
-=======
+*******
+
 *Posted April 25, 2024*
  
 **The Center for Internet Security has announced to the OVAL board that they intend to relinquish their role as the OVAL Sponsor by the end of 2024. 
