@@ -23,6 +23,6 @@ formats:
   - htmlzip
 
 #Python requirements file
-# python:
-#   install:
-#     - requirements: guidelines/requirements.txt
+python:
+   install:
+     - requirements: guidelines/requirements.txt
