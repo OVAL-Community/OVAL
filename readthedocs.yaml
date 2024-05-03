@@ -20,7 +20,7 @@ sphinx:
 formats:
   - pdf
   - epub
-  - html
+  - htmlzip
 
 #Python requirements file
 # python:
