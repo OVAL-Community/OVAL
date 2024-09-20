@@ -938,6 +938,14 @@
             <xsd:group ref="oval-def:ComponentGroup"/>
         </xsd:sequence>
     </xsd:complexType>
+        <xsd:annotation>
+            <xsd:documentation>The merge function takes one or more components and merges them together into a single string, with an optional delimiter.  For example "abc" and "def would be merged together to form "abcdef" or if using the optional delimiter would be "abc,def"</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence minOccurs="2" maxOccurs="unbounded">
+            <xsd:group ref="oval-def:ComponentGroup"/>
+        </xsd:sequence>
+		<xsd:attribute name="delimiter" type="xsd:string" use="optional" default=""/>
+    </xsd:complexType>
     <xsd:complexType name="CountFunctionType">
         <xsd:annotation>
             <xsd:documentation>The count function takes one or more components and returns the count of all of the values represented by the components. For example, assume that two variables exist, each with a single value. By applying the count function against two variable components that resolve to the two variables, the resulting local_variable would have a value of '2'. Additionally, if any of the components referenced by the count function evaluate to a collection of values, then those values are used in the count calculation. For example, assume that there are two components, one of which resolves to a single value, the other of which resolves to two values. If the count function is used to provide a count of these two components, the function will resolve to a local_variable with the values '3'.</xsd:documentation>
