@@ -723,6 +723,7 @@
             <xsd:element name="unique" type="oval-def:UniqueFunctionType"/>
             <xsd:element name="count" type="oval-def:CountFunctionType"/>
             <xsd:element name="glob_to_regex" type="oval-def:GlobToRegexFunctionType"/>
+			<xsd:element name="merge" type="oval-def:MergeFunctionType"/>
         </xsd:choice>
     </xsd:group>
     <xsd:complexType name="ArithmeticFunctionType">
@@ -938,8 +939,9 @@
             <xsd:group ref="oval-def:ComponentGroup"/>
         </xsd:sequence>
     </xsd:complexType>
+    <xsd:complexType name="MergeFunctionType">
         <xsd:annotation>
-            <xsd:documentation>The merge function takes one or more components and merges them together into a single string, with an optional delimiter.  For example "abc" and "def would be merged together to form "abcdef" or if using the optional delimiter would be "abc,def"</xsd:documentation>
+            <xsd:documentation>The merge function takes one or more components and merges them together into a single string, with an optional delimiter.  For example "abc" and "def" would be merged together to form "abcdef" or if using the optional delimiter would be "abc,def"</xsd:documentation>
         </xsd:annotation>
         <xsd:sequence minOccurs="2" maxOccurs="unbounded">
             <xsd:group ref="oval-def:ComponentGroup"/>
