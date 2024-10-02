@@ -579,6 +579,64 @@
           </xsd:complexType>
      </xsd:element>
      <!-- =============================================================================== -->
+     <!-- ===========================  YAML FILE CONTENT ITEM  ========================== -->
+     <!-- =============================================================================== -->
+     <xsd:element name="yamlfilecontent_item" substitutionGroup="oval-sc:item">
+          <xsd:annotation>
+               <xsd:documentation>This item stores results from checking the contents of an YAML file.</xsd:documentation>
+          </xsd:annotation>
+          <xsd:complexType>
+               <xsd:complexContent>
+                    <xsd:extension base="oval-sc:ItemType">
+                         <xsd:sequence>
+                              <xsd:element name="filepath" type="oval-sc:EntityItemStringType" minOccurs="0" maxOccurs="1">
+                                   <xsd:annotation>
+                                        <xsd:documentation>The filepath element specifies the absolute path for a file on the machine. A directory cannot be specified as a filepath.</xsd:documentation>
+                                   </xsd:annotation>
+                              </xsd:element>
+                              <xsd:element name="path" type="oval-sc:EntityItemStringType" minOccurs="0" maxOccurs="1">
+                                   <xsd:annotation>
+                                        <xsd:documentation>The path element specifies the directory component of the absolute path to a file on the machine.</xsd:documentation>
+                                   </xsd:annotation>
+                              </xsd:element>
+                              <xsd:element name="filename" type="oval-sc:EntityItemStringType" minOccurs="0" maxOccurs="1">
+                                   <xsd:annotation>
+                                        <xsd:documentation>The filename element specifies the name of the file.</xsd:documentation>
+                                   </xsd:annotation>
+                              </xsd:element>
+                              <xsd:element name="content" type="oval-sc:EntityItemStringType" minOccurs="0" maxOccurs="1">
+                                   <xsd:annotation>
+                                        <xsd:documentation>The content element specifies the YAML document body.</xsd:documentation>
+                                   </xsd:annotation>
+                              </xsd:element>
+                              <xsd:element name="yamlpath" type="oval-sc:EntityItemStringType" minOccurs="0" maxOccurs="1">
+                                   <xsd:annotation>
+                                        <xsd:documentation>Specifies an YAML Path expression to evaluate against the YAML file specified by the filename entity.</xsd:documentation>
+                                   </xsd:annotation>
+                              </xsd:element>
+                              <xsd:element name="value" type="oval-sc:EntityItemRecordType" minOccurs="0" maxOccurs="unbounded">
+                                   <xsd:annotation>
+                                        <xsd:documentation>The value entity holds the target(s) of the specified YAML Path. A single scalar value or a list of scalar values (where there is no key to associate) would have the name attribute of the field element set to '#'. Due to the limitation of the record type field names could not contain uppercase letters, they will be converted to the lowercase and escaped using the '^' symbol (the '^' symbol would be escaped as well). For example 'myCamelCase^Key' would be collected as 'my^camel^case^^^key'.</xsd:documentation>
+                                        <xsd:appinfo>
+                                             <sch:pattern id="ind-sc_yamlfile_itemvalue">
+                                                  <sch:rule context="ind-sc:yamlfile_item/ind-sc:value">
+                                                       <sch:assert test="@datatype='record'"><sch:value-of select="../@id"/> - datatype attribute for the value entity of a yamlfile_item must be 'record'</sch:assert>
+                                                  </sch:rule>
+                                             </sch:pattern>
+                                        </xsd:appinfo>
+                                   </xsd:annotation>
+                              </xsd:element>
+                              <xsd:element name="windows_view" type="ind-sc:EntityItemWindowsViewType" minOccurs="0">
+                                   <xsd:annotation>
+                                        <xsd:documentation>The windows view value from which this OVAL Item was collected. This is used to indicate from which view (32-bit or 64-bit), the associated Item was collected. A value of '32_bit' indicates the Item was collected from the 32-bit view. A value of '64-bit' indicates the Item was collected from the 64-bit view. Omitting this entity removes any assertion about which view the Item was collected from, and therefore it is strongly suggested that this entity be set. This entity only applies to 64-bit Microsoft Windows operating systems.</xsd:documentation>
+                                   </xsd:annotation>
+                              </xsd:element>
+                         </xsd:sequence>
+                    </xsd:extension>
+               </xsd:complexContent>
+          </xsd:complexType>
+     </xsd:element>
+     <!-- =============================================================================== -->
      <!-- =============================================================================== -->
      <!-- =============================================================================== -->
      <xsd:complexType name="EntityItemEngineType">
@@ -726,6 +784,11 @@
                              <xsd:documentation>The asa value describes the Cisco ASA security devices.</xsd:documentation>
                         </xsd:annotation>
                     </xsd:enumeration>
+                   <xsd:enumeration value="aws">
+                       <xsd:annotation>
+                           <xsd:documentation>The aws value describes the Amazon Web Services platform.</xsd:documentation>
+                       </xsd:annotation>
+                   </xsd:enumeration>
                     <xsd:enumeration value="catos">
                          <xsd:annotation>
                               <xsd:documentation>The catos value describes the Cisco CatOS operating system.</xsd:documentation>
@@ -751,6 +814,11 @@
                               <xsd:documentation>The macos value describes the Mac operating system.</xsd:documentation>
                          </xsd:annotation>
                     </xsd:enumeration>
+                   <xsd:enumeration value="panos">
+                       <xsd:annotation>
+                           <xsd:documentation>The panos value describes the Palo Alto Networks operating system.</xsd:documentation>
+                       </xsd:annotation>
+                   </xsd:enumeration>
                     <xsd:enumeration value="pixos">
                          <xsd:annotation>
                               <xsd:documentation>The pixos value describes the Cisco PIX operating system.</xsd:documentation>

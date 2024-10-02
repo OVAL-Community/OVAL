@@ -381,7 +381,7 @@
       <!-- =============================================================================== -->
       <xsd:element name="disabledservice_test" substitutionGroup="oval-def:test">
             <xsd:annotation>
-                  <xsd:documentation>The disabledservice_test is used to check the status of daemons/agents disabled via the launchd service, via the command 'launchctl print-disabled &lt;domain&gt;'. It extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information. The required object element references a disabledservice_object and the optional state element specifies the data to check.</xsd:documentation>
+                  <xsd:documentation>The disabledservice_test is used to check the status of daemons/agents disabled via the launchd service, via the command 'launchctl print-disabled system'. It extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information. The required object element references a disabledservice_object and the optional state element specifies the data to check.</xsd:documentation>
                   <xsd:appinfo>
                         <oval:element_mapping>
                               <oval:test>disabledservice_test</oval:test>
@@ -414,8 +414,7 @@
       </xsd:element>
       <xsd:element name="disabledservice_object" substitutionGroup="oval-def:object">
             <xsd:annotation>
-                  <xsd:documentation>The disabledservice_object element is used by a disabledservice_test to define the service domain to be evaluated. Each object extends the standard ObjectType as defined in the oval-definitions-schema and one should refer to the ObjectType description for more information. The common set element allows complex objects to be created using filters and set logic. Again, please refer to the description of the set element in the oval-definitions-schema.</xsd:documentation>
-                  <xsd:documentation>A disabledservice_object consists of a domain entity that contains the name of the domain that will be queried for disabled services.</xsd:documentation>
+                  <xsd:documentation>The disabledservice_object element is used by a disabledservice_test to define the service domain to be evaluated. It is a singleton object. Each object extends the standard ObjectType as defined in the oval-definitions-schema and one should refer to the ObjectType description for more information. The common set element allows complex objects to be created using filters and set logic. Again, please refer to the description of the set element in the oval-definitions-schema.</xsd:documentation>
                   <xsd:appinfo>
                         <sch:pattern id="macos-def_disabledsvc_object_verify_filter_state">
                               <sch:rule context="macos-def:macos_object//oval-def:filter">
@@ -432,28 +431,7 @@
             </xsd:annotation>
             <xsd:complexType>
                   <xsd:complexContent>
-                        <xsd:extension base="oval-def:ObjectType">
-                              <xsd:sequence>
-                                    <xsd:choice>
-                                          <xsd:element ref="oval-def:set"/>
-                                          <xsd:sequence>
-                                                <xsd:element name="domain" type="oval-def:EntityObjectStringType">
-                                                      <xsd:annotation>
-                                                            <xsd:documentation>Specifies the domain to be queried. The only valid operation for this field is "equals".</xsd:documentation>
-                                                            <xsd:appinfo>
-                                                                  <sch:pattern id="macos-def_disabledsvcobjdomain">
-                                                                        <sch:rule context="macos-def:disabledservice_object/macos-def:domain">
-                                                                              <sch:assert test="@operation='equals'"><sch:value-of select="../@id"/> - operation attribute for the domain entity of a disabledservice_object must be 'equals'</sch:assert>
-                                                                        </sch:rule>
-                                                                  </sch:pattern>
-                                                            </xsd:appinfo>
-                                                      </xsd:annotation>
-                                                </xsd:element>
-                                                <xsd:element ref="oval-def:filter" minOccurs="0" maxOccurs="unbounded"/>
-                                          </xsd:sequence>
-                                    </xsd:choice>
-                              </xsd:sequence>
-                        </xsd:extension>
+                        <xsd:extension base="oval-def:ObjectType"></xsd:extension>
                   </xsd:complexContent>
             </xsd:complexType>
       </xsd:element>
@@ -465,11 +443,6 @@
                   <xsd:complexContent>
                         <xsd:extension base="oval-def:StateType">
                               <xsd:sequence>
-                                    <xsd:element name="domain" type="oval-def:EntityStateStringType" minOccurs="0" maxOccurs="1">
-                                          <xsd:annotation>
-                                                <xsd:documentation>Specifies the name of the domain used to create the object.</xsd:documentation>
-                                          </xsd:annotation>
-                                    </xsd:element>
                                     <xsd:element name="label" type="oval-def:EntityStateStringType" minOccurs="0" maxOccurs="1">
                                           <xsd:annotation>
                                                 <xsd:documentation>Specifies the name of the service disabled in the domain.</xsd:documentation>

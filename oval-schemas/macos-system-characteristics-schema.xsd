@@ -356,11 +356,6 @@
                <xsd:complexContent>
                     <xsd:extension base="oval-sc:ItemType">
                          <xsd:sequence>
-                              <xsd:element name="domain" type="oval-sc:EntityItemStringType" minOccurs="0" maxOccurs="1">
-                                   <xsd:annotation>
-                                        <xsd:documentation>Specifies the name of the domain used to create the object.</xsd:documentation>
-                                   </xsd:annotation>
-                              </xsd:element>
                               <xsd:element name="label" type="oval-sc:EntityItemStringType" minOccurs="1" maxOccurs="1">
                                    <xsd:annotation>
                                         <xsd:documentation>Specifies the name of the agent/daemon.</xsd:documentation>
