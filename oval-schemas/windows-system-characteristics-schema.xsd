@@ -1069,18 +1069,6 @@
                               <xsd:element name="trustee_name" type="oval-sc:EntityItemStringType" minOccurs="0" maxOccurs="1">
                                    <xsd:annotation>
                                         <xsd:documentation>This element specifies the trustee name associated with this particular SACL.  A trustee can be a user, group, or program (such as a Windows service). In Windows, trustee names are case-insensitive. As a result, it is recommended that the case-insensitive operations are used for this entity. In a domain environment, trustee names should be identified in the form:  "domain\trustee name". For local trustee names use: "computer name\trustee name". For built-in accounts on the system, use the trustee name without a domain.</xsd:documentation>
-                                        <xsd:appinfo>
-                                             <oval:deprecated_info>
-                                                  <oval:version>5.3</oval:version>
-                                                  <oval:reason>Replaced by the trustee_sid entity. This entity uses trustee names for identifying trustees. Trustee names are not unique, and a new entity was created to use trustee SIDs, which are unique. See the trustee_sid.</oval:reason>
-                                                  <oval:comment>This entity has been deprecated and will be removed in version 6.0 of the language.</oval:comment>
-                                             </oval:deprecated_info>
-                                             <sch:pattern id="win-sc_fileaudititemtrustee_name">
-                                                  <sch:rule context="win-sc:fileauditedpermissions_item/win-sc:trustee_name">
-                                                        <sch:report test="true()">DEPRECATED ELEMENT: <sch:value-of select="name()"/> ID: <sch:value-of select="@id"/></sch:report>
-                                                  </sch:rule>
-                                             </sch:pattern>
-                                        </xsd:appinfo>
                                    </xsd:annotation>
                               </xsd:element>
                               <xsd:element name="standard_delete" type="win-sc:EntityItemAuditType" minOccurs="0" maxOccurs="1">
@@ -1222,18 +1210,6 @@
                               <xsd:element name="trustee_name" type="oval-sc:EntityItemStringType" minOccurs="0" maxOccurs="1">
                                    <xsd:annotation>
                                         <xsd:documentation>This element specifies the trustee name associated with this particular DACL.  A trustee can be a user, group, or program (such as a Windows service). In Windows, trustee names are case-insensitive. As a result, it is recommended that the case-insensitive operations are used for this entity. In a domain environment, trustee names should be identified in the form: "domain\trustee name". For local trustee names use: "computer name\trustee name". For built-in accounts on the system, use the trustee name without a domain.</xsd:documentation>
-                                        <xsd:appinfo>
-                                             <oval:deprecated_info>
-                                                  <oval:version>5.3</oval:version>
-                                                  <oval:reason>Replaced by the trustee_sid entity. This entity uses trustee names for identifying trustees. Trustee names are not unique, and a new entity was created to use trustee SIDs, which are unique. See the trustee_sid.</oval:reason>
-                                                  <oval:comment>This entity has been deprecated and will be removed in version 6.0 of the language.</oval:comment>
-                                             </oval:deprecated_info>
-                                             <sch:pattern id="win-sc_feritemtrustee_name">
-                                                  <sch:rule context="win-sc:fileeffectiverights_item/win-sc:trustee_name">
-                                                        <sch:report test="true()">DEPRECATED ELEMENT: <sch:value-of select="name()"/> ID: <sch:value-of select="@id"/></sch:report>
-                                                  </sch:rule>
-                                             </sch:pattern>
-                                        </xsd:appinfo>
                                    </xsd:annotation>
                               </xsd:element>
                               <xsd:element name="standard_delete" type="oval-sc:EntityItemBoolType" minOccurs="0" maxOccurs="1">
@@ -1412,6 +1388,23 @@
                                              <xsd:documentation>A string that represents the SID of a particular subgroup. If the specified group has more than one subgroup as a member, then multiple subgroup_sid entities should exist. If the specified group does not contain a single subgroup, a single subgroup_sid entity should exist with a status of 'does not exist'. If there is an error determining the subgroups that are members of the group, then a single subgroup_sid entity should be included with a status of 'error'.</xsd:documentation>
                                         </xsd:annotation>
                                    </xsd:element>
+								  <xsd:element name="group" type="oval-sc:EntityItemStringType" minOccurs="0" maxOccurs="1">
+									   <xsd:annotation>
+											<xsd:documentation>A string the represents the name of a particular group. In Windows, group names are case-insensitive. As a result, it is recommended that the case-insensitive operations are used for this entity. In a domain environment, groups should be identified in the form: "domain\group name". For local groups use: "computer name\group name". For built-in accounts on the system, use the group name without a domain.</xsd:documentation>
+									   </xsd:annotation>
+								  </xsd:element>
+								  <xsd:element name="user" type="oval-sc:EntityItemStringType" minOccurs="0" maxOccurs="unbounded">
+									   <xsd:annotation>
+											<xsd:documentation>A string that represents the name of a particular user. In Windows, user names are case-insensitive. As a result, it is recommended that the case-insensitive operations are used for this entity. In a domain environment, users should be identified in the form: "domain\user name". For local users use: "computer name\user name". For built-in accounts on the system, use the user name without a domain.</xsd:documentation>
+											<xsd:documentation>If the specified group has more than one user as a member, then multiple user elements should exist. If the specified group does not contain a single user, then a single user element should exist with a status of 'does not exist'. If there is an error determining the users that are members of the group, then a single user element should be included with a status of 'error'.</xsd:documentation>
+									   </xsd:annotation>
+								  </xsd:element>
+								  <xsd:element name="subgroup" type="oval-sc:EntityItemStringType" minOccurs="0" maxOccurs="unbounded">
+									   <xsd:annotation>
+											<xsd:documentation>A string that represents the name of a particular subgroup in the specified group. In Windows, group names are case-insensitive. As a result, it is recommended that the case-insensitive operations are used for this entity. In a domain environment, the subgroups should be identified in the form: "domain\group name".  In a local environment, the subgroups should be identified in the form: "computer name\group name".  If the subgroups are built-in groups, the subgroups should be identified in the form: "group name" without a domain component.</xsd:documentation>
+											<xsd:documentation>If the specified group has more than one subgroup as a member, then multiple subgroup elements should exist. If the specified group does not contain a single subgroup, then a single subgroup element should exist with a status of 'does not exist'. If there is an error determining the subgroups that are members of the group, then a single subgroup element should be included with a status of 'error'.</xsd:documentation>
+									   </xsd:annotation>
+								  </xsd:element>
                              </xsd:sequence>
                        </xsd:extension>
                  </xsd:complexContent>
@@ -2392,18 +2385,6 @@
                               <xsd:element name="trustee_name" type="oval-sc:EntityItemStringType" minOccurs="0" maxOccurs="1">
                                    <xsd:annotation>
                                         <xsd:documentation>This element specifies the trustee name associated with this particular DACL.  A trustee can be a user, group, or program (such as a Windows service). In Windows, trustee names are case-insensitive. As a result, it is recommended that the case-insensitive operations are used for this entity. In a domain environment, trustee names should be identified in the form: "domain\trustee name". For local trustee names use: "computer name\trustee name". For built-in accounts on the system, use the trustee name without a domain.</xsd:documentation>
-                                        <xsd:appinfo>
-                                             <oval:deprecated_info>
-                                                  <oval:version>5.3</oval:version>
-                                                  <oval:reason>Replaced by the trustee_sid entity. This entity uses trustee names for identifying trustees. Trustee names are not unique, and a new entity was created to use trustee SIDs, which are unique. See the trustee_sid.</oval:reason>
-                                                  <oval:comment>This entity has been deprecated and will be removed in version 6.0 of the language.</oval:comment>
-                                             </oval:deprecated_info>
-                                             <sch:pattern id="win-sc_rapitemtrustee_name">
-                                                  <sch:rule context="win-sc:regkeyauditedpermissions_item/win-sc:trustee_name">
-                                                        <sch:report test="true()">DEPRECATED ELEMENT: <sch:value-of select="name()"/> ID: <sch:value-of select="@id"/></sch:report>
-                                                  </sch:rule>
-                                             </sch:pattern>
-                                        </xsd:appinfo>
                                    </xsd:annotation>
                               </xsd:element>
                               <xsd:element name="standard_delete" type="win-sc:EntityItemAuditType" minOccurs="0" maxOccurs="1">
@@ -2551,18 +2532,6 @@
                               <xsd:element name="trustee_name" type="oval-sc:EntityItemStringType" minOccurs="0" maxOccurs="1">
                                    <xsd:annotation>
                                         <xsd:documentation>This element specifies the trustee name associated with this particular DACL.  A trustee can be a user, group, or program (such as a Windows service). In Windows, trustee names are case-insensitive. As a result, it is recommended that the case-insensitive operations are used for this entity. In a domain environment, trustee names should be identified in the form: "domain\trustee name". For local trustee names use: "computer name\trustee name". For built-in accounts on the system, use the trustee name without a domain.</xsd:documentation>
-                                        <xsd:appinfo>
-                                             <oval:deprecated_info>
-                                                  <oval:version>5.3</oval:version>
-                                                  <oval:reason>Replaced by the trustee_sid entity. This entity uses trustee names for identifying trustees. Trustee names are not unique, and a new entity was created to use trustee SIDs, which are unique. See the trustee_sid.</oval:reason>
-                                                  <oval:comment>This entity has been deprecated and will be removed in version 6.0 of the language.</oval:comment>
-                                             </oval:deprecated_info>
-                                             <sch:pattern id="win-sc_reritemtrustee_name">
-                                                  <sch:rule context="win-sc:regkeyeffectiverights_item/win-sc:trustee_name">
-                                                        <sch:report test="true()">DEPRECATED ELEMENT: <sch:value-of select="name()"/> ID: <sch:value-of select="@id"/></sch:report>
-                                                  </sch:rule>
-                                             </sch:pattern>
-                                        </xsd:appinfo>
                                    </xsd:annotation>
                               </xsd:element>
                               <xsd:element name="standard_delete" type="oval-sc:EntityItemBoolType" minOccurs="0" maxOccurs="1">
@@ -3395,6 +3364,17 @@
                                             <xsd:documentation>The date and time when the last logon occurred. This value is stored as the number of seconds that have elapsed since 00:00:00, January 1, 1970, GMT.</xsd:documentation>
                                        </xsd:annotation>
                                   </xsd:element>
+                              <xsd:element name="user" type="oval-sc:EntityItemStringType" minOccurs="0" maxOccurs="1">
+                                   <xsd:annotation>
+                                        <xsd:documentation>A string the represents the name of a particular user. In Windows, user names are case-insensitive. As a result, it is recommended that the case-insensitive operations are used for this entity. In a domain environment, users should be identified in the form: "domain\user name". For local users use: "computer_name\user_name". For built-in accounts on the system, use the user name without a domain.</xsd:documentation>
+                                   </xsd:annotation>
+                              </xsd:element>
+                              <xsd:element name="group" type="oval-sc:EntityItemStringType" minOccurs="0" maxOccurs="unbounded">
+                                   <xsd:annotation>
+                                        <xsd:documentation>A string that represents the name of a particular group. In Windows, group names are case-insensitive. As a result, it is recommended that the case-insensitive operations are used for this entity. In a domain environment, groups should be identified in the form: "domain\group name". For local groups use: "computer name\group name". For built-in accounts on the system, use the group name without a domain.</xsd:documentation>
+                                        <xsd:documentation>If the specified user belongs to more than one group, then multiple group elements should exist. If the specified user is not a member of a single group, then a single group element should exist with a status of 'does not exist'. If there is an error determining the groups that the user belongs to, then a single group element should be included with a status of 'error'.</xsd:documentation>
+                                   </xsd:annotation>
+                              </xsd:element>
                              </xsd:sequence>
                        </xsd:extension>
                  </xsd:complexContent>
