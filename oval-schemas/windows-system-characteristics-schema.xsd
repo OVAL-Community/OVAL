@@ -1069,18 +1069,6 @@
                               <xsd:element name="trustee_name" type="oval-sc:EntityItemStringType" minOccurs="0" maxOccurs="1">
                                    <xsd:annotation>
                                         <xsd:documentation>This element specifies the trustee name associated with this particular SACL.  A trustee can be a user, group, or program (such as a Windows service). In Windows, trustee names are case-insensitive. As a result, it is recommended that the case-insensitive operations are used for this entity. In a domain environment, trustee names should be identified in the form:  "domain\trustee name". For local trustee names use: "computer name\trustee name". For built-in accounts on the system, use the trustee name without a domain.</xsd:documentation>
-                                        <xsd:appinfo>
-                                             <oval:deprecated_info>
-                                                  <oval:version>5.3</oval:version>
-                                                  <oval:reason>Replaced by the trustee_sid entity. This entity uses trustee names for identifying trustees. Trustee names are not unique, and a new entity was created to use trustee SIDs, which are unique. See the trustee_sid.</oval:reason>
-                                                  <oval:comment>This entity has been deprecated and will be removed in version 6.0 of the language.</oval:comment>
-                                             </oval:deprecated_info>
-                                             <sch:pattern id="win-sc_fileaudititemtrustee_name">
-                                                  <sch:rule context="win-sc:fileauditedpermissions_item/win-sc:trustee_name">
-                                                        <sch:report test="true()">DEPRECATED ELEMENT: <sch:value-of select="name()"/> ID: <sch:value-of select="@id"/></sch:report>
-                                                  </sch:rule>
-                                             </sch:pattern>
-                                        </xsd:appinfo>
                                    </xsd:annotation>
                               </xsd:element>
                               <xsd:element name="standard_delete" type="win-sc:EntityItemAuditType" minOccurs="0" maxOccurs="1">
@@ -1222,18 +1210,6 @@
                               <xsd:element name="trustee_name" type="oval-sc:EntityItemStringType" minOccurs="0" maxOccurs="1">
                                    <xsd:annotation>
                                         <xsd:documentation>This element specifies the trustee name associated with this particular DACL.  A trustee can be a user, group, or program (such as a Windows service). In Windows, trustee names are case-insensitive. As a result, it is recommended that the case-insensitive operations are used for this entity. In a domain environment, trustee names should be identified in the form: "domain\trustee name". For local trustee names use: "computer name\trustee name". For built-in accounts on the system, use the trustee name without a domain.</xsd:documentation>
-                                        <xsd:appinfo>
-                                             <oval:deprecated_info>
-                                                  <oval:version>5.3</oval:version>
-                                                  <oval:reason>Replaced by the trustee_sid entity. This entity uses trustee names for identifying trustees. Trustee names are not unique, and a new entity was created to use trustee SIDs, which are unique. See the trustee_sid.</oval:reason>
-                                                  <oval:comment>This entity has been deprecated and will be removed in version 6.0 of the language.</oval:comment>
-                                             </oval:deprecated_info>
-                                             <sch:pattern id="win-sc_feritemtrustee_name">
-                                                  <sch:rule context="win-sc:fileeffectiverights_item/win-sc:trustee_name">
-                                                        <sch:report test="true()">DEPRECATED ELEMENT: <sch:value-of select="name()"/> ID: <sch:value-of select="@id"/></sch:report>
-                                                  </sch:rule>
-                                             </sch:pattern>
-                                        </xsd:appinfo>
                                    </xsd:annotation>
                               </xsd:element>
                               <xsd:element name="standard_delete" type="oval-sc:EntityItemBoolType" minOccurs="0" maxOccurs="1">
@@ -2392,18 +2368,6 @@
                               <xsd:element name="trustee_name" type="oval-sc:EntityItemStringType" minOccurs="0" maxOccurs="1">
                                    <xsd:annotation>
                                         <xsd:documentation>This element specifies the trustee name associated with this particular DACL.  A trustee can be a user, group, or program (such as a Windows service). In Windows, trustee names are case-insensitive. As a result, it is recommended that the case-insensitive operations are used for this entity. In a domain environment, trustee names should be identified in the form: "domain\trustee name". For local trustee names use: "computer name\trustee name". For built-in accounts on the system, use the trustee name without a domain.</xsd:documentation>
-                                        <xsd:appinfo>
-                                             <oval:deprecated_info>
-                                                  <oval:version>5.3</oval:version>
-                                                  <oval:reason>Replaced by the trustee_sid entity. This entity uses trustee names for identifying trustees. Trustee names are not unique, and a new entity was created to use trustee SIDs, which are unique. See the trustee_sid.</oval:reason>
-                                                  <oval:comment>This entity has been deprecated and will be removed in version 6.0 of the language.</oval:comment>
-                                             </oval:deprecated_info>
-                                             <sch:pattern id="win-sc_rapitemtrustee_name">
-                                                  <sch:rule context="win-sc:regkeyauditedpermissions_item/win-sc:trustee_name">
-                                                        <sch:report test="true()">DEPRECATED ELEMENT: <sch:value-of select="name()"/> ID: <sch:value-of select="@id"/></sch:report>
-                                                  </sch:rule>
-                                             </sch:pattern>
-                                        </xsd:appinfo>
                                    </xsd:annotation>
                               </xsd:element>
                               <xsd:element name="standard_delete" type="win-sc:EntityItemAuditType" minOccurs="0" maxOccurs="1">
@@ -2551,18 +2515,6 @@
                               <xsd:element name="trustee_name" type="oval-sc:EntityItemStringType" minOccurs="0" maxOccurs="1">
                                    <xsd:annotation>
                                         <xsd:documentation>This element specifies the trustee name associated with this particular DACL.  A trustee can be a user, group, or program (such as a Windows service). In Windows, trustee names are case-insensitive. As a result, it is recommended that the case-insensitive operations are used for this entity. In a domain environment, trustee names should be identified in the form: "domain\trustee name". For local trustee names use: "computer name\trustee name". For built-in accounts on the system, use the trustee name without a domain.</xsd:documentation>
-                                        <xsd:appinfo>
-                                             <oval:deprecated_info>
-                                                  <oval:version>5.3</oval:version>
-                                                  <oval:reason>Replaced by the trustee_sid entity. This entity uses trustee names for identifying trustees. Trustee names are not unique, and a new entity was created to use trustee SIDs, which are unique. See the trustee_sid.</oval:reason>
-                                                  <oval:comment>This entity has been deprecated and will be removed in version 6.0 of the language.</oval:comment>
-                                             </oval:deprecated_info>
-                                             <sch:pattern id="win-sc_reritemtrustee_name">
-                                                  <sch:rule context="win-sc:regkeyeffectiverights_item/win-sc:trustee_name">
-                                                        <sch:report test="true()">DEPRECATED ELEMENT: <sch:value-of select="name()"/> ID: <sch:value-of select="@id"/></sch:report>
-                                                  </sch:rule>
-                                             </sch:pattern>
-                                        </xsd:appinfo>
                                    </xsd:annotation>
                               </xsd:element>
                               <xsd:element name="standard_delete" type="oval-sc:EntityItemBoolType" minOccurs="0" maxOccurs="1">

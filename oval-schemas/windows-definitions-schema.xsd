@@ -2025,6 +2025,11 @@
                                                 <xsd:documentation>The trustee_sid element is the unique SID that associated a user, group, system, or program (such as a Windows service).</xsd:documentation>
                                           </xsd:annotation>
                                     </xsd:element>
+								  <xsd:element name="trustee_name" type="oval-def:EntityStateStringType" minOccurs="0">
+									   <xsd:annotation>
+											<xsd:documentation>This element specifies the trustee name associated with this particular DACL.  A trustee can be a user, group, or program (such as a Windows service). In Windows, trustee names are case-insensitive. As a result, it is recommended that the case-insensitive operations are used for this entity. In a domain environment, trustee names should be identified in the form: "domain\trustee name". For local trustee names use: "computer name\trustee name". For built-in accounts on the system, use the trustee name without a domain.</xsd:documentation>
+									   </xsd:annotation>
+								  </xsd:element>
                                     <xsd:element name="standard_delete" type="win-def:EntityStateAuditType" minOccurs="0">
                                           <xsd:annotation>
                                                 <xsd:documentation>The right to delete the object.</xsd:documentation>
@@ -2636,6 +2641,11 @@
                                                 <xsd:documentation>The trustee_sid element is the unique SID that associated a user, group, system, or program (such as a Windows service).</xsd:documentation>
                                           </xsd:annotation>
                                     </xsd:element>
+									  <xsd:element name="trustee_name" type="oval-def:EntityStateStringType" minOccurs="0">
+										   <xsd:annotation>
+												<xsd:documentation>This element specifies the trustee name associated with this particular DACL.  A trustee can be a user, group, or program (such as a Windows service). In Windows, trustee names are case-insensitive. As a result, it is recommended that the case-insensitive operations are used for this entity. In a domain environment, trustee names should be identified in the form: "domain\trustee name". For local trustee names use: "computer name\trustee name". For built-in accounts on the system, use the trustee name without a domain.</xsd:documentation>
+										   </xsd:annotation>
+									  </xsd:element>
                                     <xsd:element name="standard_delete" type="oval-def:EntityStateBoolType" minOccurs="0">
                                           <xsd:annotation>
                                                 <xsd:documentation>The right to delete the object.</xsd:documentation>
@@ -5547,6 +5557,11 @@
                                                 <xsd:documentation>The trustee_sid element is the unique SID that associated a user, group, system, or program (such as a Windows service).</xsd:documentation>
                                           </xsd:annotation>
                                     </xsd:element>
+								  <xsd:element name="trustee_name" type="oval-def:EntityStateStringType" minOccurs="0">
+									   <xsd:annotation>
+											<xsd:documentation>This element specifies the trustee name associated with this particular DACL.  A trustee can be a user, group, or program (such as a Windows service). In Windows, trustee names are case-insensitive. As a result, it is recommended that the case-insensitive operations are used for this entity. In a domain environment, trustee names should be identified in the form: "domain\trustee name". For local trustee names use: "computer name\trustee name". For built-in accounts on the system, use the trustee name without a domain.</xsd:documentation>
+									   </xsd:annotation>
+								  </xsd:element>
                                     <xsd:element name="standard_delete" type="win-def:EntityStateAuditType" minOccurs="0">
                                           <xsd:annotation>
                                                 <xsd:documentation>The right to delete the object.</xsd:documentation>
@@ -6117,6 +6132,11 @@
                                                 <xsd:documentation>The trustee_sid element is the unique SID that associated a user, group, system, or program (such as a Windows service).</xsd:documentation>
                                           </xsd:annotation>
                                     </xsd:element>
+								  <xsd:element name="trustee_name" type="oval-def:EntityStateStringType" minOccurs="0">
+									   <xsd:annotation>
+											<xsd:documentation>This element specifies the trustee name associated with this particular DACL.  A trustee can be a user, group, or program (such as a Windows service). In Windows, trustee names are case-insensitive. As a result, it is recommended that the case-insensitive operations are used for this entity. In a domain environment, trustee names should be identified in the form: "domain\trustee name". For local trustee names use: "computer name\trustee name". For built-in accounts on the system, use the trustee name without a domain.</xsd:documentation>
+									   </xsd:annotation>
+								  </xsd:element>
                                     <xsd:element name="standard_delete" type="oval-def:EntityStateBoolType" minOccurs="0">
                                           <xsd:annotation>
                                                 <xsd:documentation>The right to delete the object.</xsd:documentation>
