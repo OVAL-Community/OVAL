@@ -941,12 +941,13 @@
     </xsd:complexType>
     <xsd:complexType name="MergeFunctionType">
         <xsd:annotation>
-            <xsd:documentation>The merge function takes one or more components and merges them together into a single string, with an optional delimiter.  For example "abc" and "def" would be merged together to form "abcdef" or if using the optional delimiter would be "abc,def"</xsd:documentation>
+            <xsd:documentation>The merge function takes one or more components and merges them together into a single string, with an optional delimiter.  For example if data from one registry multi-size value contains values of "abc" and "def".  The merge function will resolve to a local_variable with the value of 'abcdef'.  If an optional delimiter of ',' was used, the merge function would resolve to a local_variable with the value of 'abc,'def'</xsd:documentation>
         </xsd:annotation>
-        <xsd:sequence minOccurs="2" maxOccurs="unbounded">
+        <xsd:sequence minOccurs="1" maxOccurs="unbounded">
             <xsd:group ref="oval-def:ComponentGroup"/>
         </xsd:sequence>
 		<xsd:attribute name="delimiter" type="xsd:string" use="optional" default=""/>
+		<xsd:attribute name="sort" type="oval-def:SortEnumeration" use="optional" default="none"/>
     </xsd:complexType>
     <xsd:complexType name="CountFunctionType">
         <xsd:annotation>
@@ -1111,6 +1112,33 @@
                 <xsd:enumeration value="divide"/>
                 <xsd:enumeration value="subtract"/>
             -->
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="SortEnumeration">
+        <xsd:annotation>
+            <xsd:documentation>The SortEnumeration simple type defines basic sorting operations.  Currently 'none', 'alphabetical' and 'alphanumerical' are defined..</xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="none">
+                <xsd:annotation>
+					<xsd:documentation>No sorting is performed, the values will remain in the order they came in as.</xsd:documentation>
+                </xsd:annotation>
+			</xsd:enumeration>	
+            <xsd:enumeration value="alphabetical">
+			    <xsd:annotation>
+                    <xsd:documentation>Sort alphabetical, useful for pure string lists</xsd:documentation>
+                </xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="alphanumerical">
+			    <xsd:annotation>
+                    <xsd:documentation>Sort alphanumerical, useful for lists of numbers or lists of strings with numbers</xsd:documentation>
+                </xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="natural">
+			    <xsd:annotation>
+                    <xsd:documentation>Sort like PHP's natsort https://www.php.net/manual/en/function.natsort.php</xsd:documentation>
+                </xsd:annotation>
+			</xsd:enumeration>
         </xsd:restriction>
     </xsd:simpleType>
     <xsd:simpleType name="DateTimeFormatEnumeration">
