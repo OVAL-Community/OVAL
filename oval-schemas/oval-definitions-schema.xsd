@@ -941,7 +941,7 @@
     </xsd:complexType>
     <xsd:complexType name="MergeFunctionType">
         <xsd:annotation>
-            <xsd:documentation>The merge function takes one or more components and merges them together into a single string value, optionally including a delimiter string. For example, if data from one registry multi-size value contains values of "abc" and "def", the merge function operated on those values would resolve to a string with the value of 'abcdef'. If an optional delimiter of ',' was used, the merge function would resolve to a value of 'abc,'def'.</xsd:documentation>
+            <xsd:documentation>The merge function takes one or more components and merges them together into a single string value, optionally including a delimiter string. For example, if data from one registry reg_multi_sz value contains values of "abc" and "def", the merge function operated on those values would resolve to a string with the value of 'abcdef'. If an optional delimiter of ',' was used, the merge function would resolve to a value of 'abc,'def'.</xsd:documentation>
         </xsd:annotation>
         <xsd:sequence minOccurs="1" maxOccurs="unbounded">
             <xsd:group ref="oval-def:ComponentGroup"/>
@@ -1137,7 +1137,7 @@
 			</xsd:enumeration>
 			<xsd:enumeration value="natural">
 			    <xsd:annotation>
-                    <xsd:documentation>Sort like PHP's natsort https://www.php.net/manual/en/function.natsort.php</xsd:documentation>
+                    <xsd:documentation>Perform a 'natural' sort, refer to https://en.wikipedia.org/wiki/Natural_sort_order</xsd:documentation>
                 </xsd:annotation>
 			</xsd:enumeration>
         </xsd:restriction>
