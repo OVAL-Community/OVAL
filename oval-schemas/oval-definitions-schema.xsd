@@ -941,13 +941,14 @@
     </xsd:complexType>
     <xsd:complexType name="MergeFunctionType">
         <xsd:annotation>
-            <xsd:documentation>The merge function takes one or more components and merges them together into a single string, with an optional delimiter.  For example if data from one registry multi-size value contains values of "abc" and "def".  The merge function will resolve to a local_variable with the value of 'abcdef'.  If an optional delimiter of ',' was used, the merge function would resolve to a local_variable with the value of 'abc,'def'</xsd:documentation>
+            <xsd:documentation>The merge function takes one or more components and merges them together into a single string value, optionally including a delimiter string. For example, if data from one registry multi-size value contains values of "abc" and "def", the merge function operated on those values would resolve to a string with the value of 'abcdef'. If an optional delimiter of ',' was used, the merge function would resolve to a value of 'abc,'def'.</xsd:documentation>
         </xsd:annotation>
         <xsd:sequence minOccurs="1" maxOccurs="unbounded">
             <xsd:group ref="oval-def:ComponentGroup"/>
         </xsd:sequence>
 		<xsd:attribute name="delimiter" type="xsd:string" use="optional" default=""/>
-		<xsd:attribute name="sort" type="oval-def:SortEnumeration" use="optional" default="none"/>
+		<xsd:attribute name="sort" type="oval-def:SortEnumeration" use="optional" default="document"/>
+		<xsd:attribute name="order" type="oval-def:OrderEnumeration" use="optional" default="ascending"/>
     </xsd:complexType>
     <xsd:complexType name="CountFunctionType">
         <xsd:annotation>
@@ -1116,27 +1117,44 @@
     </xsd:simpleType>
     <xsd:simpleType name="SortEnumeration">
         <xsd:annotation>
-            <xsd:documentation>The SortEnumeration simple type defines basic sorting operations.  Currently 'none', 'alphabetical' and 'alphanumerical' are defined..</xsd:documentation>
+            <xsd:documentation>The SortEnumeration simple type defines basic sorting operations.  Currently 'document', 'lexical', 'numeric' and 'natural' are defined.</xsd:documentation>
         </xsd:annotation>
         <xsd:restriction base="xsd:string">
-            <xsd:enumeration value="none">
+            <xsd:enumeration value="document">
                 <xsd:annotation>
-					<xsd:documentation>No sorting is performed, the values will remain in the order they came in as.</xsd:documentation>
+					<xsd:documentation>No sorting is performed, the values will remain in the order they came in as, and match the order in which the referenced system characterics will appear in the OVAL results XML document.</xsd:documentation>
                 </xsd:annotation>
 			</xsd:enumeration>	
-            <xsd:enumeration value="alphabetical">
+            <xsd:enumeration value="lexical">
 			    <xsd:annotation>
-                    <xsd:documentation>Sort alphabetical, useful for pure string lists</xsd:documentation>
+                    <xsd:documentation>Sort alphabetically, useful for pure string lists.</xsd:documentation>
                 </xsd:annotation>
 			</xsd:enumeration>
-			<xsd:enumeration value="alphanumerical">
+			<xsd:enumeration value="numeric">
 			    <xsd:annotation>
-                    <xsd:documentation>Sort alphanumerical, useful for lists of numbers or lists of strings with numbers</xsd:documentation>
+                    <xsd:documentation>Sort numerically, useful for lists of numbers or lists of integers or floats, but will cause errors if string data is present.</xsd:documentation>
                 </xsd:annotation>
 			</xsd:enumeration>
 			<xsd:enumeration value="natural">
 			    <xsd:annotation>
                     <xsd:documentation>Sort like PHP's natsort https://www.php.net/manual/en/function.natsort.php</xsd:documentation>
+                </xsd:annotation>
+			</xsd:enumeration>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="OrderEnumeration">
+        <xsd:annotation>
+            <xsd:documentation>The OrderEnumeration simple type defines the direction in which data should be sorted, and works to support the SortEnumeration.  The OrderEnumeration has no impact on the SortEnumeration of 'document'.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="ascending">
+                <xsd:annotation>
+					<xsd:documentation>Numbers: Arranged from smallest to largest, such as 0, 1, 2, 3, 4, 5, 6. Letters: Arranged alphabetically from A to Z</xsd:documentation>
+                </xsd:annotation>
+			</xsd:enumeration>	
+            <xsd:enumeration value="descending">
+			    <xsd:annotation>
+                    <xsd:documentation>Numbers: Arranged from largest to smallest, such as 9, 8, 7, 6. Letters: Arranged alphabetically from Z to A</xsd:documentation>
                 </xsd:annotation>
 			</xsd:enumeration>
         </xsd:restriction>
