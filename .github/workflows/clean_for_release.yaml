@@ -8,15 +8,30 @@ on:
 jobs:
   Clean-and-tag:
     runs-on: ubuntu-latest
-    outputs:
-      version_tag: ${{ inputs.version_tag }}
+    env:
+      CLEAN_FILES: |
+        Area Supervisors
+        Email List Archives
+        OVAL-Board
+        guidelines
+        tools
+        .gitignore
+        README.md
+        readthedocs.yaml
+        terms-of-use.rst
+        .github
     steps:
       - name: Check out repository code
         uses: actions/checkout@v4
       - name: Change to release branch
         run: git checkout -b "releases/${{ inputs.version_tag }}"
       - name: Delete undesired directories
-        run: rm -rf 'Area Supervisors' 'Email List Archives' 'OVAL-Board' 'guidelines'
+        run: |
+          readarray -t clean_files <<< "${CLEAN_FILES}"
+          for it in "${clean_files[@]}"; do
+            echo "Removing ${it}"
+            rm -rf "${it}"
+          done
       - name: List files in the repository
         run: |
           ls ${{ github.workspace }}
