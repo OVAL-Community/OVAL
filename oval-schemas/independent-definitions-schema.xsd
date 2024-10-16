@@ -1327,7 +1327,7 @@
       <!-- ================================================================================ -->
       <xsd:element name="sql512_test" substitutionGroup="oval-def:test">
             <xsd:annotation>
-                  <xsd:documentation>The sql test is used to check information stored in a database.</xsd:documentation>
+                  <xsd:documentation>The sql512 test is used to check information stored in a database. It extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information.  This test should only be performed by the OVAL scanner if the content is 'trusted', such as being digitally signed by a trusted content author.</xsd:documentation>
                   <xsd:appinfo>
                         <oval:element_mapping>
                               <oval:test>sql512_test</oval:test>
