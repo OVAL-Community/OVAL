@@ -1,0 +1,51 @@
+name: Clean and tag action
+run-name: clean_and_tag
+on:
+  workflow_dispatch:
+    inputs:
+      version_tag:
+        description: 'Associated tag to the release version'
+jobs:
+  Clean-and-tag:
+    runs-on: ubuntu-latest
+    env:
+      CLEAN_FILES: |
+        Area Supervisors
+        Email List Archives
+        OVAL-Board
+        guidelines
+        tools
+        .gitignore
+        README.md
+        readthedocs.yaml
+        terms-of-use.rst
+        .github
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v4
+      - name: Change to release branch
+        run: git checkout -b "releases/${{ inputs.version_tag }}"
+      - name: Delete undesired directories
+        run: |
+          readarray -t clean_files <<< "${CLEAN_FILES}"
+          for it in "${clean_files[@]}"; do
+            echo "Removing ${it}"
+            rm -rf "${it}"
+          done
+      - name: List files in the repository
+        run: |
+          ls ${{ github.workspace }}
+      - name: Set gitconfig
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+      - name: Commit release
+        run: |
+          git add .
+          git commit -m "release ${{ inputs.version_tag }}"
+      - name: Add tag
+        run: git tag -m "Release tag ${{ inputs.version_tag }}" ${{ inputs.version_tag }}
+      - name: Push to repo
+        run: git push --follow-tags origin "releases/${{ inputs.version_tag }}"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
