@@ -1408,12 +1408,16 @@
                                                 </xsd:element>
                                                 <xsd:element name="instance" type="oval-def:EntityObjectStringType">
                                                       <xsd:annotation>
-                                                            <xsd:documentation>The instance entity defines the specific instance name to be used when connecting to the correct database.</xsd:documentation>
-                                                      </xsd:annotation>
+                                                            <xsd:documentation>The instance entity defines the specific instance name to be used when connecting to the correct database, where instance refers to the running instance of the DMBS software itself. This could be a separate installation of binaries (such as with MS SQL Server), or just a set of running processes used to manage the DBMS.</xsd:documentation>
+															<xsd:documentation>The OVAL interpreter will automatically determine the list of available instances on the target.</xsd:documentation>
+															<xsd:documentation>When a pattern or string is entered, the OVAL interpeter will consider any matching instance as in scope for analysis.</xsd:documentation>
+													  </xsd:annotation>
                                                 </xsd:element>
                                                 <xsd:element name="database" type="oval-def:EntityObjectStringType" nillable="true">
                                                       <xsd:annotation>
-                                                            <xsd:documentation>The database entity defines the specific database name to be used when connecting to the specified instance. If the xsi:nil attribute is set to true, then the target instance's default database will be queried.</xsd:documentation>
+                                                            <xsd:documentation>The database entity defines the specific database name to be used when connecting to the specified instance, where a database is defined as a collection of tables within a DBMS instance.</xsd:documentation>
+															<xsd:documentation>When a pattern or string is entered, the OVAL interpeter will perform the query against any matching databases.</xsd:documentation>
+															<xsd:documentation>If the xsi:nil attribute is set to true, then only the target instance's default database will be queried.</xsd:documentation>
                                                       </xsd:annotation>
                                                 </xsd:element>
                                                 <xsd:element name="sql" type="oval-def:EntityObjectStringType" nillable="true">
