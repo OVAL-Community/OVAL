@@ -1,0 +1,29 @@
+name: Build Release
+
+on:
+  release:
+    types: [ published, edited ]
+
+jobs:
+  buildRelease:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - name: Build Release
+        env:
+          TAG: ${{ github.ref_name }}
+        run: |
+          echo "Perform and build steps here such as docs, .sch, .xsl, zip files, etc..."
+      - name: Attach Release Artifacts
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          OWNER: ${{ github.repository_owner }}
+          REPO: ${{ github.event.repository.name }}
+          TAG: ${{ github.ref_name }}
+        run: |
+            SCHEMA_FILES=$(ls oval-schemas/*.xsd)
+            gh release upload $TAG $SCHEMA_FILES --clobber --repo $OWNER/$REPO
