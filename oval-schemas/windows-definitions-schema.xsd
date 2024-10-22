@@ -10153,6 +10153,11 @@
                                     <xsd:documentation>This registry subtree contains the user profile of the user that is currently logged into the system.</xsd:documentation>
                               </xsd:annotation>
                         </xsd:enumeration>
+		                <xsd:enumeration value="HKEY_CURRENT_USER_LOCAL_SETTINGS">
+                              <xsd:annotation>
+                                    <xsd:documentation>Registry entries subordinate to this key define preferences of the current user that are local to the machine. These entries are not included in the per-user registry portion of a roaming user profile. This key is supported starting with Windows 7 and Windows Server 2008 R2.</xsd:documentation>
+                              </xsd:annotation>
+                        </xsd:enumeration>
                         <xsd:enumeration value="HKEY_LOCAL_MACHINE">
                               <xsd:annotation>
                                     <xsd:documentation>This registry subtree contains information about the local system.</xsd:documentation>
