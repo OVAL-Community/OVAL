@@ -1420,21 +1420,14 @@
                                                 </xsd:element>
                                                 <xsd:element name="version" type="oval-def:EntityObjectStringType">
                                                       <xsd:annotation>
-                                                            <xsd:documentation>The version entity defines the specific version of the database engine to use. This is also important in determining the correct driver to use for establishing a connection.</xsd:documentation>
+                                                            <xsd:documentation>The version entity defines the specific version of the database engine to use. </xsd:documentation>
 															<xsd:documentation>The version shall be reported in the format provided by the dbms application, which may differ slightly across dbms products, but should generally be in the foramt of X.Y.Z</xsd:documentation>
 															<xsd:documentation>Below are some examples, but make sure to refer to DBMS system documentation for complete/current methods to determine versions</xsd:documentation>
 															<xsd:documentation>For Microsoft SQL Server, the version can be obtained with 'SELECT SERVERPROPERTY('productversion')'</xsd:documentation>
 															<xsd:documentation>For Oracle DBMS, the version can be obtained with 'SELECT * FROM V$VERSION;'</xsd:documentation>
 															<xsd:documentation>For MySQL and MariaDB, the version can be obtained with 'SELECT version();'</xsd:documentation>
-															<xsd:documentation>It is recommended to use a pattern match on the major/minor version such as 13\.0\..* to match all SQL Server 2016 versions.</xsd:documentation>
-                                                            <xsd:appinfo>
-                                                                  <sch:pattern id="ind-def_sql512_object_version">
-                                                                        <sch:rule context="ind-def:sql512_object/ind-def:version">
-                                                                              <sch:assert test="not(@operation) or @operation='equals'"><sch:value-of select="../@id"/> - operation attribute for the version entity of an sql512_object should be 'equals', note that this overrules the general operation attribute validation (i.e. follow this one)</sch:assert>
-                                                                        </sch:rule>
-                                                                  </sch:pattern>
-                                                            </xsd:appinfo>
-                                                      </xsd:annotation>
+															<xsd:documentation>Usage of regular expressions is recommended in order to match on a primary version or multiple versions of the dbms.</xsd:documentation>
+													 </xsd:annotation>
                                                 </xsd:element>
                                                 <xsd:element name="instance" type="oval-def:EntityObjectStringType">
                                                       <xsd:annotation>
