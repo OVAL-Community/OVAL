@@ -1159,6 +1159,18 @@
                         </oval:element_mapping>
                   </xsd:appinfo>
                   <xsd:appinfo>
+                        <oval:deprecated_info>
+                              <oval:version>5.12</oval:version>
+                              <oval:reason>Replaced by the sql512_test.  The sql512_test removes the connection string and replaces it with 'instance' and 'database' elements.  This allows the application to perform any necessary steps to connect, and providing a simple method for content authors to determine which database(s) to query.</oval:reason>
+                              <oval:comment>This object has been deprecated and may be removed in a future version of the language.</oval:comment>
+                        </oval:deprecated_info>
+                        <sch:pattern id="ind-def_sql_test_dep">
+                              <sch:rule context="ind-def:sql_test">
+                                    <sch:report test="true()">DEPRECATED TEST: <sch:value-of select="name()"/> ID: <sch:value-of select="@id"/></sch:report>
+                              </sch:rule>
+                        </sch:pattern>
+                  </xsd:appinfo>
+                  <xsd:appinfo>
                         <sch:pattern id="ind-def_sql57_test">
                               <sch:rule context="ind-def:sql57_test/ind-def:object">
                                     <sch:assert test="@object_ref=ancestor::oval-def:oval_definitions/oval-def:objects/ind-def:sql57_object/@id"><sch:value-of select="../@id"/> - the object child element of a sql57_test must reference a sql57_object</sch:assert>
@@ -1300,6 +1312,208 @@
                                                 </xsd:appinfo>
                                           </xsd:annotation>
                                           <xsd:unique name="UniqueSqlResultFieldName">
+                                                <xsd:selector xpath="./oval-def:field"/>
+                                                <xsd:field xpath="@name"/>
+                                          </xsd:unique>
+                                    </xsd:element>
+                              </xsd:sequence>
+                        </xsd:extension>
+                  </xsd:complexContent>
+            </xsd:complexType>
+      </xsd:element>
+
+      <!-- ================================================================================ -->
+      <!-- =================================  SQL TEST (512)  ============================= -->
+      <!-- ================================================================================ -->
+      <xsd:element name="sql512_test" substitutionGroup="oval-def:test">
+            <xsd:annotation>
+                  <xsd:documentation>The sql512 test is used to check information stored in a database. It extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information.</xsd:documentation>
+				  <xsd:documentation>This test should only be performed by the OVAL interpreter if the content is 'trusted', such as being digitally signed by a trusted content author.</xsd:documentation>
+                  <xsd:documentation>The OVAL interpeter will provide all authentication capabilities to the SQL DMBS target.</xsd:documentation>
+				  <xsd:documentation>The OVAL interpeter will query the target system and find all applicable DBMS instances and databases (refer to sql512 object elements for more information on instances and databases) .</xsd:documentation>
+				  <xsd:documentation>Using Microsoft SQL Server as an example, below is sample of what the OVAL intepreter will gather from a target.</xsd:documentation>
+				  <xsd:documentation>Target Host: Host1
+    SQL Server Instances:
+		SQLEXPRESS (version 13.0.6450.1 )
+			Databases:
+				master
+				model
+				msdb
+				tempdb
+				userdb1
+				userdb2
+		SQLSERVER (version 16.0.4135.4)
+			Databases:
+				master
+				model
+				msdb
+				tempdb
+				testdb1
+				testdb2		
+</xsd:documentation>
+<xsd:documentation>Content can then be created that targets one or more versions, and within those versions, queries could be run against one or more instances and one ore more databases.</xsd:documentation>
+				  <xsd:appinfo>
+                        <oval:element_mapping>
+                              <oval:test>sql512_test</oval:test>
+                              <oval:object>sql512_object</oval:object>
+                              <oval:state>sql512_state</oval:state>
+                              <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#independent">sql512_item</oval:item>
+                        </oval:element_mapping>
+                  </xsd:appinfo>
+                  <xsd:appinfo>
+                        <sch:pattern id="ind-def_sql512_test">
+                              <sch:rule context="ind-def:sql512_test/ind-def:object">
+                                    <sch:assert test="@object_ref=ancestor::oval-def:oval_definitions/oval-def:objects/ind-def:sql512_object/@id"><sch:value-of select="../@id"/> - the object child element of a sql512_test must reference a sql512_object</sch:assert>
+                              </sch:rule>
+                              <sch:rule context="ind-def:sql512_test/ind-def:state">
+                                    <sch:assert test="@state_ref=ancestor::oval-def:oval_definitions/oval-def:states/ind-def:sql512_state/@id"><sch:value-of select="../@id"/> - the state child element of a sql512_test must reference a sql512_state</sch:assert>
+                              </sch:rule>
+                        </sch:pattern>
+                  </xsd:appinfo>
+            </xsd:annotation>
+            <xsd:complexType>
+                  <xsd:complexContent>
+                        <xsd:extension base="oval-def:TestType">
+                              <xsd:sequence>
+                                    <xsd:element name="object" type="oval-def:ObjectRefType"/>
+                                    <xsd:element name="state" type="oval-def:StateRefType" minOccurs="0" maxOccurs="unbounded"/>
+                              </xsd:sequence>
+                        </xsd:extension>
+                  </xsd:complexContent>
+            </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="sql512_object" substitutionGroup="oval-def:object">
+            <xsd:annotation>
+                  <xsd:documentation>The sql512_object element is used by a sql512 test to define the specific database and query to be evaluated. Each object extends the standard ObjectType as defined in the oval-definitions-schema and one should refer to the ObjectType description for more information. The common set element allows complex objects to be created using filters and set logic. Again, please refer to the description of the set element in the oval-definitions-schema.</xsd:documentation>
+                  <xsd:appinfo>
+                        <sch:pattern id="ind-def_sql512_object_verify_filter_state">
+                              <sch:rule context="ind-def:sql512_object//oval-def:filter">
+                                    <sch:let name="parent_object" value="ancestor::ind-def:sql512_object"/>
+                                    <sch:let name="parent_object_id" value="$parent_object/@id"/>
+                                    <sch:let name="state_ref" value="."/>
+                                    <sch:let name="reffed_state" value="ancestor::oval-def:oval_definitions/oval-def:states/*[@id=$state_ref]"/>
+                                    <sch:let name="state_name" value="local-name($reffed_state)"/>
+                                    <sch:let name="state_namespace" value="namespace-uri($reffed_state)"/>
+                                    <sch:assert test="(($state_namespace='http://oval.mitre.org/XMLSchema/oval-definitions-5#independent') and ($state_name='sql512_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
+                              </sch:rule>
+                        </sch:pattern>
+                  </xsd:appinfo>
+            </xsd:annotation>
+            <xsd:complexType>
+                  <xsd:complexContent>
+                        <xsd:extension base="oval-def:ObjectType">
+                              <xsd:sequence>
+                                    <xsd:choice>
+                                          <xsd:element ref="oval-def:set"/>
+                                          <xsd:sequence>
+                                                <xsd:element name="engine" type="ind-def:EntityObjectEngineType">
+                                                      <xsd:annotation>
+                                                            <xsd:documentation>The engine entity defines the specific database engine to use. Any tool looking to collect information about this object will need to know the engine in order to use the appropriate drivers to establish a connection.</xsd:documentation>
+                                                            <xsd:appinfo>
+                                                                  <sch:pattern id="ind-def_sql512_object_engine">
+                                                                        <sch:rule context="ind-def:sql512_object/ind-def:engine">
+                                                                              <sch:assert test="not(@operation) or @operation='equals'"><sch:value-of select="../@id"/> - operation attribute for the engine entity of an sql512_object should be 'equals', note that this overrules the general operation attribute validation (i.e. follow this one)</sch:assert>
+                                                                        </sch:rule>
+                                                                  </sch:pattern>
+                                                            </xsd:appinfo>
+                                                      </xsd:annotation>
+                                                </xsd:element>
+                                                <xsd:element name="version" type="oval-def:EntityObjectStringType">
+                                                      <xsd:annotation>
+                                                            <xsd:documentation>The version entity defines the specific version of the database engine to use. </xsd:documentation>
+															<xsd:documentation>The version shall be reported in the format provided by the dbms application, which may differ slightly across dbms products, but should generally be in the foramt of X.Y.Z</xsd:documentation>
+															<xsd:documentation>Below are some examples, but make sure to refer to DBMS system documentation for complete/current methods to determine versions</xsd:documentation>
+															<xsd:documentation>For Microsoft SQL Server, the version can be obtained with 'SELECT SERVERPROPERTY('productversion')'</xsd:documentation>
+															<xsd:documentation>For Oracle DBMS, the version can be obtained with 'SELECT * FROM V$VERSION;'</xsd:documentation>
+															<xsd:documentation>For MySQL and MariaDB, the version can be obtained with 'SELECT version();'</xsd:documentation>
+															<xsd:documentation>Usage of regular expressions is recommended in order to match on a primary version or multiple versions of the dbms.</xsd:documentation>
+													 </xsd:annotation>
+                                                </xsd:element>
+                                                <xsd:element name="instance" type="oval-def:EntityObjectStringType">
+                                                      <xsd:annotation>
+                                                            <xsd:documentation>The instance entity defines the specific instance name to be used when connecting to the correct database, where instance refers to the running instance of the DMBS software itself. This could be a separate installation of binaries (such as with MS SQL Server), or just a set of running processes used to manage the DBMS.</xsd:documentation>
+															<xsd:documentation>The OVAL interpreter will automatically determine the list of available instances on the target.</xsd:documentation>
+															<xsd:documentation>When a pattern or string is entered, the OVAL interpeter will consider any matching instance as in scope for analysis.</xsd:documentation>
+													  </xsd:annotation>
+                                                </xsd:element>
+                                                <xsd:element name="database" type="oval-def:EntityObjectStringType" nillable="true">
+                                                      <xsd:annotation>
+                                                            <xsd:documentation>The database entity defines the specific database name to be used when connecting to the specified instance, where a database is defined as a collection of tables within a DBMS instance.</xsd:documentation>
+															<xsd:documentation>When a pattern or string is entered, the OVAL interpeter will perform the query against any matching databases.</xsd:documentation>
+															<xsd:documentation>If the xsi:nil attribute is set to true, then the OVAL interpreter will perform the query once per instance.  This is primarily useful for queries that gather instance configuration settings, such as SQL Servers SERVERPROPERTY data.  
+See https://learn.microsoft.com/en-us/sql/t-sql/functions/serverproperty-transact-sql?view=sql-server-ver16
+Example:
+															
+SELECT
+SERVERPROPERTY('IsClustered') AS [is_clustered]
+															</xsd:documentation>
+                                                      </xsd:annotation>
+                                                </xsd:element>
+                                                <xsd:element name="sql" type="oval-def:EntityObjectStringType" nillable="true">
+                                                      <xsd:annotation>
+                                                            <xsd:documentation>The sql entity defines a query used to identify the object(s) to test against. Any valid SQL query is usable with one exception, all fields must be named in the SELECT portion of the query. For example, SELECT name, number FROM ... is valid. However, SELECT * FROM ... is not valid. This is because the record element in the state and item require a unique field name value to ensure that any query results can be evaluated consistently. If the xsi:nil attribute is set to true, then no query is executed and only the existance of the specified instance and database will be considered.</xsd:documentation>
+                                                            <xsd:appinfo>
+                                                                  <sch:pattern id="ind-def_sql512_object_sql">
+                                                                        <sch:rule context="ind-def:sql512_object/ind-def:sql">
+                                                                              <sch:assert test="not(@operation) or @operation='equals'"><sch:value-of select="../@id"/> - operation attribute for the sql entity of an sql512_object should be 'equals', note that this overrules the general operation attribute validation (i.e. follow this one)</sch:assert>
+                                                                        </sch:rule>
+                                                                  </sch:pattern>
+                                                            </xsd:appinfo>
+                                                      </xsd:annotation>
+                                                </xsd:element>
+                                                <xsd:element ref="oval-def:filter" minOccurs="0" maxOccurs="unbounded"/>
+                                          </xsd:sequence>
+                                    </xsd:choice>
+                              </xsd:sequence>
+                        </xsd:extension>
+                  </xsd:complexContent>
+            </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="sql512_state" substitutionGroup="oval-def:state">
+            <xsd:annotation>
+                  <xsd:documentation>The sql512_state element contains two entities that are used to check the name of the specified field and the value associated with it.</xsd:documentation>
+            </xsd:annotation>
+            <xsd:complexType>
+                  <xsd:complexContent>
+                        <xsd:extension base="oval-def:StateType">
+                              <xsd:sequence>
+                                    <xsd:element name="engine" type="ind-def:EntityStateEngineType" minOccurs="0">
+                                          <xsd:annotation>
+                                                <xsd:documentation>The engine entity defines a specific database engine.</xsd:documentation>
+                                          </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="version" type="oval-def:EntityStateStringType" minOccurs="0">
+                                          <xsd:annotation>
+                                                <xsd:documentation>The version entity defines a specific version of a given database engine.</xsd:documentation>
+                                          </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="instance" type="oval-def:EntityStateStringType" minOccurs="0">
+                                          <xsd:annotation>
+                                                <xsd:documentation>The instance entity defines the specific instance name to be used when connecting to the correct database.</xsd:documentation>
+                                          </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="database" type="oval-def:EntityStateStringType" minOccurs="0">
+                                          <xsd:annotation>
+                                                <xsd:documentation>The database entity defines the specific database name to be used when connecting to the specified instance.</xsd:documentation>
+                                          </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="sql" type="oval-def:EntityStateStringType" minOccurs="0">
+                                          <xsd:annotation>
+                                                <xsd:documentation>the sql entity defines a query used to identify the object(s) to test against.</xsd:documentation>
+                                          </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="result" type="oval-def:EntityStateRecordType" minOccurs="0">
+                                          <xsd:annotation>
+                                                <xsd:documentation>The result entity specifies how to test objects in the result set of the specified SQL statement.</xsd:documentation>
+                                                <xsd:appinfo>
+                                                      <sch:pattern id="ind-def_sql512steresult">
+                                                            <sch:rule context="ind-def:sql512_state/ind-def:result">
+                                                                  <sch:assert test="@datatype='record'"><sch:value-of select="../@id"/> - datatype attribute for the result entity of a sql512_state must be 'record'</sch:assert>
+                                                            </sch:rule>
+                                                      </sch:pattern>
+                                                </xsd:appinfo>
+                                          </xsd:annotation>
+                                          <xsd:unique name="Uniquesql512ResultFieldName">
                                                 <xsd:selector xpath="./oval-def:field"/>
                                                 <xsd:field xpath="@name"/>
                                           </xsd:unique>
