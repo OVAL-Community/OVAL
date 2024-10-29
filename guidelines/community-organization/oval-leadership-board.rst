@@ -3,16 +3,6 @@
 OVAL Leadership Board
 =====================
 
-**Notice:**
-
-*Posted April 25, 2024*
- 
-The Center for Internet Security has announced to the OVAL board that they intend to relinquish their role as the OVAL Sponsor by the end of 2024. 
-The board and CIS are working on a transition plan, including the identification of a new sponsor. 
-If your organization is interested in sponsoring this active community composed of top security experts, system administrators, and software developers 
-from industry, government, and academia, please reach out to oval@cisecurity.org.
-
-
 In general, members of the OVAL Leadership Board are:
 
 * Responsible for steering the OVAL Mission, Use Cases and providing guidance to other key strategic artifacts including the OVAL Design Principles
@@ -33,25 +23,20 @@ Current Members
   * `Arctic Wolf <https://arcticwolf.com>`_ - Adam Biggs, Max Ullman
   * `Canonical <https://canonical.com/>`_ - Eduardo Barretto
   * `Center for Internet Security <https://www.cisecurity.org>`_ - Justin Burr, Tim Rosner
-  * `Cisco Systems, Inc. <https://www.cisco.com/>`_ - Omar Santos
-  * `HCL Group <https://hcl.com/>`_ - Anurag Srivastava 
+  * `Defense Information Systems Agency (DISA) <https://www.disa.mil/>`, Jamaal Spearman, Brady Alleman
+  * 'HCL Group https://hcl.com/` Anurag Srivastava
   * `Modulo <https://www.modulo.com/>`_ - Alberto Bastos
-  * `National Institute of Standards and Technology <https://www.nist.gov/>`_ - Open
-  * `NAVWARSYSCOM, U.S. Navy <https://www.spawar.navy.mil/>`_ - Jack Vander Pol
-  * `Qualys, Inc. <https://www.qualys.com/>`_ - Hariom Singh
+  * `National Institute of Standards and Technology (NIST) <https://www.nist.gov/>`_ - Dragos Prisaca, Bob Gendler
+  * `Naval Information Warfare Center (NIWC) Atlantic <https://www.niwcatlantic.navy.mil/>`_ - Jack Vander Pol, Daniel Harris, John Ulmer
   * `Red Hat, Inc. <https://www.redhat.com/>`_ - Evgeny Kolesnikov, Watson Sato
   * `SecPod Technologies <https://www.secpod.com/>`_ - Chandrashekhar B
-  * `Unified Compliance <https://www.unifiedcompliance.com/>`_ - Stephen Pillero
-  * `VMware <https://www.vmware.com/>`_ - Open
   * `Venable <https://www.venable.com/>`_ - Stephen Banghart
 
 * Individual
 
   * Blake Frantz
-  * Dale Rich
   * David Solin
   * Kent Landfield
-  * Nils Puhlmann
   * Richard Maciel Costa
 
 Past Members
@@ -74,12 +59,14 @@ Past Members
 * Former
 
   * Amol Sarwate
-  * Anthony Busciglio
+  * Anthony Busciglio 
   * Carl Banzhof
   * Chris Wood
+  * Dale Rich
   * Dennis Moreau
   * Eric Walker
   * Gary Miliefsky
+  * Hariom Singh
   * Jamie Cromer
   * Jay Graver
   * Kurt Seifried
@@ -90,12 +77,15 @@ Past Members
   * Michael Tan
   * Morey Haber
   * Nick Connor
+  * Nils Puhlmann
   * Noah Salzman
+  * Omar Santos
   * Panos Kampanakis
   * Pat Fetty
   * Randy Taylor
   * Rosario Gangemi
   * Stephen Quinn
+  * Stephen Pillero
 
 
 Responsibilities
