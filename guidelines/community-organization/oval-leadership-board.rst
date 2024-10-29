@@ -23,8 +23,8 @@ Current Members
   * `Arctic Wolf <https://arcticwolf.com>`_ - Adam Biggs, Max Ullman
   * `Canonical <https://canonical.com/>`_ - Eduardo Barretto
   * `Center for Internet Security <https://www.cisecurity.org>`_ - Justin Burr, Tim Rosner
-  * `Defense Information Systems Agency (DISA) <https://www.disa.mil/>`, Jamaal Spearman, Brady Alleman
-  * 'HCL Group https://hcl.com/` Anurag Srivastava
+  * `Defense Information Systems Agency (DISA) <https://www.disa.mil/>`_ - Jamaal Spearman, Brady Alleman
+  * `HCL Group <https://hcl.com/>`_ - Anurag Srivastava
   * `Modulo <https://www.modulo.com/>`_ - Alberto Bastos
   * `National Institute of Standards and Technology (NIST) <https://www.nist.gov/>`_ - Dragos Prisaca, Bob Gendler
   * `Naval Information Warfare Center (NIWC) Atlantic <https://www.niwcatlantic.navy.mil/>`_ - Jack Vander Pol, Daniel Harris, John Ulmer
