@@ -22,6 +22,7 @@ Current Members
 
   * `Arctic Wolf <https://arcticwolf.com>`_ - Adam Biggs, Max Ullman
   * `Canonical <https://canonical.com/>`_ - Eduardo Barretto
+  * `Cisco <https://www.cisco.com/>`_ - Omar Santos
   * `Center for Internet Security <https://www.cisecurity.org>`_ - Justin Burr, Tim Rosner
   * `Defense Information Systems Agency (DISA) <https://www.disa.mil/>`_ - Jamaal Spearman, Brady Alleman
   * `HCL Group <https://hcl.com/>`_ - Anurag Srivastava
@@ -79,7 +80,6 @@ Past Members
   * Nick Connor
   * Nils Puhlmann
   * Noah Salzman
-  * Omar Santos
   * Panos Kampanakis
   * Pat Fetty
   * Randy Taylor
