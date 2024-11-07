@@ -968,6 +968,7 @@
                   </xsd:complexContent>
             </xsd:complexType>
       </xsd:element>
+	  
       <!-- =============================================================================== -->
       <!-- ============================  SHELLCOMMAND TEST  =============================== -->
       <!-- =============================================================================== -->
@@ -975,7 +976,7 @@
             <xsd:annotation>
                   <xsd:documentation>The shellcommand_test is used to check the values produced by the running of the command (or embedded script, not an external script file) found in the object 'command' element. It extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information. The required object element references a shellcommand_object and the optional state element references a shellcommand_state that specifies the information to check.
                                    
-Since this test requires the running of code supplied by content and since SCAP applications commonly run with elevated privileges, significant responsibilty falls to the content author to do no harm.  This also requires that any content stream that employs this test MUST be from a known trusted source and be digitally signed.  The use of any executables that are not supplied by the installed operating system is highly discouraged.</xsd:documentation>
+				Since this test requires the running of code supplied by content and since SCAP applications commonly run with elevated privileges, significant responsibilty falls to the content author to do no harm.  This also requires that any content stream that employs this test MUST be from a known trusted source and be digitally signed.  The use of any executables that are not supplied by the installed operating system is highly discouraged.</xsd:documentation>
                   <xsd:appinfo>
                         <oval:element_mapping>
                               <oval:test>shellcommand_test</oval:test>
@@ -1033,7 +1034,7 @@ Since this test requires the running of code supplied by content and since SCAP 
                                           <xsd:sequence>
                                                 <xsd:element name="shell" type="ind-def:EntityObjectShellType">
                                                       <xsd:annotation>
-                                                            <xsd:documentation>The shell entity defines the specific shell interpeter use. Any tool looking to collect information about this object will need to know the shell in order to use it properly.</xsd:documentation>
+                                                            <xsd:documentation>The shell entity defines the specific shell interpreter to use. Any tool looking to collect information about this object will need to know the shell in order to use it properly.</xsd:documentation>
                                                       </xsd:annotation>
                                                 </xsd:element>
                                                 <xsd:element name="command" type="oval-def:EntityObjectStringType"  minOccurs="1" maxOccurs="1">
@@ -1043,12 +1044,15 @@ Since this test requires the running of code supplied by content and since SCAP 
                                                 </xsd:element>
                                                 <xsd:element name="pattern" type="oval-def:EntityObjectStringType"  minOccurs="0" maxOccurs="1">
                                                       <xsd:annotation>
-                                                            <xsd:documentation>The 'pattern' is a regular expression that identifies lines in 'command' results that are to produce OVAL items.   Any result line that matches the pattern is kept as an OVAL item.  Any that do not are discarded.  If the pattern element is empty or does not exist, all results lines are kept.  Importantly, this test does not support the capture of subexpressions as the textfilecontent test do.  The shell command or script should produce concise results obfuscating the need for subexpression.</xsd:documentation>
+                                                            <xsd:documentation>The 'pattern' is a regular expression that identifies lines in 'command' results that are to produce OVAL items.   Any result line that matches the pattern is kept as an OVAL item.  Any that do not are discarded.  If the pattern element is empty or does not exist, all results lines are kept.  
+															
+															A subexpression (using parentheses) can call out a piece of the matched stdout_line to test. For example, the pattern abc(.*)xyz would look for a block of text in the file that starts with abc and ends with xyz, with the subexpression being all the characters that exist in between. The value of the subexpression can then be tested using the subexpression entity of a shellcommand_state. Note that if the pattern, starting at the same point in the line, matches more than one block of text, then it matches the longest. For example, given a file with abcdefxyzxyzabc, then the pattern abc(.*)xyz would match the block abcdefxyzxyz. Subexpressions also match the longest possible substrings, subject to the constraint that the whole match be as long as possible, with subexpressions starting earlier in the pattern taking priority over ones starting later.
+															</xsd:documentation>
                                                             <xsd:documentation>Note that when using regular expressions, OVAL supports a common subset of the regular expression character classes, operations, expressions and other lexical tokens defined within Perl 5's regular expression specification. For more information on the supported regular expression syntax in OVAL see: http://oval.mitre.org/language/about/re_support_5.6.html.</xsd:documentation>
                                                             <xsd:appinfo>
                                                                   <sch:pattern id="ind-def_txt54objpattern">
                                                                         <sch:rule context="ind-def:textfilecontent54_object/ind-def:pattern">
-                                                                              <sch:assert test="@operation='pattern match'"><sch:value-of select="../@id" /> - operation attribute for the pattern entity of a textfilecontent54_object should be 'pattern match'</sch:assert>
+                                                                              <sch:assert test="@operation='pattern match'"><sch:value-of select="../@id" /> - operation attribute for the pattern entity of a shellcommand_object should be 'pattern match'</sch:assert>
                                                                         </sch:rule>
                                                                   </sch:pattern>
                                                             </xsd:appinfo>
@@ -1065,7 +1069,7 @@ Since this test requires the running of code supplied by content and since SCAP 
       </xsd:element>
       <xsd:element name="shellcommand_state" substitutionGroup="oval-def:state">
             <xsd:annotation>
-                  <xsd:documentation>The shellcommand_state contains the entity that are used to check the value(s) returned by the shellcommand_object.  Note that only the 'result' element is meaningful in OVAL item to state comparisons.  All other state entities (label, command, and pattern) are echoed, verbatim, from the same elements in the associated shellcommand_object.</xsd:documentation>
+                  <xsd:documentation>The shellcommand_state contains the entities that are used to check the values returned by the shellcommand_object.  Note that the state entities shell, command, and pattern are echoed, verbatim, from the same elements in the associated shellcommand_object.</xsd:documentation>
             </xsd:annotation>
             <xsd:complexType>
                   <xsd:complexContent>
@@ -1088,7 +1092,7 @@ Since this test requires the running of code supplied by content and since SCAP 
                                                 <xsd:appinfo>
                                                       <sch:pattern id="ind-def_txt54objpattern">
                                                             <sch:rule context="ind-def:textfilecontent54_state/ind-def:pattern">
-                                                                  <sch:assert test="@operation='pattern match'"><sch:value-of select="../@id" /> - operation attribute for the pattern entity of a textfilecontent54_object should be 'pattern match'</sch:assert>
+                                                                  <sch:assert test="@operation='pattern match'"><sch:value-of select="../@id" /> - operation attribute for the pattern entity of a shellcommand_object should be 'pattern match'</sch:assert>
                                                             </sch:rule>
                                                       </sch:pattern>
                                                 </xsd:appinfo>
@@ -1096,17 +1100,19 @@ Since this test requires the running of code supplied by content and since SCAP 
                                     </xsd:element>
 			                        <xsd:element name="exit_status" type="oval-def:EntityStateIntType" minOccurs="0" maxOccurs="1">
 										<xsd:annotation>
-											<xsd:documentation>The exit status value from the command</xsd:documentation>
+											<xsd:documentation>The exit_status entity represents the exist status returned by the system for the execution of the object command.</xsd:documentation>
 										</xsd:annotation>
 									</xsd:element>
-                                    <xsd:element name="stdout_line" type="oval-def:EntityStateAnySimpleType" minOccurs="1" maxOccurs="1">
+                                    <xsd:element name="stdout_line" type="oval-def:EntityStateAnySimpleType" minOccurs="0" maxOccurs="1">
                                           <xsd:annotation>
-                                                <xsd:documentation>The result element contains the standard output of a successful run of the command string.  Each result line should produce an OVAL item.  The object pattern can be used to filter (exclude) unwanted lines.</xsd:documentation>
+                                                <xsd:documentation>The stdout_line entity represents a line from the STDOUT output of a successful run of the command string that matched the specified object pattern.</xsd:documentation>
                                           </xsd:annotation>
                                     </xsd:element>
-                                    <xsd:element name="stderr_line" type="oval-def:EntityStateAnySimpleType" minOccurs="1" maxOccurs="1">
+                                    <xsd:element name="stderr_line" type="oval-def:EntityStateAnySimpleType" minOccurs="0" maxOccurs="1">
                                           <xsd:annotation>
-                                                <xsd:documentation>The result element contains the standard error of a run of the command string.  Each result line should produce an OVAL item.  The object pattern can be used to filter (exclude) unwanted lines.</xsd:documentation>
+                                                <xsd:documentation>The stderr_line element represents a line from the STDERR output of a run of the command string that matched the specified object pattern.  Each line of STDERR produced by the command execution will produce a single shellcommand item.</xsd:documentation>
+					<!-- WHICH ONE????? -->		
+												 <xsd:documentation>The stderr(_line) element contains any output to STDERR from a run of the object command.</xsd:documentation>
                                           </xsd:annotation>
                                     </xsd:element>
 
@@ -1115,6 +1121,8 @@ Since this test requires the running of code supplied by content and since SCAP 
                   </xsd:complexContent>
             </xsd:complexType>
       </xsd:element>
+	  
+	  
       <!-- =============================================================================== -->
       <!-- =================================  SQL TEST  ================================== -->
       <!-- =============================================================================== -->
