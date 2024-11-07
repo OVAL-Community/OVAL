@@ -330,7 +330,7 @@
      <!-- =============================================================================== -->
      <xsd:element name="shellcommand_item" substitutionGroup="oval-sc:item">
           <xsd:annotation>
-               <xsd:documentation>The shellcommand_item stores information retrieved from the local system that result from the running of the command or embedded script in the associated object command element.</xsd:documentation>
+               <xsd:documentation>The shellcommand_item stores information retrieved from the local system that results from the running of the command or embedded script in the associated object command element.</xsd:documentation>
           </xsd:annotation>
           <xsd:complexType>
                <xsd:complexContent>
@@ -338,7 +338,7 @@
                          <xsd:sequence>
                               <xsd:element name="shell" type="oval-sc:EntityItemShellType" minOccurs="1" maxOccurs="1">
                                    <xsd:annotation>
-                                        <xsd:documentation>The shell element contains the shell used to perform the command.</xsd:documentation>
+                                        <xsd:documentation>The shell element contains the shell used (e.g. bash or powershell) to perform the command and should be taken, verbatim, from the associated object 'shell' element.</xsd:documentation>
                                    </xsd:annotation>
                               </xsd:element>
                               <xsd:element name="command" type="oval-sc::EntityItemStringType"  minOccurs="1" maxOccurs="1">
@@ -354,17 +354,19 @@
                               </xsd:element>                              
 							<xsd:element name="exit_status" type="oval-sc:EntityItemIntType" minOccurs="0" maxOccurs="1">
 								<xsd:annotation>
-									<xsd:documentation>The exit status value from the command</xsd:documentation>
+									<xsd:documentation>The exit_status entity represents the exist status returned by the system for the execution of the object command. OVAL Item status should match the exit status of the system call.</xsd:documentation>
 								</xsd:annotation>
 							</xsd:element>
 							<xsd:element name="stdout_line" type="oval-sc:EntityItemStringType" minOccurs="0" maxOccurs="unbounded">
 								<xsd:annotation>
-									<xsd:documentation>Each line of standard output from the shell command which matches the line selection</xsd:documentation>
+									<xsd:documentation>The stdout_line entity contains a line from the STDOUT output of a successful run of the command string that matched the specified object pattern.  Each line created by the execution of the object command should create an item.</xsd:documentation>
 								</xsd:annotation>
 							</xsd:element>
 							<xsd:element name="stderr_line" type="oval-sc:EntityItemStringType" minOccurs="0" maxOccurs="unbounded">
 								<xsd:annotation>
-									<xsd:documentation>Each line of standard error output from the shell command.  All standard error lines are always included in any shellcommand_item generated.</xsd:documentation>
+									<xsd:documentation>The stderr_line element represents a line from the STDERR output of a run of the command string that matched the specified object pattern.  Each line of STDERR produced by the command execution will produce a single shellcommand item.</xsd:documentation>
+												
+									<xsd:documentation>The stderr_line element represents any and all output to STDERR from a run of the command string.</xsd:documentation>
 								</xsd:annotation>
 							</xsd:element>
                          </xsd:sequence>
