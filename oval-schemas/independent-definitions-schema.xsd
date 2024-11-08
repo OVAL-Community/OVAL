@@ -2502,6 +2502,26 @@ SERVERPROPERTY('IsClustered') AS [is_clustered]
                                     <xsd:documentation>The access value describes the Microsoft Access database engine.</xsd:documentation>
                               </xsd:annotation>
                         </xsd:enumeration>
+                        <xsd:enumeration value="aurora">
+                              <xsd:annotation>
+                                    <xsd:documentation>The aurora value describes the Amazon Aurora cloud database engine.</xsd:documentation>
+                              </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="azuresql">
+                              <xsd:annotation>
+                                    <xsd:documentation>The azuresql value describes the Microsoft Azure SQL cloud database engine.</xsd:documentation>
+                              </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="crunchypostgres">
+                              <xsd:annotation>
+                                    <xsd:documentation>The crunchypostgres value describes the Crunchy Postgres cloud database engine.</xsd:documentation>
+                              </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="derby">
+                              <xsd:annotation>
+                                    <xsd:documentation>The derby value describes the Apache Derby database engine.</xsd:documentation>
+                              </xsd:annotation>
+                        </xsd:enumeration>
                         <xsd:enumeration value="db2">
                               <xsd:annotation>
                                     <xsd:documentation>The db2 value describes the IBM DB2 database engine.</xsd:documentation>
@@ -2545,6 +2565,11 @@ SERVERPROPERTY('IsClustered') AS [is_clustered]
                         <xsd:enumeration value="lightbase">
                               <xsd:annotation>
                                     <xsd:documentation>The lightbase value describes the Light Infocon LightBase database engine.</xsd:documentation>
+                              </xsd:annotation>
+                        </xsd:enumeration>
+                      <xsd:enumeration value="mariadb">
+                              <xsd:annotation>
+                                    <xsd:documentation>The mariadb value describes the MariaDB database engine.</xsd:documentation>
                               </xsd:annotation>
                         </xsd:enumeration>
                         <xsd:enumeration value="maxdb">
