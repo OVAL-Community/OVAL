@@ -10,9 +10,6 @@ jobs:
     runs-on: ubuntu-latest
     env:
       CLEAN_FILES: |
-        Area Supervisors
-        Email List Archives
-        OVAL-Board
         guidelines
         tools
         .gitignore
