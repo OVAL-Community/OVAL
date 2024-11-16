@@ -1,6 +1,7 @@
 name: Build Release
 
 on:
+  workflow_dispatch:
   release:
     types: [ published, edited ]
 
@@ -13,6 +14,8 @@ jobs:
         uses: actions/checkout@v4
         with:
           submodules: recursive
+      - name: 'Build docs'
+        uses: ./.github/actions/buildDocs-action
       - name: Build Release
         env:
           TAG: ${{ github.ref_name }}
