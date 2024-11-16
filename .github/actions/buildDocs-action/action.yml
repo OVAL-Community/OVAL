@@ -1,0 +1,9 @@
+name: 'Build Docs'
+description: 'Docker action which build docs'
+
+on:
+   workflow_call:
+
+runs:
+    using: 'docker'
+    image: 'Dockerfile'
