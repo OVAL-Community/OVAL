@@ -35,6 +35,12 @@
                               <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#hpux">getconf_item</oval:item>
                         </oval:element_mapping>
                   </xsd:appinfo>
+					<xsd:appinfo>
+						<oval:deprecated_info>
+							<oval:version>5.12</oval:version>
+							<oval:comment>This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.</oval:comment>
+						</oval:deprecated_info>
+					</xsd:appinfo>
                   <xsd:appinfo>
                         <sch:pattern id="hpux-def_getconf_test">
                               <sch:rule context="hpux-def:getconf_test/hpux-def:object">
@@ -141,6 +147,12 @@
                               <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#hpux">ndd_item</oval:item>
                         </oval:element_mapping>
                   </xsd:appinfo>
+					<xsd:appinfo>
+						<oval:deprecated_info>
+							<oval:version>5.12</oval:version>
+							<oval:comment>This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.</oval:comment>
+						</oval:deprecated_info>
+					</xsd:appinfo>
                   <xsd:appinfo>
                         <sch:pattern id="hpux-def_ndd_test">
                               <sch:rule context="hpux-def:ndd_test/hpux-def:object">
@@ -247,6 +259,12 @@
                               <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#hpux">patch_item</oval:item>
                         </oval:element_mapping>
                   </xsd:appinfo>
+					<xsd:appinfo>
+						<oval:deprecated_info>
+							<oval:version>5.12</oval:version>
+							<oval:comment>This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.</oval:comment>
+						</oval:deprecated_info>
+					</xsd:appinfo>
                   <xsd:appinfo>
                         <sch:pattern id="hpux-def_patch53_test">
                               <sch:rule context="hpux-def:patch53_test/hpux-def:object">
@@ -496,6 +514,12 @@
                               <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#hpux">swlist_item</oval:item>
                         </oval:element_mapping>
                   </xsd:appinfo>
+					<xsd:appinfo>
+						<oval:deprecated_info>
+							<oval:version>5.12</oval:version>
+							<oval:comment>This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.</oval:comment>
+						</oval:deprecated_info>
+					</xsd:appinfo>
                   <xsd:appinfo>
                         <sch:pattern id="hpux-def_swlist_test">
                               <sch:rule context="hpux-def:swlist_test/hpux-def:object">
@@ -626,6 +650,12 @@
                               <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#hpux">trusted_item</oval:item>
                         </oval:element_mapping>
                   </xsd:appinfo>
+					<xsd:appinfo>
+						<oval:deprecated_info>
+							<oval:version>5.12</oval:version>
+							<oval:comment>This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.</oval:comment>
+						</oval:deprecated_info>
+					</xsd:appinfo>
                   <xsd:appinfo>
                         <sch:pattern id="hpux-def_trusted_test">
                               <sch:rule context="hpux-def:trusted_test/hpux-def:object">

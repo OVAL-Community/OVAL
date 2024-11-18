@@ -34,6 +34,12 @@
                     <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#netconf">config_item</oval:item>
                 </oval:element_mapping>
             </xsd:appinfo>
+			<xsd:appinfo>
+				<oval:deprecated_info>
+					<oval:version>5.12</oval:version>
+					<oval:comment>This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.</oval:comment>
+				</oval:deprecated_info>
+			</xsd:appinfo>
             <xsd:appinfo>
                 <sch:pattern id="netconf-def_configtst">
                     <sch:rule context="netconf-def:config_test/netconf-def:object">

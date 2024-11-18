@@ -35,6 +35,12 @@
                         </oval:element_mapping>
                   </xsd:appinfo>
                   <xsd:appinfo>
+                        <oval:deprecated_info>
+                              <oval:version>5.12</oval:version>
+                              <oval:comment>This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.</oval:comment>
+                        </oval:deprecated_info>
+                  </xsd:appinfo>
+                  <xsd:appinfo>
                         <sch:pattern id="aix-def_interimfixtst">
                               <sch:rule context="aix-def:interim_fix_test/aix-def:object">
                                     <sch:assert test="@object_ref=ancestor::oval-def:oval_definitions/oval-def:objects/aix-def:interim_fix_object/@id"><sch:value-of select="../@id"/> - the object child element of a <sch:name path=".."/> must reference a interim_fix_object</sch:assert>
@@ -870,6 +876,12 @@
                               </sch:rule>
                         </sch:pattern>
                   </xsd:appinfo>
+                  <xsd:appinfo>
+                        <oval:deprecated_info>
+                              <oval:version>5.12</oval:version>
+                              <oval:comment>This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.</oval:comment>
+                        </oval:deprecated_info>
+                  </xsd:appinfo>
             </xsd:annotation>
             <xsd:complexType>
                   <xsd:complexContent>
@@ -946,6 +958,12 @@
                         </sch:rule>
                     </sch:pattern>
                 </xsd:appinfo>
+				<xsd:appinfo>
+					<oval:deprecated_info>
+						<oval:version>5.12</oval:version>
+						<oval:comment>This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.</oval:comment>
+					</oval:deprecated_info>
+				</xsd:appinfo>
             </xsd:annotation>
             <xsd:complexType>
                   <xsd:complexContent>

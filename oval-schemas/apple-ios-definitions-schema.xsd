@@ -36,6 +36,12 @@
           <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#apple_ios">globalrestrictions_item</oval:item>
         </oval:element_mapping>
       </xsd:appinfo>
+		<xsd:appinfo>
+			<oval:deprecated_info>
+				<oval:version>5.12</oval:version>
+				<oval:comment>This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.</oval:comment>
+			</oval:deprecated_info>
+		</xsd:appinfo>
       <xsd:appinfo>
         <sch:pattern id="apple-ios-def_globalrestrictions_test">
           <sch:rule context="apple-ios-def:globalrestrictions_test/apple-ios-def:object">
@@ -295,6 +301,12 @@
           <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#apple_ios">passcodepolicy_item</oval:item>
         </oval:element_mapping>
       </xsd:appinfo>
+		<xsd:appinfo>
+			<oval:deprecated_info>
+				<oval:version>5.12</oval:version>
+				<oval:comment>This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.</oval:comment>
+			</oval:deprecated_info>
+		</xsd:appinfo>
       <xsd:appinfo>
         <sch:pattern id="apple-ios-def_passcodepolicy_test">
           <sch:rule context="apple-ios-def:passcodepolicy_test/apple-ios-def:object">
@@ -405,6 +417,12 @@
           <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#apple_ios">profile_item</oval:item>
         </oval:element_mapping>
       </xsd:appinfo>
+		<xsd:appinfo>
+			<oval:deprecated_info>
+				<oval:version>5.12</oval:version>
+				<oval:comment>This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.</oval:comment>
+			</oval:deprecated_info>
+		</xsd:appinfo>
       <xsd:appinfo>
         <sch:pattern id="apple-ios-def_profile_test">
           <sch:rule context="apple-ios-def:profile_test/apple-ios-def:object">

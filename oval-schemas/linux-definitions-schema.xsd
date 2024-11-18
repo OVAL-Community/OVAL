@@ -309,6 +309,12 @@
                          <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#linux">iflisteners_item</oval:item>
                     </oval:element_mapping>
                </xsd:appinfo>
+				<xsd:appinfo>
+					<oval:deprecated_info>
+						<oval:version>5.12</oval:version>
+						<oval:comment>This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.</oval:comment>
+					</oval:deprecated_info>
+				</xsd:appinfo>
                <xsd:appinfo>
                     <sch:pattern id="linux-def_iflisteners_test">
                          <sch:rule context="linux-def:iflisteners_test/linux-def:object">
@@ -1021,6 +1027,12 @@
                          <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#linux">rpmverify_item</oval:item>
                     </oval:element_mapping>
                </xsd:appinfo>
+				<xsd:appinfo>
+					<oval:deprecated_info>
+						<oval:version>5.12</oval:version>
+						<oval:comment>This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.</oval:comment>
+					</oval:deprecated_info>
+				</xsd:appinfo>
                <xsd:appinfo>
                     <oval:deprecated_info>
                          <oval:version>5.10</oval:version>
@@ -2410,6 +2422,12 @@
                          <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#linux">slackwarepkginfo_item</oval:item>
                     </oval:element_mapping>
                </xsd:appinfo>
+				<xsd:appinfo>
+					<oval:deprecated_info>
+						<oval:version>5.12</oval:version>
+						<oval:comment>This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.</oval:comment>
+					</oval:deprecated_info>
+				</xsd:appinfo>
                <xsd:appinfo>
                     <sch:pattern id="linux-def_slackwarepkginfo_test">
                          <sch:rule context="linux-def:slackwarepkginfo_test/linux-def:object">

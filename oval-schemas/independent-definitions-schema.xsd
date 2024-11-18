@@ -675,6 +675,12 @@
                               <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#independent">ldap_item</oval:item>
                         </oval:element_mapping>
                   </xsd:appinfo>
+					<xsd:appinfo>
+						<oval:deprecated_info>
+							<oval:version>5.12</oval:version>
+							<oval:comment>This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.</oval:comment>
+						</oval:deprecated_info>
+					</xsd:appinfo>
                   <xsd:appinfo>
                         <sch:pattern id="ind-def_ldaptst">
                               <sch:rule context="ind-def:ldap_test/ind-def:object">
@@ -1164,8 +1170,8 @@
                               <oval:reason>Replaced by the sql512_test.  The sql512_test removes the connection string and replaces it with 'instance' and 'database' elements.  This allows the application to perform any necessary steps to connect, and providing a simple method for content authors to determine which database(s) to query.</oval:reason>
                               <oval:comment>This object has been deprecated and may be removed in a future version of the language.</oval:comment>
                         </oval:deprecated_info>
-                        <sch:pattern id="ind-def_sql_test_dep">
-                              <sch:rule context="ind-def:sql_test">
+                        <sch:pattern id="ind-def_sql57_test_dep">
+                              <sch:rule context="ind-def:sql57_test">
                                     <sch:report test="true()">DEPRECATED TEST: <sch:value-of select="name()"/> ID: <sch:value-of select="@id"/></sch:report>
                               </sch:rule>
                         </sch:pattern>

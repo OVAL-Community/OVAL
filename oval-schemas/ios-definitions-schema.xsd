@@ -35,6 +35,12 @@
                               <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#ios">acl_item</oval:item>
                         </oval:element_mapping>
                   </xsd:appinfo>
+					<xsd:appinfo>
+						<oval:deprecated_info>
+							<oval:version>5.12</oval:version>
+							<oval:comment>This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.</oval:comment>
+						</oval:deprecated_info>
+					</xsd:appinfo>
                   <xsd:appinfo>
                         <sch:pattern id="ios_acltst">
                               <sch:rule context="ios-def:acl_test/ios-def:object">
@@ -731,6 +737,12 @@
                               <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#ios">router_item</oval:item>
                         </oval:element_mapping>
                   </xsd:appinfo>
+					<xsd:appinfo>
+						<oval:deprecated_info>
+							<oval:version>5.12</oval:version>
+							<oval:comment>This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.</oval:comment>
+						</oval:deprecated_info>
+					</xsd:appinfo>
                   <xsd:appinfo>
                         <sch:pattern id="ios_routertst">
                               <sch:rule context="ios-def:router_test/ios-def:object">
@@ -1648,6 +1660,12 @@
                               <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#ios">snmpview_item</oval:item>
                         </oval:element_mapping>
                   </xsd:appinfo>
+					<xsd:appinfo>
+						<oval:deprecated_info>
+							<oval:version>5.12</oval:version>
+							<oval:comment>This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.</oval:comment>
+						</oval:deprecated_info>
+					</xsd:appinfo>
                   <xsd:appinfo>
                         <sch:pattern id="ios_viewtst">
                               <sch:rule context="ios-def:snmpview_test/ios-def:object">
@@ -1750,6 +1768,12 @@
                               <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#ios">tclsh_item</oval:item>
                         </oval:element_mapping>
                   </xsd:appinfo>
+					<xsd:appinfo>
+						<oval:deprecated_info>
+							<oval:version>5.12</oval:version>
+							<oval:comment>This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.</oval:comment>
+						</oval:deprecated_info>
+					</xsd:appinfo>
                   <xsd:appinfo>
                         <sch:pattern id="ios-def_tclshtst">
                               <sch:rule context="ios-def:tclsh_test/ios-def:object">
