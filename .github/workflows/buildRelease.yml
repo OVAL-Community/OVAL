@@ -1,15 +1,59 @@
 name: Build Release
 
 on:
-  push:
-    tags:
-      - 5.[0-9]+
-      - 6.[0-9]+
+  workflow_dispatch:
+    inputs:
+      version_tag:
+        description: 'Associated tag to the release version'
+        required: true
 
 jobs:
+  CleanAndTag:
+    runs-on: ubuntu-latest
+    env:
+      CLEAN_FILES: |
+        guidelines
+        tools
+        .gitignore
+        README.md
+        readthedocs.yaml
+        terms-of-use.rst
+        .github
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v4
+      - name: Change to release branch
+        run: git checkout -b "releases/${{ inputs.version_tag }}"
+      - name: Delete undesired directories
+        run: |
+          readarray -t clean_files <<< "${CLEAN_FILES}"
+          for it in "${clean_files[@]}"; do
+            echo "Removing ${it}"
+            rm -rf "${it}"
+          done
+      - name: List files in the repository
+        run: |
+          ls ${{ github.workspace }}
+      - name: Set gitconfig
+        run: |
+          git config user.name "github-actions[bot] on behalf of ${{ github.triggering_actor }}"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+      - name: Commit release
+        run: |
+          git add .
+          git commit -m "release ${{ inputs.version_tag }}"
+      - name: Add tag
+        run: git tag -m "Release tag ${{ inputs.version_tag }}" ${{ inputs.version_tag }}
+      - name: Push to repo
+        run: git push --follow-tags origin "releases/${{ inputs.version_tag }}"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
   buildRelease:
     runs-on: ubuntu-latest
-
+    env:
+      DOC_DIR: "OVAL_html"
+    needs: CleanAndTag
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -19,14 +63,14 @@ jobs:
         uses: ./.github/actions/buildDocs-action
       - name: 'Compress docs'
         run: |
-          mv guidelines/_build/dirhtml OVAL_html
-          zip -r OVAL_html.zip OVAL_html
-      - name: Attach Release Artifacts
+          sudo chown -R $USER guidelines
+          mv guidelines/_build/dirhtml $DOC_DIR
+          zip -r "$DOC_DIR".zip $DOC_DIR
+      - name: Create Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           OWNER: ${{ github.repository_owner }}
           REPO: ${{ github.event.repository.name }}
-          TAG: ${{ github.ref_name }}
+          TAG: ${{ inputs.version_tag }}
         run: |
-            SCHEMA_FILES=$(ls oval-schemas/*.xsd OVAL_html.zip)
-            gh release upload $TAG $SCHEMA_FILES --clobber --repo $OWNER/$REPO
+            gh release create $TAG "$DOC_DIR".zip -d --generate-notes --verify-tag --repo $OWNER/$REPO
