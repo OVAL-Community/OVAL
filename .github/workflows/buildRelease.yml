@@ -1,8 +1,10 @@
 name: Build Release
 
 on:
-  release:
-    types: [ published, edited ]
+  push:
+    tags:
+      - 5.[0-9]+
+      - 6.[0-9]+
 
 jobs:
   buildRelease:
@@ -15,11 +17,10 @@ jobs:
           submodules: recursive
       - name: 'Build docs'
         uses: ./.github/actions/buildDocs-action
-      - name: Build Release
-        env:
-          TAG: ${{ github.ref_name }}
+      - name: 'Compress docs'
         run: |
-          echo "Perform and build steps here such as docs, .sch, .xsl, zip files, etc..."
+          mv guidelines/_build/dirhtml OVAL_html
+          zip -r OVAL_html.zip OVAL_html
       - name: Attach Release Artifacts
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -27,5 +28,5 @@ jobs:
           REPO: ${{ github.event.repository.name }}
           TAG: ${{ github.ref_name }}
         run: |
-            SCHEMA_FILES=$(ls oval-schemas/*.xsd)
+            SCHEMA_FILES=$(ls oval-schemas/*.xsd OVAL_html.zip)
             gh release upload $TAG $SCHEMA_FILES --clobber --repo $OWNER/$REPO
