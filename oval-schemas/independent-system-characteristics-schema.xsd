@@ -325,18 +325,22 @@
                </xsd:complexContent>
           </xsd:complexType>
      </xsd:element>
+
+	
 	 <!-- =============================================================================== -->
      <!-- ==========================  SHELLCOMMAND ITEM  ================================= -->
      <!-- =============================================================================== -->
      <xsd:element name="shellcommand_item" substitutionGroup="oval-sc:item">
           <xsd:annotation>
-               <xsd:documentation>The shellcommand_item stores information retrieved from the local system that results from the running of the command or embedded script in the associated object command element.</xsd:documentation>
+               <xsd:documentation>The shellcommand_item stores information retrieved from the local system that results from the running of the command or embedded script in the associated object command element.
+               
+The evaluation of the object should always produce at least one item.  If the object evaluation does not produce output that should result in an item, one should be created with a status of 'does not exist'.  This facilitates that capture of the exit_status and stderr from the system call.</xsd:documentation>
           </xsd:annotation>
           <xsd:complexType>
                <xsd:complexContent>
                     <xsd:extension base="oval-sc:ItemType">
                          <xsd:sequence>
-                              <xsd:element name="shell" type="oval-sc:EntityItemShellType" minOccurs="1" maxOccurs="1">
+                              <xsd:element name="shell" type="oval-sc:EntityItemStringType" minOccurs="1" maxOccurs="1">
                                    <xsd:annotation>
                                         <xsd:documentation>The shell element contains the shell used (e.g. bash or powershell) to perform the command and should be taken, verbatim, from the associated object 'shell' element.</xsd:documentation>
                                    </xsd:annotation>
@@ -362,11 +366,14 @@
 									<xsd:documentation>The stdout_line entity contains a line from the STDOUT output of a successful run of the command string that matched the specified object pattern.  Each line created by the execution of the object command should create an item.</xsd:documentation>
 								</xsd:annotation>
 							</xsd:element>
-							<xsd:element name="stderr_line" type="oval-sc:EntityItemStringType" minOccurs="0" maxOccurs="unbounded">
+                            <xsd:element name="subexpression" type="oval-sc:EntityItemAnySimpleType" minOccurs="0" maxOccurs="unbounded">
+                                   <xsd:annotation>
+                                        <xsd:documentation>The subexpression entity represents the value of a subexpression in the specified pattern.  If multiple subexpressions are specified in the pattern, then multiple entities are presented.  Note that the textfilecontent_state in the definition schema only allows a single subexpression entity.  This means that the test will check that all (or at least one, none, etc.) the subexpressions pass the same check.  This means that the order of multiple subexpression entities in the item does not matter.</xsd:documentation>
+                                   </xsd:annotation>
+                               </xsd:element>
+							<xsd:element name="stderr" type="oval-sc:EntityItemStringType" minOccurs="0" maxOccurs="unbounded">
 								<xsd:annotation>
-									<xsd:documentation>The stderr_line element represents a line from the STDERR output of a run of the command string that matched the specified object pattern.  Each line of STDERR produced by the command execution will produce a single shellcommand item.</xsd:documentation>
-												
-									<xsd:documentation>The stderr_line element represents any and all output to STDERR from a run of the command string.</xsd:documentation>
+									<xsd:documentation>The stderr element represents any and all output to STDERR from a run of the command string.</xsd:documentation>
 								</xsd:annotation>
 							</xsd:element>
                          </xsd:sequence>
