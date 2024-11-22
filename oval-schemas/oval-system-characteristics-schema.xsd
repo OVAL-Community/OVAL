@@ -153,7 +153,8 @@
                     <xsd:documentation>The required interface_name element is the name of the interface</xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
-            <xsd:element name="ip_address" type="xsd:string">
+            <!-- xsd:element name="ip_address" type="xsd:string" -->
+            <xsd:element name="ip_address" type="oval-sc:EntityItemIPAddressType">
                 <xsd:annotation>
                     <xsd:documentation>The required ip_address element holds the IP address for the interface. Note that the IP address can be IPv4 or IPv6.</xsd:documentation>
                 </xsd:annotation>
