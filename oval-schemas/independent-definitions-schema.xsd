@@ -976,7 +976,9 @@
             <xsd:annotation>
                   <xsd:documentation>The shellcommand_test is used to check the values produced by the running of the 'command' (or script, but not an external script file) found in the object 'command' element. It extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information. The required object element references a shellcommand_object and the optional state element references a shellcommand_state that specifies the information to check.
                   
-Since this test runs the command string supplied in the object command element, the content author should avoid writing command strings that may produce large amounts of output or that may be fragile causing errors and thus produce large amounts of error output.  The command should produce well formed output that will result in one OVAL item foreach line of output produced by the object evaluation.
+Since this test runs the command string supplied in the object command element, the content author should avoid writing command strings that may produce large amounts of output or that may be fragile causing errors and thus produce large amounts of error output.
+
+The command should produce well formed output that will result in one item stdout_line element for each line of output via STDOUT by the object evaluation.  Similarly, in the item, for any output to STDERR, a stderr_line element will be created.
                                    
 IMPORTANT! - Since this test requires the running of code supplied by content and since OVAL interpreters commonly run with elevated privileges, significant responsibilty falls to the content author to DO NO HARM to the target system.  This also requires that any content stream that employs this test MUST be from a known trusted source and be digitally signed.  The use of any executables that are not supplied by the installed operating system is highly discouraged.</xsd:documentation>
                   <xsd:appinfo>
@@ -1015,9 +1017,6 @@ IMPORTANT! - Since this test requires the running of code supplied by content an
                   <xsd:documentation>The shellcommand_object is used by a shellcommand_test to define a shell to use (e.g. sh, bash, ksh, etc.), a command (or shell script) to be run, and a pattern to filter result lines. The default shell is bash.  Each object extends the standard ObjectType as defined in the oval-definitions-schema and one should refer to the ObjectType description for more information. The common set element allows complex objects to be created using filters and set logic.
                   
 The evaluation of the object should always produce at least one item.  If the object evaluation does not produce output that should result in an item, one should be created with a status of 'does not exist' and, if possible, the exit_status and any STDERR from the system call should be captured in that item.
-
-Also, note that as lines from STDERR often cannot be related to a specific line of STDOUT, each item will contain all of the output from STDERR.  Content authors should be aware that this could be highly redundant and voluminous and should design object command strings accordingly.
-
                   </xsd:documentation>
                   <xsd:appinfo>
                         <sch:pattern id="ind-def_shellcommand_object_verify_filter_state">
@@ -1052,7 +1051,7 @@ Also, note that as lines from STDERR often cannot be related to a specific line 
                                                 </xsd:element>
                                                 <xsd:element name="pattern" type="oval-def:EntityObjectStringType"  minOccurs="0" maxOccurs="1">
                                                       <xsd:annotation>
-                                                            <xsd:documentation>The 'pattern' is a regular expression that identifies lines in 'command' results that are to produce OVAL items.   Any result line that matches the pattern is kept as an OVAL item.  Any that do not are discarded.  If the pattern element is empty or does not exist, all results lines are kept.  
+                                                            <xsd:documentation>The 'pattern' is a regular expression that identifies lines in 'command' results that are to produce OVAL items.   Any result line via STDOUT that matches the pattern is kept as an item stdout_line element.  Any that do not are discarded.  If the pattern element is empty or does not exist, all results lines are kept.  
 															
 A subexpression (using parentheses) can call out a piece of the matched stdout_line to test. For example, the pattern abc(.*)xyz would look for a block of text in the file that starts with abc and ends with xyz, with the subexpression being all the characters that exist in between. The value of the subexpression can then be tested using the subexpression entity of a shellcommand_state. Note that if the pattern, starting at the same point in the line, matches more than one block of text, then it matches the longest. For example, given a file with abcdefxyzxyzabc, then the pattern abc(.*)xyz would match the block abcdefxyzxyz. Subexpressions also match the longest possible substrings, subject to the constraint that the whole match be as long as possible, with subexpressions starting earlier in the pattern taking priority over ones starting later.
 
@@ -1112,7 +1111,7 @@ A subexpression (using parentheses) can call out a piece of the matched stdout_l
 											<xsd:documentation>The 'exit_status' entity represents the exist status returned by the system for the execution of the object command.</xsd:documentation>
 										</xsd:annotation>
 									</xsd:element>
-                                    <xsd:element name="stdout_line" type="oval-def:EntityStateAnySimpleType" minOccurs="0" maxOccurs="1">
+                                    <xsd:element name="stdout_line" type="oval-def:EntityStateAnySimpleType" minOccurs="0" maxOccurs="unbounded">
                                           <xsd:annotation>
                                                 <xsd:documentation>The 'stdout_line' entity represents a line from the STDOUT output of a successful run of the command string that matched the specified object pattern.</xsd:documentation>
                                           </xsd:annotation>
@@ -1122,9 +1121,9 @@ A subexpression (using parentheses) can call out a piece of the matched stdout_l
                                                 <xsd:documentation>The subexpression entity represents a value to test against the subexpression in the specified pattern. If multiple subexpressions are specified in the pattern, this value is tested against all of them. For example, if the pattern abc(.*)mno(.*)xyp was supplied, and the state specifies a subexpression value of enabled, then the test would check that both (or at least one, none, etc. depending on the entity_check attribute) of the subexpressions have a value of enabled.</xsd:documentation>
                                           </xsd:annotation>
                                     </xsd:element>
-                                    <xsd:element name="stderr" type="oval-def:EntityStateAnySimpleType" minOccurs="0" maxOccurs="1">
+                                    <xsd:element name="stderr_line" type="oval-def:EntityStateAnySimpleType" minOccurs="0" maxOccurs="unbounded">
                                           <xsd:annotation>		
-												 <xsd:documentation>The 'stderr' element contains any and all output to STDERR from a run of the object command.</xsd:documentation>
+												 <xsd:documentation>The 'stderr_line' element contains any and all output to STDERR from a run of the object command.  Each line of STDERR should create an additional 'stderr_line' element.</xsd:documentation>
                                           </xsd:annotation>
                                     </xsd:element>
                               </xsd:sequence>
