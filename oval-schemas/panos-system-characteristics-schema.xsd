@@ -15,12 +15,12 @@
         <xsd:documentation>
             This schema was originally developed by William Munyan at cisecurity.org. The OVAL Schema is maintained by the OVAL 
             Community. For more information, including how to get involved in the project and how to submit change requests, please 
-            visit the OVAL website at http://oval.cisecurity.org.
+            visit the OVAL website at https://github.com/OVAL-Community/.
         </xsd:documentation>
         <xsd:appinfo>
             <schema>Palo Alto (PAN-OS) Definitions</schema>
             <version>5.11.2:2.0</version>
-            <date>03/30/2021 09:00:00 AM</date>
+            <date>11/29/2024 09:00:00 AM</date>
             <terms_of_use>
                 For the portion subject to the copyright in the United States: Copyright (c) 2016 United States Government. 
                 All rights reserved. Copyright (c) 2016, Center for Internet Security. All rights reserved. The contents of 
