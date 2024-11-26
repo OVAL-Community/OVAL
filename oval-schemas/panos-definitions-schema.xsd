@@ -5,7 +5,7 @@
             xmlns:panos-def="http://oval.mitre.org/XMLSchema/oval-definitions-5#panos"
             xmlns:sch="http://purl.oclc.org/dsdl/schematron"
             targetNamespace="http://oval.mitre.org/XMLSchema/oval-definitions-5#panos"
-            elementFormDefault="qualified" version="5.11">
+            elementFormDefault="qualified" version="5.12">
     <xsd:import namespace="http://oval.mitre.org/XMLSchema/oval-definitions-5" schemaLocation="oval-definitions-schema.xsd"/>
     <xsd:annotation>
         <xsd:documentation>
@@ -24,7 +24,7 @@
         </xsd:documentation>
         <xsd:appinfo>
             <schema>Palo Alto (PAN-OS) Definitions</schema>
-            <version>5.11.2:2.0</version>
+            <version>5.12</version>
             <date>11/29/2024 09:00:00 AM</date>
             <terms_of_use>
                 For the portion subject to the copyright in the United States: Copyright (c) 2016 United States Government. 

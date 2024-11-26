@@ -5,7 +5,7 @@
             xmlns:apache-def="http://oval.mitre.org/XMLSchema/oval-definitions-5#apache"
             xmlns:sch="http://purl.oclc.org/dsdl/schematron"
             targetNamespace="http://oval.mitre.org/XMLSchema/oval-definitions-5#apache"
-            elementFormDefault="qualified" version="5.11">
+            elementFormDefault="qualified" version="5.12">
       <xsd:import namespace="http://oval.mitre.org/XMLSchema/oval-common-5" schemaLocation="oval-common-schema.xsd"/>
       <xsd:import namespace="http://oval.mitre.org/XMLSchema/oval-definitions-5" schemaLocation="oval-definitions-schema.xsd"/>
       <xsd:annotation>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:aws-def="http://oval.mitre.org/XMLSchema/oval-definitions-5#aws" xmlns:sch="http://purl.oclc.org/dsdl/schematron" targetNamespace="http://oval.mitre.org/XMLSchema/oval-definitions-5#aws" elementFormDefault="qualified" version="5.11">
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:aws-def="http://oval.mitre.org/XMLSchema/oval-definitions-5#aws" xmlns:sch="http://purl.oclc.org/dsdl/schematron" targetNamespace="http://oval.mitre.org/XMLSchema/oval-definitions-5#aws" elementFormDefault="qualified" version="5.12">
     
     <xsd:import namespace="http://oval.mitre.org/XMLSchema/oval-common-5" schemaLocation="oval-common-schema.xsd"/>
     <xsd:import namespace="http://oval.mitre.org/XMLSchema/oval-definitions-5" schemaLocation="oval-definitions-schema.xsd"/>
@@ -23,7 +23,7 @@
         </xsd:documentation>
         <xsd:appinfo>
             <schema>Amazon Web Services Definition</schema>
-            <version>5.11.2</version>
+            <version>5.12</version>
             <date>11/29/2024 09:00:00 AM</date>
             <terms_of_use>
                 For the portion subject to the copyright in the United States: Copyright (c) 2016 United States 

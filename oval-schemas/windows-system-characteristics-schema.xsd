@@ -5,7 +5,7 @@
             xmlns:win-sc="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#windows"
             xmlns:sch="http://purl.oclc.org/dsdl/schematron"
             targetNamespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#windows"
-            elementFormDefault="qualified" version="5.11">
+            elementFormDefault="qualified" version="5.12">
      <xsd:import namespace="http://oval.mitre.org/XMLSchema/oval-common-5" schemaLocation="oval-common-schema.xsd"/>
      <xsd:import namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5" schemaLocation="oval-system-characteristics-schema.xsd"/>
      <xsd:annotation>
