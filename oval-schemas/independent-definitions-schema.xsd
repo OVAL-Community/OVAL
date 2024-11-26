@@ -1039,7 +1039,7 @@ The evaluation of the object should always produce at least one item.  If the ob
                                     <xsd:choice>
                                           <xsd:element ref="oval-def:set"/>
                                           <xsd:sequence>
-                                                <xsd:element name="shell" type="oval-def:EntityObjectShellType" use="optional" default="'cmd' on Windows, 'sh' on UNIX/linux, 'Zsh' on MacOS" >
+                                                <xsd:element name="shell" type="oval-def:EntityObjectShellType" use="required" >
                                                       <xsd:annotation>
                                                             <xsd:documentation>The shell entity defines the specific shell to use (e.g. bash, csh, ksh, etc.). Any tool collecting information for this object will need to know the shell in order to use it properly.</xsd:documentation>
                                                       </xsd:annotation>
@@ -2682,9 +2682,9 @@ SERVERPROPERTY('IsClustered') AS [is_clustered]
                                     <xsd:documentation>The korn shell (ksh).</xsd:documentation>
                               </xsd:annotation>
                         </xsd:enumeration>
-                        <xsd:enumeration value="Zsh">
+                        <xsd:enumeration value="zsh">
                               <xsd:annotation>
-                                    <xsd:documentation>The Z shell (Zsh).</xsd:documentation>
+                                    <xsd:documentation>The Z shell (zsh).</xsd:documentation>
                               </xsd:annotation>
                         </xsd:enumeration>
                         <xsd:enumeration value="cmd">
@@ -2731,9 +2731,9 @@ SERVERPROPERTY('IsClustered') AS [is_clustered]
                                     <xsd:documentation>The korn shell (ksh).</xsd:documentation>
                               </xsd:annotation>
                         </xsd:enumeration>
-                        <xsd:enumeration value="Zsh">
+                        <xsd:enumeration value="zsh">
                               <xsd:annotation>
-                                    <xsd:documentation>The Z shell (Zsh).</xsd:documentation>
+                                    <xsd:documentation>The Z shell (zsh).</xsd:documentation>
                               </xsd:annotation>
                         </xsd:enumeration>
                         <xsd:enumeration value="cmd">
