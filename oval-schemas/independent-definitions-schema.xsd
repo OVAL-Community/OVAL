@@ -1039,7 +1039,7 @@ The evaluation of the object should always produce at least one item.  If the ob
                                     <xsd:choice>
                                           <xsd:element ref="oval-def:set"/>
                                           <xsd:sequence>
-                                                <xsd:element name="shell" type="oval-def:EntityObjectStringType">
+                                                <xsd:element name="shell" type="oval-def:EntityObjectShellType" use="optional" default="'cmd' on Windows, 'sh' on UNIX/linux, 'Zsh' on MacOS" >
                                                       <xsd:annotation>
                                                             <xsd:documentation>The shell entity defines the specific shell to use (e.g. bash, csh, ksh, etc.). Any tool collecting information for this object will need to know the shell in order to use it properly.</xsd:documentation>
                                                       </xsd:annotation>
@@ -1053,7 +1053,7 @@ The evaluation of the object should always produce at least one item.  If the ob
                                                       <xsd:annotation>
                                                             <xsd:documentation>The 'pattern' is a regular expression that identifies lines in 'command' results that are to produce OVAL items.   Any result line via STDOUT that matches the pattern is kept as an item stdout_line element.  Any that do not are discarded.  If the pattern element is empty or does not exist, all results lines are kept.  
 															
-A subexpression (using parentheses) can call out a piece of the matched stdout_line to test. For example, the pattern abc(.*)xyz would look for a block of text in the file that starts with abc and ends with xyz, with the subexpression being all the characters that exist in between. The value of the subexpression can then be tested using the subexpression entity of a shellcommand_state. Note that if the pattern, starting at the same point in the line, matches more than one block of text, then it matches the longest. For example, given a file with abcdefxyzxyzabc, then the pattern abc(.*)xyz would match the block abcdefxyzxyz. Subexpressions also match the longest possible substrings, subject to the constraint that the whole match be as long as possible, with subexpressions starting earlier in the pattern taking priority over ones starting later.
+A subexpression (using parentheses) can call out a piece of the matched stdout_line to test. For example, the pattern abc(.*)xyz would look for a block of text in the output that starts with abc and ends with xyz, with the subexpression being all the characters that exist in between. The value of the subexpression can then be tested using the subexpression entity of a shellcommand_state. Note that if the pattern, starting at the same point in the line, matches more than one block of text, then it matches the longest. For example, given output with abcdefxyzxyzabc, then the pattern abc(.*)xyz would match the block abcdefxyzxyz. Subexpressions also match the longest possible substrings, subject to the constraint that the whole match be as long as possible, with subexpressions starting earlier in the pattern taking priority over ones starting later.
 
 															</xsd:documentation>
                                                             <xsd:documentation>Note that when using regular expressions, OVAL supports a common subset of the regular expression character classes, operations, expressions and other lexical tokens defined within Perl 5's regular expression specification. For more information on the supported regular expression syntax in OVAL see: http://oval.mitre.org/language/about/re_support_5.6.html.</xsd:documentation>
@@ -1083,7 +1083,7 @@ A subexpression (using parentheses) can call out a piece of the matched stdout_l
                   <xsd:complexContent>
                         <xsd:extension base="oval-def:StateType">
                               <xsd:sequence>
-                                    <xsd:element name="shell" type="oval-def:EntityStateStringType" minOccurs="0" maxOccurs="1">
+                                    <xsd:element name="shell" type="oval-def:EntityStateShellType" minOccurs="0" maxOccurs="1">
                                           <xsd:annotation>
                                                 <xsd:documentation>The 'shell' element contains the shell used to perform the command and must match the value in the associated object, verbatim.</xsd:documentation>
                                           </xsd:annotation>
@@ -1121,7 +1121,7 @@ A subexpression (using parentheses) can call out a piece of the matched stdout_l
                                                 <xsd:documentation>The subexpression entity represents a value to test against the subexpression in the specified pattern. If multiple subexpressions are specified in the pattern, this value is tested against all of them. For example, if the pattern abc(.*)mno(.*)xyp was supplied, and the state specifies a subexpression value of enabled, then the test would check that both (or at least one, none, etc. depending on the entity_check attribute) of the subexpressions have a value of enabled.</xsd:documentation>
                                           </xsd:annotation>
                                     </xsd:element>
-                                    <xsd:element name="stderr_line" type="oval-def:EntityStateAnySimpleType" minOccurs="0" maxOccurs="unbounded">
+                                    <xsd:element name="stderr_line" type="oval-def:EntityStateStringType" minOccurs="0" maxOccurs="unbounded">
                                           <xsd:annotation>		
 												 <xsd:documentation>The 'stderr_line' element contains any and all output to STDERR from a run of the object command.  Each line of STDERR should create an additional 'stderr_line' element.</xsd:documentation>
                                           </xsd:annotation>
@@ -2682,6 +2682,11 @@ SERVERPROPERTY('IsClustered') AS [is_clustered]
                                     <xsd:documentation>The korn shell (ksh).</xsd:documentation>
                               </xsd:annotation>
                         </xsd:enumeration>
+                        <xsd:enumeration value="Zsh">
+                              <xsd:annotation>
+                                    <xsd:documentation>The Z shell (Zsh).</xsd:documentation>
+                              </xsd:annotation>
+                        </xsd:enumeration>
                         <xsd:enumeration value="cmd">
                               <xsd:annotation>
                                     <xsd:documentation>The Microsoft Windows command prompt (cmd).</xsd:documentation>
@@ -2724,6 +2729,11 @@ SERVERPROPERTY('IsClustered') AS [is_clustered]
                         <xsd:enumeration value="ksh">
                               <xsd:annotation>
                                     <xsd:documentation>The korn shell (ksh).</xsd:documentation>
+                              </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="Zsh">
+                              <xsd:annotation>
+                                    <xsd:documentation>The Z shell (Zsh).</xsd:documentation>
                               </xsd:annotation>
                         </xsd:enumeration>
                         <xsd:enumeration value="cmd">

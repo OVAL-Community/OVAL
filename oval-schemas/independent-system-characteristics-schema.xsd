@@ -334,13 +334,13 @@
           <xsd:annotation>
                <xsd:documentation>The shellcommand_item stores information retrieved from the local system that results from the running of the command or embedded script in the associated object command element.
                
-The evaluation of the object should always produce at least one item.  If the object evaluation does not produce output via STDOUT that should result in an item, one should be created with a status of 'does not exist'.  This facilitates that capture of the exit_status and stderr from the system call.</xsd:documentation>
+The evaluation of the object should always produce one item.  If the object evaluation does not produce output via STDOUT that should result in an item, one should be created with a status of 'does not exist'.  This facilitates that capture of the exit_status and stderr from the system call.</xsd:documentation>
           </xsd:annotation>
           <xsd:complexType>
                <xsd:complexContent>
                     <xsd:extension base="oval-sc:ItemType">
                          <xsd:sequence>
-                              <xsd:element name="shell" type="oval-sc:EntityItemStringType" minOccurs="1" maxOccurs="1">
+                              <xsd:element name="shell" type="oval-sc:EntityItemShellType" minOccurs="1" maxOccurs="1">
                                    <xsd:annotation>
                                         <xsd:documentation>The shell element contains the shell used (e.g. bash or powershell) to perform the command and should be taken, verbatim, from the associated object 'shell' element.</xsd:documentation>
                                    </xsd:annotation>
@@ -788,6 +788,11 @@ The evaluation of the object should always produce at least one item.  If the ob
                         <xsd:enumeration value="ksh">
                               <xsd:annotation>
                                     <xsd:documentation>The korn shell (ksh).</xsd:documentation>
+                              </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="Zsh">
+                              <xsd:annotation>
+                                    <xsd:documentation>The Z shell (Zsh).</xsd:documentation>
                               </xsd:annotation>
                         </xsd:enumeration>
                         <xsd:enumeration value="cmd">
