@@ -1,4 +1,4 @@
-<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:oval-sc="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:aws-sc="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#aws" xmlns:sch="http://purl.oclc.org/dsdl/schematron" targetNamespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#aws" elementFormDefault="qualified" version="5.11">
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:oval-sc="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:aws-sc="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#aws" xmlns:sch="http://purl.oclc.org/dsdl/schematron" targetNamespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#aws" elementFormDefault="qualified" version="5.12">
     <xsd:import namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5" schemaLocation="oval-system-characteristics-schema.xsd"/>
     
     <xsd:annotation>
@@ -13,12 +13,12 @@
         </xsd:documentation>
         <xsd:documentation>
             The OVAL Schema is maintained by the OVAL Community. For more information, including how to get involved in the project 
-            and how to submit change requests, please visit the OVAL website at http://oval.cisecurity.org. 
+            and how to submit change requests, please visit the OVAL website at https://github.com/OVAL-Community/. 
         </xsd:documentation>
         <xsd:appinfo>
             <schema>Amazon Web Services System Characteristics</schema>
-            <version>5.11.2</version>
-            <date>09/08/2019 09:00:00 AM</date>
+            <version>5.12</version>
+            <date>11/29/2024 09:00:00 AM</date>
             <terms_of_use>
                 For the portion subject to the copyright in the United States: Copyright (c) 2016 United States Government. All Rights 
                 Reserved. Copyright (c) 2016, Center for Internet Security. All rights reserved. The contents of this file are subject 
