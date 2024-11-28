@@ -17,7 +17,7 @@ schemas-${OVAL_VERSION}.zip:
 	zip -j schemas-${OVAL_VERSION}.zip ${OVAL_SRC}/*.xsd
 	
 oval_docs-${OVAL_VERSION}.zip: $(DOCS)/index.html ovaldocs
-	zip oval_docs-${OVAL_VERSION}.zip ${OVAL_DOCS}
+	zip -j oval_docs-${OVAL_VERSION}.zip ${OVAL_DOCS}
 	
 $(DOCS)/index.html: rsrc/index.html
 	mkdir -p $(DOCS)
