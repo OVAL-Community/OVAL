@@ -1,4 +1,3 @@
-
 OVAL_VERSION=5.11.2
 NUMPROCS=$(shell nproc)
 SAXON_LIB=rsrc/saxon9he.jar
@@ -28,4 +27,4 @@ ovaldocs:
 	$(MAKE) -j$(NUMPROCS) $(OVAL_DOCS)
 
 $(DOCS)/%.html: $(OVAL_SRC)/%.xsd
-	java -jar $(SAXON_LIB) -s:$< -xsl:rsrc/oval_xsd2html.xsl -o:$@
+	java -jar $(SAXON_LIB) -s:$< -xsl:tools/oval_xsd2html.xsl -o:$@

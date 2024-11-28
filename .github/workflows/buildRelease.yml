@@ -18,7 +18,7 @@ jobs:
           TAG: ${{ github.ref_name }}
         run: |
             VERSION=echo "$TAG" | sed -nre 's/^[^0-9]*(([0-9]+\.)*[0-9]+).*/\1/p'
-            make OVAL_VERSION=${VERSION}
+            make
       - name: Attach Release Artifacts
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
