@@ -27,7 +27,5 @@ jobs:
           REPO: ${{ github.event.repository.name }}
           TAG: ${{ github.ref_name }}
         run: |
-            # SCHEMA_FILES=$(ls oval-schemas/*.xsd)
-            # gh release upload $TAG $SCHEMA_FILES --clobber --repo $OWNER/$REPO
             VERSION=$(echo $TAG | sed -nre 's/^[^0-9]*(([0-9]+\.)*[0-9]+).*/\1/p')
             gh release upload $TAG schemas-${VERSION}.zip oval_docs-${VERSION}.zip --clobber --repo $OWNER/$REPO
