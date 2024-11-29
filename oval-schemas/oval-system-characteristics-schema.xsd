@@ -153,17 +153,17 @@
                     <xsd:documentation>The required interface_name element is the name of the interface</xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
-            <xsd:element name="ip_address" minOccurs="0" maxOccurs="unbounded" type="xsd:IPv4Type">
+            <xsd:element name="ip_address" minOccurs="0" maxOccurs="unbounded" type="xsd:string">
                 <xsd:annotation>
                     <xsd:documentation>The ipv4_address element holds the IPV4 address for the interface.</xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
-            <xsd:element name="ipv6_address" minOccurs="0" maxOccurs="unbounded" type="xsd:IPv6Type">
+            <xsd:element name="ipv6_address" minOccurs="0" maxOccurs="unbounded" type="xsd:string">
                 <xsd:annotation>
                     <xsd:documentation>The ipv6_address element holds the IPV6 address for the interface.</xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
-            <xsd:element name="mac_address" minOccurs="0" type="xsd:MacAddressType" >
+            <xsd:element name="mac_address" minOccurs="0" type="xsd:string" >
                 <xsd:annotation>
                     <xsd:documentation>The required mac_address element holds the MAC address for the interface. MAC addresses should be formatted according to the IEEE 802-2001 standard which states that a MAC address is a sequence of six octet values, separated by hyphens, where each octet is represented by two hexadecimal digits. Uppercase letters should also be used to represent the hexadecimal digits A through F.</xsd:documentation>
                 </xsd:annotation>
@@ -171,32 +171,6 @@
         </xsd:sequence>
     </xsd:complexType>
 	
-	<xsd:simpleType name="MacAddressType">
-          <xsd:annotation>
-               <xsd:documentation>The standard (IEEE 802) format for printing MAC-48 addresses in human-friendly form is six groups of two hexadecimal digits, separated by hyphens - or colons :</xsd:documentation>
-          </xsd:annotation>
-          <xsd:restriction base="xsd:string">
-               <xsd:pattern value="^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$"/>
-          </xsd:restriction>
-     </xsd:simpleType>
-	 
-	<xsd:simpleType name="IPv4Type">
-          <xsd:annotation>
-               <xsd:documentation>Match a string represents a valid IPv4 address in 255.255.255.255 notation</xsd:documentation>
-          </xsd:annotation>
-          <xsd:restriction base="xsd:string">
-               <xsd:pattern value="^((25[0-5]|(2[0-4]|1\d|[1-9]|)\d)\.?\b){4}$"/>
-          </xsd:restriction>
-     </xsd:simpleType>
-	 
-	 <xsd:simpleType name="IPv6Type">
-          <xsd:annotation>
-               <xsd:documentation>Match an IPv6 address in standard notation, which consists of eight 16-bit words using hexadecimal notation, delimited by colons (e.g.: 1762:0:0:0:0:B03:1:AF18). Leading zeros are optional.</xsd:documentation>
-          </xsd:annotation>
-          <xsd:restriction base="xsd:string">
-               <xsd:pattern value="^(?:[A-F0-9]{1,4}:){7}[A-F0-9]{1,4}$"/>
-          </xsd:restriction>
-     </xsd:simpleType>
     <!-- =============================================================================== -->
     <!-- =============================  COLLECTED OBJECTS  ============================= -->
     <!-- =============================================================================== -->
