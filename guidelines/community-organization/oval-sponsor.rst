@@ -8,7 +8,7 @@ The Sponsor is essentially the conservator of the OVAL Language, providing infra
 Sponsor
 -------
 
-The Center for Internet Security is the presently designated sponsor and can be contacted at oval@cisecurity.org.
+The Naval Information Warfare Center (NIWC) Atlantic is the presently designated sponsor.
 
 Responsibilities
 ----------------

@@ -10,6 +10,13 @@ Welcome to The OVAL Community Guidelines!
 
 Welcome to the guidelines for OVAL, the Open Vulnerability and Assessment Language. These guidelines are designed to explain everything you need to know to start contributing to OVAL (or link you to places to ask questions, should the explanations not suffice), as well as provide a variety of standards and resources to the community.
 
+**Notice:**
+
+# Notice:
+*Posted Sept 19, 2024*
+ 
+**The development team of the SCAP Compliance Checker (SCC) at the Naval Information Warfare Center (NWIC) has taken over the role as OVAL Sponsor.  If your organization is interested in being part of this development community composed of top security experts, system administrators, and software developers from industry, government, and academia, please reach out to our team at scc.fct@navy.mil**
+
 What is OVAL?
 -------------
 
@@ -18,7 +25,7 @@ OVAL is an open language built by security experts, system administrators, and s
 Who is the OVAL Community?
 --------------------------
 
-The `OVAL Community <http://oval-community-guidelines.readthedocs.io/en/latest/community-organization/index.html>`_ is the group responsible for proposals about anything and everything OVAL related. It comprises `Members <https://oval-community-guidelines.readthedocs.io/en/latest/community-organization/community-members.html>`_, `Area Supervisors <https://oval-community-guidelines.readthedocs.io/en/latest/community-organization/area-supervisors.html>`_, the `Leadership Board <https://oval.cisecurity.org/community/board_members>`_, and the `Sponsor <https://www.cisecurity.org/>`_. The community maintains, fixes, and improves OVAL through an established governance process.
+The `OVAL Community <http://oval-community-guidelines.readthedocs.io/en/latest/community-organization/index.html>`_ is the group responsible for proposals about anything and everything OVAL related. It comprises `Members <https://oval-community-guidelines.readthedocs.io/en/latest/community-organization/community-members.html>`_, `Area Supervisors <https://oval-community-guidelines.readthedocs.io/en/latest/community-organization/area-supervisors.html>`_, the `Leadership Board <https://oval-community-guidelines.readthedocs.io/en/latest/community-organization/oval-leadership-board.html>`_, and the `Sponsor <https://www.cisecurity.org/>`_. The community maintains, fixes, and improves OVAL through an established governance process.
 
 Learn More
 ----------
@@ -26,7 +33,6 @@ Learn More
 | `OVAL Community <http://oval-community-guidelines.readthedocs.io/en/latest/community-organization/index.html>`_
 | `Repository Registry <http://oval-community-guidelines.readthedocs.io/en/latest/oval-content-repos.html>`_
 | `CIS OVAL Repository (GitHub) <https://github.com/CISecurity/OVALRepo>`_
-| `CIS OVAL Repository (Static Site) <https://oval.cisecurity.org>`_
 | `Mailing Lists <http://oval-community-guidelines.readthedocs.io/en/latest/mailing-lists.html>`_
 
 Get Involved

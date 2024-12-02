@@ -3,7 +3,7 @@
 OVAL Content Repositories
 =========================
 
-OVAL Content Repositories exist to preserve OVAL definitions and make them available for public use. While the `CIS Repository <https://oval.cisecurity.org/repository>`_ is the official repository, others exist that contain content specific to operating systems, applications, and software vendors.
+OVAL Content Repositories exist to preserve OVAL definitions and make them available for public use.
 
 Repositories
 ------------
@@ -29,18 +29,7 @@ The ALTEX-SOFT repository OVALdb consist of OVAL Definitions that correspond to 
 
 This page provides OVAL xml content for the latest Ubuntu operating system versions.
 
-`Click here for the Ubuntu Repository <https://people.canonical.com/~ubuntu-security/oval/>`_
-
-
-|CIS|
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-.. |CIS| image:: images/Logo_Text_Stacked_TMR.png
-   :width: 140px
-   :height: 50px
-
-The CIS repository is the new official OVAL Repository following the transition away from MITRE. Created August 2015.
-
-`Click here for the CIS Repository <https://oval.cisecurity.org/repository>`_
+`Click here for the Ubuntu Repository <https://ubuntu.com/security/oval>`_
 
 
 |Cisco|
@@ -144,4 +133,4 @@ The SUSE Linux Enterprise OVAL Information database is an index of fixed securit
 Updating the List
 -----------------
 
-To make changes to this list; to be added, removed, or have existing content modified, submit a pull request or email oval@cisecurity.org
+To make changes to this list; to be added, removed, or have existing content modified, 
