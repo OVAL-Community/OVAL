@@ -13,11 +13,13 @@ jobs:
         uses: actions/checkout@v4
         with:
           submodules: recursive
-      - name: Build Release
+      - name: Build Release Artifacts
         env:
           TAG: ${{ github.ref_name }}
         run: |
-          echo "Perform and build steps here such as docs, .sch, .xsl, zip files, etc..."
+            VERSION=$(echo $TAG | sed -nre 's/^[^0-9]*(([0-9]+\.)*[0-9]+).*/\1/p')
+            echo "Build OVAL Version ${VERSION}"
+            make OVAL_VERSION=${VERSION}
       - name: Attach Release Artifacts
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -25,5 +27,5 @@ jobs:
           REPO: ${{ github.event.repository.name }}
           TAG: ${{ github.ref_name }}
         run: |
-            SCHEMA_FILES=$(ls oval-schemas/*.xsd)
-            gh release upload $TAG $SCHEMA_FILES --clobber --repo $OWNER/$REPO
+            VERSION=$(echo $TAG | sed -nre 's/^[^0-9]*(([0-9]+\.)*[0-9]+).*/\1/p')
+            gh release upload $TAG schemas-${VERSION}.zip oval_docs-${VERSION}.zip --clobber --repo $OWNER/$REPO
