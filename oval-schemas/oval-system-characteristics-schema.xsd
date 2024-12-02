@@ -148,23 +148,29 @@
             <xsd:documentation>The InterfaceType complex type is used to describe an existing network interface on the system. This information can help identify a specific system on a given network.</xsd:documentation>
         </xsd:annotation>
         <xsd:sequence>
-            <xsd:element name="interface_name" type="xsd:string">
+            <xsd:element name="interface_name" minOccurs="1" type="xsd:string">
                 <xsd:annotation>
                     <xsd:documentation>The required interface_name element is the name of the interface</xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
-            <xsd:element name="ip_address" type="xsd:string">
+            <xsd:element name="ip_address" minOccurs="0" maxOccurs="unbounded" type="xsd:string">
                 <xsd:annotation>
-                    <xsd:documentation>The required ip_address element holds the IP address for the interface. Note that the IP address can be IPv4 or IPv6.</xsd:documentation>
+                    <xsd:documentation>The ipv4_address element holds the IPV4 address for the interface.</xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
-            <xsd:element name="mac_address" type="xsd:string">
+            <xsd:element name="ipv6_address" minOccurs="0" maxOccurs="unbounded" type="xsd:string">
+                <xsd:annotation>
+                    <xsd:documentation>The ipv6_address element holds the IPV6 address for the interface.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="mac_address" minOccurs="0" type="xsd:string" >
                 <xsd:annotation>
                     <xsd:documentation>The required mac_address element holds the MAC address for the interface. MAC addresses should be formatted according to the IEEE 802-2001 standard which states that a MAC address is a sequence of six octet values, separated by hyphens, where each octet is represented by two hexadecimal digits. Uppercase letters should also be used to represent the hexadecimal digits A through F.</xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
         </xsd:sequence>
     </xsd:complexType>
+	
     <!-- =============================================================================== -->
     <!-- =============================  COLLECTED OBJECTS  ============================= -->
     <!-- =============================================================================== -->
