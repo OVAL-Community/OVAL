@@ -696,7 +696,7 @@
                                                 <xsd:appinfo>
                                                       <sch:pattern id="win-def_ad57stevalue">
                                                             <sch:rule context="win-def:activedirectory57_state/win-def:value">
-                                                                  <sch:assert test="@datatype='record'"><sch:value-of select="../@id"/> - datatype attribute for the value entity of a activedirectory57_state must be 'record'</sch:assert>
+                                                                  <sch:assert test="@datatype='record'"><sch:value-of select="../@id"/> - datatype attribute for the value entity of an activedirectory57_state must be 'record'</sch:assert>
                                                             </sch:rule>
                                                       </sch:pattern>
                                                 </xsd:appinfo>
@@ -962,7 +962,7 @@
                                     <!-- DS Access Audit Policy Subcategories -->
                                     <xsd:element name="directory_service_access" type="win-def:EntityStateAuditType" minOccurs="0">
                                           <xsd:annotation>
-                                                <xsd:documentation>Audit the events produced when a Active Directory Domain Services object is accessed. This state corresponds with the following GUID specified in ntsecapi.h: 0cce923b-69ae-11d9-bed3-505054503030. This state corresponds with the following Advanced Audit Policy:  DS Access: Audit Directory Service Access</xsd:documentation>
+                                                <xsd:documentation>Audit the events produced when an Active Directory Domain Services object is accessed. This state corresponds with the following GUID specified in ntsecapi.h: 0cce923b-69ae-11d9-bed3-505054503030. This state corresponds with the following Advanced Audit Policy:  DS Access: Audit Directory Service Access</xsd:documentation>
                                           </xsd:annotation>
                                     </xsd:element>
                                     <xsd:element name="directory_service_changes" type="win-def:EntityStateAuditType" minOccurs="0">
@@ -9639,7 +9639,7 @@
                         </xsd:enumeration>
                         <xsd:enumeration value="IMAGE_FILE_MACHINE_R10000">
                               <xsd:annotation>
-                                    <xsd:documentation>The IMAGE_FILE_MACHINE_10000 type is used to indicate a MIPS little endian machine.</xsd:documentation>
+                                    <xsd:documentation>The IMAGE_FILE_MACHINE_R10000 type is used to indicate a MIPS little endian machine.</xsd:documentation>
                               </xsd:annotation>
                         </xsd:enumeration>
                         <xsd:enumeration value="IMAGE_FILE_MACHINE_SH3">

@@ -381,7 +381,7 @@
                                         <xsd:appinfo>
                                              <sch:pattern id="win-sc_activedirectory57_itemvalue">
                                                   <sch:rule context="win-sc:activedirectory57_item/win-sc:value">
-                                                       <sch:assert test="@datatype='record'"><sch:value-of select="../@id"/> - datatype attribute for the value entity of a activedirectory57_item must be 'record'</sch:assert>
+                                                       <sch:assert test="@datatype='record'"><sch:value-of select="../@id"/> - datatype attribute for the value entity of an activedirectory57_item must be 'record'</sch:assert>
                                                   </sch:rule>
                                              </sch:pattern>
                                         </xsd:appinfo>
@@ -398,7 +398,7 @@
      <xsd:element name="auditeventpolicy_item" substitutionGroup="oval-sc:item">
           <xsd:annotation>
                <xsd:documentation>The auditeventpolicy item enumerates the different types of events the system should audit. The defined values are found in window's POLICY_AUDIT_EVENT_TYPE enumeration and accessed through the LsaQueryInformationPolicy when the InformationClass parameters are set to PolicyAuditEventsInformation. It extends the standard ItemType as defined in the oval-system-characteristics schema and one should refer to the ItemType description for more information.</xsd:documentation>
-               <xsd:documentation>Note that when audinting is disabled each of the entities listed below should be set to 'AUDIT_NONE'.</xsd:documentation>
+               <xsd:documentation>Note that when auditing is disabled each of the entities listed below should be set to 'AUDIT_NONE'.</xsd:documentation>
           </xsd:annotation>
           <xsd:complexType>
                <xsd:complexContent>
@@ -460,7 +460,7 @@
      <xsd:element name="auditeventpolicysubcategories_item" substitutionGroup="oval-sc:item">
           <xsd:annotation>
                <xsd:documentation>The auditeventpolicysubcategories_item is used to hold information about the audit event policy settings on a Windows system. These settings are used to specify which system and network events are monitored.  For example, if the credential_validation element has a value of AUDIT_FAILURE, it means that the system is configured to log all unsuccessful attempts to validate a user account on a system. It is important to note that these audit event policy settings are specific to certain versions of Windows. As a result, the documentation for that version of Windows should be consulted for more information on each setting. It extends the standard ItemType as defined in the oval-system-characteristics schema and one should refer to the ItemType description for more information.</xsd:documentation>
-               <xsd:documentation>Note that when audinting is disabled each of the entities listed below should be set to 'AUDIT_NONE'.</xsd:documentation>
+               <xsd:documentation>Note that when auditing is disabled each of the entities listed below should be set to 'AUDIT_NONE'.</xsd:documentation>
           </xsd:annotation>
           <xsd:complexType>
                <xsd:complexContent>
@@ -559,7 +559,7 @@
                               <!-- DS Access Audit Policy Subcategories -->
                               <xsd:element name="directory_service_access" type="win-sc:EntityItemAuditType" minOccurs="0" maxOccurs="1">
                                    <xsd:annotation>
-                                        <xsd:documentation>Audit the events produced when a Active Directory Domain Services object is accessed. This state corresponds with the following GUID specified in ntsecapi.h: 0cce923b-69ae-11d9-bed3-505054503030. This state corresponds with the following Advanced Audit Policy:  DS Access: Audit Directory Service Access</xsd:documentation>
+                                        <xsd:documentation>Audit the events produced when an Active Directory Domain Services object is accessed. This state corresponds with the following GUID specified in ntsecapi.h: 0cce923b-69ae-11d9-bed3-505054503030. This state corresponds with the following Advanced Audit Policy:  DS Access: Audit Directory Service Access</xsd:documentation>
                                    </xsd:annotation>
                               </xsd:element>
                               <xsd:element name="directory_service_changes" type="win-sc:EntityItemAuditType" minOccurs="0" maxOccurs="1">
@@ -691,7 +691,7 @@
                               </xsd:element>
                               <xsd:element name="removable_storage" type="win-sc:EntityItemAuditType" minOccurs="0" maxOccurs="1">
                                    <xsd:annotation>
-                                        <xsd:documentation>Audit events that indicate file object access attemps to removable storage. This state corresponds with the following GUID specified in ntsecapi.h: 0cce9245-69ae-11d9-bed3-505054503030. This state corresponds with the following Advanced Audit Policy:  Object Access: Audit Removable Storage</xsd:documentation>
+                                        <xsd:documentation>Audit events that indicate file object access attempts to removable storage. This state corresponds with the following GUID specified in ntsecapi.h: 0cce9245-69ae-11d9-bed3-505054503030. This state corresponds with the following Advanced Audit Policy:  Object Access: Audit Removable Storage</xsd:documentation>
                                    </xsd:annotation>
                               </xsd:element>
                               <xsd:element name="central_access_policy_staging" type="win-sc:EntityItemAuditType" minOccurs="0" maxOccurs="1">
@@ -3301,7 +3301,7 @@
                               </xsd:element>
                               <xsd:element name="password_age_days" type="oval-sc:EntityItemIntType" minOccurs="0" maxOccurs="1">
                                    <xsd:annotation>
-                                        <xsd:documentation>The number of full days that have elapsed since the password was last changed, meaning data calulated should be truncated. Ex: 89.5 days = 89, 90.01 = 90</xsd:documentation>
+                                        <xsd:documentation>The number of full days that have elapsed since the password was last changed, meaning data calculated should be truncated. Ex: 89.5 days = 89, 90.01 = 90</xsd:documentation>
                                    </xsd:annotation>
                               </xsd:element>
                               <xsd:element name="lockout" type="oval-sc:EntityItemBoolType" minOccurs="0" maxOccurs="1">
@@ -4228,6 +4228,11 @@
                               <xsd:documentation>The IMAGE_FILE_MACHINE_ARM type is used to indicate an ARM little endian machine.</xsd:documentation>
                          </xsd:annotation>
                     </xsd:enumeration>
+                    <xsd:enumeration value="IMAGE_FILE_MACHINE_AMD64">
+                         <xsd:annotation>
+                              <xsd:documentation>The IMAGE_FILE_MACHINE_AMD64 type is used to indicate an AMD 64-bit machine.</xsd:documentation>
+                         </xsd:annotation>
+                    </xsd:enumeration>
                     <xsd:enumeration value="IMAGE_FILE_MACHINE_ALPHA64">
                          <xsd:annotation>
                               <xsd:documentation>The IMAGE_FILE_MACHINE_ALPHA64 type is used to indicate an 64-bit Alpha APX machine.</xsd:documentation>
@@ -4280,7 +4285,7 @@
                     </xsd:enumeration>
                     <xsd:enumeration value="IMAGE_FILE_MACHINE_R10000">
                          <xsd:annotation>
-                              <xsd:documentation>The IMAGE_FILE_MACHINE_10000 type is used to indicate a MIPS little endian machine.</xsd:documentation>
+                              <xsd:documentation>The IMAGE_FILE_MACHINE_R10000 type is used to indicate a MIPS little endian machine.</xsd:documentation>
                          </xsd:annotation>
                     </xsd:enumeration>
                     <xsd:enumeration value="IMAGE_FILE_MACHINE_SH3">

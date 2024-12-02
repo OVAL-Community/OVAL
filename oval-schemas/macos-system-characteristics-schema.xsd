@@ -26,7 +26,7 @@
      <!-- =============================================================================== -->
      <xsd:element name="accountinfo_item" substitutionGroup="oval-sc:item">
           <xsd:annotation>
-               <xsd:documentation>This item stores sser account information (username, uid, gid, etc.).</xsd:documentation>
+               <xsd:documentation>This item stores user account information (username, uid, gid, etc.).</xsd:documentation>
           </xsd:annotation>
           <xsd:complexType>
                <xsd:complexContent>
@@ -437,7 +437,7 @@
                               </xsd:element>
                               <xsd:element name="lock_on_sleep" type="oval-sc:EntityItemBoolType" minOccurs="0" maxOccurs="1">
                                    <xsd:annotation>
-                                        <xsd:documentation>Specifies the whether the keychain is configured to lock on sleep.</xsd:documentation>
+                                        <xsd:documentation>Specifies whether the keychain is configured to lock on sleep.</xsd:documentation>
                                    </xsd:annotation>
                               </xsd:element>
                               <xsd:element name="timeout" type="oval-sc:EntityItemIntType" minOccurs="0" maxOccurs="1">
