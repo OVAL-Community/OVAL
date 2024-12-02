@@ -4237,7 +4237,7 @@
                               <xsd:sequence>
                                     <xsd:element name="max_passwd_age" type="oval-def:EntityStateIntType" minOccurs="0">
                                           <xsd:annotation>
-                                                <xsd:documentation>Specifies, in seconds (from a DWORD), the maximum allowable password age.  A value of TIMEQ_FOREVER (max DWORD value, 4294967295) indicates that the password never expires. The minimum valid value for this element is ONE_DAY (86400).  See the USER_MODALS_INFO_0 structure returned by a call to NetUserModalsGet().</xsd:documentation>
+                                                <xsd:documentation>Alternate Name: "Maximum password age".  Specifies, in seconds (from a DWORD), the maximum allowable password age.  A value of TIMEQ_FOREVER (max DWORD value, 4294967295) indicates that the password never expires. The minimum valid value for this element is ONE_DAY (86400).  See the USER_MODALS_INFO_0 structure returned by a call to NetUserModalsGet().</xsd:documentation>
                                                 <xsd:appinfo>
                                                       <sch:pattern id="win-def_pwp_mpa">
                                                             <sch:rule context="win-def:passwordpolicy_state/win-def:max_passwd_age">
@@ -4249,32 +4249,32 @@
                                     </xsd:element>
                                     <xsd:element name="min_passwd_age" type="oval-def:EntityStateIntType" minOccurs="0">
                                           <xsd:annotation>
-                                                <xsd:documentation>Specifies the minimum number of seconds that can elapse between the time a password changes and when it can be changed again. A value of zero indicates that no delay is required between password updates.</xsd:documentation>
+                                                <xsd:documentation>Alternate Name: "Minimum password age".  Specifies the minimum number of seconds that can elapse between the time a password changes and when it can be changed again. A value of zero indicates that no delay is required between password updates.</xsd:documentation>
                                           </xsd:annotation>
                                     </xsd:element>
                                     <xsd:element name="min_passwd_len" type="oval-def:EntityStateIntType" minOccurs="0">
                                           <xsd:annotation>
-                                                <xsd:documentation>Specifies the minimum allowable password length. Valid values for this element are zero through PWLEN.</xsd:documentation>
+                                                <xsd:documentation>Alternate Name: "Minimum password length".  Specifies the minimum allowable password length. Valid values for this element are zero through PWLEN.</xsd:documentation>
                                           </xsd:annotation>
                                     </xsd:element>
                                     <xsd:element name="password_hist_len" type="oval-def:EntityStateIntType" minOccurs="0">
                                           <xsd:annotation>
-                                                <xsd:documentation>Specifies the length of password history maintained. A new password cannot match any of the previous usrmod0_password_hist_len passwords. Valid values for this element are zero through DEF_MAX_PWHIST.</xsd:documentation>
+                                                <xsd:documentation>Alternate Name: "Enforce password history".  Specifies the length of password history maintained. A new password cannot match any of the previous usrmod0_password_hist_len passwords. Valid values for this element are zero through DEF_MAX_PWHIST.</xsd:documentation>
                                           </xsd:annotation>
                                     </xsd:element>
                                     <xsd:element name="password_complexity" type="oval-def:EntityStateBoolType" minOccurs="0">
                                           <xsd:annotation>
-                                                <xsd:documentation>A boolean value that signifies whether passwords must meet the complexity requirements put forth by the operating system.</xsd:documentation>
+                                                <xsd:documentation>Alternate Name: "Password must meet complexity requirements".  A boolean value that signifies whether passwords must meet the complexity requirements put forth by the operating system.</xsd:documentation>
                                           </xsd:annotation>
                                     </xsd:element>
                                     <xsd:element name="reversible_encryption" type="oval-def:EntityStateBoolType" minOccurs="0">
                                           <xsd:annotation>
-                                                <xsd:documentation>Determines whether or not passwords are stored using reversible encryption.</xsd:documentation>
+                                                <xsd:documentation>Alternate name: "Store passwords using reversible encryption".  Determines whether or not passwords are stored using reversible encryption.</xsd:documentation>
                                           </xsd:annotation>
                                     </xsd:element>
                                     <xsd:element name="anonymous_name_lookup" type="oval-def:EntityStateBoolType" minOccurs="0">
                                           <xsd:annotation>
-                                                <xsd:documentation>Determines whether or not an anonymous user may query the local LSA policy.</xsd:documentation>
+                                                <xsd:documentation>Alternate name: "Allow anonymous SID/Name translation".  Determines whether or not an anonymous user may query the local LSA policy.</xsd:documentation>
                                           </xsd:annotation>
                                     </xsd:element>
                               </xsd:sequence>
