@@ -1,17 +1,22 @@
 OVAL_VERSION=5.11.2
 NUMPROCS=$(shell nproc)
-SAXON_LIB=rsrc/saxon9he.jar
+SAXON_LIB_DOWNLOAD_URL=https://repo1.maven.org/maven2/net/sf/saxon/Saxon-HE/10.9/Saxon-HE-10.9.jar
+SAXON_LIB=rsrc/Saxon-HE.jar
 
 DOCS=docs
 OVAL_SRC=oval-schemas
 OVAL_DOCS:=$(foreach schema, $(shell find $(OVAL_SRC) -name *.xsd ! -name xmldsig*), $(DOCS)/$(notdir $(basename $(schema))).html)
 
-all: oval_docs-${OVAL_VERSION}.zip schemas-${OVAL_VERSION}.zip
+all: ${SAXON_LIB} oval_docs-${OVAL_VERSION}.zip schemas-${OVAL_VERSION}.zip
 
 clean:
 	rm -rf $(DOCS)
 	rm -f schemas-*.zip
 	rm -f oval_docs-*.zip
+	rm -f ${SAXON_LIB}
+
+${SAXON_LIB}:
+	curl ${SAXON_LIB_DOWNLOAD_URL} --output ${SAXON_LIB}
 
 schemas-${OVAL_VERSION}.zip:
 	zip -j schemas-${OVAL_VERSION}.zip ${OVAL_SRC}/*.xsd
