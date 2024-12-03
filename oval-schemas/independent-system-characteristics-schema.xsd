@@ -340,12 +340,12 @@ The evaluation of the object should always produce one item.  If the object eval
                <xsd:complexContent>
                     <xsd:extension base="oval-sc:ItemType">
                          <xsd:sequence>
-                              <xsd:element name="shell" type="oval-sc:EntityItemShellType" minOccurs="1" maxOccurs="1">
+                              <xsd:element name="shell" type="ind-sc:EntityItemShellType" minOccurs="1" maxOccurs="1">
                                    <xsd:annotation>
                                         <xsd:documentation>The shell element contains the shell used (e.g. bash or powershell) to perform the command and should be taken, verbatim, from the associated object 'shell' element.</xsd:documentation>
                                    </xsd:annotation>
                               </xsd:element>
-                              <xsd:element name="command" type="oval-sc::EntityItemStringType"  minOccurs="1" maxOccurs="1">
+                              <xsd:element name="command" type="oval-sc:EntityItemStringType"  minOccurs="1" maxOccurs="1">
                                    <xsd:annotation>
                                         <xsd:documentation>The command element specifies the command string that was run on the target system and should be taken, verbatim, from the associated object 'command' element..</xsd:documentation>
                                    </xsd:annotation>

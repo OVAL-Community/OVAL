@@ -1045,7 +1045,7 @@ The evaluation of the object should always produce one item. If the command exec
                                     <xsd:choice>
                                           <xsd:element ref="oval-def:set"/>
                                           <xsd:sequence>
-                                                <xsd:element name="shell" type="oval-def:EntityObjectShellType" use="required" >
+                                                <xsd:element name="shell" type="ind-def:EntityObjectShellType" minOccurs="1" maxOccurs="1" >
                                                       <xsd:annotation>
                                                             <xsd:documentation>The shell entity defines the specific shell to use (e.g. bash, csh, ksh, etc.). Any tool collecting information for this object will need to know the shell in order to use it properly.</xsd:documentation>
                                                       </xsd:annotation>
@@ -1089,7 +1089,7 @@ A subexpression (using parentheses) can call out a piece of the matched stdout_l
                   <xsd:complexContent>
                         <xsd:extension base="oval-def:StateType">
                               <xsd:sequence>
-                                    <xsd:element name="shell" type="oval-def:EntityStateShellType" minOccurs="0" maxOccurs="1">
+                                    <xsd:element name="shell" type="ind-def:EntityStateShellType" minOccurs="0" maxOccurs="1">
                                           <xsd:annotation>
                                                 <xsd:documentation>The 'shell' element contains the shell used to perform the command and must match the value in the associated object, verbatim.</xsd:documentation>
                                           </xsd:annotation>
