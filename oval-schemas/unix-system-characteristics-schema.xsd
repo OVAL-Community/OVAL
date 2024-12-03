@@ -5,17 +5,17 @@
             xmlns:unix-sc="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#unix"
             xmlns:sch="http://purl.oclc.org/dsdl/schematron"
             targetNamespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#unix"
-            elementFormDefault="qualified" version="5.11">
+            elementFormDefault="qualified" version="5.12">
      <xsd:import namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5" schemaLocation="oval-system-characteristics-schema.xsd"/>
      <xsd:import namespace="http://oval.mitre.org/XMLSchema/oval-common-5" schemaLocation="oval-common-schema.xsd"/>
      <xsd:annotation>
           <xsd:documentation>The following is a description of the elements, types, and attributes that compose the UNIX specific system characteristic items found in Open Vulnerability and Assessment Language (OVAL). Each item is an extension of the standard item element defined in the Core System Characteristic Schema. Through extension, each item inherits a set of elements and attributes that are shared amongst all OVAL Items. Each item is described in detail and should provide the information necessary to understand what each element and attribute represents. This document is intended for developers and assumes some familiarity with XML. A high level description of the interaction between the different tests and their relationship to the Core System Characteristic Schema is not outlined here.</xsd:documentation>
-          <xsd:documentation>The OVAL Schema is maintained by the OVAL Community. For more information, including how to get involved in the project and how to submit change requests, please visit the OVAL website at http://oval.cisecurity.org.</xsd:documentation>
+          <xsd:documentation>The OVAL Schema is maintained by the OVAL Community. For more information, including how to get involved in the project and how to submit change requests, please visit the OVAL website at https://github.com/OVAL-Community/.</xsd:documentation>
           <xsd:appinfo>
                <schema>Unix System Characteristics</schema>
-               <version>5.11.1:1.2</version>
-               <date>11/30/2016 09:00:00 AM</date>
-                <terms_of_use>For the portion subject to the copyright in the United States: Copyright (c) 2016 United States Government. All rights reserved. Copyright (c) 2016, Center for Internet Security. All rights reserved. The contents of this file are subject to the terms of the OVAL License located at https://oval.cisecurity.org/terms. See the OVAL License for the specific language governing permissions and limitations for use of this schema. When distributing copies of the OVAL Schema, this license header must be included.</terms_of_use>
+               <version>5.12</version>
+               <date>11/29/2024 09:00:00 AM</date>
+                <terms_of_use>This software is an open standard developed by multiple parties, including the United States Government (Government). The Government hereby grants you a non-exclusive, royalty-free, worldwide license to use, modify, and/or reproduce the software for any lawful purpose provided that you reproduce this License/Disclaimer language with any use/modification/copy of the software. The Government assumes no responsibility whatsoever for this software's use by other parties, and the software is provided "AS IS" without warranty or guarantee of any kind, express or implied, including, but not limited to, the warranties of merchantability, fitness for a particular purpose, and noninfringement. In no event shall the Government be liable for any claim, damages or other liability, whether in an action of contract, tort or other dealings in the software. The Government has no obligation hereunder to provide maintenance, support, updates, enhancements, or modifications to the software. Users may submit proposals and/or updates regarding the software, which proposals and/or updates the Government, at its sole discretion, can choose to incorporate into the software. Proposals and/or updates submitted to the Government by users must be accompanied by a license to such proposals and/or updates that is no more restrictive than this License/Disclaimer.</terms_of_use>
                <sch:ns prefix="oval-sc" uri="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5"/>
                <sch:ns prefix="unix-sc" uri="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#unix"/>
               <sch:ns prefix="xsi" uri="http://www.w3.org/2001/XMLSchema-instance"/>
@@ -90,7 +90,7 @@
                                         <xsd:appinfo>
                                               <sch:pattern id="unix-sc_file_gid">
                                                     <sch:rule context="unix-sc:file_item/unix-sc:group_id">
-                                                          <sch:assert test="string-length(.) = 0 or number(.) &lt; 0"><sch:value-of select="../@id"/> - the value of group_id must be greater than zero</sch:assert>
+                                                         <sch:assert test="number(.) &gt;= 0"><sch:value-of select="../@id"/> - the value of group_id must be greater than or equal to zero</sch:assert>
                                                     </sch:rule>
                                               </sch:pattern>
                                         </xsd:appinfo>
@@ -116,7 +116,7 @@
                                         <xsd:appinfo>
                                               <sch:pattern id="unix-sc_file_uid">
                                                     <sch:rule context="unix-sc:file_item/unix-sc:user_id">
-                                                          <sch:assert test="string-length(.) = 0 or number(.) &lt; 0"><sch:value-of select="../@id"/> - the value of user_id must be greater than zero</sch:assert>
+                                                         <sch:assert test="number(.) &gt;= 0"><sch:value-of select="../@id"/> - the value of user_id must be greater than or equal to zero</sch:assert>
                                                     </sch:rule>
                                               </sch:pattern>
                                         </xsd:appinfo>
@@ -1039,8 +1039,8 @@
           <xsd:annotation>
                <xsd:documentation>
                     The sshd_item stores information retrieved from the local system about sshd parameters and their respective value(s).
-                    Information is collected from the target endpoint using the "sshd -T [NAME]" command and output values are parsed.  Each 
-                    output line begins with the name of the SSHD parameter, followed by a space, and potentially a tokenized list of values.
+                    Information is collected from the target endpoint using the "sshd -f [FILEPATH] -T [NAME]" command and output values are parsed.  
+                    Each output line begins with the name of the SSHD parameter, followed by a space, and potentially a tokenized list of values.
                     It has been found that some parameter values are comma-delimited while some are space-delimited.  Implementers of this
                     collection should account for both delimiters in SSHD parameter values.
                </xsd:documentation>
@@ -1049,6 +1049,15 @@
                <xsd:complexContent>
                     <xsd:extension base="oval-sc:ItemType">
                          <xsd:sequence>
+                              <xsd:element name="filepath" type="oval-sc:EntityItemStringType" minOccurs="0" maxOccurs="1">
+                                   <xsd:annotation>
+                                        <xsd:documentation>
+                                             The filepath element specifies the absolute path to the sshd configuration file on the machine. A directory 
+                                             cannot be specified as a filepath. If the collecting object's filepath was specified as xsi:nil="true", then 
+                                             the value of this system characteristics element should be set to the default filepath, /etc/ssh/sshd_config.
+                                        </xsd:documentation>
+                                   </xsd:annotation>
+                              </xsd:element>
                               <xsd:element name="name" type="oval-sc:EntityItemStringType" minOccurs="0" maxOccurs="1">
                                    <xsd:annotation>
                                         <xsd:documentation>The name element contains a string that represents the name of a sshd parameter that was collected from the local system.</xsd:documentation>

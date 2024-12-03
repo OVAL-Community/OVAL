@@ -5,17 +5,17 @@
             xmlns:unix-def="http://oval.mitre.org/XMLSchema/oval-definitions-5#unix"
             xmlns:sch="http://purl.oclc.org/dsdl/schematron"
             targetNamespace="http://oval.mitre.org/XMLSchema/oval-definitions-5#unix"
-            elementFormDefault="qualified" version="5.11">
+            elementFormDefault="qualified" version="5.12">
       <xsd:import namespace="http://oval.mitre.org/XMLSchema/oval-definitions-5" schemaLocation="oval-definitions-schema.xsd"/>
       <xsd:import namespace="http://oval.mitre.org/XMLSchema/oval-common-5" schemaLocation="oval-common-schema.xsd"/>
       <xsd:annotation>
             <xsd:documentation>The following is a description of the elements, types, and attributes that compose generic UNIX tests found in Open Vulnerability and Assessment Language (OVAL). Each test is an extension of the standard test element defined in the Core Definition Schema. Through extension, each test inherits a set of elements and attributes that are shared amongst all OVAL tests. Each test is described in detail and should provide the information necessary to understand what each element and attribute represents. This document is intended for developers and assumes some familiarity with XML. A high level description of the interaction between the different tests and their relationship to the Core Definition Schema is not outlined here.</xsd:documentation>
-            <xsd:documentation>The OVAL Schema is maintained by the OVAL Community. For more information, including how to get involved in the project and how to submit change requests, please visit the OVAL website at http://oval.cisecurity.org.</xsd:documentation>
+            <xsd:documentation>The OVAL Schema is maintained by the OVAL Community. For more information, including how to get involved in the project and how to submit change requests, please visit the OVAL website at https://github.com/OVAL-Community/.</xsd:documentation>
             <xsd:appinfo>
                   <schema>UNIX Definition</schema>
-                  <version>5.11.1:1.2</version>
-                  <date>11/30/2016 09:00:00 AM</date>
-                  <terms_of_use>For the portion subject to the copyright in the United States: Copyright (c) 2016 United States Government. All rights reserved. Copyright (c) 2016, Center for Internet Security. All rights reserved. The contents of this file are subject to the terms of the OVAL License located at https://oval.cisecurity.org/terms. See the OVAL License for the specific language governing permissions and limitations for use of this schema. When distributing copies of the OVAL Schema, this license header must be included.</terms_of_use>
+                  <version>5.12</version>
+                  <date>11/29/2024 09:00:00 AM</date>
+                  <terms_of_use>This software is an open standard developed by multiple parties, including the United States Government (Government). The Government hereby grants you a non-exclusive, royalty-free, worldwide license to use, modify, and/or reproduce the software for any lawful purpose provided that you reproduce this License/Disclaimer language with any use/modification/copy of the software. The Government assumes no responsibility whatsoever for this software's use by other parties, and the software is provided "AS IS" without warranty or guarantee of any kind, express or implied, including, but not limited to, the warranties of merchantability, fitness for a particular purpose, and noninfringement. In no event shall the Government be liable for any claim, damages or other liability, whether in an action of contract, tort or other dealings in the software. The Government has no obligation hereunder to provide maintenance, support, updates, enhancements, or modifications to the software. Users may submit proposals and/or updates regarding the software, which proposals and/or updates the Government, at its sole discretion, can choose to incorporate into the software. Proposals and/or updates submitted to the Government by users must be accompanied by a license to such proposals and/or updates that is no more restrictive than this License/Disclaimer.</terms_of_use>
                   <sch:ns prefix="oval-def" uri="http://oval.mitre.org/XMLSchema/oval-definitions-5"/>
                   <sch:ns prefix="unix-def" uri="http://oval.mitre.org/XMLSchema/oval-definitions-5#unix"/>
                   <sch:ns prefix="xsi" uri="http://www.w3.org/2001/XMLSchema-instance"/>
@@ -35,6 +35,12 @@
                               <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#unix">dnscache_item</oval:item>
                         </oval:element_mapping>
                   </xsd:appinfo>
+					<xsd:appinfo>
+						<oval:deprecated_info>
+							<oval:version>5.12</oval:version>
+							<oval:comment>This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.</oval:comment>
+						</oval:deprecated_info>
+					</xsd:appinfo>
                   <xsd:appinfo>
                         <sch:pattern id="unix-def_dnscachetst">
                               <sch:rule context="unix-def:dnscache_test/unix-def:object">
@@ -276,7 +282,7 @@
                                                 <xsd:appinfo>
                                                       <sch:pattern id="unix-def_file_gid">
                                                             <sch:rule context="unix-def:file_state/unix-def:group_id">
-                                                                  <sch:assert test="string-length(.) = 0 or number(.) &lt; 0"><sch:value-of select="../@id"/> - the value of group_id must be greater than zero</sch:assert>
+                                                                  <sch:assert test="(@var_ref and string-length(.)=0) or (number(.) &gt;= 0)"><sch:value-of select="../@id"/> - the value of group_id must be greater than or equal to zero, or empty if var_ref is used.</sch:assert>
                                                             </sch:rule>
                                                       </sch:pattern>
                                                 </xsd:appinfo>
@@ -302,7 +308,7 @@
                                                 <xsd:appinfo>
                                                       <sch:pattern id="unix-def_file_uid">
                                                             <sch:rule context="unix-def:file_state/unix-def:user_id">
-                                                                  <sch:assert test="string-length(.) = 0 or number(.) &lt; 0"><sch:value-of select="../@id"/> - the value of user_id must be greater than zero</sch:assert>
+                                                                  <sch:assert test="(@var_ref and string-length(.)=0) or (number(.) &gt;= 0)"><sch:value-of select="../@id"/> - the value of user_id must be greater than or equal to zero, or empty if var_ref is used.</sch:assert>
                                                             </sch:rule>
                                                       </sch:pattern>
                                                 </xsd:appinfo>
@@ -569,6 +575,12 @@
                               <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#unix">fileextendedattribute_item</oval:item>
                         </oval:element_mapping>
                   </xsd:appinfo>
+					<xsd:appinfo>
+						<oval:deprecated_info>
+							<oval:version>5.12</oval:version>
+							<oval:comment>This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.</oval:comment>
+						</oval:deprecated_info>
+					</xsd:appinfo>
                   <xsd:appinfo>
                         <sch:pattern id="unix-def_file_ea_tst">
                               <sch:rule context="unix-def:filextendedattribute_test/unix-def:object">
@@ -732,6 +744,12 @@
                               <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#unix">gconf_item</oval:item>
                         </oval:element_mapping>
                   </xsd:appinfo>
+					<xsd:appinfo>
+						<oval:deprecated_info>
+							<oval:version>5.12</oval:version>
+							<oval:comment>This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.</oval:comment>
+						</oval:deprecated_info>
+					</xsd:appinfo>	
                   <xsd:appinfo>
                         <sch:pattern id="unix-def_gconf_test">
                               <sch:rule context="unix-def:gconf_test/unix-def:object">
@@ -872,6 +890,12 @@
                               <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#unix">inetd_item</oval:item>
                         </oval:element_mapping>
                   </xsd:appinfo>
+					<xsd:appinfo>
+						<oval:deprecated_info>
+							<oval:version>5.12</oval:version>
+							<oval:comment>This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.</oval:comment>
+						</oval:deprecated_info>
+					</xsd:appinfo>
                   <xsd:appinfo>
                         <sch:pattern id="unix-def_inetdtst">
                               <sch:rule context="unix-def:inetd_test/unix-def:object">
@@ -1599,6 +1623,12 @@
                               <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#unix">routingtable_item</oval:item>
                         </oval:element_mapping>
                   </xsd:appinfo>
+					<xsd:appinfo>
+						<oval:deprecated_info>
+							<oval:version>5.12</oval:version>
+							<oval:comment>This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.</oval:comment>
+						</oval:deprecated_info>
+					</xsd:appinfo>
                   <xsd:appinfo>
                         <sch:pattern id="unix-def_routingtable_test">
                               <sch:rule context="unix-def:routingtable_test/unix-def:object">
@@ -1816,6 +1846,12 @@
                               <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#unix">sccs_item</oval:item>
                         </oval:element_mapping>
                   </xsd:appinfo>
+					<xsd:appinfo>
+						<oval:deprecated_info>
+							<oval:version>5.12</oval:version>
+							<oval:comment>This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.</oval:comment>
+						</oval:deprecated_info>
+					</xsd:appinfo>
                   <xsd:appinfo>
                         <oval:deprecated_info>
                               <oval:version>5.10</oval:version>
@@ -2295,10 +2331,11 @@
       <xsd:element name="sshd_object" substitutionGroup="oval-def:object">
             <xsd:annotation>
                   <xsd:documentation>
-                        The sshd_object is used by a sshd_test to define which sshd parameters on the local system should be collected via the "sshd -T [NAME]" command. 
-                        Each object extends the standard ObjectType as defined in the oval-definitions-schema and one should refer to the ObjectType description for more 
-                        information. The common set element allows complex objects to be created using filters and set logic. Again, please refer to the description of the 
-                        set element in the oval-definitions-schema.</xsd:documentation>
+                        The sshd_object is used by a sshd_test to define which sshd parameters on the local system should be collected via the 
+                        "sshd -f [FILEPATH] -T" command. Each object extends the standard ObjectType as defined in the oval-definitions-schema and 
+                        one should refer to the ObjectType description for more information. The common set element allows complex objects to be 
+                        created using filters and set logic. Again, please refer to the description of the set element in the oval-definitions-schema.
+                  </xsd:documentation>
                   <xsd:appinfo>
                         <sch:pattern id="unix-def_sshd_object_verify_filter_state">
                               <sch:rule context="unix-def:sshd_object//oval-def:filter">
@@ -2320,6 +2357,11 @@
                                     <xsd:choice>
                                           <xsd:element ref="oval-def:set"/>
                                           <xsd:sequence>
+                                                <xsd:element name="filepath" type="oval-def:EntityObjectStringType" nillable="true">
+                                                      <xsd:annotation>
+                                                            <xsd:documentation>Specifies the name of the configuration file. If xsi:nil="true", then collect from the default filepath at /etc/ssh/sshd_config.</xsd:documentation>
+                                                      </xsd:annotation>
+                                                </xsd:element>
                                                 <xsd:element name="name" type="oval-def:EntityObjectStringType">
                                                       <xsd:annotation>
                                                             <xsd:documentation>The name element specifies the name(s) of the sshd parameter(s) that should be collected from the local system.</xsd:documentation>
@@ -2335,12 +2377,17 @@
       </xsd:element>
       <xsd:element name="sshd_state" substitutionGroup="oval-def:state">
             <xsd:annotation>
-                  <xsd:documentation>The sshd_state contains two entities that are used to check the sshd parameter name and value(s).</xsd:documentation>
+                  <xsd:documentation>The sshd_state contains entities that are used to check the sshd configuration filepath, parameter name and value(s).</xsd:documentation>
             </xsd:annotation>
             <xsd:complexType>
                   <xsd:complexContent>
                         <xsd:extension base="oval-def:StateType">
                               <xsd:sequence>
+                                    <xsd:element name="filepath" type="oval-def:EntityStateStringType" minOccurs="0" maxOccurs="1">
+                                          <xsd:annotation>
+                                                <xsd:documentation>Specifies the name of the sshd configuration file. Note the default filepath is /etc/ssh/sshd_config.</xsd:documentation>
+                                          </xsd:annotation>
+                                    </xsd:element>
                                     <xsd:element name="name" type="oval-def:EntityStateStringType" minOccurs="0" maxOccurs="1">
                                           <xsd:annotation>
                                                 <xsd:documentation>The name element contains a string that represents the name of a sshd parameter that was collected from the local system.</xsd:documentation>
