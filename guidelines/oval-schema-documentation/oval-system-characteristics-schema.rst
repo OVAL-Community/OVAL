@@ -1,13 +1,15 @@
 Open Vulnerability and Assessment Language: Core System Characteristics  
 =========================================================
 * Schema: Core System Characteristics  
-* Version: 5.11.2  
-* Release Date: 11/30/2016 09:00:00 AM
+* Version: 5.12  
+* Release Date: 11/29/2024 09:00:00 AM
 
 The following is a description of the elements, types, and attributes that compose the core schema for encoding Open Vulnerability and Assessment Language (OVAL) System Characteristics. The Core System Characteristics Schema defines all operating system independent objects. These objects are extended and enhanced by individual family schemas, which are described in separate documents. Each of the elements, types, and attributes that make up the Core System Characteristics Schema are described in detail and should provide the information necessary to understand what each object represents. This document is intended for developers and assumes some familiarity with XML. A high level description of the interaction between these objects is not outlined here.
 
-The OVAL Schema is maintained by the OVAL Community. For more information, including how to get involved in the project and how to submit change requests, please visit the OVAL website at http://oval.cisecurity.org.
+The OVAL Schema is maintained by the OVAL Community. For more information, including how to get involved in the project and how to submit change requests, please visit the OVAL website at https://github.com/OVAL-Community/.
 
+______________
+  
 .. _oval_system_characteristics:  
   
 < oval_system_characteristics >  
@@ -111,10 +113,13 @@ Child Elements
       - xsd:string (1..1)  
       - The required interface_name element is the name of the interface  
     * - ip_address  
-      - xsd:string (1..1)  
-      - The required ip_address element holds the IP address for the interface. Note that the IP address can be IPv4 or IPv6.  
+      - xsd:string (0..unbounded)  
+      - The ipv4_address element holds the IPV4 address for the interface.  
+    * - ipv6_address  
+      - xsd:string (0..unbounded)  
+      - The ipv6_address element holds the IPV6 address for the interface.  
     * - mac_address  
-      - xsd:string (1..1)  
+      - xsd:string (0..1)  
       - The required mac_address element holds the MAC address for the interface. MAC addresses should be formatted according to the IEEE 802-2001 standard which states that a MAC address is a sequence of six octet values, separated by hyphens, where each octet is represented by two hexadecimal digits. Uppercase letters should also be used to represent the hexadecimal digits A through F.  
   
 ______________
@@ -244,7 +249,7 @@ ______________
   
 == SystemDataType ==  
 ---------------------------------------------------------
-The SystemDataType complex type is a container for one or more item elements. Each item defines a specific piece of data on the system.
+The SystemDataType complex type is a container for zero or more item elements. Each item defines a specific piece of data on the system.
 
 Child Elements  
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -255,7 +260,7 @@ Child Elements
       - Type (MinOccurs..MaxOccurs)  
       - Desc.  
     * - oval-sc:item  
-      - n/a (1..unbounded)  
+      - n/a (0..unbounded)  
       -   
   
 .. _item:  

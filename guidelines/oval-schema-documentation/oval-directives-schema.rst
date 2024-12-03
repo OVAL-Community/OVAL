@@ -1,13 +1,15 @@
 Open Vulnerability and Assessment Language: Core Directives  
 =========================================================
 * Schema: Core Directives  
-* Version: 5.11.2  
-* Release Date: 11/30/2016 09:00:00 AM
+* Version: 5.12  
+* Release Date: 11/29/2024 09:00:00 AM
 
 The following is a description of the elements, types, and attributes that compose the core schema for encoding Open Vulnerability and Assessment Language (OVAL) Directives. Each of the elements, types, and attributes that make up the Core Directives Schema are described in detail and should provide the information necessary to understand what each object represents. This document is intended for developers and assumes some familiarity with XML. A high level description of the interaction between these objects is not outlined here.
 
 The OVAL Schema is maintained by The MITRE Corporation and developed by the public OVAL Community. For more information, including how to get involved in the project and how to submit change requests, please visit the OVAL website at http://oval.mitre.org.
 
+______________
+  
 .. _oval_directives:  
   
 < oval_directives >  

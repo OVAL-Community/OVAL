@@ -1,12 +1,12 @@
 Open Vulnerability and Assessment Language: Independent Definition  
 =========================================================
 * Schema: Independent Definition  
-* Version: 5.11.1:1.2  
-* Release Date: 11/30/2016 09:00:00 AM
+* Version: 5.12  
+* Release Date: 11/29/2024 09:00:00 AM
 
 The following is a description of the elements, types, and attributes that compose the tests found in Open Vulnerability and Assessment Language (OVAL) that are independent of a specific piece of software. Each test is described in detail and should provide the information necessary to understand what each element and attribute represents. This document is intended for developers and assumes some familiarity with XML. A high level description of the interaction between the different tests and their relationship to the Core Definition Schema is not outlined here.
 
-The OVAL Schema is maintained by the OVAL Community. For more information, including how to get involved in the project and how to submit change requests, please visit the OVAL website at http://oval.cisecurity.org.
+The OVAL Schema is maintained by the OVAL Community. For more information, including how to get involved in the project and how to submit change requests, please visit the OVAL website at https://github.com/OVAL-Community/.
 
 Test Listing  
 ---------------------------------------------------------
@@ -15,15 +15,18 @@ Test Listing
 * :ref:`filehash58_test`  
 * :ref:`environmentvariable_test` (Deprecated)  
 * :ref:`environmentvariable58_test`  
-* :ref:`ldap_test`  
+* :ref:`ldap_test` (Deprecated)  
 * :ref:`ldap57_test` (Deprecated)  
+* :ref:`shellcommand_test`  
 * :ref:`sql_test` (Deprecated)  
-* :ref:`sql57_test`  
+* :ref:`sql57_test` (Deprecated)  
+* :ref:`sql512_test`  
 * :ref:`textfilecontent54_test`  
 * :ref:`textfilecontent_test` (Deprecated)  
 * :ref:`unknown_test`  
 * :ref:`variable_test`  
 * :ref:`xmlfilecontent_test`  
+* :ref:`yamlfilecontent_test`  
   
 ______________
   
@@ -459,8 +462,14 @@ ______________
   
 .. _ldap_test:  
   
-< ldap_test >  
+< ldap_test > (Deprecated)  
 ---------------------------------------------------------
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* Deprecated As Of Version 5.12  
+* Reason:   
+* Comment: This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.  
+  
 The LDAP test is used to check information about specific entries in an LDAP directory. It extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information. The required object element references an ldap_object and the optional state element, ldap_state, specifies the metadata to check.
 
 **Extends:** oval-def:TestType
@@ -681,6 +690,98 @@ Child Elements
   
 ______________
   
+.. _shellcommand_test:  
+  
+< shellcommand_test >  
+---------------------------------------------------------
+The shellcommand_test is used to check the values produced by the running of the 'command' (or script, but not an external script file) found in the object 'command' element. It extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information. The required object element references a shellcommand_object and the optional state element references a shellcommand_state that specifies the information to check. Since this test runs the command string supplied in the object command element, the content author should avoid writing command strings that may produce large amounts of output or that may be fragile causing errors and thus produce large amounts of error output. The command should produce well formed output that will result in one item stdout_line element for each line of output via STDOUT by the object evaluation. Similarly, in the item, for any output to STDERR, a stderr_line element will be created. IMPORTANT! - Since this test requires the running of code supplied by content and since OVAL interpreters commonly run with elevated privileges, significant responsibilty falls to the content author to DO NO HARM to the target system. This also requires that any content stream that employs this test MUST be from a known trusted source and be digitally signed. The use of any executables that are not supplied by the installed operating system is highly discouraged.
+
+**Extends:** oval-def:TestType
+
+Child Elements  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. list-table:: Elements  
+    :header-rows: 1  
+  
+    * - Child Elements  
+      - Type (MinOccurs..MaxOccurs)  
+      - Desc.  
+    * - object  
+      - oval-def:ObjectRefType (1..1)  
+      -   
+    * - state  
+      - oval-def:StateRefType (0..unbounded)  
+      -   
+  
+.. _shellcommand_object:  
+  
+< shellcommand_object >  
+---------------------------------------------------------
+The shellcommand_object is used by a shellcommand_test to define a shell to use (e.g. sh, bash, ksh, etc.), a command (or shell script) to be run, and a pattern to filter result lines. The default shell is bash. Each object extends the standard ObjectType as defined in the oval-definitions-schema and one should refer to the ObjectType description for more information. The common set element allows complex objects to be created using filters and set logic. The evaluation of the object should always produce one item. If the command execution does not produce output, an item should still be created with the exit_status (AKA process exit code), a stdout entity with a status of 'does not exist', and any STDERR from the execution captured in stderr_line entities.
+
+**Extends:** oval-def:ObjectType
+
+Child Elements  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. list-table:: Elements  
+    :header-rows: 1  
+  
+    * - Child Elements  
+      - Type (MinOccurs..MaxOccurs)  
+      - Desc.  
+    * - shell  
+      - oval-def:EntityObjectShellType (1..1)  
+      - The shell entity defines the specific shell to use (e.g. bash, csh, ksh, etc.). Any tool collecting information for this object will need to know the shell in order to use it properly.  
+    * - command  
+      - oval-def:EntityObjectStringType (1..1)  
+      - The command element specifies the command string to be run on the target system. Since this command string will be executed on the target system and since OVAL interpreters commonly run with elevated privileges, significant responsibilty falls to the content author to DO NO HARM. This also requires that any content stream that employs this test MUST be from a known trusted source and be digitally signed. The use of executables that are not supplied by the installed operating system is highly discouraged.  
+    * - pattern  
+      - oval-def:EntityObjectStringType (0..1)  
+      - The 'pattern' is a regular expression that identifies lines in 'command' results that are to produce OVAL items. Any result line via STDOUT that matches the pattern is kept as an item stdout_line element. Any that do not are discarded. If the pattern element is empty or does not exist, all results lines are kept. A subexpression (using parentheses) can call out a piece of the matched stdout_line to test. For example, the pattern abc(.*)xyz would look for a block of text in the output that starts with abc and ends with xyz, with the subexpression being all the characters that exist in between. The value of the subexpression can then be tested using the subexpression entity of a shellcommand_state. Note that if the pattern, starting at the same point in the line, matches more than one block of text, then it matches the longest. For example, given output with abcdefxyzxyzabc, then the pattern abc(.*)xyz would match the block abcdefxyzxyz. Subexpressions also match the longest possible substrings, subject to the constraint that the whole match be as long as possible, with subexpressions starting earlier in the pattern taking priority over ones starting later.Note that when using regular expressions, OVAL supports a common subset of the regular expression character classes, operations, expressions and other lexical tokens defined within Perl 5's regular expression specification. For more information on the supported regular expression syntax in OVAL see: http://oval.mitre.org/language/about/re_support_5.6.html.  
+    * - oval-def:filter  
+      - n/a (0..unbounded)  
+      -   
+  
+.. _shellcommand_state:  
+  
+< shellcommand_state >  
+---------------------------------------------------------
+The shellcommand_state contains the entities that are used to check the values returned by the shellcommand_object. Note that the state entities shell, command, and pattern are echoed, verbatim, from the same elements in the associated shellcommand_object.
+
+**Extends:** oval-def:StateType
+
+Child Elements  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. list-table:: Elements  
+    :header-rows: 1  
+  
+    * - Child Elements  
+      - Type (MinOccurs..MaxOccurs)  
+      - Desc.  
+    * - shell  
+      - oval-def:EntityStateShellType (0..1)  
+      - The 'shell' element contains the shell used to perform the command and must match the value in the associated object, verbatim.  
+    * - command  
+      - oval-def:EntityStateAnySimpleType (1..1)  
+      - The 'command' element specifies the command string to be run on the target system and must match the same element in the associated shellcommand_object, verbatim.  
+    * - pattern  
+      - oval-def:EntityStateStringType (0..1)  
+      - The 'pattern' is a regular expression that identifies lines in 'command' results that are to produce OVAL items and must match the same element in the associated shellcommand_object, verbatim.  
+    * - exit_status  
+      - oval-def:EntityStateIntType (0..1)  
+      - The 'exit_status' entity represents the exist status returned by the system for the execution of the object command.  
+    * - stdout_line  
+      - oval-def:EntityStateAnySimpleType (0..unbounded)  
+      - The 'stdout_line' entity represents a line from the STDOUT output of a successful run of the command string that matched the specified object pattern.  
+    * - subexpression  
+      - oval-def:EntityStateAnySimpleType (0..1)  
+      - The subexpression entity represents a value to test against the subexpression in the specified pattern. If multiple subexpressions are specified in the pattern, this value is tested against all of them. For example, if the pattern abc(.*)mno(.*)xyp was supplied, and the state specifies a subexpression value of enabled, then the test would check that both (or at least one, none, etc. depending on the entity_check attribute) of the subexpressions have a value of enabled.  
+    * - stderr_line  
+      - oval-def:EntityStateStringType (0..unbounded)  
+      - The 'stderr_line' element contains any and all output to STDERR from a run of the object command. Each line of STDERR should create an additional 'stderr_line' element.  
+  
+______________
+  
 .. _sql_test:  
   
 < sql_test > (Deprecated)  
@@ -787,8 +888,14 @@ ______________
   
 .. _sql57_test:  
   
-< sql57_test >  
+< sql57_test > (Deprecated)  
 ---------------------------------------------------------
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* Deprecated As Of Version 5.12  
+* Reason: Replaced by the sql512_test.  The sql512_test removes the connection string and replaces it with 'instance' and 'database' elements.  This allows the application to perform any necessary steps to connect, and providing a simple method for content authors to determine which database(s) to query.  
+* Comment: This object has been deprecated and may be removed in a future version of the language.  
+  
 The sql test is used to check information stored in a database. It is often the case that applications store configuration settings in a database as opposed to a file. This test has been designed to enable those settings to be tested. It extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information. The required object element references a wmi_object and the optional state element specifies the metadata to check.
 
 **Extends:** oval-def:TestType
@@ -874,6 +981,113 @@ Child Elements
   
 ______________
   
+.. _sql512_test:  
+  
+< sql512_test >  
+---------------------------------------------------------
+The sql512 test is used to check information stored in a database. It extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information.
+
+This test should only be performed by the OVAL interpreter if the content is 'trusted', such as being digitally signed by a trusted content author.
+
+The OVAL interpeter will provide all authentication capabilities to the SQL DMBS target.
+
+The OVAL interpeter will query the target system and find all applicable DBMS instances and databases (refer to sql512 object elements for more information on instances and databases) .
+
+Using Microsoft SQL Server as an example, below is sample of what the OVAL intepreter will gather from a target.
+
+Target Host: Host1 SQL Server Instances: SQLEXPRESS (version 13.0.6450.1 ) Databases: master model msdb tempdb userdb1 userdb2 SQLSERVER (version 16.0.4135.4) Databases: master model msdb tempdb testdb1 testdb2
+
+Content can then be created that targets one or more versions, and within those versions, queries could be run against one or more instances and one ore more databases.
+
+**Extends:** oval-def:TestType
+
+Child Elements  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. list-table:: Elements  
+    :header-rows: 1  
+  
+    * - Child Elements  
+      - Type (MinOccurs..MaxOccurs)  
+      - Desc.  
+    * - object  
+      - oval-def:ObjectRefType (1..1)  
+      -   
+    * - state  
+      - oval-def:StateRefType (0..unbounded)  
+      -   
+  
+.. _sql512_object:  
+  
+< sql512_object >  
+---------------------------------------------------------
+The sql512_object element is used by a sql512 test to define the specific database and query to be evaluated. Each object extends the standard ObjectType as defined in the oval-definitions-schema and one should refer to the ObjectType description for more information. The common set element allows complex objects to be created using filters and set logic. Again, please refer to the description of the set element in the oval-definitions-schema.
+
+**Extends:** oval-def:ObjectType
+
+Child Elements  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. list-table:: Elements  
+    :header-rows: 1  
+  
+    * - Child Elements  
+      - Type (MinOccurs..MaxOccurs)  
+      - Desc.  
+    * - engine  
+      - ind-def:EntityObjectEngineType (1..1)  
+      - The engine entity defines the specific database engine to use. Any tool looking to collect information about this object will need to know the engine in order to use the appropriate drivers to establish a connection.  
+    * - version  
+      - oval-def:EntityObjectStringType (1..1)  
+      - The version entity defines the specific version of the database engine to use.The version shall be reported in the format provided by the dbms application, which may differ slightly across dbms products, but should generally be in the foramt of X.Y.ZBelow are some examples, but make sure to refer to DBMS system documentation for complete/current methods to determine versionsFor Microsoft SQL Server, the version can be obtained with 'SELECT SERVERPROPERTY('productversion')'For Oracle DBMS, the version can be obtained with 'SELECT * FROM V$VERSION;'For MySQL and MariaDB, the version can be obtained with 'SELECT version();'Usage of regular expressions is recommended in order to match on a primary version or multiple versions of the dbms.  
+    * - instance  
+      - oval-def:EntityObjectStringType (1..1)  
+      - The instance entity defines the specific instance name to be used when connecting to the correct database, where instance refers to the running instance of the DMBS software itself. This could be a separate installation of binaries (such as with MS SQL Server), or just a set of running processes used to manage the DBMS.The OVAL interpreter will automatically determine the list of available instances on the target.When a pattern or string is entered, the OVAL interpeter will consider any matching instance as in scope for analysis.  
+    * - database  
+      - oval-def:EntityObjectStringType (1..1)  
+      - The database entity defines the specific database name to be used when connecting to the specified instance, where a database is defined as a collection of tables within a DBMS instance.When a pattern or string is entered, the OVAL interpeter will perform the query against any matching databases.If the xsi:nil attribute is set to true, then the OVAL interpreter will perform the query once per instance. This is primarily useful for queries that gather instance configuration settings, such as SQL Servers SERVERPROPERTY data. See https://learn.microsoft.com/en-us/sql/t-sql/functions/serverproperty-transact-sql?view=sql-server-ver16 Example: SELECT SERVERPROPERTY('IsClustered') AS [is_clustered]  
+    * - sql  
+      - oval-def:EntityObjectStringType (1..1)  
+      - The sql entity defines a query used to identify the object(s) to test against. Any valid SQL query is usable with one exception, all fields must be named in the SELECT portion of the query. For example, SELECT name, number FROM ... is valid. However, SELECT * FROM ... is not valid. This is because the record element in the state and item require a unique field name value to ensure that any query results can be evaluated consistently. If the xsi:nil attribute is set to true, then no query is executed and only the existance of the specified instance and database will be considered.  
+    * - oval-def:filter  
+      - n/a (0..unbounded)  
+      -   
+  
+.. _sql512_state:  
+  
+< sql512_state >  
+---------------------------------------------------------
+The sql512_state element contains two entities that are used to check the name of the specified field and the value associated with it.
+
+**Extends:** oval-def:StateType
+
+Child Elements  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. list-table:: Elements  
+    :header-rows: 1  
+  
+    * - Child Elements  
+      - Type (MinOccurs..MaxOccurs)  
+      - Desc.  
+    * - engine  
+      - ind-def:EntityStateEngineType (0..1)  
+      - The engine entity defines a specific database engine.  
+    * - version  
+      - oval-def:EntityStateStringType (0..1)  
+      - The version entity defines a specific version of a given database engine.  
+    * - instance  
+      - oval-def:EntityStateStringType (0..1)  
+      - The instance entity defines the specific instance name to be used when connecting to the correct database.  
+    * - database  
+      - oval-def:EntityStateStringType (0..1)  
+      - The database entity defines the specific database name to be used when connecting to the specified instance.  
+    * - sql  
+      - oval-def:EntityStateStringType (0..1)  
+      - the sql entity defines a query used to identify the object(s) to test against.  
+    * - result  
+      - oval-def:EntityStateRecordType (0..1)  
+      - The result entity specifies how to test objects in the result set of the specified SQL statement.  
+  
+______________
+  
 .. _textfilecontent54_test:  
   
 < textfilecontent54_test >  
@@ -934,7 +1148,7 @@ Child Elements
       - The pattern entity defines a chunk of text in a file and is represented using a regular expression. A subexpression (using parentheses) can call out a piece of the text block to test. For example, the pattern abc(.*)xyz would look for a block of text in the file that starts with abc and ends with xyz, with the subexpression being all the characters that exist in between. The value of the subexpression can then be tested using the subexpression entity of a textfilecontent54_state. Note that if the pattern, starting at the same point in the file, matches more than one block of text, then it matches the longest. For example, given a file with abcdefxyzxyzabc, then the pattern abc(.*)xyz would match the block abcdefxyzxyz. Subexpressions also match the longest possible substrings, subject to the constraint that the whole match be as long as possible, with subexpressions starting earlier in the pattern taking priority over ones starting later.Note that when using regular expressions, OVAL supports a common subset of the regular expression character classes, operations, expressions and other lexical tokens defined within Perl 5's regular expression specification. For more information on the supported regular expression syntax in OVAL see: http://oval.mitre.org/language/about/re_support_5.6.html.  
     * - instance  
       - oval-def:EntityObjectIntType (1..1)  
-      - The instance entity calls out a specific match of the pattern. It can have both positive and negative values. If the value is positive, the index of the specific match of the pattern is counted from the beginning of the set of matches of that pattern. The first match is given an instance value of 1, the second match is given an instance value of 2, and so on. For positive values, the 'less than' and 'less than or equals' operations imply the the object is operating only on positive values. Frequently, this entity will be defined as 'greater than or equals' 1, which results in the object representing the set of all matches of the pattern.Negative values are used to simplify collection of pattern match occurrences counting backwards from the last match. To find the last match, use an instance of -1; the penultimate match is found using an instance value of -2, and so on. For negative values, the 'greater than' and 'greater than or equals' operations imply the object is operating only on negative values. For example, searching for instances greater than or equal to -2 would yield only the last two maches.Note that the main purpose of the instance item entity is to provide uniqueness for different textfilecontent_items that results from multiple matches of a given pattern against the same file, and they will always have positive values.  
+      - The instance entity calls out a specific match of the pattern. It can have any integer value. If the value is a non-negative integer, the index of the specific match of the pattern is counted from the beginning of the set of matches of that pattern in the targeted file. The first match is given an instance value of 1, the second match is given an instance value of 2, and so on. For non-negative values, the 'less than' and 'less than or equal' operations imply the the object is operating only on non-negative values. Frequently, this entity will be defined as 'greater than or equal' to 1 or 'greater than' 0, either of which results in the object representing the set of all matches of the pattern.Negative values are used to simplify collection of pattern match occurrences counting backwards from the final match in the targeted file. To find the final match, use an instance of -1; the penultimate match is found using an instance value of -2, and so on. For negative values, the 'greater than' and 'greater than or equal' operations imply the object is operating only on negative values. For example, searching for instances greater than or equal to -2 would yield only the last two maches.Note that the main purpose of the instance item entity is to provide uniqueness for different textfilecontent_items that results from multiple matches of a given pattern against the same file, and they will always have positive values.  
     * - oval-def:filter  
       - n/a (0..unbounded)  
       -   
@@ -1295,6 +1509,111 @@ Child Elements
       - ind-def:EntityStateWindowsViewType (0..1)  
       - The windows view value to which this was targeted. This is used to indicate which view (32-bit or 64-bit), the associated State applies to. This entity only applies to 64-bit Microsoft Windows operating systems.  
   
+______________
+  
+.. _yamlfilecontent_test:  
+  
+< yamlfilecontent_test >  
+---------------------------------------------------------
+The yamlfilecontent_test element is used to explore the contents of an YAML file. This test allows specific pieces of an YAML document specified using YAML Path to be tested. It extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information. The required object element references a yamlfilecontent_object and the optional state element specifies the metadata to check.
+
+**Extends:** oval-def:TestType
+
+Child Elements  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. list-table:: Elements  
+    :header-rows: 1  
+  
+    * - Child Elements  
+      - Type (MinOccurs..MaxOccurs)  
+      - Desc.  
+    * - object  
+      - oval-def:ObjectRefType (1..1)  
+      -   
+    * - state  
+      - oval-def:StateRefType (0..unbounded)  
+      -   
+  
+.. _yamlfilecontent_object:  
+  
+< yamlfilecontent_object >  
+---------------------------------------------------------
+The yamlfilecontent_object element is used by a YAML file content test to define the specific piece of an YAML file(s) to be evaluated. The yamlfilecontent_object will only collect regular files on UNIX systems and FILE_TYPE_DISK files on Windows systems. Each object extends the standard ObjectType as defined in the oval-definitions-schema and one should refer to the ObjectType description for more information. The common set element allows complex objects to be created using filters and set logic. Again, please refer to the description of the set element in the oval-definitions-schema.
+
+The set of files to be evaluated may be identified with either a complete filepath or a path and filename. Only one of these options may be selected.
+
+It is important to note that the 'max_depth' and 'recurse_direction' attributes of the 'behaviors' element do not apply to the 'filepath' element, only to the 'path' and 'filename' elements. This is because the 'filepath' element represents an absolute path to a particular file and it is not possible to recurse over a file.
+
+**Extends:** oval-def:ObjectType
+
+Child Elements  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. list-table:: Elements  
+    :header-rows: 1  
+  
+    * - Child Elements  
+      - Type (MinOccurs..MaxOccurs)  
+      - Desc.  
+    * - behaviors  
+      - ind-def:FileBehaviors (0..1)  
+      -   
+    * - filepath  
+      - oval-def:EntityObjectStringType (1..1)  
+      - The filepath element specifies the absolute path for a file on the machine. A directory cannot be specified as a filepath.  
+    * - path  
+      - oval-def:EntityObjectStringType (1..1)  
+      - The path element specifies the directory component of the absolute path to a file on the machine.  
+    * - filename  
+      - oval-def:EntityObjectStringType (1..1)  
+      - The filename element specifies the name of the file.  
+    * - content  
+      - oval-def:EntityObjectStringType (1..1)  
+      - The content element specifies the YAML document body. It also could reference a variable containing the document using var_ref attribute. Note that "equals" is the only valid operator for the content entity.  
+    * - yamlpath  
+      - oval-def:EntityObjectStringType (1..1)  
+      - Specifies an YAML Path expression to evaluate against the YAML file specified by the filename entity. This YAML Path expression must evaluate to a sequence or a map (part of a map) of scalar values which will be accessible in OVAL via instances of the value entity. Any results from evaluating the YAML Path expression other than a sequence (or a map) of scalar values (e.g. sequence of sequences, sequence of maps, map of maps etc.) are considered as incorrect, so the author should define the YAML Path expression carefully. Note that "equals" is the only valid operator for the yamlpath entity.  
+    * - oval-def:filter  
+      - n/a (0..unbounded)  
+      -   
+  
+.. _yamlfilecontent_state:  
+  
+< yamlfilecontent_state >  
+---------------------------------------------------------
+The yamlfilecontent_state element contains entities that are used to check the file path and name, as well as the YAML Path used and the value of the this YAML Path.
+
+**Extends:** oval-def:StateType
+
+Child Elements  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. list-table:: Elements  
+    :header-rows: 1  
+  
+    * - Child Elements  
+      - Type (MinOccurs..MaxOccurs)  
+      - Desc.  
+    * - filepath  
+      - oval-def:EntityStateStringType (0..1)  
+      - The filepath element specifies the absolute path for a file on the machine. A directory cannot be specified as a filepath.  
+    * - path  
+      - oval-def:EntityStateStringType (0..1)  
+      - The path element specifies the directory component of the absolute path to a file on the machine.  
+    * - filename  
+      - oval-def:EntityStateStringType (0..1)  
+      - The filename element specifies the name of the file.  
+    * - content  
+      - oval-def:EntityStateStringType (0..1)  
+      - The content element specifies the YAML document body. Note that "equals" is the only valid operator for the content entity.  
+    * - yamlpath  
+      - oval-def:EntityStateStringType (0..1)  
+      - Specifies an YAML Path expression to evaluate against the YAML file specified by the filename entity. Note that "equals" is the only valid operator for the yamlpath entity.  
+    * - value  
+      - oval-def:EntityStateRecordType (0..1)  
+      - The value entity specifies how to test objects in the value set of the specified YAML Path. To define tests for a single scalar value or a list of scalar values (where there is no key to associate), set the name attribute of the field element to '#'. Due to the limitation of the record type field names could not contain uppercase letters, they should be converted to the lowercase and escaped using the '^' symbol (the '^' symbol should be escaped as well). For example, to check a value associated with 'myCamelCase^Key' set the name attribute of the field to 'my^camel^case^^^key'. The check is entirely controlled by operator attributes of the field element.  
+    * - windows_view  
+      - ind-def:EntityStateWindowsViewType (0..1)  
+      - The windows view value to which this was targeted. This is used to indicate which view (32-bit or 64-bit), the associated State applies to. This entity only applies to 64-bit Microsoft Windows operating systems.  
+  
 .. _FileBehaviors:  
   
 == FileBehaviors ==  
@@ -1334,6 +1653,66 @@ Note that in most cases it is recommended that the value of 'local' be used to e
 Note that the values have the following meaning: '64_bit' – Indicates that the 64-bit view on 64-bit Windows operating systems must be examined. On a 32-bit system, the Object must be evaluated without applying the behavior. '32_bit' – Indicates that the 32-bit view must be examined. On a 32-bit system, the Object must be evaluated without applying the behavior. It is recommended that the corresponding 'windows_view' entity be set on the OVAL Items that are collected when this behavior is used to distinguish between the OVAL Items that are collected in the 32-bit or 64-bit views.  
   
   
+.. _EntityObjectShellType:  
+  
+== EntityObjectShellType ==  
+---------------------------------------------------------
+The EntityObjectShellType complex type defines a string entity value that is restricted to a set of command shells. The empty string is also allowed to support empty elements associated with variable references.
+
+**Restricts:** oval-def:EntityObjectStringType
+
+.. list-table:: Enumeration Values  
+    :header-rows: 1  
+  
+    * - Value  
+      - Description  
+    * - sh  
+      - | The borne shell (sh)  
+    * - bash  
+      - | The gnu borne again shell (bash).  
+    * - csh  
+      - | The C shell (csh).  
+    * - ksh  
+      - | The korn shell (ksh).  
+    * - zsh  
+      - | The Z shell (zsh).  
+    * - cmd  
+      - | The Microsoft Windows command prompt (cmd).  
+    * - powershell  
+      - | The Microsoft Powershell prompt (powershell).  
+    * -   
+      - | The empty string value is permitted here to allow for empty elements associated with variable references.  
+  
+.. _EntityStateShellType:  
+  
+== EntityStateShellType ==  
+---------------------------------------------------------
+The EntityStateShellType complex type defines a string entity value that is restricted to a set of command shells. The empty string is also allowed to support empty elements associated with variable references.
+
+**Restricts:** oval-def:EntityStateStringType
+
+.. list-table:: Enumeration Values  
+    :header-rows: 1  
+  
+    * - Value  
+      - Description  
+    * - sh  
+      - | The borne shell (sh)  
+    * - bash  
+      - | The gnu borne again shell (bash).  
+    * - csh  
+      - | The C shell (csh).  
+    * - ksh  
+      - | The korn shell (ksh).  
+    * - zsh  
+      - | The Z shell (zsh).  
+    * - cmd  
+      - | The Microsoft Windows command prompt (cmd).  
+    * - powershell  
+      - | The Microsoft Powershell prompt (powershell).  
+    * -   
+      - | The empty string value is permitted here to allow for empty elements associated with variable references.  
+  
 .. _EntityObjectEngineType:  
   
 == EntityObjectEngineType ==  
@@ -1349,6 +1728,14 @@ The EntityObjectEngineType complex type defines a string entity value that is re
       - Description  
     * - access  
       - | The access value describes the Microsoft Access database engine.  
+    * - aurora  
+      - | The aurora value describes the Amazon Aurora cloud database engine.  
+    * - azuresql  
+      - | The azuresql value describes the Microsoft Azure SQL cloud database engine.  
+    * - crunchypostgres  
+      - | The crunchypostgres value describes the Crunchy Postgres cloud database engine.  
+    * - derby  
+      - | The derby value describes the Apache Derby database engine.  
     * - db2  
       - | The db2 value describes the IBM DB2 database engine.  
     * - cache  
@@ -1367,6 +1754,8 @@ The EntityObjectEngineType complex type defines a string entity value that is re
       - | The interbase value describes the Embarcadero Technologies InterBase database engine.  
     * - lightbase  
       - | The lightbase value describes the Light Infocon LightBase database engine.  
+    * - mariadb  
+      - | The mariadb value describes the MariaDB database engine.  
     * - maxdb  
       - | The maxdb value describes the SAP MaxDB database engine.  
     * - monetdb  
@@ -1475,6 +1864,8 @@ The EntityStateFamilyType complex type defines a string entity value that is res
       - | The apple_ios value describes the iOS mobile operating system.  
     * - asa  
       - | The asa value describes the Cisco ASA security devices.  
+    * - aws  
+      - | The aws value describes the Amazon Web Services platform.  
     * - catos  
       - | The catos value describes the Cisco CatOS operating system.  
     * - ios  
@@ -1485,6 +1876,8 @@ The EntityStateFamilyType complex type defines a string entity value that is res
       - | The junos value describes the Juniper JunOS operating system.  
     * - macos  
       - | The macos value describes the Mac operating system.  
+    * - panos  
+      - | The panos value describes the Palo Alto Networks operating system.  
     * - pixos  
       - | The pixos value describes the Cisco PIX operating system.  
     * - undefined  

@@ -1,12 +1,12 @@
 Open Vulnerability and Assessment Language: Linux System Characteristics  
 =========================================================
 * Schema: Linux System Characteristics  
-* Version: 5.11.1:1.2  
-* Release Date: 11/30/2016 09:00:00 AM
+* Version: 5.12  
+* Release Date: 11/29/2024 09:00:00 AM
 
 The following is a description of the elements, types, and attributes that compose the Linux specific system characteristic items found in Open Vulnerability and Assessment Language (OVAL). Each item is an extension of the standard item element defined in the Core System Characteristic Schema. Through extension, each item inherits a set of elements and attributes that are shared amongst all OVAL Items. Each item is described in detail and should provide the information necessary to understand what each element and attribute represents. This document is intended for developers and assumes some familiarity with XML. A high level description of the interaction between the different tests and their relationship to the Core System Characteristic Schema is not outlined here.
 
-The OVAL Schema is maintained by the OVAL Community. For more information, including how to get involved in the project and how to submit change requests, please visit the OVAL website at http://oval.cisecurity.org.
+The OVAL Schema is maintained by the OVAL Community. For more information, including how to get involved in the project and how to submit change requests, please visit the OVAL website at https://github.com/OVAL-Community/.
 
 Item Listing  
 ---------------------------------------------------------
@@ -14,6 +14,7 @@ Item Listing
 * :ref:`dpkginfo_item`  
 * :ref:`iflisteners_item`  
 * :ref:`inetlisteningserver_item`  
+* :ref:`kernelmodule_item`  
 * :ref:`partition_item`  
 * :ref:`rpminfo_item`  
 * :ref:`rpmverify_item`  
@@ -21,6 +22,7 @@ Item Listing
 * :ref:`rpmverifypackage_item`  
 * :ref:`selinuxboolean_item`  
 * :ref:`selinuxsecuritycontext_item`  
+* :ref:`sestatus_item`  
 * :ref:`slackwarepkginfo_item`  
 * :ref:`systemdunitdependency_item`  
 * :ref:`systemdunitproperty_item`  
@@ -187,6 +189,36 @@ Child Elements
     * - user_id  
       - oval-sc:EntityItemIntType (0..1)  
       - The numeric user id, or uid, is the third column of each user's entry in /etc/passwd. It represents the owner, and thus privilege level, of the specified program.  
+  
+______________
+  
+.. _kernelmodule_item:  
+  
+< kernelmodule_item >  
+---------------------------------------------------------
+The kernelmodule_item captures limited information, parsing the output of the "modprobe -n -v [module_name]" command.
+
+Need a combo of "lsmod", "modprobe -n -v" and potentially searching "" Collection of a modprobe_item is determined by the "modprobe -n -v module_name" command. Due to the limitations of the modprobe command, and its requirement for a specific module_name, only the "equals" operation is supported, as there is no method to collect this information otherwise. To support other collection methods, variable references should be used to collect specific module names for use in collection here.
+
+**Extends:** oval-sc:ItemType
+
+Child Elements  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. list-table:: Elements  
+    :header-rows: 1  
+  
+    * - Child Elements  
+      - Type (MinOccurs..MaxOccurs)  
+      - Desc.  
+    * - module_name  
+      - oval-sc:EntityItemStringType (0..1)  
+      - The name of the kernel module for which information was collected  
+    * - loaded  
+      - oval-sc:EntityItemBoolType (0..1)  
+      - The loaded element is true when the collected kernel module is currently loaded; false otherwise.  
+    * - loadable  
+      - oval-sc:EntityItemBoolType (0..1)  
+      - The loadable element is true when the collected kernel module is allowed to be loaded; false otherwise.  
   
 ______________
   
@@ -584,6 +616,40 @@ Child Elements
   
 ______________
   
+.. _sestatus_item:  
+  
+< sestatus_item >  
+---------------------------------------------------------
+The SEStatus Item displays various information about the current SEStatus policy. This item maps the counts of profiles and processes as per the results of the "sestatus" command. Each item extends the standard ItemType as defined in the oval-system-characteristics-schema and one should refer to the ItemType description for more information.
+
+**Extends:** oval-sc:ItemType
+
+Child Elements  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. list-table:: Elements  
+    :header-rows: 1  
+  
+    * - Child Elements  
+      - Type (MinOccurs..MaxOccurs)  
+      - Desc.  
+    * - selinux_status  
+      - linux-sc:EntityItemSEStatusType (0..1)  
+      - Indicates whether SELinux module itself is enabled or disabled on your system.  
+    * - current_mode  
+      - linux-sc:EntityItemSEStatusModeType (0..1)  
+      - This indicates whether SELinux is currently enforcing the policies or not utilizing the following values enforcing, permissive, disabled.  
+    * - mode_from_config_file  
+      - linux-sc:EntityItemSEStatusModeType (0..1)  
+      - Displays the mode from config file.  
+    * - loaded_policy_name  
+      - linux-sc:EntityItemSEStatusPolicyType (0..1)  
+      - Displays what type of SELinux policy is currently loaded. In pretty much all common situations, you’ll see “targeted” as the SELinux policy, as that is the default policy.  
+    * - policy_from_config_file  
+      - linux-sc:EntityItemSEStatusPolicyType (0..1)  
+      - Displays what type of SELinux policy is present in the SELinux configuration.  
+  
+______________
+  
 .. _slackwarepkginfo_item:  
   
 < slackwarepkginfo_item >  
@@ -803,4 +869,68 @@ The EntityStateProtocolType complex type restricts a string value to the set of 
       - | 1A for ArcNet.  
     * -   
       - | The empty string value is permitted here to allow for detailed error reporting.  
+  
+.. _EntityItemSEStatusType:  
+  
+== EntityItemSEStatusType ==  
+---------------------------------------------------------
+The EntityItemSEStatusType complex type restricts a string value to the set of SEStatus values that indicate whether SELinux module itself is enabled or disabled on your system. Keep in mind that even though this may say enabled, but SELinux might still be not technically enabled (enforced), which is really indicated by the "current_mode" value.
+
+**Restricts:** oval-sc:EntityItemStringType
+
+.. list-table:: Enumeration Values  
+    :header-rows: 1  
+  
+    * - Value  
+      - Description  
+    * - enabled  
+      - | Indicates SELinux is enabled  
+    * - disabled  
+      - | Indicates SELinux is disabled  
+    * -   
+      - | The empty string value is permitted here to allow for empty elements associated with variable references.  
+  
+.. _EntityItemSEStatusModeType:  
+  
+== EntityItemSEStatusModeType ==  
+---------------------------------------------------------
+The EntityItemSEStatusModeType complex type restricts a string value to the set of SEStatus Current Mode values. The empty string is also allowed to support the empty element associated with variable references. Note that when using pattern matches and variables care must be taken to ensure that the regular expression and variable values align with the enumerated values
+
+**Restricts:** oval-sc:EntityItemStringType
+
+.. list-table:: Enumeration Values  
+    :header-rows: 1  
+  
+    * - Value  
+      - Description  
+    * - enforcing  
+      - | 'enforcing' indicates that SELinux security policy is enforced (i.e SELinux is enabled).  
+    * - pemissive  
+      - | 'permissive' indicates that SELinux prints warnings instead of enforcing. This is helpful during debugging purpose when you want to know what would SELinux potentially block (without really blocking it) by looking at the SELinux logs.  
+    * - disabled  
+      - | 'disabled' indicates no SELinux policy is loaded.  
+    * -   
+      - | The empty string value is permitted here to allow for empty elements associated with variable references.  
+  
+.. _EntityItemSEStatusPolicyType:  
+  
+== EntityItemSEStatusPolicyType ==  
+---------------------------------------------------------
+The EntityItemSEStatusPolicyType complex type restricts a string value to the set of SEStatus Loaded Policy Name values. The empty string is also allowed to support the empty element associated with variable references. Note that when using pattern matches and variables care must be taken to ensure that the regular expression and variable values align with the enumerated values
+
+**Restricts:** oval-sc:EntityItemStringType
+
+.. list-table:: Enumeration Values  
+    :header-rows: 1  
+  
+    * - Value  
+      - Description  
+    * - targeted  
+      - | 'targeted' indicates that only targeted processes are protected by SELinux.  
+    * - minimum  
+      - | 'minimum' indicates is a slight modification of targeted policy. Only few selected processes are protected in this case.  
+    * - mls  
+      - | 'mls' indicates Multi Level Security protection. MLS is pretty complex and pretty much not used in most situations.  
+    * -   
+      - | The empty string value is permitted here to allow for empty elements associated with variable references.  
   

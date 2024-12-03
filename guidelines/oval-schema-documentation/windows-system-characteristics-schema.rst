@@ -1,12 +1,12 @@
 Open Vulnerability and Assessment Language: Windows System Characteristics  
 =========================================================
 * Schema: Windows System Characteristics  
-* Version: 5.11.1:1.4  
-* Release Date: 01/09/2017 10:00:00 PM
+* Version: 5.12  
+* Release Date: 11/29/2024 09:00:00 AM
 
 The following is a description of the elements, types, and attributes that compose the Windows specific system characteristic items found in Open Vulnerability and Assessment Language (OVAL). Each item is an extension of the standard item element defined in the Core System Characteristic Schema. Through extension, each item inherits a set of elements and attributes that are shared amongst all OVAL Items. Each item is described in detail and should provide the information necessary to understand what each element and attribute represents. This document is intended for developers and assumes some familiarity with XML. A high level description of the interaction between the different tests and their relationship to the Core System Characteristic Schema is not outlined here.
 
-The OVAL Schema is maintained by the OVAL Community. For more information, including how to get involved in the project and how to submit change requests, please visit the OVAL website at http://oval.cisecurity.org.
+The OVAL Schema is maintained by the OVAL Community. For more information, including how to get involved in the project and how to submit change requests, please visit the OVAL website at https://github.com/OVAL-Community/.
 
 Item Listing  
 ---------------------------------------------------------
@@ -48,6 +48,8 @@ Item Listing
 * :ref:`user_item`  
 * :ref:`user_sid_item`  
 * :ref:`userright_item`  
+* :ref:`appcmd_item`  
+* :ref:`appcmdlistconfig_item`  
 * :ref:`volume_item`  
 * :ref:`wmi_item`  
 * :ref:`wmi57_item`  
@@ -308,7 +310,7 @@ ______________
 ---------------------------------------------------------
 The auditeventpolicy item enumerates the different types of events the system should audit. The defined values are found in window's POLICY_AUDIT_EVENT_TYPE enumeration and accessed through the LsaQueryInformationPolicy when the InformationClass parameters are set to PolicyAuditEventsInformation. It extends the standard ItemType as defined in the oval-system-characteristics schema and one should refer to the ItemType description for more information.
 
-Note that when audinting is disabled each of the entities listed below should be set to 'AUDIT_NONE'.
+Note that when auditing is disabled each of the entities listed below should be set to 'AUDIT_NONE'.
 
 **Extends:** oval-sc:ItemType
 
@@ -356,7 +358,7 @@ ______________
 ---------------------------------------------------------
 The auditeventpolicysubcategories_item is used to hold information about the audit event policy settings on a Windows system. These settings are used to specify which system and network events are monitored. For example, if the credential_validation element has a value of AUDIT_FAILURE, it means that the system is configured to log all unsuccessful attempts to validate a user account on a system. It is important to note that these audit event policy settings are specific to certain versions of Windows. As a result, the documentation for that version of Windows should be consulted for more information on each setting. It extends the standard ItemType as defined in the oval-system-characteristics schema and one should refer to the ItemType description for more information.
 
-Note that when audinting is disabled each of the entities listed below should be set to 'AUDIT_NONE'.
+Note that when auditing is disabled each of the entities listed below should be set to 'AUDIT_NONE'.
 
 **Extends:** oval-sc:ItemType
 
@@ -415,7 +417,7 @@ Child Elements
       - Audit the events produced by inbound remote procedure call connections. This state corresponds with the following GUID specified in ntsecapi.h: 0cce922e-69ae-11d9-bed3-505054503030. This state corresponds with the following Advanced Audit Policy: Detailed Tracking: Audit RPC Events  
     * - directory_service_access  
       - win-sc:EntityItemAuditType (0..1)  
-      - Audit the events produced when a Active Directory Domain Services object is accessed. This state corresponds with the following GUID specified in ntsecapi.h: 0cce923b-69ae-11d9-bed3-505054503030. This state corresponds with the following Advanced Audit Policy: DS Access: Audit Directory Service Access  
+      - Audit the events produced when an Active Directory Domain Services object is accessed. This state corresponds with the following GUID specified in ntsecapi.h: 0cce923b-69ae-11d9-bed3-505054503030. This state corresponds with the following Advanced Audit Policy: DS Access: Audit Directory Service Access  
     * - directory_service_changes  
       - win-sc:EntityItemAuditType (0..1)  
       - Audit the events produced when changes are made to Active Directory Domain Services objects. This state corresponds with the following GUID specified in ntsecapi.h: 0cce923c-69ae-11d9-bed3-505054503030. This state corresponds with the following Advanced Audit Policy: DS Access: Audit Directory Service Changes  
@@ -493,7 +495,7 @@ Child Elements
       - Audit the events produced by attempts to access Security Accounts Manager objects. This state corresponds with the following GUID specified in ntsecapi.h: 0cce9220-69ae-11d9-bed3-505054503030. This state corresponds with the following Advanced Audit Policy: Object Access: Audit SAM  
     * - removable_storage  
       - win-sc:EntityItemAuditType (0..1)  
-      - Audit events that indicate file object access attemps to removable storage. This state corresponds with the following GUID specified in ntsecapi.h: 0cce9245-69ae-11d9-bed3-505054503030. This state corresponds with the following Advanced Audit Policy: Object Access: Audit Removable Storage  
+      - Audit events that indicate file object access attempts to removable storage. This state corresponds with the following GUID specified in ntsecapi.h: 0cce9245-69ae-11d9-bed3-505054503030. This state corresponds with the following Advanced Audit Policy: Object Access: Audit Removable Storage  
     * - central_access_policy_staging  
       - win-sc:EntityItemAuditType (0..1)  
       - Audit events that indicate permission granted or denied by a proposed policy differs from the current central access policy on an object. This state corresponds with the following GUID specified in ntsecapi.h: 0cce9246-69ae-11d9-bed3-505054503030. This state corresponds with the following Advanced Audit Policy: Object Access: Central Access Policy Staging  
@@ -732,7 +734,7 @@ Child Elements
     * - trustee_sid  
       - oval-sc:EntityItemStringType (0..1)  
       - The trustee_sid entity specifies the SID that associated a user, group, system, or program (such as a Windows service).  
-    * - trustee_name (Deprecated)  
+    * - trustee_name  
       - oval-sc:EntityItemStringType (0..1)  
       - This element specifies the trustee name associated with this particular SACL. A trustee can be a user, group, or program (such as a Windows service). In Windows, trustee names are case-insensitive. As a result, it is recommended that the case-insensitive operations are used for this entity. In a domain environment, trustee names should be identified in the form: "domain\trustee name". For local trustee names use: "computer name\trustee name". For built-in accounts on the system, use the trustee name without a domain.  
     * - standard_delete  
@@ -826,7 +828,7 @@ Child Elements
     * - trustee_sid  
       - oval-sc:EntityItemStringType (0..1)  
       - The trustee_sid entity specifies the SID that associated a user, group, system, or program (such as a Windows service).  
-    * - trustee_name (Deprecated)  
+    * - trustee_name  
       - oval-sc:EntityItemStringType (0..1)  
       - This element specifies the trustee name associated with this particular DACL. A trustee can be a user, group, or program (such as a Windows service). In Windows, trustee names are case-insensitive. As a result, it is recommended that the case-insensitive operations are used for this entity. In a domain environment, trustee names should be identified in the form: "domain\trustee name". For local trustee names use: "computer name\trustee name". For built-in accounts on the system, use the trustee name without a domain.  
     * - standard_delete  
@@ -951,6 +953,15 @@ Child Elements
     * - subgroup_sid  
       - oval-sc:EntityItemStringType (0..unbounded)  
       - A string that represents the SID of a particular subgroup. If the specified group has more than one subgroup as a member, then multiple subgroup_sid entities should exist. If the specified group does not contain a single subgroup, a single subgroup_sid entity should exist with a status of 'does not exist'. If there is an error determining the subgroups that are members of the group, then a single subgroup_sid entity should be included with a status of 'error'.  
+    * - group  
+      - oval-sc:EntityItemStringType (0..1)  
+      - A string the represents the name of a particular group. In Windows, group names are case-insensitive. As a result, it is recommended that the case-insensitive operations are used for this entity. In a domain environment, groups should be identified in the form: "domain\group name". For local groups use: "computer name\group name". For built-in accounts on the system, use the group name without a domain.  
+    * - user  
+      - oval-sc:EntityItemStringType (0..unbounded)  
+      - A string that represents the name of a particular user. In Windows, user names are case-insensitive. As a result, it is recommended that the case-insensitive operations are used for this entity. In a domain environment, users should be identified in the form: "domain\user name". For local users use: "computer name\user name". For built-in accounts on the system, use the user name without a domain.If the specified group has more than one user as a member, then multiple user elements should exist. If the specified group does not contain a single user, then a single user element should exist with a status of 'does not exist'. If there is an error determining the users that are members of the group, then a single user element should be included with a status of 'error'.  
+    * - subgroup  
+      - oval-sc:EntityItemStringType (0..unbounded)  
+      - A string that represents the name of a particular subgroup in the specified group. In Windows, group names are case-insensitive. As a result, it is recommended that the case-insensitive operations are used for this entity. In a domain environment, the subgroups should be identified in the form: "domain\group name". In a local environment, the subgroups should be identified in the form: "computer name\group name". If the subgroups are built-in groups, the subgroups should be identified in the form: "group name" without a domain component.If the specified group has more than one subgroup as a member, then multiple subgroup elements should exist. If the specified group does not contain a single subgroup, then a single subgroup element should exist with a status of 'does not exist'. If there is an error determining the subgroups that are members of the group, then a single subgroup element should be included with a status of 'error'.  
   
 ______________
   
@@ -1197,25 +1208,25 @@ Child Elements
       - Desc.  
     * - max_passwd_age  
       - oval-sc:EntityItemIntType (0..1)  
-      - Specifies, in seconds (from a DWORD), the maximum allowable password age. A value of TIMEQ_FOREVER (max DWORD value, 4294967295) indicates that the password never expires. The minimum valid value for this element is ONE_DAY (86400). See the USER_MODALS_INFO_0 structure returned by a call to NetUserModalsGet().  
+      - Alternate Name: "Maximum password age". Specifies, in seconds (from a DWORD), the maximum allowable password age. A value of TIMEQ_FOREVER (max DWORD value, 4294967295) indicates that the password never expires. The minimum valid value for this element is ONE_DAY (86400). See the USER_MODALS_INFO_0 structure returned by a call to NetUserModalsGet().  
     * - min_passwd_age  
       - oval-sc:EntityItemIntType (0..1)  
-      - Specifies the minimum number of seconds that can elapse between the time a password changes and when it can be changed again. A value of zero indicates that no delay is required between password updates.  
+      - Alternate Name: "Minimum password age". Specifies the minimum number of seconds that can elapse between the time a password changes and when it can be changed again. A value of zero indicates that no delay is required between password updates.  
     * - min_passwd_len  
       - oval-sc:EntityItemIntType (0..1)  
-      - Specifies the minimum allowable password length. Valid values for this element are zero through PWLEN.  
+      - Alternate Name: "Minimum password length". Specifies the minimum allowable password length. Valid values for this element are zero through PWLEN.  
     * - password_hist_len  
       - oval-sc:EntityItemIntType (0..1)  
-      - Specifies the length of password history maintained. A new password cannot match any of the previous usrmod0_password_hist_len passwords. Valid values for this element are zero through DEF_MAX_PWHIST.  
+      - Alternate Name: "Enforce password history". Specifies the length of password history maintained. A new password cannot match any of the previous usrmod0_password_hist_len passwords. Valid values for this element are zero through DEF_MAX_PWHIST.  
     * - password_complexity  
       - oval-sc:EntityItemBoolType (0..1)  
-      - A boolean value that signifies whether passwords must meet the complexity requirements put forth by the operating system.  
+      - Alternate Name: "Password must meet complexity requirements". A boolean value that signifies whether passwords must meet the complexity requirements put forth by the operating system.  
     * - reversible_encryption  
       - oval-sc:EntityItemBoolType (0..1)  
-      - Determines whether or not passwords are stored using reversible encryption.  
+      - Alternate name: "Store passwords using reversible encryption". Determines whether or not passwords are stored using reversible encryption.  
     * - anonymous_name_lookup  
       - oval-sc:EntityItemBoolType (0..1)  
-      - Determines whether or not an anonymous user may query the local LSA policy.  
+      - Alternate name: "Allow anonymous SID/Name translation". Determines whether or not an anonymous user may query the local LSA policy.  
   
 ______________
   
@@ -1627,7 +1638,7 @@ Child Elements
     * - trustee_sid  
       - oval-sc:EntityItemStringType (0..1)  
       - The security identifier (SID) of the specified trustee name.  
-    * - trustee_name (Deprecated)  
+    * - trustee_name  
       - oval-sc:EntityItemStringType (0..1)  
       - This element specifies the trustee name associated with this particular DACL. A trustee can be a user, group, or program (such as a Windows service). In Windows, trustee names are case-insensitive. As a result, it is recommended that the case-insensitive operations are used for this entity. In a domain environment, trustee names should be identified in the form: "domain\trustee name". For local trustee names use: "computer name\trustee name". For built-in accounts on the system, use the trustee name without a domain.  
     * - standard_delete  
@@ -1718,7 +1729,7 @@ Child Elements
     * - trustee_sid  
       - oval-sc:EntityItemStringType (0..1)  
       - The trustee_sid entity specifies the SID that associated a user, group, system, or program (such as a Windows service).  
-    * - trustee_name (Deprecated)  
+    * - trustee_name  
       - oval-sc:EntityItemStringType (0..1)  
       - This element specifies the trustee name associated with this particular DACL. A trustee can be a user, group, or program (such as a Windows service). In Windows, trustee names are case-insensitive. As a result, it is recommended that the case-insensitive operations are used for this entity. In a domain environment, trustee names should be identified in the form: "domain\trustee name". For local trustee names use: "computer name\trustee name". For built-in accounts on the system, use the trustee name without a domain.  
     * - standard_delete  
@@ -2249,7 +2260,7 @@ Child Elements
       - A Unicode string that contains a comment to associate with the user account. The string can be a NULL string, or it can have any number of characters before the terminating null character.  
     * - password_age_days  
       - oval-sc:EntityItemIntType (0..1)  
-      - The number of full days that have elapsed since the password was last changed, meaning data calulated should be truncated. Ex: 89.5 days = 89, 90.01 = 90  
+      - The number of full days that have elapsed since the password was last changed, meaning data calculated should be truncated. Ex: 89.5 days = 89, 90.01 = 90  
     * - lockout  
       - oval-sc:EntityItemBoolType (0..1)  
       - The account is currently locked out.  
@@ -2314,6 +2325,12 @@ Child Elements
     * - last_logon  
       - oval-sc:EntityItemIntType (0..1)  
       - The date and time when the last logon occurred. This value is stored as the number of seconds that have elapsed since 00:00:00, January 1, 1970, GMT.  
+    * - user  
+      - oval-sc:EntityItemStringType (0..1)  
+      - A string the represents the name of a particular user. In Windows, user names are case-insensitive. As a result, it is recommended that the case-insensitive operations are used for this entity. In a domain environment, users should be identified in the form: "domain\user name". For local users use: "computer_name\user_name". For built-in accounts on the system, use the user name without a domain.  
+    * - group  
+      - oval-sc:EntityItemStringType (0..unbounded)  
+      - A string that represents the name of a particular group. In Windows, group names are case-insensitive. As a result, it is recommended that the case-insensitive operations are used for this entity. In a domain environment, groups should be identified in the form: "domain\group name". For local groups use: "computer name\group name". For built-in accounts on the system, use the group name without a domain.If the specified user belongs to more than one group, then multiple group elements should exist. If the specified user is not a member of a single group, then a single group element should exist with a status of 'does not exist'. If there is an error determining the groups that the user belongs to, then a single group element should be included with a status of 'error'.  
   
 ______________
   
@@ -2340,6 +2357,67 @@ Child Elements
     * - trustee_sid  
       - oval-sc:EntityItemStringType (0..1)  
       - The trustee_sid entity identifies the SID that has been granted the specified user right/privilege.  
+  
+______________
+  
+.. _appcmd_item:  
+  
+< appcmd_item >  
+---------------------------------------------------------
+**Extends:** oval-sc:ItemType
+
+Child Elements  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. list-table:: Elements  
+    :header-rows: 1  
+  
+    * - Child Elements  
+      - Type (MinOccurs..MaxOccurs)  
+      - Desc.  
+    * - identifier_type  
+      - win-sc:EntityItemAppCmdIdentifierType (0..1)  
+      - The identifier_type defines the identifier type (Apppool, Site, or VDir).  
+    * - identifier  
+      - oval-sc:EntityItemStringType (0..1)  
+      - The identifier defines the location of the found result (application pool name/site name).  
+    * - parameter  
+      - oval-sc:EntityItemStringType (0..1)  
+      - The parameter value defines the location of the setting.  
+    * - result  
+      - oval-sc:EntityItemAnySimpleType (0..1)  
+      - The value of the collected collected setting.  
+  
+______________
+  
+.. _appcmdlistconfig_item:  
+  
+< appcmdlistconfig_item >  
+---------------------------------------------------------
+**Extends:** oval-sc:ItemType
+
+Child Elements  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. list-table:: Elements  
+    :header-rows: 1  
+  
+    * - Child Elements  
+      - Type (MinOccurs..MaxOccurs)  
+      - Desc.  
+    * - identifier_type  
+      - win-sc:EntityItemAppCmdListConfigIdentifierType (0..1)  
+      - The identifier_type defines the identifier type (Webserver, Site, or VDir).  
+    * - identifier  
+      - oval-sc:EntityItemStringType (0..1)  
+      - The identifier defines the location of the found result (vdir name or site name). If the identifier_type is set to Webserver, this item element is not populated.  
+    * - section  
+      - oval-sc:EntityItemStringType (0..1)  
+      - The section value defines the section which contains the parameter.  
+    * - parameter  
+      - oval-sc:EntityItemStringType (0..1)  
+      - The parameter value defines the location of the configuration setting.  
+    * - result  
+      - oval-sc:EntityItemAnySimpleType (0..1)  
+      - The value of the collected setting.  
   
 ______________
   
@@ -2694,6 +2772,11 @@ The EntityItemFileTypeType restricts a string value to a specific set of values 
   
     * - Value  
       - Description  
+    * - FILE_ATTRIBUTE_DIRECTORY (Deprecated)  
+      - | The handle identifies a directory.  
+        | **Deprecated As Of Version:** 5.11.1:1.2  
+        | **Reason:** In version 5.11.1:1.2 of the OVAL Language windows schema, FILE_ATTRIBUTE_DIRECTORY was added to EntityItemFileAttributeType.  
+        | **Comment:** This value has been deprecated and will be removed in version 6.0 of the language.  
     * - FILE_TYPE_CHAR  
       - | The specified file is a character file, typically an LPT device or a console.  
     * - FILE_TYPE_DISK  
@@ -2754,6 +2837,8 @@ The EntityItemFileAttributeType restricts a string value to a specific set of va
       - | A file that is being used for temporary storage. File systems avoid writing data back to mass storage if sufficient cache memory is available, because typically, an application deletes a temporary file after the handle is closed. In that scenario, the system can entirely avoid writing the data. Otherwise, the data is written after the handle is closed.  
     * - FILE_ATTRIBUTE_VIRTUAL  
       - | This value is reserved for system use.  
+    * -   
+      - | The empty string value is permitted here to allow for detailed error reporting.  
   
 .. _EntityItemInterfaceTypeType:  
   
@@ -2846,6 +2931,8 @@ The EntityItemPeTargetMachineType enumeration identifies the valid machine targe
       - | The IMAGE_FILE_MACHINE_ALPHA type is used to indicate an Alpha APX machine.  
     * - IMAGE_FILE_MACHINE_ARM  
       - | The IMAGE_FILE_MACHINE_ARM type is used to indicate an ARM little endian machine.  
+    * - IMAGE_FILE_MACHINE_AMD64  
+      - | The IMAGE_FILE_MACHINE_AMD64 type is used to indicate an AMD 64-bit machine.  
     * - IMAGE_FILE_MACHINE_ALPHA64  
       - | The IMAGE_FILE_MACHINE_ALPHA64 type is used to indicate an 64-bit Alpha APX machine.  
     * - IMAGE_FILE_MACHINE_I386  
@@ -2867,7 +2954,7 @@ The EntityItemPeTargetMachineType enumeration identifies the valid machine targe
     * - IMAGE_FILE_MACHINE_R4000  
       - | The IMAGE_FILE_MACHINE_R4000 type is used to indicate a MIPS little endian machine.  
     * - IMAGE_FILE_MACHINE_R10000  
-      - | The IMAGE_FILE_MACHINE_10000 type is used to indicate a MIPS little endian machine.  
+      - | The IMAGE_FILE_MACHINE_R10000 type is used to indicate a MIPS little endian machine.  
     * - IMAGE_FILE_MACHINE_SH3  
       - | The IMAGE_FILE_MACHINE_SH3 type is used to indicate a Hitachi SH3 machine.  
     * - IMAGE_FILE_MACHINE_SH4  
@@ -3448,6 +3535,50 @@ The EntityItemCmdletVerbType restricts a string value to a set of allow cmdlet v
       - | The Watch verb continually inspects or monitors a resource for changes.  
     * -   
       - | The empty string is also allowed to support empty elements associated with error conditions.  
+  
+.. _EntityItemAppCmdIdentifierType:  
+  
+== EntityItemAppCmdIdentifierType ==  
+---------------------------------------------------------
+The EntityItemAppCmdIdentifierType restricts a string value to a set of allowed appcmd objects.
+
+**Restricts:** oval-sc:EntityItemStringType
+
+.. list-table:: Enumeration Values  
+    :header-rows: 1  
+  
+    * - Value  
+      - Description  
+    * - Site  
+      - | Administration of virtual sites  
+    * - VDir  
+      - | Administration of virtual directories  
+    * - Apppool  
+      - | Administration of application pools  
+    * -   
+      - | The empty string value is permitted here to allow for empty elements associated with variable references.  
+  
+.. _EntityItemAppCmdListConfigIdentifierType:  
+  
+== EntityItemAppCmdListConfigIdentifierType ==  
+---------------------------------------------------------
+Restricts a string value to a set of allowed appcmd objects.
+
+**Restricts:** oval-sc:EntityItemStringType
+
+.. list-table:: Enumeration Values  
+    :header-rows: 1  
+  
+    * - Value  
+      - Description  
+    * - Site  
+      - | Administration of virtual sites  
+    * - VDir  
+      - | Administration of virtual directories  
+    * - Webserver  
+      - | Server level configuration  
+    * -   
+      - | The empty string value is permitted here to allow for empty elements associated with variable references.  
   
 .. _EntityItemWindowsViewType:  
   

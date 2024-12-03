@@ -1,28 +1,29 @@
 Open Vulnerability and Assessment Language: UNIX Definition  
 =========================================================
 * Schema: UNIX Definition  
-* Version: 5.11.1:1.2  
-* Release Date: 11/30/2016 09:00:00 AM
+* Version: 5.12  
+* Release Date: 11/29/2024 09:00:00 AM
 
 The following is a description of the elements, types, and attributes that compose generic UNIX tests found in Open Vulnerability and Assessment Language (OVAL). Each test is an extension of the standard test element defined in the Core Definition Schema. Through extension, each test inherits a set of elements and attributes that are shared amongst all OVAL tests. Each test is described in detail and should provide the information necessary to understand what each element and attribute represents. This document is intended for developers and assumes some familiarity with XML. A high level description of the interaction between the different tests and their relationship to the Core Definition Schema is not outlined here.
 
-The OVAL Schema is maintained by the OVAL Community. For more information, including how to get involved in the project and how to submit change requests, please visit the OVAL website at http://oval.cisecurity.org.
+The OVAL Schema is maintained by the OVAL Community. For more information, including how to get involved in the project and how to submit change requests, please visit the OVAL website at https://github.com/OVAL-Community/.
 
 Test Listing  
 ---------------------------------------------------------
-* :ref:`dnscache_test`  
+* :ref:`dnscache_test` (Deprecated)  
 * :ref:`file_test`  
-* :ref:`fileextendedattribute_test`  
-* :ref:`gconf_test`  
-* :ref:`inetd_test`  
+* :ref:`fileextendedattribute_test` (Deprecated)  
+* :ref:`gconf_test` (Deprecated)  
+* :ref:`inetd_test` (Deprecated)  
 * :ref:`interface_test`  
 * :ref:`password_test`  
 * :ref:`process_test` (Deprecated)  
 * :ref:`process58_test`  
-* :ref:`routingtable_test`  
+* :ref:`routingtable_test` (Deprecated)  
 * :ref:`runlevel_test`  
 * :ref:`sccs_test` (Deprecated)  
 * :ref:`shadow_test`  
+* :ref:`sshd_test`  
 * :ref:`symlink_test`  
 * :ref:`sysctl_test`  
 * :ref:`uname_test`  
@@ -32,8 +33,14 @@ ______________
   
 .. _dnscache_test:  
   
-< dnscache_test >  
+< dnscache_test > (Deprecated)  
 ---------------------------------------------------------
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* Deprecated As Of Version 5.12  
+* Reason:   
+* Comment: This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.  
+  
 The dnscache_test is used to check the time to live and IP addresses associated with a domain name. The time to live and IP addresses for a particular domain name are retrieved from the DNS cache on the local system. It extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information. The required object element references a dnscache_object and the optional state element specifies the metadata to check.
 
 **Extends:** oval-def:TestType
@@ -290,8 +297,14 @@ ______________
   
 .. _fileextendedattribute_test:  
   
-< fileextendedattribute_test >  
+< fileextendedattribute_test > (Deprecated)  
 ---------------------------------------------------------
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* Deprecated As Of Version 5.12  
+* Reason:   
+* Comment: This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.  
+  
 The file extended attribute test is used to check extended attribute values associated with UNIX files, of the sort returned by the getfattr command or getxattr() system call. It extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information. The required object element references a fileextendedattribute_object and the optional state element specifies the extended attributes to check.
 
 NOTE: Solaris has a very different implementation of "extended attributes" in which the attributes are really an orthogonal directory hierarchy of files. See the Solaris documentation for more details. The file extended attribute test only handles simple name/value pairs as implemented by most other UNIX derived operating systems.
@@ -390,8 +403,14 @@ ______________
   
 .. _gconf_test:  
   
-< gconf_test >  
+< gconf_test > (Deprecated)  
 ---------------------------------------------------------
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* Deprecated As Of Version 5.12  
+* Reason:   
+* Comment: This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.  
+  
 The gconf_test is used to check the attributes and value(s) associated with GConf preference keys. It extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information. The required object element references a gconf_object and the optional gconf_state element specifies the data to check.
 
 **Extends:** oval-def:TestType
@@ -482,8 +501,14 @@ ______________
   
 .. _inetd_test:  
   
-< inetd_test >  
+< inetd_test > (Deprecated)  
 ---------------------------------------------------------
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* Deprecated As Of Version 5.12  
+* Reason:   
+* Comment: This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.  
+  
 The inetd test is used to check information associated with different Internet services. It extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information. The required object element references an inetd_object and the optional state element specifies the information to check.
 
 **Extends:** oval-def:TestType
@@ -980,8 +1005,14 @@ ______________
   
 .. _routingtable_test:  
   
-< routingtable_test >  
+< routingtable_test > (Deprecated)  
 ---------------------------------------------------------
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* Deprecated As Of Version 5.12  
+* Reason:   
+* Comment: This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.  
+  
 The routingtable_test is used to check information about the IPv4 and IPv6 routing table entries found in a system's primary routing table. It is important to note that only numerical addresses will be collected and that their symbolic representations will not be resolved. This equivalent to using the '-n' option with route(8) or netstat(8). It extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information. The required object element references a routingtable_object and the optional routingtable_state element specifies the data to check.
 
 **Extends:** oval-def:TestType
@@ -1139,6 +1170,12 @@ ______________
   
 < sccs_test > (Deprecated)  
 ---------------------------------------------------------
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* Deprecated As Of Version 5.12  
+* Reason:   
+* Comment: This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.  
+  
 Deprecation Info  
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 * Deprecated As Of Version 5.10  
@@ -1350,6 +1387,83 @@ Child Elements
     * - encrypt_method  
       - unix-def:EntityStateEncryptMethodType (0..1)  
       - The encrypt_method entity describes method that is used for hashing passwords.  
+  
+______________
+  
+.. _sshd_test:  
+  
+< sshd_test >  
+---------------------------------------------------------
+The sshd_test is used to check the values associated with sshd parameters that are used by the local system. It extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information. The required object element references a sshd_object and the optional state element references a sshd_state that specifies the information to check.
+
+**Extends:** oval-def:TestType
+
+Child Elements  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. list-table:: Elements  
+    :header-rows: 1  
+  
+    * - Child Elements  
+      - Type (MinOccurs..MaxOccurs)  
+      - Desc.  
+    * - object  
+      - oval-def:ObjectRefType (1..1)  
+      -   
+    * - state  
+      - oval-def:StateRefType (0..unbounded)  
+      -   
+  
+.. _sshd_object:  
+  
+< sshd_object >  
+---------------------------------------------------------
+The sshd_object is used by a sshd_test to define which sshd parameters on the local system should be collected via the "sshd -f [FILEPATH] -T" command. Each object extends the standard ObjectType as defined in the oval-definitions-schema and one should refer to the ObjectType description for more information. The common set element allows complex objects to be created using filters and set logic. Again, please refer to the description of the set element in the oval-definitions-schema.
+
+**Extends:** oval-def:ObjectType
+
+Child Elements  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. list-table:: Elements  
+    :header-rows: 1  
+  
+    * - Child Elements  
+      - Type (MinOccurs..MaxOccurs)  
+      - Desc.  
+    * - filepath  
+      - oval-def:EntityObjectStringType (1..1)  
+      - Specifies the name of the configuration file. If xsi:nil="true", then collect from the default filepath at /etc/ssh/sshd_config.  
+    * - name  
+      - oval-def:EntityObjectStringType (1..1)  
+      - The name element specifies the name(s) of the sshd parameter(s) that should be collected from the local system.  
+    * - oval-def:filter  
+      - n/a (0..unbounded)  
+      -   
+  
+.. _sshd_state:  
+  
+< sshd_state >  
+---------------------------------------------------------
+The sshd_state contains entities that are used to check the sshd configuration filepath, parameter name and value(s).
+
+**Extends:** oval-def:StateType
+
+Child Elements  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. list-table:: Elements  
+    :header-rows: 1  
+  
+    * - Child Elements  
+      - Type (MinOccurs..MaxOccurs)  
+      - Desc.  
+    * - filepath  
+      - oval-def:EntityStateStringType (0..1)  
+      - Specifies the name of the sshd configuration file. Note the default filepath is /etc/ssh/sshd_config.  
+    * - name  
+      - oval-def:EntityStateStringType (0..1)  
+      - The name element contains a string that represents the name of a sshd parameter that was collected from the local system.  
+    * - value  
+      - oval-def:EntityStateAnySimpleType (0..1)  
+      - The value element contains a string that represents the value(s) associated with the specified sshd parameter.  
   
 ______________
   

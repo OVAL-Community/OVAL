@@ -1,19 +1,20 @@
 Open Vulnerability and Assessment Language: Linux Definition  
 =========================================================
 * Schema: Linux Definition  
-* Version: 5.11.1:1.2  
-* Release Date: 11/30/2016 09:00:00 AM
+* Version: 5.12  
+* Release Date: 11/29/2024 09:00:00 AM
 
 The following is a description of the elements, types, and attributes that compose the Linux specific tests found in Open Vulnerability and Assessment Language (OVAL). Each test is an extension of the standard test element defined in the Core Definition Schema. Through extension, each test inherits a set of elements and attributes that are shared amongst all OVAL tests. Each test is described in detail and should provide the information necessary to understand what each element and attribute represents. This document is intended for developers and assumes some familiarity with XML. A high level description of the interaction between the different tests and their relationship to the Core Definition Schema is not outlined here.
 
-The OVAL Schema is maintained by the OVAL Community. For more information, including how to get involved in the project and how to submit change requests, please visit the OVAL website at http://oval.cisecurity.org.
+The OVAL Schema is maintained by the OVAL Community. For more information, including how to get involved in the project and how to submit change requests, please visit the OVAL website at https://github.com/OVAL-Community/.
 
 Test Listing  
 ---------------------------------------------------------
 * :ref:`apparmorstatus_test`  
 * :ref:`dpkginfo_test`  
-* :ref:`iflisteners_test`  
+* :ref:`iflisteners_test` (Deprecated)  
 * :ref:`inetlisteningservers_test`  
+* :ref:`kernelmodule_test`  
 * :ref:`partition_test`  
 * :ref:`rpminfo_test`  
 * :ref:`rpmverify_test` (Deprecated)  
@@ -21,7 +22,8 @@ Test Listing
 * :ref:`rpmverifypackage_test`  
 * :ref:`selinuxboolean_test`  
 * :ref:`selinuxsecuritycontext_test`  
-* :ref:`slackwarepkginfo_test`  
+* :ref:`sestatus_test`  
+* :ref:`slackwarepkginfo_test` (Deprecated)  
 * :ref:`systemdunitdependency_test`  
 * :ref:`systemdunitproperty_test`  
   
@@ -185,8 +187,14 @@ ______________
   
 .. _iflisteners_test:  
   
-< iflisteners_test >  
+< iflisteners_test > (Deprecated)  
 ---------------------------------------------------------
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* Deprecated As Of Version 5.12  
+* Reason:   
+* Comment: This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.  
+  
 The iflisteners_test is used to check what applications such as packet sniffers that are bound to an interface on the system. This is limited to applications that are listening on AF_PACKET sockets. Furthermore, only applications bound to an ethernet interface should be collected. It extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information. The required object element references an iflisteners_object and the optional iflisteners_state element specifies the data to check.
 
 **Extends:** oval-def:TestType
@@ -366,6 +374,88 @@ Child Elements
     * - user_id  
       - oval-def:EntityStateIntType (0..1)  
       - The numeric user id, or uid, is the third column of each user's entry in /etc/passwd. It represents the owner, and thus privilege level, of the specified program.  
+  
+______________
+  
+.. _kernelmodule_test:  
+  
+< kernelmodule_test >  
+---------------------------------------------------------
+The kernelmodule_test is used to check the loaded/loadability status for a given kernel module. It extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information. The required object element references a kernelmodule_object and the optional state element specifies the data to check.
+
+**Extends:** oval-def:TestType
+
+Child Elements  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. list-table:: Elements  
+    :header-rows: 1  
+  
+    * - Child Elements  
+      - Type (MinOccurs..MaxOccurs)  
+      - Desc.  
+    * - object  
+      - oval-def:ObjectRefType (1..1)  
+      -   
+    * - state  
+      - oval-def:StateRefType (0..unbounded)  
+      -   
+  
+.. _kernelmodule_object:  
+  
+< kernelmodule_object >  
+---------------------------------------------------------
+The kernelmodule_object element is used by the kernelmodule_test to specify those modules for which information will be collected. This object, using the specified module_name, will collect information on the current loaded and loadable status of the module.
+
+By default modprobe loads modules from subdirectories located in the /lib/modules/$(uname -r) directory. Usually the files have an extension of .ko, so they can be listed like this: find /lib/modules/$(uname -r) -type f -name '*.ko*'. An example line of output from this command would look like: /lib/modules/3.10.0-693.21.1.el7.x86_64/kernel/sound/usb/line6/snd-usb-pod.ko.xz. In this case, the module name would be "snd-usb-pod". This information may be useful when needing to collect kernel module information based on operators other than "equals", such as pattern matching.
+
+To populate the "loaded" element for a kernelmodule_item, the specified module name must appear in the output of the "lsmod" command. "lsmod" is a trivial program which nicely formats the contents of the /proc/modules, showing what kernel modules are currently loaded.
+
+To populate the "loadable" element for a kernelmodule_item, implementors should explore the output of the "modprobe -n -v [module_name]" command. If the output of this command contains a line reading "install /bin/true" then the module is NOT loadable. Another option is to parse the output of the "modprobe --showconfig" command. Similarly, if an output line matches "install [module_name] /bin/true", then the module is NOT loadable.
+
+A kernelmodule_object consists of a single module_name entity that identifies the package being checked.
+
+**Extends:** oval-def:ObjectType
+
+Child Elements  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. list-table:: Elements  
+    :header-rows: 1  
+  
+    * - Child Elements  
+      - Type (MinOccurs..MaxOccurs)  
+      - Desc.  
+    * - module_name  
+      - oval-def:EntityObjectStringType (1..1)  
+      - This is the name of the kernel module to collect.  
+    * - oval-def:filter  
+      - n/a (0..unbounded)  
+      -   
+  
+.. _kernelmodule_state:  
+  
+< kernelmodule_state >  
+---------------------------------------------------------
+The kernelmodule_state element defines the different information that can be used to evaluate the specified kernel module. Please refer to the individual elements in the schema for more details about what each represents.
+
+**Extends:** oval-def:StateType
+
+Child Elements  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. list-table:: Elements  
+    :header-rows: 1  
+  
+    * - Child Elements  
+      - Type (MinOccurs..MaxOccurs)  
+      - Desc.  
+    * - module_name  
+      - oval-def:EntityStateStringType (0..1)  
+      - The name of the kernel module for which information was collected  
+    * - loaded  
+      - oval-def:EntityStateBoolType (0..1)  
+      - The loaded element is true when the collected kernel module is currently loaded; false otherwise.  
+    * - loadable  
+      - oval-def:EntityStateBoolType (0..1)  
+      - The loadable element is true when the collected kernel module is allowed to be loaded; false otherwise.  
   
 ______________
   
@@ -584,6 +674,12 @@ ______________
   
 < rpmverify_test > (Deprecated)  
 ---------------------------------------------------------
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* Deprecated As Of Version 5.12  
+* Reason:   
+* Comment: This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.  
+  
 Deprecation Info  
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 * Deprecated As Of Version 5.10  
@@ -1319,10 +1415,81 @@ Child Elements
   
 ______________
   
+.. _sestatus_test:  
+  
+< sestatus_test >  
+---------------------------------------------------------
+The SEStatus Test is used to check properties representing the counts of profiles and processes as per the results of the "sestatus" command. It extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information. The required object element references an sestatus_object and the optional state element specifies the data to check.
+
+**Extends:** oval-def:TestType
+
+Child Elements  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. list-table:: Elements  
+    :header-rows: 1  
+  
+    * - Child Elements  
+      - Type (MinOccurs..MaxOccurs)  
+      - Desc.  
+    * - object  
+      - oval-def:ObjectRefType (1..1)  
+      -   
+    * - state  
+      - oval-def:StateRefType (0..unbounded)  
+      -   
+  
+.. _sestatus_object:  
+  
+< sestatus_object >  
+---------------------------------------------------------
+The sestatus_object element is used by a sestatus test to define the different information about the current SEStatus polciy. There is actually only one object relating to SEStatus and this is the system as a whole. Therefore, there are no child entities defined. Any OVAL Test written to check SEStatus will reference the same sestatus_object which is basically an empty object element.
+
+**Extends:** oval-def:ObjectType
+
+.. _sestatus_state:  
+  
+< sestatus_state >  
+---------------------------------------------------------
+The SEStatus Item displays various information about the current SEStatus policy. This item maps the counts of profiles and processes as per the results of the "sestatus" command. Please refer to the individual elements in the schema for more details about what each represents.
+
+**Extends:** oval-def:StateType
+
+Child Elements  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. list-table:: Elements  
+    :header-rows: 1  
+  
+    * - Child Elements  
+      - Type (MinOccurs..MaxOccurs)  
+      - Desc.  
+    * - selinux_status  
+      - linux-def:EntityStateSEStatusType (0..1)  
+      - Indicates whether SELinux module itself is enabled or disabled on your system.  
+    * - current_mode  
+      - linux-def:EntityStateSEStatusModeType (0..1)  
+      - This indicates whether SELinux is currently enforcing the policies or not utilizing the following values enforcing, permissive, disabled.  
+    * - mode_from_config_file  
+      - linux-def:EntityStateSEStatusModeType (0..1)  
+      - Displays the mode from config file.  
+    * - loaded_policy_name  
+      - linux-def:EntityStateSEStatusPolicyType (0..1)  
+      - Displays what type of SELinux policy is currently loaded. In pretty much all common situations, you’ll see “targeted” as the SELinux policy, as that is the default policy.  
+    * - policy_from_config_file  
+      - linux-def:EntityStateSEStatusPolicyType (0..1)  
+      - Displays what type of SELinux policy is currently loaded. In pretty much all common situations, you’ll see “targeted” as the SELinux policy, as that is the default policy.  
+  
+______________
+  
 .. _slackwarepkginfo_test:  
   
-< slackwarepkginfo_test >  
+< slackwarepkginfo_test > (Deprecated)  
 ---------------------------------------------------------
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* Deprecated As Of Version 5.12  
+* Reason:   
+* Comment: This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.  
+  
 The slackware package info test is used to check information associated with a given Slackware package. It extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information. The required object element references a slackwarepkginfo_object and the optional state element specifies the data to check.
 
 **Extends:** oval-def:TestType
@@ -1714,6 +1881,70 @@ The EntityStateProtocolType complex type restricts a string value to the set of 
       - | HDLC frames.  
     * - ETH_P_ARCNET  
       - | 1A for ArcNet.  
+    * -   
+      - | The empty string value is permitted here to allow for empty elements associated with variable references.  
+  
+.. _EntityStateSEStatusType:  
+  
+== EntityStateSEStatusType ==  
+---------------------------------------------------------
+The EntityItemSEStatusType complex type restricts a string value to the set of SEStatus values that indicate whether SELinux module itself is enabled or disabled on your system. Keep in mind that even though this may say enabled, but SELinux might still be not technically enabled (enforced), which is really indicated by the "current_mode" value.
+
+**Restricts:** oval-def:EntityStateStringType
+
+.. list-table:: Enumeration Values  
+    :header-rows: 1  
+  
+    * - Value  
+      - Description  
+    * - enabled  
+      - | Indicates SELinux is enabled  
+    * - disabled  
+      - | Indicates SELinux is disabled  
+    * -   
+      - | The empty string value is permitted here to allow for empty elements associated with variable references.  
+  
+.. _EntityStateSEStatusModeType:  
+  
+== EntityStateSEStatusModeType ==  
+---------------------------------------------------------
+The EntityItemSEStatusModeType complex type restricts a string value to the set of SEStatus Current Mode values. The empty string is also allowed to support the empty element associated with variable references. Note that when using pattern matches and variables care must be taken to ensure that the regular expression and variable values align with the enumerated values
+
+**Restricts:** oval-def:EntityStateStringType
+
+.. list-table:: Enumeration Values  
+    :header-rows: 1  
+  
+    * - Value  
+      - Description  
+    * - enforcing  
+      - | 'enforcing' indicates that SELinux security policy is enforced (i.e SELinux is enabled).  
+    * - pemissive  
+      - | 'permissive' indicates that SELinux prints warnings instead of enforcing. This is helpful during debugging purpose when you want to know what would SELinux potentially block (without really blocking it) by looking at the SELinux logs  
+    * - disabled  
+      - | 'disabled' indicates no SELinux policy is loaded.  
+    * -   
+      - | The empty string value is permitted here to allow for empty elements associated with variable references.  
+  
+.. _EntityStateSEStatusPolicyType:  
+  
+== EntityStateSEStatusPolicyType ==  
+---------------------------------------------------------
+The EntityItemSEStatusPolicyType complex type restricts a string value to the set of SEStatus Loaded Policy Name values. The empty string is also allowed to support the empty element associated with variable references. Note that when using pattern matches and variables care must be taken to ensure that the regular expression and variable values align with the enumerated values
+
+**Restricts:** oval-def:EntityStateStringType
+
+.. list-table:: Enumeration Values  
+    :header-rows: 1  
+  
+    * - Value  
+      - Description  
+    * - targeted  
+      - | 'targeted' indicates that only targeted processes are protected by SELinux.  
+    * - minimum  
+      - | 'minimum' indicates is a slight modification of targeted policy. Only few selected processes are protected in this case.  
+    * - mls  
+      - | 'mls' indicates Multi Level Security protection. MLS is pretty complex and pretty much not used in most situations.  
     * -   
       - | The empty string value is permitted here to allow for empty elements associated with variable references.  
   

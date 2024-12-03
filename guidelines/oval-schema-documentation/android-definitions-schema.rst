@@ -1,35 +1,41 @@
 Open Vulnerability and Assessment Language: Android Definition  
 =========================================================
 * Schema: Android Definition  
-* Version: 5.11.1:1.1  
-* Release Date: 11/30/2016 09:00:00 AM
+* Version: 5.12  
+* Release Date: 11/29/2024 09:00:00 AM
 
 The following is a description of the elements, types, and attributes that compose the Android specific tests found in Open Vulnerability and Assessment Language (OVAL). Each test is an extension of the standard test element defined in the Core Definition Schema. Through extension, each test inherits a set of elements and attributes that are shared amongst all OVAL tests. Each test is described in detail and should provide the information necessary to understand what each element and attribute represents. This document is intended for developers and assumes some familiarity with XML. A high level description of the interaction between the different tests and their relationship to the Core Definition Schema is not outlined here.
 
-The OVAL Schema is maintained by the OVAL Community. For more information, including how to get involved in the project and how to submit change requests, please visit the OVAL website at http://oval.cisecurity.org.
+The OVAL Schema is maintained by the OVAL Community. For more information, including how to get involved in the project and how to submit change requests, please visit the OVAL website at https://github.com/OVAL-Community/.
 
 Test Listing  
 ---------------------------------------------------------
-* :ref:`appmanager_test`  
-* :ref:`bluetooth_test`  
-* :ref:`camera_test`  
-* :ref:`certificate_test`  
-* :ref:`devicesettings_test`  
-* :ref:`encryption_test`  
-* :ref:`locationservice_test`  
-* :ref:`network_test`  
-* :ref:`password_test`  
-* :ref:`systemdetails_test`  
-* :ref:`wifi_test`  
-* :ref:`wifinetwork_test`  
-* :ref:`telephony_test`  
+* :ref:`appmanager_test` (Deprecated)  
+* :ref:`bluetooth_test` (Deprecated)  
+* :ref:`camera_test` (Deprecated)  
+* :ref:`certificate_test` (Deprecated)  
+* :ref:`devicesettings_test` (Deprecated)  
+* :ref:`encryption_test` (Deprecated)  
+* :ref:`locationservice_test` (Deprecated)  
+* :ref:`network_test` (Deprecated)  
+* :ref:`password_test` (Deprecated)  
+* :ref:`systemdetails_test` (Deprecated)  
+* :ref:`wifi_test` (Deprecated)  
+* :ref:`wifinetwork_test` (Deprecated)  
+* :ref:`telephony_test` (Deprecated)  
   
 ______________
   
 .. _appmanager_test:  
   
-< appmanager_test >  
+< appmanager_test > (Deprecated)  
 ---------------------------------------------------------
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* Deprecated As Of Version 5.12  
+* Reason:   
+* Comment: This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.  
+  
 The appmanager_test is used to verify the applications installed on the device. It extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information. The required object element references a appmanager_object and the optional state element specifies the data to check.
 
 **Extends:** oval-def:TestType
@@ -135,8 +141,14 @@ ______________
   
 .. _bluetooth_test:  
   
-< bluetooth_test >  
+< bluetooth_test > (Deprecated)  
 ---------------------------------------------------------
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* Deprecated As Of Version 5.12  
+* Reason:   
+* Comment: This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.  
+  
 The bluetooth_test is used to check the status of bluetooth settings on the device. It extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information. The required object element references a bluetooth_object and the optional state element specifies the data to check.
 
 **Extends:** oval-def:TestType
@@ -191,8 +203,14 @@ ______________
   
 .. _camera_test:  
   
-< camera_test >  
+< camera_test > (Deprecated)  
 ---------------------------------------------------------
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* Deprecated As Of Version 5.12  
+* Reason:   
+* Comment: This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.  
+  
 The camera_test is used to check camera-related information.
 
 **Extends:** oval-def:TestType
@@ -244,8 +262,14 @@ ______________
   
 .. _certificate_test:  
   
-< certificate_test >  
+< certificate_test > (Deprecated)  
 ---------------------------------------------------------
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* Deprecated As Of Version 5.12  
+* Reason:   
+* Comment: This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.  
+  
 The certificate_test is used to check the certificates installed on the device.
 
 **Extends:** oval-def:TestType
@@ -297,8 +321,14 @@ ______________
   
 .. _devicesettings_test:  
   
-< devicesettings_test >  
+< devicesettings_test > (Deprecated)  
 ---------------------------------------------------------
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* Deprecated As Of Version 5.12  
+* Reason:   
+* Comment: This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.  
+  
 The devicesettings_test is used to check the status of various settings on the device. It extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information. The required object element references a devicesettings_object and the optional state element specifies the data to check.
 
 **Extends:** oval-def:TestType
@@ -368,8 +398,14 @@ ______________
   
 .. _encryption_test:  
   
-< encryption_test >  
+< encryption_test > (Deprecated)  
 ---------------------------------------------------------
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* Deprecated As Of Version 5.12  
+* Reason:   
+* Comment: This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.  
+  
 The encryption_test is used to check the encryption status on the device. It extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information. The required object element references a encryption_object and the optional state element references a encryption_state that specifies the information to check.
 
 **Extends:** oval-def:TestType
@@ -424,8 +460,14 @@ ______________
   
 .. _locationservice_test:  
   
-< locationservice_test >  
+< locationservice_test > (Deprecated)  
 ---------------------------------------------------------
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* Deprecated As Of Version 5.12  
+* Reason:   
+* Comment: This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.  
+  
 The locationservice_test is used to check the status of location based services. It extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information. The required object element references a locationservice_object and the optional state element specifies the data to check.
 
 **Extends:** oval-def:TestType
@@ -480,8 +522,14 @@ ______________
   
 .. _network_test:  
   
-< network_test >  
+< network_test > (Deprecated)  
 ---------------------------------------------------------
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* Deprecated As Of Version 5.12  
+* Reason:   
+* Comment: This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.  
+  
 The network_test is used to check the status of network preferences on the device. It extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information. The required object element references a network_object and the optional state element specifies the data to check.
 
 **Extends:** oval-def:TestType
@@ -536,8 +584,14 @@ ______________
   
 .. _password_test:  
   
-< password_test >  
+< password_test > (Deprecated)  
 ---------------------------------------------------------
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* Deprecated As Of Version 5.12  
+* Reason:   
+* Comment: This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.  
+  
 The password test is used to check specific policy associated with passwords and the device screen lock. It extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information. The required object element references a password_object and the optional state element specifies the metadata to check.
 
 **Extends:** oval-def:TestType
@@ -634,8 +688,14 @@ ______________
   
 .. _systemdetails_test:  
   
-< systemdetails_test >  
+< systemdetails_test > (Deprecated)  
 ---------------------------------------------------------
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* Deprecated As Of Version 5.12  
+* Reason:   
+* Comment: This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.  
+  
 The syste_details test is used to get system hardware and operating system information. It extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information. The required object element references a systemdetails_object and the optional state element specifies the data to check.
 
 **Extends:** oval-def:TestType
@@ -720,8 +780,14 @@ ______________
   
 .. _wifi_test:  
   
-< wifi_test >  
+< wifi_test > (Deprecated)  
 ---------------------------------------------------------
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* Deprecated As Of Version 5.12  
+* Reason:   
+* Comment: This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.  
+  
 The wifi_test is used to check the status of general Wi-Fi settings on the device. It extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information. The required object element references a wifi_object and the optional state element specifies the data to check.
 
 **Extends:** oval-def:TestType
@@ -776,8 +842,14 @@ ______________
   
 .. _wifinetwork_test:  
   
-< wifinetwork_test >  
+< wifinetwork_test > (Deprecated)  
 ---------------------------------------------------------
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* Deprecated As Of Version 5.12  
+* Reason:   
+* Comment: This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.  
+  
 The wifinetwork_test is used to check information about the configured Wi-Fi networks on the device. It extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information. The required object element references a wifinetwork_object and the optional state element specifies the data to check.
 
 **Extends:** oval-def:TestType
@@ -874,8 +946,14 @@ ______________
   
 .. _telephony_test:  
   
-< telephony_test >  
+< telephony_test > (Deprecated)  
 ---------------------------------------------------------
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* Deprecated As Of Version 5.12  
+* Reason:   
+* Comment: This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.  
+  
 The telephony_test is used to check Telephony characteristics of system.
 
 **Extends:** oval-def:TestType

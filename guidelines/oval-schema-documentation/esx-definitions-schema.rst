@@ -1,26 +1,32 @@
 Open Vulnerability and Assessment Language: VMware ESX server Definition  
 =========================================================
 * Schema: VMware ESX server Definition  
-* Version: 5.11.1:1.1  
-* Release Date: 11/30/2016 09:00:00 AM
+* Version: 5.12  
+* Release Date: 11/29/2024 09:00:00 AM
 
 The following is a description of the elements, types, and attributes that compose the VMware ESX server specific tests found in Open Vulnerability and Assessment Language (OVAL). Each test is an extension of the standard test element defined in the Core Definition Schema. Through extension, each test inherits a set of elements and attributes that are shared amongst all OVAL tests. Each test is described in detail and should provide the information necessary to understand what each element and attribute represents. This document is intended for developers and assumes some familiarity with XML. A high level description of the interaction between the different tests and their relationship to the Core Definition Schema is not outlined here.
 
-This schema was originally developed by Yuzheng Zhou and Todd Dolinsky at Hewlett-Packard. The OVAL Schema is maintained by the OVAL Community. For more information, including how to get involved in the project and how to submit change requests, please visit the OVAL website at http://oval.cisecurity.org.
+This schema was originally developed by Yuzheng Zhou and Todd Dolinsky at Hewlett-Packard. The OVAL Schema is maintained by the OVAL Community. For more information, including how to get involved in the project and how to submit change requests, please visit the OVAL website at https://github.com/OVAL-Community/.
 
 Test Listing  
 ---------------------------------------------------------
-* :ref:`patch56_test`  
+* :ref:`patch56_test` (Deprecated)  
 * :ref:`patch_test` (Deprecated)  
-* :ref:`version_test`  
-* :ref:`visdkmanagedobject_test`  
+* :ref:`version_test` (Deprecated)  
+* :ref:`visdkmanagedobject_test` (Deprecated)  
   
 ______________
   
 .. _patch56_test:  
   
-< patch56_test >  
+< patch56_test > (Deprecated)  
 ---------------------------------------------------------
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* Deprecated As Of Version 5.12  
+* Reason:   
+* Comment: This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.  
+  
 The patch56_test reveals the installation status of a specific patch or patches in VMware ESX Server. This information can be retrieved by the "esxupdate query" command. It extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information. The required object element references a patch56_object and the optional state element referencing a patch56_state specifies the metadata to check.
 
 Note that different from previous versions, ESX Server 3.0.3 and ESX Server 3.5 use the following patch naming convention: {ProductName}{VersionNumber}-{BundleID}-{Classification}{SupportLevel}. Please refer to http://www.vmware.com/pdf/vi3_35/esx_3/r35/vi3_35_25_esxupdate.pdf for more detailed information.
@@ -244,8 +250,14 @@ ______________
   
 .. _version_test:  
   
-< version_test >  
+< version_test > (Deprecated)  
 ---------------------------------------------------------
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* Deprecated As Of Version 5.12  
+* Reason:   
+* Comment: This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.  
+  
 The version test reveals information about the release and build version of the VMware ESX server. This information can be retrieved by the "vmware -v" command or by checking the /proc/vmware/version file. It extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information. The required object element references a version_object and the optional state element specifies the metadata to check.
 
 **Extends:** oval-def:TestType
@@ -300,8 +312,14 @@ ______________
   
 .. _visdkmanagedobject_test:  
   
-< visdkmanagedobject_test >  
+< visdkmanagedobject_test > (Deprecated)  
 ---------------------------------------------------------
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* Deprecated As Of Version 5.12  
+* Reason:   
+* Comment: This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.  
+  
 The visdkmanagedobject_test is used to check information about Managed Objects in the VMware Infrastructure. This test extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information. The required object element references a visdkmanagedobject _object and the optional state element specifies the metadata to check.
 
 This test has been introduced to enable standardized automated assessments of configuration settings in cloud computing components. All aspects of the VMware cloud can be considered in this test due to the VMware Infrastructure. Whether it is a Virutal Machine, a Host System, or even a Data Center, properties are defined in ways that can be enumerated in a common methodology. The VI SDK Programming Guide located at http://www.vmware.com/support/developer/vc-sdk/visdk400pubs/sdk40programmingguide.pdf serves as a great resource. Chapter 3 discusses the Managed Entities enumerated in the behaviors.

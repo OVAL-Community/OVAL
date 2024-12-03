@@ -1,12 +1,12 @@
 Open Vulnerability and Assessment Language: NETCONF System Characteristics  
 =========================================================
 * Schema: NETCONF System Characteristics  
-* Version: 5.11.1:1.1  
-* Release Date: 11/30/2016 09:00:00 AM
+* Version: 5.12  
+* Release Date: 11/29/2024 09:00:00 AM
 
 This document outlines the items of the OVAL System Characteristics XML schema that are composed of NETCONF (RFC 6241) protocol-specific tests. Each item is an extention of a basic System Characteristics item defined in the core System Characteristics XML schema.
 
-This schema was originally developed by David Solin at jOVAL.org. The OVAL Schema is maintained by the OVAL Community. For more information, including how to get involved in the project and how to submit change requests, please visit the OVAL website at http://oval.cisecurity.org.
+This schema was originally developed by David Solin at jOVAL.org. The OVAL Schema is maintained by the OVAL Community. For more information, including how to get involved in the project and how to submit change requests, please visit the OVAL website at https://github.com/OVAL-Community/.
 
 Item Listing  
 ---------------------------------------------------------

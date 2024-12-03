@@ -1,38 +1,44 @@
 Open Vulnerability and Assessment Language: Solaris Definition  
 =========================================================
 * Schema: Solaris Definition  
-* Version: 5.11.1:1.1  
-* Release Date: 11/30/2016 09:00:00 AM
+* Version: 5.12  
+* Release Date: 11/29/2024 09:00:00 AM
 
 The following is a description of the elements, types, and attributes that compose the Solaris specific tests found in Open Vulnerability and Assessment Language (OVAL). Each test is an extension of the standard test element defined in the Core Definition Schema. Through extension, each test inherits a set of elements and attributes that are shared amongst all OVAL tests. Each test is described in detail and should provide the information necessary to understand what each element and attribute represents. This document is intended for developers and assumes some familiarity with XML. A high level description of the interaction between the different tests and their relationship to the Core Definition Schema is not outlined here.
 
-The OVAL Schema is maintained by the OVAL Community. For more information, including how to get involved in the project and how to submit change requests, please visit the OVAL website at http://oval.cisecurity.org.
+The OVAL Schema is maintained by the OVAL Community. For more information, including how to get involved in the project and how to submit change requests, please visit the OVAL website at https://github.com/OVAL-Community/.
 
 Test Listing  
 ---------------------------------------------------------
-* :ref:`facet_test`  
-* :ref:`image_test`  
-* :ref:`isainfo_test`  
-* :ref:`ndd_test`  
-* :ref:`package_test`  
-* :ref:`package511_test`  
-* :ref:`packageavoidlist_test`  
-* :ref:`packagecheck_test`  
-* :ref:`packagefreezelist_test`  
-* :ref:`packagepublisher_test`  
-* :ref:`patch54_test`  
+* :ref:`facet_test` (Deprecated)  
+* :ref:`image_test` (Deprecated)  
+* :ref:`isainfo_test` (Deprecated)  
+* :ref:`ndd_test` (Deprecated)  
+* :ref:`package_test` (Deprecated)  
+* :ref:`package511_test` (Deprecated)  
+* :ref:`packageavoidlist_test` (Deprecated)  
+* :ref:`packagecheck_test` (Deprecated)  
+* :ref:`packagefreezelist_test` (Deprecated)  
+* :ref:`packagepublisher_test` (Deprecated)  
+* :ref:`patch54_test` (Deprecated)  
 * :ref:`patch_test` (Deprecated)  
 * :ref:`smf_test`  
 * :ref:`smfproperty_test`  
-* :ref:`variant_test`  
-* :ref:`virtualizationinfo_test`  
+* :ref:`variant_test` (Deprecated)  
+* :ref:`virtualizationinfo_test` (Deprecated)  
   
 ______________
   
 .. _facet_test:  
   
-< facet_test >  
+< facet_test > (Deprecated)  
 ---------------------------------------------------------
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* Deprecated As Of Version 5.12  
+* Reason:   
+* Comment: This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.  
+  
 The facet_test is used to check the facets associated with the specified Image Packaging System image. Facets are properties that control whether or not optional components from a package are installed on a system. It extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information. The required object element references an facet_object and the optional state elements reference a facet_state and specifies the data to check.
 
 **Extends:** oval-def:TestType
@@ -108,8 +114,14 @@ ______________
   
 .. _image_test:  
   
-< image_test >  
+< image_test > (Deprecated)  
 ---------------------------------------------------------
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* Deprecated As Of Version 5.12  
+* Reason:   
+* Comment: This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.  
+  
 The image_test provides support for checking the metadata of IPS images on Solaris systems. The test extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information. The required object element references a image_object and the optional state elements reference image_states that specify the metadata to check about a set of images.
 
 **Extends:** oval-def:TestType
@@ -185,8 +197,14 @@ ______________
   
 .. _isainfo_test:  
   
-< isainfo_test >  
+< isainfo_test > (Deprecated)  
 ---------------------------------------------------------
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* Deprecated As Of Version 5.12  
+* Reason:   
+* Comment: This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.  
+  
 The isainfo test reveals information about the instruction set architectures. This information can be retrieved by the isainfo command. It extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information. The required object element references an isainfo_object and the optional state element specifies the metadata to check.
 
 The isainfo_test was originally developed by Robert L. Hollis at ThreatGuard, Inc. Many thanks for their support of the OVAL project.
@@ -246,8 +264,14 @@ ______________
   
 .. _ndd_test:  
   
-< ndd_test >  
+< ndd_test > (Deprecated)  
 ---------------------------------------------------------
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* Deprecated As Of Version 5.12  
+* Reason:   
+* Comment: This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.  
+  
 From /usr/bin/ndd. See ndd manpage for specific fields
 
 **Extends:** oval-def:TestType
@@ -326,8 +350,14 @@ ______________
   
 .. _package_test:  
   
-< package_test >  
+< package_test > (Deprecated)  
 ---------------------------------------------------------
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* Deprecated As Of Version 5.12  
+* Reason:   
+* Comment: This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.  
+  
 The package test is used to check information associated with different SVR4 packages installed on the system. Image Packaging System (IPS) packages are not supported by this test. The information used by this test is modeled after the /usr/bin/pkginfo command. It extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information. The required object element references an package_object and the optional state element specifies the information to check.
 
 **Extends:** oval-def:TestType
@@ -411,8 +441,14 @@ ______________
   
 .. _package511_test:  
   
-< package511_test >  
+< package511_test > (Deprecated)  
 ---------------------------------------------------------
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* Deprecated As Of Version 5.12  
+* Reason:   
+* Comment: This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.  
+  
 The package511_test provides support for checking the metadata of packages installed using the Solaris Image Packaging System. The test extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information. The required object element references a package511_object and the optional state elements reference package511_states that specify the metadata to check about a set of packages.
 
 **Extends:** oval-def:TestType
@@ -512,8 +548,14 @@ ______________
   
 .. _packageavoidlist_test:  
   
-< packageavoidlist_test >  
+< packageavoidlist_test > (Deprecated)  
 ---------------------------------------------------------
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* Deprecated As Of Version 5.12  
+* Reason:   
+* Comment: This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.  
+  
 The packageavoidlist_test provides support for checking the metadata of IPS packages that have been flagged as needing to avoid from installation on a Solaris system. The test extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information. The required object element references a packageavoidlist_object and the optional state elements reference packageavoidlist_states that specify the metadata to check about a set of packages that have been flagged as to be avoided on a Solaris system.
 
 **Extends:** oval-def:TestType
@@ -565,8 +607,14 @@ ______________
   
 .. _packagecheck_test:  
   
-< packagecheck_test >  
+< packagecheck_test > (Deprecated)  
 ---------------------------------------------------------
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* Deprecated As Of Version 5.12  
+* Reason:   
+* Comment: This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.  
+  
 The packagecheck_test is used to verify the integrity of an installed Solaris SVR4 package. Image Packaging System (IPS) packages are not supported by this test. The information used by this test is modeled after the pkgchk command. For more information, see pkgchk(1M). It extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information. The required object element references a packagecheck_object and the optional packagecheck_state element specifies the data to check.
 
 **Extends:** oval-def:TestType
@@ -703,8 +751,14 @@ ______________
   
 .. _packagefreezelist_test:  
   
-< packagefreezelist_test >  
+< packagefreezelist_test > (Deprecated)  
 ---------------------------------------------------------
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* Deprecated As Of Version 5.12  
+* Reason:   
+* Comment: This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.  
+  
 The packagefreezelist_test provides support for checking the metadata of IPS packages that have been frozen at a particular version. The test extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information. The required object element references a packagefreezelist_object and the optional state elements reference packagefreezelist_states that specify the metadata to check about a set of packages.
 
 **Extends:** oval-def:TestType
@@ -756,8 +810,14 @@ ______________
   
 .. _packagepublisher_test:  
   
-< packagepublisher_test >  
+< packagepublisher_test > (Deprecated)  
 ---------------------------------------------------------
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* Deprecated As Of Version 5.12  
+* Reason:   
+* Comment: This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.  
+  
 The packagepublisher_test provides support for checking the metadata of package publishers on a Solaris system. The test extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information. The required object element references a packagepublisher_object and the optional state elements reference packagepublisher_states that specify the metadata to check about a set of package publishers on a Solaris system.
 
 **Extends:** oval-def:TestType
@@ -860,8 +920,14 @@ ______________
   
 .. _patch54_test:  
   
-< patch54_test >  
+< patch54_test > (Deprecated)  
 ---------------------------------------------------------
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* Deprecated As Of Version 5.12  
+* Reason:   
+* Comment: This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.  
+  
 The patch test is used to check information associated with different patches for SVR4 packages installed on the system. Image Packaging System (IPS) packages do not support patches and are not supported by this test. The information being tested is based off the /usr/bin/showrev -p command. It extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information. The required object element references an inetd_object and the optional state element specifies the information to check.
 
 **Extends:** oval-def:TestType
@@ -887,6 +953,12 @@ ______________
   
 < patch_test > (Deprecated)  
 ---------------------------------------------------------
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* Deprecated As Of Version 5.12  
+* Reason:   
+* Comment: This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.  
+  
 Deprecation Info  
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 * Deprecated As Of Version 5.4  
@@ -1191,8 +1263,14 @@ ______________
   
 .. _variant_test:  
   
-< variant_test >  
+< variant_test > (Deprecated)  
 ---------------------------------------------------------
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* Deprecated As Of Version 5.12  
+* Reason:   
+* Comment: This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.  
+  
 The variant_test is used to check the variants associated with the current Image Packaging System image. Variants are properties that control whether or not mutually exclusive components from a package are installed on a system. It extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information. The required object element references an variant_object and the optional state elements reference a variant_state and specifies the data to check.
 
 **Extends:** oval-def:TestType
@@ -1268,8 +1346,14 @@ ______________
   
 .. _virtualizationinfo_test:  
   
-< virtualizationinfo_test >  
+< virtualizationinfo_test > (Deprecated)  
 ---------------------------------------------------------
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* Deprecated As Of Version 5.12  
+* Reason:   
+* Comment: This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.  
+  
 The virtualizationinfo_test provides support for checking the metadata associated with the current virtualization environment this instance of Solaris is running on. The test extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information. The required object element references a virtualizationinfo_object and the optional state elements reference virtualizationinfo_states that specify the metadata to check the current virtualization environment.
 
 **Extends:** oval-def:TestType

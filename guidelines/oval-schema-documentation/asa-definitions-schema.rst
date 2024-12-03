@@ -1,35 +1,41 @@
 Open Vulnerability and Assessment Language: Cisco ASA Definition  
 =========================================================
 * Schema: Cisco ASA Definition  
-* Version: 5.11.1:1.2  
-* Release Date: 11/30/2016 09:00:00 AM
+* Version: 5.12  
+* Release Date: 11/29/2024 09:00:00 AM
 
 The following is a description of the elements, types, and attributes that compose the Cisco ASA specific tests found in Open Vulnerability and Assessment Language (OVAL). Each test is an extension of the standard test element defined in the Core Definition Schema. Through extension, each test inherits a set of elements and attributes that are shared amongst all OVAL tests. Each test is described in detail and should provide the information necessary to understand what each element and attribute represents. This document is intended for developers and assumes some familiarity with XML. A high level description of the interaction between the different tests and their relationship to the Core Definition Schema is not outlined here.
 
-The OVAL Schema is maintained by the OVAL Community. For more information, including how to get involved in the project and how to submit change requests, please visit the OVAL website at http://oval.cisecurity.org.
+The OVAL Schema is maintained by the OVAL Community. For more information, including how to get involved in the project and how to submit change requests, please visit the OVAL website at https://github.com/OVAL-Community/.
 
 Thanks to Omar Santos and Panos Kampanakis of Cisco for providing these tests.
 
 Test Listing  
 ---------------------------------------------------------
-* :ref:`acl_test`  
-* :ref:`class_map_test`  
-* :ref:`interface_test`  
+* :ref:`acl_test` (Deprecated)  
+* :ref:`class_map_test` (Deprecated)  
+* :ref:`interface_test` (Deprecated)  
 * :ref:`line_test`  
-* :ref:`policy_map_test`  
-* :ref:`service_policy_test`  
-* :ref:`snmp_host_test`  
-* :ref:`snmp_user_test`  
-* :ref:`snmp_group_test`  
-* :ref:`tcp_map_test`  
+* :ref:`policy_map_test` (Deprecated)  
+* :ref:`service_policy_test` (Deprecated)  
+* :ref:`snmp_host_test` (Deprecated)  
+* :ref:`snmp_user_test` (Deprecated)  
+* :ref:`snmp_group_test` (Deprecated)  
+* :ref:`tcp_map_test` (Deprecated)  
 * :ref:`version_test`  
   
 ______________
   
 .. _acl_test:  
   
-< acl_test >  
+< acl_test > (Deprecated)  
 ---------------------------------------------------------
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* Deprecated As Of Version 5.12  
+* Reason:   
+* Comment: This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.  
+  
 The acl test is used to check the properties of specific output lines from an ACL configuration.
 
 **Extends:** oval-def:TestType
@@ -119,8 +125,14 @@ ______________
   
 .. _class_map_test:  
   
-< class_map_test >  
+< class_map_test > (Deprecated)  
 ---------------------------------------------------------
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* Deprecated As Of Version 5.12  
+* Reason:   
+* Comment: This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.  
+  
 The class_map test is used to check the properties of specific output lines from an MPF class-map configuration.
 
 **Extends:** oval-def:TestType
@@ -210,8 +222,14 @@ ______________
   
 .. _interface_test:  
   
-< interface_test >  
+< interface_test > (Deprecated)  
 ---------------------------------------------------------
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* Deprecated As Of Version 5.12  
+* Reason:   
+* Comment: This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.  
+  
 The interface test is used to check for the existence of a particular interface on the Cisco ASA device. It extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information. The required object element references a interface_object and the optional state element specifies the data to check.
 
 **Extends:** oval-def:TestType
@@ -389,8 +407,14 @@ ______________
   
 .. _policy_map_test:  
   
-< policy_map_test >  
+< policy_map_test > (Deprecated)  
 ---------------------------------------------------------
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* Deprecated As Of Version 5.12  
+* Reason:   
+* Comment: This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.  
+  
 The policy_map test is used to check the properties of specific output lines from an policy-map ASA configuration.
 
 **Extends:** oval-def:TestType
@@ -471,8 +495,14 @@ ______________
   
 .. _service_policy_test:  
   
-< service_policy_test >  
+< service_policy_test > (Deprecated)  
 ---------------------------------------------------------
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* Deprecated As Of Version 5.12  
+* Reason:   
+* Comment: This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.  
+  
 The service_policy test is used to check the properties of specific output lines from an MPF service-policy configuration.
 
 **Extends:** oval-def:TestType
@@ -547,8 +577,14 @@ ______________
   
 .. _snmp_host_test:  
   
-< snmp_host_test >  
+< snmp_host_test > (Deprecated)  
 ---------------------------------------------------------
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* Deprecated As Of Version 5.12  
+* Reason:   
+* Comment: This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.  
+  
 The snmp_host test is used to check the properties of specific output lines from an SNMP configuration.
 
 **Extends:** oval-def:TestType
@@ -635,8 +671,14 @@ ______________
   
 .. _snmp_user_test:  
   
-< snmp_user_test >  
+< snmp_user_test > (Deprecated)  
 ---------------------------------------------------------
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* Deprecated As Of Version 5.12  
+* Reason:   
+* Comment: This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.  
+  
 The snmp_user test is used to check the properties of specific output lines from an SNMP user configuration.
 
 **Extends:** oval-def:TestType
@@ -714,8 +756,14 @@ ______________
   
 .. _snmp_group_test:  
   
-< snmp_group_test >  
+< snmp_group_test > (Deprecated)  
 ---------------------------------------------------------
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* Deprecated As Of Version 5.12  
+* Reason:   
+* Comment: This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.  
+  
 The snmp_group test is used to check the properties of specific output lines from an SNMP group configuration.
 
 **Extends:** oval-def:TestType
@@ -787,8 +835,14 @@ ______________
   
 .. _tcp_map_test:  
   
-< tcp_map_test >  
+< tcp_map_test > (Deprecated)  
 ---------------------------------------------------------
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* Deprecated As Of Version 5.12  
+* Reason:   
+* Comment: This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.  
+  
 The tcp_map test is used to check the properties of specific output lines from a tcp-map ASA configuration.
 
 **Extends:** oval-def:TestType

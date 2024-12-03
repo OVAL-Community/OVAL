@@ -1,40 +1,46 @@
 Open Vulnerability and Assessment Language: SharePoint Definition  
 =========================================================
 * Schema: SharePoint Definition  
-* Version: 5.11.1:1.1  
-* Release Date: 11/30/2016 09:00:00 AM
+* Version: 5.12  
+* Release Date: 11/29/2024 09:00:00 AM
 
 The following is a description of the elements, types, and attributes that compose the SharePoint specific tests found in Open Vulnerability and Assessment Language (OVAL). Each test is an extension of the standard test element defined in the Core Definition Schema. Through extension, each test inherits a set of elements and attributes that are shared amongst all OVAL tests. Each test is described in detail and should provide the information necessary to understand what each element and attribute represents. This document is intended for developers and assumes some familiarity with XML. A high level description of the interaction between the different tests and their relationship to the Core Definition Schema is not outlined here.
 
 The SharePoint Component Schema is based on the SharePoint Object Model (Windows SharePoint Services 3.0)
 
-The OVAL Schema is maintained by the OVAL Community. For more information, including how to get involved in the project and how to submit change requests, please visit the OVAL website at http://oval.cisecurity.org.
+The OVAL Schema is maintained by the OVAL Community. For more information, including how to get involved in the project and how to submit change requests, please visit the OVAL website at https://github.com/OVAL-Community/.
 
 Test Listing  
 ---------------------------------------------------------
-* :ref:`spwebapplication_test`  
-* :ref:`spgroup_test`  
-* :ref:`spweb_test`  
-* :ref:`splist_test`  
-* :ref:`spantivirussettings_test`  
-* :ref:`spsiteadministration_test`  
-* :ref:`spsite_test`  
-* :ref:`spcrawlrule_test`  
+* :ref:`spwebapplication_test` (Deprecated)  
+* :ref:`spgroup_test` (Deprecated)  
+* :ref:`spweb_test` (Deprecated)  
+* :ref:`splist_test` (Deprecated)  
+* :ref:`spantivirussettings_test` (Deprecated)  
+* :ref:`spsiteadministration_test` (Deprecated)  
+* :ref:`spsite_test` (Deprecated)  
+* :ref:`spcrawlrule_test` (Deprecated)  
 * :ref:`spjobdefinition_test` (Deprecated)  
-* :ref:`spjobdefinition510_test`  
-* :ref:`bestbet_test`  
-* :ref:`infopolicycoll_test`  
-* :ref:`spdiagnosticsservice_test`  
-* :ref:`spdiagnosticslevel_test`  
-* :ref:`sppolicyfeature_test`  
-* :ref:`sppolicy_test`  
+* :ref:`spjobdefinition510_test` (Deprecated)  
+* :ref:`bestbet_test` (Deprecated)  
+* :ref:`infopolicycoll_test` (Deprecated)  
+* :ref:`spdiagnosticsservice_test` (Deprecated)  
+* :ref:`spdiagnosticslevel_test` (Deprecated)  
+* :ref:`sppolicyfeature_test` (Deprecated)  
+* :ref:`sppolicy_test` (Deprecated)  
   
 ______________
   
 .. _spwebapplication_test:  
   
-< spwebapplication_test >  
+< spwebapplication_test > (Deprecated)  
 ---------------------------------------------------------
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* Deprecated As Of Version 5.12  
+* Reason:   
+* Comment: This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.  
+  
 The spwebapplication test is used to check the properties or permission settings of a SharePoint web application. It extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information. The required object element references a spwebapplication_object and the optional state element specifies the data to check.
 
 **Extends:** oval-def:TestType
@@ -256,8 +262,14 @@ ______________
   
 .. _spgroup_test:  
   
-< spgroup_test >  
+< spgroup_test > (Deprecated)  
 ---------------------------------------------------------
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* Deprecated As Of Version 5.12  
+* Reason:   
+* Comment: This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.  
+  
 The spgroup test is used to check the group properties for site collections. It extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information. The required object element references an spwebapplication_object and the optional state element specifies the data to check.
 
 **Extends:** oval-def:TestType
@@ -338,8 +350,14 @@ ______________
   
 .. _spweb_test:  
   
-< spweb_test >  
+< spweb_test > (Deprecated)  
 ---------------------------------------------------------
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* Deprecated As Of Version 5.12  
+* Reason:   
+* Comment: This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.  
+  
 The spweb test is used to check the properties for site collections. It extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information. The required object element references an spwebapplication_object and the optional state element specifies the data to check. See https://msdn.microsoft.com/en-us/library/ms473633.aspx for more information.
 
 **Extends:** oval-def:TestType
@@ -423,8 +441,14 @@ ______________
   
 .. _splist_test:  
   
-< splist_test >  
+< splist_test > (Deprecated)  
 ---------------------------------------------------------
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* Deprecated As Of Version 5.12  
+* Reason:   
+* Comment: This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.  
+  
 The splist test is used to check the properties of lists associated with a SharePoint site or site collection. It extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information. The required object element references an splist_object and the optional state element specifies the data to check.
 
 **Extends:** oval-def:TestType
@@ -502,8 +526,14 @@ ______________
   
 .. _spantivirussettings_test:  
   
-< spantivirussettings_test >  
+< spantivirussettings_test > (Deprecated)  
 ---------------------------------------------------------
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* Deprecated As Of Version 5.12  
+* Reason:   
+* Comment: This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.  
+  
 The spantivirussettings test is used to check the settings for antivirus software associated with a SharePoint deployment.
 
 **Extends:** oval-def:TestType
@@ -602,8 +632,14 @@ ______________
   
 .. _spsiteadministration_test:  
   
-< spsiteadministration_test >  
+< spsiteadministration_test > (Deprecated)  
 ---------------------------------------------------------
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* Deprecated As Of Version 5.12  
+* Reason:   
+* Comment: This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.  
+  
 The spsiteadministration test is used to check the properties of a site. It extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information. The required object element references an spwebapplication_object and the optional state element specifies the data to check.
 
 **Extends:** oval-def:TestType
@@ -678,8 +714,14 @@ ______________
   
 .. _spsite_test:  
   
-< spsite_test >  
+< spsite_test > (Deprecated)  
 ---------------------------------------------------------
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* Deprecated As Of Version 5.12  
+* Reason:   
+* Comment: This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.  
+  
 The spsite test is used to check the properties of a site. It extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information. The required object element references an spwebapplication_object and the optional state element specifies the data to check.
 
 **Extends:** oval-def:TestType
@@ -754,8 +796,14 @@ ______________
   
 .. _spcrawlrule_test:  
   
-< spcrawlrule_test >  
+< spcrawlrule_test > (Deprecated)  
 ---------------------------------------------------------
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* Deprecated As Of Version 5.12  
+* Reason:   
+* Comment: This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.  
+  
 The spcrawlrule test is used to check the configuration or rules associated with the SharePoint system's built-in indexer and the sites or documents that will be indexed.
 
 **Extends:** oval-def:TestType
@@ -847,6 +895,12 @@ ______________
   
 < spjobdefinition_test > (Deprecated)  
 ---------------------------------------------------------
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* Deprecated As Of Version 5.12  
+* Reason:   
+* Comment: This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.  
+  
 Deprecation Info  
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 * Deprecated As Of Version 5.10  
@@ -945,8 +999,14 @@ ______________
   
 .. _spjobdefinition510_test:  
   
-< spjobdefinition510_test >  
+< spjobdefinition510_test > (Deprecated)  
 ---------------------------------------------------------
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* Deprecated As Of Version 5.12  
+* Reason:   
+* Comment: This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.  
+  
 The spjobdefinition test is used to check the status of the various properties associated with scheduled jobs in the SharePoint system.
 
 **Extends:** oval-def:TestType
@@ -1030,8 +1090,14 @@ ______________
   
 .. _bestbet_test:  
   
-< bestbet_test >  
+< bestbet_test > (Deprecated)  
 ---------------------------------------------------------
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* Deprecated As Of Version 5.12  
+* Reason:   
+* Comment: This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.  
+  
 The bestbet test is used to get all the best bets associated with a site.
 
 **Extends:** oval-def:TestType
@@ -1112,8 +1178,14 @@ ______________
   
 .. _infopolicycoll_test:  
   
-< infopolicycoll_test >  
+< infopolicycoll_test > (Deprecated)  
 ---------------------------------------------------------
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* Deprecated As Of Version 5.12  
+* Reason:   
+* Comment: This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.  
+  
 The policycoll test is used to get all the Information Policies associated with a site.
 
 **Extends:** oval-def:TestType
@@ -1197,8 +1269,14 @@ ______________
   
 .. _spdiagnosticsservice_test:  
   
-< spdiagnosticsservice_test >  
+< spdiagnosticsservice_test > (Deprecated)  
 ---------------------------------------------------------
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* Deprecated As Of Version 5.12  
+* Reason:   
+* Comment: This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.  
+  
 The spdiagnosticsservice test is used to check the diagnostic properties associated with a Sharepoint system.
 
 **Extends:** oval-def:TestType
@@ -1285,8 +1363,14 @@ ______________
   
 .. _spdiagnosticslevel_test:  
   
-< spdiagnosticslevel_test >  
+< spdiagnosticslevel_test > (Deprecated)  
 ---------------------------------------------------------
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* Deprecated As Of Version 5.12  
+* Reason:   
+* Comment: This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.  
+  
 The spdiagnosticslevel_test is used to check the status of the logging features associated with a Sharepoint deployment.
 
 **Extends:** oval-def:TestType
@@ -1370,8 +1454,14 @@ ______________
   
 .. _sppolicyfeature_test:  
   
-< sppolicyfeature_test >  
+< sppolicyfeature_test > (Deprecated)  
 ---------------------------------------------------------
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* Deprecated As Of Version 5.12  
+* Reason:   
+* Comment: This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.  
+  
 The sppolicyfeature test enables one to check the attributes associated with policies and policy features on the Sharepoint deployment.
 
 **Extends:** oval-def:TestType
@@ -1467,8 +1557,14 @@ ______________
   
 .. _sppolicy_test:  
   
-< sppolicy_test >  
+< sppolicy_test > (Deprecated)  
 ---------------------------------------------------------
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* Deprecated As Of Version 5.12  
+* Reason:   
+* Comment: This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.  
+  
 The sppolicy test enables one to check the attributes of the policies associated with a particular URL Zone in a Sharepoint system.
 
 **Extends:** oval-def:TestType

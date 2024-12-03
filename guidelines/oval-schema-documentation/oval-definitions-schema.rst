@@ -1,13 +1,15 @@
 Open Vulnerability and Assessment Language: Core Definition  
 =========================================================
 * Schema: Core Definition  
-* Version: 5.11.2  
-* Release Date: 11/30/2016 09:00:00 AM
+* Version: 5.12  
+* Release Date: 11/29/2024 09:00:00 AM
 
 The following is a description of the elements, types, and attributes that compose the core schema for encoding Open Vulnerability and Assessment Language (OVAL) Definitions. Some of the objects defined here are extended and enhanced by individual component schemas, which are described in separate documents. Each of the elements, types, and attributes that make up the Core Definition Schema are described in detail and should provide the information necessary to understand what each represents. This document is intended for developers and assumes some familiarity with XML. A high level description of the interaction between these objects is not outlined here.
 
-The OVAL Schema is maintained by OVAL Community. For more information, including how to get involved in the project and how to submit change requests, please visit the OVAL website at http://oval.cisecurity.org.
+The OVAL Schema is maintained by OVAL Community. For more information, including how to get involved in the project and how to submit change requests, please visit the OVAL website at https://github.com/OVAL-Community/.
 
+______________
+  
 .. _oval_definitions:  
   
 < oval_definitions >  
@@ -577,7 +579,7 @@ The set element's object_reference refers to an existing OVAL Object. The set el
 
 Each filter is applied to the items identified by each OVAL Object before the set_operator is applied. For example, if an object_reference points to an OVAL Object that identifies every file in a certain directory, a filter might be set up to limit the object set to only those files with a size less than 10 KB. If multiple filters are provided, then each filter is applied to the set of items identified by the OVAL Object. Care must be taken to ensure that conflicting filters are not applied. It is possible to exclude all items with a size of 10 KB and then include only items with a size of 10 KB. This example would result in the empty set.
 
-The required set_operator attribute defines how different child sets are combined to form the overall unique set of objects. For example, does one take the union of different sets or the intersection? For a description of the valid values please refer to the SetOperatorEnumeration simple type.
+The optional set_operator attribute defines how different child sets are combined to form the overall unique set of objects. For example, does one take the union of different sets or the intersection? For a description of the valid values please refer to the SetOperatorEnumeration simple type.
 
 Child Elements  
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -1055,6 +1057,9 @@ Child Elements
     * - glob_to_regex  
       - oval-def:GlobToRegexFunctionType (1..1)  
       -   
+    * - merge  
+      - oval-def:MergeFunctionType (1..1)  
+      -   
   
 .. _ArithmeticFunctionType:  
   
@@ -1362,6 +1367,43 @@ Child Elements
       - n/a (1..1)  
       -   
   
+.. _MergeFunctionType:  
+  
+== MergeFunctionType ==  
+---------------------------------------------------------
+The merge function takes one or more components and merges them together into a single string value, optionally including a delimiter string. For example, if data from one registry reg_multi_sz value contains values of "abc" and "def", the merge function operated on those values would resolve to a string with the value of 'abcdef'. If an optional delimiter of ',' was used, the merge function would resolve to a value of 'abc,'def'.
+
+Attributes  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. list-table:: Attributes  
+    :header-rows: 1  
+  
+    * - Attribute  
+      - Type  
+      - Desc.  
+    * - delimiter  
+      - xsd:string (optional *default*='')  
+      - (No Description)  
+    * - sort  
+      - oval-def:SortEnumeration (optional *default*='document')  
+      - (No Description)  
+    * - order  
+      - oval-def:OrderEnumeration (optional *default*='ascending')  
+      - (No Description)  
+  
+  
+Child Elements  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. list-table:: Elements  
+    :header-rows: 1  
+  
+    * - Child Elements  
+      - Type (MinOccurs..MaxOccurs)  
+      - Desc.  
+    * - oval-def:ComponentGroup  
+      - n/a (1..1)  
+      -   
+  
 .. _CountFunctionType:  
   
 == CountFunctionType ==  
@@ -1544,6 +1586,42 @@ The ArithmeticEnumeration simple type defines basic arithmetic operations. Curre
       - (No Description)  
     * - multiply  
       - (No Description)  
+  
+.. _SortEnumeration:  
+  
+-- SortEnumeration --  
+---------------------------------------------------------
+The SortEnumeration simple type defines basic sorting operations. Currently 'document', 'lexical', 'numeric' and 'natural' are defined.
+
+.. list-table:: Enumeration Values  
+    :header-rows: 1  
+  
+    * - Value  
+      - Description  
+    * - document  
+      - | No sorting is performed, the values will remain in the order they came in as, and match the order in which the referenced system characterics will appear in the OVAL results XML document.  
+    * - lexical  
+      - | Sort alphabetically, useful for pure string lists.  
+    * - numeric  
+      - | Sort numerically, useful for lists of numbers or lists of integers or floats, but will cause errors if string data is present.  
+    * - natural  
+      - | Perform a 'natural' sort, refer to https://en.wikipedia.org/wiki/Natural_sort_order  
+  
+.. _OrderEnumeration:  
+  
+-- OrderEnumeration --  
+---------------------------------------------------------
+The OrderEnumeration simple type defines the direction in which data should be sorted, and works to support the SortEnumeration. The OrderEnumeration has no impact on the SortEnumeration of 'document'.
+
+.. list-table:: Enumeration Values  
+    :header-rows: 1  
+  
+    * - Value  
+      - Description  
+    * - ascending  
+      - | Numbers: Arranged from smallest to largest, such as 0, 1, 2, 3, 4, 5, 6. Letters: Arranged alphabetically from A to Z  
+    * - descending  
+      - | Numbers: Arranged from largest to smallest, such as 9, 8, 7, 6. Letters: Arranged alphabetically from Z to A  
   
 .. _DateTimeFormatEnumeration:  
   

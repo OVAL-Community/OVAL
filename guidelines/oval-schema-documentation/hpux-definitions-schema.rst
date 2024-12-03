@@ -1,28 +1,34 @@
 Open Vulnerability and Assessment Language: HP-UX Definition  
 =========================================================
 * Schema: HP-UX Definition  
-* Version: 5.11.1:1.1  
-* Release Date: 11/30/2016 09:00:00 AM
+* Version: 5.12  
+* Release Date: 11/29/2024 09:00:00 AM
 
 The following is a description of the elements, types, and attributes that compose the HP-UX specific tests found in Open Vulnerability and Assessment Language (OVAL). Each test is an extension of the standard test element defined in the Core Definition Schema. Through extension, each test inherits a set of elements and attributes that are shared amongst all OVAL tests. Each test is described in detail and should provide the information necessary to understand what each element and attribute represents. This document is intended for developers and assumes some familiarity with XML. A high level description of the interaction between the different tests and their relationship to the Core Definition Schema is not outlined here.
 
-The OVAL Schema is maintained by the OVAL Community. For more information, including how to get involved in the project and how to submit change requests, please visit the OVAL website at http://oval.cisecurity.org.
+The OVAL Schema is maintained by the OVAL Community. For more information, including how to get involved in the project and how to submit change requests, please visit the OVAL website at https://github.com/OVAL-Community/.
 
 Test Listing  
 ---------------------------------------------------------
-* :ref:`getconf_test`  
-* :ref:`ndd_test`  
-* :ref:`patch53_test`  
+* :ref:`getconf_test` (Deprecated)  
+* :ref:`ndd_test` (Deprecated)  
+* :ref:`patch53_test` (Deprecated)  
 * :ref:`patch_test` (Deprecated)  
-* :ref:`swlist_test`  
-* :ref:`trusted_test`  
+* :ref:`swlist_test` (Deprecated)  
+* :ref:`trusted_test` (Deprecated)  
   
 ______________
   
 .. _getconf_test:  
   
-< getconf_test >  
+< getconf_test > (Deprecated)  
 ---------------------------------------------------------
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* Deprecated As Of Version 5.12  
+* Reason:   
+* Comment: This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.  
+  
 From /usr/bin/getconf. See getconf manpage for specific fields
 
 **Extends:** oval-def:TestType
@@ -98,8 +104,14 @@ ______________
   
 .. _ndd_test:  
   
-< ndd_test >  
+< ndd_test > (Deprecated)  
 ---------------------------------------------------------
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* Deprecated As Of Version 5.12  
+* Reason:   
+* Comment: This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.  
+  
 From /usr/bin/ndd. See ndd manpage for specific fields
 
 **Extends:** oval-def:TestType
@@ -175,8 +187,14 @@ ______________
   
 .. _patch53_test:  
   
-< patch53_test >  
+< patch53_test > (Deprecated)  
 ---------------------------------------------------------
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* Deprecated As Of Version 5.12  
+* Reason:   
+* Comment: This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.  
+  
 From /usr/sbin/swlist -l patch PHxx_yyyyy. See swlist manpage for specific fields
 
 **Extends:** oval-def:TestType
@@ -365,8 +383,14 @@ ______________
   
 .. _swlist_test:  
   
-< swlist_test >  
+< swlist_test > (Deprecated)  
 ---------------------------------------------------------
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* Deprecated As Of Version 5.12  
+* Reason:   
+* Comment: This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.  
+  
 Output of /usr/sbin/swlist command. Note: A quick way to check for the installation of a specific fileset is to use the command 'swlist -a version -l fileset filesetname'. See manpage for swlist for explanation of additional command options.
 
 **Extends:** oval-def:TestType
@@ -448,8 +472,14 @@ ______________
   
 .. _trusted_test:  
   
-< trusted_test >  
+< trusted_test > (Deprecated)  
 ---------------------------------------------------------
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* Deprecated As Of Version 5.12  
+* Reason:   
+* Comment: This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.  
+  
 This test allows for analysis of account settings in trusted HP-UX installations
 
 **Extends:** oval-def:TestType

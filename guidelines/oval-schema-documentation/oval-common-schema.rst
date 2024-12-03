@@ -1,13 +1,15 @@
 Open Vulnerability and Assessment Language: Core Common  
 =========================================================
 * Schema: Core Common  
-* Version: 5.11.2  
-* Release Date: 11/30/2016 09:00:00 AM
+* Version: 5.12  
+* Release Date: 11/29/2024 09:00:00 AM
 
 The following is a description of the common types that are shared across the different schemas within Open Vulnerability and Assessment Language (OVAL). Each type is described in detail and should provide the information necessary to understand what each represents. This document is intended for developers and assumes some familiarity with XML. A high level description of the interaction between these type is not outlined here.
 
-The OVAL Schema is maintained by the OVAL Community. For more information, including how to get involved in the project and how to submit change requests, please visit the OVAL website at http://oval.cisecurity.org.
+The OVAL Schema is maintained by the OVAL Community. For more information, including how to get involved in the project and how to submit change requests, please visit the OVAL website at https://github.com/OVAL-Community/.
 
+______________
+  
 .. _deprecated_info:  
   
 < deprecated_info >  
@@ -482,6 +484,8 @@ The FamilyEnumeration simple type is a listing of families that OVAL supports at
       - | The asa value describes the Cisco ASA security devices.  
     * - apple_ios  
       - | The apple_ios value describes the iOS mobile operating system.  
+    * - aws  
+      - | The aws value describes the Amazon Web Services platform.  
     * - catos  
       - | The catos value describes the Cisco CatOS operating system.  
     * - ios  
@@ -492,6 +496,8 @@ The FamilyEnumeration simple type is a listing of families that OVAL supports at
       - | The junos value describes the Juniper JunOS operating system.  
     * - macos  
       - | The macos value describes the Mac operating system.  
+    * - panos  
+      - | The panos value describes the Palo Alto Networks operating system.  
     * - pixos  
       - | The pixos value describes the Cisco PIX operating system.  
     * - undefined  

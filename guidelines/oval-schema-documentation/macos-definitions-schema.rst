@@ -1,33 +1,41 @@
 Open Vulnerability and Assessment Language: MacOS Definition  
 =========================================================
 * Schema: MacOS Definition  
-* Version: 5.11.1:1.2  
-* Release Date: 11/30/2016 09:00:00 AM
+* Version: 5.12  
+* Release Date: 11/29/2024 09:00:00 AM
 
 The following is a description of the elements, types, and attributes that compose the MacOS specific tests found in Open Vulnerability and Assessment Language (OVAL). Each test is an extension of the standard test element defined in the Core Definition Schema. Through extension, each test inherits a set of elements and attributes that are shared amongst all OVAL tests. Each test is described in detail and should provide the information necessary to understand what each element and attribute represents. This document is intended for developers and assumes some familiarity with XML. A high level description of the interaction between the different tests and their relationship to the Core Definition Schema is not outlined here.
 
 The MacOS Definition Schema was initially developed by The Center for Internet Security. Many thanks to their contributions to OVAL and the security community.
 
-The OVAL Schema is maintained by the OVAL Community. For more information, including how to get involved in the project and how to submit change requests, please visit the OVAL website at http://oval.cisecurity.org.
+The OVAL Schema is maintained by the OVAL Community. For more information, including how to get involved in the project and how to submit change requests, please visit the OVAL website at https://github.com/OVAL-Community/.
 
 Test Listing  
 ---------------------------------------------------------
 * :ref:`accountinfo_test`  
 * :ref:`authorizationdb_test`  
-* :ref:`corestorage_test`  
-* :ref:`diskutil_test`  
+* :ref:`corestorage_test` (Deprecated)  
+* :ref:`disabledservice_test`  
+* :ref:`diskinfo_test`  
+* :ref:`diskutil_test` (Deprecated)  
+* :ref:`filevault_test`  
+* :ref:`firmwarepassword_test`  
 * :ref:`gatekeeper_test`  
 * :ref:`inetlisteningservers_test` (Deprecated)  
-* :ref:`inetlisteningserver510_test`  
+* :ref:`inetlisteningserver510_test` (Deprecated)  
+* :ref:`installhistory_test`  
 * :ref:`keychain_test`  
 * :ref:`launchd_test`  
-* :ref:`nvram_test`  
+* :ref:`nvram_test` (Deprecated)  
+* :ref:`nvram512_test`  
 * :ref:`plist_test` (Deprecated)  
 * :ref:`plist510_test` (Deprecated)  
 * :ref:`plist511_test`  
+* :ref:`profiles_test`  
 * :ref:`pwpolicy_test` (Deprecated)  
-* :ref:`pwpolicy59_test`  
-* :ref:`rlimit_test`  
+* :ref:`pwpolicy59_test` (Deprecated)  
+* :ref:`pwpolicy512_test`  
+* :ref:`rlimit_test` (Deprecated)  
 * :ref:`softwareupdate_test`  
 * :ref:`systemprofiler_test`  
 * :ref:`systemsetup_test`  
@@ -119,6 +127,9 @@ Child Elements
     * - login_shell  
       - oval-def:EntityStateStringType (0..1)  
       - The login shell for this user account.  
+    * - generated_uid  
+      - oval-def:EntityStateStringType (0..1)  
+      - The generated UID for this user account. The UID is related to File Vault.  
   
 ______________
   
@@ -203,8 +214,14 @@ ______________
   
 .. _corestorage_test:  
   
-< corestorage_test >  
+< corestorage_test > (Deprecated)  
 ---------------------------------------------------------
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* Deprecated As Of Version 5.12  
+* Reason:   
+* Comment: This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.  
+  
 The corestorage_test is used to check the properties of the plist-style XML output from the "diskutil cs list -plist" command, for reading information about the CoreStorage setup on MacOSX. It extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information. The required object element references an corestorage_object and the optional state element specifies the data to check.
 
 **Extends:** oval-def:TestType
@@ -280,10 +297,178 @@ Child Elements
   
 ______________
   
+.. _disabledservice_test:  
+  
+< disabledservice_test >  
+---------------------------------------------------------
+The disabledservice_test is used to check the status of daemons/agents disabled via the launchd service, via the command 'launchctl print-disabled system'. It extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information. The required object element references a disabledservice_object and the optional state element specifies the data to check.
+
+**Extends:** oval-def:TestType
+
+Child Elements  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. list-table:: Elements  
+    :header-rows: 1  
+  
+    * - Child Elements  
+      - Type (MinOccurs..MaxOccurs)  
+      - Desc.  
+    * - object  
+      - oval-def:ObjectRefType (1..1)  
+      -   
+    * - state  
+      - oval-def:StateRefType (0..unbounded)  
+      -   
+  
+.. _disabledservice_object:  
+  
+< disabledservice_object >  
+---------------------------------------------------------
+The disabledservice_object element is used by a disabledservice_test to define the service domain to be evaluated. It is a singleton object. Each object extends the standard ObjectType as defined in the oval-definitions-schema and one should refer to the ObjectType description for more information. The common set element allows complex objects to be created using filters and set logic. Again, please refer to the description of the set element in the oval-definitions-schema.
+
+**Extends:** oval-def:ObjectType
+
+.. _disabledservice_state:  
+  
+< disabledservice_state >  
+---------------------------------------------------------
+The disabledservice_state element defines a value used to evaluate the result of a specific disabledservice_object item.
+
+**Extends:** oval-def:StateType
+
+Child Elements  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. list-table:: Elements  
+    :header-rows: 1  
+  
+    * - Child Elements  
+      - Type (MinOccurs..MaxOccurs)  
+      - Desc.  
+    * - label  
+      - oval-def:EntityStateStringType (0..1)  
+      - Specifies the name of the service disabled in the domain.  
+    * - disabled  
+      - oval-def:EntityStateBoolType (0..1)  
+      - Specifies the actual status of the service as indicated by the output of the 'launchctl print-disabled <domain>' command.  
+  
+______________
+  
+.. _diskinfo_test:  
+  
+< diskinfo_test >  
+---------------------------------------------------------
+The diskinfo_test is used to inspect the contents of 'diskutil info <device ID>' command output. It extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information. The required object element references an diskinfo_object and the optional state element references an diskinfo_state that specifies the information to check.
+
+**Extends:** oval-def:TestType
+
+Child Elements  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. list-table:: Elements  
+    :header-rows: 1  
+  
+    * - Child Elements  
+      - Type (MinOccurs..MaxOccurs)  
+      - Desc.  
+    * - object  
+      - oval-def:ObjectRefType (1..1)  
+      -   
+    * - state  
+      - oval-def:StateRefType (0..unbounded)  
+      -   
+  
+.. _diskinfo_object:  
+  
+< diskinfo_object >  
+---------------------------------------------------------
+The diskinfo_object is used by an diskinfo_test to define the scope of disks on the local system that should be collected using the 'diskutil info <name>' command. Each object extends the standard ObjectType as defined in the oval-definitions-schema and one should refer to the ObjectType description for more information. The common set element allows complex objects to be created using filters and set logic. Again, please refer to the description of the set element in the oval-definitions-schema.
+
+**Extends:** oval-def:ObjectType
+
+Child Elements  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. list-table:: Elements  
+    :header-rows: 1  
+  
+    * - Child Elements  
+      - Type (MinOccurs..MaxOccurs)  
+      - Desc.  
+    * - device_identifier  
+      - oval-def:EntityObjectStringType (1..1)  
+      - The device_identifier element specifies the name(s) of the disk whose information should be collected from the local system. Use a wildcard pattern to collect information for all disk devices.  
+    * - oval-def:filter  
+      - n/a (0..unbounded)  
+      -   
+  
+.. _diskinfo_state:  
+  
+< diskinfo_state >  
+---------------------------------------------------------
+The diskinfo_state contains entities that are used to check against retrieved disk information.
+
+**Extends:** oval-def:StateType
+
+Child Elements  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. list-table:: Elements  
+    :header-rows: 1  
+  
+    * - Child Elements  
+      - Type (MinOccurs..MaxOccurs)  
+      - Desc.  
+    * - device_identifier  
+      - oval-def:EntityStateStringType (0..1)  
+      - The device identifier.  
+    * - volume_name  
+      - oval-def:EntityStateStringType (0..1)  
+      - The value of the volume name field (if any).  
+    * - file_system_personality  
+      - oval-def:EntityStateStringType (0..1)  
+      - The value of the file system personality field (if any).  
+    * - removable_media  
+      - oval-def:EntityStateStringType (0..1)  
+      - The value of the removable media field (if any).  
+    * - device_location  
+      - oval-def:EntityStateStringType (0..1)  
+      - The value of the device location field (if any).  
+    * - solid_state  
+      - oval-def:EntityStateBoolType (0..1)  
+      - The value of the solid state flag.  
+    * - read_only  
+      - oval-def:EntityStateBoolType (0..1)  
+      - The value of the read-only volume flag.  
+    * - file_vault  
+      - oval-def:EntityStateBoolType (0..1)  
+      - Whether or not FileVault is enabled on the disk.  
+    * - mount_point  
+      - oval-def:EntityStateStringType (0..1)  
+      - The mount point for this disk (if any).  
+    * - smart_status  
+      - oval-def:EntityStateStringType (0..1)  
+      - The value of the SMART status field (if any).  
+    * - encrypted  
+      - oval-def:EntityStateBoolType (0..1)  
+      - The value of the encrypted status field (if any). This is typically present for external drives, not APFS drives with FileVault active (for which this field does not exist).  
+    * - apfs_uid  
+      - oval-def:EntityStateStringType (0..1)  
+      - The value of an APFS userid (for non-APFS disks, this does not exist).  
+  
+______________
+  
 .. _diskutil_test:  
   
-< diskutil_test >  
+< diskutil_test > (Deprecated)  
 ---------------------------------------------------------
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* Deprecated As Of Version 5.12  
+* Reason:   
+* Comment: This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.  
+  
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* Deprecated As Of Version 5.11.2  
+* Reason: The diskutil_test has been deprecated. The underlying capability was rendered obsolete in MacOS X 10.11 (El Capitan), and then removed altogether from the platform in MacOS X 10.12 (Sierra).  
+  
 The diskutil_test is used to verify packages on a Mac OS system. The information used by this test is modeled after the diskutil command's verifyPermissions option. On MacOS X 10.11 and later, this option was replaced by the repair_packages command. For more information, see diskutil(8) or repair_packages(8). It extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information. The required object element references a diskutil_object and the optional diskutil_state element specifies the data to check.
 
 **Extends:** oval-def:TestType
@@ -305,8 +490,13 @@ Child Elements
   
 .. _diskutil_object:  
   
-< diskutil_object >  
+< diskutil_object > (Deprecated)  
 ---------------------------------------------------------
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* Deprecated As Of Version 5.11.2  
+* Reason: The diskutil_object has been deprecated. The underlying capability was rendered obsolete in MacOS X 10.11 (El Capitan), and then removed altogether from the platform in MacOS X 10.12 (Sierra).  
+  
 The diskutil_object element is used by a diskutil_test to define the volumes containing packages to be verified on a Mac OS system. Each object extends the standard ObjectType as defined in the oval-definitions-schema and one should refer to the ObjectType description for more information. The common set element allows complex objects to be created using filters and set logic. Again, please refer to the description of the set element in the oval-definitions-schema.
 
 **Extends:** oval-def:ObjectType
@@ -331,8 +521,13 @@ Child Elements
   
 .. _diskutil_state:  
   
-< diskutil_state >  
+< diskutil_state > (Deprecated)  
 ---------------------------------------------------------
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* Deprecated As Of Version 5.11.2  
+* Reason: The diskutil_state has been deprecated. The underlying capability was rendered obsolete in MacOS X 10.11 (El Capitan), and then removed altogether from the platform in MacOS X 10.12 (Sierra).  
+  
 The diskutil_state element defines the different verification information associated with a disk on a Mac OS system. Please refer to the individual elements in the schema for more details about what each represents.
 
 **Extends:** oval-def:StateType
@@ -408,6 +603,132 @@ Child Elements
   
 ______________
   
+.. _filevault_test:  
+  
+< filevault_test >  
+---------------------------------------------------------
+The filevault_test is used to determine the status of File Vault disk encryption. It extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information. The required object element references an filevault_object and the optional state element references an filevault_state that specifies the information to check.
+
+**Extends:** oval-def:TestType
+
+Child Elements  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. list-table:: Elements  
+    :header-rows: 1  
+  
+    * - Child Elements  
+      - Type (MinOccurs..MaxOccurs)  
+      - Desc.  
+    * - object  
+      - oval-def:ObjectRefType (1..1)  
+      -   
+    * - state  
+      - oval-def:StateRefType (0..unbounded)  
+      -   
+  
+.. _filevault_object:  
+  
+< filevault_object >  
+---------------------------------------------------------
+The filevault_object is used by a filevault_test to query the status of File Vault. It is a singleton object.
+
+**Extends:** oval-def:ObjectType
+
+.. _filevault_state:  
+  
+< filevault_state >  
+---------------------------------------------------------
+The filevault_state is used to check the filevault status.
+
+**Extends:** oval-def:StateType
+
+Child Elements  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. list-table:: Elements  
+    :header-rows: 1  
+  
+    * - Child Elements  
+      - Type (MinOccurs..MaxOccurs)  
+      - Desc.  
+    * - status  
+      - macos-def:EntityStateFileVaultStatusType (0..1)  
+      - The status element describes the File Vault status of the machine.  
+  
+.. _EntityStateFileVaultStatusType:  
+  
+== EntityStateFileVaultStatusType ==  
+---------------------------------------------------------
+**Restricts:** oval-def:EntityStateStringType
+
+.. list-table:: Enumeration Values  
+    :header-rows: 1  
+  
+    * - Value  
+      - Description  
+    * - enabled  
+      - (No Description)  
+    * - disabled  
+      - (No Description)  
+    * - encrypting  
+      - (No Description)  
+    * -   
+      - | The empty string value is permitted here to allow for use of variables.  
+  
+______________
+  
+.. _firmwarepassword_test:  
+  
+< firmwarepassword_test >  
+---------------------------------------------------------
+The firmwarepassword_test is used to determine the status of File Vault disk encryption. It extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information. The required object element references an firmwarepassword_object and the optional state element references an firmwarepassword_state that specifies the information to check.
+
+**Extends:** oval-def:TestType
+
+Child Elements  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. list-table:: Elements  
+    :header-rows: 1  
+  
+    * - Child Elements  
+      - Type (MinOccurs..MaxOccurs)  
+      - Desc.  
+    * - object  
+      - oval-def:ObjectRefType (1..1)  
+      -   
+    * - state  
+      - oval-def:StateRefType (0..unbounded)  
+      -   
+  
+.. _firmwarepassword_object:  
+  
+< firmwarepassword_object >  
+---------------------------------------------------------
+The firmwarepassword_object is used by a firmwarepassword_test to query the status of the firmwarepasswd command. It is a singleton object.
+
+**Extends:** oval-def:ObjectType
+
+.. _firmwarepassword_state:  
+  
+< firmwarepassword_state >  
+---------------------------------------------------------
+The firmwarepassword_state is used to check the firmwarepasswd status.
+
+**Extends:** oval-def:StateType
+
+Child Elements  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. list-table:: Elements  
+    :header-rows: 1  
+  
+    * - Child Elements  
+      - Type (MinOccurs..MaxOccurs)  
+      - Desc.  
+    * - enabled  
+      - oval-def:EntityStateBoolType (0..1)  
+      - The status element describes whether a firmware password is enabled.  
+  
+______________
+  
 .. _gatekeeper_test:  
   
 < gatekeeper_test >  
@@ -458,6 +779,9 @@ Child Elements
     * - enabled  
       - oval-def:EntityStateBoolType (0..1)  
       - The status of Gatekeeper assessments.  
+    * - require_developer_id  
+      - oval-def:EntityStateBoolType (0..1)  
+      - The status of Gatekeeper enforcement of app developer id.  
     * - unlabeled  
       - oval-def:EntityStateStringType (0..1)  
       - The path to an unsigned application folder to which Gatekeeper has granted execute permission.  
@@ -576,8 +900,14 @@ ______________
   
 .. _inetlisteningserver510_test:  
   
-< inetlisteningserver510_test >  
+< inetlisteningserver510_test > (Deprecated)  
 ---------------------------------------------------------
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* Deprecated As Of Version 5.12  
+* Reason:   
+* Comment: This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.  
+  
 The inetlisteningserver510_test is used to check if an application is listening on the network, either for a new connection or as part of an ongoing connection. This is limited to applications that are listening for connections that use the TCP or UDP protocols and have addresses represented as IPv4 or IPv6 addresses (AF_INET or AF_INET6). One method for retrieving the required information is by parsing the output of the command 'lsof -i -P -n -l' with root privileges.
 
 **Extends:** oval-def:TestType
@@ -672,6 +1002,83 @@ Child Elements
     * - user_id  
       - oval-def:EntityStateIntType (0..1)  
       - The numeric user id, or uid, is the third column of each user's entry in /etc/passwd. It represents the owner, and thus privilege level, of the specified program.  
+  
+______________
+  
+.. _installhistory_test:  
+  
+< installhistory_test >  
+---------------------------------------------------------
+The installhistory_test is used to inspect the install history (SPInstallHistoryDataType) section of the system_profiler command output. It extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information. The required object element references an installhistory_object and the optional state element references an installhistory_state that specifies the information to check.
+
+**Extends:** oval-def:TestType
+
+Child Elements  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. list-table:: Elements  
+    :header-rows: 1  
+  
+    * - Child Elements  
+      - Type (MinOccurs..MaxOccurs)  
+      - Desc.  
+    * - object  
+      - oval-def:ObjectRefType (1..1)  
+      -   
+    * - state  
+      - oval-def:StateRefType (0..unbounded)  
+      -   
+  
+.. _installhistory_object:  
+  
+< installhistory_object >  
+---------------------------------------------------------
+The installhistory_object is used by an installhistory_test to define the scope of software install history on the local system that should be collected using the "system_profiler SPInstallHistoryDataType" command. Each object extends the standard ObjectType as defined in the oval-definitions-schema and one should refer to the ObjectType description for more information. The common set element allows complex objects to be created using filters and set logic. Again, please refer to the description of the set element in the oval-definitions-schema.
+
+**Extends:** oval-def:ObjectType
+
+Child Elements  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. list-table:: Elements  
+    :header-rows: 1  
+  
+    * - Child Elements  
+      - Type (MinOccurs..MaxOccurs)  
+      - Desc.  
+    * - name  
+      - oval-def:EntityObjectStringType (1..1)  
+      - The name element specifies the name(s) of the software item which should be collected from the local system.  
+    * - oval-def:filter  
+      - n/a (0..unbounded)  
+      -   
+  
+.. _installhistory_state:  
+  
+< installhistory_state >  
+---------------------------------------------------------
+The installhistory_state contains entities that are used to check against installed software.
+
+**Extends:** oval-def:StateType
+
+Child Elements  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. list-table:: Elements  
+    :header-rows: 1  
+  
+    * - Child Elements  
+      - Type (MinOccurs..MaxOccurs)  
+      - Desc.  
+    * - name  
+      - oval-def:EntityStateStringType (0..1)  
+      - The name element contains a string that represents the name of a software title that was collected from the local system.  
+    * - install_version  
+      - oval-def:EntityStateVersionType (0..1)  
+      - The install_version element contains the version of an installed software item. When this entry is blank or made up of only white-space, the status of the entity must be set to "does not exist".  
+    * - install_date  
+      - oval-def:EntityStateIntType (0..1)  
+      - The install_date element contains the date that a software item was installed on the system. The value is an integer expressing the number of seconds which have passed since the epoch, midnight GMT Jan 1, 1970.  
+    * - package_source  
+      - macos-def:EntityStatePackageSourceType (0..1)  
+      - The package_source element contains the source type of an installed software item.  
   
 ______________
   
@@ -829,9 +1236,15 @@ ______________
   
 .. _nvram_test:  
   
-< nvram_test >  
+< nvram_test > (Deprecated)  
 ---------------------------------------------------------
-This test pulls data from the 'nvram -p' output.
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* Deprecated As Of Version 5.12  
+* Reason:   
+* Comment: This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.  
+  
+This test pulls firmware data from the device using the 'nvram' command.
 
 **Extends:** oval-def:TestType
 
@@ -854,7 +1267,7 @@ Child Elements
   
 < nvram_object >  
 ---------------------------------------------------------
-The nvram_object element is used by a nvram test to define the object to be evaluated. Each object extends the standard ObjectType as defined in the oval-definitions-schema and one should refer to the ObjectType description for more information. The common set element allows complex objects to be created using filters and set logic. Again, please refer to the description of the set element in the oval-definitions-schema.
+The nvram_object element is used by an nvram_test to define the object to be evaluated. Each object extends the standard ObjectType as defined in the oval-definitions-schema and one should refer to the ObjectType description for more information. The common set element allows complex objects to be created using filters and set logic. Again, please refer to the description of the set element in the oval-definitions-schema.
 
 **Extends:** oval-def:ObjectType
 
@@ -868,7 +1281,7 @@ Child Elements
       - Desc.  
     * - nvram_var  
       - oval-def:EntityObjectStringType (1..1)  
-      -   
+      - Used to specify the name of the variable to retrieve. In the case of operations other than 'equals', the scope of variables will be limited to those retrieved via the 'nvram -p' command. Hidden nvram variables can be accessed through direct queries using the 'equals' operation.  
     * - oval-def:filter  
       - n/a (0..unbounded)  
       -   
@@ -895,6 +1308,77 @@ Child Elements
     * - nvram_value  
       - oval-def:EntityStateStringType (0..1)  
       - This is the value of the associated nvram variable.  
+  
+______________
+  
+.. _nvram512_test:  
+  
+< nvram512_test >  
+---------------------------------------------------------
+The nvram512_test is used to check the binary values of firmware variables, via the command 'nvram -x -p' or 'nvram -x <variable_name>'. It extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information. The required object element references a nvram512_object and the optional state element specifies the data to check.
+
+**Extends:** oval-def:TestType
+
+Child Elements  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. list-table:: Elements  
+    :header-rows: 1  
+  
+    * - Child Elements  
+      - Type (MinOccurs..MaxOccurs)  
+      - Desc.  
+    * - object  
+      - oval-def:ObjectRefType (1..1)  
+      -   
+    * - state  
+      - oval-def:StateRefType (0..unbounded)  
+      -   
+  
+.. _nvram512_object:  
+  
+< nvram512_object >  
+---------------------------------------------------------
+The nvram512_object element is used by an nvram512_test to define the service domain to be evaluated. Each object extends the standard ObjectType as defined in the oval-definitions-schema and one should refer to the ObjectType description for more information. The common set element allows complex objects to be created using filters and set logic. Again, please refer to the description of the set element in the oval-definitions-schema.
+
+**Extends:** oval-def:ObjectType
+
+Child Elements  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. list-table:: Elements  
+    :header-rows: 1  
+  
+    * - Child Elements  
+      - Type (MinOccurs..MaxOccurs)  
+      - Desc.  
+    * - variable  
+      - oval-def:EntityObjectStringType (1..1)  
+      - The name of the firmware variable being queried.  
+    * - oval-def:filter  
+      - n/a (0..unbounded)  
+      -   
+  
+.. _nvram512_state:  
+  
+< nvram512_state >  
+---------------------------------------------------------
+The nvram512_state element defines a value used to evaluate the result of a specific nvram512_object item.
+
+**Extends:** oval-def:StateType
+
+Child Elements  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. list-table:: Elements  
+    :header-rows: 1  
+  
+    * - Child Elements  
+      - Type (MinOccurs..MaxOccurs)  
+      - Desc.  
+    * - variable  
+      - oval-def:EntityStateStringType (0..1)  
+      - Specifies the name of the firmware variable that was queried.  
+    * - value  
+      - oval-def:EntityStateBinaryType (0..1)  
+      - Specifies the binary value of the firmware variable.  
   
 ______________
   
@@ -1198,6 +1682,62 @@ Child Elements
   
 ______________
   
+.. _profiles_test:  
+  
+< profiles_test >  
+---------------------------------------------------------
+The profiles_test is used to test aspects of the device configuration profiles installed on the device. It extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information. The required object element references an profiles_object and the optional state element references an profiles_state that specifies the information to check.
+
+**Extends:** oval-def:TestType
+
+Child Elements  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. list-table:: Elements  
+    :header-rows: 1  
+  
+    * - Child Elements  
+      - Type (MinOccurs..MaxOccurs)  
+      - Desc.  
+    * - object  
+      - oval-def:ObjectRefType (1..1)  
+      -   
+    * - state  
+      - oval-def:StateRefType (0..unbounded)  
+      -   
+  
+.. _profiles_object:  
+  
+< profiles_object >  
+---------------------------------------------------------
+The profiles_object is used by a profiles_test to query the status of the 'profiles status -type enrollment' command. It is a singleton object.
+
+**Extends:** oval-def:ObjectType
+
+.. _profiles_state:  
+  
+< profiles_state >  
+---------------------------------------------------------
+The profiles_state is used to check the MDM enrollment status.
+
+**Extends:** oval-def:StateType
+
+Child Elements  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. list-table:: Elements  
+    :header-rows: 1  
+  
+    * - Child Elements  
+      - Type (MinOccurs..MaxOccurs)  
+      - Desc.  
+    * - mdm_enrolled  
+      - oval-def:EntityStateBoolType (0..1)  
+      - The status element describes whether the device is enrolled in MDM.  
+    * - dep_enrolled  
+      - oval-def:EntityStateBoolType (0..1)  
+      - The status element describes whether the device is enrolled in MDM via DEP.  
+  
+______________
+  
 .. _pwpolicy_test:  
   
 < pwpolicy_test > (Deprecated)  
@@ -1316,8 +1856,14 @@ ______________
   
 .. _pwpolicy59_test:  
   
-< pwpolicy59_test >  
+< pwpolicy59_test > (Deprecated)  
 ---------------------------------------------------------
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* Deprecated As Of Version 5.12  
+* Reason:   
+* Comment: This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.  
+  
 This test retrieves password policy data from the 'pwpolicy -getpolicy -u target_user [-a username] [-p userpass] [-n directory_node]' output where username, userpass, and directory_node are optional. Please see the 'pwpolicy' man page for additional information.
 
 **Extends:** oval-def:TestType
@@ -1463,10 +2009,111 @@ Child Elements
   
 ______________
   
+.. _pwpolicy512_test:  
+  
+< pwpolicy512_test >  
+---------------------------------------------------------
+This test retrieves password policy data from the 'pwpolicy -getaccountpolicies -u username [-a authenticator] [-p authenticator_password] [-n directory_node]' output where authenticator, authenticator_password, and directory_node are optional. Please see the 'pwpolicy' man page for additional information.
+
+**Extends:** oval-def:TestType
+
+Child Elements  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. list-table:: Elements  
+    :header-rows: 1  
+  
+    * - Child Elements  
+      - Type (MinOccurs..MaxOccurs)  
+      - Desc.  
+    * - object  
+      - oval-def:ObjectRefType (1..1)  
+      -   
+    * - state  
+      - oval-def:StateRefType (0..unbounded)  
+      -   
+  
+.. _pwpolicy512_object:  
+  
+< pwpolicy512_object >  
+---------------------------------------------------------
+The pwpolicy512_object element is used by a pwpolicy59_test to define the object to be evaluated. Each object extends the standard ObjectType as defined in the oval-definitions-schema and one should refer to the ObjectType description for more information. The common set element allows complex objects to be created using filters and set logic. Again, please refer to the description of the set element in the oval-definitions-schema.
+
+**Extends:** oval-def:ObjectType
+
+Child Elements  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. list-table:: Elements  
+    :header-rows: 1  
+  
+    * - Child Elements  
+      - Type (MinOccurs..MaxOccurs)  
+      - Desc.  
+    * - username  
+      - oval-def:EntityObjectStringType (1..1)  
+      - The username element specifies the user whose password policy information should be collected. If an operation other than equals is specified, the users on the system should be enumerated and the 'pwpolicy' command should be issued for each user that matches the username element. If the xsi:nil attribute is set to true, the global policy should be retrieved.  
+    * - authenticator  
+      - oval-def:EntityObjectStringType (1..1)  
+      - The authenticator element specifies the username of the authenticator. If the xsi:nil attribute is set to true, authentication to the directory node will not be performed (i.e. the '-a' and '-p' command line options will not be specified when issuing the 'pwpolicy' command) and the xsi:nil attribute of the authenticator_password element should also be set to true.  
+    * - authenticator_password  
+      - oval-def:EntityObjectStringType (1..1)  
+      - The authenticator_password element specifies the password of the authenticator as specified by the username element. If the xsi:nil attribute is set to true, authentication to the directory node will not be performed (i.e. the '-a' and '-p' command line options will not be specified when issuing the 'pwpolicy' command) and the xsi:nil attribute of the username element should also be set to true.  
+    * - directory_node  
+      - oval-def:EntityObjectStringType (1..1)  
+      - The directory_node element specifies the directory node that you would like to retrieve the password policy information from. If the xsi:nil attribute is set to true, the default directory node is used (i.e. the '-n' command line option will not be specified when issuing the 'pwpolicy' command).  
+    * - xpath  
+      - oval-def:EntityObjectStringType (1..1)  
+      - Specifies an XPath 1.0 expression to evaluate against the XML representation of the output generated from the pwpolicy -getaccountinfo command. This XPath 1.0 expression must evaluate to a list of zero or more text values which will be accessible in OVAL via instances of the value_of item entity. Any results from evaluating the XPath 1.0 expression other than a list of text strings (e.g., a nodes set) is considered an error. The intention is that the text values be drawn from instances of a single, uniquely named element or attribute. However, an OVAL interpreter is not required to verify this, so the author should define the XPath expression carefully. Note that "equals" is the only valid operator for the xpath entity.  
+    * - oval-def:filter  
+      - n/a (0..unbounded)  
+      -   
+  
+.. _pwpolicy512_state:  
+  
+< pwpolicy512_state >  
+---------------------------------------------------------
+The pwpolicy512_state element defines the different information that can be used to evaluate the password policy for the target user in the specified directory node. Please refer to the individual elements in the schema for more details about what each represents.
+
+**Extends:** oval-def:StateType
+
+Child Elements  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. list-table:: Elements  
+    :header-rows: 1  
+  
+    * - Child Elements  
+      - Type (MinOccurs..MaxOccurs)  
+      - Desc.  
+    * - username  
+      - oval-def:EntityStateStringType (0..1)  
+      - The username element specifies the user whose password policy information should be collected.  
+    * - authenticator  
+      - oval-def:EntityStateStringType (0..1)  
+      - The authenticator element specifies the username of the authenticator.  
+    * - authenticator_password  
+      - oval-def:EntityStateStringType (0..1)  
+      - The authenticator_password element specifies the password of the authenticator as specified by the authenticator element.  
+    * - directory_node  
+      - oval-def:EntityStateStringType (0..1)  
+      - The directory_node element specifies the directory node that you would like to retrieve the password policy information from.  
+    * - xpath  
+      - oval-def:EntityStateStringType (0..1)  
+      - Specifies an XPath expression describing the text node(s) or attribute(s) to look at.  
+    * - value_of  
+      - oval-def:EntityStateAnySimpleType (0..1)  
+      - The value of the preference key.  
+  
+______________
+  
 .. _rlimit_test:  
   
-< rlimit_test >  
+< rlimit_test > (Deprecated)  
 ---------------------------------------------------------
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* Deprecated As Of Version 5.12  
+* Reason:   
+* Comment: This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.  
+  
 The rlimit_test is used to check system resource limits for launchd. It is a singleton object. It extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information. The state element specifies the system setup elements to check.
 
 **Extends:** oval-def:TestType
@@ -1669,7 +2316,7 @@ Child Elements
       - Type (MinOccurs..MaxOccurs)  
       - Desc.  
     * - data_type  
-      - macos-def:EntityObjectDataTypeType (1..1)  
+      - oval-def:EntityObjectStringType (1..1)  
       - The data_type entity provides the datatype value that is desired.  
     * - xpath  
       - oval-def:EntityObjectStringType (1..1)  
@@ -1695,7 +2342,7 @@ Child Elements
       - Type (MinOccurs..MaxOccurs)  
       - Desc.  
     * - data_type  
-      - macos-def:EntityStateDataTypeType (0..1)  
+      - oval-def:EntityStateStringType (0..1)  
       - The data_type entity provides the datatype value that is desired.  
     * - xpath  
       - oval-def:EntityStateStringType (0..1)  
@@ -1783,6 +2430,9 @@ Child Elements
     * - allowpowerbuttontosleepcomputer  
       - oval-def:EntityStateBoolType (0..1)  
       - Specifies whether the power button can be used to cause the computer to sleep.  
+    * - restartpowerfailure  
+      - oval-def:EntityStateBoolType (0..1)  
+      - Specifies whether the computer will restart after a power failure.  
     * - remotelogin  
       - oval-def:EntityStateBoolType (0..1)  
       - Specifies whether remote logins are allowed.  
@@ -1792,6 +2442,9 @@ Child Elements
     * - computername  
       - oval-def:EntityStateStringType (0..1)  
       - Specifies the computer's name.  
+    * - localsubnetname  
+      - oval-def:EntityStateStringType (0..1)  
+      - Specifies the name of the local subnet.  
     * - startupdisk  
       - oval-def:EntityStateStringType (0..1)  
       - Specifies the startup disk.  
@@ -1804,190 +2457,6 @@ Child Elements
     * - kernelbootarchitecturesetting  
       - oval-def:EntityStateStringType (0..1)  
       - Specifies the kernel boot architecture setting.  
-  
-.. _EntityObjectDataTypeType:  
-  
-== EntityObjectDataTypeType ==  
----------------------------------------------------------
-The EntityObjectDataTypeType complex type defines the different values that are valid for the data_type entity of a system_profiler object. These values describe the system_profiler XML data to be retrieved. The empty string is also allowed as a valid value to support an empty element that is found when a variable reference is used within the index entity. Note that when using pattern matches and variables care must be taken to ensure that the regular expression and variable values align with the enumerated values. Please note that the values identified are for the data_type entity and are not valid values for the datatype attribute.
-
-**Restricts:** oval-def:EntityObjectStringType
-
-.. list-table:: Enumeration Values  
-    :header-rows: 1  
-  
-    * - Value  
-      - Description  
-    * - SPHardwareDataType  
-      - (No Description)  
-    * - SPNetworkDataType  
-      - (No Description)  
-    * - SPSoftwareDataType  
-      - (No Description)  
-    * - SPParallelATADataType  
-      - (No Description)  
-    * - SPAudioDataType  
-      - (No Description)  
-    * - SPBluetoothDataType  
-      - (No Description)  
-    * - SPDiagnosticsDataType  
-      - (No Description)  
-    * - SPDiscBurningDataType  
-      - (No Description)  
-    * - SPEthernetDataType  
-      - (No Description)  
-    * - SPFibreChannelDataType  
-      - (No Description)  
-    * - SPFireWireDataType  
-      - (No Description)  
-    * - SPDisplaysDataType  
-      - (No Description)  
-    * - SPHardwareRAIDDataType  
-      - (No Description)  
-    * - SPMemoryDataType  
-      - (No Description)  
-    * - SPPCIDataType  
-      - (No Description)  
-    * - SPParallelSCSIDataType  
-      - (No Description)  
-    * - SPPowerDataType  
-      - (No Description)  
-    * - SPPrintersDataType  
-      - (No Description)  
-    * - SPSASDataType  
-      - (No Description)  
-    * - SPSerialATADataType  
-      - (No Description)  
-    * - SPUSBDataType  
-      - (No Description)  
-    * - SPAirPortDataType  
-      - (No Description)  
-    * - SPFirewallDataType  
-      - (No Description)  
-    * - SPNetworkLocationDataType  
-      - (No Description)  
-    * - SPModemDataType  
-      - (No Description)  
-    * - SPNetworkVolumeDataType  
-      - (No Description)  
-    * - SPWWANDataType  
-      - (No Description)  
-    * - SPApplicationsDataType  
-      - (No Description)  
-    * - SPDeveloperToolsDataType  
-      - (No Description)  
-    * - SPExtensionsDataType  
-      - (No Description)  
-    * - SPFontsDataType  
-      - (No Description)  
-    * - SPFrameworksDataType  
-      - (No Description)  
-    * - SPLogsDataType  
-      - (No Description)  
-    * - SPManagedClientDataType  
-      - (No Description)  
-    * - SPPrefPaneDataType  
-      - (No Description)  
-    * - SPStartupItemDataType  
-      - (No Description)  
-    * - SPSyncServicesDataType  
-      - (No Description)  
-    * - SPUniversalAccessDataType  
-      - (No Description)  
-    * -   
-      - | The empty string value is permitted here to allow for empty elements associated with variable references.  
-  
-.. _EntityStateDataTypeType:  
-  
-== EntityStateDataTypeType ==  
----------------------------------------------------------
-The EntityStateDataTypeType complex type defines the different values that are valid for the data_type entity of a system_profiler state. These values describe the system_profiler XML data to be retrieved. The empty string is also allowed as a valid value to support an empty element that is found when a variable reference is used within the index entity. Note that when using pattern matches and variables care must be taken to ensure that the regular expression and variable values align with the enumerated values. Please note that the values identified are for the data_type entity and are not valid values for the datatype attribute.
-
-**Restricts:** oval-def:EntityObjectStringType
-
-.. list-table:: Enumeration Values  
-    :header-rows: 1  
-  
-    * - Value  
-      - Description  
-    * - SPHardwareDataType  
-      - (No Description)  
-    * - SPNetworkDataType  
-      - (No Description)  
-    * - SPSoftwareDataType  
-      - (No Description)  
-    * - SPParallelATADataType  
-      - (No Description)  
-    * - SPAudioDataType  
-      - (No Description)  
-    * - SPBluetoothDataType  
-      - (No Description)  
-    * - SPDiagnosticsDataType  
-      - (No Description)  
-    * - SPDiscBurningDataType  
-      - (No Description)  
-    * - SPEthernetDataType  
-      - (No Description)  
-    * - SPFibreChannelDataType  
-      - (No Description)  
-    * - SPFireWireDataType  
-      - (No Description)  
-    * - SPDisplaysDataType  
-      - (No Description)  
-    * - SPHardwareRAIDDataType  
-      - (No Description)  
-    * - SPMemoryDataType  
-      - (No Description)  
-    * - SPPCIDataType  
-      - (No Description)  
-    * - SPParallelSCSIDataType  
-      - (No Description)  
-    * - SPPowerDataType  
-      - (No Description)  
-    * - SPPrintersDataType  
-      - (No Description)  
-    * - SPSASDataType  
-      - (No Description)  
-    * - SPSerialATADataType  
-      - (No Description)  
-    * - SPUSBDataType  
-      - (No Description)  
-    * - SPAirPortDataType  
-      - (No Description)  
-    * - SPFirewallDataType  
-      - (No Description)  
-    * - SPNetworkLocationDataType  
-      - (No Description)  
-    * - SPModemDataType  
-      - (No Description)  
-    * - SPNetworkVolumeDataType  
-      - (No Description)  
-    * - SPWWANDataType  
-      - (No Description)  
-    * - SPApplicationsDataType  
-      - (No Description)  
-    * - SPDeveloperToolsDataType  
-      - (No Description)  
-    * - SPExtensionsDataType  
-      - (No Description)  
-    * - SPFontsDataType  
-      - (No Description)  
-    * - SPFrameworksDataType  
-      - (No Description)  
-    * - SPLogsDataType  
-      - (No Description)  
-    * - SPManagedClientDataType  
-      - (No Description)  
-    * - SPPrefPaneDataType  
-      - (No Description)  
-    * - SPStartupItemDataType  
-      - (No Description)  
-    * - SPSyncServicesDataType  
-      - (No Description)  
-    * - SPUniversalAccessDataType  
-      - (No Description)  
-    * -   
-      - | The empty string value is permitted here to allow for empty elements associated with variable references.  
   
 .. _EntityStatePermissionCompareType:  
   
@@ -2046,4 +2515,24 @@ The EntityStatePlistTypeType complex type restricts a string value to the seven 
       - | The CFDictionary type is used to describe a preference key that has a collection of key-value pairs. Note that the collection of CFDictionary values is not supported. If an attempt is made to collect a CFDictionary value, an error should be reported.  
     * -   
       - | The empty string value is permitted here to allow for empty elements associated with variable references.  
+  
+.. _EntityStatePackageSourceType:  
+  
+== EntityStatePackageSourceType ==  
+---------------------------------------------------------
+**Restricts:** oval-def:EntityStateStringType
+
+.. list-table:: Enumeration Values  
+    :header-rows: 1  
+  
+    * - Value  
+      - Description  
+    * - Apple  
+      - (No Description)  
+    * - AppStore  
+      - (No Description)  
+    * - ThirdParty  
+      - (No Description)  
+    * -   
+      - | The empty string value is permitted here to allow for detailed error reporting.  
   

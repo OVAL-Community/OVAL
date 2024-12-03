@@ -1,12 +1,12 @@
 Open Vulnerability and Assessment Language: IOS-XE Definition  
 =========================================================
 * Schema: IOS-XE Definition  
-* Version: 5.11.1:1.2  
-* Release Date: 11/30/2016 09:00:00 AM
+* Version: 5.12  
+* Release Date: 11/29/2024 09:00:00 AM
 
 The following is a description of the elements, types, and attributes that compose the IOS-XE specific tests found in Open Vulnerability and Assessment Language (OVAL). Each test is an extension of the standard test element defined in the Core Definition Schema. Through extension, each test inherits a set of elements and attributes that are shared amongst all OVAL tests. Each test is described in detail and should provide the information necessary to understand what each element and attribute represents. This document is intended for developers and assumes some familiarity with XML. A high level description of the interaction between the different tests and their relationship to the Core Definition Schema is not outlined here.
 
-The OVAL Schema is maintained by the OVAL Community. For more information, including how to get involved in the project and how to submit change requests, please visit the OVAL website at http://oval.cisecurity.org.
+The OVAL Schema is maintained by the OVAL Community. For more information, including how to get involved in the project and how to submit change requests, please visit the OVAL website at https://github.com/OVAL-Community/.
 
 Thanks to Omar Santos and Panos Kampanakis of Cisco for providing this test.
 
@@ -17,15 +17,15 @@ Test Listing
 * :ref:`version_test`  
 * :ref:`interface_test`  
 * :ref:`section_test`  
-* :ref:`router_test`  
+* :ref:`router_test` (Deprecated)  
 * :ref:`bgpneighbor_test`  
 * :ref:`routingprotocolauthintf_test`  
-* :ref:`acl_test`  
+* :ref:`acl_test` (Deprecated)  
 * :ref:`snmphost_test`  
 * :ref:`snmpcommunity_test`  
 * :ref:`snmpuser_test`  
 * :ref:`snmpgroup_test`  
-* :ref:`snmpview_test`  
+* :ref:`snmpview_test` (Deprecated)  
   
 ______________
   
@@ -455,8 +455,14 @@ ______________
   
 .. _router_test:  
   
-< router_test >  
+< router_test > (Deprecated)  
 ---------------------------------------------------------
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* Deprecated As Of Version 5.12  
+* Reason:   
+* Comment: This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.  
+  
 The router test is used to check the properties of specific output lines from a router configurated instance in IOS-XE.
 
 **Extends:** oval-def:TestType
@@ -704,8 +710,14 @@ ______________
   
 .. _acl_test:  
   
-< acl_test >  
+< acl_test > (Deprecated)  
 ---------------------------------------------------------
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* Deprecated As Of Version 5.12  
+* Reason:   
+* Comment: This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.  
+  
 The acl test is used to check the properties of specific output lines from an ACL configuration.
 
 **Extends:** oval-def:TestType
@@ -1138,8 +1150,14 @@ ______________
   
 .. _snmpview_test:  
   
-< snmpview_test >  
+< snmpview_test > (Deprecated)  
 ---------------------------------------------------------
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* Deprecated As Of Version 5.12  
+* Reason:   
+* Comment: This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.  
+  
 The snmpview test is used to check the properties of specific output lines from an SNMP view configuration.
 
 **Extends:** oval-def:TestType

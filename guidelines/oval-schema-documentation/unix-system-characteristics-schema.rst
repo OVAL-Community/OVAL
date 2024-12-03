@@ -1,12 +1,12 @@
 Open Vulnerability and Assessment Language: Unix System Characteristics  
 =========================================================
 * Schema: Unix System Characteristics  
-* Version: 5.11.1:1.2  
-* Release Date: 11/30/2016 09:00:00 AM
+* Version: 5.12  
+* Release Date: 11/29/2024 09:00:00 AM
 
 The following is a description of the elements, types, and attributes that compose the UNIX specific system characteristic items found in Open Vulnerability and Assessment Language (OVAL). Each item is an extension of the standard item element defined in the Core System Characteristic Schema. Through extension, each item inherits a set of elements and attributes that are shared amongst all OVAL Items. Each item is described in detail and should provide the information necessary to understand what each element and attribute represents. This document is intended for developers and assumes some familiarity with XML. A high level description of the interaction between the different tests and their relationship to the Core System Characteristic Schema is not outlined here.
 
-The OVAL Schema is maintained by the OVAL Community. For more information, including how to get involved in the project and how to submit change requests, please visit the OVAL website at http://oval.cisecurity.org.
+The OVAL Schema is maintained by the OVAL Community. For more information, including how to get involved in the project and how to submit change requests, please visit the OVAL website at https://github.com/OVAL-Community/.
 
 Item Listing  
 ---------------------------------------------------------
@@ -23,6 +23,7 @@ Item Listing
 * :ref:`runlevel_item`  
 * :ref:`sccs_item`  
 * :ref:`shadow_item`  
+* :ref:`sshd_item`  
 * :ref:`symlink_item`  
 * :ref:`sysctl_item`  
 * :ref:`uname_item`  
@@ -626,6 +627,34 @@ Child Elements
     * - encrypt_method  
       - unix-sc:EntityItemEncryptMethodType (0..1)  
       - The encrypt_method entity describes method that is used for hashing passwords.  
+  
+______________
+  
+.. _sshd_item:  
+  
+< sshd_item >  
+---------------------------------------------------------
+The sshd_item stores information retrieved from the local system about sshd parameters and their respective value(s). Information is collected from the target endpoint using the "sshd -f [FILEPATH] -T [NAME]" command and output values are parsed. Each output line begins with the name of the SSHD parameter, followed by a space, and potentially a tokenized list of values. It has been found that some parameter values are comma-delimited while some are space-delimited. Implementers of this collection should account for both delimiters in SSHD parameter values.
+
+**Extends:** oval-sc:ItemType
+
+Child Elements  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. list-table:: Elements  
+    :header-rows: 1  
+  
+    * - Child Elements  
+      - Type (MinOccurs..MaxOccurs)  
+      - Desc.  
+    * - filepath  
+      - oval-sc:EntityItemStringType (0..1)  
+      - The filepath element specifies the absolute path to the sshd configuration file on the machine. A directory cannot be specified as a filepath. If the collecting object's filepath was specified as xsi:nil="true", then the value of this system characteristics element should be set to the default filepath, /etc/ssh/sshd_config.  
+    * - name  
+      - oval-sc:EntityItemStringType (0..1)  
+      - The name element contains a string that represents the name of a sshd parameter that was collected from the local system.  
+    * - value  
+      - oval-sc:EntityItemAnySimpleType (0..unbounded)  
+      - The value element contains a string that represents the current value(s) for the specified sshd parameter on the local system.  
   
 ______________
   

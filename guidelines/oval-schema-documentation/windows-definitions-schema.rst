@@ -1,63 +1,65 @@
 Open Vulnerability and Assessment Language: Windows Definition  
 =========================================================
 * Schema: Windows Definition  
-* Version: 5.11.1:1.4  
-* Release Date: 01/09/2017 10:00:00 PM
+* Version: 5.12  
+* Release Date: 11/29/2024 09:00:00 AM
 
 The following is a description of the elements, types, and attributes that compose the Windows specific tests found in Open Vulnerability and Assessment Language (OVAL). Each test is an extension of the standard test element defined in the Core Definition Schema. Through extension, each test inherits a set of elements and attributes that are shared amongst all OVAL tests. Each test is described in detail and should provide the information necessary to understand what each element and attribute represents. This document is intended for developers and assumes some familiarity with XML. A high level description of the interaction between the different tests and their relationship to the Core Definition Schema is not outlined here.
 
-The OVAL Schema is maintained by the OVAL Community. For more information, including how to get involved in the project and how to submit change requests, please visit the OVAL website at http://oval.cisecurity.org.
+The OVAL Schema is maintained by the OVAL Community. For more information, including how to get involved in the project and how to submit change requests, please visit the OVAL website at https://github.com/OVAL-Community/.
 
 Test Listing  
 ---------------------------------------------------------
 * :ref:`accesstoken_test` (Deprecated)  
-* :ref:`activedirectory_test`  
+* :ref:`activedirectory_test` (Deprecated)  
 * :ref:`activedirectory57_test` (Deprecated)  
-* :ref:`auditeventpolicy_test`  
+* :ref:`auditeventpolicy_test` (Deprecated)  
 * :ref:`auditeventpolicysubcategories_test`  
 * :ref:`cmdlet_test`  
-* :ref:`dnscache_test`  
+* :ref:`dnscache_test` (Deprecated)  
 * :ref:`file_test`  
-* :ref:`fileauditedpermissions53_test`  
+* :ref:`fileauditedpermissions53_test` (Deprecated)  
 * :ref:`fileauditedpermissions_test` (Deprecated)  
 * :ref:`fileeffectiverights53_test`  
 * :ref:`fileeffectiverights_test` (Deprecated)  
 * :ref:`group_test` (Deprecated)  
 * :ref:`group_sid_test`  
-* :ref:`interface_test`  
-* :ref:`junction_test`  
-* :ref:`license_test`  
+* :ref:`interface_test` (Deprecated)  
+* :ref:`junction_test` (Deprecated)  
+* :ref:`license_test` (Deprecated)  
 * :ref:`lockoutpolicy_test`  
-* :ref:`metabase_test`  
+* :ref:`metabase_test` (Deprecated)  
 * :ref:`ntuser_test`  
 * :ref:`passwordpolicy_test`  
-* :ref:`peheader_test`  
-* :ref:`port_test`  
-* :ref:`printereffectiverights_test`  
+* :ref:`peheader_test` (Deprecated)  
+* :ref:`port_test` (Deprecated)  
+* :ref:`printereffectiverights_test` (Deprecated)  
 * :ref:`process_test` (Deprecated)  
-* :ref:`process58_test`  
+* :ref:`process58_test` (Deprecated)  
 * :ref:`registry_test`  
-* :ref:`regkeyauditedpermissions53_test`  
+* :ref:`regkeyauditedpermissions53_test` (Deprecated)  
 * :ref:`regkeyauditedpermissions_test` (Deprecated)  
 * :ref:`regkeyeffectiverights53_test`  
 * :ref:`regkeyeffectiverights_test` (Deprecated)  
 * :ref:`service_test`  
-* :ref:`serviceeffectiverights_test`  
-* :ref:`sharedresource_test`  
-* :ref:`sharedresourceauditedpermissions_test`  
-* :ref:`sharedresourceeffectiverights_test`  
+* :ref:`serviceeffectiverights_test` (Deprecated)  
+* :ref:`sharedresource_test` (Deprecated)  
+* :ref:`sharedresourceauditedpermissions_test` (Deprecated)  
+* :ref:`sharedresourceeffectiverights_test` (Deprecated)  
 * :ref:`sid_test`  
 * :ref:`sid_sid_test`  
-* :ref:`systemmetric_test`  
-* :ref:`uac_test`  
+* :ref:`systemmetric_test` (Deprecated)  
+* :ref:`uac_test` (Deprecated)  
 * :ref:`user_test` (Deprecated)  
 * :ref:`user_sid55_test`  
 * :ref:`user_sid_test` (Deprecated)  
 * :ref:`userright_test`  
-* :ref:`volume_test`  
+* :ref:`appcmd_test`  
+* :ref:`appcmdlistconfig_test`  
+* :ref:`volume_test` (Deprecated)  
 * :ref:`wmi_test` (Deprecated)  
 * :ref:`wmi57_test`  
-* :ref:`wuaupdatesearcher_test`  
+* :ref:`wuaupdatesearcher_test` (Deprecated)  
   
 ______________
   
@@ -317,8 +319,14 @@ ______________
   
 .. _activedirectory_test:  
   
-< activedirectory_test >  
+< activedirectory_test > (Deprecated)  
 ---------------------------------------------------------
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* Deprecated As Of Version 5.12  
+* Reason:   
+* Comment: This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.  
+  
 The active directory test is used to check information about specific entries in active directory. It extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information. The required object element references an activedirectory_object and the optional state element specifies the metadata to check.
 
 **Extends:** oval-def:TestType
@@ -520,8 +528,14 @@ ______________
   
 .. _auditeventpolicy_test:  
   
-< auditeventpolicy_test >  
+< auditeventpolicy_test > (Deprecated)  
 ---------------------------------------------------------
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* Deprecated As Of Version 5.12  
+* Reason:   
+* Comment: This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.  
+  
 The auditeventpolicy_test is used to check different types of events the system should audit. It extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information. The required object element references a auditeventpolicy_object and the optional state element specifies the metadata to check.
 
 **Extends:** oval-def:TestType
@@ -689,7 +703,7 @@ Child Elements
       - Audit the events produced by inbound remote procedure call connections. This state corresponds with the following GUID specified in ntsecapi.h: 0cce922e-69ae-11d9-bed3-505054503030. This state corresponds with the following Advanced Audit Policy: Detailed Tracking: Audit RPC Events  
     * - directory_service_access  
       - win-def:EntityStateAuditType (0..1)  
-      - Audit the events produced when a Active Directory Domain Services object is accessed. This state corresponds with the following GUID specified in ntsecapi.h: 0cce923b-69ae-11d9-bed3-505054503030. This state corresponds with the following Advanced Audit Policy: DS Access: Audit Directory Service Access  
+      - Audit the events produced when an Active Directory Domain Services object is accessed. This state corresponds with the following GUID specified in ntsecapi.h: 0cce923b-69ae-11d9-bed3-505054503030. This state corresponds with the following Advanced Audit Policy: DS Access: Audit Directory Service Access  
     * - directory_service_changes  
       - win-def:EntityStateAuditType (0..1)  
       - Audit the events produced when changes are made to Active Directory Domain Services objects. This state corresponds with the following GUID specified in ntsecapi.h: 0cce923c-69ae-11d9-bed3-505054503030. This state corresponds with the following Advanced Audit Policy: DS Access: Audit Directory Service Changes  
@@ -937,8 +951,14 @@ ______________
   
 .. _dnscache_test:  
   
-< dnscache_test >  
+< dnscache_test > (Deprecated)  
 ---------------------------------------------------------
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* Deprecated As Of Version 5.12  
+* Reason:   
+* Comment: This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.  
+  
 The dnscache_test is used to check the time to live and IP addresses associated with a domain name. The time to live and IP addresses for a particular domain name are retrieved from the DNS cache on the local system. The entries in the DNS cache can be collected using Microsoft's DnsGetCacheDataTable() and DnsQuery() API calls. It extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information. The required object element references a dnscache_object and the optional state element specifies the metadata to check.
 
 **Extends:** oval-def:TestType
@@ -1190,8 +1210,14 @@ ______________
   
 .. _fileauditedpermissions53_test:  
   
-< fileauditedpermissions53_test >  
+< fileauditedpermissions53_test > (Deprecated)  
 ---------------------------------------------------------
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* Deprecated As Of Version 5.12  
+* Reason:   
+* Comment: This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.  
+  
 The file audit permissions test is used to check the audit permissions associated with Windows files. Note that the trustee's audited permissions are the audit permissons that the SACL grants to the trustee or to any groups of which the trustee is a member. It extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information. The required object element references a fileauditedpermissions_object and the optional state element specifies the metadata to check.
 
 **Extends:** oval-def:TestType
@@ -1280,6 +1306,9 @@ Child Elements
     * - trustee_sid  
       - oval-def:EntityStateStringType (0..1)  
       - The trustee_sid element is the unique SID that associated a user, group, system, or program (such as a Windows service).  
+    * - trustee_name  
+      - oval-def:EntityStateStringType (0..1)  
+      - This element specifies the trustee name associated with this particular DACL. A trustee can be a user, group, or program (such as a Windows service). In Windows, trustee names are case-insensitive. As a result, it is recommended that the case-insensitive operations are used for this entity. In a domain environment, trustee names should be identified in the form: "domain\trustee name". For local trustee names use: "computer name\trustee name". For built-in accounts on the system, use the trustee name without a domain.  
     * - standard_delete  
       - win-def:EntityStateAuditType (0..1)  
       - The right to delete the object.  
@@ -1655,6 +1684,9 @@ Child Elements
     * - trustee_sid  
       - oval-def:EntityStateStringType (0..1)  
       - The trustee_sid element is the unique SID that associated a user, group, system, or program (such as a Windows service).  
+    * - trustee_name  
+      - oval-def:EntityStateStringType (0..1)  
+      - This element specifies the trustee name associated with this particular DACL. A trustee can be a user, group, or program (such as a Windows service). In Windows, trustee names are case-insensitive. As a result, it is recommended that the case-insensitive operations are used for this entity. In a domain environment, trustee names should be identified in the form: "domain\trustee name". For local trustee names use: "computer name\trustee name". For built-in accounts on the system, use the trustee name without a domain.  
     * - standard_delete  
       - oval-def:EntityStateBoolType (0..1)  
       - The right to delete the object.  
@@ -1944,6 +1976,12 @@ ______________
 ---------------------------------------------------------
 Deprecation Info  
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* Deprecated As Of Version 5.12  
+* Reason:   
+* Comment: This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.  
+  
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 * Deprecated As Of Version 5.11  
 * Reason: Replaced by the group_sid_test. This test uses trustee names for identifying accounts on the system. Trustee names are not unique and the group_sid_test, which uses trustee SIDs which are unique, should be used instead. See the group_sid_test.  
 * Comment: This test has been deprecated and will be removed in version 6.0 of the language.  
@@ -2101,13 +2139,28 @@ Child Elements
     * - subgroup_sid  
       - oval-def:EntityStateStringType (0..1)  
       - The subgroup_sid entity holds a string that represents the SID of particular subgroup in the specified group. This entity can be included multiple times in a system characteristic item in order to record that a group contains a number of different subgroups. Note that the entity_check attribute associated with EntityStateStringType guides the evaluation of entities like subgroup_sid that refer to items that can occur an unbounded number of times.  
+    * - group  
+      - oval-def:EntityStateStringType (0..1)  
+      - A string the represents the name of a particular group. In Windows, group names are case-insensitive. As a result, it is recommended that the case-insensitive operations are used for this entity. In a domain environment, groups should be identified in the form: "domain\group name". For local groups use: "computer name\group name". For built-in accounts on the system, use the group name without a domain.  
+    * - user  
+      - oval-def:EntityStateStringType (0..1)  
+      - A string that represents the name of a particular user. In Windows, user names are case-insensitive. As a result, it is recommended that the case-insensitive operations are used for this entity. In a domain environment, users should be identified in the form: "domain\user name". For local users use: "computer name\user name". For built-in accounts on the system, use the user name without a domain.If the specified group has more than one user as a member, then multiple user elements should exist. If the specified group does not contain a single user, then a single user element should exist with a status of 'does not exist'. If there is an error determining the users that are members of the group, then a single user element should be included with a status of 'error'.  
+    * - subgroup  
+      - oval-def:EntityStateStringType (0..1)  
+      - A string that represents the name of a particular subgroup in the specified group. In Windows, group names are case-insensitive. As a result, it is recommended that the case-insensitive operations are used for this entity. In a domain environment, the subgroups should be identified in the form: "domain\group name". In a local environment, the subgroups should be identified in the form: "computer name\group name". If the subgroups are built-in groups, the subgroups should be identified in the form: "group name" without a domain component.If the specified group has more than one subgroup as a member, then multiple subgroup elements should exist. If the specified group does not contain a single subgroup, then a single subgroup element should exist with a status of 'does not exist'. If there is an error determining the subgroups that are members of the group, then a single subgroup element should be included with a status of 'error'.  
   
 ______________
   
 .. _interface_test:  
   
-< interface_test >  
+< interface_test > (Deprecated)  
 ---------------------------------------------------------
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* Deprecated As Of Version 5.12  
+* Reason:   
+* Comment: This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.  
+  
 The interface test enumerate various attributes about the interfaces on a system. It extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information. The required object element references an interface_object and the optional state element specifies the interface information to check.
 
 **Extends:** oval-def:TestType
@@ -2197,8 +2250,14 @@ ______________
   
 .. _junction_test:  
   
-< junction_test >  
+< junction_test > (Deprecated)  
 ---------------------------------------------------------
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* Deprecated As Of Version 5.12  
+* Reason:   
+* Comment: This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.  
+  
 The junction_test is used to obtain canonical path information for junctions (reparse points) on Windows filesystems.
 
 **Extends:** oval-def:TestType
@@ -2276,8 +2335,14 @@ ______________
   
 .. _license_test:  
   
-< license_test >  
+< license_test > (Deprecated)  
 ---------------------------------------------------------
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* Deprecated As Of Version 5.12  
+* Reason:   
+* Comment: This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.  
+  
 The license_test is used to check the content of a particular entry in the Windows registry HKLM\SYSTEM\CurrentControlSet\Control\ProductOptions key, ProductPolicy value. Access to this data is exposed by the functions NtQueryLicenseValue (and also, in version 6.0 and higher, ZwQueryLicenseValue) in NTDLL.DLL.
 
 **Extends:** oval-def:TestType
@@ -2412,8 +2477,14 @@ ______________
   
 .. _metabase_test:  
   
-< metabase_test >  
+< metabase_test > (Deprecated)  
 ---------------------------------------------------------
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* Deprecated As Of Version 5.12  
+* Reason:   
+* Comment: This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.  
+  
 The metabase test is used to check information found in the Windows metabase. It extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information. The required object element references a metabase_object and the optional state element specifies the metadata to check.
 
 **Extends:** oval-def:TestType
@@ -2692,32 +2763,38 @@ Child Elements
       - Desc.  
     * - max_passwd_age  
       - oval-def:EntityStateIntType (0..1)  
-      - Specifies, in seconds (from a DWORD), the maximum allowable password age. A value of TIMEQ_FOREVER (max DWORD value, 4294967295) indicates that the password never expires. The minimum valid value for this element is ONE_DAY (86400). See the USER_MODALS_INFO_0 structure returned by a call to NetUserModalsGet().  
+      - Alternate Name: "Maximum password age". Specifies, in seconds (from a DWORD), the maximum allowable password age. A value of TIMEQ_FOREVER (max DWORD value, 4294967295) indicates that the password never expires. The minimum valid value for this element is ONE_DAY (86400). See the USER_MODALS_INFO_0 structure returned by a call to NetUserModalsGet().  
     * - min_passwd_age  
       - oval-def:EntityStateIntType (0..1)  
-      - Specifies the minimum number of seconds that can elapse between the time a password changes and when it can be changed again. A value of zero indicates that no delay is required between password updates.  
+      - Alternate Name: "Minimum password age". Specifies the minimum number of seconds that can elapse between the time a password changes and when it can be changed again. A value of zero indicates that no delay is required between password updates.  
     * - min_passwd_len  
       - oval-def:EntityStateIntType (0..1)  
-      - Specifies the minimum allowable password length. Valid values for this element are zero through PWLEN.  
+      - Alternate Name: "Minimum password length". Specifies the minimum allowable password length. Valid values for this element are zero through PWLEN.  
     * - password_hist_len  
       - oval-def:EntityStateIntType (0..1)  
-      - Specifies the length of password history maintained. A new password cannot match any of the previous usrmod0_password_hist_len passwords. Valid values for this element are zero through DEF_MAX_PWHIST.  
+      - Alternate Name: "Enforce password history". Specifies the length of password history maintained. A new password cannot match any of the previous usrmod0_password_hist_len passwords. Valid values for this element are zero through DEF_MAX_PWHIST.  
     * - password_complexity  
       - oval-def:EntityStateBoolType (0..1)  
-      - A boolean value that signifies whether passwords must meet the complexity requirements put forth by the operating system.  
+      - Alternate Name: "Password must meet complexity requirements". A boolean value that signifies whether passwords must meet the complexity requirements put forth by the operating system.  
     * - reversible_encryption  
       - oval-def:EntityStateBoolType (0..1)  
-      - Determines whether or not passwords are stored using reversible encryption.  
+      - Alternate name: "Store passwords using reversible encryption". Determines whether or not passwords are stored using reversible encryption.  
     * - anonymous_name_lookup  
       - oval-def:EntityStateBoolType (0..1)  
-      - Determines whether or not an anonymous user may query the local LSA policy.  
+      - Alternate name: "Allow anonymous SID/Name translation". Determines whether or not an anonymous user may query the local LSA policy.  
   
 ______________
   
 .. _peheader_test:  
   
-< peheader_test >  
+< peheader_test > (Deprecated)  
 ---------------------------------------------------------
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* Deprecated As Of Version 5.12  
+* Reason:   
+* Comment: This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.  
+  
 The peheader_test is used to check data from a Portable Executable file header. It extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information. The required object element references a peheader_object and the optional state element specifies the metadata to check.
 
 **Extends:** oval-def:TestType
@@ -2964,8 +3041,14 @@ ______________
   
 .. _port_test:  
   
-< port_test >  
+< port_test > (Deprecated)  
 ---------------------------------------------------------
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* Deprecated As Of Version 5.12  
+* Reason:   
+* Comment: This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.  
+  
 The port test is used to check information about the available ports on a Windows system. It extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information. The required object element references a port_object and the optional state element specifies the port information to check.
 
 **Extends:** oval-def:TestType
@@ -3055,8 +3138,14 @@ ______________
   
 .. _printereffectiverights_test:  
   
-< printereffectiverights_test >  
+< printereffectiverights_test > (Deprecated)  
 ---------------------------------------------------------
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* Deprecated As Of Version 5.12  
+* Reason:   
+* Comment: This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.  
+  
 The printer effective rights test is used to check the effective rights associated with Windows printers. The printereffectiverights_test element extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information. The required object element references a printereffectiverights_object and the optional state element specifies the metadata to check.
 
 **Extends:** oval-def:TestType
@@ -3293,8 +3382,14 @@ ______________
   
 .. _process58_test:  
   
-< process58_test >  
+< process58_test > (Deprecated)  
 ---------------------------------------------------------
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* Deprecated As Of Version 5.12  
+* Reason:   
+* Comment: This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.  
+  
 The process58_test is used to check information found in the Windows processes. It extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information. The required object element references a process58_object and the optional state element references a process58_state element that specifies the process information to check.
 
 **Extends:** oval-def:TestType
@@ -3520,8 +3615,14 @@ ______________
   
 .. _regkeyauditedpermissions53_test:  
   
-< regkeyauditedpermissions53_test >  
+< regkeyauditedpermissions53_test > (Deprecated)  
 ---------------------------------------------------------
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* Deprecated As Of Version 5.12  
+* Reason:   
+* Comment: This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.  
+  
 The registry key audited permissions test is used to check the audit permissions associated with Windows registry keys. Note that the trustee's audited permissions are the audit permissons that the SACL grants to the trustee or to any groups of which the trustee is a member. It extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information. The required object element references a regkeyauditedpermissions53_object and the optional state element specifies the metadata to check.
 
 **Extends:** oval-def:TestType
@@ -3600,6 +3701,9 @@ Child Elements
     * - trustee_sid  
       - oval-def:EntityStateStringType (0..1)  
       - The trustee_sid element is the unique SID that associated a user, group, system, or program (such as a Windows service).  
+    * - trustee_name  
+      - oval-def:EntityStateStringType (0..1)  
+      - This element specifies the trustee name associated with this particular DACL. A trustee can be a user, group, or program (such as a Windows service). In Windows, trustee names are case-insensitive. As a result, it is recommended that the case-insensitive operations are used for this entity. In a domain environment, trustee names should be identified in the form: "domain\trustee name". For local trustee names use: "computer name\trustee name". For built-in accounts on the system, use the trustee name without a domain.  
     * - standard_delete  
       - win-def:EntityStateAuditType (0..1)  
       - The right to delete the object.  
@@ -3963,6 +4067,9 @@ Child Elements
     * - trustee_sid  
       - oval-def:EntityStateStringType (0..1)  
       - The trustee_sid element is the unique SID that associated a user, group, system, or program (such as a Windows service).  
+    * - trustee_name  
+      - oval-def:EntityStateStringType (0..1)  
+      - This element specifies the trustee name associated with this particular DACL. A trustee can be a user, group, or program (such as a Windows service). In Windows, trustee names are case-insensitive. As a result, it is recommended that the case-insensitive operations are used for this entity. In a domain environment, trustee names should be identified in the form: "domain\trustee name". For local trustee names use: "computer name\trustee name". For built-in accounts on the system, use the trustee name without a domain.  
     * - standard_delete  
       - oval-def:EntityStateBoolType (0..1)  
       - The right to delete the object.  
@@ -4343,8 +4450,14 @@ ______________
   
 .. _serviceeffectiverights_test:  
   
-< serviceeffectiverights_test >  
+< serviceeffectiverights_test > (Deprecated)  
 ---------------------------------------------------------
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* Deprecated As Of Version 5.12  
+* Reason:   
+* Comment: This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.  
+  
 The service effective rights test is used to check the effective rights associated with Windows services. Note that the trustee's effective access rights are the access rights that the DACL grants to the trustee or to any groups of which the trustee is a member. The serviceeffectiverights_test element extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information. The required object element references a serviceeffectiverights_object and the optional state element specifies the metadata to check.
 
 **Extends:** oval-def:TestType
@@ -4494,8 +4607,14 @@ ______________
   
 .. _sharedresource_test:  
   
-< sharedresource_test >  
+< sharedresource_test > (Deprecated)  
 ---------------------------------------------------------
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* Deprecated As Of Version 5.12  
+* Reason:   
+* Comment: This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.  
+  
 The shared resource test is used to check properties associated with any shared resource on the system. It extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information. The required object element references a sharedresource_object and the optional state element specifies the metadata to check.
 
 **Extends:** oval-def:TestType
@@ -4600,8 +4719,14 @@ ______________
   
 .. _sharedresourceauditedpermissions_test:  
   
-< sharedresourceauditedpermissions_test >  
+< sharedresourceauditedpermissions_test > (Deprecated)  
 ---------------------------------------------------------
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* Deprecated As Of Version 5.12  
+* Reason:   
+* Comment: This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.  
+  
 The shared resource audited permissions test is used to check the audit permissions associated with any shared resource on the system. Note that the trustee's audited permissions are the audit permissons that the SACL grants to the trustee or to any groups of which the trustee is a member. It extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information. The required object element references a sharedresourceauditedpermissions_object and the optional state element specifies the metadata to check.
 
 **Extends:** oval-def:TestType
@@ -4728,8 +4853,14 @@ ______________
   
 .. _sharedresourceeffectiverights_test:  
   
-< sharedresourceeffectiverights_test >  
+< sharedresourceeffectiverights_test > (Deprecated)  
 ---------------------------------------------------------
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* Deprecated As Of Version 5.12  
+* Reason:   
+* Comment: This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.  
+  
 The shared resource effective rights test is used to check the effective rights associated with any shared resource on the system. Note that the trustee's effective access rights are the access rights that the DACL grants to the trustee or to any groups of which the trustee is a member. It extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information. The required object element references a sharedresourceeffectiverights_object and the optional state element specifies the metadata to check.
 
 **Extends:** oval-def:TestType
@@ -5056,8 +5187,14 @@ ______________
   
 .. _systemmetric_test:  
   
-< systemmetric_test >  
+< systemmetric_test > (Deprecated)  
 ---------------------------------------------------------
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* Deprecated As Of Version 5.12  
+* Reason:   
+* Comment: This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.  
+  
 The system metric test is used to check the value of a particular Windows system metric. Access to this information is exposed by the GetSystemMetrics function in User32.dll.
 
 **Extends:** oval-def:TestType
@@ -5127,8 +5264,14 @@ ______________
   
 .. _uac_test:  
   
-< uac_test >  
+< uac_test > (Deprecated)  
 ---------------------------------------------------------
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* Deprecated As Of Version 5.12  
+* Reason:   
+* Comment: This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.  
+  
 The user access control test is used to check setting related to User Access Control within Windows. It extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information. The required object element references a uaac_object and the optional state element specifies the metadata to check.
 
 **Extends:** oval-def:TestType
@@ -5413,6 +5556,12 @@ Child Elements
     * - last_logon  
       - oval-def:EntityStateIntType (0..1)  
       - The date and time when the last logon occurred. This value is stored as the number of seconds that have elapsed since 00:00:00, January 1, 1970, GMT.  
+    * - user  
+      - oval-def:EntityStateStringType (0..1)  
+      - A string the represents the name of a particular user. In Windows, user names are case-insensitive. As a result, it is recommended that the case-insensitive operations are used for this entity. In a domain environment, users should be identified in the form: "domain\user name". For local users use: "computer_name\user_name". For built-in accounts on the system, use the user name without a domain.  
+    * - group  
+      - oval-def:EntityStateStringType (0..1)  
+      - A string that represents the name of a particular group. In Windows, group names are case-insensitive. As a result, it is recommended that the case-insensitive operations are used for this entity. In a domain environment, groups should be identified in the form: "domain\group name". For local groups use: "computer name\group name". For built-in accounts on the system, use the group name without a domain.If the specified user belongs to more than one group, then multiple group elements should exist. If the specified user is not a member of a single group, then a single group element should exist with a status of 'does not exist'. If there is an error determining the groups that the user belongs to, then a single group element should be included with a status of 'error'.  
   
 ______________
   
@@ -5577,10 +5726,184 @@ Child Elements
   
 ______________
   
+.. _appcmd_test:  
+  
+< appcmd_test >  
+---------------------------------------------------------
+The appcmd_test is one of two tests used to gather Microsoft Internet Information Server (IIS) configuration settings. It is used to gather Apppool, Site, and VDir settings. The second of the two tests is appcmdlistconfig_test which is used to gather Webserver, Site, and VDir settings. Note Webserver and Application Pool (Apppool) data gathering are limited to one of the two tests respectively. Whereas certain website (Site) and virtual directory (VDir) data gathering are found in both or either test. In test content development certain data gathering attempts for Site or VDir could only be done utilizing one test or the other. Meaning to be able capture larger sets of Site or VDir data both tests may be needed to gather all data.
+
+**Extends:** oval-def:TestType
+
+Child Elements  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. list-table:: Elements  
+    :header-rows: 1  
+  
+    * - Child Elements  
+      - Type (MinOccurs..MaxOccurs)  
+      - Desc.  
+    * - object  
+      - oval-def:ObjectRefType (1..1)  
+      -   
+    * - state  
+      - oval-def:StateRefType (0..unbounded)  
+      -   
+  
+.. _appcmd_object:  
+  
+< appcmd_object >  
+---------------------------------------------------------
+The appcmd_object is used to gather Apppool, Site, and VDir IIS settings.
+
+**Extends:** oval-def:ObjectType
+
+Child Elements  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. list-table:: Elements  
+    :header-rows: 1  
+  
+    * - Child Elements  
+      - Type (MinOccurs..MaxOccurs)  
+      - Desc.  
+    * - identifier_type  
+      - win-def:EntityObjectAppCmdIdentifierType (1..1)  
+      - The identifier_type defines the identifier type (Apppool, Site, or VDir).  
+    * - identifier  
+      - oval-def:EntityObjectStringType (1..1)  
+      - The identifier defines information about the location of the found result (apppool name, vdir name or site name).  
+    * - parameter  
+      - oval-def:EntityObjectStringType (1..1)  
+      - The parameter value defines the location of the setting.  
+    * - oval-def:filter  
+      - n/a (0..unbounded)  
+      -   
+  
+.. _appcmd_state:  
+  
+< appcmd_state >  
+---------------------------------------------------------
+**Extends:** oval-def:StateType
+
+Child Elements  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. list-table:: Elements  
+    :header-rows: 1  
+  
+    * - Child Elements  
+      - Type (MinOccurs..MaxOccurs)  
+      - Desc.  
+    * - identifier_type  
+      - win-def:EntityStateAppCmdIdentifierType (0..1)  
+      - The identifier_type defines the identifier type (Apppool, Site, or VDir).  
+    * - identifier  
+      - oval-def:EntityStateStringType (0..1)  
+      - The identifier defines information about the location of the found result (such as apppool name or site name).  
+    * - parameter  
+      - oval-def:EntityStateStringType (0..1)  
+      - The parameter value defines the location of the setting.  
+    * - result  
+      - oval-def:EntityStateAnySimpleType (0..1)  
+      - The value of the collected setting.  
+  
+______________
+  
+.. _appcmdlistconfig_test:  
+  
+< appcmdlistconfig_test >  
+---------------------------------------------------------
+The appcmdlistconfig_test is one of two tests used to gather Microsoft Internet Information Server (IIS) configuration settings. It is used to gather Webserver, Site, and VDir settings. The second of the two tests is appcmd_test which is used to gather Apppool, Site, and VDir settings. Note Webserver and Application Pool (Apppool) data gathering are limited to one of the two tests respectively. Whereas certain website (Site) and virtual directory (VDir) data gathering are found in both or either test. In test content development certain data gathering attempts for Site or VDir could only be done utilizing one test or the other. Meaning to be able capture larger sets of Site or VDir data both tests may be needed to gather all data.
+
+**Extends:** oval-def:TestType
+
+Child Elements  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. list-table:: Elements  
+    :header-rows: 1  
+  
+    * - Child Elements  
+      - Type (MinOccurs..MaxOccurs)  
+      - Desc.  
+    * - object  
+      - oval-def:ObjectRefType (1..1)  
+      -   
+    * - state  
+      - oval-def:StateRefType (0..unbounded)  
+      -   
+  
+.. _appcmdlistconfig_object:  
+  
+< appcmdlistconfig_object >  
+---------------------------------------------------------
+The appcmdlistconfig_object is used to gather Webserver, Site, and VDir IIS settings.
+
+**Extends:** oval-def:ObjectType
+
+Child Elements  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. list-table:: Elements  
+    :header-rows: 1  
+  
+    * - Child Elements  
+      - Type (MinOccurs..MaxOccurs)  
+      - Desc.  
+    * - identifier_type  
+      - win-def:EntityObjectAppCmdListConfigIdentifierType (1..1)  
+      - The identifier_type defines the identifier type (Webserver, Site, or VDir).  
+    * - identifier  
+      - oval-def:EntityObjectStringType (1..1)  
+      - The identifier defines the location of the found result (vdir name or site name). If the xsi:nil attribute is set to true, the identifier element is not used and the identifier_type must be set to Webserver. xsi:nil attribute should not be set to true if the identifier_type is set to Site or VDir.  
+    * - section  
+      - oval-def:EntityObjectStringType (1..1)  
+      - The section value defines the section which contains the parameter.  
+    * - parameter  
+      - oval-def:EntityObjectStringType (1..1)  
+      - The parameter value defines the location of the configuration setting.  
+    * - oval-def:filter  
+      - n/a (0..unbounded)  
+      -   
+  
+.. _appcmdlistconfig_state:  
+  
+< appcmdlistconfig_state >  
+---------------------------------------------------------
+**Extends:** oval-def:StateType
+
+Child Elements  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. list-table:: Elements  
+    :header-rows: 1  
+  
+    * - Child Elements  
+      - Type (MinOccurs..MaxOccurs)  
+      - Desc.  
+    * - identifier_type  
+      - win-def:EntityStateAppCmdListConfigIdentifierType (0..1)  
+      - The identifier_type defines the identifier type (Webserver, Site, or VDir).  
+    * - identifier  
+      - oval-def:EntityStateStringType (0..1)  
+      - The identifier defines the location of the found result (vdir name or site name). If the identifier_type is set to Webserver, the identifier is not populated.  
+    * - section  
+      - oval-def:EntityStateStringType (0..1)  
+      - The section value defines the section which contains the parameter.  
+    * - parameter  
+      - oval-def:EntityStateStringType (0..1)  
+      - The parameter value defines the location of the configuration setting.  
+    * - result  
+      - oval-def:EntityStateAnySimpleType (0..1)  
+      - The value of the collected setting.  
+  
+______________
+  
 .. _volume_test:  
   
-< volume_test >  
+< volume_test > (Deprecated)  
 ---------------------------------------------------------
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* Deprecated As Of Version 5.12  
+* Reason:   
+* Comment: This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.  
+  
 The volume_test is used to check information about different storage volumes found on a Windows system. This includes the various system flags returned by GetVolumeInformation(). It is important to note that these system flags are specific to certain versions of Windows. As a result, the documentation for that version of Windows should be consulted for more information. It extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information. The required object element references a volume_object and the optional state element specifies the metadata to check.
 
 **Extends:** oval-def:TestType
@@ -5893,8 +6216,14 @@ ______________
   
 .. _wuaupdatesearcher_test:  
   
-< wuaupdatesearcher_test >  
+< wuaupdatesearcher_test > (Deprecated)  
 ---------------------------------------------------------
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* Deprecated As Of Version 5.12  
+* Reason:   
+* Comment: This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.  
+  
 The wuaupdatesearcher_test is used to evaluate patch level in a Windows environment utilizing the WUA (Windows Update Agent) interface. It is based on the Search method of the IUpdateSearcher interface found in the WUA API. It extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information. The required object element references a wuaupdatesearcher_object and the optional state element specifies the metadata to check.
 
 Note that WUA can work off of many different sources including WSUS, update.microsoft.com, and a local cab file. The content source is specific to a given system evaluating a wuaupdatesearcher_test and thus is not defined by this test. The tool being used for evaluation should determine what content source is best for the system being assessed and then evaluate this test based on that selection.
@@ -6248,6 +6577,8 @@ The EntityStateFileAttributeType complex type restricts a string value to a spec
       - | A file that is being used for temporary storage. File systems avoid writing data back to mass storage if sufficient cache memory is available, because typically, an application deletes a temporary file after the handle is closed. In that scenario, the system can entirely avoid writing the data. Otherwise, the data is written after the handle is closed.  
     * - FILE_ATTRIBUTE_VIRTUAL  
       - | This value is reserved for system use.  
+    * -   
+      - | The empty string value is permitted here to allow for empty elements associated with variable references.  
   
 .. _EntityObjectNamingContextType:  
   
@@ -6353,7 +6684,7 @@ The EntityStatePeTargetMachineType enumeration identifies the valid machine targ
     * - IMAGE_FILE_MACHINE_R4000  
       - | The IMAGE_FILE_MACHINE_R4000 type is used to indicate a MIPS little endian machine.  
     * - IMAGE_FILE_MACHINE_R10000  
-      - | The IMAGE_FILE_MACHINE_10000 type is used to indicate a MIPS little endian machine.  
+      - | The IMAGE_FILE_MACHINE_R10000 type is used to indicate a MIPS little endian machine.  
     * - IMAGE_FILE_MACHINE_SH3  
       - | The IMAGE_FILE_MACHINE_SH3 type is used to indicate a Hitachi SH3 machine.  
     * - IMAGE_FILE_MACHINE_SH4  
@@ -6492,6 +6823,8 @@ The EntityStateRegistryHiveType restricts a string value to a specific set of va
       - | This registry subtree contains configuration data for the current hardware profile.  
     * - HKEY_CURRENT_USER  
       - | This registry subtree contains the user profile of the user that is currently logged into the system.  
+    * - HKEY_CURRENT_USER_LOCAL_SETTINGS  
+      - | Registry entries subordinate to this key define preferences of the current user that are local to the machine. These entries are not included in the per-user registry portion of a roaming user profile. This key is supported starting with Windows 7 and Windows Server 2008 R2.  
     * - HKEY_LOCAL_MACHINE  
       - | This registry subtree contains information about the local system.  
     * - HKEY_USERS  
@@ -7200,6 +7533,94 @@ The EntityObjectCmdletVerbType restricts a string value to a set of allow cmdlet
       - | The Trace verb tracks the activities of a resource.  
     * - Watch  
       - | The Watch verb continually inspects or monitors a resource for changes.  
+    * -   
+      - | The empty string value is permitted here to allow for empty elements associated with variable references.  
+  
+.. _EntityStateAppCmdIdentifierType:  
+  
+== EntityStateAppCmdIdentifierType ==  
+---------------------------------------------------------
+The EntityStateAppCmdIdentifierType restricts a string value to a set of allowed appcmd objects.
+
+**Restricts:** oval-def:EntityObjectStringType
+
+.. list-table:: Enumeration Values  
+    :header-rows: 1  
+  
+    * - Value  
+      - Description  
+    * - Site  
+      - | Administration of virtual sites  
+    * - VDir  
+      - | Administration of virtual directories  
+    * - Apppool  
+      - | Administration of application pools  
+    * -   
+      - | The empty string value is permitted here to allow for empty elements associated with variable references.  
+  
+.. _EntityObjectAppCmdIdentifierType:  
+  
+== EntityObjectAppCmdIdentifierType ==  
+---------------------------------------------------------
+The EntityObjectAppCmdIdentifierType restricts a string value to a set of allowed appcmd objects.
+
+**Restricts:** oval-def:EntityObjectStringType
+
+.. list-table:: Enumeration Values  
+    :header-rows: 1  
+  
+    * - Value  
+      - Description  
+    * - Site  
+      - | Administration of virtual sites  
+    * - VDir  
+      - | Administration of virtual directories  
+    * - Apppool  
+      - | Administration of application pools  
+    * -   
+      - | The empty string value is permitted here to allow for empty elements associated with variable references.  
+  
+.. _EntityStateAppCmdListConfigIdentifierType:  
+  
+== EntityStateAppCmdListConfigIdentifierType ==  
+---------------------------------------------------------
+The EntityStateAppCmdListConfigIdentifierType restricts a string value to a set of allowed appcmd objects.
+
+**Restricts:** oval-def:EntityObjectStringType
+
+.. list-table:: Enumeration Values  
+    :header-rows: 1  
+  
+    * - Value  
+      - Description  
+    * - Site  
+      - | Administration of virtual sites  
+    * - VDir  
+      - | Administration of virtual directories  
+    * - Webserver  
+      - | Server level configuration  
+    * -   
+      - | The empty string value is permitted here to allow for empty elements associated with variable references.  
+  
+.. _EntityObjectAppCmdListConfigIdentifierType:  
+  
+== EntityObjectAppCmdListConfigIdentifierType ==  
+---------------------------------------------------------
+The EntityObjectAppCmdListConfigIdentifierType restricts a string value to a set of allowed appcmd objects.
+
+**Restricts:** oval-def:EntityObjectStringType
+
+.. list-table:: Enumeration Values  
+    :header-rows: 1  
+  
+    * - Value  
+      - Description  
+    * - Site  
+      - | Administration of virtual sites  
+    * - VDir  
+      - | Administration of virtual directories  
+    * - Webserver  
+      - | Server level configuration  
     * -   
       - | The empty string value is permitted here to allow for empty elements associated with variable references.  
   
