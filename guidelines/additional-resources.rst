@@ -3,7 +3,7 @@
 Additional Resources
 =====================
 
-The following resources are related standards, OVAL documentation, and other helpful information. Suggested additions or deletions can be submitted through the `developer mailing list <https://lists.cisecurity.org/list/oval_developer.lists.cisecurity.org>`_.
+The following resources are related standards, OVAL documentation, and other helpful information. Suggested additions or deletions can be submitted through the `OVAL Community Discussions <https://github.com/orgs/OVAL-Community/discussions>`_.
 
 Resources
 ---------
@@ -11,8 +11,7 @@ Resources
 * `OVAL Community Repository <https://github.com/OVAL-Community/OVAL>`_ *The official repository for OVAL development, maintenance, issue tracking, enhancement proposals, etc.*
 * `OVAL Developer Guide <http://ovalproject.github.io/getting-started/best-practices/>`_ *The OVAL Developer Guide was written by MITRE, the previous OVAL Sponsor.*
 * `Security Content Automation Protocol (SCAP) home <https://csrc.nist.gov/projects/security-content-automation-protocol>`_ *SCAP is a set of standards defined by NIST that includes OVAL.*
-* `Center for Internet Security <https://www.cisecurity.org/>`_ *The website for the current OVAL Sponsor.*
-* `OVAL Repository <https://oval.cisecurity.org/>`_ *A publicly contributed/available repository of OVAL definitions of varying use-cases, OS platforms, and product families.*
+* `Naval Information Warfare Center (NIWC) <https://www.niwcatlantic.navy.mil/Technology/SCAP/>`_ *The website for the current OVAL Sponsor.*
 
 Related Standards
 -----------------
