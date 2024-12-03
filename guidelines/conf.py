@@ -24,9 +24,9 @@ copyright = '2018, COPYRIGHT STATEMENT TBD.'
 author = 'The OVAL community with notable contributions by David Ries (jovalcm.com), Adam Montville (cisecurity.org), and Bill Munyan (cisecurity.org).'
 
 # The short X.Y version
-version = '5.11.2'
+version = '5.12'
 # The full version, including alpha/beta/rc tags
-release = '5.11.2'
+release = '5.12'
 
 
 # -- General configuration ---------------------------------------------------
@@ -53,8 +53,8 @@ source_parsers = {
 # The suffix(es) of source filenames.
 # You can specify multiple suffix as a list of string:
 #
-source_suffix = ['.rst', '.md']
-# source_suffix = '.rst'
+# source_suffix = ['.rst', '.md']
+source_suffix = '.rst'
 
 # The master toctree document.
 master_doc = 'index'
