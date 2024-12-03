@@ -214,6 +214,25 @@ Nakamura Akihito
 |   [ ] System Characteristics Producer
 |
 
+Naval Information Warfare Center (NIWC) Atlantic
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+| *Declared February 25, 2010*
+| *https://www.niwcatlantic.navy.mil/Technology/SCAP/*
+|
+| The SCAP Compliance Checker (SCC) is a SCAP 1.3 Validated Authenticated Configuration Scanner, with support for SCAP versions 1.0, 1.1, 1.2 and 1.3, and an Open Vulnerability Assessment Language (OVAL) adopter, capable of performing compliance verification using SCAP content, and authenticated vulnerability scanning using OVAL content. 
+|
+|   `SCAP Compliance Checker <https://www.niwcatlantic.navy.mil/Technology/SCAP/>`_
+|   *OVAL Definition Evaluator*
+|
+|   [ ] Authoring Tool
+|   [X] Definition Evaluator
+|   [ ] Definition Repository
+|   [ ] Results Consumer
+|   [X] System Characteristics Producer
+|
+
+
 
 New Net Technologies, Ltd.
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -317,26 +336,6 @@ SecPod Technologies
 |   [ ] Results Consumer
 |   [X] System Characteristics Producer
 |
-
-
-SPAWAR Systems Center Atlantic
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-| *Declared February 25, 2010*
-| *www.public.navy.mil/spawar/Atlantic/*
-|
-| The SCAP Compliance Checker has adopted OVAL as part of the FDCC Scanner capabilities of SCAP Validation Program. SCAP Compliance Checker is able to process all four of OVAL's schemas: the Definitions schema, the System Characteristics schema, the Results schema and the Variables schema. SCAP Compliance Checker processes the XCCDF content of a SCAP stream and extracts any variables that need to be imported into the OVAL engine. It then creates an XML file using the OVAL Variables schema that contains these variables. The OVAL engine later uses this file during OVAL processing. By using the industry standard OVAL schemas, SCAP Compliance Checker can share data with any tool that understands OVAL.
-|
-|   `SCAP Compliance Checker <https://www.public.navy.mil/spawar/Atlantic/Technology/Pages/SCAP.aspx>`_
-|   *OVAL Definition Evaluator*
-|
-|   [ ] Authoring Tool
-|   [X] Definition Evaluator
-|   [ ] Definition Repository
-|   [ ] Results Consumer
-|   [X] System Characteristics Producer
-|
-
 
 SUSE
 ^^^^
