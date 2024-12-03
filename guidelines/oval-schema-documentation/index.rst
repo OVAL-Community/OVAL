@@ -26,6 +26,11 @@ Independent
 
 * Platform-Independent: :doc:`Definitions <independent-definitions-schema>`, :doc:`System Characteristics <independent-system-characteristics-schema>`
 
+Cloud
+^^^^^^^^^^^
+
+* Amazon AWS: :doc:`Definitions <aws-definitions-schema>`, :doc:`System Characteristics <aws-system-characteristics-schema>`
+
 Mobile Devices
 ^^^^^^^^^^^^^^
 
@@ -42,6 +47,7 @@ Network Devices
 * Cisco PIX: :doc:`Definitions <pixos-definitions-schema>`, :doc:`System Characteristics <pixos-system-characteristics-schema>`
 * Juniper JunOS: :doc:`Definitions <junos-definitions-schema>`, :doc:`System Characteristics <junos-system-characteristics-schema>`
 * NETCONF: :doc:`Definitions <netconf-definitions-schema>`, :doc:`System Characteristics <netconf-system-characteristics-schema>`
+* Palo Alto PAN-OS: :doc:`Definitions <panos-definitions-schema>`, :doc:`System Characteristics <panos-system-characteristics-schema>`
 
 Microsoft-Specific
 ^^^^^^^^^^^^^^^^^^
@@ -86,12 +92,16 @@ Application-Specific
     android-system-characteristics-schema
     asa-definitions-schema
     asa-system-characteristics-schema
+    aws-definitions-schema
+    aws-system-characteristics-schema
     catos-definitions-schema
     catos-system-characteristics-schema
     ios-definitions-schema
     ios-system-characteristics-schema
     iosxe-definitions-schema
     iosxe-system-characteristics-schema
+    panos-definitions-schema
+    panos-system-characteristics-schema
     pixos-definitions-schema
     pixos-system-characteristics-schema
     junos-definitions-schema
