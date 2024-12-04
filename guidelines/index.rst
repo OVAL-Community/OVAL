@@ -5,10 +5,12 @@
 
 .. _welcome-to-the-guidelines:
 
-Welcome to The OVAL Community Guidelines!
+The OVAL Community Version 5.12 Documenation
 =========================================
 
 Welcome to the guidelines for OVAL, the Open Vulnerability and Assessment Language. These guidelines are designed to explain everything you need to know to start contributing to OVAL (or link you to places to ask questions, should the explanations not suffice), as well as provide a variety of standards and resources to the community.
+
+If you are looking for documentation for OVAL version 5.11.2, please visit:  https://oval-community-guidelines.readthedocs.io/en/5.11.2_release/
 
 **Notice:**
 
