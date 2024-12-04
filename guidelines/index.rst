@@ -25,15 +25,13 @@ OVAL is an open language built by security experts, system administrators, and s
 Who is the OVAL Community?
 --------------------------
 
-The `OVAL Community <http://oval-community-guidelines.readthedocs.io/en/latest/community-organization/index.html>`_ is the group responsible for proposals about anything and everything OVAL related. It comprises `Members <https://oval-community-guidelines.readthedocs.io/en/latest/community-organization/community-members.html>`_, `Area Supervisors <https://oval-community-guidelines.readthedocs.io/en/latest/community-organization/area-supervisors.html>`_, the `Leadership Board <https://oval-community-guidelines.readthedocs.io/en/latest/community-organization/oval-leadership-board.html>`_, and the `Sponsor <https://www.cisecurity.org/>`_. The community maintains, fixes, and improves OVAL through an established governance process.
+The `OVAL Community <http://oval-community-guidelines.readthedocs.io/en/latest/community-organization/index.html>`_ is the group responsible for proposals about anything and everything OVAL related. It comprises `Members <https://oval-community-guidelines.readthedocs.io/en/latest/community-organization/community-members.html>`_, `Area Supervisors <https://oval-community-guidelines.readthedocs.io/en/latest/community-organization/area-supervisors.html>`_, the `Leadership Board <https://oval-community-guidelines.readthedocs.io/en/latest/community-organization/oval-leadership-board.html>`_, and the `Sponsor <https://www.niwcatlantic.navy.mil/Technology/SCAP/>`_. The community maintains, fixes, and improves OVAL through an established governance process.
 
 Learn More
 ----------
 
 | `OVAL Community <http://oval-community-guidelines.readthedocs.io/en/latest/community-organization/index.html>`_
 | `Repository Registry <http://oval-community-guidelines.readthedocs.io/en/latest/oval-content-repos.html>`_
-| `CIS OVAL Repository (GitHub) <https://github.com/CISecurity/OVALRepo>`_
-| `Mailing Lists <http://oval-community-guidelines.readthedocs.io/en/latest/mailing-lists.html>`_
 
 Get Involved
 ------------
@@ -41,13 +39,7 @@ Get Involved
 | **Language Development**
 | `Language Proposal Process <http://oval-community-guidelines.readthedocs.io/en/latest/proposal-process/index.html>`_
 | `OVAL Community GitHub <https://github.com/OVAL-Community/OVAL>`_
-|
-| **Content Development**
-| `Contributing OVAL Content <https://github.com/CISecurity/OVALRepo/blob/master/CONTRIBUTING.md>`_
-| `CIS OVAL Repository <https://github.com/CISecurity/OVALRepo>`_
-|
-| **Discussion Forums**
-| `Mailing Lists <http://oval-community-guidelines.readthedocs.io/en/latest/mailing-lists.html>`_
+| `Discussion Forums <https://github.com/orgs/OVAL-Community/discussions>`_
 
 License
 -------
