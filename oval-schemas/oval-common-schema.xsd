@@ -263,25 +263,6 @@
                           <xsd:documentation>A value of 'at least one' means that a final result of true is given if at least one of the individual results under consideration is true.</xsd:documentation>
                     </xsd:annotation>
                </xsd:enumeration>
-               <xsd:enumeration value="none exist">
-                    <xsd:annotation>
-                         <xsd:documentation>A value of 'none exists' means that a test evaluates to true if no matching object exists that satisfy the data requirements.</xsd:documentation>
-                         <xsd:appinfo>
-                              <oval:deprecated_info>
-                                   <oval:version>5.3</oval:version>
-                                   <oval:reason>Replaced by the 'none satisfy' value. In version 5.3 of the OVAL Language, the checking of existence and state were separated into two distinct checks CheckEnumeration (state) and ExistenceEnumeration (existence). Since CheckEnumeration is now used to specify how many objects should satisfy a given state for a test to return true, and no longer used for specifying how many objects must exist for a test to return true, a value of 'none exist' is no longer needed. See the 'none satisfy' value.</oval:reason>
-                                   <oval:comment>This value has been deprecated and will be removed in version 6.0 of the language.</oval:comment>
-                              </oval:deprecated_info>
-                              <sch:pattern id="oval_none_exist_value_dep">
-                                   <sch:rule context="oval-def:oval_definitions/oval-def:tests/child::*">
-                                        <sch:report test="@check='none exist'">
-                                             DEPRECATED ATTRIBUTE VALUE IN: <sch:value-of select="name()"/> ATTRIBUTE VALUE:
-                                        </sch:report>
-                                   </sch:rule>
-                              </sch:pattern>                        
-                         </xsd:appinfo>
-                    </xsd:annotation>
-               </xsd:enumeration>
                <xsd:enumeration value="none satisfy">
                     <xsd:annotation>
                           <xsd:documentation>A value of 'none satisfy' means that a final result of true is given if none the individual results under consideration are true.</xsd:documentation>
