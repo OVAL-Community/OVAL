@@ -11,14 +11,14 @@ The OVAL Schema is maintained by the OVAL Community. For more information, inclu
 Test Listing  
 ---------------------------------------------------------
 * :ref:`dnscache_test_unix` 
-* :ref:`file_test`  
+* :ref:`file_test_unix`  
 * :ref:`fileextendedattribute_test`  
 * :ref:`gconf_test` 
 * :ref:`inetd_test` 
 * :ref:`interface_test`  
 * :ref:`password_test`  
-* :ref:`process_test`   
-* :ref:`process58_test`  
+* :ref:`process_test_unix`   
+* :ref:`process58_test_unix`  
 * :ref:`routingtable_test` 
 * :ref:`runlevel_test`  
 * :ref:`sccs_test` 
@@ -111,7 +111,7 @@ Child Elements
   
 ______________
   
-.. _file_test:  
+.. _file_test_unix:  
   
 < file_test >  (unix)
 ---------------------------------------------------------
@@ -779,7 +779,7 @@ Child Elements
   
 ______________
   
-.. _process_test:  
+.. _process_test_unix:  
   
 < process_test > (unix) (Deprecated)  
 ---------------------------------------------------------
@@ -888,7 +888,7 @@ Child Elements
   
 ______________
   
-.. _process58_test:  
+.. _process58_test_unix:  
   
 < process58_test >  (unix)
 ---------------------------------------------------------
