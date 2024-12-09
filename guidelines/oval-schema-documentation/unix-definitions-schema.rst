@@ -10,7 +10,7 @@ The OVAL Schema is maintained by the OVAL Community. For more information, inclu
 
 Test Listing  
 ---------------------------------------------------------
-* :ref:`dnscache_test` 
+* :ref:`dnscache_test_unix` 
 * :ref:`file_test`  
 * :ref:`fileextendedattribute_test`  
 * :ref:`gconf_test` 
@@ -31,7 +31,7 @@ Test Listing
   
 ______________
   
-.. _dnscache_test:  
+.. _dnscache_test_unix:  
   
 < dnscache_test > (unix) (Deprecated)  
 ---------------------------------------------------------
