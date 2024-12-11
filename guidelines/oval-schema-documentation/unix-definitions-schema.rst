@@ -10,18 +10,18 @@ The OVAL Schema is maintained by the OVAL Community. For more information, inclu
 
 Test Listing  
 ---------------------------------------------------------
-* :ref:`dnscache_test` (Deprecated)  
-* :ref:`file_test`  
-* :ref:`fileextendedattribute_test` (Deprecated)  
-* :ref:`gconf_test` (Deprecated)  
-* :ref:`inetd_test` (Deprecated)  
+* :ref:`dnscache_test_unix` 
+* :ref:`file_test_unix`  
+* :ref:`fileextendedattribute_test`  
+* :ref:`gconf_test` 
+* :ref:`inetd_test` 
 * :ref:`interface_test`  
 * :ref:`password_test`  
-* :ref:`process_test` (Deprecated)  
-* :ref:`process58_test`  
-* :ref:`routingtable_test` (Deprecated)  
+* :ref:`process_test_unix`   
+* :ref:`process58_test_unix`  
+* :ref:`routingtable_test` 
 * :ref:`runlevel_test`  
-* :ref:`sccs_test` (Deprecated)  
+* :ref:`sccs_test` 
 * :ref:`shadow_test`  
 * :ref:`sshd_test`  
 * :ref:`symlink_test`  
@@ -31,9 +31,9 @@ Test Listing
   
 ______________
   
-.. _dnscache_test:  
+.. _dnscache_test_unix:  
   
-< dnscache_test > (Deprecated)  
+< dnscache_test > (unix) (Deprecated)  
 ---------------------------------------------------------
 Deprecation Info  
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -111,9 +111,9 @@ Child Elements
   
 ______________
   
-.. _file_test:  
+.. _file_test_unix:  
   
-< file_test >  
+< file_test >  (unix)
 ---------------------------------------------------------
 The file test is used to check metadata associated with UNIX files, of the sort returned by either an ls command, stat command or stat() system call. It extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information. The required object element references a file_object and the optional state element specifies the metadata to check.
 
@@ -598,7 +598,7 @@ ______________
   
 .. _interface_test:  
   
-< interface_test >  
+< interface_test >  (unix)
 ---------------------------------------------------------
 The interface test enumerates various attributes about the interfaces on a system. It extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information. The required object element references an interface_object and the optional state element specifies the interface information to check.
 
@@ -779,9 +779,9 @@ Child Elements
   
 ______________
   
-.. _process_test:  
+.. _process_test_unix:  
   
-< process_test > (Deprecated)  
+< process_test > (unix) (Deprecated)  
 ---------------------------------------------------------
 Deprecation Info  
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -888,9 +888,9 @@ Child Elements
   
 ______________
   
-.. _process58_test:  
+.. _process58_test_unix:  
   
-< process58_test >  
+< process58_test >  (unix)
 ---------------------------------------------------------
 The process58_test is used to check information found in the UNIX processes. It is equivalent to parsing the output of the ps command. It extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information. The required object element references a process58_object and the optional state element references a process58_state that specifies the process information to check.
 

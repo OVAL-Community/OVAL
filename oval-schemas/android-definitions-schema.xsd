@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-            xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5"
-            xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5"
-            xmlns:android-def="http://oval.mitre.org/XMLSchema/oval-definitions-5#android"
+            xmlns:oval="urn:oval:v6:common"
+            xmlns:oval-def="urn:oval:v6:definitions"
+            xmlns:android-def="urn:oval:v6:definitions:android"
             xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-            targetNamespace="http://oval.mitre.org/XMLSchema/oval-definitions-5#android" elementFormDefault="qualified" version="5.12">
-  <xsd:import namespace="http://oval.mitre.org/XMLSchema/oval-definitions-5" schemaLocation="oval-definitions-schema.xsd"/>
-  <xsd:import namespace="http://oval.mitre.org/XMLSchema/oval-common-5" schemaLocation="oval-common-schema.xsd"/>
+            targetNamespace="urn:oval:v6:definitions:android" elementFormDefault="qualified" version="6.0">
+  <xsd:import namespace="urn:oval:v6:definitions" schemaLocation="oval-definitions-schema.xsd"/>
+  <xsd:import namespace="urn:oval:v6:common" schemaLocation="oval-common-schema.xsd"/>
   <xsd:annotation>
     <xsd:documentation>The following is a description of the elements, types, and attributes that compose the Android specific tests found in Open Vulnerability and Assessment Language (OVAL). Each test is an extension of the standard test element defined in the Core Definition Schema. Through extension, each test inherits a set of elements and attributes that are shared amongst all OVAL tests. Each test is described in detail and should provide the information necessary to understand what each element and attribute represents. This document is intended for developers and assumes some familiarity with XML. A high level description of the interaction between the different tests and their relationship to the Core Definition Schema is not outlined here.</xsd:documentation>
     <xsd:documentation>The OVAL Schema is maintained by the OVAL Community. For more information, including how to get involved in the project and how to submit change requests, please visit the OVAL website at https://github.com/OVAL-Community/.</xsd:documentation>
     <xsd:appinfo>
       <schema>Android Definition</schema>
-      <version>5.12</version>
-      <date>11/29/2024 09:00:00 AM</date>
+      <version>6.0</version>
+      <date>1/1/2025 09:00:00 AM</date>
       <terms_of_use>This software is an open standard developed by multiple parties, including the United States Government (Government). The Government hereby grants you a non-exclusive, royalty-free, worldwide license to use, modify, and/or reproduce the software for any lawful purpose provided that you reproduce this License/Disclaimer language with any use/modification/copy of the software. The Government assumes no responsibility whatsoever for this software's use by other parties, and the software is provided "AS IS" without warranty or guarantee of any kind, express or implied, including, but not limited to, the warranties of merchantability, fitness for a particular purpose, and noninfringement. In no event shall the Government be liable for any claim, damages or other liability, whether in an action of contract, tort or other dealings in the software. The Government has no obligation hereunder to provide maintenance, support, updates, enhancements, or modifications to the software. Users may submit proposals and/or updates regarding the software, which proposals and/or updates the Government, at its sole discretion, can choose to incorporate into the software. Proposals and/or updates submitted to the Government by users must be accompanied by a license to such proposals and/or updates that is no more restrictive than this License/Disclaimer.</terms_of_use>
-      <sch:ns prefix="oval-def" uri="http://oval.mitre.org/XMLSchema/oval-definitions-5"/>
-      <sch:ns prefix="android-def" uri="http://oval.mitre.org/XMLSchema/oval-definitions-5#android"/>
+      <sch:ns prefix="oval-def" urn="urn:oval:v6:definitions"/>
+      <sch:ns prefix="android-def" urn="urn:oval:v6:definitions:android"/>
       <sch:ns prefix="xsi" uri="http://www.w3.org/2001/XMLSchema-instance"/>
     </xsd:appinfo>
   </xsd:annotation>
@@ -31,7 +31,7 @@
           <oval:test>appmanager_test</oval:test>
           <oval:object>appmanager_object</oval:object>
           <oval:state>appmanager_state</oval:state>
-          <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#android">appmanager_item</oval:item>
+          <oval:item target_namespace="urn:oval:v6:system-characteristics:android">appmanager_item</oval:item>
         </oval:element_mapping>
       </xsd:appinfo>
 		<xsd:appinfo>
@@ -74,7 +74,7 @@
             <sch:let name="reffed_state" value="ancestor::oval-def:oval_definitions/oval-def:states/*[@id=$state_ref]"/>
             <sch:let name="state_name" value="local-name($reffed_state)"/>
             <sch:let name="state_namespace" value="namespace-uri($reffed_state)"/>
-            <sch:assert test="(($state_namespace='http://oval.mitre.org/XMLSchema/oval-definitions-5#android') and ($state_name='appmanager_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
+            <sch:assert test="(($state_namespace='urn:oval:v6:definitions:android') and ($state_name='appmanager_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
           </sch:rule>
         </sch:pattern>
       </xsd:appinfo>
@@ -193,7 +193,7 @@
           <oval:test>bluetooth_test</oval:test>
           <oval:object>bluetooth_object</oval:object>
           <oval:state>bluetooth_state</oval:state>
-          <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#android">bluetooth_item</oval:item>
+          <oval:item target_namespace="urn:oval:v6:system-characteristics:android">bluetooth_item</oval:item>
         </oval:element_mapping>
       </xsd:appinfo>
 		<xsd:appinfo>
@@ -268,7 +268,7 @@
           <oval:test>camera_test</oval:test>
           <oval:object>camera_object</oval:object>
           <oval:state>camera_state</oval:state>
-          <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#android">camera_item</oval:item>
+          <oval:item target_namespace="urn:oval:v6:system-characteristics:android">camera_item</oval:item>
         </oval:element_mapping>
       </xsd:appinfo>
       <xsd:appinfo>
@@ -334,11 +334,11 @@
     <xsd:annotation>
       <xsd:documentation>The certificate_test is used to check the certificates installed on the device.</xsd:documentation>
       <xsd:appinfo>
-        <oval:element_mapping xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5">
+        <oval:element_mapping xmlns:oval="urn:oval:v6:common">
           <oval:test>certificate_test</oval:test>
           <oval:object>certificate_object</oval:object>
           <oval:state>certificate_state</oval:state>
-          <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#android">certificate_item</oval:item>
+          <oval:item target_namespace="urn:oval:v6:system-characteristics:android">certificate_item</oval:item>
         </oval:element_mapping>
       </xsd:appinfo>
 		<xsd:appinfo>
@@ -408,7 +408,7 @@
           <oval:test>devicesettings_test</oval:test>
           <oval:object>devicesettings_object</oval:object>
           <oval:state>devicesettings_state</oval:state>
-          <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#android">devicesettings_item</oval:item>
+          <oval:item target_namespace="urn:oval:v6:system-characteristics:android">devicesettings_item</oval:item>
         </oval:element_mapping>
       </xsd:appinfo>
 		<xsd:appinfo>
@@ -508,7 +508,7 @@
           <oval:test>encryption_test</oval:test>
           <oval:object>encryption_object</oval:object>
           <oval:state>encryption_state</oval:state>
-          <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#android">encryption_item</oval:item>
+          <oval:item target_namespace="urn:oval:v6:system-characteristics:android">encryption_item</oval:item>
         </oval:element_mapping>
       </xsd:appinfo>
 		<xsd:appinfo>
@@ -583,7 +583,7 @@
           <oval:test>locationservice_test</oval:test>
           <oval:object>locationservice_object</oval:object>
           <oval:state>locationservice_state</oval:state>
-          <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#android">locationservice_item</oval:item>
+          <oval:item target_namespace="urn:oval:v6:system-characteristics:android">locationservice_item</oval:item>
         </oval:element_mapping>
       </xsd:appinfo>
 		<xsd:appinfo>
@@ -658,7 +658,7 @@
           <oval:test>network_test</oval:test>
           <oval:object>network_object</oval:object>
           <oval:state>network_state</oval:state>
-          <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#android">network_item</oval:item>
+          <oval:item target_namespace="urn:oval:v6:system-characteristics:android">network_item</oval:item>
         </oval:element_mapping>
       </xsd:appinfo>
 		<xsd:appinfo>
@@ -733,7 +733,7 @@
           <oval:test>password_test</oval:test>
           <oval:object>password_object</oval:object>
           <oval:state>password_state</oval:state>
-          <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#android">password_item</oval:item>
+          <oval:item target_namespace="urn:oval:v6:system-characteristics:android">password_item</oval:item>
         </oval:element_mapping>
       </xsd:appinfo>
 		<xsd:appinfo>
@@ -878,7 +878,7 @@
           <oval:test>systemdetails_test</oval:test>
           <oval:object>systemdetails_object</oval:object>
           <oval:state>systemdetails_state</oval:state>
-          <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#android">systemdetails_item</oval:item>
+          <oval:item target_namespace="urn:oval:v6:system-characteristics:android">systemdetails_item</oval:item>
         </oval:element_mapping>
       </xsd:appinfo>
 		<xsd:appinfo>
@@ -1003,7 +1003,7 @@
           <oval:test>wifi_test</oval:test>
           <oval:object>wifi_object</oval:object>
           <oval:state>wifi_state</oval:state>
-          <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#android">wifi_item</oval:item>
+          <oval:item target_namespace="urn:oval:v6:system-characteristics:android">wifi_item</oval:item>
         </oval:element_mapping>
       </xsd:appinfo>
 		<xsd:appinfo>
@@ -1078,7 +1078,7 @@
           <oval:test>wifinetwork_test</oval:test>
           <oval:object>wifinetwork_object</oval:object>
           <oval:state>wifinetwork_state</oval:state>
-          <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#android">wifinetwork_item</oval:item>
+          <oval:item target_namespace="urn:oval:v6:system-characteristics:android">wifinetwork_item</oval:item>
         </oval:element_mapping>
       </xsd:appinfo>
 		<xsd:appinfo>
@@ -1121,7 +1121,7 @@
             <sch:let name="reffed_state" value="ancestor::oval-def:oval_definitions/oval-def:states/*[@id=$state_ref]"/>
             <sch:let name="state_name" value="local-name($reffed_state)"/>
             <sch:let name="state_namespace" value="namespace-uri($reffed_state)"/>
-            <sch:assert test="(($state_namespace='http://oval.mitre.org/XMLSchema/oval-definitions-5#android') and ($state_name='wifinetwork_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
+            <sch:assert test="(($state_namespace='urn:oval:v6:definitions:android') and ($state_name='wifinetwork_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
           </sch:rule>
         </sch:pattern>
       </xsd:appinfo>
@@ -1225,7 +1225,7 @@
           <oval:test>telephony_test</oval:test>
           <oval:object>telephony_object</oval:object>
           <oval:state>telephony_state</oval:state>
-          <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#android">telephony_item</oval:item>
+          <oval:item target_namespace="urn:oval:v6:system-characteristics:android">telephony_item</oval:item>
         </oval:element_mapping>
       </xsd:appinfo>
 		<xsd:appinfo>

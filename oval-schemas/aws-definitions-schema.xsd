@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:aws-def="http://oval.mitre.org/XMLSchema/oval-definitions-5#aws" xmlns:sch="http://purl.oclc.org/dsdl/schematron" targetNamespace="http://oval.mitre.org/XMLSchema/oval-definitions-5#aws" elementFormDefault="qualified" version="5.12">
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:oval="urn:oval:v6:common" xmlns:oval-def="urn:oval:v6:definitions" xmlns:aws-def="urn:oval:v6:definitions:aws" xmlns:sch="http://purl.oclc.org/dsdl/schematron" targetNamespace="urn:oval:v6:definitions:aws" elementFormDefault="qualified" version="6.0">
     
-    <xsd:import namespace="http://oval.mitre.org/XMLSchema/oval-common-5" schemaLocation="oval-common-schema.xsd"/>
-    <xsd:import namespace="http://oval.mitre.org/XMLSchema/oval-definitions-5" schemaLocation="oval-definitions-schema.xsd"/>
+    <xsd:import namespace="urn:oval:v6:common" schemaLocation="oval-common-schema.xsd"/>
+    <xsd:import namespace="urn:oval:v6:definitions" schemaLocation="oval-definitions-schema.xsd"/>
     
     <xsd:annotation>
         <xsd:documentation>
@@ -23,8 +23,8 @@
         </xsd:documentation>
         <xsd:appinfo>
             <schema>Amazon Web Services Definition</schema>
-            <version>5.12</version>
-            <date>11/29/2024 09:00:00 AM</date>
+            <version>6.0</version>
+            <date>1/1/2025 09:00:00 AM</date>
             <terms_of_use>
                 For the portion subject to the copyright in the United States: Copyright (c) 2016 United States 
                 Government. All Rights Reserved. Copyright (c) 2016, Center for Internet Security. All rights 
@@ -34,8 +34,8 @@
                 this license header must be included.
             </terms_of_use>
             
-            <sch:ns prefix="oval-def" uri="http://oval.mitre.org/XMLSchema/oval-definitions-5"/>
-            <sch:ns prefix="aws-def" uri="http://oval.mitre.org/XMLSchema/oval-definitions-5#aws"/>
+            <sch:ns prefix="oval-def" urn="urn:oval:v6:definitions"/>
+            <sch:ns prefix="aws-def" urn="urn:oval:v6:definitions:aws"/>
             <sch:ns prefix="xsi" uri="http://www.w3.org/2001/XMLSchema-instance"/>
         </xsd:appinfo>
     </xsd:annotation>
@@ -58,7 +58,7 @@
                     <oval:test>api_test</oval:test>
                     <oval:object>api_object</oval:object>
                     <oval:state>api_state</oval:state>
-                    <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#aws">api_item</oval:item>
+                    <oval:item target_namespace="urn:oval:v6:system-characteristics:aws">api_item</oval:item>
                 </oval:element_mapping>
             </xsd:appinfo>
             <xsd:appinfo>
@@ -107,7 +107,7 @@
                         <sch:let name="reffed_state" value="ancestor::oval-def:oval_definitions/oval-def:states/*[@id=$state_ref]"/>
                         <sch:let name="state_name" value="local-name($reffed_state)"/>
                         <sch:let name="state_namespace" value="namespace-uri($reffed_state)"/>
-                        <sch:assert test="(($state_namespace='http://oval.mitre.org/XMLSchema/oval-definitions-5#aws') and ($state_name='api_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
+                        <sch:assert test="(($state_namespace='urn:oval:v6:definitions:aws') and ($state_name='api_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
                     </sch:rule>
                 </sch:pattern>
             </xsd:appinfo>
@@ -302,7 +302,7 @@
                     <oval:test>apicontent_test</oval:test>
                     <oval:object>apicontent_object</oval:object>
                     <oval:state>apicontent_state</oval:state>
-                    <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#aws">apicontent_item</oval:item>
+                    <oval:item target_namespace="urn:oval:v6:system-characteristics:aws">apicontent_item</oval:item>
                 </oval:element_mapping>
             </xsd:appinfo>
             <xsd:appinfo>
@@ -350,7 +350,7 @@
                         <sch:let name="reffed_state" value="ancestor::oval-def:oval_definitions/oval-def:states/*[@id=$state_ref]"/>
                         <sch:let name="state_name" value="local-name($reffed_state)"/>
                         <sch:let name="state_namespace" value="namespace-uri($reffed_state)"/>
-                        <sch:assert test="(($state_namespace='http://oval.mitre.org/XMLSchema/oval-definitions-5#aws') and ($state_name='apicontent_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
+                        <sch:assert test="(($state_namespace='urn:oval:v6:definitions:aws') and ($state_name='apicontent_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
                     </sch:rule>
                 </sch:pattern>
             </xsd:appinfo>
@@ -561,7 +561,7 @@
                     <oval:test>credentialreportuser_test</oval:test>
                     <oval:object>credentialreportuser_object</oval:object>
                     <oval:state>credentialreportuser_state</oval:state>
-                    <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#aws">credentialreportuser_item</oval:item>
+                    <oval:item target_namespace="urn:oval:v6:system-characteristics:aws">credentialreportuser_item</oval:item>
                 </oval:element_mapping>
             </xsd:appinfo>
             <xsd:appinfo>
@@ -749,7 +749,7 @@
                     <oval:test>credentialreportkey_test</oval:test>
                     <oval:object>credentialreportkey_object</oval:object>
                     <oval:state>credentialreportkey_state</oval:state>
-                    <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#aws">credentialreportkey_item</oval:item>
+                    <oval:item target_namespace="urn:oval:v6:system-characteristics:aws">credentialreportkey_item</oval:item>
                 </oval:element_mapping>
             </xsd:appinfo>
             <xsd:appinfo>
@@ -927,7 +927,7 @@
                     <oval:test>credentialreportcert_test</oval:test>
                     <oval:object>credentialreportcert_object</oval:object>
                     <oval:state>credentialreportcert_state</oval:state>
-                    <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#aws">credentialreportcert_item</oval:item>
+                    <oval:item target_namespace="urn:oval:v6:system-characteristics:aws">credentialreportcert_item</oval:item>
                 </oval:element_mapping>
             </xsd:appinfo>
             <xsd:appinfo>

@@ -10,56 +10,56 @@ The OVAL Schema is maintained by the OVAL Community. For more information, inclu
 
 Test Listing  
 ---------------------------------------------------------
-* :ref:`accesstoken_test` (Deprecated)  
-* :ref:`activedirectory_test` (Deprecated)  
-* :ref:`activedirectory57_test` (Deprecated)  
-* :ref:`auditeventpolicy_test` (Deprecated)  
+* :ref:`accesstoken_test`  
+* :ref:`activedirectory_test` 
+* :ref:`activedirectory57_test`  
+* :ref:`auditeventpolicy_test` 
 * :ref:`auditeventpolicysubcategories_test`  
 * :ref:`cmdlet_test`  
-* :ref:`dnscache_test` (Deprecated)  
+* :ref:`dnscache_test`   
 * :ref:`file_test`  
-* :ref:`fileauditedpermissions53_test` (Deprecated)  
-* :ref:`fileauditedpermissions_test` (Deprecated)  
+* :ref:`fileauditedpermissions53_test`  
+* :ref:`fileauditedpermissions_test`  
 * :ref:`fileeffectiverights53_test`  
-* :ref:`fileeffectiverights_test` (Deprecated)  
-* :ref:`group_test` (Deprecated)  
+* :ref:`fileeffectiverights_test`   
+* :ref:`group_test`  
 * :ref:`group_sid_test`  
-* :ref:`interface_test` (Deprecated)  
-* :ref:`junction_test` (Deprecated)  
-* :ref:`license_test` (Deprecated)  
+* :ref:`interface_test`   
+* :ref:`junction_test`  
+* :ref:`license_test`   
 * :ref:`lockoutpolicy_test`  
-* :ref:`metabase_test` (Deprecated)  
+* :ref:`metabase_test` 
 * :ref:`ntuser_test`  
 * :ref:`passwordpolicy_test`  
-* :ref:`peheader_test` (Deprecated)  
-* :ref:`port_test` (Deprecated)  
-* :ref:`printereffectiverights_test` (Deprecated)  
-* :ref:`process_test` (Deprecated)  
-* :ref:`process58_test` (Deprecated)  
+* :ref:`peheader_test` 
+* :ref:`port_test` 
+* :ref:`printereffectiverights_test`
+* :ref:`process_test`  
+* :ref:`process58_test` 
 * :ref:`registry_test`  
-* :ref:`regkeyauditedpermissions53_test` (Deprecated)  
-* :ref:`regkeyauditedpermissions_test` (Deprecated)  
+* :ref:`regkeyauditedpermissions53_test`  
+* :ref:`regkeyauditedpermissions_test` 
 * :ref:`regkeyeffectiverights53_test`  
-* :ref:`regkeyeffectiverights_test` (Deprecated)  
+* :ref:`regkeyeffectiverights_test`   
 * :ref:`service_test`  
-* :ref:`serviceeffectiverights_test` (Deprecated)  
-* :ref:`sharedresource_test` (Deprecated)  
-* :ref:`sharedresourceauditedpermissions_test` (Deprecated)  
-* :ref:`sharedresourceeffectiverights_test` (Deprecated)  
+* :ref:`serviceeffectiverights_test` 
+* :ref:`sharedresource_test`  
+* :ref:`sharedresourceauditedpermissions_test`  
+* :ref:`sharedresourceeffectiverights_test`   
 * :ref:`sid_test`  
 * :ref:`sid_sid_test`  
-* :ref:`systemmetric_test` (Deprecated)  
-* :ref:`uac_test` (Deprecated)  
-* :ref:`user_test` (Deprecated)  
+* :ref:`systemmetric_test` 
+* :ref:`uac_test`  
+* :ref:`user_test` 
 * :ref:`user_sid55_test`  
-* :ref:`user_sid_test` (Deprecated)  
+* :ref:`user_sid_test`  
 * :ref:`userright_test`  
 * :ref:`appcmd_test`  
 * :ref:`appcmdlistconfig_test`  
-* :ref:`volume_test` (Deprecated)  
-* :ref:`wmi_test` (Deprecated)  
+* :ref:`volume_test` 
+* :ref:`wmi_test` 
 * :ref:`wmi57_test`  
-* :ref:`wuaupdatesearcher_test` (Deprecated)  
+* :ref:`wuaupdatesearcher_test` 
   
 ______________
   
