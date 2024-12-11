@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-            xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5"
-            xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5"
-            xmlns:iosxe-def="http://oval.mitre.org/XMLSchema/oval-definitions-5#iosxe"
+            xmlns:oval="urn:oval:v6:common"
+            xmlns:oval-def="urn:oval:v6:definitions"
+            xmlns:iosxe-def="urn:oval:v6:definitions:iosxe"
             xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-            targetNamespace="http://oval.mitre.org/XMLSchema/oval-definitions-5#iosxe"
-            elementFormDefault="qualified" version="5.12">
-    <xsd:import namespace="http://oval.mitre.org/XMLSchema/oval-definitions-5" schemaLocation="oval-definitions-schema.xsd"/>
-    <xsd:import namespace="http://oval.mitre.org/XMLSchema/oval-common-5" schemaLocation="oval-common-schema.xsd"/>
+            targetNamespace="urn:oval:v6:definitions:iosxe"
+            elementFormDefault="qualified" version="6.0">
+    <xsd:import namespace="urn:oval:v6:definitions" schemaLocation="oval-definitions-schema.xsd"/>
+    <xsd:import namespace="urn:oval:v6:common" schemaLocation="oval-common-schema.xsd"/>
     <xsd:annotation>
         <xsd:documentation>The following is a description of the elements, types, and attributes that compose the IOS-XE specific tests found in Open Vulnerability and Assessment Language (OVAL). Each test is an extension of the standard test element defined in the Core Definition Schema. Through extension, each test inherits a set of elements and attributes that are shared amongst all OVAL tests. Each test is described in detail and should provide the information necessary to understand what each element and attribute represents. This document is intended for developers and assumes some familiarity with XML. A high level description of the interaction between the different tests and their relationship to the Core Definition Schema is not outlined here.</xsd:documentation>
         <xsd:documentation>The OVAL Schema is maintained by the OVAL Community. For more information, including how to get involved in the project and how to submit change requests, please visit the OVAL website at https://github.com/OVAL-Community/.</xsd:documentation>
         <xsd:documentation>Thanks to Omar Santos and Panos Kampanakis of Cisco for providing this test.</xsd:documentation>
         <xsd:appinfo>
             <schema>IOS-XE Definition</schema>
-            <version>5.12</version>
-            <date>11/29/2024 09:00:00 AM</date>
+            <version>6.0</version>
+            <date>1/1/2025 09:00:00 AM</date>
             <terms_of_use>This software is an open standard developed by multiple parties, including the United States Government (Government). The Government hereby grants you a non-exclusive, royalty-free, worldwide license to use, modify, and/or reproduce the software for any lawful purpose provided that you reproduce this License/Disclaimer language with any use/modification/copy of the software. The Government assumes no responsibility whatsoever for this software's use by other parties, and the software is provided "AS IS" without warranty or guarantee of any kind, express or implied, including, but not limited to, the warranties of merchantability, fitness for a particular purpose, and noninfringement. In no event shall the Government be liable for any claim, damages or other liability, whether in an action of contract, tort or other dealings in the software. The Government has no obligation hereunder to provide maintenance, support, updates, enhancements, or modifications to the software. Users may submit proposals and/or updates regarding the software, which proposals and/or updates the Government, at its sole discretion, can choose to incorporate into the software. Proposals and/or updates submitted to the Government by users must be accompanied by a license to such proposals and/or updates that is no more restrictive than this License/Disclaimer.</terms_of_use>
-            <sch:ns prefix="oval-def" uri="http://oval.mitre.org/XMLSchema/oval-definitions-5"/>
-            <sch:ns prefix="iosxe-def" uri="http://oval.mitre.org/XMLSchema/oval-definitions-5#iosxe"/>
+            <sch:ns prefix="oval-def" urn="urn:oval:v6:definitions"/>
+            <sch:ns prefix="iosxe-def" urn="urn:oval:v6:definitions:iosxe"/>
             <sch:ns prefix="xsi" uri="http://www.w3.org/2001/XMLSchema-instance"/>
         </xsd:appinfo>
     </xsd:annotation>
@@ -33,7 +33,7 @@
                     <oval:test>global_test</oval:test>
                     <oval:object>global_object</oval:object>
                     <oval:state>global_state</oval:state>
-                    <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#iosxe">global_item</oval:item>
+                    <oval:item target_namespace="urn:oval:v6:system-characteristics:iosxe">global_item</oval:item>
                 </oval:element_mapping>
             </xsd:appinfo>
             <xsd:appinfo>
@@ -70,7 +70,7 @@
                         <sch:let name="reffed_state" value="ancestor::oval-def:oval_definitions/oval-def:states/*[@id=$state_ref]"/>
                         <sch:let name="state_name" value="local-name($reffed_state)"/>
                         <sch:let name="state_namespace" value="namespace-uri($reffed_state)"/>
-                        <sch:assert test="(($state_namespace='http://oval.mitre.org/XMLSchema/oval-definitions-5#iosxe') and ($state_name='global_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
+                        <sch:assert test="(($state_namespace='urn:oval:v6:definitions:iosxe') and ($state_name='global_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
                     </sch:rule>
                 </sch:pattern>
             </xsd:appinfo>
@@ -124,7 +124,7 @@
                     <oval:test>line_test</oval:test>
                     <oval:object>line_object</oval:object>
                     <oval:state>line_state</oval:state>
-                    <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#iosxe">line_item</oval:item>
+                    <oval:item target_namespace="urn:oval:v6:system-characteristics:iosxe">line_item</oval:item>
                 </oval:element_mapping>
             </xsd:appinfo>
             <xsd:appinfo>
@@ -162,7 +162,7 @@
                         <sch:let name="reffed_state" value="ancestor::oval-def:oval_definitions/oval-def:states/*[@id=$state_ref]"/>
                         <sch:let name="state_name" value="local-name($reffed_state)"/>
                         <sch:let name="state_namespace" value="namespace-uri($reffed_state)"/>
-                        <sch:assert test="(($state_namespace='http://oval.mitre.org/XMLSchema/oval-definitions-5#iosxe') and ($state_name='line_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
+                        <sch:assert test="(($state_namespace='urn:oval:v6:definitions:iosxe') and ($state_name='line_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
                     </sch:rule>
                 </sch:pattern>
             </xsd:appinfo>
@@ -221,7 +221,7 @@
                     <oval:test>version_test</oval:test>
                     <oval:object>version_object</oval:object>
                     <oval:state>version_state</oval:state>
-                    <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#iosxe">version_item</oval:item>
+                    <oval:item target_namespace="urn:oval:v6:system-characteristics:iosxe">version_item</oval:item>
                 </oval:element_mapping>
             </xsd:appinfo>
             <xsd:appinfo>
@@ -385,7 +385,7 @@
                     <oval:test>interface_test</oval:test>
                     <oval:object>interface_object</oval:object>
                     <oval:state>interface_state</oval:state>
-                    <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#iosxe">interface_item</oval:item>
+                    <oval:item target_namespace="urn:oval:v6:system-characteristics:iosxe">interface_item</oval:item>
                 </oval:element_mapping>
             </xsd:appinfo>
             <xsd:appinfo>
@@ -598,7 +598,7 @@
                     <oval:test>section_test</oval:test>
                     <oval:object>section_object</oval:object>
                     <oval:state>section_state</oval:state>
-                    <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#iosxe">section_item</oval:item>
+                    <oval:item target_namespace="urn:oval:v6:system-characteristics:iosxe">section_item</oval:item>
                 </oval:element_mapping>
             </xsd:appinfo>
             <xsd:appinfo>
@@ -636,7 +636,7 @@
                         <sch:let name="reffed_state" value="ancestor::oval-def:oval_definitions/oval-def:states/*[@id=$state_ref]"/>
                         <sch:let name="state_name" value="local-name($reffed_state)"/>
                         <sch:let name="state_namespace" value="namespace-uri($reffed_state)"/>
-                        <sch:assert test="(($state_namespace='http://oval.mitre.org/XMLSchema/oval-definitions-5#iosxe') and ($state_name='section_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type.</sch:assert>
+                        <sch:assert test="(($state_namespace='urn:oval:v6:definitions:iosxe') and ($state_name='section_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type.</sch:assert>
                     </sch:rule>
                 </sch:pattern>
             </xsd:appinfo>
@@ -700,7 +700,7 @@
                     <oval:test>router_test</oval:test>
                     <oval:object>router_object</oval:object>
                     <oval:state>router_state</oval:state>
-                    <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#iosxe">router_item</oval:item>
+                    <oval:item target_namespace="urn:oval:v6:system-characteristics:iosxe">router_item</oval:item>
                 </oval:element_mapping>
             </xsd:appinfo>
 			<xsd:appinfo>
@@ -744,7 +744,7 @@
                         <sch:let name="reffed_state" value="ancestor::oval-def:oval_definitions/oval-def:states/*[@id=$state_ref]"/>
                         <sch:let name="state_name" value="local-name($reffed_state)"/>
                         <sch:let name="state_namespace" value="namespace-uri($reffed_state)"/>
-                        <sch:assert test="(($state_namespace='http://oval.mitre.org/XMLSchema/oval-definitions-5#iosxe') and ($state_name='router_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type.</sch:assert>
+                        <sch:assert test="(($state_namespace='urn:oval:v6:definitions:iosxe') and ($state_name='router_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type.</sch:assert>
                     </sch:rule>
                 </sch:pattern>
             </xsd:appinfo>
@@ -842,7 +842,7 @@
                     <oval:test>bgpneighbor_test</oval:test>
                     <oval:object>bgpneighbor_object</oval:object>
                     <oval:state>bgpneighbor_state</oval:state>
-                    <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#iosxe">bgpneighbor_item</oval:item>
+                    <oval:item target_namespace="urn:oval:v6:system-characteristics:iosxe">bgpneighbor_item</oval:item>
                 </oval:element_mapping>
             </xsd:appinfo>
             <xsd:appinfo>
@@ -880,7 +880,7 @@
                         <sch:let name="reffed_state" value="ancestor::oval-def:oval_definitions/oval-def:states/*[@id=$state_ref]"/>
                         <sch:let name="state_name" value="local-name($reffed_state)"/>
                         <sch:let name="state_namespace" value="namespace-uri($reffed_state)"/>
-                        <sch:assert test="(($state_namespace='http://oval.mitre.org/XMLSchema/oval-definitions-5#iosxe') and ($state_name='bgpneighbor_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type.</sch:assert>
+                        <sch:assert test="(($state_namespace='urn:oval:v6:definitions:iosxe') and ($state_name='bgpneighbor_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type.</sch:assert>
                     </sch:rule>
                 </sch:pattern>
             </xsd:appinfo>
@@ -939,7 +939,7 @@
                     <oval:test>routingprotocolauthintf_test</oval:test>
                     <oval:object>routingprotocolauthintf_object</oval:object>
                     <oval:state>routingprotocolauthintf_state</oval:state>
-                    <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#iosxe">routingprotocolauthintf_item</oval:item>
+                    <oval:item target_namespace="urn:oval:v6:system-characteristics:iosxe">routingprotocolauthintf_item</oval:item>
                 </oval:element_mapping>
             </xsd:appinfo>
             <xsd:appinfo>
@@ -977,7 +977,7 @@
                         <sch:let name="reffed_state" value="ancestor::oval-def:oval_definitions/oval-def:states/*[@id=$state_ref]"/>
                         <sch:let name="state_name" value="local-name($reffed_state)"/>
                         <sch:let name="state_namespace" value="namespace-uri($reffed_state)"/>
-                        <sch:assert test="(($state_namespace='http://oval.mitre.org/XMLSchema/oval-definitions-5#iosxe') and ($state_name='routingprotocolauthintf_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type.</sch:assert>
+                        <sch:assert test="(($state_namespace='urn:oval:v6:definitions:iosxe') and ($state_name='routingprotocolauthintf_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type.</sch:assert>
                     </sch:rule>
                 </sch:pattern>
             </xsd:appinfo>
@@ -1075,7 +1075,7 @@
                     <oval:test>acl_test</oval:test>
                     <oval:object>acl_object</oval:object>
                     <oval:state>acl_state</oval:state>
-                    <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#iosxe">acl_item</oval:item>
+                    <oval:item target_namespace="urn:oval:v6:system-characteristics:iosxe">acl_item</oval:item>
                 </oval:element_mapping>
             </xsd:appinfo>
 					<xsd:appinfo>
@@ -1119,7 +1119,7 @@
                         <sch:let name="reffed_state" value="ancestor::oval-def:oval_definitions/oval-def:states/*[@id=$state_ref]"/>
                         <sch:let name="state_name" value="local-name($reffed_state)"/>
                         <sch:let name="state_namespace" value="namespace-uri($reffed_state)"/>
-                        <sch:assert test="(($state_namespace='http://oval.mitre.org/XMLSchema/oval-definitions-5#iosxe') and ($state_name='acl_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type.</sch:assert>
+                        <sch:assert test="(($state_namespace='urn:oval:v6:definitions:iosxe') and ($state_name='acl_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type.</sch:assert>
                     </sch:rule>
                 </sch:pattern>
             </xsd:appinfo>
@@ -1208,7 +1208,7 @@
                     <oval:test>snmphost_test</oval:test>
                     <oval:object>snmphost_object</oval:object>
                     <oval:state>snmphost_state</oval:state>
-                    <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#iosxe">snmphost_item</oval:item>
+                    <oval:item target_namespace="urn:oval:v6:system-characteristics:iosxe">snmphost_item</oval:item>
                 </oval:element_mapping>
             </xsd:appinfo>
             <xsd:appinfo>
@@ -1246,7 +1246,7 @@
                         <sch:let name="reffed_state" value="ancestor::oval-def:oval_definitions/oval-def:states/*[@id=$state_ref]"/>
                         <sch:let name="state_name" value="local-name($reffed_state)"/>
                         <sch:let name="state_namespace" value="namespace-uri($reffed_state)"/>
-                        <sch:assert test="(($state_namespace='http://oval.mitre.org/XMLSchema/oval-definitions-5#iosxe') and ($state_name='snmphost_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type.</sch:assert>
+                        <sch:assert test="(($state_namespace='urn:oval:v6:definitions:iosxe') and ($state_name='snmphost_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type.</sch:assert>
                     </sch:rule>
                 </sch:pattern>
             </xsd:appinfo>
@@ -1320,7 +1320,7 @@
                     <oval:test>snmpcommunity_test</oval:test>
                     <oval:object>snmpcommunity_object</oval:object>
                     <oval:state>snmpcommunity_state</oval:state>
-                    <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#iosxe">snmpcommunity_item</oval:item>
+                    <oval:item target_namespace="urn:oval:v6:system-characteristics:iosxe">snmpcommunity_item</oval:item>
                 </oval:element_mapping>
             </xsd:appinfo>
             <xsd:appinfo>
@@ -1358,7 +1358,7 @@
                         <sch:let name="reffed_state" value="ancestor::oval-def:oval_definitions/oval-def:states/*[@id=$state_ref]"/>
                         <sch:let name="state_name" value="local-name($reffed_state)"/>
                         <sch:let name="state_namespace" value="namespace-uri($reffed_state)"/>
-                        <sch:assert test="(($state_namespace='http://oval.mitre.org/XMLSchema/oval-definitions-5#iosxe') and ($state_name='snmpcommunity_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type.</sch:assert>
+                        <sch:assert test="(($state_namespace='urn:oval:v6:definitions:iosxe') and ($state_name='snmpcommunity_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type.</sch:assert>
                     </sch:rule>
                 </sch:pattern>
             </xsd:appinfo>
@@ -1432,7 +1432,7 @@
                     <oval:test>snmpuser_test</oval:test>
                     <oval:object>snmpuser_object</oval:object>
                     <oval:state>snmpuser_state</oval:state>
-                    <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#iosxe">snmpuser_item</oval:item>
+                    <oval:item target_namespace="urn:oval:v6:system-characteristics:iosxe">snmpuser_item</oval:item>
                 </oval:element_mapping>
             </xsd:appinfo>
             <xsd:appinfo>
@@ -1470,7 +1470,7 @@
                         <sch:let name="reffed_state" value="ancestor::oval-def:oval_definitions/oval-def:states/*[@id=$state_ref]"/>
                         <sch:let name="state_name" value="local-name($reffed_state)"/>
                         <sch:let name="state_namespace" value="namespace-uri($reffed_state)"/>
-                        <sch:assert test="(($state_namespace='http://oval.mitre.org/XMLSchema/oval-definitions-5#iosxe') and ($state_name='snmpuser_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type.</sch:assert>
+                        <sch:assert test="(($state_namespace='urn:oval:v6:definitions:iosxe') and ($state_name='snmpuser_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type.</sch:assert>
                     </sch:rule>
                 </sch:pattern>
             </xsd:appinfo>
@@ -1554,7 +1554,7 @@
                     <oval:test>snmpgroup_test</oval:test>
                     <oval:object>snmpgroup_object</oval:object>
                     <oval:state>snmpgroup_state</oval:state>
-                    <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#iosxe">snmpgroup_item</oval:item>
+                    <oval:item target_namespace="urn:oval:v6:system-characteristics:iosxe">snmpgroup_item</oval:item>
                 </oval:element_mapping>
             </xsd:appinfo>
             <xsd:appinfo>
@@ -1592,7 +1592,7 @@
                         <sch:let name="reffed_state" value="ancestor::oval-def:oval_definitions/oval-def:states/*[@id=$state_ref]"/>
                         <sch:let name="state_name" value="local-name($reffed_state)"/>
                         <sch:let name="state_namespace" value="namespace-uri($reffed_state)"/>
-                        <sch:assert test="(($state_namespace='http://oval.mitre.org/XMLSchema/oval-definitions-5#iosxe') and ($state_name='snmpgroup_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type.</sch:assert>
+                        <sch:assert test="(($state_namespace='urn:oval:v6:definitions:iosxe') and ($state_name='snmpgroup_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type.</sch:assert>
                     </sch:rule>
                 </sch:pattern>
             </xsd:appinfo>
@@ -1681,7 +1681,7 @@
                     <oval:test>snmpview_test</oval:test>
                     <oval:object>snmpview_object</oval:object>
                     <oval:state>snmpview_state</oval:state>
-                    <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#iosxe">snmpview_item</oval:item>
+                    <oval:item target_namespace="urn:oval:v6:system-characteristics:iosxe">snmpview_item</oval:item>
                 </oval:element_mapping>
             </xsd:appinfo>
 			<xsd:appinfo>
@@ -1725,7 +1725,7 @@
                         <sch:let name="reffed_state" value="ancestor::oval-def:oval_definitions/oval-def:states/*[@id=$state_ref]"/>
                         <sch:let name="state_name" value="local-name($reffed_state)"/>
                         <sch:let name="state_namespace" value="namespace-uri($reffed_state)"/>
-                        <sch:assert test="(($state_namespace='http://oval.mitre.org/XMLSchema/oval-definitions-5#iosxe') and ($state_name='snmpview_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type.</sch:assert>
+                        <sch:assert test="(($state_namespace='urn:oval:v6:definitions:iosxe') and ($state_name='snmpview_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type.</sch:assert>
                     </sch:rule>
                 </sch:pattern>
             </xsd:appinfo>

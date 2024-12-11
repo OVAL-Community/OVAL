@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-            xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5"
-            xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5"
-            xmlns:ind-def="http://oval.mitre.org/XMLSchema/oval-definitions-5#independent"
+            xmlns:oval="urn:oval:v6:common"
+            xmlns:oval-def="urn:oval:v6:definitions"
+            xmlns:ind-def="urn:oval:v6:definitions:independent"
             xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-            targetNamespace="http://oval.mitre.org/XMLSchema/oval-definitions-5#independent"
-            elementFormDefault="qualified" version="5.12">
-      <xsd:import namespace="http://oval.mitre.org/XMLSchema/oval-common-5" schemaLocation="oval-common-schema.xsd"/>
-      <xsd:import namespace="http://oval.mitre.org/XMLSchema/oval-definitions-5" schemaLocation="oval-definitions-schema.xsd"/>
+            targetNamespace="urn:oval:v6:definitions:independent"
+            elementFormDefault="qualified" version="6.0">
+      <xsd:import namespace="urn:oval:v6:common" schemaLocation="oval-common-schema.xsd"/>
+      <xsd:import namespace="urn:oval:v6:definitions" schemaLocation="oval-definitions-schema.xsd"/>
       <xsd:annotation>
             <xsd:documentation>The following is a description of the elements, types, and attributes that compose the tests found in Open Vulnerability and Assessment Language (OVAL) that are independent of a specific piece of software. Each test is described in detail and should provide the information necessary to understand what each element and attribute represents. This document is intended for developers and assumes some familiarity with XML. A high level description of the interaction between the different tests and their relationship to the Core Definition Schema is not outlined here.</xsd:documentation>
             <xsd:documentation>The OVAL Schema is maintained by the OVAL Community. For more information, including how to get involved in the project and how to submit change requests, please visit the OVAL website at https://github.com/OVAL-Community/.</xsd:documentation>
             <xsd:appinfo>
                   <schema>Independent Definition</schema>
-                  <version>5.12</version>
-                  <date>11/29/2024 09:00:00 AM</date>
+                  <version>6.0</version>
+                  <date>1/1/2025 09:00:00 AM</date>
                   <terms_of_use>This software is an open standard developed by multiple parties, including the United States Government (Government). The Government hereby grants you a non-exclusive, royalty-free, worldwide license to use, modify, and/or reproduce the software for any lawful purpose provided that you reproduce this License/Disclaimer language with any use/modification/copy of the software. The Government assumes no responsibility whatsoever for this software's use by other parties, and the software is provided "AS IS" without warranty or guarantee of any kind, express or implied, including, but not limited to, the warranties of merchantability, fitness for a particular purpose, and noninfringement. In no event shall the Government be liable for any claim, damages or other liability, whether in an action of contract, tort or other dealings in the software. The Government has no obligation hereunder to provide maintenance, support, updates, enhancements, or modifications to the software. Users may submit proposals and/or updates regarding the software, which proposals and/or updates the Government, at its sole discretion, can choose to incorporate into the software. Proposals and/or updates submitted to the Government by users must be accompanied by a license to such proposals and/or updates that is no more restrictive than this License/Disclaimer.</terms_of_use>
-                  <sch:ns prefix="oval-def" uri="http://oval.mitre.org/XMLSchema/oval-definitions-5"/>
-                  <sch:ns prefix="ind-def" uri="http://oval.mitre.org/XMLSchema/oval-definitions-5#independent"/>
+                  <sch:ns prefix="oval-def" urn="urn:oval:v6:definitions"/>
+                  <sch:ns prefix="ind-def" urn="urn:oval:v6:definitions:independent"/>
                   <sch:ns prefix="xsi" uri="http://www.w3.org/2001/XMLSchema-instance"/>
             </xsd:appinfo>
       </xsd:annotation>
@@ -33,7 +33,7 @@
                               <oval:test>family_test</oval:test>
                               <oval:object>family_object</oval:object>
                               <oval:state>family_state</oval:state>
-                              <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#independent">family_item</oval:item>
+                              <oval:item target_namespace="urn:oval:v6:system-characteristics:independent">family_item</oval:item>
                         </oval:element_mapping>
                   </xsd:appinfo>
                   <xsd:appinfo>
@@ -97,7 +97,7 @@
                               <oval:test>filehash_test</oval:test>
                               <oval:object>filehash_object</oval:object>
                               <oval:state>filehash_state</oval:state>
-                              <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#independent">filehash_item</oval:item>
+                              <oval:item target_namespace="urn:oval:v6:system-characteristics:independent">filehash_item</oval:item>
                         </oval:element_mapping>
                   </xsd:appinfo>
                   <xsd:appinfo>
@@ -282,7 +282,7 @@
                               <oval:test>filehash58_test</oval:test>
                               <oval:object>filehash58_object</oval:object>
                               <oval:state>filehash58_state</oval:state>
-                              <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#independent">filehash58_item</oval:item>
+                              <oval:item target_namespace="urn:oval:v6:system-characteristics:independent">filehash58_item</oval:item>
                         </oval:element_mapping>
                   </xsd:appinfo>
                   <xsd:appinfo>
@@ -322,7 +322,7 @@
                                     <sch:let name="reffed_state" value="ancestor::oval-def:oval_definitions/oval-def:states/*[@id=$state_ref]"/>
                                     <sch:let name="state_name" value="local-name($reffed_state)"/>
                                     <sch:let name="state_namespace" value="namespace-uri($reffed_state)"/>
-                                    <sch:assert test="(($state_namespace='http://oval.mitre.org/XMLSchema/oval-definitions-5#independent') and ($state_name='filehash58_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
+                                    <sch:assert test="(($state_namespace='urn:oval:v6:definitions:independent') and ($state_name='filehash58_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
                               </sch:rule>
                         </sch:pattern>
                   </xsd:appinfo>
@@ -450,7 +450,7 @@
                               <oval:test>environmentvariable_test</oval:test>
                               <oval:object>environmentvariable_object</oval:object>
                               <oval:state>environmentvariable_state</oval:state>
-                              <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#independent">environmentvariable_item</oval:item>
+                              <oval:item target_namespace="urn:oval:v6:system-characteristics:independent">environmentvariable_item</oval:item>
                         </oval:element_mapping>
                   </xsd:appinfo>
                   <xsd:appinfo>
@@ -566,7 +566,7 @@
                               <oval:test>environmentvariable58_test</oval:test>
                               <oval:object>environmentvariable58_object</oval:object>
                               <oval:state>environmentvariable58_state</oval:state>
-                              <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#independent">environmentvariable58_item</oval:item>
+                              <oval:item target_namespace="urn:oval:v6:system-characteristics:independent">environmentvariable58_item</oval:item>
                         </oval:element_mapping>
                   </xsd:appinfo>
                   <xsd:appinfo>
@@ -603,7 +603,7 @@
                                     <sch:let name="reffed_state" value="ancestor::oval-def:oval_definitions/oval-def:states/*[@id=$state_ref]"/>
                                     <sch:let name="state_name" value="local-name($reffed_state)"/>
                                     <sch:let name="state_namespace" value="namespace-uri($reffed_state)"/>
-                                    <sch:assert test="(($state_namespace='http://oval.mitre.org/XMLSchema/oval-definitions-5#independent') and ($state_name='environmentvariable58_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
+                                    <sch:assert test="(($state_namespace='urn:oval:v6:definitions:independent') and ($state_name='environmentvariable58_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
                               </sch:rule>
                         </sch:pattern>
                   </xsd:appinfo>
@@ -672,7 +672,7 @@
                               <oval:test>ldap_test</oval:test>
                               <oval:object>ldap_object</oval:object>
                               <oval:state>ldap_state</oval:state>
-                              <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#independent">ldap_item</oval:item>
+                              <oval:item target_namespace="urn:oval:v6:system-characteristics:independent">ldap_item</oval:item>
                         </oval:element_mapping>
                   </xsd:appinfo>
 					<xsd:appinfo>
@@ -809,7 +809,7 @@
                               <oval:test>ldap57_test</oval:test>
                               <oval:object>ldap57_object</oval:object>
                               <oval:state>ldap57_state</oval:state>
-                              <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#independent">ldap57_item</oval:item>
+                              <oval:item target_namespace="urn:oval:v6:system-characteristics:independent">ldap57_item</oval:item>
                         </oval:element_mapping>
                   </xsd:appinfo>
                   <xsd:appinfo>
@@ -871,7 +871,7 @@
                                     <sch:let name="reffed_state" value="ancestor::oval-def:oval_definitions/oval-def:states/*[@id=$state_ref]"/>
                                     <sch:let name="state_name" value="local-name($reffed_state)"/>
                                     <sch:let name="state_namespace" value="namespace-uri($reffed_state)"/>
-                                    <sch:assert test="(($state_namespace='http://oval.mitre.org/XMLSchema/oval-definitions-5#independent') and ($state_name='ldap57_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
+                                    <sch:assert test="(($state_namespace='urn:oval:v6:definitions:independent') and ($state_name='ldap57_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
                               </sch:rule>
                         </sch:pattern>
                   </xsd:appinfo>
@@ -992,7 +992,7 @@ IMPORTANT! - Since this test requires the running of code supplied by content an
                               <oval:test>shellcommand_test</oval:test>
                               <oval:object>shellcommand_object</oval:object>
                               <oval:state>shellcommand_state</oval:state>
-                              <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#independent">shellcommand_item</oval:item>
+                              <oval:item target_namespace="urn:oval:v6:system-characteristics:independent">shellcommand_item</oval:item>
                         </oval:element_mapping>
                   </xsd:appinfo>
                   <xsd:appinfo>
@@ -1033,7 +1033,7 @@ The evaluation of the object should always produce one item. If the command exec
                                     <sch:let name="reffed_state" value="ancestor::oval-def:oval_definitions/oval-def:states/*[@id=$state_ref]"/>
                                     <sch:let name="state_name" value="local-name($reffed_state)"/>
                                     <sch:let name="state_namespace" value="namespace-uri($reffed_state)"/>
-                                    <sch:assert test="(($state_namespace='http://oval.mitre.org/XMLSchema/oval-definitions-5#independent') and ($state_name='shellcommand_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
+                                    <sch:assert test="(($state_namespace='urn:oval:v6:definitions:independent') and ($state_name='shellcommand_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
                               </sch:rule>
                         </sch:pattern>
                   </xsd:appinfo>
@@ -1150,7 +1150,7 @@ A subexpression (using parentheses) can call out a piece of the matched stdout_l
                               <oval:test>sql_test</oval:test>
                               <oval:object>sql_object</oval:object>
                               <oval:state>sql_state</oval:state>
-                              <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#independent">sql_item</oval:item>
+                              <oval:item target_namespace="urn:oval:v6:system-characteristics:independent">sql_item</oval:item>
                         </oval:element_mapping>
                   </xsd:appinfo>
                   <xsd:appinfo>
@@ -1326,7 +1326,7 @@ A subexpression (using parentheses) can call out a piece of the matched stdout_l
                               <oval:test>sql57_test</oval:test>
                               <oval:object>sql57_object</oval:object>
                               <oval:state>sql57_state</oval:state>
-                              <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#independent">sql57_item</oval:item>
+                              <oval:item target_namespace="urn:oval:v6:system-characteristics:independent">sql57_item</oval:item>
                         </oval:element_mapping>
                   </xsd:appinfo>
                   <xsd:appinfo>
@@ -1375,7 +1375,7 @@ A subexpression (using parentheses) can call out a piece of the matched stdout_l
                                     <sch:let name="reffed_state" value="ancestor::oval-def:oval_definitions/oval-def:states/*[@id=$state_ref]"/>
                                     <sch:let name="state_name" value="local-name($reffed_state)"/>
                                     <sch:let name="state_namespace" value="namespace-uri($reffed_state)"/>
-                                    <sch:assert test="(($state_namespace='http://oval.mitre.org/XMLSchema/oval-definitions-5#independent') and ($state_name='sql57_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
+                                    <sch:assert test="(($state_namespace='urn:oval:v6:definitions:independent') and ($state_name='sql57_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
                               </sch:rule>
                         </sch:pattern>
                   </xsd:appinfo>
@@ -1528,7 +1528,7 @@ A subexpression (using parentheses) can call out a piece of the matched stdout_l
                               <oval:test>sql512_test</oval:test>
                               <oval:object>sql512_object</oval:object>
                               <oval:state>sql512_state</oval:state>
-                              <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#independent">sql512_item</oval:item>
+                              <oval:item target_namespace="urn:oval:v6:system-characteristics:independent">sql512_item</oval:item>
                         </oval:element_mapping>
                   </xsd:appinfo>
                   <xsd:appinfo>
@@ -1565,7 +1565,7 @@ A subexpression (using parentheses) can call out a piece of the matched stdout_l
                                     <sch:let name="reffed_state" value="ancestor::oval-def:oval_definitions/oval-def:states/*[@id=$state_ref]"/>
                                     <sch:let name="state_name" value="local-name($reffed_state)"/>
                                     <sch:let name="state_namespace" value="namespace-uri($reffed_state)"/>
-                                    <sch:assert test="(($state_namespace='http://oval.mitre.org/XMLSchema/oval-definitions-5#independent') and ($state_name='sql512_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
+                                    <sch:assert test="(($state_namespace='urn:oval:v6:definitions:independent') and ($state_name='sql512_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
                               </sch:rule>
                         </sch:pattern>
                   </xsd:appinfo>
@@ -1705,7 +1705,7 @@ SERVERPROPERTY('IsClustered') AS [is_clustered]
                               <oval:test>textfilecontent54_test</oval:test>
                               <oval:object>textfilecontent54_object</oval:object>
                               <oval:state>textfilecontent54_state</oval:state>
-                              <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#independent">textfilecontent_item</oval:item>
+                              <oval:item target_namespace="urn:oval:v6:system-characteristics:independent">textfilecontent_item</oval:item>
                         </oval:element_mapping>
                   </xsd:appinfo>
                   <xsd:appinfo>
@@ -1744,7 +1744,7 @@ SERVERPROPERTY('IsClustered') AS [is_clustered]
                                     <sch:let name="reffed_state" value="ancestor::oval-def:oval_definitions/oval-def:states/*[@id=$state_ref]"/>
                                     <sch:let name="state_name" value="local-name($reffed_state)"/>
                                     <sch:let name="state_namespace" value="namespace-uri($reffed_state)"/>
-                                    <sch:assert test="(($state_namespace='http://oval.mitre.org/XMLSchema/oval-definitions-5#independent') and ($state_name='textfilecontent54_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
+                                    <sch:assert test="(($state_namespace='urn:oval:v6:definitions:independent') and ($state_name='textfilecontent54_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
                               </sch:rule>
                         </sch:pattern>
                   </xsd:appinfo>
@@ -1930,7 +1930,7 @@ SERVERPROPERTY('IsClustered') AS [is_clustered]
                               <oval:test>textfilecontent_test</oval:test>
                               <oval:object>textfilecontent_object</oval:object>
                               <oval:state>textfilecontent_state</oval:state>
-                              <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#independent">textfilecontent_item</oval:item>
+                              <oval:item target_namespace="urn:oval:v6:system-characteristics:independent">textfilecontent_item</oval:item>
                         </oval:element_mapping>
                   </xsd:appinfo>
                   <xsd:appinfo>
@@ -2102,7 +2102,7 @@ SERVERPROPERTY('IsClustered') AS [is_clustered]
                               <oval:test>variable_test</oval:test>
                               <oval:object>variable_object</oval:object>
                               <oval:state>variable_state</oval:state>
-                              <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#independent">variable_item</oval:item>
+                              <oval:item target_namespace="urn:oval:v6:system-characteristics:independent">variable_item</oval:item>
                         </oval:element_mapping>
                   </xsd:appinfo>
                   <xsd:appinfo>
@@ -2139,7 +2139,7 @@ SERVERPROPERTY('IsClustered') AS [is_clustered]
                                     <sch:let name="reffed_state" value="ancestor::oval-def:oval_definitions/oval-def:states/*[@id=$state_ref]"/>
                                     <sch:let name="state_name" value="local-name($reffed_state)"/>
                                     <sch:let name="state_namespace" value="namespace-uri($reffed_state)"/>
-                                    <sch:assert test="(($state_namespace='http://oval.mitre.org/XMLSchema/oval-definitions-5#independent') and ($state_name='variable_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
+                                    <sch:assert test="(($state_namespace='urn:oval:v6:definitions:independent') and ($state_name='variable_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
                               </sch:rule>
                         </sch:pattern>
                   </xsd:appinfo>
@@ -2224,7 +2224,7 @@ SERVERPROPERTY('IsClustered') AS [is_clustered]
                               <oval:test>xmlfilecontent_test</oval:test>
                               <oval:object>xmlfilecontent_object</oval:object>
                               <oval:state>xmlfilecontent_state</oval:state>
-                              <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#independent">xmlfilecontent_item</oval:item>
+                              <oval:item target_namespace="urn:oval:v6:system-characteristics:independent">xmlfilecontent_item</oval:item>
                         </oval:element_mapping>
                   </xsd:appinfo>
                   <xsd:appinfo>
@@ -2263,7 +2263,7 @@ SERVERPROPERTY('IsClustered') AS [is_clustered]
                                     <sch:let name="reffed_state" value="ancestor::oval-def:oval_definitions/oval-def:states/*[@id=$state_ref]"/>
                                     <sch:let name="state_name" value="local-name($reffed_state)"/>
                                     <sch:let name="state_namespace" value="namespace-uri($reffed_state)"/>
-                                    <sch:assert test="(($state_namespace='http://oval.mitre.org/XMLSchema/oval-definitions-5#independent') and ($state_name='xmlfilecontent_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
+                                    <sch:assert test="(($state_namespace='urn:oval:v6:definitions:independent') and ($state_name='xmlfilecontent_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
                               </sch:rule>
                         </sch:pattern>
                   </xsd:appinfo>
@@ -2398,7 +2398,7 @@ SERVERPROPERTY('IsClustered') AS [is_clustered]
                               <oval:test>yamlfilecontent_test</oval:test>
                               <oval:object>yamlfilecontent_object</oval:object>
                               <oval:state>yamlfilecontent_state</oval:state>
-                              <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#independent">yamlfilecontent_item</oval:item>
+                              <oval:item target_namespace="urn:oval:v6:system-characteristics:independent">yamlfilecontent_item</oval:item>
                         </oval:element_mapping>
                   </xsd:appinfo>
                   <xsd:appinfo>
@@ -2437,7 +2437,7 @@ SERVERPROPERTY('IsClustered') AS [is_clustered]
                                     <sch:let name="reffed_state" value="ancestor::oval-def:oval_definitions/oval-def:states/*[@id=$state_ref]"/>
                                     <sch:let name="state_name" value="local-name($reffed_state)"/>
                                     <sch:let name="state_namespace" value="namespace-uri($reffed_state)"/>
-                                    <sch:assert test="(($state_namespace='http://oval.mitre.org/XMLSchema/oval-definitions-5#independent') and ($state_name='yamlfilecontent_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
+                                    <sch:assert test="(($state_namespace='urn:oval:v6:definitions:independent') and ($state_name='yamlfilecontent_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
                               </sch:rule>
                         </sch:pattern>
                   </xsd:appinfo>
