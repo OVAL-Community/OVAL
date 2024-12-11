@@ -635,16 +635,6 @@ The evaluation of the object should always produce one item.  If the object eval
           </xsd:annotation>
           <xsd:simpleContent>
                <xsd:restriction base="oval-sc:EntityItemStringType">
-                    <xsd:enumeration value="android">
-                         <xsd:annotation>
-                               <xsd:documentation>The android value describes the Android mobile operating system.</xsd:documentation>
-                         </xsd:annotation>
-                    </xsd:enumeration>
-                    <xsd:enumeration value="apple_ios">
-                         <xsd:annotation>
-                               <xsd:documentation>The apple_ios value describes the iOS mobile operating system.</xsd:documentation>
-                         </xsd:annotation>
-                    </xsd:enumeration>
                     <xsd:enumeration value="asa">
                         <xsd:annotation>
                              <xsd:documentation>The asa value describes the Cisco ASA security devices.</xsd:documentation>
@@ -655,11 +645,6 @@ The evaluation of the object should always produce one item.  If the object eval
                            <xsd:documentation>The aws value describes the Amazon Web Services platform.</xsd:documentation>
                        </xsd:annotation>
                    </xsd:enumeration>
-                    <xsd:enumeration value="catos">
-                         <xsd:annotation>
-                              <xsd:documentation>The catos value describes the Cisco CatOS operating system.</xsd:documentation>
-                         </xsd:annotation>
-                    </xsd:enumeration>
                     <xsd:enumeration value="ios">
                          <xsd:annotation>
                               <xsd:documentation>The ios value describes the Cisco IOS operating system.</xsd:documentation>
@@ -685,11 +670,6 @@ The evaluation of the object should always produce one item.  If the object eval
                            <xsd:documentation>The panos value describes the Palo Alto Networks operating system.</xsd:documentation>
                        </xsd:annotation>
                    </xsd:enumeration>
-                    <xsd:enumeration value="pixos">
-                         <xsd:annotation>
-                              <xsd:documentation>The pixos value describes the Cisco PIX operating system.</xsd:documentation>
-                         </xsd:annotation>
-                    </xsd:enumeration>
                     <xsd:enumeration value="undefined">
                          <xsd:annotation>
                               <xsd:documentation>The undefined value is to be used when the desired family is not available.</xsd:documentation>

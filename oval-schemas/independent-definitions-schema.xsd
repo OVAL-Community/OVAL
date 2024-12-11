@@ -1909,16 +1909,6 @@ SERVERPROPERTY('IsClustered') AS [is_clustered]
             </xsd:annotation>
             <xsd:simpleContent>
                   <xsd:restriction base="oval-def:EntityStateStringType">
-                        <xsd:enumeration value="android">
-                              <xsd:annotation>
-                                    <xsd:documentation>The android value describes the Android mobile operating system.</xsd:documentation>
-                              </xsd:annotation>
-                        </xsd:enumeration>
-                        <xsd:enumeration value="apple_ios">
-                              <xsd:annotation>
-                                    <xsd:documentation>The apple_ios value describes the iOS mobile operating system.</xsd:documentation>
-                              </xsd:annotation>
-                        </xsd:enumeration>
                         <xsd:enumeration value="asa">
                               <xsd:annotation>
                                     <xsd:documentation>The asa value describes the Cisco ASA security devices.</xsd:documentation>
@@ -1927,11 +1917,6 @@ SERVERPROPERTY('IsClustered') AS [is_clustered]
                         <xsd:enumeration value="aws">
                               <xsd:annotation>
                                     <xsd:documentation>The aws value describes the Amazon Web Services platform.</xsd:documentation>
-                              </xsd:annotation>
-                        </xsd:enumeration>
-                        <xsd:enumeration value="catos">
-                              <xsd:annotation>
-                                    <xsd:documentation>The catos value describes the Cisco CatOS operating system.</xsd:documentation>
                               </xsd:annotation>
                         </xsd:enumeration>
                         <xsd:enumeration value="ios">
@@ -1957,11 +1942,6 @@ SERVERPROPERTY('IsClustered') AS [is_clustered]
                         <xsd:enumeration value="panos">
                               <xsd:annotation>
                                     <xsd:documentation>The panos value describes the Palo Alto Networks operating system.</xsd:documentation>
-                              </xsd:annotation>
-                        </xsd:enumeration>
-                        <xsd:enumeration value="pixos">
-                              <xsd:annotation>
-                                    <xsd:documentation>The pixos value describes the Cisco PIX operating system.</xsd:documentation>
                               </xsd:annotation>
                         </xsd:enumeration>
                         <xsd:enumeration value="undefined">
