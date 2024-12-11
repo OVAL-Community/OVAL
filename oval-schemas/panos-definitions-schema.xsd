@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-            xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5"
-            xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5"
-            xmlns:panos-def="http://oval.mitre.org/XMLSchema/oval-definitions-5#panos"
+            xmlns:oval="urn:oval:v6:common"
+            xmlns:oval-def="urn:oval:v6:definitions"
+            xmlns:panos-def="urn:oval:v6:definitions:panos"
             xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-            targetNamespace="http://oval.mitre.org/XMLSchema/oval-definitions-5#panos"
-            elementFormDefault="qualified" version="5.12">
-    <xsd:import namespace="http://oval.mitre.org/XMLSchema/oval-definitions-5" schemaLocation="oval-definitions-schema.xsd"/>
+            targetNamespace="urn:oval:v6:definitions:panos"
+            elementFormDefault="qualified" version="6.0">
+    <xsd:import namespace="urn:oval:v6:definitions" schemaLocation="oval-definitions-schema.xsd"/>
     <xsd:annotation>
         <xsd:documentation>
             The following is a description of the elements, types, and attributes that compose the Palo Alto (PAN-OS)-specific 
@@ -24,8 +24,8 @@
         </xsd:documentation>
         <xsd:appinfo>
             <schema>Palo Alto (PAN-OS) Definitions</schema>
-            <version>5.12</version>
-            <date>11/29/2024 09:00:00 AM</date>
+            <version>6.0</version>
+            <date>1/1/2025 09:00:00 AM</date>
             <terms_of_use>
                 For the portion subject to the copyright in the United States: Copyright (c) 2016 United States Government. 
                 All rights reserved. Copyright (c) 2016, Center for Internet Security. All rights reserved. The contents of 
@@ -33,8 +33,8 @@
                 OVAL License for the specific language governing permissions and limitations for use of this schema. When 
                 distributing copies of the OVAL Schema, this license header must be included.
             </terms_of_use>
-            <sch:ns prefix="oval-def" uri="http://oval.mitre.org/XMLSchema/oval-definitions-5"/>
-            <sch:ns prefix="panos-def" uri="http://oval.mitre.org/XMLSchema/oval-definitions-5#panos"/>
+            <sch:ns prefix="oval-def" urn="urn:oval:v6:definitions"/>
+            <sch:ns prefix="panos-def" urn="urn:oval:v6:definitions:panos"/>
             <sch:ns prefix="xsi" uri="http://www.w3.org/2001/XMLSchema-instance"/>
         </xsd:appinfo>
     </xsd:annotation>
@@ -57,7 +57,7 @@
                     <oval:test>config_test</oval:test>
                     <oval:object>config_object</oval:object>
                     <oval:state>config_state</oval:state>
-                    <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#panos">config_item</oval:item>
+                    <oval:item target_namespace="urn:oval:v6:system-characteristics:panos">config_item</oval:item>
                 </oval:element_mapping>
             </xsd:appinfo>
             <xsd:appinfo>
@@ -104,7 +104,7 @@
                         <sch:let name="reffed_state" value="ancestor::oval-def:oval_definitions/oval-def:states/*[@id=$state_ref]"/>
                         <sch:let name="state_name" value="local-name($reffed_state)"/>
                         <sch:let name="state_namespace" value="namespace-uri($reffed_state)"/>
-                        <sch:assert test="(($state_namespace='http://oval.mitre.org/XMLSchema/oval-definitions-5#panos') and ($state_name='config_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
+                        <sch:assert test="(($state_namespace='urn:oval:v6:definitions:panos') and ($state_name='config_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
                     </sch:rule>
                 </sch:pattern>
             </xsd:appinfo>

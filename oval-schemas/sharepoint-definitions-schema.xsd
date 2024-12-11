@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-            xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5"
-            xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5"
-            xmlns:sp-def="http://oval.mitre.org/XMLSchema/oval-definitions-5#sharepoint"
+            xmlns:oval="urn:oval:v6:common"
+            xmlns:oval-def="urn:oval:v6:definitions"
+            xmlns:sp-def="urn:oval:v6:definitions:sharepoint"
             xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-            targetNamespace="http://oval.mitre.org/XMLSchema/oval-definitions-5#sharepoint"
-            elementFormDefault="qualified" version="5.12">
-      <xsd:import namespace="http://oval.mitre.org/XMLSchema/oval-definitions-5" schemaLocation="oval-definitions-schema.xsd"/>
+            targetNamespace="urn:oval:v6:definitions:sharepoint"
+            elementFormDefault="qualified" version="6.0">
+      <xsd:import namespace="urn:oval:v6:definitions" schemaLocation="oval-definitions-schema.xsd"/>
       <xsd:annotation>
             <xsd:documentation>The following is a description of the elements, types, and attributes that compose the SharePoint specific tests found in Open Vulnerability and Assessment Language (OVAL). Each test is an extension of the standard test element defined in the Core Definition Schema. Through extension, each test inherits a set of elements and attributes that are shared amongst all
                   OVAL tests. Each test is described in detail and should provide the information necessary to understand what each element and attribute represents. This document is intended for developers and assumes some familiarity with XML. A high level description of the interaction between the different tests and their relationship to the Core Definition Schema is not outlined
@@ -15,11 +15,11 @@
             <xsd:documentation>The OVAL Schema is maintained by the OVAL Community. For more information, including how to get involved in the project and how to submit change requests, please visit the OVAL website at https://github.com/OVAL-Community/.</xsd:documentation>
             <xsd:appinfo>
                   <schema>SharePoint Definition</schema>
-                  <version>5.12</version>
-                  <date>11/29/2024 09:00:00 AM</date>
+                  <version>6.0</version>
+                  <date>1/1/2025 09:00:00 AM</date>
                   <terms_of_use>This software is an open standard developed by multiple parties, including the United States Government (Government). The Government hereby grants you a non-exclusive, royalty-free, worldwide license to use, modify, and/or reproduce the software for any lawful purpose provided that you reproduce this License/Disclaimer language with any use/modification/copy of the software. The Government assumes no responsibility whatsoever for this software's use by other parties, and the software is provided "AS IS" without warranty or guarantee of any kind, express or implied, including, but not limited to, the warranties of merchantability, fitness for a particular purpose, and noninfringement. In no event shall the Government be liable for any claim, damages or other liability, whether in an action of contract, tort or other dealings in the software. The Government has no obligation hereunder to provide maintenance, support, updates, enhancements, or modifications to the software. Users may submit proposals and/or updates regarding the software, which proposals and/or updates the Government, at its sole discretion, can choose to incorporate into the software. Proposals and/or updates submitted to the Government by users must be accompanied by a license to such proposals and/or updates that is no more restrictive than this License/Disclaimer.</terms_of_use>
-                  <sch:ns prefix="oval-def" uri="http://oval.mitre.org/XMLSchema/oval-definitions-5"/>
-                  <sch:ns prefix="sp-def" uri="http://oval.mitre.org/XMLSchema/oval-definitions-5#sharepoint"/>
+                  <sch:ns prefix="oval-def" urn="urn:oval:v6:definitions"/>
+                  <sch:ns prefix="sp-def" urn="urn:oval:v6:definitions:sharepoint"/>
                   <sch:ns prefix="xsi" uri="http://www.w3.org/2001/XMLSchema-instance"/>
             </xsd:appinfo>
       </xsd:annotation>
@@ -35,7 +35,7 @@
                               <oval:test>spwebapplication_test</oval:test>
                               <oval:object>spwebapplication_object</oval:object>
                               <oval:state>spwebapplication_state</oval:state>
-                              <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#sharepoint">spwebapplication_item</oval:item>
+                              <oval:item target_namespace="urn:oval:v6:system-characteristics:sharepoint">spwebapplication_item</oval:item>
                         </oval:element_mapping>
                   </xsd:appinfo>
 					<xsd:appinfo>
@@ -80,7 +80,7 @@
                                     <sch:let name="reffed_state" value="ancestor::oval-def:oval_definitions/oval-def:states/*[@id=$state_ref]"/>
                                     <sch:let name="state_name" value="local-name($reffed_state)"/>
                                     <sch:let name="state_namespace" value="namespace-uri($reffed_state)"/>
-                                    <sch:assert test="(($state_namespace='http://oval.mitre.org/XMLSchema/oval-definitions-5#sharepoint') and ($state_name='spwebapplication_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
+                                    <sch:assert test="(($state_namespace='urn:oval:v6:definitions:sharepoint') and ($state_name='spwebapplication_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
                               </sch:rule>
                         </sch:pattern>
                   </xsd:appinfo>
@@ -390,7 +390,7 @@
                               <oval:test>spgroup_test</oval:test>
                               <oval:object>spgroup_object</oval:object>
                               <oval:state>spgroup_state</oval:state>
-                              <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#sharepoint">spgroup_item</oval:item>
+                              <oval:item target_namespace="urn:oval:v6:system-characteristics:sharepoint">spgroup_item</oval:item>
                         </oval:element_mapping>
                   </xsd:appinfo>
 					<xsd:appinfo>
@@ -435,7 +435,7 @@
                                     <sch:let name="reffed_state" value="ancestor::oval-def:oval_definitions/oval-def:states/*[@id=$state_ref]"/>
                                     <sch:let name="state_name" value="local-name($reffed_state)"/>
                                     <sch:let name="state_namespace" value="namespace-uri($reffed_state)"/>
-                                    <sch:assert test="(($state_namespace='http://oval.mitre.org/XMLSchema/oval-definitions-5#sharepoint') and ($state_name='spgroup_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
+                                    <sch:assert test="(($state_namespace='urn:oval:v6:definitions:sharepoint') and ($state_name='spgroup_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
                               </sch:rule>
                         </sch:pattern>
                   </xsd:appinfo>
@@ -509,7 +509,7 @@
                               <oval:test>spweb_test</oval:test>
                               <oval:object>spweb_object</oval:object>
                               <oval:state>spweb_state</oval:state>
-                              <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#sharepoint">spweb_item</oval:item>
+                              <oval:item target_namespace="urn:oval:v6:system-characteristics:sharepoint">spweb_item</oval:item>
                         </oval:element_mapping>
                   </xsd:appinfo>
 					<xsd:appinfo>
@@ -554,7 +554,7 @@
                                     <sch:let name="reffed_state" value="ancestor::oval-def:oval_definitions/oval-def:states/*[@id=$state_ref]"/>
                                     <sch:let name="state_name" value="local-name($reffed_state)"/>
                                     <sch:let name="state_namespace" value="namespace-uri($reffed_state)"/>
-                                    <sch:assert test="(($state_namespace='http://oval.mitre.org/XMLSchema/oval-definitions-5#sharepoint') and ($state_name='spweb_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
+                                    <sch:assert test="(($state_namespace='urn:oval:v6:definitions:sharepoint') and ($state_name='spweb_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
                               </sch:rule>
                         </sch:pattern>
                   </xsd:appinfo>
@@ -634,7 +634,7 @@
                               <oval:test>splist_test</oval:test>
                               <oval:object>splist_object</oval:object>
                               <oval:state>splist_state</oval:state>
-                              <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#sharepoint">splist_item</oval:item>
+                              <oval:item target_namespace="urn:oval:v6:system-characteristics:sharepoint">splist_item</oval:item>
                         </oval:element_mapping>
                   </xsd:appinfo>
 					<xsd:appinfo>
@@ -679,7 +679,7 @@
                                     <sch:let name="reffed_state" value="ancestor::oval-def:oval_definitions/oval-def:states/*[@id=$state_ref]"/>
                                     <sch:let name="state_name" value="local-name($reffed_state)"/>
                                     <sch:let name="state_namespace" value="namespace-uri($reffed_state)"/>
-                                    <sch:assert test="(($state_namespace='http://oval.mitre.org/XMLSchema/oval-definitions-5#sharepoint') and ($state_name='splist_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
+                                    <sch:assert test="(($state_namespace='urn:oval:v6:definitions:sharepoint') and ($state_name='splist_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
                               </sch:rule>
                         </sch:pattern>
                   </xsd:appinfo>
@@ -748,7 +748,7 @@
                               <oval:test>spantivirussettings_test</oval:test>
                               <oval:object>spantivirussettings_object</oval:object>
                               <oval:state>spantivirussettings_state</oval:state>
-                              <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#sharepoint">spantivirussettings_item</oval:item>
+                              <oval:item target_namespace="urn:oval:v6:system-characteristics:sharepoint">spantivirussettings_item</oval:item>
                         </oval:element_mapping>
                   </xsd:appinfo>
 					<xsd:appinfo>
@@ -794,7 +794,7 @@
                                     <sch:let name="reffed_state" value="ancestor::oval-def:oval_definitions/oval-def:states/*[@id=$state_ref]"/>
                                     <sch:let name="state_name" value="local-name($reffed_state)"/>
                                     <sch:let name="state_namespace" value="namespace-uri($reffed_state)"/>
-                                    <sch:assert test="(($state_namespace='http://oval.mitre.org/XMLSchema/oval-definitions-5#sharepoint') and ($state_name='spantivirussettings_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
+                                    <sch:assert test="(($state_namespace='urn:oval:v6:definitions:sharepoint') and ($state_name='spantivirussettings_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
                               </sch:rule>
                         </sch:pattern>
                   </xsd:appinfo>
@@ -899,7 +899,7 @@
                               <oval:test>spsiteadministration_test</oval:test>
                               <oval:object>spsiteadministration_object</oval:object>
                               <oval:state>spsiteadministration_state</oval:state>
-                              <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#sharepoint">spsiteadministration_item</oval:item>
+                              <oval:item target_namespace="urn:oval:v6:system-characteristics:sharepoint">spsiteadministration_item</oval:item>
                         </oval:element_mapping>
                   </xsd:appinfo>
 					<xsd:appinfo>
@@ -944,7 +944,7 @@
                                     <sch:let name="reffed_state" value="ancestor::oval-def:oval_definitions/oval-def:states/*[@id=$state_ref]"/>
                                     <sch:let name="state_name" value="local-name($reffed_state)"/>
                                     <sch:let name="state_namespace" value="namespace-uri($reffed_state)"/>
-                                    <sch:assert test="(($state_namespace='http://oval.mitre.org/XMLSchema/oval-definitions-5#sharepoint') and ($state_name='spsiteadministration_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
+                                    <sch:assert test="(($state_namespace='urn:oval:v6:definitions:sharepoint') and ($state_name='spsiteadministration_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
                               </sch:rule>
                         </sch:pattern>
                   </xsd:appinfo>
@@ -1008,7 +1008,7 @@
                               <oval:test>spsite_test</oval:test>
                               <oval:object>spsite_object</oval:object>
                               <oval:state>spsite_state</oval:state>
-                              <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#sharepoint">spsite_item</oval:item>
+                              <oval:item target_namespace="urn:oval:v6:system-characteristics:sharepoint">spsite_item</oval:item>
                         </oval:element_mapping>
                   </xsd:appinfo>
 					<xsd:appinfo>
@@ -1053,7 +1053,7 @@
                                     <sch:let name="reffed_state" value="ancestor::oval-def:oval_definitions/oval-def:states/*[@id=$state_ref]"/>
                                     <sch:let name="state_name" value="local-name($reffed_state)"/>
                                     <sch:let name="state_namespace" value="namespace-uri($reffed_state)"/>
-                                    <sch:assert test="(($state_namespace='http://oval.mitre.org/XMLSchema/oval-definitions-5#sharepoint') and ($state_name='spsite_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
+                                    <sch:assert test="(($state_namespace='urn:oval:v6:definitions:sharepoint') and ($state_name='spsite_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
                               </sch:rule>
                         </sch:pattern>
                   </xsd:appinfo>
@@ -1129,7 +1129,7 @@
                               <oval:test>spcrawlrule_test</oval:test>
                               <oval:object>spcrawlrule_object</oval:object>
                               <oval:state>spcrawlrule_state</oval:state>
-                              <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#sharepoint">spcrawlrule_item</oval:item>
+                              <oval:item target_namespace="urn:oval:v6:system-characteristics:sharepoint">spcrawlrule_item</oval:item>
                         </oval:element_mapping>
                   </xsd:appinfo>
 					<xsd:appinfo>
@@ -1173,7 +1173,7 @@
                                     <sch:let name="reffed_state" value="ancestor::oval-def:oval_definitions/oval-def:states/*[@id=$state_ref]"/>
                                     <sch:let name="state_name" value="local-name($reffed_state)"/>
                                     <sch:let name="state_namespace" value="namespace-uri($reffed_state)"/>
-                                    <sch:assert test="(($state_namespace='http://oval.mitre.org/XMLSchema/oval-definitions-5#sharepoint') and ($state_name='spcrawlrule_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
+                                    <sch:assert test="(($state_namespace='urn:oval:v6:definitions:sharepoint') and ($state_name='spcrawlrule_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
                               </sch:rule>
                         </sch:pattern>
                   </xsd:appinfo>
@@ -1262,7 +1262,7 @@
                               <oval:test>spjobdefinition_test</oval:test>
                               <oval:object>spjobdefinition_object</oval:object>
                               <oval:state>spjobdefinition_state</oval:state>
-                              <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#sharepoint">spjobdefinition_item</oval:item>
+                              <oval:item target_namespace="urn:oval:v6:system-characteristics:sharepoint">spjobdefinition_item</oval:item>
                         </oval:element_mapping>
                   </xsd:appinfo>
 					<xsd:appinfo>
@@ -1330,7 +1330,7 @@
                                     <sch:let name="reffed_state" value="ancestor::oval-def:oval_definitions/oval-def:states/*[@id=$state_ref]"/>
                                     <sch:let name="state_name" value="local-name($reffed_state)"/>
                                     <sch:let name="state_namespace" value="namespace-uri($reffed_state)"/>
-                                    <sch:assert test="(($state_namespace='http://oval.mitre.org/XMLSchema/oval-definitions-5#sharepoint') and ($state_name='spjobdefinition_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
+                                    <sch:assert test="(($state_namespace='urn:oval:v6:definitions:sharepoint') and ($state_name='spjobdefinition_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
                               </sch:rule>
                         </sch:pattern>
                   </xsd:appinfo>
@@ -1416,7 +1416,7 @@
                               <oval:test>spjobdefinition510_test</oval:test>
                               <oval:object>spjobdefinition510_object</oval:object>
                               <oval:state>spjobdefinition510_state</oval:state>
-                              <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#sharepoint">spjobdefinition510_item</oval:item>
+                              <oval:item target_namespace="urn:oval:v6:system-characteristics:sharepoint">spjobdefinition510_item</oval:item>
                         </oval:element_mapping>
                   </xsd:appinfo>
 					<xsd:appinfo>
@@ -1460,7 +1460,7 @@
                                     <sch:let name="reffed_state" value="ancestor::oval-def:oval_definitions/oval-def:states/*[@id=$state_ref]"/>
                                     <sch:let name="state_name" value="local-name($reffed_state)"/>
                                     <sch:let name="state_namespace" value="namespace-uri($reffed_state)"/>
-                                    <sch:assert test="(($state_namespace='http://oval.mitre.org/XMLSchema/oval-definitions-5#sharepoint') and ($state_name='spjobdefinition510_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
+                                    <sch:assert test="(($state_namespace='urn:oval:v6:definitions:sharepoint') and ($state_name='spjobdefinition510_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
                               </sch:rule>
                         </sch:pattern>
                   </xsd:appinfo>
@@ -1539,7 +1539,7 @@
                               <oval:test>bestbet_test</oval:test>
                               <oval:object>bestbet_object</oval:object>
                               <oval:state>bestbet_state</oval:state>
-                              <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#sharepoint">bestbet_item</oval:item>
+                              <oval:item target_namespace="urn:oval:v6:system-characteristics:sharepoint">bestbet_item</oval:item>
                         </oval:element_mapping>
                   </xsd:appinfo>
 					<xsd:appinfo>
@@ -1584,7 +1584,7 @@
                                     <sch:let name="reffed_state" value="ancestor::oval-def:oval_definitions/oval-def:states/*[@id=$state_ref]"/>
                                     <sch:let name="state_name" value="local-name($reffed_state)"/>
                                     <sch:let name="state_namespace" value="namespace-uri($reffed_state)"/>
-                                    <sch:assert test="(($state_namespace='http://oval.mitre.org/XMLSchema/oval-definitions-5#sharepoint') and ($state_name='bestbet_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
+                                    <sch:assert test="(($state_namespace='urn:oval:v6:definitions:sharepoint') and ($state_name='bestbet_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
                               </sch:rule>
                         </sch:pattern>
                   </xsd:appinfo>
@@ -1658,7 +1658,7 @@
                               <oval:test>infopolicycoll_test</oval:test>
                               <oval:object>infopolicycoll_object</oval:object>
                               <oval:state>infopolicycoll_state</oval:state>
-                              <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#sharepoint">infopolicycoll_item</oval:item>
+                              <oval:item target_namespace="urn:oval:v6:system-characteristics:sharepoint">infopolicycoll_item</oval:item>
                         </oval:element_mapping>
                   </xsd:appinfo>
 					<xsd:appinfo>
@@ -1703,7 +1703,7 @@
                                     <sch:let name="reffed_state" value="ancestor::oval-def:oval_definitions/oval-def:states/*[@id=$state_ref]"/>
                                     <sch:let name="state_name" value="local-name($reffed_state)"/>
                                     <sch:let name="state_namespace" value="namespace-uri($reffed_state)"/>
-                                    <sch:assert test="(($state_namespace='http://oval.mitre.org/XMLSchema/oval-definitions-5#sharepoint') and ($state_name='infopolicycoll_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
+                                    <sch:assert test="(($state_namespace='urn:oval:v6:definitions:sharepoint') and ($state_name='infopolicycoll_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
                               </sch:rule>
                         </sch:pattern>
                   </xsd:appinfo>
@@ -1782,7 +1782,7 @@
                               <oval:test>spdiagnosticsservice_test</oval:test>
                               <oval:object>spdiagnosticsservice_object</oval:object>
                               <oval:state>spdiagnosticsservice_state</oval:state>
-                              <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#sharepoint">spdiagnosticsservice_item</oval:item>
+                              <oval:item target_namespace="urn:oval:v6:system-characteristics:sharepoint">spdiagnosticsservice_item</oval:item>
                         </oval:element_mapping>
                   </xsd:appinfo>
 					<xsd:appinfo>
@@ -1827,7 +1827,7 @@
                                     <sch:let name="reffed_state" value="ancestor::oval-def:oval_definitions/oval-def:states/*[@id=$state_ref]"/>
                                     <sch:let name="state_name" value="local-name($reffed_state)"/>
                                     <sch:let name="state_namespace" value="namespace-uri($reffed_state)"/>
-                                    <sch:assert test="(($state_namespace='http://oval.mitre.org/XMLSchema/oval-definitions-5#sharepoint') and ($state_name='spdiagnosticsservice_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
+                                    <sch:assert test="(($state_namespace='urn:oval:v6:definitions:sharepoint') and ($state_name='spdiagnosticsservice_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
                               </sch:rule>
                         </sch:pattern>
                   </xsd:appinfo>
@@ -1911,7 +1911,7 @@
                               <oval:test>spdiagnosticslevel_test</oval:test>
                               <oval:object>spdiagnosticslevel_object</oval:object>
                               <oval:state>spdiagnosticslevel_state</oval:state>
-                              <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#sharepoint">spdiagnosticslevel_item</oval:item>
+                              <oval:item target_namespace="urn:oval:v6:system-characteristics:sharepoint">spdiagnosticslevel_item</oval:item>
                         </oval:element_mapping>
                   </xsd:appinfo>
 					<xsd:appinfo>
@@ -1955,7 +1955,7 @@
                                     <sch:let name="reffed_state" value="ancestor::oval-def:oval_definitions/oval-def:states/*[@id=$state_ref]"/>
                                     <sch:let name="state_name" value="local-name($reffed_state)"/>
                                     <sch:let name="state_namespace" value="namespace-uri($reffed_state)"/>
-                                    <sch:assert test="(($state_namespace='http://oval.mitre.org/XMLSchema/oval-definitions-5#sharepoint') and ($state_name='spdiagnosticslevel_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
+                                    <sch:assert test="(($state_namespace='urn:oval:v6:definitions:sharepoint') and ($state_name='spdiagnosticslevel_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
                               </sch:rule>
                         </sch:pattern>
                   </xsd:appinfo>
@@ -2034,7 +2034,7 @@
                               <oval:test>sppolicyfeature_test</oval:test>
                               <oval:object>sppolicyfeature_object</oval:object>
                               <oval:state>sppolicyfeature_state</oval:state>
-                              <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#sharepoint">sppolicyfeature_item</oval:item>
+                              <oval:item target_namespace="urn:oval:v6:system-characteristics:sharepoint">sppolicyfeature_item</oval:item>
                         </oval:element_mapping>
                   </xsd:appinfo>
 					<xsd:appinfo>
@@ -2079,7 +2079,7 @@
                                     <sch:let name="reffed_state" value="ancestor::oval-def:oval_definitions/oval-def:states/*[@id=$state_ref]"/>
                                     <sch:let name="state_name" value="local-name($reffed_state)"/>
                                     <sch:let name="state_namespace" value="namespace-uri($reffed_state)"/>
-                                    <sch:assert test="(($state_namespace='http://oval.mitre.org/XMLSchema/oval-definitions-5#sharepoint') and ($state_name='sppolicyfeature_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
+                                    <sch:assert test="(($state_namespace='urn:oval:v6:definitions:sharepoint') and ($state_name='sppolicyfeature_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
                               </sch:rule>
                         </sch:pattern>
                   </xsd:appinfo>
@@ -2178,7 +2178,7 @@
                               <oval:test>sppolicy_test</oval:test>
                               <oval:object>sppolicy_object</oval:object>
                               <oval:state>sppolicy_state</oval:state>
-                              <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#sharepoint">sppolicy_item</oval:item>
+                              <oval:item target_namespace="urn:oval:v6:system-characteristics:sharepoint">sppolicy_item</oval:item>
                         </oval:element_mapping>
                   </xsd:appinfo>
 					<xsd:appinfo>
