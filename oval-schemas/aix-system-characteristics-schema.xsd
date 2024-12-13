@@ -20,42 +20,6 @@ elementFormDefault="qualified" version="6.0">
             </xsd:appinfo>
       </xsd:annotation>
       <!-- =============================================================================== -->
-      <!-- =============================  INTERIM FIX ITEM  ============================== -->
-      <!-- =============================================================================== -->
-      <xsd:element name="interim_fix_item" substitutionGroup="oval-sc:item">
-            <xsd:annotation>
-                  <xsd:documentation>From emgr -l -u VUID Command. See instfix manpage for specific fields.</xsd:documentation>
-            </xsd:annotation>
-            <xsd:complexType>
-                  <xsd:complexContent>
-                        <xsd:extension base="oval-sc:ItemType">
-                              <xsd:sequence>
-                                    <xsd:element name="vuid" type="oval-sc:EntityItemStringType" minOccurs="0" maxOccurs="1">
-                                          <xsd:annotation>
-                                                <xsd:documentation>Virtually Unique ID. A combination of time and cpuid, this ID can be used to differentiate fixes that are otherwise identical.</xsd:documentation>
-                                          </xsd:annotation>
-                                    </xsd:element>
-                                    <xsd:element name="label" type="oval-sc:EntityItemStringType" minOccurs="0" maxOccurs="1">
-                                          <xsd:annotation>
-                                                <xsd:documentation>Each efix that is installed on a given system has a unique efix label.</xsd:documentation>
-                                          </xsd:annotation>
-                                    </xsd:element>
-                                    <xsd:element name="abstract" type="oval-sc:EntityItemStringType" minOccurs="0" maxOccurs="1">
-                                          <xsd:annotation>
-                                                <xsd:documentation>Describes the efix package.</xsd:documentation>
-                                          </xsd:annotation>
-                                    </xsd:element>
-                                    <xsd:element name="state" type="aix-sc:EntityItemInterimFixStateType" minOccurs="0" maxOccurs="1">
-                                          <xsd:annotation>
-                                                <xsd:documentation>The the emergency fix state.</xsd:documentation>
-                                          </xsd:annotation>
-                                    </xsd:element>
-                              </xsd:sequence>
-                        </xsd:extension>
-                  </xsd:complexContent>
-            </xsd:complexType>
-      </xsd:element>
-      <!-- =============================================================================== -->
       <!-- ===============================  FILESET ITEM  ================================ -->
       <!-- =============================================================================== -->
       <xsd:element name="fileset_item" substitutionGroup="oval-sc:item">
@@ -313,53 +277,6 @@ elementFormDefault="qualified" version="6.0">
             </xsd:complexType>
       </xsd:element>
       <!-- =============================================================================== -->
-      <!-- =================================  NO ITEM  =================================== -->
-      <!-- =============================================================================== -->
-      <xsd:element name="no_item" substitutionGroup="oval-sc:item">
-            <xsd:annotation>
-                  <xsd:documentation>The no_item is used to hold information related to the /usr/sbin/no command and the tunable parameters it manages. Currently, /usr/sbin/no is used to configure network tuning parameters. The /usr/sbin/no command sets or displays current or next boot values for network tuning parameters. The /usr/sbin/no command queries the named parameter, retrieves the value associated with the specified parameter, and displays it.</xsd:documentation>
-            </xsd:annotation>
-            <xsd:complexType>
-                  <xsd:complexContent>
-                        <xsd:extension base="oval-sc:ItemType">
-                              <xsd:sequence>
-                                    <xsd:element name="tunable" type="oval-sc:EntityItemStringType" minOccurs="0" maxOccurs="1">
-                                          <xsd:annotation>
-                                                <xsd:documentation>The name of the target parameter to be queried by the /usr/sbin/no command. Examples include ip_forwarding and tcp_keepalive_interval.</xsd:documentation>
-                                          </xsd:annotation>
-                                    </xsd:element>
-                                    <xsd:element name="value" type="oval-sc:EntityItemAnySimpleType" minOccurs="0" maxOccurs="1">
-                                          <xsd:annotation>
-                                                <xsd:documentation>The value entity defines the value assigned to the tunable parameter being examined.</xsd:documentation>
-                                          </xsd:annotation>
-                                    </xsd:element>
-                              </xsd:sequence>
-                        </xsd:extension>
-                  </xsd:complexContent>
-            </xsd:complexType>
-      </xsd:element>
-      <!-- =============================================================================== -->
-      <!-- ===============================  OSLEVEL ITEM  ================================ -->
-      <!-- =============================================================================== -->
-      <xsd:element name="oslevel_item" substitutionGroup="oval-sc:item">
-            <xsd:annotation>
-                  <xsd:documentation>Information about the release and maintenance level of AIX operating system. This information can be retrieved by the /usr/bin/oslevel -r command.</xsd:documentation>
-            </xsd:annotation>
-            <xsd:complexType>
-                  <xsd:complexContent>
-                        <xsd:extension base="oval-sc:ItemType">
-                              <xsd:sequence>
-                                    <xsd:element name="maintenance_level" type="oval-sc:EntityItemVersionType" minOccurs="0" maxOccurs="1">
-                                          <xsd:annotation>
-                                                <xsd:documentation>This is the maintenance level (system version) of current AIX operating system.</xsd:documentation>
-                                          </xsd:annotation>
-                                    </xsd:element>
-                              </xsd:sequence>
-                        </xsd:extension>
-                  </xsd:complexContent>
-            </xsd:complexType>
-      </xsd:element>
-      <!-- =============================================================================== -->
       <!-- =============================================================================== -->
       <!-- =============================================================================== -->
       <xsd:complexType name="EntityItemFilesetStateType">
@@ -431,55 +348,6 @@ elementFormDefault="qualified" version="6.0">
                         <xsd:enumeration value="NONE_INSTALLED">
                               <xsd:annotation>
                                     <xsd:documentation>No filesets which have fixes for XXXXXXX are currently installed.</xsd:documentation>
-                              </xsd:annotation>
-                        </xsd:enumeration>
-                        <xsd:enumeration value="">
-                              <xsd:annotation>
-                                    <xsd:documentation>The empty string value is permitted here to allow for detailed error reporting.</xsd:documentation>
-                              </xsd:annotation>
-                        </xsd:enumeration>
-                  </xsd:restriction>
-            </xsd:simpleContent>
-      </xsd:complexType>
-      <xsd:complexType name="EntityItemInterimFixStateType">
-            <xsd:annotation>
-                  <xsd:documentation>The EntityItemInterimFixStateType complex type defines the different values that are valid for the state entity of a interim_fix_state state. Please refer to the AIX documentation of Emergency Fix States. The empty string value is permitted here to allow for detailed error reporting.</xsd:documentation>
-            </xsd:annotation>
-            <xsd:simpleContent>
-                  <xsd:restriction base="oval-sc:EntityItemStringType">
-                        <xsd:enumeration value="STABLE">
-                              <xsd:annotation>
-                                    <xsd:documentation>The efix was installed with a standard installation, and successfully completed the last installation operation.</xsd:documentation>
-                              </xsd:annotation>
-                        </xsd:enumeration>
-                        <xsd:enumeration value="MOUNTED">
-                              <xsd:annotation>
-                                    <xsd:documentation>The efix was installed with a mount installation operation, and successfully completed the last installation or mount operation.</xsd:documentation>
-                              </xsd:annotation>
-                        </xsd:enumeration>
-                        <xsd:enumeration value="UNMOUNTED">
-                              <xsd:annotation>
-                                    <xsd:documentation>The efix was installed with a mount installation operation and one or more efix files were unmounted in a previous emgr command operation.</xsd:documentation>
-                              </xsd:annotation>
-                        </xsd:enumeration>
-                        <xsd:enumeration value="BROKEN">
-                              <xsd:annotation>
-                                    <xsd:documentation>An unrecoverable error occurred during an installation or removal operation. The status of the efix is unreliable.</xsd:documentation>
-                              </xsd:annotation>
-                        </xsd:enumeration>
-                        <xsd:enumeration value="INSTALLING">
-                              <xsd:annotation>
-                                    <xsd:documentation>The efix is in the process of installing.</xsd:documentation>
-                              </xsd:annotation>
-                        </xsd:enumeration>
-                        <xsd:enumeration value="REBOOT_REQUIRED">
-                              <xsd:annotation>
-                                    <xsd:documentation>The efix was installed successfully and requires a reboot to fully integrate into the target system.</xsd:documentation>
-                              </xsd:annotation>
-                        </xsd:enumeration>
-                        <xsd:enumeration value="REMOVING">
-                              <xsd:annotation>
-                                    <xsd:documentation>The efix is in the process of being removed.</xsd:documentation>
                               </xsd:annotation>
                         </xsd:enumeration>
                         <xsd:enumeration value="">
