@@ -1,8 +1,8 @@
 Open Vulnerability and Assessment Language: Core Definition  
 =========================================================
 * Schema: Core Definition  
-* Version: 5.12  
-* Release Date: 11/29/2024 09:00:00 AM
+* Version: 6.0  
+* Release Date: 1/1/2025 09:00:00 AM
 
 The following is a description of the elements, types, and attributes that compose the core schema for encoding Open Vulnerability and Assessment Language (OVAL) Definitions. Some of the objects defined here are extended and enhanced by individual component schemas, which are described in separate documents. Each of the elements, types, and attributes that make up the Core Definition Schema are described in detail and should provide the information necessary to understand what each represents. This document is intended for developers and assumes some familiarity with XML. A high level description of the interaction between these objects is not outlined here.
 
@@ -45,32 +45,6 @@ Child Elements
     * - ds:Signature  
       - n/a (0..1)  
       - The optional Signature element allows an XML Signature as defined by the W3C to be attached to the document. This allows authentication and data integrity to be provided to the user. Enveloped signatures are supported. More information about the official W3C Recommendation regarding XML digital signatures can be found at http://www.w3.org/TR/xmldsig-core/.  
-  
-.. _notes:  
-  
-< notes > (Deprecated)  
----------------------------------------------------------
-Deprecation Info  
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-* Deprecated As Of Version 5.11.1  
-* Reason: Replaced by the oval:notes element.  
-* Comment: This object has been deprecated and may be removed in a future version of the language.  
-  
-The notes element is a container for one or more note child elements. It exists for backwards-compatibility purposes, for the pre-5.11.0 oval-def:NotesType, which has been replaced by the oval:notes element in 5.11.1.
-
-**Extends:** oval:NotesType
-
-Child Elements  
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-.. list-table:: Elements  
-    :header-rows: 1  
-  
-    * - Child Elements  
-      - Type (MinOccurs..MaxOccurs)  
-      - Desc.  
-    * - note  
-      - xsd:string (0..unbounded)  
-      -   
   
 ______________
   
