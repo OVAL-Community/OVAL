@@ -119,28 +119,28 @@
             <xsd:annotation>
                 <xsd:documentation>Requires each test reference to refer to a valid test id.</xsd:documentation>
             </xsd:annotation>
-            <xsd:selector xpath="encapsulated_definition/* | ./*" />
+            <xsd:selector xpath=".//*"/>
             <xsd:field xpath="@test_ref"/>
         </xsd:keyref>
         <xsd:keyref name="objectKeyRef" refer="oval-def:objectKey">
             <xsd:annotation>
                 <xsd:documentation>Requires each object reference to refer to a valid object id.</xsd:documentation>
             </xsd:annotation>
-            <xsd:selector xpath="encapsulated_definition/* | ./*" />
+            <xsd:selector xpath=".//*"/>
             <xsd:field xpath="@object_ref"/>
         </xsd:keyref>
         <xsd:keyref name="stateKeyRef" refer="oval-def:stateKey">
             <xsd:annotation>
                 <xsd:documentation>Requires each state reference to refer to a valid state id.</xsd:documentation>
             </xsd:annotation>
-            <xsd:selector xpath="encapsulated_definition/* | ./*" />
+            <xsd:selector xpath=".//*"/>
             <xsd:field xpath="@state_ref"/>
         </xsd:keyref>
         <xsd:keyref name="variableKeyRef" refer="oval-def:variableKey">
             <xsd:annotation>
                 <xsd:documentation>Requires each variable reference to refer to a valid variable id.</xsd:documentation>
             </xsd:annotation>
-            <xsd:selector xpath="encapsulated_definition/* | ./*" />
+            <xsd:selector xpath=".//*"/>
             <xsd:field xpath="@var_ref"/>
         </xsd:keyref>
         <xsd:keyref name="object_referenceKeyRef" refer="oval-def:objectKey">
@@ -198,10 +198,9 @@
         <xsd:annotation>
             <xsd:documentation>The DefinitionsType complex type is a container for one or more definition elements. Each definition element describes a single OVAL Definition. Please refer to the description of the DefinitionType for more information about an individual definition.</xsd:documentation>
         </xsd:annotation>
-        <xsd:choice minOccurs="1" maxOccurs="unbounded">
-            <xsd:element ref="oval-def:definition" minOccurs="0" maxOccurs="unbounded"/>
-            <xsd:element ref="oval-def:encapsulated_definition" minOccurs="0" maxOccurs="unbounded"/>
-        </xsd:choice>
+        <xsd:sequence>
+            <xsd:element ref="oval-def:definition" minOccurs="1" maxOccurs="unbounded"/>
+        </xsd:sequence>
     </xsd:complexType>
     <xsd:element name="definition" type="oval-def:DefinitionType">
         <xsd:annotation>
@@ -240,73 +239,6 @@
         <xsd:attribute name="class" type="oval:ClassEnumeration" use="required"/>
         <xsd:attribute name="deprecated" type="xsd:boolean" use="optional" default="false"/>
     </xsd:complexType>
-    
-    <!-- _______NEW OVAL6 ENCAPSULTED DEFINITION TYPE__________ -->
-    
-     <xsd:element name="encapsulated_definition" type="oval-def:EncapsulatedDefinitionType">
-        <xsd:annotation>
-            <xsd:documentation>The encapsulated_definition element represents the globally defined element of type EncapsulatedDefinitionType. For more information please see the documentation on the EncapsulatedDefinitionType.</xsd:documentation>
-        </xsd:annotation>
-    </xsd:element>   
-    <xsd:complexType name="EncapsulatedDefinitionType">
-        <xsd:annotation>
-            <xsd:documentation>The EncapsulatedDefinitionType defines a single OVAL Definition. It differs from a 'DefinitionType' in that all other OVAL entities used by the  definition are contained in the definition. An encapsulated_definition is the a key structure in OVAL. It is analogous to the logical sentence or proposition: if a computer's state matches the configuration parameters laid out in the criteria, then that computer exhibits the state described. The EncapsulatedDefinitionType contains a section for various metadata related elements that describe the definition. This includes a description, version, affected system types, and reference information. The notes section of a definition should be used to hold information that might be helpful to someone examining the technical aspects of the definition. For example, why certain tests have been included in the criteria, or maybe a link to where further information can be found. The EncapsulatedDefinitionType also (unless the definition is deprecated) contains a criteria child element that joins individual tests together with a logical operator to specify the specific computer state being described.
-            </xsd:documentation>
-            <xsd:documentation>The required id attribute is the OVAL-ID of the EncapuslatedDefinition. The form of an OVAL-ID must follow the specific format described by the oval:DefinitionIDPattern. The required version attribute holds the current version of the encapsulated definition. Versions are integers, starting at 1 and incrementing every time a definition is modified. The required class attribute indicates the specific class to which the definition belongs. The class gives a hint to a user so they can know what the encapsulated definition writer is trying to say. See the definition of oval-def:ClassEnumeration for more information about the different valid classes. The optional deprecated attribute signifies that an id is no longer to be used or referenced but the information has been kept around for historic purposes.
-            </xsd:documentation>
-            <xsd:documentation>When the deprecated attribute is set to true, the encapsulated definition is considered to be deprecated. The criteria child element of a deprecated encapsulated definition is optional. If a deprecated encapsulated definition does not contain a criteria child element, the encapsulated definition must evaluate to "not evaluated". If a deprecated encapsulated definition contains a criteria child element, an interpreter should evaluate the encapsulated definition as if it were not deprecated, but an interpreter may evaluate the encapsulated definition to "not evaluated".
-            </xsd:documentation>
-            <xsd:appinfo>
-                <sch:pattern id="oval-def_required_criteria">
-                    <sch:rule context="oval-def:oval_definitions/oval-def:definitions/oval-def:definition[(@deprecated='false' or @deprecated='0') or not(@deprecated)]">
-                        <sch:assert test="oval-def:criteria">A valid OVAL Definition must contain a criteria unless the definition is a deprecated definition.</sch:assert>
-                    </sch:rule>
-                </sch:pattern>
-            </xsd:appinfo>
-        </xsd:annotation>
-        <xsd:sequence>
-            <xsd:element ref="ds:Signature" minOccurs="0" maxOccurs="1"/>
-            <xsd:element name="metadata" type="oval-def:MetadataType">
-                <!-- xsd:unique name="UniqueAffectedFamily">
-                    <xsd:annotation>
-                        <xsd:documentation>Each affected element must have a unique family attribute value.</xsd:documentation>
-                    </xsd:annotation>
-                    <xsd:selector xpath="oval-def:affected"/>
-                    <xsd:field xpath="@family"/>
-                </xsd:unique -->            
-            </xsd:element>
-            <xsd:element ref="oval:notes" minOccurs="0" maxOccurs="1"/>
-            <xsd:element name="criteria" type="oval-def:CriteriaType" minOccurs="0" maxOccurs="1"/>
-           <xsd:element name="tests" type="oval-def:TestsType" minOccurs="0" maxOccurs="1">
-                <xsd:annotation>
-                    <xsd:documentation>The optional tests section contains 1 or more tests.</xsd:documentation>
-                </xsd:annotation>
-            </xsd:element>
-            <xsd:element name="objects" type="oval-def:ObjectsType" minOccurs="0" maxOccurs="1">
-                <xsd:annotation>
-                    <xsd:documentation>The optional objects section contains 1 or more objects.</xsd:documentation>
-                </xsd:annotation>
-            </xsd:element>
-            <xsd:element name="states" type="oval-def:StatesType" minOccurs="0" maxOccurs="1">
-                <xsd:annotation>
-                    <xsd:documentation>The optional states section contains 1 or more states.</xsd:documentation>
-                </xsd:annotation>
-            </xsd:element>
-            <xsd:element name="variables" type="oval-def:VariablesType" minOccurs="0" maxOccurs="1">
-                <xsd:annotation>
-                    <xsd:documentation>The optional variables section contains 1 or more variables.</xsd:documentation>
-                </xsd:annotation>
-            </xsd:element>
-        </xsd:sequence>
-        <xsd:attribute name="id" type="oval:DefinitionIDPattern" use="required"/>
-        <xsd:attribute name="version" type="xsd:nonNegativeInteger" use="required"/>
-        <xsd:attribute name="class" type="oval:ClassEnumeration" use="required"/>
-        <xsd:attribute name="deprecated" type="xsd:boolean" use="optional" default="false"/>
-    </xsd:complexType>
-        
-     
-<!-- _______ END NEW ENCAPSULATEDDEFINITIONTYPE_____ -->
-
     <xsd:complexType name="MetadataType">
         <xsd:annotation>
             <xsd:documentation>The MetadataType complex type contains all the metadata available to an OVAL Definition. This metadata is for informational purposes only and is not part of the criteria used to evaluate machine state. The required title child element holds a short string that is used to quickly identify the definition to a human user. The affected metadata item contains information about the system(s) for which the definition has been written. Remember that this is just metadata and not part of the criteria. Please refer to the AffectedType description for more information. The required description element contains a textual description of the configuration state being addressed by the OVAL Definition. In the case of a definition from the vulnerability class, the reference is usually the Common Vulnerability and Exposures (CVE) Identifier, and this description field corresponds with the CVE description.</xsd:documentation>
