@@ -1,8 +1,8 @@
 Open Vulnerability and Assessment Language: AIX System Characteristics  
 =========================================================
 * Schema: AIX System Characteristics  
-* Version: 5.12  
-* Release Date: 11/29/2024 09:00:00 AM
+* Version: 6.0  
+* Release Date: 1/1/2025 09:00:00 AM
 
 The following is a description of the elements, types, and attributes that compose the AIX specific system characteristic items found in Open Vulnerability and Assessment Language (OVAL). Each item is an extension of the standard test element defined in the Core Definition Schema. Through extension, each test inherits a set of elements and attributes that are shared amongst all OVAL tests. Each test is described in detail and should provide the information necessary to understand what each element and attribute represents. This document is intended for developers and assumes some familiarity with XML. A high level description of the interaction between the different tests and their relationship to the Core Definition Schema is not outlined here.
 
@@ -10,7 +10,6 @@ This schema was originally developed by Yuzheng Zhou and Todd Dolinsky at Hewlet
 
 Item Listing  
 ---------------------------------------------------------
-* :ref:`interim_fix_item`  
 * :ref:`fileset_item`  
 * :ref:`fix_item`  
 * :ref:`deviceattribute_item`  
@@ -18,39 +17,6 @@ Item Listing
 * :ref:`securitystanza_item`  
 * :ref:`useraccount_item`  
 * :ref:`nfso_item`  
-* :ref:`no_item`  
-* :ref:`oslevel_item`  
-  
-______________
-  
-.. _interim_fix_item:  
-  
-< interim_fix_item >  
----------------------------------------------------------
-From emgr -l -u VUID Command. See instfix manpage for specific fields.
-
-**Extends:** oval-sc:ItemType
-
-Child Elements  
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-.. list-table:: Elements  
-    :header-rows: 1  
-  
-    * - Child Elements  
-      - Type (MinOccurs..MaxOccurs)  
-      - Desc.  
-    * - vuid  
-      - oval-sc:EntityItemStringType (0..1)  
-      - Virtually Unique ID. A combination of time and cpuid, this ID can be used to differentiate fixes that are otherwise identical.  
-    * - label  
-      - oval-sc:EntityItemStringType (0..1)  
-      - Each efix that is installed on a given system has a unique efix label.  
-    * - abstract  
-      - oval-sc:EntityItemStringType (0..1)  
-      - Describes the efix package.  
-    * - state  
-      - aix-sc:EntityItemInterimFixStateType (0..1)  
-      - The the emergency fix state.  
   
 ______________
   
@@ -257,53 +223,6 @@ Child Elements
       - oval-sc:EntityItemAnySimpleType (0..1)  
       - The value entity defines the value assigned to the tunable parameter being examined.  
   
-______________
-  
-.. _no_item:  
-  
-< no_item >  
----------------------------------------------------------
-The no_item is used to hold information related to the /usr/sbin/no command and the tunable parameters it manages. Currently, /usr/sbin/no is used to configure network tuning parameters. The /usr/sbin/no command sets or displays current or next boot values for network tuning parameters. The /usr/sbin/no command queries the named parameter, retrieves the value associated with the specified parameter, and displays it.
-
-**Extends:** oval-sc:ItemType
-
-Child Elements  
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-.. list-table:: Elements  
-    :header-rows: 1  
-  
-    * - Child Elements  
-      - Type (MinOccurs..MaxOccurs)  
-      - Desc.  
-    * - tunable  
-      - oval-sc:EntityItemStringType (0..1)  
-      - The name of the target parameter to be queried by the /usr/sbin/no command. Examples include ip_forwarding and tcp_keepalive_interval.  
-    * - value  
-      - oval-sc:EntityItemAnySimpleType (0..1)  
-      - The value entity defines the value assigned to the tunable parameter being examined.  
-  
-______________
-  
-.. _oslevel_item:  
-  
-< oslevel_item >  
----------------------------------------------------------
-Information about the release and maintenance level of AIX operating system. This information can be retrieved by the /usr/bin/oslevel -r command.
-
-**Extends:** oval-sc:ItemType
-
-Child Elements  
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-.. list-table:: Elements  
-    :header-rows: 1  
-  
-    * - Child Elements  
-      - Type (MinOccurs..MaxOccurs)  
-      - Desc.  
-    * - maintenance_level  
-      - oval-sc:EntityItemVersionType (0..1)  
-      - This is the maintenance level (system version) of current AIX operating system.  
-  
 .. _EntityItemFilesetStateType:  
   
 == EntityItemFilesetStateType ==  
@@ -355,36 +274,6 @@ The EntityStateFixInstallationStatusType defines the different values that are v
       - | Not all filesets for XXXXXXX were found  
     * - NONE_INSTALLED  
       - | No filesets which have fixes for XXXXXXX are currently installed.  
-    * -   
-      - | The empty string value is permitted here to allow for detailed error reporting.  
-  
-.. _EntityItemInterimFixStateType:  
-  
-== EntityItemInterimFixStateType ==  
----------------------------------------------------------
-The EntityItemInterimFixStateType complex type defines the different values that are valid for the state entity of a interim_fix_state state. Please refer to the AIX documentation of Emergency Fix States. The empty string value is permitted here to allow for detailed error reporting.
-
-**Restricts:** oval-sc:EntityItemStringType
-
-.. list-table:: Enumeration Values  
-    :header-rows: 1  
-  
-    * - Value  
-      - Description  
-    * - STABLE  
-      - | The efix was installed with a standard installation, and successfully completed the last installation operation.  
-    * - MOUNTED  
-      - | The efix was installed with a mount installation operation, and successfully completed the last installation or mount operation.  
-    * - UNMOUNTED  
-      - | The efix was installed with a mount installation operation and one or more efix files were unmounted in a previous emgr command operation.  
-    * - BROKEN  
-      - | An unrecoverable error occurred during an installation or removal operation. The status of the efix is unreliable.  
-    * - INSTALLING  
-      - | The efix is in the process of installing.  
-    * - REBOOT_REQUIRED  
-      - | The efix was installed successfully and requires a reboot to fully integrate into the target system.  
-    * - REMOVING  
-      - | The efix is in the process of being removed.  
     * -   
       - | The empty string value is permitted here to allow for detailed error reporting.  
   

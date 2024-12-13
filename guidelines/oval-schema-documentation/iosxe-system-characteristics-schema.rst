@@ -1,8 +1,8 @@
 Open Vulnerability and Assessment Language: IOS-XE System Characteristics  
 =========================================================
 * Schema: IOS-XE System Characteristics  
-* Version: 5.12  
-* Release Date: 11/29/2024 09:00:00 AM
+* Version: 6.0  
+* Release Date: 1/1/2025 09:00:00 AM
 
 The following is a description of the elements, types, and attributes that compose the IOS-XE specific system characteristic items found in Open Vulnerability and Assessment Language (OVAL). Each item is an extension of the standard item element defined in the Core System Characteristic Schema. Through extension, each item inherits a set of elements and attributes that are shared amongst all OVAL Items. Each item is described in detail and should provide the information necessary to understand what each element and attribute represents. This document is intended for developers and assumes some familiarity with XML. A high level description of the interaction between the different tests and their relationship to the Core System Characteristic Schema is not outlined here.
 
@@ -14,18 +14,14 @@ Item Listing
 ---------------------------------------------------------
 * :ref:`global_item`  
 * :ref:`line_item`  
-* :ref:`version_item`  
 * :ref:`section_item`  
 * :ref:`interface_item`  
-* :ref:`router_item`  
 * :ref:`bgpneighbor_item`  
 * :ref:`routingprotocolauthintf_item`  
-* :ref:`acl_item`  
 * :ref:`snmphost_item`  
 * :ref:`snmpcommunity_item`  
 * :ref:`snmpuser_item`  
 * :ref:`snmpgroup_item`  
-* :ref:`snmpview_item`  
   
 ______________
   
@@ -73,55 +69,6 @@ Child Elements
     * - config_line  
       - oval-sc:EntityItemStringType (0..1)  
       - The value returned from by the specified SHOW sub-command.  
-  
-______________
-  
-.. _version_item:  
-  
-< version_item >  
----------------------------------------------------------
-The version_item holds information about the version of the IOS-XE operating system. It extends the standard ItemType as defined in the oval-system-characteristics schema and one should refer to the ItemType description for more information.
-
-**Extends:** oval-sc:ItemType
-
-Child Elements  
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-.. list-table:: Elements  
-    :header-rows: 1  
-  
-    * - Child Elements  
-      - Type (MinOccurs..MaxOccurs)  
-      - Desc.  
-    * - platform (Deprecated)  
-      - oval-sc:EntityItemStringType (0..1)  
-      - The platform entity specifies the platform that is running the IOS-XE software. For example if could be asr1000.  
-    * - rp (Deprecated)  
-      - oval-sc:EntityItemIntType (0..1)  
-      - The rp entity specifies the routing processor running the IOS-XE software.  
-    * - pkg (Deprecated)  
-      - oval-sc:EntityItemStringType (0..1)  
-      - The pkg entity specifies the consolidated IOS-XE packages in the image. For example it could be adventservicesk9.  
-    * - version_string  
-      - oval-sc:EntityItemStringType (0..1)  
-      - The train entity specifies the entire IOS-XE version string, for example, '03.13.02.S'.  
-    * - major_release  
-      - oval-sc:EntityItemIntType (0..1)  
-      - The major_release entity specifies the major version piece of the version string. The value is an integer and in the example 03.13.02.S the major_release is '3'.  
-    * - release  
-      - oval-sc:EntityItemIntType (0..1)  
-      - The release entity specifies the release piece of the version string. The value is an integer and in the example 03.13.02.S the release version is '13'.  
-    * - rebuild  
-      - oval-sc:EntityItemIntType (0..1)  
-      - The rebuild entity specifies the release piece of the version string. The value is an integer and in the example 03.13.02.S the rebuild is '2'.  
-    * - train  
-      - oval-sc:EntityItemStringType (0..1)  
-      - The train entity specifies the train piece of the version string. The value is a string and in the example 03.13.02.S the train is 'S'.  
-    * - ios_release (Deprecated)  
-      - oval-sc:EntityItemStringType (0..1)  
-      - The ios_release entity specifies the IOS release the IOS-XE was derived from. The value is an string and in the example ASR1000rp1-ipbasek9.03.04.02.122-33.SR.bin the ios_release version is '122-33'  
-    * - ios_train (Deprecated)  
-      - oval-sc:EntityItemStringType (0..1)  
-      - The ios_train entity specifies the IOS release the IOS-XE was derived from. The value is an integer and in the example ASR1000rp1-ipbasek9.03.04.02.122-33.SR.bin the ios_release version is 'SR'  
   
 ______________
   
@@ -205,9 +152,6 @@ Child Elements
     * - ipv6_urpf_command  
       - oval-sc:EntityItemStringType (0..1)  
       - Element with the uRPF command for IPv6 under the interface.  
-    * - urpf_command (Deprecated)  
-      - oval-sc:EntityItemStringType (0..1)  
-      - Element with the uRPF command under the interface.  
     * - switchport_trunk_encapsulation  
       - iosxe-sc:EntityItemTrunkEncapType (0..1)  
       - Element with the switchport trunk encapsulation option configured on the interface (if applicable).  
@@ -229,43 +173,6 @@ Child Elements
     * - switchport_port_security  
       - oval-sc:EntityItemStringType (0..1)  
       - Element with the switchport port-security commands configured on the interface (if applicable).  
-  
-______________
-  
-.. _router_item:  
-  
-< router_item >  
----------------------------------------------------------
-Stores commands that are part of a IOS-XE 'router' command configuration. For example 'router bgp 123'.
-
-**Extends:** oval-sc:ItemType
-
-Child Elements  
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-.. list-table:: Elements  
-    :header-rows: 1  
-  
-    * - Child Elements  
-      - Type (MinOccurs..MaxOccurs)  
-      - Desc.  
-    * - protocol  
-      - iosxe-sc:EntityItemRoutingProtocolType (0..1)  
-      - Element with the routing protocol.  
-    * - id  
-      - oval-sc:EntityItemIntType (0..1)  
-      - Element with the IOS-XE router id.  
-    * - network  
-      - oval-sc:EntityItemStringType (0..unbounded)  
-      - Element with the subnet in the network command of the router instance. The area can be included in the string for OSPF.  
-    * - bgp_neighbor  
-      - oval-sc:EntityItemStringType (0..unbounded)  
-      - Element with the BGP neighbors, if applicable.  
-    * - ospf_authentication_area  
-      - Restriction of oval-sc:EntityItemAnySimpleType. See schema for details. (0..unbounded)  
-      - Element with the OSPF area that is authenticated, if applicable.  
-    * - router_config_lines  
-      - oval-sc:EntityItemStringType (0..1)  
-      - Element with all config lines of the router.  
   
 ______________
   
@@ -328,46 +235,6 @@ Child Elements
     * - key_chain  
       - oval-sc:EntityItemStringType (0..1)  
       - Element with the name of the key chain, if applicable.  
-  
-______________
-  
-.. _acl_item:  
-  
-< acl_item >  
----------------------------------------------------------
-Stores command that are part of a IOS-XE configuration section. For example all configuration lines under an interface. It should not store configurations for configs that already have a separate item. For example BGP has a router item and should not also be stored in a acl_item.
-
-**Extends:** oval-sc:ItemType
-
-Child Elements  
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-.. list-table:: Elements  
-    :header-rows: 1  
-  
-    * - Child Elements  
-      - Type (MinOccurs..MaxOccurs)  
-      - Desc.  
-    * - name  
-      - oval-sc:EntityItemStringType (0..1)  
-      - Element with the name of the ACL.  
-    * - ip_version  
-      - iosxe-sc:EntityItemAccessListIPVersionType (0..1)  
-      - Element with the IP version of the ACL.  
-    * - use  
-      - iosxe-sc:EntityItemAccessListUseType (0..1)  
-      - Element with the feature where the ACL is used. If the same ACL is applied in more than one feature (i.e interface and crypto map), multiple items needs to be created.  
-    * - used_in  
-      - oval-sc:EntityItemStringType (0..1)  
-      - Element with the name of where the ACL is used. For example if use is 'INTERFACE', use_in will be the name of the interface. If the same ACL is applied in more than one feature (i.e interface and crypto map), multiple items needs to be created.  
-    * - interface_direction  
-      - iosxe-sc:EntityItemAccessListInterfaceDirectionType (0..1)  
-      - Element with the direction the ACL is applied on an interface.  
-    * - acl_config_lines  
-      - oval-sc:EntityItemStringType (0..1)  
-      - Element with the value returned with all config lines of the ACL.  
-    * - config_line  
-      - oval-sc:EntityItemStringType (0..unbounded)  
-      - Element with the value returned with one ACL config line at a time.  
   
 ______________
   
@@ -520,34 +387,6 @@ Child Elements
       - oval-sc:EntityItemStringType (0..1)  
       - Element with the SNMP notify view applied to the group.  
   
-______________
-  
-.. _snmpview_item:  
-  
-< snmpview_item >  
----------------------------------------------------------
-Stores information about an SNMP view configuration in IOS. That information includes the view name, the mib_family that the view uses and the included or excluded option of the mib family in the view.
-
-**Extends:** oval-sc:ItemType
-
-Child Elements  
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-.. list-table:: Elements  
-    :header-rows: 1  
-  
-    * - Child Elements  
-      - Type (MinOccurs..MaxOccurs)  
-      - Desc.  
-    * - name  
-      - oval-sc:EntityItemStringType (0..1)  
-      - Element with the SNMP view name.  
-    * - mib_family  
-      - oval-sc:EntityItemStringType (0..1)  
-      - Element with the SNMP MIB family of the view.  
-    * - include  
-      - oval-sc:EntityItemBoolType (0..1)  
-      - Element that is true if the included option is used in the view.  
-  
 .. _EntityItemTrunkEncapType:  
   
 == EntityItemTrunkEncapType ==  
@@ -637,11 +476,6 @@ The EntityItemRoutingAuthTypeStringType complex type restricts a string value to
       - (No Description)  
     * - MESSAGE_DIGEST  
       - (No Description)  
-    * - NULL (Deprecated)  
-      - |   
-        | **Deprecated As Of Version:** 5.11.2:1.0  
-        | **Reason:** The NULL authentication area type is never declared in an interface ip ospf command context.  
-        | **Comment:** This RoutingAuthTypeStringType enumeration value has been deprecated and may be removed in a future version of the language.  
     * -   
       - | The empty string value is permitted here to allow for empty elements associated with error conditions.  
   
@@ -747,79 +581,6 @@ The EntityItemSNMPPrivStringType complex type restricts a string value to a spec
     * - 3DES  
       - (No Description)  
     * - AES  
-      - (No Description)  
-    * -   
-      - | The empty string value is permitted here to allow for empty elements associated with error conditions.  
-  
-.. _EntityItemAccessListIPVersionType:  
-  
-== EntityItemAccessListIPVersionType ==  
----------------------------------------------------------
-The EntityItemRoutingProtocolType complex type restricts a string value to a specific set of values: IPV4, IPV6. These values describe if an ACL is for IPv4 or IPv6 in a Cisco IOS-XE configuration. The empty string is also allowed to support empty element associated with error conditions.
-
-**Restricts:** oval-sc:EntityItemStringType
-
-.. list-table:: Enumeration Values  
-    :header-rows: 1  
-  
-    * - Value  
-      - Description  
-    * - IPV4  
-      - (No Description)  
-    * - IPV6  
-      - (No Description)  
-    * -   
-      - | The empty string value is permitted here to allow for empty elements associated with error conditions.  
-  
-.. _EntityItemAccessListUseType:  
-  
-== EntityItemAccessListUseType ==  
----------------------------------------------------------
-The EntityItemAccessListUseType complex type restricts a string value to a specific set of values: INTERFACE, CRYPTO_MAP_MATCH, CLASS_MAP_MATCH, ROUTE_MAP_MATCH, IGMP_FILTER, VTY. These values describe the ACL use in a Cisco IOS-XE configuration. The empty string is also allowed to support empty element associated with error conditions.
-
-**Restricts:** oval-sc:EntityItemStringType
-
-.. list-table:: Enumeration Values  
-    :header-rows: 1  
-  
-    * - Value  
-      - Description  
-    * - INTERFACE  
-      - (No Description)  
-    * - CRYPTO_MAP_MATCH  
-      - (No Description)  
-    * - CLASS_MAP_MATCH  
-      - (No Description)  
-    * - ROUTE_MAP_MATCH  
-      - (No Description)  
-    * - IGMP_FILTER  
-      - (No Description)  
-    * - VTY  
-      - (No Description)  
-    * - NONE (Deprecated)  
-      - |   
-        | **Deprecated As Of Version:** 5.11.2:1.0  
-        | **Reason:** The EntityStateSimpleBaseType check_existence attribute serves the same purpose as this enumeration value.  
-        | **Comment:** This AccessListUseType enumeration value has been deprecated and may be removed in a future version of the language.  
-    * -   
-      - | The empty string value is permitted here to allow for empty elements associated with error conditions.  
-  
-.. _EntityItemAccessListInterfaceDirectionType:  
-  
-== EntityItemAccessListInterfaceDirectionType ==  
----------------------------------------------------------
-The EntityItemAccessListInterfaceDirectionType complex type restricts a string value to a specific set of values: IN, OUT. These values describe the inbound or outbound ACL direction on an interface in a Cisco IOS-XE configuration. The empty string is also allowed to support empty element associated with error conditions.
-
-**Restricts:** oval-sc:EntityItemStringType
-
-.. list-table:: Enumeration Values  
-    :header-rows: 1  
-  
-    * - Value  
-      - Description  
-    * - IN  
-      - (No Description)  
-    * - OUT  
       - (No Description)  
     * -   
       - | The empty string value is permitted here to allow for empty elements associated with error conditions.  
