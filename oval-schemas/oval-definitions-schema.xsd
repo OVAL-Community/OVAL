@@ -224,13 +224,13 @@
         <xsd:sequence>
             <xsd:element ref="ds:Signature" minOccurs="0" maxOccurs="1"/>
             <xsd:element name="metadata" type="oval-def:MetadataType">
-                <xsd:unique name="UniqueAffectedFamily">
+                <!-- xsd:unique name="UniqueAffectedFamily">
                     <xsd:annotation>
                         <xsd:documentation>Each affected element must have a unique family attribute value.</xsd:documentation>
                     </xsd:annotation>
                     <xsd:selector xpath="oval-def:affected"/>
                     <xsd:field xpath="@family"/>
-                </xsd:unique>            
+                </xsd:unique -->            
             </xsd:element>
             <xsd:element ref="oval:notes" minOccurs="0" maxOccurs="1"/>
             <xsd:element name="criteria" type="oval-def:CriteriaType" minOccurs="0" maxOccurs="1"/>
@@ -328,6 +328,13 @@
                     </xsd:annotation>
                     <xsd:selector xpath="oval-def:product"/>
                     <xsd:field xpath="."/>
+                </xsd:unique>
+		<xsd:unique name="UniqueAffectedFamily">
+                    <xsd:annotation>
+                        <xsd:documentation>Each affected element must have a unique family attribute value.</xsd:documentation>
+                    </xsd:annotation>
+                    <xsd:selector xpath="oval-def:affected"/>
+                    <xsd:field xpath="@family"/>
                 </xsd:unique>
             </xsd:element>
             <xsd:element name="reference" type="oval-def:ReferenceType" minOccurs="0" maxOccurs="unbounded"/>
