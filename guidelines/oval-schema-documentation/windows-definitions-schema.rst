@@ -887,6 +887,26 @@ Child Elements
 ---------------------------------------------------------
 The ntuser_object element is used to specify which metadata should be collected from a Windows ntuser.dat file. Each object extends the standard ObjectType as defined in the oval-definitions-schema and one should refer to the ObjectType description for more information. The common set element allows complex objects to be created using filters and set logic. Again, please refer to the description of the set element in the oval-definitions-schema.
 
+To ensure consistent results across OVAL interpreters should comply with the following:
+
+1. Only include ntuser.dat files from 'human' accounts that have interactively logged into the system, with the exception of the 'Default' user if the 'include_default' behavior is true.
+
+2. Create a 'does not exist' item for each ntuser.dat file that does not contain the specified registry key.
+
+
+
+For requirement #1, OVAL interpreters are at their discretion to determine which ntuser.dat files have been logged into interactively, but the following is one method to determine this information.
+
+a. Obtain a list of user profiles from the registry key: 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\ProfileList'
+
+b. Only include profiles from which the string SID can be translated into a trustee name, where the string SID is determined from they keynames in 'ProfileList'
+
+c. Determine if each ntuser.dat file has been used by a human being via registry key: 'Software\Microsoft\Windows\CurrentVersion\Explorer\' with name 'UserSignedIn'
+
+For requirement #2, This requirement goes against normal item creation in OVAL, but is essential in accurately verifying all ntuser.dat files are compliant, when tests have check_existence="all_exist". It is also very useful in reporting to the end user which ntuser.dat files failed registry key existence checks when tests mandate 'all_exist'
+
+Example: If a computer contains 3 user profiles of human users, and one user has the registry key/name/value specified, and is configured correctly, but the other 2 users do not have the specified registry key, creating 'does not exist' items, informs the end user, which ntuser.dat files, (which corresponds to which specific user(s)) are not compliant. If the 'does not exist' items are not created, and at least one ntuser.dat file is configured correctly, then the overall result will be 'true', which will cause false negatives for any ntuser.dat file that does not contain the specified registry key.
+
 **Extends:** oval-def:ObjectType
 
 Child Elements  

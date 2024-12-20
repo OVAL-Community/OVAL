@@ -63,7 +63,10 @@ Child Elements
       - Type (MinOccurs..MaxOccurs)  
       - Desc.  
     * - oval-def:definition  
-      - n/a (1..unbounded)  
+      - n/a (0..unbounded)  
+      -   
+    * - oval-def:encapsulated_definition  
+      - n/a (0..unbounded)  
       -   
   
 .. _definition:  
@@ -126,6 +129,79 @@ Child Elements
     * - criteria  
       - oval-def:CriteriaType (0..1)  
       -   
+  
+.. _encapsulated_definition:  
+  
+< encapsulated_definition >  
+---------------------------------------------------------
+The encapsulated_definition element represents the globally defined element of type EncapsulatedDefinitionType. For more information please see the documentation on the EncapsulatedDefinitionType.
+
+oval-def:EncapsulatedDefinitionType
+
+.. _EncapsulatedDefinitionType:  
+  
+== EncapsulatedDefinitionType ==  
+---------------------------------------------------------
+The EncapsulatedDefinitionType defines a single OVAL Definition. It differs from a 'DefinitionType' in that all other OVAL entities used by the definition are contained in the definition. An encapsulated_definition is the a key structure in OVAL. It is analogous to the logical sentence or proposition: if a computer's state matches the configuration parameters laid out in the criteria, then that computer exhibits the state described. The EncapsulatedDefinitionType contains a section for various metadata related elements that describe the definition. This includes a description, version, affected system types, and reference information. The notes section of a definition should be used to hold information that might be helpful to someone examining the technical aspects of the definition. For example, why certain tests have been included in the criteria, or maybe a link to where further information can be found. The EncapsulatedDefinitionType also (unless the definition is deprecated) contains a criteria child element that joins individual tests together with a logical operator to specify the specific computer state being described.
+
+The required id attribute is the OVAL-ID of the EncapuslatedDefinition. The form of an OVAL-ID must follow the specific format described by the oval:DefinitionIDPattern. The required version attribute holds the current version of the encapsulated definition. Versions are integers, starting at 1 and incrementing every time a definition is modified. The required class attribute indicates the specific class to which the definition belongs. The class gives a hint to a user so they can know what the encapsulated definition writer is trying to say. See the definition of oval-def:ClassEnumeration for more information about the different valid classes. The optional deprecated attribute signifies that an id is no longer to be used or referenced but the information has been kept around for historic purposes.
+
+When the deprecated attribute is set to true, the encapsulated definition is considered to be deprecated. The criteria child element of a deprecated encapsulated definition is optional. If a deprecated encapsulated definition does not contain a criteria child element, the encapsulated definition must evaluate to "not evaluated". If a deprecated encapsulated definition contains a criteria child element, an interpreter should evaluate the encapsulated definition as if it were not deprecated, but an interpreter may evaluate the encapsulated definition to "not evaluated".
+
+Attributes  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. list-table:: Attributes  
+    :header-rows: 1  
+  
+    * - Attribute  
+      - Type  
+      - Desc.  
+    * - id  
+      - oval:DefinitionIDPattern (required)  
+      - (No Description)  
+    * - version  
+      - xsd:nonNegativeInteger (required)  
+      - (No Description)  
+    * - class  
+      - oval:ClassEnumeration (required)  
+      - (No Description)  
+    * - deprecated  
+      - xsd:boolean (optional *default*='false')  
+      - (No Description)  
+  
+  
+Child Elements  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. list-table:: Elements  
+    :header-rows: 1  
+  
+    * - Child Elements  
+      - Type (MinOccurs..MaxOccurs)  
+      - Desc.  
+    * - ds:Signature  
+      - n/a (0..1)  
+      -   
+    * - metadata  
+      - oval-def:MetadataType (1..1)  
+      -   
+    * - oval:notes  
+      - n/a (0..1)  
+      -   
+    * - criteria  
+      - oval-def:CriteriaType (0..1)  
+      -   
+    * - tests  
+      - oval-def:TestsType (0..1)  
+      - The optional tests section contains 1 or more tests.  
+    * - objects  
+      - oval-def:ObjectsType (0..1)  
+      - The optional objects section contains 1 or more objects.  
+    * - states  
+      - oval-def:StatesType (0..1)  
+      - The optional states section contains 1 or more states.  
+    * - variables  
+      - oval-def:VariablesType (0..1)  
+      - The optional variables section contains 1 or more variables.  
   
 .. _MetadataType:  
   
