@@ -27,6 +27,12 @@ What is OVAL?
 
 OVAL is an open language built by security experts, system administrators, and software developers to universalize assessment and reporting on the state of computer systems.
 
+What changed in version 6.0?
+--------------------------
+* Removed all deprecated items from OVAL 5.12, in order to substantially decrease the size/complexity of the langauge.  This was accomplished without removing any functionality from currently published SCAP/OVAL content.  144 different OVAL deprecated tests were remove from 5.12 to 6.0, along with several entire platforms.
+* Added the concept of an 'encapsulated defininition', which allows for OVAL defintion files to have a new element called 'encapsulated_defintion', which contains all of the tests, objects, states and variables needed to perform the given defintion.  This was added to allow content to be easier to write, maintain, and merge with other files.
+* Added new schemas for Vmware ESX and Kubernetes
+
 Who is the OVAL Community?
 --------------------------
 
