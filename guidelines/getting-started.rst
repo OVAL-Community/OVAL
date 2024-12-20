@@ -91,17 +91,17 @@ Sample Definition (OVAL 6.0 encapsulated style)
     xmlns:oval-def="urn:oval:v6:definitions" 
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
     
-    xsi:schemaLocation="urn:oval:v6:definitions https://raw.githubusercontent.com/OVAL-Community/OVAL/refs/heads/oval6-develop/oval-schemas/oval-definitions-schema.xsd 
-    urn:oval:v6:common https://raw.githubusercontent.com/OVAL-Community/OVAL/refs/heads/oval6-develop/oval-schemas/oval-common-schema.xsd
-    urn:oval:v6:definitions:windows https://raw.githubusercontent.com/OVAL-Community/OVAL/refs/heads/oval6-develop/oval-schemas/windows-definitions-schema.xsd
-    urn:oval:v6:definitions:independent https://raw.githubusercontent.com/OVAL-Community/OVAL/refs/heads/oval6-develop/oval-schemas/independent-definitions-schema.xsd">
+    xsi:schemaLocation="urn:oval:v6:definitions https://raw.githubusercontent.com/OVAL-Community/OVAL/refs/heads/6.0_release/oval-schemas/oval-definitions-schema.xsd 
+    urn:oval:v6:common https://raw.githubusercontent.com/OVAL-Community/OVAL/refs/heads/6.0_release/oval-schemas/oval-common-schema.xsd
+    urn:oval:v6:definitions:windows https://raw.githubusercontent.com/OVAL-Community/OVAL/refs/heads/6.0_release/oval-schemas/windows-definitions-schema.xsd
+    urn:oval:v6:definitions:independent https://raw.githubusercontent.com/OVAL-Community/OVAL/refs/heads/6.0_release/oval-schemas/independent-definitions-schema.xsd">
     <generator>
         <oval:product_name>A human being</oval:product_name>
         <oval:schema_version>6.0</oval:schema_version>
         <oval:timestamp>2024-12-13T17:30:20</oval:timestamp>
     </generator>
     <definitions>
-        <definition id="oval:oval-community:def:1" version="2" class="inventory">
+        <encapsulated_definition id="oval:oval-community:def:1" version="2" class="inventory">
             <metadata>
                 <title>Windows is installed</title>
                 <description>Computer is in the windows family</description>
@@ -123,7 +123,7 @@ Sample Definition (OVAL 6.0 encapsulated style)
                     <family>windows</family>
                 </family_state>
             </states>
-        </definition>
+        </encapsulated_definition>
     </definitions>
     </oval_definitions>
 
@@ -143,10 +143,10 @@ Sample OVAL 6.0 definition file (non-encapsulated style)
     xmlns:oval-def="urn:oval:v6:definitions" 
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
     
-    xsi:schemaLocation="urn:oval:v6:definitions https://raw.githubusercontent.com/OVAL-Community/OVAL/refs/heads/oval6-develop/oval-schemas/oval-definitions-schema.xsd 
-    urn:oval:v6:common https://raw.githubusercontent.com/OVAL-Community/OVAL/refs/heads/oval6-develop/oval-schemas/oval-common-schema.xsd
-    urn:oval:v6:definitions:windows https://raw.githubusercontent.com/OVAL-Community/OVAL/refs/heads/oval6-develop/oval-schemas/windows-definitions-schema.xsd
-    urn:oval:v6:definitions:independent https://raw.githubusercontent.com/OVAL-Community/OVAL/refs/heads/oval6-develop/oval-schemas/independent-definitions-schema.xsd">
+    xsi:schemaLocation="urn:oval:v6:definitions https://raw.githubusercontent.com/OVAL-Community/OVAL/refs/heads/6.0_release/oval-schemas/oval-definitions-schema.xsd 
+    urn:oval:v6:common https://raw.githubusercontent.com/OVAL-Community/OVAL/refs/heads/6.0_release/oval-schemas/oval-common-schema.xsd
+    urn:oval:v6:definitions:windows https://raw.githubusercontent.com/OVAL-Community/OVAL/refs/heads/6.0_release/oval-schemas/windows-definitions-schema.xsd
+    urn:oval:v6:definitions:independent https://raw.githubusercontent.com/OVAL-Community/OVAL/refs/heads/6.0_release/oval-schemas/independent-definitions-schema.xsd">
     <generator>
         <oval:product_name>A human being</oval:product_name>
         <oval:schema_version>6.0</oval:schema_version>
