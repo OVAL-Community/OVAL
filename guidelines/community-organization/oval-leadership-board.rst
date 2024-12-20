@@ -24,7 +24,7 @@ Current Members
   * `Canonical <https://canonical.com/>`_ - Eduardo Barretto
   * `Cisco <https://www.cisco.com/>`_ - Omar Santos
   * `Center for Internet Security <https://www.cisecurity.org>`_ - Justin Burr, Tim Rosner
-  * `Defense Information Systems Agency (DISA) <https://www.disa.mil/>`_ - Jamaal Spearman, Brady Alleman
+  * `Defense Information Systems Agency (DISA) <https://www.disa.mil/>`_ - Jamaal Spearman, Brady Alleman, Brian Snodgrass
   * `HCL Group <https://hcl.com/>`_ - Anurag Srivastava
   * `Modulo <https://www.modulo.com/>`_ - Alberto Bastos
   * `National Institute of Standards and Technology (NIST) <https://www.nist.gov/>`_ - Dragos Prisaca, Bob Gendler
