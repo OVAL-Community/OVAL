@@ -15,7 +15,7 @@ Test Listing
 * :ref:`fileextendedattribute_test`  
 * :ref:`gconf_test` 
 * :ref:`inetd_test` 
-* :ref:`interface_test`  
+* :ref:`interface_test_unix`  
 * :ref:`password_test`  
 * :ref:`process_test_unix`   
 * :ref:`process58_test_unix`  
@@ -596,7 +596,7 @@ Child Elements
   
 ______________
   
-.. _interface_test:  
+.. _interface_test_unix:  
   
 < interface_test >  (unix)
 ---------------------------------------------------------
