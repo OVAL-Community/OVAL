@@ -11,7 +11,10 @@ The OVAL Schema is maintained by the OVAL Community. For more information, inclu
 Test Listing  
 ---------------------------------------------------------
 * :ref:`file_test_unix`  
-* :ref:`interface_test`  
+* :ref:`fileextendedattribute_test`  
+* :ref:`gconf_test` 
+* :ref:`inetd_test` 
+* :ref:`interface_test_unix`  
 * :ref:`password_test`  
 * :ref:`process58_test`  
 * :ref:`runlevel_test`  
@@ -208,7 +211,7 @@ Note that in most cases it is recommended that the value of 'local' be used to e
   
 ______________
   
-.. _interface_test:  
+.. _interface_test_unix:  
   
 < interface_test >  
 ---------------------------------------------------------
