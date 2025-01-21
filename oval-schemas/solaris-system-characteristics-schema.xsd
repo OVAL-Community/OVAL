@@ -20,6 +20,139 @@
           </xsd:appinfo>
      </xsd:annotation>
       <!-- =============================================================================== -->
+     <!-- ===============================  PACKAGE ITEM  ================================ -->
+     <!-- =============================================================================== -->
+     <xsd:element name="package_item" substitutionGroup="oval-sc:item">
+          <xsd:annotation>
+                <xsd:documentation>The package_item holds information about installed SVR4 packages. Output of /usr/bin/pkginfo. See pkginfo(1).</xsd:documentation>
+          </xsd:annotation>
+          <xsd:complexType>
+               <xsd:complexContent>
+                    <xsd:extension base="oval-sc:ItemType">
+                         <xsd:sequence>
+                              <xsd:element name="pkginst" type="oval-sc:EntityItemStringType" minOccurs="0" maxOccurs="1">
+                                   <xsd:annotation>
+                                        <xsd:documentation/>
+                                   </xsd:annotation>
+                              </xsd:element>
+                              <xsd:element name="name" type="oval-sc:EntityItemStringType" minOccurs="0" maxOccurs="1">
+                                   <xsd:annotation>
+                                        <xsd:documentation/>
+                                   </xsd:annotation>
+                              </xsd:element>
+                              <xsd:element name="category" type="oval-sc:EntityItemStringType" minOccurs="0" maxOccurs="1">
+                                   <xsd:annotation>
+                                        <xsd:documentation/>
+                                   </xsd:annotation>
+                              </xsd:element>
+                              <xsd:element name="version" type="oval-sc:EntityItemStringType" minOccurs="0" maxOccurs="1">
+                                   <xsd:annotation>
+                                        <xsd:documentation/>
+                                   </xsd:annotation>
+                              </xsd:element>
+                              <xsd:element name="vendor" type="oval-sc:EntityItemStringType" minOccurs="0" maxOccurs="1">
+                                   <xsd:annotation>
+                                        <xsd:documentation/>
+                                   </xsd:annotation>
+                              </xsd:element>
+                              <xsd:element name="description" type="oval-sc:EntityItemStringType" minOccurs="0" maxOccurs="1">
+                                   <xsd:annotation>
+                                        <xsd:documentation/>
+                                   </xsd:annotation>
+                              </xsd:element>
+                         </xsd:sequence>
+                    </xsd:extension>
+               </xsd:complexContent>
+          </xsd:complexType>
+     </xsd:element>
+      <!-- =============================================================================== -->
+      <!-- =============================  PACKAGE 511 ITEM  ============================== -->
+      <!-- =============================================================================== -->
+      <xsd:element name="package511_item" substitutionGroup="oval-sc:item">
+            <xsd:annotation>
+                  <xsd:documentation>This item stores system state information associated with IPS packages installed on a Solaris system.</xsd:documentation>
+            </xsd:annotation>
+            <xsd:complexType>
+                  <xsd:complexContent>
+                        <xsd:extension base="oval-sc:ItemType">
+                              <xsd:sequence>
+                                    <xsd:element name="publisher" type="oval-sc:EntityItemStringType" minOccurs="0" maxOccurs="1">
+                                          <xsd:annotation>
+                                                <xsd:documentation>The person, group of persons, or organization that is the source of the package. The publisher should be expressed without leading "pkg:" or "//" components.</xsd:documentation>
+                                          </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="name" type="oval-sc:EntityItemStringType" minOccurs="0" maxOccurs="1">
+                                          <xsd:annotation>
+                                                <xsd:documentation>The full hierarchical name of the package which is separated by forward slash characters. The full name should be expressed without leading "pkg:/" or "/" components.</xsd:documentation>
+                                          </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="version" type="oval-sc:EntityItemVersionType" minOccurs="0" maxOccurs="1">
+                                          <xsd:annotation>
+                                                <xsd:documentation>The version of the package which consists of the component version, build version, and branch version.</xsd:documentation>
+                                          </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="timestamp" type="oval-sc:EntityItemStringType" minOccurs="0" maxOccurs="1">
+                                          <xsd:annotation>
+                                                <xsd:documentation>The timestamp when the package was published in the ISO-8601 basic format (YYYYMMDDTHHMMSSZ).</xsd:documentation>
+                                          </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="fmri" type="oval-sc:EntityItemStringType" minOccurs="0" maxOccurs="1">
+                                          <xsd:annotation>
+                                                <xsd:documentation>The Fault Management Resource Identifier (FMRI) of the package which uniquely identifies the package on the system.</xsd:documentation>
+                                          </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="summary" type="oval-sc:EntityItemStringType" minOccurs="0" maxOccurs="1">
+                                          <xsd:annotation>
+                                                <xsd:documentation>A summary of what the package provides.</xsd:documentation>
+                                          </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="description" type="oval-sc:EntityItemStringType" minOccurs="0" maxOccurs="1">
+                                          <xsd:annotation>
+                                                <xsd:documentation>A description of what the package provides.</xsd:documentation>
+                                          </xsd:annotation>
+                                    </xsd:element>                                    
+                                    <xsd:element name="category" type="oval-sc:EntityItemStringType" minOccurs="0" maxOccurs="1">
+                                          <xsd:annotation>
+                                                <xsd:documentation>The category of the package.</xsd:documentation>
+                                          </xsd:annotation>
+                                    </xsd:element>    
+                                    <xsd:element name="updates_available" type="oval-sc:EntityItemBoolType" minOccurs="0" maxOccurs="1">
+                                          <xsd:annotation>
+                                                <xsd:documentation>A boolean value indicating whether or not updates are available for this package.</xsd:documentation>
+                                          </xsd:annotation>
+                                    </xsd:element>  
+                              </xsd:sequence>
+                        </xsd:extension>
+                  </xsd:complexContent>
+            </xsd:complexType>
+      </xsd:element>
+      <!-- =============================================================================== -->
+     <!-- =============================  PATCH ITEM  ==================================== -->
+     <!-- =============================================================================== -->
+     <xsd:element name="patch_item" substitutionGroup="oval-sc:item">
+          <xsd:annotation>
+                <xsd:documentation>Patches for SVR4 packages are identified by unique alphanumeric strings, with the patch base code first, a hyphen, and a number that represents the patch revision number. The information can be obtained using /usr/bin/showrev -p. Please see showrev(1M).</xsd:documentation>
+          </xsd:annotation>
+          <xsd:complexType>
+               <xsd:complexContent>
+                    <xsd:extension base="oval-sc:ItemType">
+                         <xsd:sequence>
+                              <xsd:element name="base" type="oval-sc:EntityItemIntType" minOccurs="0" maxOccurs="1">
+                                   <xsd:annotation>
+                                         <xsd:documentation>The base entity reresents a patch base code found before the hyphen.</xsd:documentation>
+                                   </xsd:annotation>
+                              </xsd:element>
+                              <xsd:element name="version" type="oval-sc:EntityItemIntType" minOccurs="0" maxOccurs="1">
+                                   <xsd:annotation>
+                                         <xsd:documentation>The version entity represents a patch version number found after the hyphen.</xsd:documentation>
+                                   </xsd:annotation>
+                              </xsd:element>
+                         </xsd:sequence>
+                    </xsd:extension>
+               </xsd:complexContent>
+          </xsd:complexType>
+     </xsd:element>
+      <!-- =============================================================================== -->
       <!-- =================================  SMF ITEM  ================================== -->
       <!-- =============================================================================== -->
       <xsd:element name="smf_item" substitutionGroup="oval-sc:item">
