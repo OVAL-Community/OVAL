@@ -2,7 +2,7 @@ Open Vulnerability and Assessment Language: Solaris System Characteristics
 =========================================================
 * Schema: Solaris System Characteristics  
 * Version: 6.0  
-* Release Date: 1/1/2025 09:00:00 AM
+* Release Date: 1/24/2025 09:00:00 AM
 
 The following is a description of the elements, types, and attributes that compose the Solaris specific system characteristic items found in Open Vulnerability and Assessment Language (OVAL). Each item is an extension of the standard test element defined in the Core Definition Schema. Through extension, each test inherits a set of elements and attributes that are shared amongst all OVAL tests. Each test is described in detail and should provide the information necessary to understand what each element and attribute represents. This document is intended for developers and assumes some familiarity with XML. A high level description of the interaction between the different tests and their relationship to the Core Definition Schema is not outlined here.
 
@@ -10,8 +10,119 @@ The OVAL Schema is maintained by the OVAL Community. For more information, inclu
 
 Item Listing  
 ---------------------------------------------------------
+* :ref:`package_item`  
+* :ref:`package511_item`  
+* :ref:`patch_item`  
 * :ref:`smf_item`  
 * :ref:`smfproperty_item`  
+  
+______________
+  
+.. _package_item:  
+  
+< package_item >  
+---------------------------------------------------------
+The package_item holds information about installed SVR4 packages. Output of /usr/bin/pkginfo. See pkginfo(1).
+
+**Extends:** oval-sc:ItemType
+
+Child Elements  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. list-table:: Elements  
+    :header-rows: 1  
+  
+    * - Child Elements  
+      - Type (MinOccurs..MaxOccurs)  
+      - Desc.  
+    * - pkginst  
+      - oval-sc:EntityItemStringType (0..1)  
+      -   
+    * - name  
+      - oval-sc:EntityItemStringType (0..1)  
+      -   
+    * - category  
+      - oval-sc:EntityItemStringType (0..1)  
+      -   
+    * - version  
+      - oval-sc:EntityItemStringType (0..1)  
+      -   
+    * - vendor  
+      - oval-sc:EntityItemStringType (0..1)  
+      -   
+    * - description  
+      - oval-sc:EntityItemStringType (0..1)  
+      -   
+  
+______________
+  
+.. _package511_item:  
+  
+< package511_item >  
+---------------------------------------------------------
+This item stores system state information associated with IPS packages installed on a Solaris system.
+
+**Extends:** oval-sc:ItemType
+
+Child Elements  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. list-table:: Elements  
+    :header-rows: 1  
+  
+    * - Child Elements  
+      - Type (MinOccurs..MaxOccurs)  
+      - Desc.  
+    * - publisher  
+      - oval-sc:EntityItemStringType (0..1)  
+      - The person, group of persons, or organization that is the source of the package. The publisher should be expressed without leading "pkg:" or "//" components.  
+    * - name  
+      - oval-sc:EntityItemStringType (0..1)  
+      - The full hierarchical name of the package which is separated by forward slash characters. The full name should be expressed without leading "pkg:/" or "/" components.  
+    * - version  
+      - oval-sc:EntityItemVersionType (0..1)  
+      - The version of the package which consists of the component version, build version, and branch version.  
+    * - timestamp  
+      - oval-sc:EntityItemStringType (0..1)  
+      - The timestamp when the package was published in the ISO-8601 basic format (YYYYMMDDTHHMMSSZ).  
+    * - fmri  
+      - oval-sc:EntityItemStringType (0..1)  
+      - The Fault Management Resource Identifier (FMRI) of the package which uniquely identifies the package on the system.  
+    * - summary  
+      - oval-sc:EntityItemStringType (0..1)  
+      - A summary of what the package provides.  
+    * - description  
+      - oval-sc:EntityItemStringType (0..1)  
+      - A description of what the package provides.  
+    * - category  
+      - oval-sc:EntityItemStringType (0..1)  
+      - The category of the package.  
+    * - updates_available  
+      - oval-sc:EntityItemBoolType (0..1)  
+      - A boolean value indicating whether or not updates are available for this package.  
+  
+______________
+  
+.. _patch_item:  
+  
+< patch_item >  
+---------------------------------------------------------
+Patches for SVR4 packages are identified by unique alphanumeric strings, with the patch base code first, a hyphen, and a number that represents the patch revision number. The information can be obtained using /usr/bin/showrev -p. Please see showrev(1M).
+
+**Extends:** oval-sc:ItemType
+
+Child Elements  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. list-table:: Elements  
+    :header-rows: 1  
+  
+    * - Child Elements  
+      - Type (MinOccurs..MaxOccurs)  
+      - Desc.  
+    * - base  
+      - oval-sc:EntityItemIntType (0..1)  
+      - The base entity reresents a patch base code found before the hyphen.  
+    * - version  
+      - oval-sc:EntityItemIntType (0..1)  
+      - The version entity represents a patch version number found after the hyphen.  
   
 ______________
   

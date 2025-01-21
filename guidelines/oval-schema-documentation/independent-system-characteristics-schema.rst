@@ -2,7 +2,7 @@ Open Vulnerability and Assessment Language: Independent System Characteristics
 =========================================================
 * Schema: Independent System Characteristics  
 * Version: 6.0  
-* Release Date: 1/1/2025 09:00:00 AM
+* Release Date: 1/24/2025 09:00:00 AM
 
 This document outlines the items of the OVAL System Characteristics XML schema that are independent of any specific family or platform. Each iten is an extention of a basic System Characteristics item defined in the core System Characteristics XML schema.
 
