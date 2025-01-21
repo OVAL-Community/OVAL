@@ -2,7 +2,7 @@ Open Vulnerability and Assessment Language: Core Definition
 =========================================================
 * Schema: Core Definition  
 * Version: 6.0  
-* Release Date: 1/1/2025 09:00:00 AM
+* Release Date: 1/24/2025 09:00:00 AM
 
 The following is a description of the elements, types, and attributes that compose the core schema for encoding Open Vulnerability and Assessment Language (OVAL) Definitions. Some of the objects defined here are extended and enhanced by individual component schemas, which are described in separate documents. Each of the elements, types, and attributes that make up the Core Definition Schema are described in detail and should provide the information necessary to understand what each represents. This document is intended for developers and assumes some familiarity with XML. A high level description of the interaction between these objects is not outlined here.
 

@@ -2,7 +2,7 @@ Open Vulnerability and Assessment Language: Palo Alto (PAN-OS) Definitions
 =========================================================
 * Schema: Palo Alto (PAN-OS) Definitions  
 * Version: 6.0  
-* Release Date: 1/1/2025 09:00:00 AM
+* Release Date: 1/24/2025 09:00:00 AM
 
 This document outlines the items of the OVAL System Characteristics XML schema that are composed of Palo Alto-specific tests. Each item is an extention of a basic System Characteristics item defined in the core System Characteristics XML schema.
 

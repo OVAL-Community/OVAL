@@ -2,7 +2,7 @@ Open Vulnerability and Assessment Language: Vmware ESX Definitions
 =========================================================
 * Schema: Vmware ESX Definitions  
 * Version: 6.0  
-* Release Date: 1/1/2025 09:00:00 AM
+* Release Date: 1/24/2025 09:00:00 AM
 
 The following is a proposal for the esx-def tests and esx-sc: items that will support assessments of VMware ESXi hosts and Virtual Machines.
 

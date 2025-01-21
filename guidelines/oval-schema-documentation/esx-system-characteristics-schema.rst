@@ -2,7 +2,7 @@ Open Vulnerability and Assessment Language: VMware ESX System characteristics
 =========================================================
 * Schema: VMware ESX System characteristics  
 * Version: 6.0  
-* Release Date: 1/1/2025 09:00:00 AM
+* Release Date: 1/24/2025 09:00:00 AM
 
 The following is a proposal for the schemas for VMware ESX that will support assessment of ESX hosts and Virtual Machines
 
