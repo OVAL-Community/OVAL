@@ -4,7 +4,7 @@
 The OVAL board is proud to announce the release of OVAL 6.0, which is the first 'major' release of OVAL in nearly 20 years.   OVAL 5.0 was released back in 2006!
 
 Primary Changes:
-- OVAL 6.0 removes backward compatibility to OVAL 5.x content, dropping support for 139 deprecated OVAL tests.
+- OVAL 6.0 removes backward compatibility to OVAL 5.x content, dropping support for 140 deprecated OVAL tests.
 - OVAL 6.0 adds the concept of an 'encapsulated definition', which allows for more portable content, and easier maintenance, while still allowing the existing definition format.
 
 For a complete list of changes, please refer to:
