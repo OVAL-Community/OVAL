@@ -129,7 +129,7 @@ Sample Definition (OVAL 6.0 encapsulated style)
 
 
 Sample OVAL 6.0 definition file (non-encapsulated style)
-  This style has seperate silos of data for defintion, tests, objects, states, variables.  This makes for easy sharing of existing tests, objects, states, variables within a single file, but can make the file very hard to read/understand/maintain.  It also makes it very challenging to copy a defintion from one file to another.
+  This style has separate silos of data for definitions, tests, objects, states, variables.  This makes for easy sharing of existing tests, objects, states, variables within a single file, but can make the file very hard to read/understand/maintain.  It also makes it very challenging to copy a definition from one file to another.
 -------------------
 <snippet>
   <content><![CDATA[
