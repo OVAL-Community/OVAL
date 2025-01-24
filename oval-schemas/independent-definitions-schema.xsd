@@ -980,7 +980,7 @@
       <!-- =============================================================================== -->
       <xsd:element name="shellcommand_test" substitutionGroup="oval-def:test">
             <xsd:annotation>
-                  <xsd:documentation>The shellcommand_test is used to check the values produced by the running of the 'command' (or script, but not an external script file) found in the object 'command' element. It extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information. The required object element references a shellcommand_object and the optional state element references a shellcommand_state that specifies the information to check.
+                  <xsd:documentation>The shellcommand_test is used to check the values produced by the running of the 'command', or a one-liner (but not an external script file, or a multiple-line embedded script) found in the object 'command' element. It extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information. The required object element references a shellcommand_object and the optional state element references a shellcommand_state that specifies the information to check.
                   
 Since this test runs the command string supplied in the object command element, the content author should avoid writing command strings that may produce large amounts of output or that may be fragile causing errors and thus produce large amounts of error output.
 
@@ -1022,7 +1022,7 @@ IMPORTANT! - Since this test requires the running of code supplied by content an
             <xsd:annotation>
                   <xsd:documentation>The shellcommand_object is used by a shellcommand_test to define a shell to use (e.g. sh, bash, ksh, etc.), a command (or shell script) to be run, and a pattern to filter result lines. The default shell is bash.  Each object extends the standard ObjectType as defined in the oval-definitions-schema and one should refer to the ObjectType description for more information. The common set element allows complex objects to be created using filters and set logic.
                   
-The evaluation of the object should always produce one item. If the command execution does not produce output, an item should still be created with the exit_status (AKA process exit code), a stdout entity with a status of 'does not exist', and any STDERR from the execution captured in stderr_line entities.                  
+The evaluation of the object should always produce at least one item. If the command execution does not produce output, an item should still be created with the exit_status (AKA process exit code), a stdout entity with a status of 'does not exist', and any STDERR from the execution captured in stderr_line entities.  If the command returns multiple lines of standard out, mulitple items should be created, one for each line.                 
 				  </xsd:documentation>
                   <xsd:appinfo>
                         <sch:pattern id="ind-def_shellcommand_object_verify_filter_state">
@@ -1052,7 +1052,7 @@ The evaluation of the object should always produce one item. If the command exec
                                                 </xsd:element>
                                                 <xsd:element name="command" type="oval-def:EntityObjectStringType"  minOccurs="1" maxOccurs="1">
                                                       <xsd:annotation>
-                                                            <xsd:documentation>The command element specifies the command string to be run on the target system.  Since this command string will be executed on the target system and since OVAL interpreters commonly run with elevated privileges, significant responsibilty falls to the content author to DO NO HARM.  This also requires that any content stream that employs this test MUST be from a known trusted source and be digitally signed.  The use of executables that are not supplied by the installed operating system is highly discouraged.</xsd:documentation>
+                                                            <xsd:documentation>The command element specifies the command string to be run on the target system, which could be a single executable/binary or a one-liner which manipulates the output from one or more executables/binaries.  Since this command string will be executed on the target system and since OVAL interpreters commonly run with elevated privileges, significant responsibilty falls to the content author to DO NO HARM.  This also requires that any content stream that employs this test MUST be from a known trusted source and be digitally signed.  The use of executables that are not supplied by the installed operating system is highly discouraged.</xsd:documentation>
                                                       </xsd:annotation>
                                                 </xsd:element>
                                                 <xsd:element name="pattern" type="oval-def:EntityObjectStringType"  minOccurs="0" maxOccurs="1">
