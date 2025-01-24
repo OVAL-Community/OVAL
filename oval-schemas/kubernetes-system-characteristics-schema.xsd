@@ -1,0 +1,373 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:oval-sc="urn:oval:v6:system-characteristics"
+            xmlns:oval="urn:oval:v6:common"
+            xmlns:kube-sc="urn:oval:v6:system-characteristics:kubernetes"
+            xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+            targetNamespace="urn:oval:v6:system-characteristics:kubernetes"
+            elementFormDefault="qualified" version="6.0">
+	<xsd:import namespace="urn:oval:v6:system-characteristics" schemaLocation="oval-system-characteristics-schema.xsd"/>
+	<xsd:annotation>
+		<xsd:documentation>The following is a description of the elements, types, and attributes that compose the Kubernetes specific tests found in Open Vulnerability and Assessment Language (OVAL).  Each item is an extension of the standard item element defined in the Core System Characteristic Schema.  Through extension, each item inherits a set of elements and attributes that are shared amongst all OVAL Items.  Each item is described in detail and should provide the information necessary to understand what each element and attribute represents.  This document is intended for developers and assumes some familiarity with XML.  A high level description of the interaction between the different tests and their relationship to the Core System Characteristic Schema is not outlined here.</xsd:documentation>
+        <xsd:documentation>The OVAL Schema is maintained by the OVAL Community. For more information, including how to get involved in the project and how to submit change requests, please visit the OVAL website at https://github.com/OVAL-Community/.</xsd:documentation>
+		<xsd:appinfo>
+			<schema>Kubernetes System Characteristics</schema>
+		    <version>6.0</version>
+		    <date>1/24/2025 09:00:00 AM</date>
+			<terms_of_use>This software is an open standard developed by multiple parties, including the United States Government (Government). The Government hereby grants you a non-exclusive, royalty-free, worldwide license to use, modify, and/or reproduce the software for any lawful purpose provided that you reproduce this License/Disclaimer language with any use/modification/copy of the software. The Government assumes no responsibility whatsoever for this software's use by other parties, and the software is provided "AS IS" without warranty or guarantee of any kind, express or implied, including, but not limited to, the warranties of merchantability, fitness for a particular purpose, and noninfringement. In no event shall the Government be liable for any claim, damages or other liability, whether in an action of contract, tort or other dealings in the software. The Government has no obligation hereunder to provide maintenance, support, updates, enhancements, or modifications to the software. Users may submit proposals and/or updates regarding the software, which proposals and/or updates the Government, at its sole discretion, can choose to incorporate into the software. Proposals and/or updates submitted to the Government by users must be accompanied by a license to such proposals and/or updates that is no more restrictive than this License/Disclaimer.</terms_of_use>
+            <sch:ns prefix="oval-sc" urn="urn:oval:v6:system-characteristics"/>
+			<sch:ns prefix="kube-sc" urn="urn:oval:v6:system-characteristics:kubernetes"/>
+		    <sch:ns prefix="xsi" uri="http://www.w3.org/2001/XMLSchema-instance"/>
+		</xsd:appinfo>
+	</xsd:annotation>
+	<!-- =============================================================================== -->
+	<!-- ================================  KUBECTL ITEM  =============================== -->
+	<!-- =============================================================================== -->
+	<xsd:element name="kubectl_item" substitutionGroup="oval-sc:item">
+		<xsd:annotation>
+			<xsd:documentation>
+				The kubectl_item element defines information associated with results from the "kubectl get" command for the specified 
+				resource and potentially namespace.  Refer to https://kubernetes.io/docs/reference/kubectl/overview/ for more information on
+				the resource types available and whether or not they are namespaced. It extends the standard ItemType as defined in the 
+				oval-system-characteristics schema and one should refer to the ItemType description for more information.
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="oval-sc:ItemType">
+					<xsd:sequence>
+						<xsd:element name="resource_name" type="kube-sc:EntityItemResourceNameType" minOccurs="1" maxOccurs="1">
+							<xsd:annotation>
+								<xsd:documentation>The resource_name element defines the kind of resources retrieved via the "kubectl get" command.</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<xsd:element name="namespace" type="oval-sc:EntityItemStringType" minOccurs="1" maxOccurs="1" nillable="true">
+							<xsd:annotation>
+								<xsd:documentation>
+									If a resource to be collected defines distinct values per defined namespace, the namespace element allows 
+									collectors to only retrieve resource information for that namespace.  If xsi:nil=true, either the resource_name 
+									does not require a namespace, or the results of the command will include all namespaces.
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<xsd:element name="yaml_path" type="oval-sc:EntityItemStringType" minOccurs="1" maxOccurs="1" nillable="true">
+							<xsd:annotation>
+								<xsd:documentation>
+									By default, only a subset of fields are returned from any given "kubectl get" command.  These fields are selected based on the
+									resource name used in the command and will vary from resource to resource.  Using the output format capabilities of the "kubectl get" 
+									command, a full YAML output is available using the "-o=yaml" argument.  Using the YAML path element here allows policy writers to 
+									provide a colon-delimited path to select specific resource properties.
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<xsd:element name="result" type="oval-sc:EntityItemRecordType" minOccurs="0" maxOccurs="unbounded">
+							<xsd:annotation>
+								<xsd:documentation>The result entity holds the results of the specified "kubectl get" command.</xsd:documentation>
+								<xsd:appinfo>
+									<sch:pattern id="kube-sc_kubectl_itemresult">
+										<sch:rule context="kube-sc:kubectl_item/kube-sc:result">
+											<sch:assert test="@datatype='record'"><sch:value-of select="../@id"/> - datatype attribute for the result entity of a kubectl_item must be 'record'</sch:assert>
+										</sch:rule>
+									</sch:pattern>
+								</xsd:appinfo>
+							</xsd:annotation>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<!-- =============================================================================== -->
+	<!-- ================================  KUBEPSP ITEM  =============================== -->
+	<!-- =============================================================================== -->
+	<xsd:element name="kubepsp_item" substitutionGroup="oval-sc:item">
+		<xsd:annotation>
+			<xsd:documentation>
+				The kubepsp_item element defines information associated with results from the "kubectl get psp" command for the specified 
+				pod security policy.  Refer to https://kubernetes.io/docs/concepts/policy/pod-security-policy/ for more information on pod 
+				security policies. It extends the standard ItemType as defined in the oval-system-characteristics schema and one should refer 
+				to the ItemType description for more information.
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="oval-sc:ItemType">
+					<xsd:sequence>
+						<xsd:element name="psp_name" type="oval-sc:EntityItemStringType" minOccurs="1" maxOccurs="1">
+							<xsd:annotation>
+								<xsd:documentation>Specifies the name of the PSP. Names are case-sensitive. For example "kubectl get psp example1"</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<xsd:element name="yaml_path" type="oval-sc:EntityItemStringType" minOccurs="1" maxOccurs="1" nillable="true">
+							<xsd:annotation>
+								<xsd:documentation>
+									By default, only a subset of fields are returned from any given "kubectl get psp" command.  Using the output format capabilities 
+									of the "kubectl get" command, a full YAML output is available using the "-o=yaml" argument.  Using the YAML path element here allows 
+									policy writers to provide a colon-delimited path to select specific resource properties.
+									
+									When a yaml_path is provided, this object reflects the execution of the "kubectl get psp [PSP_NAME] -o=yaml" command, 
+									and implementations will be required to parse the output YAML and navigate the path specified, in order to find the appropriate values.
+									
+									Examples of yaml_path values can be as simple as "apiVersion", or more complicated such as "spec:runAsUser:rule"
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<xsd:element name="result" type="oval-sc:EntityItemRecordType" minOccurs="0" maxOccurs="unbounded">
+							<xsd:annotation>
+								<xsd:documentation>The result entity specifies how to test objects in the result set of the specified "kubectl get psp" output.</xsd:documentation>
+								<xsd:appinfo>
+									<sch:pattern id="kube-sc_kubectl_itemresult">
+										<sch:rule context="kube-sc:kubectl_item/kube-sc:result">
+											<sch:assert test="@datatype='record'"><sch:value-of select="../@id"/> - datatype attribute for the result entity of a kubectl_item must be 'record'</sch:assert>
+										</sch:rule>
+									</sch:pattern>
+								</xsd:appinfo>
+							</xsd:annotation>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+
+	<!-- ================================= TYPES ======================================= -->
+	<xsd:complexType name="EntityItemResourceNameType">
+		<xsd:annotation>
+			<xsd:documentation>The EntityObjectResourceNameType restricts a string value to a set of allowed "kubectl get" resource names.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleContent>
+			<xsd:restriction base="oval-sc:EntityItemStringType">
+				<xsd:enumeration value="componentstatuses">
+					<xsd:annotation>
+						<xsd:documentation/>
+					</xsd:annotation>
+				</xsd:enumeration>
+				<xsd:enumeration value="configmaps">
+					<xsd:annotation>
+						<xsd:documentation/>
+					</xsd:annotation>
+				</xsd:enumeration>
+				<xsd:enumeration value="endpoints">
+					<xsd:annotation>
+						<xsd:documentation/>
+					</xsd:annotation>
+				</xsd:enumeration>
+				<xsd:enumeration value="limitranges">
+					<xsd:annotation>
+						<xsd:documentation/>
+					</xsd:annotation>
+				</xsd:enumeration>
+				<xsd:enumeration value="namespaces">
+					<xsd:annotation>
+						<xsd:documentation/>
+					</xsd:annotation>
+				</xsd:enumeration>
+				<xsd:enumeration value="nodes">
+					<xsd:annotation>
+						<xsd:documentation/>
+					</xsd:annotation>
+				</xsd:enumeration>
+				<xsd:enumeration value="persistentvolumeclaims">
+					<xsd:annotation>
+						<xsd:documentation/>
+					</xsd:annotation>
+				</xsd:enumeration>
+				<xsd:enumeration value="persistentvolumes">
+					<xsd:annotation>
+						<xsd:documentation/>
+					</xsd:annotation>
+				</xsd:enumeration>
+				<xsd:enumeration value="pods">
+					<xsd:annotation>
+						<xsd:documentation/>
+					</xsd:annotation>
+				</xsd:enumeration>
+				<xsd:enumeration value="podtemplates">
+					<xsd:annotation>
+						<xsd:documentation/>
+					</xsd:annotation>
+				</xsd:enumeration>
+				<xsd:enumeration value="replicationcontrollers">
+					<xsd:annotation>
+						<xsd:documentation/>
+					</xsd:annotation>
+				</xsd:enumeration>
+				<xsd:enumeration value="resourcequotas">
+					<xsd:annotation>
+						<xsd:documentation/>
+					</xsd:annotation>
+				</xsd:enumeration>
+				<xsd:enumeration value="secrets">
+					<xsd:annotation>
+						<xsd:documentation/>
+					</xsd:annotation>
+				</xsd:enumeration>
+				<xsd:enumeration value="serviceaccounts">
+					<xsd:annotation>
+						<xsd:documentation/>
+					</xsd:annotation>
+				</xsd:enumeration>
+				<xsd:enumeration value="services">
+					<xsd:annotation>
+						<xsd:documentation/>
+					</xsd:annotation>
+				</xsd:enumeration>
+				<xsd:enumeration value="mutatingwebhookconfigurations">
+					<xsd:annotation>
+						<xsd:documentation/>
+					</xsd:annotation>
+				</xsd:enumeration>
+				<xsd:enumeration value="validatingwebhookconfigurations">
+					<xsd:annotation>
+						<xsd:documentation/>
+					</xsd:annotation>
+				</xsd:enumeration>
+				<xsd:enumeration value="customresourcedefinitions">
+					<xsd:annotation>
+						<xsd:documentation/>
+					</xsd:annotation>
+				</xsd:enumeration>
+				<xsd:enumeration value="apiservices">
+					<xsd:annotation>
+						<xsd:documentation/>
+					</xsd:annotation>
+				</xsd:enumeration>
+				<xsd:enumeration value="controllerrevisions">
+					<xsd:annotation>
+						<xsd:documentation/>
+					</xsd:annotation>
+				</xsd:enumeration>
+				<xsd:enumeration value="daemonsets">
+					<xsd:annotation>
+						<xsd:documentation/>
+					</xsd:annotation>
+				</xsd:enumeration>
+				<xsd:enumeration value="deployments">
+					<xsd:annotation>
+						<xsd:documentation/>
+					</xsd:annotation>
+				</xsd:enumeration>
+				<xsd:enumeration value="replicasets">
+					<xsd:annotation>
+						<xsd:documentation/>
+					</xsd:annotation>
+				</xsd:enumeration>
+				<xsd:enumeration value="statefulsets">
+					<xsd:annotation>
+						<xsd:documentation/>
+					</xsd:annotation>
+				</xsd:enumeration>
+				<xsd:enumeration value="tokenreviews">
+					<xsd:annotation>
+						<xsd:documentation/>
+					</xsd:annotation>
+				</xsd:enumeration>
+				<xsd:enumeration value="localsubjectaccessreviews">
+					<xsd:annotation>
+						<xsd:documentation/>
+					</xsd:annotation>
+				</xsd:enumeration>
+				<xsd:enumeration value="selfsubjectaccessreviews">
+					<xsd:annotation>
+						<xsd:documentation/>
+					</xsd:annotation>
+				</xsd:enumeration>
+				<xsd:enumeration value="selfsubjectrulesreviews">
+					<xsd:annotation>
+						<xsd:documentation/>
+					</xsd:annotation>
+				</xsd:enumeration>
+				<xsd:enumeration value="subjectaccessreviews">
+					<xsd:annotation>
+						<xsd:documentation/>
+					</xsd:annotation>
+				</xsd:enumeration>
+				<xsd:enumeration value="horizontalpodautoscalers">
+					<xsd:annotation>
+						<xsd:documentation/>
+					</xsd:annotation>
+				</xsd:enumeration>
+				<xsd:enumeration value="cronjobs">
+					<xsd:annotation>
+						<xsd:documentation/>
+					</xsd:annotation>
+				</xsd:enumeration>
+				<xsd:enumeration value="jobs">
+					<xsd:annotation>
+						<xsd:documentation/>
+					</xsd:annotation>
+				</xsd:enumeration>
+				<xsd:enumeration value="certificatesigningrequests">
+					<xsd:annotation>
+						<xsd:documentation/>
+					</xsd:annotation>
+				</xsd:enumeration>
+				<xsd:enumeration value="leases">
+					<xsd:annotation>
+						<xsd:documentation/>
+					</xsd:annotation>
+				</xsd:enumeration>
+				<xsd:enumeration value="events">
+					<xsd:annotation>
+						<xsd:documentation/>
+					</xsd:annotation>
+				</xsd:enumeration>
+				<xsd:enumeration value="ingresses">
+					<xsd:annotation>
+						<xsd:documentation/>
+					</xsd:annotation>
+				</xsd:enumeration>
+				<xsd:enumeration value="networkpolicies">
+					<xsd:annotation>
+						<xsd:documentation/>
+					</xsd:annotation>
+				</xsd:enumeration>
+				<xsd:enumeration value="poddisruptionbudgets">
+					<xsd:annotation>
+						<xsd:documentation/>
+					</xsd:annotation>
+				</xsd:enumeration>
+				<xsd:enumeration value="podsecuritypolicies">
+					<xsd:annotation>
+						<xsd:documentation/>
+					</xsd:annotation>
+				</xsd:enumeration>
+				<xsd:enumeration value="clusterrolebindings">
+					<xsd:annotation>
+						<xsd:documentation/>
+					</xsd:annotation>
+				</xsd:enumeration>
+				<xsd:enumeration value="clusterroles">
+					<xsd:annotation>
+						<xsd:documentation/>
+					</xsd:annotation>
+				</xsd:enumeration>
+				<xsd:enumeration value="rolebindings">
+					<xsd:annotation>
+						<xsd:documentation/>
+					</xsd:annotation>
+				</xsd:enumeration>
+				<xsd:enumeration value="roles">
+					<xsd:annotation>
+						<xsd:documentation/>
+					</xsd:annotation>
+				</xsd:enumeration>
+				<xsd:enumeration value="priorityclasses">
+					<xsd:annotation>
+						<xsd:documentation/>
+					</xsd:annotation>
+				</xsd:enumeration>
+				<xsd:enumeration value="storageclasses">
+					<xsd:annotation>
+						<xsd:documentation/>
+					</xsd:annotation>
+				</xsd:enumeration>
+				<xsd:enumeration value="volumeattachments">
+					<xsd:annotation>
+						<xsd:documentation/>
+					</xsd:annotation>
+				</xsd:enumeration>
+			</xsd:restriction>
+		</xsd:simpleContent>
+	</xsd:complexType>
+</xsd:schema>

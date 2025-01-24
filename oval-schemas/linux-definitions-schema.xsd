@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-            xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5"
-            xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5"
-            xmlns:linux-def="http://oval.mitre.org/XMLSchema/oval-definitions-5#linux"
+            xmlns:oval="urn:oval:v6:common"
+            xmlns:oval-def="urn:oval:v6:definitions"
+            xmlns:linux-def="urn:oval:v6:definitions:linux"
             xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-            targetNamespace="http://oval.mitre.org/XMLSchema/oval-definitions-5#linux"
-            elementFormDefault="qualified" version="5.12">
-     <xsd:import namespace="http://oval.mitre.org/XMLSchema/oval-definitions-5" schemaLocation="oval-definitions-schema.xsd"/>
-     <xsd:import namespace="http://oval.mitre.org/XMLSchema/oval-common-5" schemaLocation="oval-common-schema.xsd"/>
+            targetNamespace="urn:oval:v6:definitions:linux"
+            elementFormDefault="qualified" version="6.0">
+     <xsd:import namespace="urn:oval:v6:definitions" schemaLocation="oval-definitions-schema.xsd"/>
+     <xsd:import namespace="urn:oval:v6:common" schemaLocation="oval-common-schema.xsd"/>
      <xsd:annotation>
           <xsd:documentation>The following is a description of the elements, types, and attributes that compose the Linux specific tests found in Open Vulnerability and Assessment Language (OVAL). Each test is an extension of the standard test element defined in the Core Definition Schema. Through extension, each test inherits a set of elements and attributes that are shared amongst all OVAL tests. Each test is described in detail and should provide the information necessary to understand what each element and attribute represents. This document is intended for developers and assumes some familiarity with XML. A high level description of the interaction between the different tests and their relationship to the Core Definition Schema is not outlined here.</xsd:documentation>
           <xsd:documentation>The OVAL Schema is maintained by the OVAL Community. For more information, including how to get involved in the project and how to submit change requests, please visit the OVAL website at https://github.com/OVAL-Community/.</xsd:documentation>
           <xsd:appinfo>
                <schema>Linux Definition</schema>
-               <version>5.12</version>
-               <date>11/29/2024 09:00:00 AM</date>
+               <version>6.0</version>
+               <date>1/24/2025 09:00:00 AM</date>
                 <terms_of_use>This software is an open standard developed by multiple parties, including the United States Government (Government). The Government hereby grants you a non-exclusive, royalty-free, worldwide license to use, modify, and/or reproduce the software for any lawful purpose provided that you reproduce this License/Disclaimer language with any use/modification/copy of the software. The Government assumes no responsibility whatsoever for this software's use by other parties, and the software is provided "AS IS" without warranty or guarantee of any kind, express or implied, including, but not limited to, the warranties of merchantability, fitness for a particular purpose, and noninfringement. In no event shall the Government be liable for any claim, damages or other liability, whether in an action of contract, tort or other dealings in the software. The Government has no obligation hereunder to provide maintenance, support, updates, enhancements, or modifications to the software. Users may submit proposals and/or updates regarding the software, which proposals and/or updates the Government, at its sole discretion, can choose to incorporate into the software. Proposals and/or updates submitted to the Government by users must be accompanied by a license to such proposals and/or updates that is no more restrictive than this License/Disclaimer.</terms_of_use>
-               <sch:ns prefix="oval-def" uri="http://oval.mitre.org/XMLSchema/oval-definitions-5"/>
-               <sch:ns prefix="linux-def" uri="http://oval.mitre.org/XMLSchema/oval-definitions-5#linux"/>
+               <sch:ns prefix="oval-def" urn="urn:oval:v6:definitions"/>
+               <sch:ns prefix="linux-def" urn="urn:oval:v6:definitions:linux"/>
                <sch:ns prefix="xsi" uri="http://www.w3.org/2001/XMLSchema-instance"/>
           </xsd:appinfo>
      </xsd:annotation>
@@ -126,7 +126,7 @@
                          <oval:test>dpkginfo_test</oval:test>
                          <oval:object>dpkginfo_object</oval:object>
                          <oval:state>dpkginfo_state</oval:state>
-                         <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#linux">dpkginfo_item</oval:item>
+                         <oval:item target_namespace="urn:oval:v6:system-characteristics:linux">dpkginfo_item</oval:item>
                     </oval:element_mapping>
                </xsd:appinfo>
                <xsd:appinfo>
@@ -164,7 +164,7 @@
                               <sch:let name="reffed_state" value="ancestor::oval-def:oval_definitions/oval-def:states/*[@id=$state_ref]"/>
                               <sch:let name="state_name" value="local-name($reffed_state)"/>
                               <sch:let name="state_namespace" value="namespace-uri($reffed_state)"/>
-                              <sch:assert test="(($state_namespace='http://oval.mitre.org/XMLSchema/oval-definitions-5#linux') and ($state_name='dpkginfo_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
+                              <sch:assert test="(($state_namespace='urn:oval:v6:definitions:linux') and ($state_name='dpkginfo_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
                          </sch:rule>
                     </sch:pattern>
                </xsd:appinfo>
@@ -296,128 +296,6 @@
           </xsd:complexType>
      </xsd:element>
      <!-- =============================================================================== -->
-     <!-- =============================  IF LISTENERS TEST  ============================= -->
-     <!-- =============================================================================== -->
-     <xsd:element name="iflisteners_test" substitutionGroup="oval-def:test">
-          <xsd:annotation>
-               <xsd:documentation>The iflisteners_test is used to check what applications such as packet sniffers that are bound to an interface on the system. This is limited to applications that are listening on AF_PACKET sockets. Furthermore, only applications bound to an ethernet interface should be collected. It extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information. The required object element references an iflisteners_object and the optional iflisteners_state element specifies the data to check.</xsd:documentation>
-               <xsd:appinfo>
-                    <oval:element_mapping>
-                         <oval:test>iflisteners_test</oval:test>
-                         <oval:object>iflisteners_object</oval:object>
-                         <oval:state>iflisteners_state</oval:state>
-                         <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#linux">iflisteners_item</oval:item>
-                    </oval:element_mapping>
-               </xsd:appinfo>
-				<xsd:appinfo>
-					<oval:deprecated_info>
-						<oval:version>5.12</oval:version>
-						<oval:comment>This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.</oval:comment>
-					</oval:deprecated_info>
-				</xsd:appinfo>
-               <xsd:appinfo>
-                    <sch:pattern id="linux-def_iflisteners_test">
-                         <sch:rule context="linux-def:iflisteners_test/linux-def:object">
-                              <sch:assert test="@object_ref=ancestor::oval-def:oval_definitions/oval-def:objects/linux-def:iflisteners_object/@id"><sch:value-of select="../@id"/> - the object child element of an iflisteners_test must reference an iflisteners_object</sch:assert>
-                         </sch:rule>
-                         <sch:rule context="linux-def:iflisteners_test/linux-def:state">
-                              <sch:assert test="@state_ref=ancestor::oval-def:oval_definitions/oval-def:states/linux-def:iflisteners_state/@id"><sch:value-of select="../@id"/> - the state child element of an iflisteners_test must reference an iflisteners_state</sch:assert>
-                         </sch:rule>
-                    </sch:pattern>
-               </xsd:appinfo>
-          </xsd:annotation>
-          <xsd:complexType>
-               <xsd:complexContent>
-                    <xsd:extension base="oval-def:TestType">
-                         <xsd:sequence>
-                              <xsd:element name="object" type="oval-def:ObjectRefType" />
-                              <xsd:element name="state" type="oval-def:StateRefType" minOccurs="0" maxOccurs="unbounded"/>
-                         </xsd:sequence>
-                    </xsd:extension>
-               </xsd:complexContent>
-          </xsd:complexType>
-     </xsd:element>
-     <xsd:element name="iflisteners_object" substitutionGroup="oval-def:object">
-          <xsd:annotation>
-               <xsd:documentation>The iflisteners_object element is used by an iflisteners_test to define the specific interface to be evaluated. Each object extends the standard ObjectType as defined in the oval-definitions-schema and one should refer to the ObjectType description for more information. The common set element allows complex objects to be created using filters and set logic. Again, please refer to the description of the set element in the oval-definitions-schema.</xsd:documentation>
-               <xsd:appinfo>
-                    <sch:pattern id="linux-def_iflisteners_object_verify_filter_state">
-                         <sch:rule context="linux-def:iflisteners_object//oval-def:filter">
-                              <sch:let name="parent_object" value="ancestor::linux-def:iflisteners_object"/>
-                              <sch:let name="parent_object_id" value="$parent_object/@id"/>
-                              <sch:let name="state_ref" value="."/>
-                              <sch:let name="reffed_state" value="ancestor::oval-def:oval_definitions/oval-def:states/*[@id=$state_ref]"/>
-                              <sch:let name="state_name" value="local-name($reffed_state)"/>
-                              <sch:let name="state_namespace" value="namespace-uri($reffed_state)"/>
-                              <sch:assert test="(($state_namespace='http://oval.mitre.org/XMLSchema/oval-definitions-5#linux') and ($state_name='iflisteners_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
-                         </sch:rule>
-                    </sch:pattern>
-               </xsd:appinfo>
-          </xsd:annotation>
-          <xsd:complexType>
-               <xsd:complexContent>
-                    <xsd:extension base="oval-def:ObjectType">
-                         <xsd:sequence>
-                              <xsd:choice>
-                                   <xsd:element ref="oval-def:set"/>
-                                   <xsd:sequence>
-                                        <xsd:element name="interface_name" type="oval-def:EntityObjectStringType">
-                                             <xsd:annotation>
-                                                  <xsd:documentation>The interface_name entity specifies the name of the interface (eth0, eth1, fw0, etc.) to check.</xsd:documentation>
-                                             </xsd:annotation>
-                                        </xsd:element>
-                                        <xsd:element ref="oval-def:filter" minOccurs="0" maxOccurs="unbounded"/>
-                                   </xsd:sequence>
-                              </xsd:choice>
-                         </xsd:sequence>
-                    </xsd:extension>
-               </xsd:complexContent>
-          </xsd:complexType>
-     </xsd:element>
-     <xsd:element name="iflisteners_state" substitutionGroup="oval-def:state">
-          <xsd:annotation>
-               <xsd:documentation>The iflisteners_state element defines the different information that can be used to evaluate the specified applications that are listening on interfaces on the system. This includes the interface name, protocol, hardware address, program name, pid, and user id. Please refer to the individual elements in the schema for more details about what each represents.</xsd:documentation>
-          </xsd:annotation>
-          <xsd:complexType>
-               <xsd:complexContent>
-                    <xsd:extension base="oval-def:StateType">
-                         <xsd:sequence>
-                              <xsd:element name="interface_name" type="oval-def:EntityStateStringType" minOccurs="0" maxOccurs="1">
-                                   <xsd:annotation>
-                                        <xsd:documentation>This is the name of the interface (eth0, eth1, fw0, etc.).</xsd:documentation>
-                                   </xsd:annotation>
-                              </xsd:element>
-                              <xsd:element name="protocol" type="linux-def:EntityStateProtocolType" minOccurs="0" maxOccurs="1">
-                                   <xsd:annotation>
-                                        <xsd:documentation>This is the physical layer protocol used by the AF_PACKET socket.</xsd:documentation>
-                                   </xsd:annotation>
-                              </xsd:element>
-                              <xsd:element name="hw_address" type="oval-def:EntityStateStringType" minOccurs="0" maxOccurs="1">
-                                   <xsd:annotation>
-                                        <xsd:documentation>This is the hardware address associated with the interface.</xsd:documentation>
-                                   </xsd:annotation>
-                              </xsd:element>
-                              <xsd:element name="program_name" type="oval-def:EntityStateStringType" minOccurs="0" maxOccurs="1">
-                                   <xsd:annotation>
-                                        <xsd:documentation>This is the name of the communicating program.</xsd:documentation>
-                                   </xsd:annotation>
-                              </xsd:element>
-                              <xsd:element name="pid" type="oval-def:EntityStateIntType" minOccurs="0" maxOccurs="1">
-                                   <xsd:annotation>
-                                        <xsd:documentation>The pid is the process ID of a specific process.</xsd:documentation>
-                                   </xsd:annotation>
-                              </xsd:element>
-                              <xsd:element name="user_id" type="oval-def:EntityStateIntType" minOccurs="0" maxOccurs="1">
-                                   <xsd:annotation>
-                                        <xsd:documentation>The numeric user id, or uid, is the third column of each user's entry in /etc/passwd. It represents the owner, and thus privilege level, of the specified program.</xsd:documentation>
-                                   </xsd:annotation>
-                              </xsd:element>
-                         </xsd:sequence>
-                    </xsd:extension>
-               </xsd:complexContent>
-          </xsd:complexType>
-     </xsd:element>
-     <!-- =============================================================================== -->
      <!-- ========================  INET LISTENING SERVERS TEST  ======================== -->
      <!-- =============================================================================== -->
      <xsd:element name="inetlisteningservers_test" substitutionGroup="oval-def:test">
@@ -428,7 +306,7 @@
                          <oval:test>inetlisteningservers_test</oval:test>
                          <oval:object>inetlisteningservers_object</oval:object>
                          <oval:state>inetlisteningservers_state</oval:state>
-                         <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#linux">inetlisteningserver_item</oval:item>
+                         <oval:item target_namespace="urn:oval:v6:system-characteristics:linux">inetlisteningserver_item</oval:item>
                     </oval:element_mapping>
                </xsd:appinfo>
                <xsd:appinfo>
@@ -466,7 +344,7 @@
                               <sch:let name="reffed_state" value="ancestor::oval-def:oval_definitions/oval-def:states/*[@id=$state_ref]"/>
                               <sch:let name="state_name" value="local-name($reffed_state)"/>
                               <sch:let name="state_namespace" value="namespace-uri($reffed_state)"/>
-                              <sch:assert test="(($state_namespace='http://oval.mitre.org/XMLSchema/oval-definitions-5#linux') and ($state_name='inetlisteningservers_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
+                              <sch:assert test="(($state_namespace='urn:oval:v6:definitions:linux') and ($state_name='inetlisteningservers_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
                          </sch:rule>
                     </sch:pattern>
                </xsd:appinfo>
@@ -579,7 +457,7 @@
                          <oval:test>kernelmodule_test</oval:test>
                          <oval:object>kernelmodule_object</oval:object>
                          <oval:state>kernelmodule_state</oval:state>
-                         <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#linux">kernelmodule_item</oval:item>
+                         <oval:item target_namespace="urn:oval:v6:system-characteristics:linux">kernelmodule_item</oval:item>
                     </oval:element_mapping>
                </xsd:appinfo>
                <xsd:appinfo>
@@ -635,7 +513,7 @@
                               <sch:let name="reffed_state" value="ancestor::oval-def:oval_definitions/oval-def:states/*[@id=$state_ref]"/>
                               <sch:let name="state_name" value="local-name($reffed_state)"/>
                               <sch:let name="state_namespace" value="namespace-uri($reffed_state)"/>
-                              <sch:assert test="(($state_namespace='http://oval.mitre.org/XMLSchema/oval-definitions-5#linux') and ($state_name='kernelmodule_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
+                              <sch:assert test="(($state_namespace='urn:oval:v6:definitions:linux') and ($state_name='kernelmodule_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
                          </sch:rule>
                     </sch:pattern>
                </xsd:appinfo>
@@ -702,7 +580,7 @@
                          <oval:test>partition_test</oval:test>
                          <oval:object>partition_object</oval:object>
                          <oval:state>partition_state</oval:state>
-                         <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#linux">partition_item</oval:item>
+                         <oval:item target_namespace="urn:oval:v6:system-characteristics:linux">partition_item</oval:item>
                     </oval:element_mapping>
                </xsd:appinfo>
                <xsd:appinfo>
@@ -739,7 +617,7 @@
                               <sch:let name="reffed_state" value="ancestor::oval-def:oval_definitions/oval-def:states/*[@id=$state_ref]"/>
                               <sch:let name="state_name" value="local-name($reffed_state)"/>
                               <sch:let name="state_namespace" value="namespace-uri($reffed_state)"/>
-                              <sch:assert test="(($state_namespace='http://oval.mitre.org/XMLSchema/oval-definitions-5#linux') and ($state_name='partition_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
+                              <sch:assert test="(($state_namespace='urn:oval:v6:definitions:linux') and ($state_name='partition_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
                          </sch:rule>
                     </sch:pattern>
                </xsd:appinfo>
@@ -839,7 +717,7 @@
                          <oval:test>rpminfo_test</oval:test>
                          <oval:object>rpminfo_object</oval:object>
                          <oval:state>rpminfo_state</oval:state>
-                         <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#linux">rpminfo_item</oval:item>
+                         <oval:item target_namespace="urn:oval:v6:system-characteristics:linux">rpminfo_item</oval:item>
                     </oval:element_mapping>
                </xsd:appinfo>
                <xsd:appinfo>
@@ -877,7 +755,7 @@
                               <sch:let name="reffed_state" value="ancestor::oval-def:oval_definitions/oval-def:states/*[@id=$state_ref]"/>
                               <sch:let name="state_name" value="local-name($reffed_state)"/>
                               <sch:let name="state_namespace" value="namespace-uri($reffed_state)"/>
-                              <sch:assert test="(($state_namespace='http://oval.mitre.org/XMLSchema/oval-definitions-5#linux') and ($state_name='rpminfo_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
+                              <sch:assert test="(($state_namespace='urn:oval:v6:definitions:linux') and ($state_name='rpminfo_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
                          </sch:rule>
                     </sch:pattern>
                </xsd:appinfo>
@@ -1014,307 +892,6 @@
           </xsd:attribute>
      </xsd:complexType>
      <!-- =============================================================================== -->
-     <!-- ==============================  RPM VERIFY TEST  ============================== -->
-     <!-- =============================================================================== -->
-     <xsd:element name="rpmverify_test" substitutionGroup="oval-def:test">
-          <xsd:annotation>
-               <xsd:documentation>The rpmverify_test is used to verify the integrity of installed RPMs. This test aligns with the rpm -V command for verifying RPMs. It extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information. The required object element references a rpmverify_object and the optional state element specifies the data to check.</xsd:documentation>
-               <xsd:appinfo>
-                    <oval:element_mapping>
-                         <oval:test>rpmverify_test</oval:test>
-                         <oval:object>rpmverify_object</oval:object>
-                         <oval:state>rpmverify_state</oval:state>
-                         <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#linux">rpmverify_item</oval:item>
-                    </oval:element_mapping>
-               </xsd:appinfo>
-				<xsd:appinfo>
-					<oval:deprecated_info>
-						<oval:version>5.12</oval:version>
-						<oval:comment>This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.</oval:comment>
-					</oval:deprecated_info>
-				</xsd:appinfo>
-               <xsd:appinfo>
-                    <oval:deprecated_info>
-                         <oval:version>5.10</oval:version>
-                         <oval:reason>Replaced by the rpmverifyfile_test and the rpmverifypackage_test. The rpmverify_test was split into two tests to distinguish between the verification of the files in an rpm and the verification of an rpm as a whole. By making this distinction, content authoring is simplified and information is no longer duplicated across items. See the rpmverifyfile_test and rpmverifypackage_test.</oval:reason>
-                         <oval:comment>This test has been deprecated and will be removed in version 6.0 of the language.</oval:comment>
-                    </oval:deprecated_info>
-                    <sch:pattern id="linux-def_rpmverifytst_dep">
-                         <sch:rule context="linux-def:rpmverify_test">
-                              <sch:report test="true()">DEPRECATED TEST: <sch:value-of select="name()"/> ID: <sch:value-of select="@id"/></sch:report>
-                         </sch:rule>
-                    </sch:pattern>
-               </xsd:appinfo>
-               <xsd:appinfo>
-                    <sch:pattern id="linux-def_rpmverify_test">
-                         <sch:rule context="linux-def:rpmverify_test/linux-def:object">
-                              <sch:assert test="@object_ref=ancestor::oval-def:oval_definitions/oval-def:objects/linux-def:rpmverify_object/@id"><sch:value-of select="../@id"/> - the object child element of an rpmverify_test must reference an rpmverify_object</sch:assert>
-                         </sch:rule>
-                         <sch:rule context="linux-def:rpmverify_test/linux-def:state">
-                              <sch:assert test="@state_ref=ancestor::oval-def:oval_definitions/oval-def:states/linux-def:rpmverify_state/@id"><sch:value-of select="../@id"/> - the state child element of an rpmverify_test must reference an rpmverify_state</sch:assert>
-                         </sch:rule>
-                    </sch:pattern>
-               </xsd:appinfo>
-          </xsd:annotation>
-          <xsd:complexType>
-               <xsd:complexContent>
-                    <xsd:extension base="oval-def:TestType">
-                         <xsd:sequence>
-                              <xsd:element name="object" type="oval-def:ObjectRefType" />
-                              <xsd:element name="state" type="oval-def:StateRefType" minOccurs="0" maxOccurs="unbounded"/>
-                         </xsd:sequence>
-                    </xsd:extension>
-               </xsd:complexContent>
-          </xsd:complexType>
-     </xsd:element>
-     <xsd:element name="rpmverify_object" substitutionGroup="oval-def:object">
-          <xsd:annotation>
-               <xsd:documentation>The rpmverify_object element is used by a rpmverify_test to define a set of files within a set of RPMs to verify. Each object extends the standard ObjectType as defined in the oval-definitions-schema and one should refer to the ObjectType description for more information. The common set element allows complex objects to be created using filters and set logic. Again, please refer to the description of the set element in the oval-definitions-schema.</xsd:documentation>
-               <xsd:appinfo>
-                    <sch:pattern id="linux-def_rpmverify_object_verify_filter_state">
-                         <sch:rule context="linux-def:rpmverify_object//oval-def:filter">
-                              <sch:let name="parent_object" value="ancestor::linux-def:rpmverify_object"/>
-                              <sch:let name="parent_object_id" value="$parent_object/@id"/>
-                              <sch:let name="state_ref" value="."/>
-                              <sch:let name="reffed_state" value="ancestor::oval-def:oval_definitions/oval-def:states/*[@id=$state_ref]"/>
-                              <sch:let name="state_name" value="local-name($reffed_state)"/>
-                              <sch:let name="state_namespace" value="namespace-uri($reffed_state)"/>
-                              <sch:assert test="(($state_namespace='http://oval.mitre.org/XMLSchema/oval-definitions-5#linux') and ($state_name='rpmverify_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
-                         </sch:rule>
-                    </sch:pattern>
-               </xsd:appinfo>
-               <xsd:appinfo>
-                    <oval:deprecated_info>
-                         <oval:version>5.10</oval:version>
-                         <oval:reason>Replaced by the rpmverifyfile_object and rpmverifypackage_object. The rpmverify_test was split into two tests to distinguish between the verification of the files in an rpm and the verification of an rpm as a whole. By making this distinction, content authoring is simplified and information is no longer duplicated across items. See the rpmverifyfile_object and rpmverifypackage_object.</oval:reason>
-                         <oval:comment>This object has been deprecated and will be removed in version 6.0 of the language.</oval:comment>
-                    </oval:deprecated_info>
-                    <sch:pattern id="linux-def_rpmverifyobj_dep">
-                         <sch:rule context="linux-def:rpmverify_object">
-                              <sch:report test="true()">DEPRECATED OBJECT: <sch:value-of select="name()"/> ID: <sch:value-of select="@id"/></sch:report>
-                         </sch:rule>
-                    </sch:pattern>
-               </xsd:appinfo>
-          </xsd:annotation>
-          <xsd:complexType>
-               <xsd:complexContent>
-                    <xsd:extension base="oval-def:ObjectType">
-                         <xsd:sequence>
-                              <xsd:choice>
-                                   <xsd:element ref="oval-def:set"/>
-                                   <xsd:sequence>
-                                        <xsd:element name="behaviors" type="linux-def:RpmVerifyBehaviors" minOccurs="0" maxOccurs="1"/>
-                                        <xsd:element name="name" type="oval-def:EntityObjectStringType">
-                                             <xsd:annotation>
-                                                  <xsd:documentation>This is the package name to check.</xsd:documentation>
-                                             </xsd:annotation>
-                                        </xsd:element>
-                                        <xsd:element name="filepath" type="oval-def:EntityObjectStringType">
-                                             <xsd:annotation>
-                                                  <xsd:documentation>The filepath element specifies the absolute path for a file or directory in the specified package.</xsd:documentation>
-                                             </xsd:annotation>
-                                        </xsd:element>
-                                        <xsd:element ref="oval-def:filter" minOccurs="0" maxOccurs="unbounded"/>
-                                   </xsd:sequence>
-                              </xsd:choice>
-                         </xsd:sequence>
-                    </xsd:extension>
-               </xsd:complexContent>
-          </xsd:complexType>
-     </xsd:element>
-     <xsd:element name="rpmverify_state" substitutionGroup="oval-def:state">
-          <xsd:annotation>
-               <xsd:documentation>The rpmverify_state element defines the different information that can be used to evaluate the specified rpm. This includes the architecture, epoch number, and version numbers. Most of this information can be obtained through the rpm function. Please refer to the individual elements in the schema for more details about what each represents.</xsd:documentation>
-               <xsd:appinfo>
-                    <oval:deprecated_info>
-                         <oval:version>5.10</oval:version>
-                         <oval:reason>Replaced by the rpmverifyfile_state and rpmverifypackage_state. The rpmverify_test was split into two tests to distinguish between the verification of the files in an rpm and the verification of an rpm as a whole. By making this distinction, content authoring is simplified and information is no longer duplicated across items. See the rpmverifyfile_state and rpmverifypackage_state.</oval:reason>
-                         <oval:comment>This state has been deprecated and will be removed in version 6.0 of the language.</oval:comment>
-                    </oval:deprecated_info>
-                    <sch:pattern id="linux-def_rpmverifyste_dep">
-                         <sch:rule context="linux-def:rpmverify_state">
-                              <sch:report test="true()">DEPRECATED STATE: <sch:value-of select="name()"/> ID: <sch:value-of select="@id"/></sch:report>
-                         </sch:rule>
-                    </sch:pattern>
-               </xsd:appinfo>
-          </xsd:annotation>
-          <xsd:complexType>
-               <xsd:complexContent>
-                    <xsd:extension base="oval-def:StateType">
-                         <xsd:sequence>
-                              <xsd:element name="name" type="oval-def:EntityStateStringType" minOccurs="0" maxOccurs="1">
-                                   <xsd:annotation>
-                                        <xsd:documentation>This is the package name to check.</xsd:documentation>
-                                   </xsd:annotation>
-                              </xsd:element>
-                              <xsd:element name="filepath" type="oval-def:EntityStateStringType" minOccurs="0" maxOccurs="1">
-                                   <xsd:annotation>
-                                        <xsd:documentation>The filepath element specifies the absolute path for a file or directory in the specified package.</xsd:documentation>
-                                   </xsd:annotation>
-                              </xsd:element>
-                              <xsd:element name="size_differs" type="linux-def:EntityStateRpmVerifyResultType" minOccurs="0" maxOccurs="1">
-                                   <xsd:annotation>
-                                        <xsd:documentation>The size_differs entity aligns with the first character ('S' flag) in the character string in the output generated by running rpm –V on a specific file.</xsd:documentation>
-                                   </xsd:annotation>
-                              </xsd:element>
-                              <xsd:element name="mode_differs" type="linux-def:EntityStateRpmVerifyResultType" minOccurs="0" maxOccurs="1">
-                                   <xsd:annotation>
-                                        <xsd:documentation>The mode_differs entity aligns with the second character ('M' flag) in the character string in the output generated by running rpm –V on a specific file.</xsd:documentation>
-                                   </xsd:annotation>
-                              </xsd:element>
-                              <xsd:element name="md5_differs" type="linux-def:EntityStateRpmVerifyResultType" minOccurs="0" maxOccurs="1">
-                                   <xsd:annotation>
-                                        <xsd:documentation>The md5_differs entity aligns with the third character ('5' flag) in the character string in the output generated by running rpm –V on a specific file.</xsd:documentation>
-                                   </xsd:annotation>
-                              </xsd:element>
-                              <xsd:element name="device_differs" type="linux-def:EntityStateRpmVerifyResultType" minOccurs="0" maxOccurs="1">
-                                   <xsd:annotation>
-                                        <xsd:documentation>The device_differs entity aligns with the fourth character ('D' flag) in the character string in the output generated by running rpm –V on a specific file.</xsd:documentation>
-                                   </xsd:annotation>
-                              </xsd:element>
-                              <xsd:element name="link_mismatch" type="linux-def:EntityStateRpmVerifyResultType" minOccurs="0" maxOccurs="1">
-                                   <xsd:annotation>
-                                        <xsd:documentation>The link_mismatch entity aligns with the fifth character ('L' flag) in the character string in the output generated by running rpm –V on a specific file.</xsd:documentation>
-                                   </xsd:annotation>
-                              </xsd:element>
-                              <xsd:element name="ownership_differs" type="linux-def:EntityStateRpmVerifyResultType" minOccurs="0" maxOccurs="1">
-                                   <xsd:annotation>
-                                        <xsd:documentation>The ownership_differs entity aligns with the sixth character ('U' flag) in the character string in the output generated by running rpm –V on a specific file.</xsd:documentation>
-                                   </xsd:annotation>
-                              </xsd:element>
-                              <xsd:element name="group_differs" type="linux-def:EntityStateRpmVerifyResultType" minOccurs="0" maxOccurs="1">
-                                   <xsd:annotation>
-                                        <xsd:documentation>The group_differs entity aligns with the seventh character ('U' flag) in the character string in the output generated by running rpm –V on a specific file.</xsd:documentation>
-                                   </xsd:annotation>
-                              </xsd:element>
-                              <xsd:element name="mtime_differs" type="linux-def:EntityStateRpmVerifyResultType" minOccurs="0" maxOccurs="1">
-                                   <xsd:annotation>
-                                        <xsd:documentation>The mtime_differs entity aligns with the eighth character ('T' flag) in the character string in the output generated by running rpm –V on a specific file.</xsd:documentation>
-                                   </xsd:annotation>
-                              </xsd:element>
-                              <xsd:element name="capabilities_differ" type="linux-def:EntityStateRpmVerifyResultType" minOccurs="0" maxOccurs="1">
-                                   <xsd:annotation>
-                                        <xsd:documentation>The size_differs entity aligns with the ninth character ('P' flag) in the character string in the output generated by running rpm –V on a specific file.</xsd:documentation>
-                                   </xsd:annotation>
-                              </xsd:element>
-                              <xsd:element name="configuration_file" type="oval-def:EntityStateBoolType" minOccurs="0" maxOccurs="1">
-                                   <xsd:annotation>
-                                        <xsd:documentation>The configuration_file entity represents the configuration file attribute marker that may be present on a file.</xsd:documentation>
-                                   </xsd:annotation>
-                              </xsd:element>
-                              <xsd:element name="documentation_file" type="oval-def:EntityStateBoolType" minOccurs="0" maxOccurs="1">
-                                   <xsd:annotation>
-                                        <xsd:documentation>The documentation_file entity represents the documenation file attribute marker that may be present on a file.</xsd:documentation>
-                                   </xsd:annotation>
-                              </xsd:element>
-                              <xsd:element name="ghost_file" type="oval-def:EntityStateBoolType" minOccurs="0" maxOccurs="1">
-                                   <xsd:annotation>
-                                        <xsd:documentation>The ghost_file entity represents the ghost file attribute marker that may be present on a file.</xsd:documentation>
-                                   </xsd:annotation>
-                              </xsd:element>
-                              <xsd:element name="license_file" type="oval-def:EntityStateBoolType" minOccurs="0" maxOccurs="1">
-                                   <xsd:annotation>
-                                        <xsd:documentation>The license_file entity represents the license file attribute marker that may be present on a file.</xsd:documentation>
-                                   </xsd:annotation>
-                              </xsd:element>
-                              <xsd:element name="readme_file" type="oval-def:EntityStateBoolType" minOccurs="0" maxOccurs="1">
-                                   <xsd:annotation>
-                                        <xsd:documentation>The readme_file entity represents the readme file attribute marker that may be present on a file.</xsd:documentation>
-                                   </xsd:annotation>
-                              </xsd:element>
-                         </xsd:sequence>
-                    </xsd:extension>
-               </xsd:complexContent>
-          </xsd:complexType>
-     </xsd:element>
-     <xsd:complexType name="RpmVerifyBehaviors">
-          <xsd:annotation>
-               <xsd:documentation>The RpmVerifyBehaviors complex type defines a set of behaviors that for controlling how installed rpms are verified. These behaviors align with the verify-options of the rpm command with the addition of two behaviors that will indicate that a file with a given attribute marker should not be collected.</xsd:documentation>
-               <xsd:appinfo>
-                    <oval:deprecated_info>
-                         <oval:version>5.10</oval:version>
-                         <oval:reason>Replaced by the RpmVerifyFileBehaviors and the RpmVerifyPackageBehaviors. The RpmVerifyBehaviors complex type is used by the rpmverify_test which was split into two tests to distinguish between the verification of the files in an rpm and the verification of an rpm as a whole. By making this distinction, content authoring is simplified and information is no longer duplicated across items. The new tests utilize the RpmVerifyFileBehaviors and RpmVerifyPackageBehaviors complex types, and as a result, the RpmVerifyBehaviors complex type is no longer needed.</oval:reason>
-                         <oval:comment>This complex type has been deprecated and will be removed in version 6.0 of the language.</oval:comment>
-                    </oval:deprecated_info>
-               </xsd:appinfo>
-          </xsd:annotation>
-          <xsd:attribute name="nodeps" use="optional" type="xsd:boolean" default="false">
-               <xsd:annotation>
-                    <xsd:documentation>'nodeps' when true this behavior means, don't verify dependencies of packages.</xsd:documentation>
-               </xsd:annotation>
-          </xsd:attribute>
-          <xsd:attribute name="nodigest" use="optional" type="xsd:boolean" default="false">
-               <xsd:annotation>
-                    <xsd:documentation>'nodigest' when true this behavior means, don't verify package or header digests when reading.</xsd:documentation>
-               </xsd:annotation>
-          </xsd:attribute>
-          <xsd:attribute name="nofiles" use="optional" type="xsd:boolean" default="false">
-               <xsd:annotation>
-                    <xsd:documentation>'nofiles' when true this behavior means, don't verify any attributes of package files.</xsd:documentation>
-               </xsd:annotation>
-          </xsd:attribute>
-          <xsd:attribute name="noscripts" use="optional" type="xsd:boolean" default="false">
-               <xsd:annotation>
-                    <xsd:documentation>'noscripts' when true this behavior means, don't execute the %verifyscript scriptlet (if any).</xsd:documentation>
-               </xsd:annotation>
-          </xsd:attribute>
-          <xsd:attribute name="nosignature" use="optional" type="xsd:boolean" default="false">
-               <xsd:annotation>
-                    <xsd:documentation>'nosignature' when true this behavior means, don't verify package or header signatures when reading.</xsd:documentation>
-               </xsd:annotation>
-          </xsd:attribute>
-          <xsd:attribute name="nolinkto" use="optional" type="xsd:boolean" default="false">
-               <xsd:annotation>
-                    <xsd:documentation>'nolinkto' when true this behavior means, don't verify symbolic links attribute.</xsd:documentation>
-               </xsd:annotation>
-          </xsd:attribute>
-          <xsd:attribute name="nomd5" use="optional" type="xsd:boolean" default="false">
-               <xsd:annotation>
-                    <xsd:documentation>'nomd5' when true this behavior means, don't verify the file md5 attribute.</xsd:documentation>
-               </xsd:annotation>
-          </xsd:attribute>
-          <xsd:attribute name="nosize" use="optional" type="xsd:boolean" default="false">
-               <xsd:annotation>
-                    <xsd:documentation>'nosize' when true this behavior means, don't verify the file size attribute.</xsd:documentation>
-               </xsd:annotation>
-          </xsd:attribute>
-          <xsd:attribute name="nouser" use="optional" type="xsd:boolean" default="false">
-               <xsd:annotation>
-                    <xsd:documentation>'nouser' when true this behavior means, don't verify the file owner attribute.</xsd:documentation>
-               </xsd:annotation>
-          </xsd:attribute>
-          <xsd:attribute name="nogroup" use="optional" type="xsd:boolean" default="false">
-               <xsd:annotation>
-                    <xsd:documentation>'nogroup' when true this behavior means, don't verify the file group owner attribute.</xsd:documentation>
-               </xsd:annotation>
-          </xsd:attribute>
-          <xsd:attribute name="nomtime" use="optional" type="xsd:boolean" default="false">
-               <xsd:annotation>
-                    <xsd:documentation>'nomtime' when true this behavior means, don't verify the file mtime attribute.</xsd:documentation>
-               </xsd:annotation>
-          </xsd:attribute>
-          <xsd:attribute name="nomode" use="optional" type="xsd:boolean" default="false">
-               <xsd:annotation>
-                    <xsd:documentation>'nomode' when true this behavior means, don't verify the file mode attribute.</xsd:documentation>
-               </xsd:annotation>
-          </xsd:attribute>
-          <xsd:attribute name="nordev" use="optional" type="xsd:boolean" default="false">
-               <xsd:annotation>
-                    <xsd:documentation>'nordev' when true this behavior means, don't verify the file rdev attribute.</xsd:documentation>
-               </xsd:annotation>
-          </xsd:attribute>
-          <xsd:attribute name="noconfigfiles" use="optional" type="xsd:boolean" default="false">
-               <xsd:annotation>
-                    <xsd:documentation>'noconfigfiles' when true this behavior means, skip files that are marked with the %config attribute marker.</xsd:documentation>
-               </xsd:annotation>
-          </xsd:attribute>
-          <xsd:attribute name="noghostfiles" use="optional" type="xsd:boolean" default="false">
-               <xsd:annotation>
-                    <xsd:documentation>'noghostfiles' when true this behavior means, skip files that are maked with %ghost attribute marker.</xsd:documentation>
-               </xsd:annotation>
-          </xsd:attribute>
-     </xsd:complexType>
-     <!-- =============================================================================== -->
      <!-- ============================  RPM VERIFY FILE TEST  =========================== -->
      <!-- =============================================================================== -->
      <xsd:element name="rpmverifyfile_test" substitutionGroup="oval-def:test">
@@ -1325,7 +902,7 @@
                          <oval:test>rpmverifyfile_test</oval:test>
                          <oval:object>rpmverifyfile_object</oval:object>
                          <oval:state>rpmverifyfile_state</oval:state>
-                         <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#linux">rpmverifyfile_item</oval:item>
+                         <oval:item target_namespace="urn:oval:v6:system-characteristics:linux">rpmverifyfile_item</oval:item>
                     </oval:element_mapping>
                </xsd:appinfo>
                <xsd:appinfo>
@@ -1362,7 +939,7 @@
                               <sch:let name="reffed_state" value="ancestor::oval-def:oval_definitions/oval-def:states/*[@id=$state_ref]"/>
                               <sch:let name="state_name" value="local-name($reffed_state)"/>
                               <sch:let name="state_namespace" value="namespace-uri($reffed_state)"/>
-                              <sch:assert test="(($state_namespace='http://oval.mitre.org/XMLSchema/oval-definitions-5#linux') and ($state_name='rpmverifyfile_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
+                              <sch:assert test="(($state_namespace='urn:oval:v6:definitions:linux') and ($state_name='rpmverifyfile_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
                          </sch:rule>
                     </sch:pattern>
                </xsd:appinfo>
@@ -1550,18 +1127,6 @@
                                         <xsd:documentation>The mode_differs entity aligns with the second character ('M' flag) in the character string in the output generated by running rpm –V on a specific file.</xsd:documentation>
                                    </xsd:annotation>
                               </xsd:element>
-                              <xsd:element name="md5_differs" type="linux-def:EntityStateRpmVerifyResultType" minOccurs="0" maxOccurs="1">
-                                   <xsd:annotation>
-                                        <xsd:documentation>The md5_differs entity aligns with the third character ('5' flag) in the character string in the output generated by running rpm –V on a specific file.</xsd:documentation>
-                                        <xsd:appinfo>
-                                             <oval:deprecated_info>
-                                                  <oval:version>5.11.1:1.1</oval:version>
-                                                  <oval:reason>Replaced by the filedigest_differs entity.</oval:reason>
-                                                  <oval:comment>This entity has been deprecated and will be removed in version 6.0 of the language.</oval:comment>
-                                             </oval:deprecated_info>
-                                        </xsd:appinfo>
-                                   </xsd:annotation>
-                              </xsd:element>
                               <xsd:element name="filedigest_differs" type="linux-def:EntityStateRpmVerifyResultType" minOccurs="0" maxOccurs="1">
                                    <xsd:annotation>
                                         <xsd:documentation>The filedigest_differs entity aligns with the third character ('5' flag) in the character string in the output generated by running rpm –V on a specific file. This replaces the md5_differs entity due to naming changes for verification and reporting options.</xsd:documentation>
@@ -1636,18 +1201,6 @@
                     <xsd:documentation>'nolinkto' when true this behavior means, don't verify symbolic links attribute.</xsd:documentation>
                </xsd:annotation>
           </xsd:attribute>
-          <xsd:attribute name="nomd5" use="optional" type="xsd:boolean" default="false">
-               <xsd:annotation>
-                    <xsd:documentation>'nomd5' when true this behavior means, don't verify the file md5 attribute.</xsd:documentation>
-                    <xsd:appinfo>
-                         <oval:deprecated_info>
-                              <oval:version>5.11.1:1.1</oval:version>
-                              <oval:reason>Replaced by the nofiledigest RpmVerifyFileBehaviors option.</oval:reason>
-                              <oval:comment>This Behavior has been deprecated and will be removed in version 6.0 of the language.</oval:comment>
-                         </oval:deprecated_info>
-                    </xsd:appinfo>
-               </xsd:annotation>
-          </xsd:attribute>
           <xsd:attribute name="nosize" use="optional" type="xsd:boolean" default="false">
                <xsd:annotation>
                     <xsd:documentation>'nosize' when true this behavior means, don't verify the file size attribute.</xsd:documentation>
@@ -1710,7 +1263,7 @@
                          <oval:test>rpmverifypackage_test</oval:test>
                          <oval:object>rpmverifypackage_object</oval:object>
                          <oval:state>rpmverifypackage_state</oval:state>
-                         <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#linux">rpmverifypackage_item</oval:item>
+                         <oval:item target_namespace="urn:oval:v6:system-characteristics:linux">rpmverifypackage_item</oval:item>
                     </oval:element_mapping>
                </xsd:appinfo>
                <xsd:appinfo>
@@ -1747,7 +1300,7 @@
                               <sch:let name="reffed_state" value="ancestor::oval-def:oval_definitions/oval-def:states/*[@id=$state_ref]"/>
                               <sch:let name="state_name" value="local-name($reffed_state)"/>
                               <sch:let name="state_namespace" value="namespace-uri($reffed_state)"/>
-                              <sch:assert test="(($state_namespace='http://oval.mitre.org/XMLSchema/oval-definitions-5#linux') and ($state_name='rpmverifypackage_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
+                              <sch:assert test="(($state_namespace='urn:oval:v6:definitions:linux') and ($state_name='rpmverifypackage_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
                          </sch:rule>
                     </sch:pattern>
                </xsd:appinfo>
@@ -1920,43 +1473,9 @@
                                         <xsd:documentation>The dependency_check_passed entity indicates whether or not the dependency check passed. If the dependency check is not performed, due to the 'nodeps' behavior, this entity must not be collected.</xsd:documentation>
                                    </xsd:annotation>
                               </xsd:element>
-                              <xsd:element name="digest_check_passed" type="oval-def:EntityStateBoolType" minOccurs="0" maxOccurs="1">
-                                   <xsd:annotation>
-                                        <xsd:documentation>The digest_check_passed entity indicates whether or not the verification of the package or header digests passed. If the digest check is not performed, due to the 'nodigest' behavior, this entity must not be collected.</xsd:documentation>
-                                        <xsd:appinfo>
-                                             <oval:deprecated_info>
-                                                  <oval:version>5.11</oval:version>
-                                                  <oval:reason>The digest_check_passed entity can not be collected as implemented, and has become irrelevant.</oval:reason>
-                                                  <oval:comment>This entity has been deprecated and will be removed in version 6.0 of the language.</oval:comment>
-                                             </oval:deprecated_info>
-                                             <sch:pattern id="linux-def_rpmverifypackage_dicp_dep">
-                                                  <sch:rule context="linux-def:rpmverifypackage_state/linux-def:digest_check_passed">
-                                                       <sch:report test="true()">DEPRECATED ELEMENT: <sch:value-of select="name()"/> ID: <sch:value-of select="../@id"/></sch:report>
-                                                  </sch:rule>
-                                             </sch:pattern>
-                                        </xsd:appinfo>
-                                   </xsd:annotation>
-                              </xsd:element>
                               <xsd:element name="verification_script_successful" type="oval-def:EntityStateBoolType" minOccurs="0" maxOccurs="1">
                                    <xsd:annotation>
                                         <xsd:documentation>The verification_script_successful entity indicates whether or not the verification script executed successfully. If the verification script is not executed, due to the 'noscripts' behavior, this entity must not be collected.</xsd:documentation>
-                                   </xsd:annotation>
-                              </xsd:element>
-                              <xsd:element name="signature_check_passed" type="oval-def:EntityStateBoolType" minOccurs="0" maxOccurs="1">
-                                   <xsd:annotation>
-                                        <xsd:documentation>The signature_check_passed entity indicates whether or not the verification of the package or header signatures passed. If the signature check is not performed, due to the 'nosignature' behavior, this entity must not be collected.</xsd:documentation>
-                                        <xsd:appinfo>
-                                             <oval:deprecated_info>
-                                                  <oval:version>5.11</oval:version>
-                                                  <oval:reason>The signature_check_passed entity can not be collected as implemented, and has become irrelevant.</oval:reason>
-                                                  <oval:comment>This entity has been deprecated and will be removed in version 6.0 of the language.</oval:comment>
-                                             </oval:deprecated_info>
-                                             <sch:pattern id="linux-def_rpmverifypackage_scp_dep">
-                                                  <sch:rule context="linux-def:rpmverifypackage_state/linux-def:signature_check_passed">
-                                                       <sch:report test="true()">DEPRECATED ELEMENT: <sch:value-of select="name()"/> ID: <sch:value-of select="../@id"/></sch:report>
-                                                  </sch:rule>
-                                             </sch:pattern>
-                                        </xsd:appinfo>
                                    </xsd:annotation>
                               </xsd:element>
                          </xsd:sequence>
@@ -1973,43 +1492,9 @@
                     <xsd:documentation>'nodeps' when true this behavior means, don't verify dependencies of packages.</xsd:documentation>
                </xsd:annotation>
           </xsd:attribute>
-          <xsd:attribute name="nodigest" use="optional" type="xsd:boolean" default="false">
-               <xsd:annotation>
-                    <xsd:documentation>'nodigest' when true this behavior means, don't verify package or header digests when reading.</xsd:documentation>
-                    <xsd:appinfo>
-                         <oval:deprecated_info>
-                              <oval:version>5.11</oval:version>
-                              <oval:reason>The nodigest behavior has become irrelevant since the element it impacts has been deprecated.</oval:reason>
-                              <oval:comment>This test has been deprecated and will be removed in version 6.0 of the language.</oval:comment>
-                         </oval:deprecated_info>
-                         <sch:pattern id="linux-def_rpmverifypackage_nodi_beh_dep">
-                              <sch:rule context="linux-def:rpmverifypackage_object/linux-def:behaviors/@nodigest">
-                                   <sch:report test="true()">DEPRECATED BEHAVIOR: <sch:value-of select="name()"/> ID: <sch:value-of select="../../@id"/></sch:report>
-                              </sch:rule>
-                         </sch:pattern>
-                    </xsd:appinfo>
-               </xsd:annotation>
-          </xsd:attribute>
           <xsd:attribute name="noscripts" use="optional" type="xsd:boolean" default="false">
                <xsd:annotation>
                     <xsd:documentation>'noscripts' when true this behavior means, don't execute the %verifyscript scriptlet (if any).</xsd:documentation>
-               </xsd:annotation>
-          </xsd:attribute>
-          <xsd:attribute name="nosignature" use="optional" type="xsd:boolean" default="false">
-               <xsd:annotation>
-                    <xsd:documentation>'nosignature' when true this behavior means, don't verify package or header signatures when reading.</xsd:documentation>
-                    <xsd:appinfo>
-                         <oval:deprecated_info>
-                              <oval:version>5.11</oval:version>
-                              <oval:reason>The nosignature behavior has become irrelevant since the element it impacts has been deprecated.</oval:reason>
-                              <oval:comment>This test has been deprecated and will be removed in version 6.0 of the language.</oval:comment>
-                         </oval:deprecated_info>
-                         <sch:pattern id="linux-def_rpmverifypackage_nosi_beh_dep">
-                              <sch:rule context="linux-def:rpmverifypackage_object/linux-def:behaviors/@nosignature">
-                                   <sch:report test="true()">DEPRECATED BEHAVIOR: <sch:value-of select="name()"/> ID: <sch:value-of select="../../@id"/></sch:report>
-                              </sch:rule>
-                         </sch:pattern>
-                    </xsd:appinfo>
                </xsd:annotation>
           </xsd:attribute>
      </xsd:complexType>
@@ -2024,7 +1509,7 @@
                          <oval:test>selinuxboolean_test</oval:test>
                          <oval:object>selinuxboolean_object</oval:object>
                          <oval:state>selinuxboolean_state</oval:state>
-                         <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#linux">selinuxboolean_item</oval:item>
+                         <oval:item target_namespace="urn:oval:v6:system-characteristics:linux">selinuxboolean_item</oval:item>
                     </oval:element_mapping>
                </xsd:appinfo>
                <xsd:appinfo>
@@ -2061,7 +1546,7 @@
                               <sch:let name="reffed_state" value="ancestor::oval-def:oval_definitions/oval-def:states/*[@id=$state_ref]"/>
                               <sch:let name="state_name" value="local-name($reffed_state)"/>
                               <sch:let name="state_namespace" value="namespace-uri($reffed_state)"/>
-                              <sch:assert test="(($state_namespace='http://oval.mitre.org/XMLSchema/oval-definitions-5#linux') and ($state_name='selinuxboolean_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
+                              <sch:assert test="(($state_namespace='urn:oval:v6:definitions:linux') and ($state_name='selinuxboolean_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
                          </sch:rule>
                     </sch:pattern>
                </xsd:appinfo>
@@ -2125,7 +1610,7 @@
                          <oval:test>selinuxsecuritycontext_test</oval:test>
                          <oval:object>selinuxsecuritycontext_object</oval:object>
                          <oval:state>selinuxsecuritycontext_state</oval:state>
-                         <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#linux">selinuxsecuritycontext_item</oval:item>
+                         <oval:item target_namespace="urn:oval:v6:system-characteristics:linux">selinuxsecuritycontext_item</oval:item>
                     </oval:element_mapping>
                </xsd:appinfo>
                <xsd:appinfo>
@@ -2162,7 +1647,7 @@
                               <sch:let name="reffed_state" value="ancestor::oval-def:oval_definitions/oval-def:states/*[@id=$state_ref]"/>
                               <sch:let name="state_name" value="local-name($reffed_state)"/>
                               <sch:let name="state_namespace" value="namespace-uri($reffed_state)"/>
-                              <sch:assert test="(($state_namespace='http://oval.mitre.org/XMLSchema/oval-definitions-5#linux') and ($state_name='selinuxsecuritycontext_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
+                              <sch:assert test="(($state_namespace='urn:oval:v6:definitions:linux') and ($state_name='selinuxsecuritycontext_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
                          </sch:rule>
                     </sch:pattern>
                </xsd:appinfo>
@@ -2409,133 +1894,6 @@
           </xsd:complexType>
      </xsd:element>
      <!-- =============================================================================== -->
-     <!-- ==========================  SLACKWARE PKG INFO TEST  ========================== -->
-     <!-- =============================================================================== -->
-     <xsd:element name="slackwarepkginfo_test" substitutionGroup="oval-def:test">
-          <xsd:annotation>
-               <xsd:documentation>The slackware package info test is used to check information associated with a given Slackware package. It extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information. The required object element references a slackwarepkginfo_object and the optional state element specifies the data to check.</xsd:documentation>
-               <xsd:appinfo>
-                    <oval:element_mapping>
-                         <oval:test>slackwarepkginfo_test</oval:test>
-                         <oval:object>slackwarepkginfo_object</oval:object>
-                         <oval:state>slackwarepkginfo_state</oval:state>
-                         <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#linux">slackwarepkginfo_item</oval:item>
-                    </oval:element_mapping>
-               </xsd:appinfo>
-				<xsd:appinfo>
-					<oval:deprecated_info>
-						<oval:version>5.12</oval:version>
-						<oval:comment>This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.</oval:comment>
-					</oval:deprecated_info>
-				</xsd:appinfo>
-               <xsd:appinfo>
-                    <sch:pattern id="linux-def_slackwarepkginfo_test">
-                         <sch:rule context="linux-def:slackwarepkginfo_test/linux-def:object">
-                              <sch:assert test="@object_ref=ancestor::oval-def:oval_definitions/oval-def:objects/linux-def:slackwarepkginfo_object/@id"><sch:value-of select="../@id"/> - the object child element of an slackwarepkginfo_test must reference an slackwarepkginfo_object</sch:assert>
-                         </sch:rule>
-                         <sch:rule context="linux-def:slackwarepkginfo_test/linux-def:state">
-                              <sch:assert test="@state_ref=ancestor::oval-def:oval_definitions/oval-def:states/linux-def:slackwarepkginfo_state/@id"><sch:value-of select="../@id"/> - the state child element of an slackwarepkginfo_test must reference an slackwarepkginfo_state</sch:assert>
-                         </sch:rule>
-                    </sch:pattern>
-               </xsd:appinfo>
-          </xsd:annotation>
-          <xsd:complexType>
-               <xsd:complexContent>
-                    <xsd:extension base="oval-def:TestType">
-                         <xsd:sequence>
-                              <xsd:element name="object" type="oval-def:ObjectRefType" />
-                              <xsd:element name="state" type="oval-def:StateRefType" minOccurs="0" maxOccurs="unbounded"/>
-                         </xsd:sequence>
-                    </xsd:extension>
-               </xsd:complexContent>
-          </xsd:complexType>
-     </xsd:element>
-     <xsd:element name="slackwarepkginfo_object" substitutionGroup="oval-def:object">
-          <xsd:annotation>
-               <xsd:documentation>The slackwarepkginfo_object element is used by a slackware package info test to define the object to be evaluated. Each object extends the standard ObjectType as defined in the oval-definitions-schema and one should refer to the ObjectType description for more information. The common set element allows complex objects to be created using filters and set logic. Again, please refer to the description of the set element in the oval-definitions-schema.</xsd:documentation>
-               <xsd:documentation>A slackware package info object consists of a single name entity that identifies the package being checked.</xsd:documentation>
-               <xsd:appinfo>
-                    <sch:pattern id="linux-def_slackwarepkginfo_object_verify_filter_state">
-                         <sch:rule context="linux-def:slackwarepkginfo_object//oval-def:filter">
-                              <sch:let name="parent_object" value="ancestor::linux-def:slackwarepkginfo_object"/>
-                              <sch:let name="parent_object_id" value="$parent_object/@id"/>
-                              <sch:let name="state_ref" value="."/>
-                              <sch:let name="reffed_state" value="ancestor::oval-def:oval_definitions/oval-def:states/*[@id=$state_ref]"/>
-                              <sch:let name="state_name" value="local-name($reffed_state)"/>
-                              <sch:let name="state_namespace" value="namespace-uri($reffed_state)"/>
-                              <sch:assert test="(($state_namespace='http://oval.mitre.org/XMLSchema/oval-definitions-5#linux') and ($state_name='slackwarepkginfo_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
-                         </sch:rule>
-                    </sch:pattern>
-               </xsd:appinfo>
-          </xsd:annotation>
-          <xsd:complexType>
-               <xsd:complexContent>
-                    <xsd:extension base="oval-def:ObjectType">
-                         <xsd:sequence>
-                              <xsd:choice>
-                                   <xsd:element ref="oval-def:set"/>
-                                   <xsd:sequence>
-                                        <xsd:element name="name" type="oval-def:EntityObjectStringType">
-                                             <xsd:annotation>
-                                                  <xsd:documentation>This is the package name to check.</xsd:documentation>
-                                             </xsd:annotation>
-                                        </xsd:element>
-                                        <xsd:element ref="oval-def:filter" minOccurs="0" maxOccurs="unbounded"/>
-                                   </xsd:sequence>
-                              </xsd:choice>
-                         </xsd:sequence>
-                    </xsd:extension>
-               </xsd:complexContent>
-          </xsd:complexType>
-     </xsd:element>
-     <xsd:element name="slackwarepkginfo_state" substitutionGroup="oval-def:state">
-          <xsd:annotation>
-               <xsd:documentation>The slackwarepkginfo_state element defines the different information that can be used to evaluate the specified package. This includes the version, architecture, and revision. Please refer to the individual elements in the schema for more details about what each represents.</xsd:documentation>
-          </xsd:annotation>
-          <xsd:complexType>
-               <xsd:complexContent>
-                    <xsd:extension base="oval-def:StateType">
-                         <xsd:sequence>
-                              <xsd:element name="name" type="oval-def:EntityStateStringType" minOccurs="0" maxOccurs="1">
-                                   <xsd:annotation>
-                                        <xsd:documentation>This is the package name to check.</xsd:documentation>
-                                   </xsd:annotation>
-                              </xsd:element>
-                              <xsd:element name="version" minOccurs="0" maxOccurs="1">
-                                   <xsd:annotation>
-                                        <xsd:documentation>This is the version number of the package.</xsd:documentation>
-                                   </xsd:annotation>
-                                   <xsd:complexType>
-                                        <xsd:simpleContent>
-                                             <xsd:restriction base="oval-def:EntityStateAnySimpleType">
-                                                  <xsd:attribute name="datatype" use="optional" default="string">
-                                                       <xsd:simpleType>
-                                                            <xsd:restriction base="oval:SimpleDatatypeEnumeration">
-                                                                 <xsd:enumeration value="string"/>
-                                                                 <xsd:enumeration value="version"/>
-                                                            </xsd:restriction>
-                                                       </xsd:simpleType>
-                                                  </xsd:attribute>
-                                             </xsd:restriction>
-                                        </xsd:simpleContent>
-                                   </xsd:complexType>
-                              </xsd:element>
-                              <xsd:element name="architecture" type="oval-def:EntityStateStringType" minOccurs="0" maxOccurs="1">
-                                   <xsd:annotation>
-                                        <xsd:documentation/>
-                                   </xsd:annotation>
-                              </xsd:element>
-                              <xsd:element name="revision" type="oval-def:EntityStateStringType" minOccurs="0" maxOccurs="1">
-                                   <xsd:annotation>
-                                        <xsd:documentation/>
-                                   </xsd:annotation>
-                              </xsd:element>
-                         </xsd:sequence>
-                    </xsd:extension>
-               </xsd:complexContent>
-          </xsd:complexType>
-     </xsd:element>
-     <!-- =============================================================================== -->
      <!-- ======================  SYSTEMD UNIT DEPENDENCY TEST  ========================= -->
      <!-- =============================================================================== -->
      <xsd:element name="systemdunitdependency_test" substitutionGroup="oval-def:test">
@@ -2546,7 +1904,7 @@
                          <oval:test>systemdunitdependency_test</oval:test>
                          <oval:object>systemdunitdependency_object</oval:object>
                          <oval:state>systemdunitdependency_state</oval:state>
-                         <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#linux">systemdunitdependency_item</oval:item>
+                         <oval:item target_namespace="urn:oval:v6:system-characteristics:linux">systemdunitdependency_item</oval:item>
                     </oval:element_mapping>
                </xsd:appinfo>
                <xsd:appinfo>
@@ -2583,7 +1941,7 @@
                               <sch:let name="reffed_state" value="ancestor::oval-def:oval_definitions/oval-def:states/*[@id=$state_ref]"/>
                               <sch:let name="state_name" value="local-name($reffed_state)"/>
                               <sch:let name="state_namespace" value="namespace-uri($reffed_state)"/>
-                              <sch:assert test="(($state_namespace='http://oval.mitre.org/XMLSchema/oval-definitions-5#linux') and ($state_name='systemdunitdependency_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
+                              <sch:assert test="(($state_namespace='urn:oval:v6:definitions:linux') and ($state_name='systemdunitdependency_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
                          </sch:rule>
                     </sch:pattern>
                </xsd:appinfo>
@@ -2679,7 +2037,7 @@
                               <sch:let name="reffed_state" value="ancestor::oval-def:oval_definitions/oval-def:states/*[@id=$state_ref]"/>
                               <sch:let name="state_name" value="local-name($reffed_state)"/>
                               <sch:let name="state_namespace" value="namespace-uri($reffed_state)"/>
-                              <sch:assert test="(($state_namespace='http://oval.mitre.org/XMLSchema/oval-definitions-5#linux') and ($state_name='systemdunitproperty_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
+                              <sch:assert test="(($state_namespace='urn:oval:v6:definitions:linux') and ($state_name='systemdunitproperty_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
                          </sch:rule>
                     </sch:pattern>
                </xsd:appinfo>
@@ -2817,270 +2175,6 @@
                     <xsd:enumeration value="not performed">
                          <xsd:annotation>
                               <xsd:documentation>'not performed' indicates that the test could not be performed and is equivalent to the '?' value reported by the rpm -V command.</xsd:documentation>
-                         </xsd:annotation>
-                    </xsd:enumeration>
-                    <xsd:enumeration value="">
-                         <xsd:annotation>
-                              <xsd:documentation>The empty string value is permitted here to allow for empty elements associated with variable references.</xsd:documentation>
-                         </xsd:annotation>
-                    </xsd:enumeration>
-               </xsd:restriction>
-          </xsd:simpleContent>
-     </xsd:complexType>
-     <xsd:complexType name="EntityStateProtocolType">
-          <xsd:annotation>
-               <xsd:documentation>The EntityStateProtocolType complex type restricts a string value to the set of physical layer protocols used by AF_PACKET sockets. The empty string is also allowed to support the empty element associated with variable references.  Note that when using pattern matches and variables care must be taken to ensure that the regular expression and variable values align with the enumerated values.</xsd:documentation>
-          </xsd:annotation>
-          <xsd:simpleContent>
-               <xsd:restriction base="oval-def:EntityStateStringType">
-                    <xsd:enumeration value="ETH_P_LOOP">
-                         <xsd:annotation>
-                              <xsd:documentation>Ethernet loopback packet.</xsd:documentation>
-                         </xsd:annotation>
-                    </xsd:enumeration>
-                    <xsd:enumeration value="ETH_P_PUP">
-                         <xsd:annotation>
-                              <xsd:documentation>Xerox PUP packet.</xsd:documentation>
-                         </xsd:annotation>
-                    </xsd:enumeration>
-                    <xsd:enumeration value="ETH_P_PUPAT">
-                         <xsd:annotation>
-                              <xsd:documentation>Xerox PUP Address Transport packet.</xsd:documentation>
-                         </xsd:annotation>
-                    </xsd:enumeration>
-                    <xsd:enumeration value="ETH_P_IP">
-                         <xsd:annotation>
-                              <xsd:documentation>Internet protocol packet.</xsd:documentation>
-                         </xsd:annotation>
-                    </xsd:enumeration>
-                    <xsd:enumeration value="ETH_P_X25">
-                         <xsd:annotation>
-                              <xsd:documentation>CCITT X.25 packet.</xsd:documentation>
-                         </xsd:annotation>
-                    </xsd:enumeration>
-                    <xsd:enumeration value="ETH_P_ARP">
-                         <xsd:annotation>
-                              <xsd:documentation>Address resolution packet.</xsd:documentation>
-                         </xsd:annotation>
-                    </xsd:enumeration>
-                    <xsd:enumeration value="ETH_P_BPQ">
-                         <xsd:annotation>
-                              <xsd:documentation>G8BPQ AX.25 ethernet packet.</xsd:documentation>
-                         </xsd:annotation>
-                    </xsd:enumeration>
-                    <xsd:enumeration value="ETH_P_IEEEPUP">
-                         <xsd:annotation>
-                              <xsd:documentation>Xerox IEEE802.3 PUP packet.</xsd:documentation>
-                         </xsd:annotation>
-                    </xsd:enumeration>
-                    <xsd:enumeration value="ETH_P_IEEEPUPAT">
-                         <xsd:annotation>
-                              <xsd:documentation>Xerox IEEE802.3 PUP address transport packet.</xsd:documentation>
-                         </xsd:annotation>
-                    </xsd:enumeration>
-                    <xsd:enumeration value="ETH_P_DEC">
-                         <xsd:annotation>
-                              <xsd:documentation>DEC assigned protocol.</xsd:documentation>
-                         </xsd:annotation>
-                    </xsd:enumeration>
-                    <xsd:enumeration value="ETH_P_DNA_DL">
-                         <xsd:annotation>
-                              <xsd:documentation>DEC DNA Dump/Load.</xsd:documentation>
-                         </xsd:annotation>
-                    </xsd:enumeration>
-                    <xsd:enumeration value="ETH_P_DNA_RC">
-                         <xsd:annotation>
-                              <xsd:documentation>DEC DNA Remote Console.</xsd:documentation>
-                         </xsd:annotation>
-                    </xsd:enumeration>
-                    <xsd:enumeration value="ETH_P_DNA_RT">
-                         <xsd:annotation>
-                              <xsd:documentation>DEC DNA Routing.</xsd:documentation>
-                         </xsd:annotation>
-                    </xsd:enumeration>
-                    <xsd:enumeration value="ETH_P_LAT">
-                         <xsd:annotation>
-                              <xsd:documentation>DEC LAT.</xsd:documentation>
-                         </xsd:annotation>
-                    </xsd:enumeration>
-                    <xsd:enumeration value="ETH_P_DIAG">
-                         <xsd:annotation>
-                              <xsd:documentation>DEC Diagnostics.</xsd:documentation>
-                         </xsd:annotation>
-                    </xsd:enumeration>
-                    <xsd:enumeration value="ETH_P_CUST">
-                         <xsd:annotation>
-                              <xsd:documentation>DEC Customer use.</xsd:documentation>
-                         </xsd:annotation>
-                    </xsd:enumeration>
-                    <xsd:enumeration value="ETH_P_SCA">
-                         <xsd:annotation>
-                              <xsd:documentation>DEC Systems Comms Arch.</xsd:documentation>
-                         </xsd:annotation>
-                    </xsd:enumeration>
-                    <xsd:enumeration value="ETH_P_RARP">
-                         <xsd:annotation>
-                              <xsd:documentation>Reverse address resolution packet.</xsd:documentation>
-                         </xsd:annotation>
-                    </xsd:enumeration>
-                    <xsd:enumeration value="ETH_P_ATALK">
-                         <xsd:annotation>
-                              <xsd:documentation>Appletalk DDP.</xsd:documentation>
-                         </xsd:annotation>
-                    </xsd:enumeration>
-                    <xsd:enumeration value="ETH_P_AARP">
-                         <xsd:annotation>
-                              <xsd:documentation>Appletalk AARP.</xsd:documentation>
-                         </xsd:annotation>
-                    </xsd:enumeration>
-                    <xsd:enumeration value="ETH_P_8021Q">
-                         <xsd:annotation>
-                              <xsd:documentation>802.1Q VLAN Extended Header.</xsd:documentation>
-                         </xsd:annotation>
-                    </xsd:enumeration>
-                    <xsd:enumeration value="ETH_P_IPX">
-                         <xsd:annotation>
-                              <xsd:documentation>IPX over DIX.</xsd:documentation>
-                         </xsd:annotation>
-                    </xsd:enumeration>
-                    <xsd:enumeration value="ETH_P_IPV6">
-                         <xsd:annotation>
-                              <xsd:documentation>IPv6 over bluebook.</xsd:documentation>
-                         </xsd:annotation>
-                    </xsd:enumeration>
-                    <xsd:enumeration value="ETH_P_SLOW">
-                         <xsd:annotation>
-                              <xsd:documentation>Slow Protocol. See 802.3ad 43B.</xsd:documentation>
-                         </xsd:annotation>
-                    </xsd:enumeration>
-                    <xsd:enumeration value="ETH_P_WCCP">
-                         <xsd:annotation>
-                              <xsd:documentation>Web-cache coordination protocol.</xsd:documentation>
-                         </xsd:annotation>
-                    </xsd:enumeration>
-                    <xsd:enumeration value="ETH_P_PPP_DISC">
-                         <xsd:annotation>
-                              <xsd:documentation>PPPoE discovery messages.</xsd:documentation>
-                         </xsd:annotation>
-                    </xsd:enumeration>
-                    <xsd:enumeration value="ETH_P_PPP_SES">
-                         <xsd:annotation>
-                              <xsd:documentation>PPPoE session messages.</xsd:documentation>
-                         </xsd:annotation>
-                    </xsd:enumeration>
-                    <xsd:enumeration value="ETH_P_MPLS_UC">
-                         <xsd:annotation>
-                              <xsd:documentation>MPLS Unicast traffic.</xsd:documentation>
-                         </xsd:annotation>
-                    </xsd:enumeration>
-                    <xsd:enumeration value="ETH_P_MPLS_MC">
-                         <xsd:annotation>
-                              <xsd:documentation>MPLS Multicast traffic.</xsd:documentation>
-                         </xsd:annotation>
-                    </xsd:enumeration>
-                    <xsd:enumeration value="ETH_P_ATMMPOA">
-                         <xsd:annotation>
-                              <xsd:documentation>MultiProtocol Over ATM.</xsd:documentation>
-                         </xsd:annotation>
-                    </xsd:enumeration>
-                    <xsd:enumeration value="ETH_P_ATMFATE">
-                         <xsd:annotation>
-                              <xsd:documentation>Frame-based ATM Transport over Ethernet.</xsd:documentation>
-                         </xsd:annotation>
-                    </xsd:enumeration>
-                    <xsd:enumeration value="ETH_P_AOE">
-                         <xsd:annotation>
-                              <xsd:documentation>ATA over Ethernet.</xsd:documentation>
-                         </xsd:annotation>
-                    </xsd:enumeration>
-                    <xsd:enumeration value="ETH_P_TIPC">
-                         <xsd:annotation>
-                              <xsd:documentation>TIPC.</xsd:documentation>
-                         </xsd:annotation>
-                    </xsd:enumeration>
-                    <xsd:enumeration value="ETH_P_802_3">
-                         <xsd:annotation>
-                              <xsd:documentation>Dummy type for 802.3 frames.</xsd:documentation>
-                         </xsd:annotation>
-                    </xsd:enumeration>
-                    <xsd:enumeration value="ETH_P_AX25">
-                         <xsd:annotation>
-                              <xsd:documentation>Dummy protocol id for AX.25.</xsd:documentation>
-                         </xsd:annotation>
-                    </xsd:enumeration>
-                    <xsd:enumeration value="ETH_P_ALL">
-                         <xsd:annotation>
-                              <xsd:documentation>Every packet.</xsd:documentation>
-                         </xsd:annotation>
-                    </xsd:enumeration>
-                    <xsd:enumeration value="ETH_P_802_2">
-                         <xsd:annotation>
-                              <xsd:documentation>802.2 frames.</xsd:documentation>
-                         </xsd:annotation>
-                    </xsd:enumeration>
-                    <xsd:enumeration value="ETH_P_SNAP">
-                         <xsd:annotation>
-                              <xsd:documentation>Internal only.</xsd:documentation>
-                         </xsd:annotation>
-                    </xsd:enumeration>
-                    <xsd:enumeration value="ETH_P_DDCMP">
-                         <xsd:annotation>
-                              <xsd:documentation>DEC DDCMP: Internal only</xsd:documentation>
-                         </xsd:annotation>
-                    </xsd:enumeration>
-                    <xsd:enumeration value="ETH_P_WAN_PPP">
-                         <xsd:annotation>
-                              <xsd:documentation>Dummy type for WAN PPP frames.</xsd:documentation>
-                         </xsd:annotation>
-                    </xsd:enumeration>
-                    <xsd:enumeration value="ETH_P_PPP_MP">
-                         <xsd:annotation>
-                              <xsd:documentation>Dummy type for PPP MP frames.</xsd:documentation>
-                         </xsd:annotation>
-                    </xsd:enumeration>
-                    <xsd:enumeration value="ETH_P_PPPTALK">
-                         <xsd:annotation>
-                              <xsd:documentation>Dummy type for Atalk over PPP.</xsd:documentation>
-                         </xsd:annotation>
-                    </xsd:enumeration>
-                    <xsd:enumeration value="ETH_P_LOCALTALK">
-                         <xsd:annotation>
-                              <xsd:documentation>Localtalk pseudo type.</xsd:documentation>
-                         </xsd:annotation>
-                    </xsd:enumeration>
-                    <xsd:enumeration value="ETH_P_TR_802_2">
-                         <xsd:annotation>
-                              <xsd:documentation>802.2 frames.</xsd:documentation>
-                         </xsd:annotation>
-                    </xsd:enumeration>
-                    <xsd:enumeration value="ETH_P_MOBITEX">
-                         <xsd:annotation>
-                              <xsd:documentation>Mobitex.</xsd:documentation>
-                         </xsd:annotation>
-                    </xsd:enumeration>
-                    <xsd:enumeration value="ETH_P_CONTROL">
-                         <xsd:annotation>
-                              <xsd:documentation>Card specific control frames.</xsd:documentation>
-                         </xsd:annotation>
-                    </xsd:enumeration>
-                    <xsd:enumeration value="ETH_P_IRDA">
-                         <xsd:annotation>
-                              <xsd:documentation>Linux-IrDA.</xsd:documentation>
-                         </xsd:annotation>
-                    </xsd:enumeration>
-                    <xsd:enumeration value="ETH_P_ECONET">
-                         <xsd:annotation>
-                              <xsd:documentation>Acorn Econet.</xsd:documentation>
-                         </xsd:annotation>
-                    </xsd:enumeration>
-                    <xsd:enumeration value="ETH_P_HDLC">
-                         <xsd:annotation>
-                              <xsd:documentation>HDLC frames.</xsd:documentation>
-                         </xsd:annotation>
-                    </xsd:enumeration>
-                    <xsd:enumeration value="ETH_P_ARCNET">
-                         <xsd:annotation>
-                              <xsd:documentation>1A for ArcNet.</xsd:documentation>
                          </xsd:annotation>
                     </xsd:enumeration>
                     <xsd:enumeration value="">

@@ -1,8 +1,8 @@
 Open Vulnerability and Assessment Language: IOS Definition  
 =========================================================
 * Schema: IOS Definition  
-* Version: 5.12  
-* Release Date: 11/29/2024 09:00:00 AM
+* Version: 6.0  
+* Release Date: 1/24/2025 09:00:00 AM
 
 The following is a description of the elements, types, and attributes that compose the IOS specific system characteristic items found in Open Vulnerability and Assessment Language (OVAL). Each item is an extension of the standard item element defined in the Core System Characteristic Schema. Through extension, each item inherits a set of elements and attributes that are shared amongst all OVAL Items. Each item is described in detail and should provide the information necessary to understand what each element and attribute represents. This document is intended for developers and assumes some familiarity with XML. A high level description of the interaction between the different tests and their relationship to the Core System Characteristic Schema is not outlined here.
 
@@ -10,12 +10,10 @@ The OVAL Schema is maintained by the OVAL Community. For more information, inclu
 
 Item Listing  
 ---------------------------------------------------------
-* :ref:`acl_item`  
 * :ref:`bgpneighbor_item`  
 * :ref:`global_item`  
 * :ref:`interface_item`  
 * :ref:`line_item`  
-* :ref:`router_item`  
 * :ref:`routingprotocolauthintf_item`  
 * :ref:`section_item`  
 * :ref:`snmp_item`  
@@ -23,49 +21,6 @@ Item Listing
 * :ref:`snmpgroup_item`  
 * :ref:`snmphost_item`  
 * :ref:`snmpuser_item`  
-* :ref:`snmpview_item`  
-* :ref:`tclsh_item`  
-* :ref:`version_item`  
-  
-______________
-  
-.. _acl_item:  
-  
-< acl_item >  
----------------------------------------------------------
-Stores command that are part of a IOS configuration section. For example all configuration lines under an interface. It should not store configurations for configs that already have a separate item. For example BGP has a router item and should not also be stored in a acl_item.
-
-**Extends:** oval-sc:ItemType
-
-Child Elements  
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-.. list-table:: Elements  
-    :header-rows: 1  
-  
-    * - Child Elements  
-      - Type (MinOccurs..MaxOccurs)  
-      - Desc.  
-    * - name  
-      - oval-sc:EntityItemStringType (0..1)  
-      - Element with the name of the ACL.  
-    * - ip_version  
-      - ios-sc:EntityItemAccessListIPVersionType (0..1)  
-      - Element with the IP version of the ACL.  
-    * - use  
-      - ios-sc:EntityItemAccessListUseType (0..1)  
-      - Element with the feature where the ACL is used. If the same ACL is applied in more than one feature (i.e interface and crypto map), multiple items needs to be created.  
-    * - used_in  
-      - oval-sc:EntityItemStringType (0..1)  
-      - Element with the name of where the ACL is used. For example if use is 'INTERFACE', use_in will be the name of the interface. If the same ACL is applied in more than one feature (i.e interface and crypto map), multiple items needs to be created.  
-    * - interface_direction  
-      - ios-sc:EntityItemAccessListInterfaceDirectionType (0..1)  
-      - Element with the direction the ACL is applied on an interface.  
-    * - acl_config_lines  
-      - oval-sc:EntityItemStringType (0..1)  
-      - Element with the value returned with all config lines of the ACL.  
-    * - config_line  
-      - oval-sc:EntityItemStringType (0..unbounded)  
-      - Element with the value returned with one ACL config line at a time.  
   
 ______________
   
@@ -138,9 +93,6 @@ Child Elements
     * - ip_directed_broadcast_command  
       - Restriction of oval-sc:EntityItemAnySimpleType. See schema for details. (0..1)  
       - Element that is true if the directed broadcast command is enabled on the interface. The default is false.  
-    * - no_ip_directed_broadcast_command (Deprecated)  
-      - oval-sc:EntityItemStringType (0..1)  
-      -   
     * - proxy_arp_command  
       - Restriction of oval-sc:EntityItemAnySimpleType. See schema for details. (0..1)  
       - Element that is true if the proxy_arp command is enabled on the interface. The default is true.  
@@ -171,9 +123,6 @@ Child Elements
     * - ipv6_urpf_command  
       - oval-sc:EntityItemStringType (0..1)  
       - Element with the uRPF command for IPv6 under the interface.  
-    * - urpf_command (Deprecated)  
-      - oval-sc:EntityItemStringType (0..1)  
-      - Element with the uRPF command under the interface.  
     * - switchport_trunk_encapsulation  
       - ios-sc:EntityItemTrunkEncapType (0..1)  
       - Element with the switchport trunk encapsulation option configured on the interface (if applicable).  
@@ -220,43 +169,6 @@ Child Elements
     * - config_line  
       - oval-sc:EntityItemStringType (0..1)  
       - The value returned from by the specified SHOW sub-command.  
-  
-______________
-  
-.. _router_item:  
-  
-< router_item >  
----------------------------------------------------------
-Stores commands that are part of a IOS 'router' command configuration. For example 'router bgp 123'.
-
-**Extends:** oval-sc:ItemType
-
-Child Elements  
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-.. list-table:: Elements  
-    :header-rows: 1  
-  
-    * - Child Elements  
-      - Type (MinOccurs..MaxOccurs)  
-      - Desc.  
-    * - protocol  
-      - ios-sc:EntityItemRoutingProtocolType (0..1)  
-      - Element with the routing protocol.  
-    * - id  
-      - oval-sc:EntityItemIntType (0..1)  
-      - Element with the IOS router id.  
-    * - network  
-      - oval-sc:EntityItemStringType (0..unbounded)  
-      - Element with the subnet in the network command of the router instance. The area can be included in the string for OSPF.  
-    * - bgp_neighbor  
-      - oval-sc:EntityItemStringType (0..unbounded)  
-      - Element with the BGP neighbors, if applicable.  
-    * - ospf_authentication_area  
-      - Restriction of oval-sc:EntityItemAnySimpleType. See schema for details. (0..unbounded)  
-      - Element with the OSPF area that is authenticated, if applicable.  
-    * - router_config_lines  
-      - oval-sc:EntityItemStringType (0..1)  
-      - Element with all config lines of the router.  
   
 ______________
   
@@ -499,105 +411,6 @@ Child Elements
       - ios-sc:EntityItemSNMPAuthStringType (0..1)  
       - Element with the SNMP authentication type for the user (for SNMPv3).  
   
-______________
-  
-.. _snmpview_item:  
-  
-< snmpview_item >  
----------------------------------------------------------
-Stores information about an SNMP view configuration in IOS. That information includes the view name, the mib_family that the view uses and the included or excluded option of the mib family in the view.
-
-**Extends:** oval-sc:ItemType
-
-Child Elements  
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-.. list-table:: Elements  
-    :header-rows: 1  
-  
-    * - Child Elements  
-      - Type (MinOccurs..MaxOccurs)  
-      - Desc.  
-    * - name  
-      - oval-sc:EntityItemStringType (0..1)  
-      - Element with the SNMP view name.  
-    * - mib_family  
-      - oval-sc:EntityItemStringType (0..1)  
-      - Element with the SNMP MIB family of the view.  
-    * - include  
-      - oval-sc:EntityItemBoolType (0..1)  
-      - Element that is true if the included option is used in the view.  
-  
-______________
-  
-.. _tclsh_item:  
-  
-< tclsh_item >  
----------------------------------------------------------
-The tclsh item holds information about the availability of tcl on the IOS operating system. It extends the standard ItemType as defined in the oval-system-characteristics schema and one should refer to the ItemType description for more information.
-
-**Extends:** oval-sc:ItemType
-
-Child Elements  
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-.. list-table:: Elements  
-    :header-rows: 1  
-  
-    * - Child Elements  
-      - Type (MinOccurs..MaxOccurs)  
-      - Desc.  
-    * - available  
-      - oval-sc:EntityItemBoolType (0..1)  
-      - This boolean entity describes whether TCLSH is available on the system. A value of true means that TCLSH is available. Per Cisco documentation, the accepted way to see if the device supports tcl functionality is to enter the tcl shell. If the attempt results in a tcl prompt then the device supports tclsh and has it enabled.  
-  
-______________
-  
-.. _version_item:  
-  
-< version_item >  
----------------------------------------------------------
-The version_item holds information about the version of the IOS operating system. It extends the standard ItemType as defined in the oval-system-characteristics schema and one should refer to the ItemType description for more information.
-
-**Extends:** oval-sc:ItemType
-
-Child Elements  
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-.. list-table:: Elements  
-    :header-rows: 1  
-  
-    * - Child Elements  
-      - Type (MinOccurs..MaxOccurs)  
-      - Desc.  
-    * - major_release (Deprecated)  
-      - oval-sc:EntityItemStringType (0..1)  
-      - The major_release is a combination of train and rebuild information and is used by Cisco advisories to identify major releases.  
-    * - train_number (Deprecated)  
-      - oval-sc:EntityItemStringType (0..1)  
-      - The train number is the dotted version that starts a version string. For example the version string 12.2(3)T has a train number of 12.2.  
-    * - major_version  
-      - oval-sc:EntityItemIntType (0..1)  
-      - The major_version entity specifies the major version piece of the version string. The value is an integer and in the example 12.4(9)T0a the major version is '12'.  
-    * - minor_version  
-      - oval-sc:EntityItemIntType (0..1)  
-      - The minor_version entity specifies the minor version piece of the version string. The value is an integer and in the example 12.4(9)T0a the minor version is '4'.  
-    * - release  
-      - oval-sc:EntityItemIntType (0..1)  
-      - The release entity specifies the release piece of the version string. The value is an integer and in the example 12.4(9)T0a the release is '9'.  
-    * - train_identifier  
-      - oval-sc:EntityItemStringType (0..1)  
-      - The train identifier is the type of Train. For example the version string 12.2(3)T has a train identifier of T. Please see the EntityItemTrainIdentifierType for more information about the different train identifiers.The train_identifier entity specifies the type of train represented in the version string. The value is a string and in the example 12.4(9)T0a the train identifier is 'T'. The following explaination from Wikipedia should help explain the different train identifiers. Cisco IOS releases are split into several "trains", each containing a different set of features. Trains more or less map onto distinct markets or groups of customers that Cisco is targeting. The 'mainline' train is designed to be the most stable release the company can offer, and its feature set never expands during its lifetime. Updates are released only to address bugs in the product. The previous technology train becomes the source for the current mainline train--for example, the 12.1T train becomes the basis for the 12.2 mainline. Therefore, to determine the features available in a particular mainline release, look at the previous T train release. The 'T' (Technology) train, gets new features and bug fixes throughout its life, and is therefore less stable than the mainline. (In releases prior to Cisco IOS Release 12.0, the P train served as the Technology train.) The 'S' (Service Provider) train, runs only on the company's core router products and is heavily customized for Service Provider customers. The 'E' (Enterprise) train, is customized for implementation in enterprise environments. The 'B' (broadband) train, support internet based broadband features. The 'XA', 'Xb' ... (special functionality) train, needs to be documented. There are other trains from time to time, designed for specific needs -- for example, the 12.0AA train contained new code required for Cisco's AS5800 product.  
-    * - rebuild  
-      - oval-sc:EntityItemIntType (0..1)  
-      - The rebuild entity specifies the rebuild piece of the version string The value is an integer and in the example 12.4(9)T0a the rebuild is '0'. Often a rebuild is compiled to fix a single specific problem or vulnerability for a given IOS version. For example, 12.1(8)E14 is a Rebuild, the 14 denoting the 14th rebuild of 12.1(8)E. Rebuilds are produced to either quickly repair a defect, or to satisfy customers who do not want to upgrade to a later major revision because they may be running critical infrastructure on their devices, and hence prefer to minimise change and risk.  
-    * - subrebuild  
-      - oval-sc:EntityItemStringType (0..1)  
-      - The subrebuild entity specifies the subrebuild piece of the version string. The value is a string and in the example 12.4(9)T0a the subrebuild is 'a'.  
-    * - mainline_rebuild  
-      - oval-sc:EntityItemStringType (0..1)  
-      - The mainline_rebuild entity specifies the mainline rebuild piece of the version string. The mainline rebuild is just a regular rebuild release against the mainline operating system release (e.g. the branch of development that would typically be called "the trunk" that isn't associated with a train). Since there is no train identifier to stick the rebuild release after, they stick a alphabetic character inside the parens holding the maintenance release number. For example, 12.4(5b) is the second rebuild of the 12.4(5) maintenance release.  
-    * - version_string  
-      - oval-sc:EntityItemIOSVersionType (0..1)  
-      - The version entity holds the raw string output of a 'show version' command.  
-  
 .. _EntityItemAccessListInterfaceDirectionType:  
   
 == EntityItemAccessListInterfaceDirectionType ==  
@@ -663,11 +476,6 @@ The EntityItemAccessListUseType complex type restricts a string value to a speci
       - (No Description)  
     * - VTY  
       - (No Description)  
-    * - NONE (Deprecated)  
-      - |   
-        | **Deprecated As Of Version:** 5.11.2:1.0  
-        | **Reason:** The EntityStateSimpleBaseType check_existence attribute serves the same purpose as this enumeration value.  
-        | **Comment:** This AccessListUseType enumeration value has been deprecated and may be removed in a future version of the language.  
     * -   
       - | The empty string value is permitted here to allow for detailed error reporting.  
   
@@ -688,11 +496,6 @@ The EntityItemRoutingAuthTypeStringType complex type restricts a string value to
       - (No Description)  
     * - MESSAGE_DIGEST  
       - (No Description)  
-    * - NULL (Deprecated)  
-      - |   
-        | **Deprecated As Of Version:** 5.11.2:1.0  
-        | **Reason:** The NULL authentication area type is never declared in an interface ip ospf command context.  
-        | **Comment:** This RoutingAuthTypeStringType enumeration value has been deprecated and may be removed in a future version of the language.  
     * -   
       - | The empty string value is permitted here to allow for detailed error reporting.  
   

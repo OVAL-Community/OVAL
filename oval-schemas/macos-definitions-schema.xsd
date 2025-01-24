@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-            xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5"
-            xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5"
-            xmlns:macos-def="http://oval.mitre.org/XMLSchema/oval-definitions-5#macos"
+            xmlns:oval="urn:oval:v6:common"
+            xmlns:oval-def="urn:oval:v6:definitions"
+            xmlns:macos-def="urn:oval:v6:definitions:macos"
             xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-            targetNamespace="http://oval.mitre.org/XMLSchema/oval-definitions-5#macos"
-            elementFormDefault="qualified" version="5.12">
-      <xsd:import namespace="http://oval.mitre.org/XMLSchema/oval-definitions-5" schemaLocation="oval-definitions-schema.xsd"/>
+            targetNamespace="urn:oval:v6:definitions:macos"
+            elementFormDefault="qualified" version="6.0">
+      <xsd:import namespace="urn:oval:v6:definitions" schemaLocation="oval-definitions-schema.xsd"/>
       <xsd:annotation>
             <xsd:documentation>The following is a description of the elements, types, and attributes that compose the MacOS specific tests found in Open Vulnerability and Assessment Language (OVAL). Each test is an extension of the standard test element defined in the Core Definition Schema. Through extension, each test inherits a set of elements and attributes that are shared amongst all OVAL tests. Each test is described in detail and should provide the information necessary to understand what each element and attribute represents. This document is intended for developers and assumes some familiarity with XML. A high level description of the interaction between the different tests and their relationship to the Core Definition Schema is not outlined here.</xsd:documentation>
             <xsd:documentation>The MacOS Definition Schema was initially developed by The Center for Internet Security. Many thanks to their contributions to OVAL and the security community.</xsd:documentation>
             <xsd:documentation>The OVAL Schema is maintained by the OVAL Community. For more information, including how to get involved in the project and how to submit change requests, please visit the OVAL website at https://github.com/OVAL-Community/.</xsd:documentation>
             <xsd:appinfo>
                   <schema>MacOS Definition</schema>
-                  <version>5.12</version>
-                  <date>11/29/2024 09:00:00 AM</date>
+                  <version>6.0</version>
+                  <date>1/24/2025 09:00:00 AM</date>
                   <terms_of_use>This software is an open standard developed by multiple parties, including the United States Government (Government). The Government hereby grants you a non-exclusive, royalty-free, worldwide license to use, modify, and/or reproduce the software for any lawful purpose provided that you reproduce this License/Disclaimer language with any use/modification/copy of the software. The Government assumes no responsibility whatsoever for this software's use by other parties, and the software is provided "AS IS" without warranty or guarantee of any kind, express or implied, including, but not limited to, the warranties of merchantability, fitness for a particular purpose, and noninfringement. In no event shall the Government be liable for any claim, damages or other liability, whether in an action of contract, tort or other dealings in the software. The Government has no obligation hereunder to provide maintenance, support, updates, enhancements, or modifications to the software. Users may submit proposals and/or updates regarding the software, which proposals and/or updates the Government, at its sole discretion, can choose to incorporate into the software. Proposals and/or updates submitted to the Government by users must be accompanied by a license to such proposals and/or updates that is no more restrictive than this License/Disclaimer.</terms_of_use>
-                  <sch:ns prefix="oval-def" uri="http://oval.mitre.org/XMLSchema/oval-definitions-5"/>
-                  <sch:ns prefix="macos-def" uri="http://oval.mitre.org/XMLSchema/oval-definitions-5#macos"/>
+                  <sch:ns prefix="oval-def" urn="urn:oval:v6:definitions"/>
+                  <sch:ns prefix="macos-def" urn="urn:oval:v6:definitions:macos"/>
                   <sch:ns prefix="xsi" uri="http://www.w3.org/2001/XMLSchema-instance"/>
             </xsd:appinfo>
       </xsd:annotation>
@@ -32,7 +32,7 @@
                               <oval:test>accountinfo_test</oval:test>
                               <oval:object>accountinfo_object</oval:object>
                               <oval:state>accountinfo_state</oval:state>
-                              <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#macos">accountinfo_item</oval:item>
+                              <oval:item target_namespace="urn:oval:v6:system-characteristics:macos">accountinfo_item</oval:item>
                         </oval:element_mapping>
                   </xsd:appinfo>
                   <xsd:appinfo>
@@ -70,7 +70,7 @@
                                     <sch:let name="reffed_state" value="ancestor::oval-def:oval_definitions/oval-def:states/*[@id=$state_ref]"/>
                                     <sch:let name="state_name" value="local-name($reffed_state)"/>
                                     <sch:let name="state_namespace" value="namespace-uri($reffed_state)"/>
-                                    <sch:assert test="(($state_namespace='http://oval.mitre.org/XMLSchema/oval-definitions-5#macos') and ($state_name='accountinfo_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
+                                    <sch:assert test="(($state_namespace='urn:oval:v6:definitions:macos') and ($state_name='accountinfo_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
                               </sch:rule>
                         </sch:pattern>
                   </xsd:appinfo>
@@ -159,7 +159,7 @@
                               <oval:test>authorizationdb_test</oval:test>
                               <oval:object>authorizationdb_object</oval:object>
                               <oval:state>authorizationdb_state</oval:state>
-                              <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#macos">authorizationdb_item</oval:item>
+                              <oval:item target_namespace="urn:oval:v6:system-characteristics:macos">authorizationdb_item</oval:item>
                         </oval:element_mapping>
                   </xsd:appinfo>
                   <xsd:appinfo>
@@ -197,7 +197,7 @@
                                     <sch:let name="reffed_state" value="ancestor::oval-def:oval_definitions/oval-def:states/*[@id=$state_ref]"/>
                                     <sch:let name="state_name" value="local-name($reffed_state)"/>
                                     <sch:let name="state_namespace" value="namespace-uri($reffed_state)"/>
-                                    <sch:assert test="(($state_namespace='http://oval.mitre.org/XMLSchema/oval-definitions-5#macos') and ($state_name='authorizationdb_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
+                                    <sch:assert test="(($state_namespace='urn:oval:v6:definitions:macos') and ($state_name='authorizationdb_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
                               </sch:rule>
                         </sch:pattern>
                   </xsd:appinfo>
@@ -263,126 +263,6 @@
             </xsd:complexType>
       </xsd:element>
       <!-- =============================================================================== -->
-      <!-- ==========================  CORESTORAGE TEST  ================================= -->
-      <!-- =============================================================================== -->
-      <xsd:element name="corestorage_test" substitutionGroup="oval-def:test">
-            <xsd:annotation>
-                  <xsd:documentation>The corestorage_test is used to check the properties of the plist-style XML output from the "diskutil cs list -plist" command, for reading information about the CoreStorage setup on MacOSX. It extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information. The required object element references an corestorage_object and the optional state element specifies the data to check.</xsd:documentation>
-                  <xsd:appinfo>
-                        <oval:element_mapping>
-                              <oval:test>corestorage_test</oval:test>
-                              <oval:object>corestorage_object</oval:object>
-                              <oval:state>corestorage_state</oval:state>
-                              <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#macos">corestorage_item</oval:item>
-                        </oval:element_mapping>
-                  </xsd:appinfo>
-					<xsd:appinfo>
-						<oval:deprecated_info>
-							<oval:version>5.12</oval:version>
-							<oval:comment>This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.</oval:comment>
-						</oval:deprecated_info>
-					</xsd:appinfo>
-                  <xsd:appinfo>
-                        <sch:pattern id="macos-def_corestoragetst">
-                              <sch:rule context="macos-def:corestorage_test/macos-def:object">
-                                    <sch:assert test="@object_ref=ancestor::oval-def:oval_definitions/oval-def:objects/macos-def:corestorage_object/@id"><sch:value-of select="../@id"/> - the object child element of a corestorage_test must reference an corestorage_object</sch:assert>
-                              </sch:rule>
-                              <sch:rule context="macos-def:corestorage_test/macos-def:state">
-                                    <sch:assert test="@state_ref=ancestor::oval-def:oval_definitions/oval-def:states/macos-def:corestorage_state/@id"><sch:value-of select="../@id"/> - the state child element of a corestorage_test must reference an corestorage_state</sch:assert>
-                              </sch:rule>
-                        </sch:pattern>
-                  </xsd:appinfo>
-            </xsd:annotation>
-            <xsd:complexType>
-                  <xsd:complexContent>
-                        <xsd:extension base="oval-def:TestType">
-                              <xsd:sequence>
-                                    <xsd:element name="object" type="oval-def:ObjectRefType"/>
-                                    <xsd:element name="state" type="oval-def:StateRefType" minOccurs="0" maxOccurs="unbounded"/>
-                              </xsd:sequence>
-                        </xsd:extension>
-                  </xsd:complexContent>
-            </xsd:complexType>
-      </xsd:element>
-      <xsd:element name="corestorage_object" substitutionGroup="oval-def:object">
-            <xsd:annotation>
-                  <xsd:documentation>The corestorage_object element is used by an corestorage_test to define the object to be evaluated. Each object extends the standard ObjectType as defined in the oval-definitions-schema and one should refer to the ObjectType description for more information. The common set element allows complex objects to be created using filters and set logic. Again, please refer to the description of the set element in the oval-definitions-schema.</xsd:documentation>
-                  <xsd:documentation>An corestorage_object consists of a uuid entity that contains the UUID of the volume whose information should be read (i.e., 'diskutil cs info -plist [UUID]'). The resulting plist data can be queried using the xpath entity.</xsd:documentation>
-                  <xsd:appinfo>
-                        <sch:pattern id="macos-def_corestorage_object_verify_filter_state">
-                              <sch:rule context="macos-def:corestorage_object//oval-def:filter">
-                                    <sch:let name="parent_object" value="ancestor::macos-def:corestorage_object"/>
-                                    <sch:let name="parent_object_id" value="$parent_object/@id"/>
-                                    <sch:let name="state_ref" value="."/>
-                                    <sch:let name="reffed_state" value="ancestor::oval-def:oval_definitions/oval-def:states/*[@id=$state_ref]"/>
-                                    <sch:let name="state_name" value="local-name($reffed_state)"/>
-                                    <sch:let name="state_namespace" value="namespace-uri($reffed_state)"/>
-                                    <sch:assert test="(($state_namespace='http://oval.mitre.org/XMLSchema/oval-definitions-5#macos') and ($state_name='corestorage_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
-                              </sch:rule>
-                        </sch:pattern>
-                  </xsd:appinfo>
-            </xsd:annotation>
-            <xsd:complexType>
-                  <xsd:complexContent>
-                        <xsd:extension base="oval-def:ObjectType">
-                              <xsd:sequence>
-                                    <xsd:choice>
-                                          <xsd:element ref="oval-def:set"/>
-                                          <xsd:sequence>
-                                                <xsd:element name="uuid" type="oval-def:EntityObjectStringType">
-                                                      <xsd:annotation>
-                                                            <xsd:documentation>Specifies the UUID of the volume about which the plist information should be retrieved.</xsd:documentation>
-                                                      </xsd:annotation>
-                                                </xsd:element>
-                                                <xsd:element name="xpath" type="oval-def:EntityObjectStringType">
-                                                      <xsd:annotation>
-                                                            <xsd:documentation>Specifies an Xpath expression describing the text node(s) or attribute(s) to look at. Any valid Xpath 1.0 statement is usable with one exception, at most one field may be identified in the Xpath. This is because the value_of element in the data section is only designed to work against a single field. The only valid operator for xpath is equals since there is an infinite number of possible xpaths and determinining all those that do not equal a given xpath would be impossible.</xsd:documentation>
-                                                            <xsd:appinfo>
-                                                                  <sch:pattern id="macos-def_corestorageobjxpath">
-                                                                        <sch:rule context="macos-def:corestorage_object/macos-def:xpath">
-                                                                              <sch:assert test="not(@operation) or @operation='equals'"><sch:value-of select="../@id"/> - operation attribute for the xpath entity of an corestorage_object should be 'equals', note that this overrules the general operation attribute validation (i.e. follow this one)</sch:assert>
-                                                                        </sch:rule>
-                                                                  </sch:pattern>
-                                                            </xsd:appinfo>
-                                                      </xsd:annotation>
-                                                </xsd:element>
-                                                <xsd:element ref="oval-def:filter" minOccurs="0" maxOccurs="unbounded"/>
-                                          </xsd:sequence>
-                                    </xsd:choice>
-                              </xsd:sequence>
-                        </xsd:extension>
-                  </xsd:complexContent>
-            </xsd:complexType>
-      </xsd:element>
-      <xsd:element name="corestorage_state" substitutionGroup="oval-def:state">
-            <xsd:annotation>
-                  <xsd:documentation>The corestorage_state element defines a value used to evaluate the result of a specific corestorage_object item.</xsd:documentation>
-            </xsd:annotation>
-            <xsd:complexType>
-                  <xsd:complexContent>
-                        <xsd:extension base="oval-def:StateType">
-                              <xsd:sequence>
-                                    <xsd:element name="uuid" type="oval-def:EntityStateStringType" minOccurs="0" maxOccurs="1">
-                                          <xsd:annotation>
-                                                <xsd:documentation>Specifies the UUID of the volume about which the plist information was retrieved.</xsd:documentation>
-                                          </xsd:annotation>
-                                    </xsd:element>
-                                    <xsd:element name="xpath" type="oval-def:EntityStateStringType" minOccurs="0" maxOccurs="1">
-                                          <xsd:annotation>
-                                                <xsd:documentation>Specifies an Xpath expression describing the text node(s) or attribute(s) to look at.</xsd:documentation>
-                                          </xsd:annotation>
-                                    </xsd:element>
-                                    <xsd:element name="value_of" type="oval-def:EntityStateAnySimpleType" minOccurs="0" maxOccurs="1">
-                                          <xsd:annotation>
-                                                <xsd:documentation>The value_of element checks the value(s) of the text node(s) or attribute(s) found.</xsd:documentation>
-                                          </xsd:annotation>
-                                    </xsd:element>
-                              </xsd:sequence>
-                        </xsd:extension>
-                  </xsd:complexContent>
-            </xsd:complexType>
-      </xsd:element>
-      <!-- =============================================================================== -->
       <!-- ============================ DISABLEDSERVICE_TEST ============================= -->
       <!-- =============================================================================== -->
       <xsd:element name="disabledservice_test" substitutionGroup="oval-def:test">
@@ -393,7 +273,7 @@
                               <oval:test>disabledservice_test</oval:test>
                               <oval:object>disabledservice_object</oval:object>
                               <oval:state>disabledservice_state</oval:state>
-                              <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#macos">disabledservice_item</oval:item>
+                              <oval:item target_namespace="urn:oval:v6:system-characteristics:macos">disabledservice_item</oval:item>
                         </oval:element_mapping>
                   </xsd:appinfo>
                   <xsd:appinfo>
@@ -430,7 +310,7 @@
                                     <sch:let name="reffed_state" value="ancestor::oval-def:oval_definitions/oval-def:states/*[@id=$state_ref]"/>
                                     <sch:let name="state_name" value="local-name($reffed_state)"/>
                                     <sch:let name="state_namespace" value="namespace-uri($reffed_state)"/>
-                                    <sch:assert test="(($state_namespace='http://oval.mitre.org/XMLSchema/oval-definitions-5#macos') and ($state_name='disabledservice_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
+                                    <sch:assert test="(($state_namespace='urn:oval:v6:definitions:macos') and ($state_name='disabledservice_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
                               </sch:rule>
                         </sch:pattern>
                   </xsd:appinfo>
@@ -479,7 +359,7 @@
                               <oval:test>diskinfo_test</oval:test>
                               <oval:object>diskinfo_object</oval:object>
                               <oval:state>diskinfo_state</oval:state>
-                              <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#macos">diskinfo_item</oval:item>
+                              <oval:item target_namespace="urn:oval:v6:system-characteristics:macos">diskinfo_item</oval:item>
                         </oval:element_mapping>
                   </xsd:appinfo>
                   <xsd:appinfo>
@@ -521,7 +401,7 @@
                                     <sch:let name="reffed_state" value="ancestor::oval-def:oval_definitions/oval-def:states/*[@id=$state_ref]"/>
                                     <sch:let name="state_name" value="local-name($reffed_state)"/>
                                     <sch:let name="state_namespace" value="namespace-uri($reffed_state)"/>
-                                    <sch:assert test="(($state_namespace='http://oval.mitre.org/XMLSchema/oval-definitions-5#macos') and ($state_name='diskinfo_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
+                                    <sch:assert test="(($state_namespace='urn:oval:v6:definitions:macos') and ($state_name='diskinfo_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
                               </sch:rule>
                         </sch:pattern>
                   </xsd:appinfo>
@@ -626,239 +506,6 @@
             </xsd:complexType>
       </xsd:element>
       <!-- =============================================================================== -->
-      <!-- ===============================  DISK UTIL TEST  ============================== -->
-      <!-- =============================================================================== -->
-      <xsd:element name="diskutil_test" substitutionGroup="oval-def:test">
-            <xsd:annotation>
-                  <xsd:documentation>The diskutil_test is used to verify packages on a Mac OS system. The information used by this test is modeled after the diskutil command's verifyPermissions option. On MacOS X 10.11 and later, this option was replaced by the repair_packages command. For more information, see diskutil(8) or repair_packages(8). It extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information. The required object element references a diskutil_object and the optional diskutil_state element specifies the data to check.</xsd:documentation>
-                  <xsd:appinfo>
-                        <oval:element_mapping>
-                              <oval:test>diskutil_test</oval:test>
-                              <oval:object>diskutil_object</oval:object>
-                              <oval:state>diskutil_state</oval:state>
-                              <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#macos">diskutil_item</oval:item>
-                        </oval:element_mapping>
-                  </xsd:appinfo>
-				  	<xsd:appinfo>
-						<oval:deprecated_info>
-							<oval:version>5.12</oval:version>
-							<oval:comment>This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.</oval:comment>
-						</oval:deprecated_info>
-					</xsd:appinfo>
-                  <xsd:appinfo>
-                        <oval:deprecated_info>
-                              <oval:version>5.11.2</oval:version>
-                              <oval:reason>The diskutil_test has been deprecated. The underlying capability was rendered obsolete in MacOS X 10.11 (El Capitan), and then removed altogether from the platform in MacOS X 10.12 (Sierra).</oval:reason>
-                        </oval:deprecated_info>
-                        <sch:pattern id="macos-def_diskutiltst_dep">
-                              <sch:rule context="macos-def:diskutil_test">
-                                    <sch:report test="true()">DEPRECATED TEST: <sch:value-of select="name()"/> ID: <sch:value-of select="@id"/></sch:report>
-                              </sch:rule>
-                        </sch:pattern>
-                  </xsd:appinfo>
-                  <xsd:appinfo>
-                        <sch:pattern id="macos-def_diskutiltst">
-                              <sch:rule context="macos-def:diskutil_test/macos-def:object">
-                                    <sch:assert test="@object_ref=ancestor::oval-def:oval_definitions/oval-def:objects/macos-def:diskutil_object/@id">
-                                          <sch:value-of select="../@id"/> - the object child element of a diskutil_test must reference a diskutil_object</sch:assert>
-                              </sch:rule>
-                              <sch:rule context="macos-def:diskutil_test/macos-def:state">
-                                    <sch:assert test="@state_ref=ancestor::oval-def:oval_definitions/oval-def:states/macos-def:diskutil_state/@id">
-                                          <sch:value-of select="../@id"/> - the state child element of a diskutil_test must reference a diskutil_state</sch:assert>
-                              </sch:rule>
-                        </sch:pattern>
-                  </xsd:appinfo>
-            </xsd:annotation>
-            <xsd:complexType>
-                  <xsd:complexContent>
-                        <xsd:extension base="oval-def:TestType">
-                              <xsd:sequence>
-                                    <xsd:element name="object" type="oval-def:ObjectRefType"/>
-                                    <xsd:element name="state" type="oval-def:StateRefType" minOccurs="0" maxOccurs="unbounded"/>
-                              </xsd:sequence>
-                        </xsd:extension>
-                  </xsd:complexContent>
-            </xsd:complexType>
-      </xsd:element>
-      <xsd:element name="diskutil_object" substitutionGroup="oval-def:object">
-            <xsd:annotation>
-                  <xsd:documentation>The diskutil_object element is used by a diskutil_test to define the volumes containing packages to be verified on a Mac OS system. Each object extends the standard ObjectType as defined in the oval-definitions-schema and one should refer to the ObjectType description for more information. The common set element allows complex objects to be created using filters and set logic. Again, please refer to the description of the set element in the oval-definitions-schema.</xsd:documentation>
-                  <xsd:appinfo>
-                        <oval:deprecated_info>
-                              <oval:version>5.11.2</oval:version>
-                              <oval:reason>The diskutil_object has been deprecated. The underlying capability was rendered obsolete in MacOS X 10.11 (El Capitan), and then removed altogether from the platform in MacOS X 10.12 (Sierra).</oval:reason>
-                        </oval:deprecated_info>
-                        <sch:pattern id="macos-def_diskutilobj_dep">
-                              <sch:rule context="macos-def:diskutil_object">
-                                    <sch:report test="true()">DEPRECATED OBJECT: <sch:value-of select="name()"/> ID: <sch:value-of select="@id"/></sch:report>
-                              </sch:rule>
-                        </sch:pattern>
-                  </xsd:appinfo>
-                  <xsd:appinfo>
-                        <sch:pattern id="macos-def_diskutil_object_verify_filter_state">
-                              <sch:rule context="macos-def:diskutil_object//oval-def:filter">
-                                    <sch:let name="parent_object" value="ancestor::macos-def:diskutil_object"/>
-                                    <sch:let name="parent_object_id" value="$parent_object/@id"/>
-                                    <sch:let name="state_ref" value="."/>
-                                    <sch:let name="reffed_state" value="ancestor::oval-def:oval_definitions/oval-def:states/*[@id=$state_ref]"/>
-                                    <sch:let name="state_name" value="local-name($reffed_state)"/>
-                                    <sch:let name="state_namespace" value="namespace-uri($reffed_state)"/>
-                                    <sch:assert test="(($state_namespace='http://oval.mitre.org/XMLSchema/oval-definitions-5#macos') and ($state_name='diskutil_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
-                              </sch:rule>
-                        </sch:pattern>
-                  </xsd:appinfo>
-            </xsd:annotation>
-            <xsd:complexType>
-                  <xsd:complexContent>
-                        <xsd:extension base="oval-def:ObjectType">
-                              <xsd:sequence>
-                                    <xsd:choice>
-                                          <xsd:element ref="oval-def:set"/>
-                                          <xsd:sequence>
-                                                <xsd:element name="device" type="oval-def:EntityObjectStringType">
-                                                      <xsd:annotation>
-                                                            <xsd:documentation>The device entity is a string that represents the name of a volume containing system packages that is mounted on a Mac OS system to verify. Please see diskutil(8) or repair_packages(8) for instructions on how to specify the volume.</xsd:documentation>
-                                                      </xsd:annotation>
-                                                </xsd:element>
-                                                <xsd:element name="filepath" type="oval-def:EntityObjectStringType" minOccurs="1" maxOccurs="1">
-                                                      <xsd:annotation>
-                                                            <xsd:documentation>The filepath element specifies the absolute path for a file or directory in the specified package.</xsd:documentation>
-                                                      </xsd:annotation>
-                                                </xsd:element>
-                                                <xsd:element ref="oval-def:filter" minOccurs="0" maxOccurs="unbounded"/>
-                                          </xsd:sequence>
-                                    </xsd:choice>
-                              </xsd:sequence>
-                        </xsd:extension>
-                  </xsd:complexContent>
-            </xsd:complexType>
-      </xsd:element>
-      <xsd:element name="diskutil_state" substitutionGroup="oval-def:state">
-            <xsd:annotation>
-                  <xsd:documentation>The diskutil_state element defines the different verification information associated with a disk on a Mac OS system. Please refer to the individual elements in the schema for more details about what each represents.</xsd:documentation>
-                  <xsd:appinfo>
-                        <oval:deprecated_info>
-                              <oval:version>5.11.2</oval:version>
-                              <oval:reason>The diskutil_state has been deprecated. The underlying capability was rendered obsolete in MacOS X 10.11 (El Capitan), and then removed altogether from the platform in MacOS X 10.12 (Sierra).</oval:reason>
-                        </oval:deprecated_info>
-                        <sch:pattern id="macos-def_diskutilste_dep">
-                              <sch:rule context="macos-def:diskutil_state">
-                                    <sch:report test="true()">DEPRECATED STATE: <sch:value-of select="name()"/> ID: <sch:value-of select="@id"/></sch:report>
-                              </sch:rule>
-                        </sch:pattern>
-                  </xsd:appinfo>
-            </xsd:annotation>
-            <xsd:complexType>
-                  <xsd:complexContent>
-                        <xsd:extension base="oval-def:StateType">
-                              <xsd:sequence>
-                                    <xsd:element name="device" type="oval-def:EntityStateStringType" minOccurs="0" maxOccurs="1">
-                                          <xsd:annotation>
-                                                <xsd:documentation>The device entity is a string that represents the volume on a Mac OS system to verify. Please see diskutil(8) or repair_packages(8) for instructions on how to specify the device.</xsd:documentation>
-                                          </xsd:annotation>
-                                    </xsd:element>
-                                    <xsd:element name="filepath" type="oval-def:EntityStateStringType" minOccurs="0" maxOccurs="1">
-                                          <xsd:annotation>
-                                                <xsd:documentation>The filepath element specifies the absolute path for a file or directory on the specified device.</xsd:documentation>
-                                          </xsd:annotation>
-                                    </xsd:element>
-                                    <xsd:element name="uread" type="macos-def:EntityStatePermissionCompareType" minOccurs="0" maxOccurs="1">
-                                          <xsd:annotation>
-                                                <xsd:documentation>Has the actual user read permission changed from the expected user read permission?</xsd:documentation>
-                                          </xsd:annotation>
-                                    </xsd:element>
-                                    <xsd:element name="uwrite" type="macos-def:EntityStatePermissionCompareType" minOccurs="0" maxOccurs="1">
-                                          <xsd:annotation>
-                                                <xsd:documentation>Has the actual user write permission changed from the expected user write permission?</xsd:documentation>
-                                          </xsd:annotation>
-                                    </xsd:element>
-                                    <xsd:element name="uexec" type="macos-def:EntityStatePermissionCompareType" minOccurs="0" maxOccurs="1">
-                                          <xsd:annotation>
-                                                <xsd:documentation>Has the actual user exec permission changed from the expected user exec permission?</xsd:documentation>
-                                          </xsd:annotation>
-                                    </xsd:element>
-                                    <xsd:element name="gread" type="macos-def:EntityStatePermissionCompareType" minOccurs="0" maxOccurs="1">
-                                          <xsd:annotation>
-                                                <xsd:documentation>Has the actual group read permission changed from the expected group read permission?</xsd:documentation>
-                                          </xsd:annotation>
-                                    </xsd:element>
-                                    <xsd:element name="gwrite" type="macos-def:EntityStatePermissionCompareType" minOccurs="0" maxOccurs="1">
-                                          <xsd:annotation>
-                                                <xsd:documentation>Has the actual group write permission changed from the expected group write permission?</xsd:documentation>
-                                          </xsd:annotation>
-                                    </xsd:element>
-                                    <xsd:element name="gexec" type="macos-def:EntityStatePermissionCompareType" minOccurs="0" maxOccurs="1">
-                                          <xsd:annotation>
-                                                <xsd:documentation>Has the actual group exec permission changed from the expected group exec permission?</xsd:documentation>
-                                          </xsd:annotation>
-                                    </xsd:element>
-                                    <xsd:element name="oread" type="macos-def:EntityStatePermissionCompareType" minOccurs="0" maxOccurs="1">
-                                          <xsd:annotation>
-                                                <xsd:documentation>Has the actual others read permission changed from the expected others read permission?</xsd:documentation>
-                                          </xsd:annotation>
-                                    </xsd:element>
-                                    <xsd:element name="owrite" type="macos-def:EntityStatePermissionCompareType" minOccurs="0" maxOccurs="1">
-                                          <xsd:annotation>
-                                                <xsd:documentation>Has the actual others write permission changed from the expected others write permission?</xsd:documentation>
-                                          </xsd:annotation>
-                                    </xsd:element>
-                                    <xsd:element name="oexec" type="macos-def:EntityStatePermissionCompareType" minOccurs="0" maxOccurs="1">
-                                          <xsd:annotation>
-                                                <xsd:documentation>Has the actual others exec permission changed from the expected others exec permission?</xsd:documentation>
-                                          </xsd:annotation>
-                                    </xsd:element>
-                                    <xsd:element name="user_differs" type="oval-def:EntityStateBoolType" minOccurs="0" maxOccurs="1">
-                                          <xsd:annotation>
-                                                <xsd:documentation>Has the actual user changed from the expected user?</xsd:documentation>
-                                          </xsd:annotation>
-                                    </xsd:element>
-                                    <xsd:element minOccurs="0" maxOccurs="1" name="actual_user" type="oval-def:EntityStateIntType">
-                                          <xsd:annotation>
-                                                <xsd:documentation>The actual user of the file/directory.</xsd:documentation>
-                                          </xsd:annotation>
-                                    </xsd:element>
-                                    <xsd:element name="expected_user" type="oval-def:EntityStateIntType" minOccurs="0" maxOccurs="1">
-                                          <xsd:annotation>
-                                                <xsd:documentation>The expected user of the file/directory.</xsd:documentation>
-                                          </xsd:annotation>
-                                    </xsd:element>
-                                    <xsd:element name="group_differs" type="oval-def:EntityStateBoolType" minOccurs="0" maxOccurs="1">
-                                          <xsd:annotation>
-                                                <xsd:documentation>Has the actual group changed from the expected group?</xsd:documentation>
-                                          </xsd:annotation>
-                                    </xsd:element>
-                                    <xsd:element minOccurs="0" maxOccurs="1" name="actual_group" type="oval-def:EntityStateIntType">
-                                          <xsd:annotation>
-                                                <xsd:documentation>The actual group of the file/directory.</xsd:documentation>
-                                          </xsd:annotation>
-                                    </xsd:element>
-                                    <xsd:element name="expected_group" type="oval-def:EntityStateIntType" minOccurs="0" maxOccurs="1">
-                                          <xsd:annotation>
-                                                <xsd:documentation>The expected group of the file/directory.</xsd:documentation>
-                                          </xsd:annotation>
-                                    </xsd:element>
-                                    <xsd:element name="symlink_differs" type="oval-def:EntityStateBoolType" minOccurs="0" maxOccurs="1">
-                                          <xsd:annotation>
-                                                <xsd:documentation>Has the actual symlink changed from the expected symlink?</xsd:documentation>
-                                          </xsd:annotation>
-                                    </xsd:element>
-                                    <xsd:element minOccurs="0" maxOccurs="1" name="actual_symlink" type="oval-def:EntityStateStringType">
-                                          <xsd:annotation>
-                                                <xsd:documentation>The actual symlink of the file/directory.</xsd:documentation>
-                                          </xsd:annotation>
-                                    </xsd:element>
-                                    <xsd:element name="expected_symlink" type="oval-def:EntityStateStringType" minOccurs="0"
-                                          maxOccurs="1">
-                                          <xsd:annotation>
-                                                <xsd:documentation>The expected symlink of the file/directory.</xsd:documentation>
-                                          </xsd:annotation>
-                                    </xsd:element>
-                              </xsd:sequence>
-                        </xsd:extension>
-                  </xsd:complexContent>
-            </xsd:complexType>
-      </xsd:element>
-      <!-- =============================================================================== -->
       <!-- ==============================  FILE VAULT TEST  ============================== -->
       <!-- =============================================================================== -->
       <xsd:element name="filevault_test" substitutionGroup="oval-def:test">
@@ -871,7 +518,7 @@
                               <oval:test>filevault_test</oval:test>
                               <oval:object>filevault_object</oval:object>
                               <oval:state>filevault_state</oval:state>
-                              <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#macos">filevault_item</oval:item>
+                              <oval:item target_namespace="urn:oval:v6:system-characteristics:macos">filevault_item</oval:item>
                         </oval:element_mapping>
                   </xsd:appinfo>
                   <xsd:appinfo>
@@ -910,7 +557,7 @@
                                     <sch:let name="reffed_state" value="ancestor::oval-def:oval_definitions/oval-def:states/*[@id=$state_ref]"/>
                                     <sch:let name="state_name" value="local-name($reffed_state)"/>
                                     <sch:let name="state_namespace" value="namespace-uri($reffed_state)"/>
-                                    <sch:assert test="(($state_namespace='http://oval.mitre.org/XMLSchema/oval-definitions-5#macos') and ($state_name='filevault_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
+                                    <sch:assert test="(($state_namespace='urn:oval:v6:definitions:macos') and ($state_name='filevault_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
                               </sch:rule>
                         </sch:pattern>
                   </xsd:appinfo>
@@ -966,7 +613,7 @@
                               <oval:test>firmwarepassword_test</oval:test>
                               <oval:object>firmwarepassword_object</oval:object>
                               <oval:state>firmwarepassword_state</oval:state>
-                              <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#macos">firmwarepassword_item</oval:item>
+                              <oval:item target_namespace="urn:oval:v6:system-characteristics:macos">firmwarepassword_item</oval:item>
                         </oval:element_mapping>
                   </xsd:appinfo>
                   <xsd:appinfo>
@@ -1005,7 +652,7 @@
                                     <sch:let name="reffed_state" value="ancestor::oval-def:oval_definitions/oval-def:states/*[@id=$state_ref]"/>
                                     <sch:let name="state_name" value="local-name($reffed_state)"/>
                                     <sch:let name="state_namespace" value="namespace-uri($reffed_state)"/>
-                                    <sch:assert test="(($state_namespace='http://oval.mitre.org/XMLSchema/oval-definitions-5#macos') and ($state_name='firmwarepassword_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
+                                    <sch:assert test="(($state_namespace='urn:oval:v6:definitions:macos') and ($state_name='firmwarepassword_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
                               </sch:rule>
                         </sch:pattern>
                   </xsd:appinfo>
@@ -1045,7 +692,7 @@
                               <oval:test>gatekeeper_test</oval:test>
                               <oval:object>gatekeeper_object</oval:object>
                               <oval:state>gatekeeper_state</oval:state>
-                              <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#macos">gatekeeper_item</oval:item>
+                              <oval:item target_namespace="urn:oval:v6:system-characteristics:macos">gatekeeper_item</oval:item>
                         </oval:element_mapping>
                   </xsd:appinfo>
                   <xsd:appinfo>
@@ -1109,327 +756,6 @@
             </xsd:complexType>
       </xsd:element>
       <!-- =============================================================================== -->
-      <!-- ========================  INET LISTENING SERVERS TEST  ======================== -->
-      <!-- =============================================================================== -->
-      <xsd:element name="inetlisteningservers_test" substitutionGroup="oval-def:test">
-            <xsd:annotation>
-                  <xsd:documentation>This test's purpose is generally used to check if an application is listening on the network, either for a new connection or as part of an ongoing connection. This is limited to applications that are listening for connections that use the TCP or UDP protocols and have addresses represented as IPv4 or IPv6 addresses (AF_INET or AF_INET6). It is generally speaking the parsed output of running the command netstat -tuwlnpe with root privilege.</xsd:documentation>
-                  <xsd:appinfo>
-                        <oval:element_mapping>
-                              <oval:test>inetlisteningservers_test</oval:test>
-                              <oval:object>inetlisteningservers_object</oval:object>
-                              <oval:state>inetlisteningservers_state</oval:state>
-                              <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#macos">inetlisteningserver_item</oval:item>
-                        </oval:element_mapping>
-                  </xsd:appinfo>
-                  <xsd:appinfo>
-                        <oval:deprecated_info>
-                              <oval:version>5.10</oval:version>
-                              <oval:reason>The inetlisteningservers_test has been deprecated and replaced by the inetlisteningserver510_test. The name of an application cannot be used to uniquely identify an application that is listening on the network. As a result, the inetlisteningserver510_object utilizes the protocol, local_address, and local_port entities to uniquely identify an application listening on the network. Please see the inetlisteningserver510_test for additional information.</oval:reason>
-                        </oval:deprecated_info>
-                        <sch:pattern id="macos-def_inetlisteningserverstst_dep">
-                              <sch:rule context="macos-def:inetlisteningservers_test">
-                                    <sch:report test="true()">DEPRECATED TEST: <sch:value-of select="name()"/> ID: <sch:value-of select="@id"/></sch:report>
-                              </sch:rule>
-                        </sch:pattern>
-                  </xsd:appinfo>
-                  <xsd:appinfo>
-                        <sch:pattern id="macos-def_inetlisteningservers_test">
-                              <sch:rule context="macos-def:inetlisteningservers_test/macos-def:object">
-                                    <sch:assert test="@object_ref=ancestor::oval-def:oval_definitions/oval-def:objects/macos-def:inetlisteningservers_object/@id"><sch:value-of select="../@id"/> - the object child element of an inetlisteningservers_test must reference an inetlisteningservers_object</sch:assert>
-                              </sch:rule>
-                              <sch:rule context="macos-def:inetlisteningservers_test/macos-def:state">
-                                    <sch:assert test="@state_ref=ancestor::oval-def:oval_definitions/oval-def:states/macos-def:inetlisteningservers_state/@id"><sch:value-of select="../@id"/> - the state child element of an inetlisteningservers_test must reference an inetlisteningservers_state</sch:assert>
-                              </sch:rule>
-                        </sch:pattern>
-                  </xsd:appinfo>
-            </xsd:annotation>
-            <xsd:complexType>
-                  <xsd:complexContent>
-                        <xsd:extension base="oval-def:TestType">
-                              <xsd:sequence>
-                                    <xsd:element name="object" type="oval-def:ObjectRefType"/>
-                                    <xsd:element name="state" type="oval-def:StateRefType" minOccurs="0" maxOccurs="unbounded"/>
-                              </xsd:sequence>
-                        </xsd:extension>
-                  </xsd:complexContent>
-            </xsd:complexType>
-      </xsd:element>
-      <xsd:element name="inetlisteningservers_object" substitutionGroup="oval-def:object">
-            <xsd:annotation>
-                  <xsd:documentation>The inetlisteningservers_object element is used by an inetlisteningserver test to define the object to be evaluated. Each object extends the standard ObjectType as defined in the oval-definitions-schema and one should refer to the ObjectType description for more information. The common set element allows complex objects to be created using filters and set logic. Again, please refer to the description of the set element in the oval-definitions-schema.</xsd:documentation>
-                  <xsd:appinfo>
-                        <oval:deprecated_info>
-                              <oval:version>5.10</oval:version>
-                              <oval:reason>The inetlisteningservers_object has been deprecated and replaced by the inetlisteningserver510_object. The name of an application cannot be used to uniquely identify an application that is listening on the network. As a result, the inetlisteningserver510_object utilizes the protocol, local_address, and local_port entities to uniquely identify an application listening on the network. Please see the inetlisteningserver510_object for additional information.</oval:reason>
-                        </oval:deprecated_info>
-                        <sch:pattern id="macos-def_inetlisteningserversobj_dep">
-                              <sch:rule context="macos-def:inetlisteningservers_object">
-                                    <sch:report test="true()">DEPRECATED OBJECT: <sch:value-of select="name()"/> ID: <sch:value-of select="@id"/></sch:report>
-                              </sch:rule>
-                        </sch:pattern>
-                  </xsd:appinfo>
-                  <xsd:appinfo>
-                        <sch:pattern id="macos-def_inetlisteningservers_object_verify_filter_state">
-                              <sch:rule context="macos-def:inetlisteningservers_object//oval-def:filter">
-                                    <sch:let name="parent_object" value="ancestor::macos-def:inetlisteningservers_object"/>
-                                    <sch:let name="parent_object_id" value="$parent_object/@id"/>
-                                    <sch:let name="state_ref" value="."/>
-                                    <sch:let name="reffed_state" value="ancestor::oval-def:oval_definitions/oval-def:states/*[@id=$state_ref]"/>
-                                    <sch:let name="state_name" value="local-name($reffed_state)"/>
-                                    <sch:let name="state_namespace" value="namespace-uri($reffed_state)"/>
-                                    <sch:assert test="(($state_namespace='http://oval.mitre.org/XMLSchema/oval-definitions-5#macos') and ($state_name='inetlisteningservers_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
-                              </sch:rule>
-                        </sch:pattern>
-                  </xsd:appinfo>
-            </xsd:annotation>
-            <xsd:complexType>
-                  <xsd:complexContent>
-                        <xsd:extension base="oval-def:ObjectType">
-                              <xsd:sequence>
-                                    <xsd:choice>
-                                          <xsd:element ref="oval-def:set"/>
-                                          <xsd:sequence>
-                                                <xsd:element name="program_name" type="oval-def:EntityObjectStringType">
-                                                      <xsd:annotation>
-                                                            <xsd:documentation/>
-                                                      </xsd:annotation>
-                                                </xsd:element>
-                                                <xsd:element ref="oval-def:filter" minOccurs="0" maxOccurs="unbounded"/>
-                                          </xsd:sequence>
-                                    </xsd:choice>
-                              </xsd:sequence>
-                        </xsd:extension>
-                  </xsd:complexContent>
-            </xsd:complexType>
-      </xsd:element>
-      <xsd:element name="inetlisteningservers_state" substitutionGroup="oval-def:state">
-            <xsd:annotation>
-                  <xsd:documentation>The inetlisteningservers_state element defines the different information that can be used to evaluate the specified inet listening server. This includes the local address, foreign address, port information, and process id. Please refer to the individual elements in the schema for more details about what each represents.</xsd:documentation>
-                  <xsd:appinfo>
-                        <oval:deprecated_info>
-                              <oval:version>5.10</oval:version>
-                              <oval:reason>The inetlisteningservers_state has been deprecated and replaced by the inetlisteningserver510_state. The name of an application cannot be used to uniquely identify an application that is listening on the network. As a result, the inetlisteningserver510_object utilizes the protocol, local_address, and local_port entities to uniquely identify an application listening on the network. Please see the inetlisteningserver510_state for additional information.</oval:reason>
-                        </oval:deprecated_info>
-                        <sch:pattern id="macos-def_inetlisteningserversste_dep">
-                              <sch:rule context="macos-def:inetlisteningservers_state">
-                                    <sch:report test="true()">DEPRECATED STATE: <sch:value-of select="name()"/> ID: <sch:value-of select="@id"/></sch:report>
-                              </sch:rule>
-                        </sch:pattern>
-                  </xsd:appinfo>
-            </xsd:annotation>
-            <xsd:complexType>
-                  <xsd:complexContent>
-                        <xsd:extension base="oval-def:StateType">
-                              <xsd:sequence>
-                                    <xsd:element name="program_name" type="oval-def:EntityStateStringType" minOccurs="0" maxOccurs="1">
-                                          <xsd:annotation>
-                                                <xsd:documentation>This is the name of the communicating program.</xsd:documentation>
-                                          </xsd:annotation>
-                                    </xsd:element>
-                                    <xsd:element name="local_address" type="oval-def:EntityStateIPAddressStringType" minOccurs="0" maxOccurs="1">
-                                          <xsd:annotation>
-                                                <xsd:documentation>This is the IP address of the network interface on which the program listens. Note that the IP address can be IPv4 or IPv6.</xsd:documentation>
-                                          </xsd:annotation>
-                                    </xsd:element>
-                                    <xsd:element name="local_full_address" type="oval-def:EntityStateStringType" minOccurs="0" maxOccurs="1">
-                                          <xsd:annotation>
-                                                <xsd:documentation>This is the IP address and network port on which the program listens, equivalent to local_address:local_port. Note that the IP address can be IPv4 or IPv6.</xsd:documentation>
-                                          </xsd:annotation>
-                                    </xsd:element>
-                                    <xsd:element name="local_port" type="oval-def:EntityStateIntType" minOccurs="0" maxOccurs="1">
-                                          <xsd:annotation>
-                                                <xsd:documentation>This is the TCP or UDP port on which the program listens. Note that this is not a list -- if a program listens on multiple ports, or on a combination of TCP and UDP, each will have its own entry in the table data stored by this test.</xsd:documentation>
-                                          </xsd:annotation>
-                                    </xsd:element>
-                                    <xsd:element name="foreign_address" type="oval-def:EntityStateIPAddressStringType" minOccurs="0" maxOccurs="1">
-                                          <xsd:annotation>
-                                                <xsd:documentation>This is the IP address with which the program is communicating, or with which it will communicate, in the case of a listening server. Note that the IP address can be IPv4 or IPv6.</xsd:documentation>
-                                          </xsd:annotation>
-                                    </xsd:element>
-                                    <xsd:element name="foreign_full_address" type="oval-def:EntityStateStringType" minOccurs="0" maxOccurs="1">
-                                          <xsd:annotation>
-                                                <xsd:documentation>This is the IP address and network port to which the program is communicating or will accept communications from, equivalent to foreign_address:foreign_port. Note that the IP address can be IPv4 or IPv6.</xsd:documentation>
-                                          </xsd:annotation>
-                                    </xsd:element>
-                                    <xsd:element name="foreign_port" type="oval-def:EntityStateStringType" minOccurs="0" maxOccurs="1">
-                                          <xsd:annotation>
-                                                <xsd:documentation>This is the TCP or UDP port to which the program communicates. In the case of a listening program accepting new connections, this is usually '0'.</xsd:documentation>
-                                          </xsd:annotation>
-                                    </xsd:element>
-                                    <xsd:element name="pid" type="oval-def:EntityStateIntType" minOccurs="0" maxOccurs="1">
-                                          <xsd:annotation>
-                                                <xsd:documentation>This is the process ID of the process. The process in question is that of the program communicating on the network.</xsd:documentation>
-                                          </xsd:annotation>
-                                    </xsd:element>
-                                    <xsd:element name="protocol" type="oval-def:EntityStateStringType" minOccurs="0" maxOccurs="1">
-                                          <xsd:annotation>
-                                                <xsd:documentation>This is the transport-layer protocol, in lowercase: tcp or udp.</xsd:documentation>
-                                          </xsd:annotation>
-                                    </xsd:element>
-                                    <xsd:element name="user_id" type="oval-def:EntityStateStringType" minOccurs="0" maxOccurs="1">
-                                          <xsd:annotation>
-                                                <xsd:documentation>The numeric user id, or uid, is the third column of each user's entry in /etc/passwd. It represents the owner, and thus privilege level, of the specified program.</xsd:documentation>
-                                          </xsd:annotation>
-                                    </xsd:element>
-                              </xsd:sequence>
-                        </xsd:extension>
-                  </xsd:complexContent>
-            </xsd:complexType>
-      </xsd:element>
-      <!-- =============================================================================== -->
-      <!-- =====================  INET LISTENING SERVER TEST (510)  ===================== -->
-      <!-- =============================================================================== -->
-      <xsd:element name="inetlisteningserver510_test" substitutionGroup="oval-def:test">
-            <xsd:annotation>
-                  <xsd:documentation>The inetlisteningserver510_test is used to check if an application is listening on the network, either for a new connection or as part of an ongoing connection. This is limited to applications that are listening for connections that use the TCP or UDP protocols and have addresses represented as IPv4 or IPv6 addresses (AF_INET or AF_INET6). One method for retrieving the required information is by parsing the output of the command 'lsof -i -P -n -l' with root privileges.</xsd:documentation>
-                  <xsd:appinfo>
-                        <oval:element_mapping>
-                              <oval:test>inetlisteningserver510_test</oval:test>
-                              <oval:object>inetlisteningserver510_object</oval:object>
-                              <oval:state>inetlisteningserver510_state</oval:state>
-                              <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#macos">inetlisteningserver510_item</oval:item>
-                        </oval:element_mapping>
-                  </xsd:appinfo>
-					<xsd:appinfo>
-						<oval:deprecated_info>
-							<oval:version>5.12</oval:version>
-							<oval:comment>This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.</oval:comment>
-						</oval:deprecated_info>
-					</xsd:appinfo>
-                  <xsd:appinfo>
-                        <sch:pattern id="macos-def_inetlisteningserver510_test">
-                              <sch:rule context="macos-def:inetlisteningserver510_test/macos-def:object">
-                                    <sch:assert test="@object_ref=ancestor::oval-def:oval_definitions/oval-def:objects/macos-def:inetlisteningserver510_object/@id"><sch:value-of select="../@id"/> - the object child element of an inetlisteningserver510_test must reference an inetlisteningserver510_object</sch:assert>
-                              </sch:rule>
-                              <sch:rule context="macos-def:inetlisteningserver510_test/macos-def:state">
-                                    <sch:assert test="@state_ref=ancestor::oval-def:oval_definitions/oval-def:states/macos-def:inetlisteningserver510_state/@id"><sch:value-of select="../@id"/> - the state child element of an inetlisteningserver510_test must reference an inetlisteningserver510_state</sch:assert>
-                              </sch:rule>
-                        </sch:pattern>
-                  </xsd:appinfo>
-            </xsd:annotation>
-            <xsd:complexType>
-                  <xsd:complexContent>
-                        <xsd:extension base="oval-def:TestType">
-                              <xsd:sequence>
-                                    <xsd:element name="object" type="oval-def:ObjectRefType"/>
-                                    <xsd:element name="state" type="oval-def:StateRefType" minOccurs="0" maxOccurs="unbounded"/>
-                              </xsd:sequence>
-                        </xsd:extension>
-                  </xsd:complexContent>
-            </xsd:complexType>
-      </xsd:element>
-      <xsd:element name="inetlisteningserver510_object" substitutionGroup="oval-def:object">
-            <xsd:annotation>
-                  <xsd:documentation>The inetlisteningserver510_object element is used by an inetlisteningserver510_test to define the object to be evaluated. Each object extends the standard ObjectType as defined in the oval-definitions-schema and one should refer to the ObjectType description for more information. The common set element allows complex objects to be created using filters and set logic. Again, please refer to the description of the set element in the oval-definitions-schema.</xsd:documentation>
-                  <xsd:appinfo>
-                        <sch:pattern id="macos-def_inetlisteningserver510_object_verify_filter_state">
-                              <sch:rule context="macos-def:inetlisteningserver510_object//oval-def:filter">
-                                    <sch:let name="parent_object" value="ancestor::macos-def:inetlisteningserver510_object"/>
-                                    <sch:let name="parent_object_id" value="$parent_object/@id"/>
-                                    <sch:let name="state_ref" value="."/>
-                                    <sch:let name="reffed_state" value="ancestor::oval-def:oval_definitions/oval-def:states/*[@id=$state_ref]"/>
-                                    <sch:let name="state_name" value="local-name($reffed_state)"/>
-                                    <sch:let name="state_namespace" value="namespace-uri($reffed_state)"/>
-                                    <sch:assert test="(($state_namespace='http://oval.mitre.org/XMLSchema/oval-definitions-5#macos') and ($state_name='inetlisteningserver510_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
-                              </sch:rule>
-                        </sch:pattern>
-                  </xsd:appinfo>
-            </xsd:annotation>
-            <xsd:complexType>
-                  <xsd:complexContent>
-                        <xsd:extension base="oval-def:ObjectType">
-                              <xsd:sequence>
-                                    <xsd:choice>
-                                          <xsd:element ref="oval-def:set"/>
-                                          <xsd:sequence>
-                                                <xsd:element name="protocol" type="oval-def:EntityObjectStringType">
-                                                      <xsd:annotation>
-                                                            <xsd:documentation>The protocol entity defines a certain transport-layer protocol, in lowercase: tcp or udp.</xsd:documentation>
-                                                      </xsd:annotation>
-                                                </xsd:element>
-                                                <xsd:element name="local_address" type="oval-def:EntityObjectIPAddressStringType">
-                                                      <xsd:annotation>
-                                                            <xsd:documentation>This is the IP address of the network interface on which an application listens. Note that the IP address can be IPv4 or IPv6.</xsd:documentation>
-                                                      </xsd:annotation>
-                                                </xsd:element>
-                                                <xsd:element name="local_port" type="oval-def:EntityObjectIntType">
-                                                      <xsd:annotation>
-                                                            <xsd:documentation>This is the TCP or UDP port on which an application would listen. Note that this is not a list -- if a program listens on multiple ports, or on a combination of TCP and UDP, each will be represented by its own object.</xsd:documentation>
-                                                      </xsd:annotation>
-                                                </xsd:element>
-                                                <xsd:element ref="oval-def:filter" minOccurs="0" maxOccurs="unbounded"/>
-                                          </xsd:sequence>
-                                    </xsd:choice>
-                              </xsd:sequence>
-                        </xsd:extension>
-                  </xsd:complexContent>
-            </xsd:complexType>
-      </xsd:element>
-      <xsd:element name="inetlisteningserver510_state" substitutionGroup="oval-def:state">
-            <xsd:annotation>
-                  <xsd:documentation>The inetlisteningserver510_state element defines the different information that can be used to evaluate the specified inet listening server. This includes the local address, foreign address, port information, and process id. Please refer to the individual elements in the schema for more details about what each represents.</xsd:documentation>
-            </xsd:annotation>
-            <xsd:complexType>
-                  <xsd:complexContent>
-                        <xsd:extension base="oval-def:StateType">
-                              <xsd:sequence>
-                                    <xsd:element name="protocol" type="oval-def:EntityStateStringType" minOccurs="0" maxOccurs="1">
-                                          <xsd:annotation>
-                                                <xsd:documentation>This is the transport-layer protocol, in lowercase: tcp or udp.</xsd:documentation>
-                                          </xsd:annotation>
-                                    </xsd:element>
-                                    <xsd:element name="local_address" type="oval-def:EntityStateIPAddressStringType" minOccurs="0" maxOccurs="1">
-                                          <xsd:annotation>
-                                                <xsd:documentation>This is the IP address of the network interface on which the program listens. Note that the IP address can be IPv4 or IPv6.</xsd:documentation>
-                                          </xsd:annotation>
-                                    </xsd:element>
-                                    <xsd:element name="local_port" type="oval-def:EntityStateIntType" minOccurs="0" maxOccurs="1">
-                                          <xsd:annotation>
-                                                <xsd:documentation>This is the TCP or UDP port on which the program listens. Note that this is not a list -- if a program listens on multiple ports, or on a combination of TCP and UDP, each will have its own entry in the table data stored by this test.</xsd:documentation>
-                                          </xsd:annotation>
-                                    </xsd:element>
-                                    <xsd:element name="local_full_address" type="oval-def:EntityStateStringType" minOccurs="0" maxOccurs="1">
-                                          <xsd:annotation>
-                                                <xsd:documentation>This is the IP address and network port on which the program listens, equivalent to local_address:local_port. Note that the IP address can be IPv4 or IPv6.</xsd:documentation>
-                                          </xsd:annotation>
-                                    </xsd:element>
-                                    <xsd:element name="program_name" type="oval-def:EntityStateStringType" minOccurs="0" maxOccurs="1">
-                                          <xsd:annotation>
-                                                <xsd:documentation>This is the name of the communicating program.</xsd:documentation>
-                                          </xsd:annotation>
-                                    </xsd:element>
-                                    <xsd:element name="foreign_address" type="oval-def:EntityStateIPAddressStringType" minOccurs="0" maxOccurs="1">
-                                          <xsd:annotation>
-                                                <xsd:documentation>This is the IP address with which the program is communicating, or with which it will communicate, in the case of a listening server. Note that the IP address can be IPv4 or IPv6.</xsd:documentation>
-                                          </xsd:annotation>
-                                    </xsd:element>
-                                    <xsd:element name="foreign_port" type="oval-def:EntityStateIntType" minOccurs="0" maxOccurs="1">
-                                          <xsd:annotation>
-                                                <xsd:documentation>This is the TCP or UDP port to which the program communicates. In the case of a listening program accepting new connections, this is usually '0'.</xsd:documentation>
-                                          </xsd:annotation>
-                                    </xsd:element>
-                                    <xsd:element name="foreign_full_address" type="oval-def:EntityStateStringType" minOccurs="0" maxOccurs="1">
-                                          <xsd:annotation>
-                                                <xsd:documentation>This is the IP address and network port to which the program is communicating or will accept communications from, equivalent to foreign_address:foreign_port. Note that the IP address can be IPv4 or IPv6.</xsd:documentation>
-                                          </xsd:annotation>
-                                    </xsd:element>
-                                    <xsd:element name="pid" type="oval-def:EntityStateIntType" minOccurs="0" maxOccurs="1">
-                                          <xsd:annotation>
-                                                <xsd:documentation>This is the process ID of the process. The process in question is that of the program communicating on the network.</xsd:documentation>
-                                          </xsd:annotation>
-                                    </xsd:element>
-                                    <xsd:element name="user_id" type="oval-def:EntityStateIntType" minOccurs="0" maxOccurs="1">
-                                          <xsd:annotation>
-                                                <xsd:documentation>The numeric user id, or uid, is the third column of each user's entry in /etc/passwd. It represents the owner, and thus privilege level, of the specified program.</xsd:documentation>
-                                          </xsd:annotation>
-                                    </xsd:element>
-                              </xsd:sequence>
-                        </xsd:extension>
-                  </xsd:complexContent>
-            </xsd:complexType>
-      </xsd:element>
-      <!-- =============================================================================== -->
       <!-- ============================  INSTALL HISTORY TEST  =========================== -->
       <!-- =============================================================================== -->
       <xsd:element name="installhistory_test" substitutionGroup="oval-def:test">
@@ -1445,7 +771,7 @@
                               <oval:test>installhistory_test</oval:test>
                               <oval:object>installhistory_object</oval:object>
                               <oval:state>installhistory_state</oval:state>
-                              <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#macos">installhistory_item</oval:item>
+                              <oval:item target_namespace="urn:oval:v6:system-characteristics:macos">installhistory_item</oval:item>
                         </oval:element_mapping>
                   </xsd:appinfo>
                   <xsd:appinfo>
@@ -1487,7 +813,7 @@
                                     <sch:let name="reffed_state" value="ancestor::oval-def:oval_definitions/oval-def:states/*[@id=$state_ref]"/>
                                     <sch:let name="state_name" value="local-name($reffed_state)"/>
                                     <sch:let name="state_namespace" value="namespace-uri($reffed_state)"/>
-                                    <sch:assert test="(($state_namespace='http://oval.mitre.org/XMLSchema/oval-definitions-5#macos') and ($state_name='installhistory_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
+                                    <sch:assert test="(($state_namespace='urn:oval:v6:definitions:macos') and ($state_name='installhistory_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
                               </sch:rule>
                         </sch:pattern>
                   </xsd:appinfo>
@@ -1565,7 +891,7 @@
                               <oval:test>keychain_test</oval:test>
                               <oval:object>keychain_object</oval:object>
                               <oval:state>keychain_state</oval:state>
-                              <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#macos">keychain_item</oval:item>
+                              <oval:item target_namespace="urn:oval:v6:system-characteristics:macos">keychain_item</oval:item>
                         </oval:element_mapping>
                   </xsd:appinfo>
                   <xsd:appinfo>
@@ -1603,7 +929,7 @@
                                     <sch:let name="reffed_state" value="ancestor::oval-def:oval_definitions/oval-def:states/*[@id=$state_ref]"/>
                                     <sch:let name="state_name" value="local-name($reffed_state)"/>
                                     <sch:let name="state_namespace" value="namespace-uri($reffed_state)"/>
-                                    <sch:assert test="(($state_namespace='http://oval.mitre.org/XMLSchema/oval-definitions-5#macos') and ($state_name='keychain_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
+                                    <sch:assert test="(($state_namespace='urn:oval:v6:definitions:macos') and ($state_name='keychain_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
                               </sch:rule>
                         </sch:pattern>
                   </xsd:appinfo>
@@ -1667,7 +993,7 @@
                               <oval:test>launchd_test</oval:test>
                               <oval:object>launchd_object</oval:object>
                               <oval:state>launchd_state</oval:state>
-                              <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#macos">launchd_item</oval:item>
+                              <oval:item target_namespace="urn:oval:v6:system-characteristics:macos">launchd_item</oval:item>
                         </oval:element_mapping>
                   </xsd:appinfo>
                   <xsd:appinfo>
@@ -1705,7 +1031,7 @@
                                     <sch:let name="reffed_state" value="ancestor::oval-def:oval_definitions/oval-def:states/*[@id=$state_ref]"/>
                                     <sch:let name="state_name" value="local-name($reffed_state)"/>
                                     <sch:let name="state_namespace" value="namespace-uri($reffed_state)"/>
-                                    <sch:assert test="(($state_namespace='http://oval.mitre.org/XMLSchema/oval-definitions-5#macos') and ($state_name='launchd_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
+                                    <sch:assert test="(($state_namespace='urn:oval:v6:definitions:macos') and ($state_name='launchd_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
                               </sch:rule>
                         </sch:pattern>
                   </xsd:appinfo>
@@ -1759,108 +1085,6 @@
             </xsd:complexType>
       </xsd:element>
       <!-- =============================================================================== -->
-      <!-- ==============================  NVRAM INFO TEST  ============================== -->
-      <!-- =============================================================================== -->
-      <xsd:element name="nvram_test" substitutionGroup="oval-def:test">
-            <xsd:annotation>
-                  <xsd:documentation>This test pulls firmware data from the device using the 'nvram' command.</xsd:documentation>
-                  <xsd:appinfo>
-                        <oval:element_mapping>
-                              <oval:test>nvram_test</oval:test>
-                              <oval:object>nvram_object</oval:object>
-                              <oval:state>nvram_state</oval:state>
-                              <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#macos">nvram_item</oval:item>
-                        </oval:element_mapping>
-                  </xsd:appinfo>
-					<xsd:appinfo>
-						<oval:deprecated_info>
-							<oval:version>5.12</oval:version>
-							<oval:comment>This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.</oval:comment>
-						</oval:deprecated_info>
-					</xsd:appinfo>
-                  <xsd:appinfo>
-                        <sch:pattern id="macos-def_nvram_test">
-                              <sch:rule context="macos-def:nvram_test/macos-def:object">
-                                    <sch:assert test="@object_ref=ancestor::oval-def:oval_definitions/oval-def:objects/macos-def:nvram_object/@id"><sch:value-of select="../@id"/> - the object child element of an nvram_test must reference an nvram_object</sch:assert>
-                              </sch:rule>
-                              <sch:rule context="macos-def:nvram_test/macos-def:state">
-                                    <sch:assert test="@state_ref=ancestor::oval-def:oval_definitions/oval-def:states/macos-def:nvram_state/@id"><sch:value-of select="../@id"/> - the state child element of an nvram_test must reference an nvram_state</sch:assert>
-                              </sch:rule>
-                        </sch:pattern>
-                  </xsd:appinfo>
-            </xsd:annotation>
-            <xsd:complexType>
-                  <xsd:complexContent>
-                        <xsd:extension base="oval-def:TestType">
-                              <xsd:sequence>
-                                    <xsd:element name="object" type="oval-def:ObjectRefType"/>
-                                    <xsd:element name="state" type="oval-def:StateRefType" minOccurs="0" maxOccurs="unbounded"/>
-                              </xsd:sequence>
-                        </xsd:extension>
-                  </xsd:complexContent>
-            </xsd:complexType>
-      </xsd:element>
-      <xsd:element name="nvram_object" substitutionGroup="oval-def:object">
-            <xsd:annotation>
-                  <xsd:documentation>The nvram_object element is used by an nvram_test to define the object to be evaluated. Each object extends the standard ObjectType as defined in the oval-definitions-schema and one should refer to the ObjectType description for more information. The common set element allows complex objects to be created using filters and set logic. Again, please refer to the description of the set element in the oval-definitions-schema.</xsd:documentation>
-                  <xsd:appinfo>
-                        <sch:pattern id="macos-def_nvram_object_verify_filter_state">
-                              <sch:rule context="macos-def:nvram_object//oval-def:filter">
-                                    <sch:let name="parent_object" value="ancestor::macos-def:nvram_object"/>
-                                    <sch:let name="parent_object_id" value="$parent_object/@id"/>
-                                    <sch:let name="state_ref" value="."/>
-                                    <sch:let name="reffed_state" value="ancestor::oval-def:oval_definitions/oval-def:states/*[@id=$state_ref]"/>
-                                    <sch:let name="state_name" value="local-name($reffed_state)"/>
-                                    <sch:let name="state_namespace" value="namespace-uri($reffed_state)"/>
-                                    <sch:assert test="(($state_namespace='http://oval.mitre.org/XMLSchema/oval-definitions-5#macos') and ($state_name='nvram_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
-                              </sch:rule>
-                        </sch:pattern>
-                  </xsd:appinfo>
-            </xsd:annotation>
-            <xsd:complexType>
-                  <xsd:complexContent>
-                        <xsd:extension base="oval-def:ObjectType">
-                              <xsd:sequence>
-                                    <xsd:choice>
-                                          <xsd:element ref="oval-def:set"/>
-                                          <xsd:sequence>
-                                                <xsd:element name="nvram_var" type="oval-def:EntityObjectStringType">
-                                                      <xsd:annotation>
-                                                            <xsd:documentation>Used to specify the name of the variable to retrieve. In the case of operations other than 'equals', the scope of variables will be limited to those retrieved via the 'nvram -p' command. Hidden nvram variables can be accessed through direct queries using the 'equals' operation.</xsd:documentation>
-                                                      </xsd:annotation>
-                                                </xsd:element>
-                                                <xsd:element ref="oval-def:filter" minOccurs="0" maxOccurs="unbounded"/>
-                                          </xsd:sequence>
-                                    </xsd:choice>
-                              </xsd:sequence>
-                        </xsd:extension>
-                  </xsd:complexContent>
-            </xsd:complexType>
-      </xsd:element>
-      <xsd:element name="nvram_state" substitutionGroup="oval-def:state">
-            <xsd:annotation>
-                  <xsd:documentation>This test pulls data from the 'nvram -p' output.</xsd:documentation>
-            </xsd:annotation>
-            <xsd:complexType>
-                  <xsd:complexContent>
-                        <xsd:extension base="oval-def:StateType">
-                              <xsd:sequence>
-                                    <xsd:element name="nvram_var" type="oval-def:EntityStateStringType" minOccurs="0" maxOccurs="1">
-                                          <xsd:annotation>
-                                                <xsd:documentation>This specifies the nvram variable to check.</xsd:documentation>
-                                          </xsd:annotation>
-                                    </xsd:element>
-                                    <xsd:element name="nvram_value" type="oval-def:EntityStateStringType" minOccurs="0" maxOccurs="1">
-                                          <xsd:annotation>
-                                                <xsd:documentation>This is the value of the associated nvram variable.</xsd:documentation>
-                                          </xsd:annotation>
-                                    </xsd:element>
-                              </xsd:sequence>
-                        </xsd:extension>
-                  </xsd:complexContent>
-            </xsd:complexType>
-      </xsd:element>
-      <!-- =============================================================================== -->
       <!-- ================================ NVRAM512_TEST ================================ -->
       <!-- =============================================================================== -->
       <xsd:element name="nvram512_test" substitutionGroup="oval-def:test">
@@ -1871,7 +1095,7 @@
                               <oval:test>nvram512_test</oval:test>
                               <oval:object>nvram512_object</oval:object>
                               <oval:state>nvram512_state</oval:state>
-                              <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#macos">nvram512_item</oval:item>
+                              <oval:item target_namespace="urn:oval:v6:system-characteristics:macos">nvram512_item</oval:item>
                         </oval:element_mapping>
                   </xsd:appinfo>
                   <xsd:appinfo>
@@ -1908,7 +1132,7 @@
                                     <sch:let name="reffed_state" value="ancestor::oval-def:oval_definitions/oval-def:states/*[@id=$state_ref]"/>
                                     <sch:let name="state_name" value="local-name($reffed_state)"/>
                                     <sch:let name="state_namespace" value="namespace-uri($reffed_state)"/>
-                                    <sch:assert test="(($state_namespace='http://oval.mitre.org/XMLSchema/oval-definitions-5#macos') and ($state_name='nvram512_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
+                                    <sch:assert test="(($state_namespace='urn:oval:v6:definitions:macos') and ($state_name='nvram512_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
                               </sch:rule>
                         </sch:pattern>
                   </xsd:appinfo>
@@ -1949,365 +1173,6 @@
                                     <xsd:element name="value" type="oval-def:EntityStateBinaryType" minOccurs="0" maxOccurs="1">
                                           <xsd:annotation>
                                                 <xsd:documentation>Specifies the binary value of the firmware variable.</xsd:documentation>
-                                          </xsd:annotation>
-                                    </xsd:element>
-                              </xsd:sequence>
-                        </xsd:extension>
-                  </xsd:complexContent>
-            </xsd:complexType>
-      </xsd:element>
-      <!-- =============================================================================== -->
-      <!-- ================================  PLIST TEST  ================================= -->
-      <!-- =============================================================================== -->
-      <xsd:element name="plist_test" substitutionGroup="oval-def:test">
-            <xsd:annotation>
-                  <xsd:documentation>The plist_test is used to check the value(s) associated with property list preference keys. It extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information. The required object element references a plist_object and the optional plist_state element specifies the data to check.</xsd:documentation>
-                  <xsd:appinfo>
-                        <oval:element_mapping>
-                              <oval:test>plist_test</oval:test>
-                              <oval:object>plist_object</oval:object>
-                              <oval:state>plist_state</oval:state>
-                              <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#macos">plist_item</oval:item>
-                        </oval:element_mapping>
-                  </xsd:appinfo>
-                  <xsd:appinfo>
-                        <oval:deprecated_info>
-                              <oval:version>5.10</oval:version>
-                              <oval:reason>Replaced by the plist510_test. This test references the plist_object which does not contain an instance entity. As a result, it is not possible to differentiate between two preference keys that have the same name using the plist_object. The plist510_test was added to address this deficiency. See the plist510_test.</oval:reason>
-                              <oval:comment>This test has been deprecated and may be removed in a future version of the language.</oval:comment>
-                        </oval:deprecated_info>
-                        <sch:pattern id="macos-def_plist_test_dep">
-                              <sch:rule context="macos-def:plist_test">
-                                    <sch:report test="true()">DEPRECATED TEST: <sch:value-of select="name()"/> ID: <sch:value-of select="@id"/></sch:report>
-                              </sch:rule>
-                        </sch:pattern>
-                  </xsd:appinfo>
-                  <xsd:appinfo>
-                        <sch:pattern id="macos-def_plist_test">
-                              <sch:rule context="macos-def:plist_test/macos-def:object">
-                                    <sch:assert test="@object_ref=ancestor::oval-def:oval_definitions/oval-def:objects/macos-def:plist_object/@id"><sch:value-of select="../@id"/> - the object child element of a plist_test must reference a plist_object</sch:assert>
-                              </sch:rule>
-                              <sch:rule context="macos-def:plist_test/macos-def:state">
-                                    <sch:assert test="@state_ref=ancestor::oval-def:oval_definitions/oval-def:states/macos-def:plist_state/@id"><sch:value-of select="../@id"/> - the state child element of a plist_test must reference a plist_state</sch:assert>
-                              </sch:rule>
-                        </sch:pattern>
-                  </xsd:appinfo>
-            </xsd:annotation>
-            <xsd:complexType>
-                  <xsd:complexContent>
-                        <xsd:extension base="oval-def:TestType">
-                              <xsd:sequence>
-                                    <xsd:element name="object" type="oval-def:ObjectRefType"/>
-                                    <xsd:element name="state" type="oval-def:StateRefType" minOccurs="0" maxOccurs="unbounded"/>
-                              </xsd:sequence>
-                        </xsd:extension>
-                  </xsd:complexContent>
-            </xsd:complexType>
-      </xsd:element>
-      <xsd:element name="plist_object" substitutionGroup="oval-def:object">
-            <xsd:annotation>
-                  <xsd:documentation>The plist_object element is used by a plist_test to define the preference keys to collect and where to look for them. Each object extends the standard ObjectType as defined in the oval-definitions-schema and one should refer to the ObjectType description for more information. The common set element allows complex objects to be created using filters and set logic. Again, please refer to the description of the set element in the oval-definitions-schema.</xsd:documentation>
-                  <xsd:appinfo>
-                        <oval:deprecated_info>
-                              <oval:version>5.10</oval:version>
-                              <oval:reason>Replaced by the plist510_object. This object does not contain an instance entity. As a result, it is not possible to differentiate between two preference keys that have the same name using this object. The plist510_object was added to address this deficiency. See the plist510_object.</oval:reason>
-                              <oval:comment>This object has been deprecated and may be removed in a future version of the language.</oval:comment>
-                        </oval:deprecated_info>
-                        <sch:pattern id="macos-def_plist_object_dep">
-                              <sch:rule context="macos-def:plist_object">
-                                    <sch:report test="true()"> DEPRECATED OBJECT: <sch:value-of select="name()"/> ID: <sch:value-of select="@id"/>
-                                    </sch:report>
-                              </sch:rule>
-                        </sch:pattern>
-                  </xsd:appinfo>
-                  <xsd:appinfo>
-                        <sch:pattern id="macos-def_plist_object_verify_filter_state">
-                              <sch:rule context="macos-def:plist_object//oval-def:filter">
-                                    <sch:let name="parent_object" value="ancestor::macos-def:plist_object"/>
-                                    <sch:let name="parent_object_id" value="$parent_object/@id"/>
-                                    <sch:let name="state_ref" value="."/>
-                                    <sch:let name="reffed_state" value="ancestor::oval-def:oval_definitions/oval-def:states/*[@id=$state_ref]"/>
-                                    <sch:let name="state_name" value="local-name($reffed_state)"/>
-                                    <sch:let name="state_namespace" value="namespace-uri($reffed_state)"/>
-                                    <sch:assert test="(($state_namespace='http://oval.mitre.org/XMLSchema/oval-definitions-5#macos') and ($state_name='plist_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
-                              </sch:rule>
-                        </sch:pattern>
-                  </xsd:appinfo>
-            </xsd:annotation>
-            <xsd:complexType>
-                  <xsd:complexContent>
-                        <xsd:extension base="oval-def:ObjectType">
-                              <xsd:sequence>
-                                    <xsd:choice>
-                                          <xsd:element ref="oval-def:set"/>
-                                          <xsd:sequence>
-                                                <xsd:element name="key" type="oval-def:EntityObjectStringType" nillable="true">
-                                                      <xsd:annotation>
-                                                            <xsd:documentation>The preference key to check. If the xsi:nil attribute is set to 'true', the plist does not have any keys associated with it (i.e. it is not a CFDictionary) and the default value of the plist will be collected.</xsd:documentation>
-                                                      </xsd:annotation>
-                                                </xsd:element>
-                                                <xsd:choice>
-                                                      <xsd:element name="app_id" type="oval-def:EntityObjectStringType">
-                                                            <xsd:annotation>
-                                                                  <xsd:documentation>The unique application identifier that specifies the application to use when looking up the preference key (e.g. com.apple.Safari).</xsd:documentation>
-                                                            </xsd:annotation>
-                                                      </xsd:element>
-                                                      <xsd:element name="filepath" type="oval-def:EntityObjectStringType">
-                                                            <xsd:annotation>
-                                                                  <xsd:documentation>The absolute path to a plist file (e.g. ~/Library/Preferences/com.apple.Safari.plist). A directory cannot be specified as a filepath.</xsd:documentation>
-                                                                  <xsd:appinfo>
-                                                                        <sch:pattern id="macos-def_plistobjfilepath">
-                                                                              <sch:rule context="macos-def:plist_object/macos-def:filepath">
-                                                                                    <sch:assert test="not(@operation) or @operation='equals'">
-                                                                                          <sch:value-of select="../@id"/> - operation attribute for the filepath entity of a plist_object should be 'equals' </sch:assert>
-                                                                              </sch:rule>
-                                                                        </sch:pattern>
-                                                                  </xsd:appinfo>
-                                                            </xsd:annotation>
-                                                      </xsd:element>
-                                                </xsd:choice>
-                                                <xsd:element ref="oval-def:filter" minOccurs="0" maxOccurs="unbounded"/>
-                                          </xsd:sequence>
-                                    </xsd:choice>
-                              </xsd:sequence>
-                        </xsd:extension>
-                  </xsd:complexContent>
-            </xsd:complexType>
-      </xsd:element>
-      <xsd:element name="plist_state" substitutionGroup="oval-def:state">
-            <xsd:annotation>
-                  <xsd:documentation>The plist_state element defines the different information that can be used to evaluate the specified property list preference key. This includes the preference key, application identifier, filepath, type, as well as the preference key's value. Please refer to the individual elements in the schema for more details about what each represents.</xsd:documentation>
-                  <xsd:appinfo>
-                        <oval:deprecated_info>
-                              <oval:version>5.10</oval:version>
-                              <oval:reason>Replaced by the plist510_state. This state is used in conjunction with the plist_object which does not contain an instance entity. As a result, it is not possible to differentiate between two preference keys that have the same name using the plist_object. The plist510_state was added to address this deficiency. See the plist510_state.</oval:reason>
-                              <oval:comment>This object has been deprecated and may be removed in a future version of the language.</oval:comment>
-                        </oval:deprecated_info>
-                        <sch:pattern id="macos-def_plist_state_dep">
-                              <sch:rule context="macos-def:plist_state">
-                                    <sch:report test="true()">DEPRECATED STATE: <sch:value-of select="name()"/> ID: <sch:value-of select="@id"/></sch:report>
-                              </sch:rule>
-                        </sch:pattern>
-                  </xsd:appinfo>
-            </xsd:annotation>
-            <xsd:complexType>
-                  <xsd:complexContent>
-                        <xsd:extension base="oval-def:StateType">
-                              <xsd:sequence>
-                                    <xsd:element name="key" type="oval-def:EntityStateStringType" minOccurs="0" maxOccurs="1">
-                                          <xsd:annotation>
-                                                <xsd:documentation>The preference key to check.</xsd:documentation>
-                                          </xsd:annotation>
-                                    </xsd:element>
-                                    <xsd:element name="app_id" type="oval-def:EntityStateStringType" minOccurs="0" maxOccurs="1">
-                                          <xsd:annotation>
-                                                <xsd:documentation>The unique application identifier that specifies the application to use when looking up the preference key (e.g. com.apple.Safari).</xsd:documentation>
-                                          </xsd:annotation>
-                                    </xsd:element>
-                                    <xsd:element name="filepath" type="oval-def:EntityStateStringType" minOccurs="0" maxOccurs="1">
-                                          <xsd:annotation>
-                                                <xsd:documentation>The absolute path to a plist file (e.g. ~/Library/Preferences/com.apple.Safari.plist).</xsd:documentation>
-                                          </xsd:annotation>
-                                    </xsd:element>
-                                    <xsd:element name="instance" type="oval-def:EntityStateIntType" minOccurs="0" maxOccurs="1">
-                                          <xsd:annotation>
-                                                <xsd:documentation>The instance of the preference key found in the plist. The first instance of a matching preference key is given the instance value of 1, the second instance of a matching preference key is given the instance value of 2, and so on. Note that the main purpose of this entity is to provide uniqueness for the different plist_items that result from multiple instances of a given preference key in the same plist file.</xsd:documentation>
-                                          </xsd:annotation>
-                                    </xsd:element>
-                                    <xsd:element name="type" type="macos-def:EntityStatePlistTypeType" minOccurs="0" maxOccurs="1">
-                                          <xsd:annotation>
-                                                <xsd:documentation>The type of the preference key.</xsd:documentation>
-                                          </xsd:annotation>
-                                    </xsd:element>
-                                    <xsd:element name="value" type="oval-def:EntityStateAnySimpleType" minOccurs="0" maxOccurs="1">
-                                          <xsd:annotation>
-                                                <xsd:documentation>The value of the preference key.</xsd:documentation>
-                                          </xsd:annotation>
-                                    </xsd:element>
-                              </xsd:sequence>
-                        </xsd:extension>
-                  </xsd:complexContent>
-            </xsd:complexType>
-      </xsd:element>
-      <!-- =============================================================================== -->
-      <!-- =============================  PLIST TEST (510)  ============================== -->
-      <!-- =============================================================================== -->
-      <xsd:element name="plist510_test" substitutionGroup="oval-def:test">
-            <xsd:annotation>
-                  <xsd:documentation>The plist510_test is used to check the value(s) associated with property list preference keys. It extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information. The required object element references a plist510_object and the optional plist510_state element specifies the data to check.</xsd:documentation>
-                  <xsd:appinfo>
-                        <oval:element_mapping>
-                              <oval:test>plist510_test</oval:test>
-                              <oval:object>plist510_object</oval:object>
-                              <oval:state>plist510_state</oval:state>
-                              <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#macos">plist_item</oval:item>
-                        </oval:element_mapping>
-                  </xsd:appinfo>
-                  <xsd:appinfo>
-                        <oval:deprecated_info>
-                              <oval:version>5.11.2:1.0</oval:version>
-                              <oval:reason>Replaced by the plist511_test. This test references the plist_object which cannot express the context hierarchy required to differentiate between nodes with identical names. As a result, it is not possible to address a particular node when the order of their parent nodes is indeterminate. The plist511_test was added to address this deficiency. See the plist511_test.</oval:reason>
-                              <oval:comment>This test has been deprecated and may be removed in a future version of the language.</oval:comment>
-                        </oval:deprecated_info>
-                        <sch:pattern id="macos-def_plist510_test_dep">
-                              <sch:rule context="macos-def:plist510_test">
-                                    <sch:report test="true()">DEPRECATED TEST: <sch:value-of select="name()"/> ID: <sch:value-of select="@id"/></sch:report>
-                              </sch:rule>
-                        </sch:pattern>
-                  </xsd:appinfo>
-                  <xsd:appinfo>
-                        <sch:pattern id="macos-def_plist510_test">
-                              <sch:rule context="macos-def:plist510_test/macos-def:object">
-                                    <sch:assert test="@object_ref=ancestor::oval-def:oval_definitions/oval-def:objects/macos-def:plist510_object/@id"><sch:value-of select="../@id"/> - the object child element of a plist510_test must reference a plist510_object</sch:assert>
-                              </sch:rule>
-                              <sch:rule context="macos-def:plist510_test/macos-def:state">
-                                    <sch:assert test="@state_ref=ancestor::oval-def:oval_definitions/oval-def:states/macos-def:plist510_state/@id"><sch:value-of select="../@id"/> - the state child element of a plist510_test must reference a plist510_state</sch:assert>
-                              </sch:rule>
-                        </sch:pattern>
-                  </xsd:appinfo>
-            </xsd:annotation>
-            <xsd:complexType>
-                  <xsd:complexContent>
-                        <xsd:extension base="oval-def:TestType">
-                              <xsd:sequence>
-                                    <xsd:element name="object" type="oval-def:ObjectRefType"/>
-                                    <xsd:element name="state" type="oval-def:StateRefType" minOccurs="0" maxOccurs="unbounded"/>
-                              </xsd:sequence>
-                        </xsd:extension>
-                  </xsd:complexContent>
-            </xsd:complexType>
-      </xsd:element>
-      <xsd:element name="plist510_object" substitutionGroup="oval-def:object">
-            <xsd:annotation>
-                  <xsd:documentation>The plist510_object element is used by a plist510_test to define the preference keys to collect and where to look for them. Each object extends the standard ObjectType as defined in the oval-definitions-schema and one should refer to the ObjectType description for more information. The common set element allows complex objects to be created using filters and set logic. Again, please refer to the description of the set element in the oval-definitions-schema.</xsd:documentation>
-                  <xsd:appinfo>
-                        <oval:deprecated_info>
-                              <oval:version>5.11.2:1.0</oval:version>
-                              <oval:reason>Replaced by the plist511_object. This object cannot express the context hierarchy required to differentiate between nodes with identical names. As a result, it is not possible to address a particular node when the order of their parent nodes is indeterminate. The plist511_object was added to address this deficiency. See the plist511_object.</oval:reason>
-                              <oval:comment>This object has been deprecated and may be removed in a future version of the language.</oval:comment>
-                        </oval:deprecated_info>
-                        <sch:pattern id="macos-def_plist510_object_dep">
-                              <sch:rule context="macos-def:plist510_object">
-                                    <sch:report test="true()"> DEPRECATED OBJECT: <sch:value-of select="name()"/> ID: <sch:value-of select="@id"/>
-                                    </sch:report>
-                              </sch:rule>
-                        </sch:pattern>
-                  </xsd:appinfo>
-                  <xsd:appinfo>
-                        <sch:pattern id="macos-def_plist510_object_verify_filter_state">
-                              <sch:rule context="macos-def:plist510_object//oval-def:filter">
-                                    <sch:let name="parent_object" value="ancestor::macos-def:plist510_object"/>
-                                    <sch:let name="parent_object_id" value="$parent_object/@id"/>
-                                    <sch:let name="state_ref" value="."/>
-                                    <sch:let name="reffed_state" value="ancestor::oval-def:oval_definitions/oval-def:states/*[@id=$state_ref]"/>
-                                    <sch:let name="state_name" value="local-name($reffed_state)"/>
-                                    <sch:let name="state_namespace" value="namespace-uri($reffed_state)"/>
-                                    <sch:assert test="(($state_namespace='http://oval.mitre.org/XMLSchema/oval-definitions-5#macos') and ($state_name='plist510_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
-                              </sch:rule>
-                        </sch:pattern>
-                  </xsd:appinfo>
-            </xsd:annotation>
-            <xsd:complexType>
-                  <xsd:complexContent>
-                        <xsd:extension base="oval-def:ObjectType">
-                              <xsd:sequence>
-                                    <xsd:choice>
-                                          <xsd:element ref="oval-def:set"/>
-                                          <xsd:sequence>
-                                                <xsd:element name="key" type="oval-def:EntityObjectStringType" nillable="true">
-                                                      <xsd:annotation>
-                                                            <xsd:documentation>The preference key to check. If the xsi:nil attribute is set to 'true', the plist does not have any keys associated with it (i.e. it is not a CFDictionary) and the default value of the plist will be collected.</xsd:documentation>
-                                                      </xsd:annotation>
-                                                </xsd:element>
-                                                <xsd:choice>
-                                                      <xsd:element name="app_id" type="oval-def:EntityObjectStringType">
-                                                            <xsd:annotation>
-                                                                  <xsd:documentation>The unique application identifier that specifies the application to use when looking up the preference key (e.g. com.apple.Safari).</xsd:documentation>
-                                                                  <xsd:appinfo>
-                                                                        <sch:pattern id="macos-def_plist510objappid">
-                                                                              <sch:rule context="macos-def:plist510_object/macos-def:app_id">
-                                                                                    <sch:assert test="not(../macos-def:key/@xsi:nil='true' or ../macos-def:key/@xsi:nil='1')">
-                                                                                          <sch:value-of select="../@id"/> - key entity must not be nil when the app_id entity is used because preferences require a key. </sch:assert>
-                                                                              </sch:rule>
-                                                                        </sch:pattern>
-                                                                  </xsd:appinfo>
-                                                            </xsd:annotation>
-                                                      </xsd:element>
-                                                      <xsd:element name="filepath" type="oval-def:EntityObjectStringType">
-                                                            <xsd:annotation>
-                                                                  <xsd:documentation>The absolute path to a plist file (e.g. ~/Library/Preferences/com.apple.Safari.plist). A directory cannot be specified as a filepath.</xsd:documentation>
-                                                                  <xsd:appinfo>
-                                                                        <sch:pattern id="macos-def_plist510objfilepath">
-                                                                              <sch:rule context="macos-def:plist510_object/macos-def:filepath">
-                                                                                    <sch:assert test="not(@operation) or @operation='equals'">
-                                                                                          <sch:value-of select="../@id"/> - operation attribute for the filepath entity of a plist510_object should be 'equals' </sch:assert>
-                                                                              </sch:rule>
-                                                                        </sch:pattern>
-                                                                  </xsd:appinfo>
-                                                            </xsd:annotation>
-                                                      </xsd:element>
-                                                </xsd:choice>
-                                                <xsd:element name="instance" type="oval-def:EntityObjectIntType">
-                                                      <xsd:annotation>
-                                                            <xsd:documentation>The instance of the preference key found in the plist. The first instance of a matching preference key is given the instance value of 1, the second instance of a matching preference key is given the instance value of 2, and so on. Instance values must be assigned using a depth-first approach. Note that the main purpose of this entity is to provide uniqueness for the different plist_items that result from multiple instances of a given preference key in the same plist file.</xsd:documentation>
-                                                      </xsd:annotation>
-                                                </xsd:element>
-                                                <xsd:element ref="oval-def:filter" minOccurs="0" maxOccurs="unbounded"/>
-                                          </xsd:sequence>
-                                    </xsd:choice>
-                              </xsd:sequence>
-                        </xsd:extension>
-                  </xsd:complexContent>
-            </xsd:complexType>
-      </xsd:element>
-      <xsd:element name="plist510_state" substitutionGroup="oval-def:state">
-            <xsd:annotation>
-                  <xsd:documentation>The plist510_state element defines the different information that can be used to evaluate the specified property list preference key. This includes the preference key, application identifier, filepath, type, as well as the preference key's value. Please refer to the individual elements in the schema for more details about what each represents.</xsd:documentation>
-                  <xsd:appinfo>
-                        <oval:deprecated_info>
-                              <oval:version>5.11.2:1.0</oval:version>
-                              <oval:reason>Replaced by the plist511_state. This state is used in conjunction with the plist510_object which cannot express the context hierarchy required to differentiate between nodes with identical names. As a result, it is not possible to address a particular node when the order of their parent nodes is indeterminate. The plist511_state was added to address this deficiency. See the plist511_state.</oval:reason>
-                              <oval:comment>This object has been deprecated and may be removed in a future version of the language.</oval:comment>
-                        </oval:deprecated_info>
-                        <sch:pattern id="macos-def_plist510_state_dep">
-                              <sch:rule context="macos-def:plist510_state">
-                                    <sch:report test="true()">DEPRECATED STATE: <sch:value-of select="name()"/> ID: <sch:value-of select="@id"/></sch:report>
-                              </sch:rule>
-                        </sch:pattern>
-                  </xsd:appinfo>
-            </xsd:annotation>
-            <xsd:complexType>
-                  <xsd:complexContent>
-                        <xsd:extension base="oval-def:StateType">
-                              <xsd:sequence>
-                                    <xsd:element name="key" type="oval-def:EntityStateStringType" minOccurs="0" maxOccurs="1">
-                                          <xsd:annotation>
-                                                <xsd:documentation>The preference key to check.</xsd:documentation>
-                                          </xsd:annotation>
-                                    </xsd:element>
-                                    <xsd:element name="app_id" type="oval-def:EntityStateStringType" minOccurs="0" maxOccurs="1">
-                                          <xsd:annotation>
-                                                <xsd:documentation>The unique application identifier that specifies the application to use when looking up the preference key (e.g. com.apple.Safari).</xsd:documentation>
-                                          </xsd:annotation>
-                                    </xsd:element>
-                                    <xsd:element name="filepath" type="oval-def:EntityStateStringType" minOccurs="0" maxOccurs="1">
-                                          <xsd:annotation>
-                                                <xsd:documentation>The absolute path to a plist file (e.g. ~/Library/Preferences/com.apple.Safari.plist).</xsd:documentation>
-                                          </xsd:annotation>
-                                    </xsd:element>
-                                    <xsd:element name="instance" type="oval-def:EntityStateIntType" minOccurs="0" maxOccurs="1">
-                                          <xsd:annotation>
-                                                <xsd:documentation>The instance of the preference key found in the plist. The first instance of a matching preference key is given the instance value of 1, the second instance of a matching preference key is given the instance value of 2, and so on. Instance values must be assigned using a depth-first approach. Note that the main purpose of this entity is to provide uniqueness for the different plist_items that result from multiple instances of a given preference key in the same plist file.</xsd:documentation>
-                                          </xsd:annotation>
-                                    </xsd:element>
-                                    <xsd:element name="type" type="macos-def:EntityStatePlistTypeType" minOccurs="0" maxOccurs="1">
-                                          <xsd:annotation>
-                                                <xsd:documentation>The type of the preference key.</xsd:documentation>
-                                          </xsd:annotation>
-                                    </xsd:element>
-                                    <xsd:element name="value" type="oval-def:EntityStateAnySimpleType" minOccurs="0" maxOccurs="1">
-                                          <xsd:annotation>
-                                                <xsd:documentation>The value of the preference key.</xsd:documentation>
                                           </xsd:annotation>
                                     </xsd:element>
                               </xsd:sequence>
@@ -2363,7 +1228,7 @@
                                     <sch:let name="reffed_state" value="ancestor::oval-def:oval_definitions/oval-def:states/*[@id=$state_ref]"/>
                                     <sch:let name="state_name" value="local-name($reffed_state)"/>
                                     <sch:let name="state_namespace" value="namespace-uri($reffed_state)"/>
-                                    <sch:assert test="(($state_namespace='http://oval.mitre.org/XMLSchema/oval-definitions-5#macos') and ($state_name='plist511_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
+                                    <sch:assert test="(($state_namespace='urn:oval:v6:definitions:macos') and ($state_name='plist511_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
                               </sch:rule>
                         </sch:pattern>
                   </xsd:appinfo>
@@ -2462,7 +1327,7 @@
                               <oval:test>profiles_test</oval:test>
                               <oval:object>profiles_object</oval:object>
                               <oval:state>profiles_state</oval:state>
-                              <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#macos">profiles_item</oval:item>
+                              <oval:item target_namespace="urn:oval:v6:system-characteristics:macos">profiles_item</oval:item>
                         </oval:element_mapping>
                   </xsd:appinfo>
                   <xsd:appinfo>
@@ -2501,7 +1366,7 @@
                                     <sch:let name="reffed_state" value="ancestor::oval-def:oval_definitions/oval-def:states/*[@id=$state_ref]"/>
                                     <sch:let name="state_name" value="local-name($reffed_state)"/>
                                     <sch:let name="state_namespace" value="namespace-uri($reffed_state)"/>
-                                    <sch:assert test="(($state_namespace='http://oval.mitre.org/XMLSchema/oval-definitions-5#macos') and ($state_name='profiles_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
+                                    <sch:assert test="(($state_namespace='urn:oval:v6:definitions:macos') and ($state_name='profiles_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
                               </sch:rule>
                         </sch:pattern>
                   </xsd:appinfo>
@@ -2536,458 +1401,6 @@
             </xsd:complexType>
       </xsd:element>
       <!-- =============================================================================== -->
-      <!-- ===============================  PWPOLICY TEST  =============================== -->
-      <!-- =============================================================================== -->
-      <xsd:element name="pwpolicy_test" substitutionGroup="oval-def:test">
-            <xsd:annotation>
-                  <xsd:documentation>This test pulls data from the 'pwpolicy -getpolicy' output. The actual values get stored under /var/db/netinfo/local.nidb/ in a Store.# file. Is this test actually needed, or can the text file content test be used instead?</xsd:documentation>
-                  <xsd:appinfo>
-                        <oval:element_mapping>
-                              <oval:test>pwpolicy_test</oval:test>
-                              <oval:object>pwpolicy_object</oval:object>
-                              <oval:state>pwpolicy_state</oval:state>
-                              <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#macos">pwpolicy_item</oval:item>
-                        </oval:element_mapping>
-                  </xsd:appinfo>
-                  <xsd:appinfo>
-                        <oval:deprecated_info>
-                              <oval:version>5.9</oval:version>
-                              <oval:reason>Replaced by the pwpolicy59_test. The username, userpass, and directory_node entities in the pwpolicy_object, pwpolicy_state, and pwpolicy_item were underspecified and as a result their meaning was uncertain. A new test was created to resolve this issue. See the pwpolicy59_test.</oval:reason>
-                              <oval:comment>This test has been deprecated and may be removed in a future version of the language.</oval:comment>
-                        </oval:deprecated_info>
-                        <sch:pattern id="macos-def_pwpolicy_test_dep">
-                              <sch:rule context="macos-def:pwpolicy_test">
-                                    <sch:report test="true()">DEPRECATED TEST: <sch:value-of select="name()"/> ID: <sch:value-of select="@id"/></sch:report>
-                              </sch:rule>
-                        </sch:pattern>
-                  </xsd:appinfo>
-                  <xsd:appinfo>
-                        <sch:pattern id="macos-def_pwpolicy_test">
-                              <sch:rule context="macos-def:pwpolicy_test/macos-def:object">
-                                    <sch:assert test="@object_ref=ancestor::oval-def:oval_definitions/oval-def:objects/macos-def:pwpolicy_object/@id"><sch:value-of select="../@id"/> - the object child element of an pwpolicy_test must reference an pwpolicy_object</sch:assert>
-                              </sch:rule>
-                              <sch:rule context="macos-def:pwpolicy_test/macos-def:state">
-                                    <sch:assert test="@state_ref=ancestor::oval-def:oval_definitions/oval-def:states/macos-def:pwpolicy_state/@id"><sch:value-of select="../@id"/> - the state child element of an pwpolicy_test must reference an pwpolicy_state</sch:assert>
-                              </sch:rule>
-                        </sch:pattern>
-                  </xsd:appinfo>
-            </xsd:annotation>
-            <xsd:complexType>
-                  <xsd:complexContent>
-                        <xsd:extension base="oval-def:TestType">
-                              <xsd:sequence>
-                                    <xsd:element name="object" type="oval-def:ObjectRefType"/>
-                                    <xsd:element name="state" type="oval-def:StateRefType" minOccurs="0" maxOccurs="unbounded"/>
-                              </xsd:sequence>
-                        </xsd:extension>
-                  </xsd:complexContent>
-            </xsd:complexType>
-      </xsd:element>
-      <xsd:element name="pwpolicy_object" substitutionGroup="oval-def:object">
-            <xsd:annotation>
-                  <xsd:documentation>The pwpolicy_object element is used by a pwpolicy_test to define the object to be evaluated. Each object extends the standard ObjectType as defined in the oval-definitions-schema and one should refer to the ObjectType description for more information. The common set element allows complex objects to be created using filters and set logic. Again, please refer to the description of the set element in the oval-definitions-schema.</xsd:documentation>
-                  <xsd:appinfo>
-                        <oval:deprecated_info>
-                              <oval:version>5.9</oval:version>
-                              <oval:reason>Replaced by the pwpolicy59_object. The username, userpass, and directory_node entities in the pwpolicy_object were underspecified and as a result their meaning was uncertain. A new object was created to resolve this issue. See the pwpolicy59_object.</oval:reason>
-                              <oval:comment>This object has been deprecated and may be removed in a future version of the language.</oval:comment>
-                        </oval:deprecated_info>
-                        <sch:pattern id="macos-def_pwpolicy_object_dep">
-                              <sch:rule context="macos-def:pwpolicy_object">
-                                    <sch:report test="true()">DEPRECATED OBJECT: <sch:value-of select="name()"/> ID: <sch:value-of select="@id"/></sch:report>
-                              </sch:rule>
-                        </sch:pattern>
-                  </xsd:appinfo>
-                  <xsd:appinfo>
-                        <sch:pattern id="macos-def_pwpolicy_object_verify_filter_state">
-                              <sch:rule context="macos-def:pwpolicy_object//oval-def:filter">
-                                    <sch:let name="parent_object" value="ancestor::macos-def:pwpolicy_object"/>
-                                    <sch:let name="parent_object_id" value="$parent_object/@id"/>
-                                    <sch:let name="state_ref" value="."/>
-                                    <sch:let name="reffed_state" value="ancestor::oval-def:oval_definitions/oval-def:states/*[@id=$state_ref]"/>
-                                    <sch:let name="state_name" value="local-name($reffed_state)"/>
-                                    <sch:let name="state_namespace" value="namespace-uri($reffed_state)"/>
-                                    <sch:assert test="(($state_namespace='http://oval.mitre.org/XMLSchema/oval-definitions-5#macos') and ($state_name='pwpolicy_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
-                              </sch:rule>
-                        </sch:pattern>
-                  </xsd:appinfo>
-            </xsd:annotation>
-            <xsd:complexType>
-                  <xsd:complexContent>
-                        <xsd:extension base="oval-def:ObjectType">
-                              <xsd:sequence>
-                                    <xsd:choice>
-                                          <xsd:element ref="oval-def:set"/>
-                                          <xsd:sequence>
-                                                <xsd:element name="username" type="oval-def:EntityObjectStringType">
-                                                      <xsd:annotation>
-                                                            <xsd:documentation/>
-                                                            <xsd:appinfo>
-                                                                  <sch:pattern id="macos-def_pwpobjusername">
-                                                                        <sch:rule context="macos-def:pwpolicy_object/macos-def:username">
-                                                                              <sch:assert test="not(@operation) or @operation='equals'"><sch:value-of select="../@id"/> - operation attribute for the username entity of a pwpolicy_object should be 'equals', note that this overrules the general operation attribute validation (i.e. follow this one)</sch:assert>
-                                                                        </sch:rule>
-                                                                  </sch:pattern>
-                                                            </xsd:appinfo>
-                                                      </xsd:annotation>
-                                                </xsd:element>
-                                                <xsd:element name="userpass" type="oval-def:EntityObjectStringType">
-                                                      <xsd:annotation>
-                                                            <xsd:documentation/>
-                                                            <xsd:appinfo>
-                                                                  <sch:pattern id="macos-def_pwpobjuserpass">
-                                                                        <sch:rule context="macos-def:pwpolicy_object/macos-def:userpass">
-                                                                              <sch:assert test="not(@operation) or @operation='equals'"><sch:value-of select="../@id"/> - operation attribute for the userpass entity of a pwpolicy_object should be 'equals', note that this overrules the general operation attribute validation (i.e. follow this one)</sch:assert>
-                                                                        </sch:rule>
-                                                                  </sch:pattern>
-                                                            </xsd:appinfo>
-                                                      </xsd:annotation>
-                                                </xsd:element>
-                                                <xsd:element name="directory_node" type="oval-def:EntityObjectStringType">
-                                                      <xsd:annotation>
-                                                            <xsd:documentation/>
-                                                            <xsd:appinfo>
-                                                                  <sch:pattern id="macos-def_pwpobjdirnode">
-                                                                        <sch:rule context="macos-def:pwpolicy_object/macos-def:directory_node">
-                                                                              <sch:assert test="not(@operation) or @operation='equals'"><sch:value-of select="../@id"/> - operation attribute for the directory_node entity of a pwpolicy_object should be 'equals', note that this overrules the general operation attribute validation (i.e. follow this one)</sch:assert>
-                                                                        </sch:rule>
-                                                                  </sch:pattern>
-                                                            </xsd:appinfo>
-                                                      </xsd:annotation>
-                                                </xsd:element>
-                                                <xsd:element ref="oval-def:filter" minOccurs="0" maxOccurs="unbounded"/>
-                                          </xsd:sequence>
-                                    </xsd:choice>
-                              </xsd:sequence>
-                        </xsd:extension>
-                  </xsd:complexContent>
-            </xsd:complexType>
-      </xsd:element>
-      <xsd:element name="pwpolicy_state" substitutionGroup="oval-def:state">
-            <xsd:annotation>
-                  <xsd:documentation/>
-                  <xsd:appinfo>
-                        <oval:deprecated_info>
-                              <oval:version>5.9</oval:version>
-                              <oval:reason>Replaced by the pwpolicy59_state. The username, userpass, and directory_node entities in the pwpolicy_state were underspecified and as a result their meaning was uncertain. A new state was created to resolve this issue. See the pwpolicy59_state.</oval:reason>
-                              <oval:comment>This state has been deprecated and may be removed in a future version of the language.</oval:comment>
-                        </oval:deprecated_info>
-                        <sch:pattern id="macos-def_pwpolicy_state_dep">
-                              <sch:rule context="macos-def:pwpolicy_state">
-                                    <sch:report test="true()">DEPRECATED STATE: <sch:value-of select="name()"/> ID: <sch:value-of select="@id"/></sch:report>
-                              </sch:rule>
-                        </sch:pattern>
-                  </xsd:appinfo>
-            </xsd:annotation>
-            <xsd:complexType>
-                  <xsd:complexContent>
-                        <xsd:extension base="oval-def:StateType">
-                              <xsd:sequence>
-                                    <xsd:element name="username" type="oval-def:EntityStateStringType" minOccurs="0" maxOccurs="1">
-                                          <xsd:annotation>
-                                                <xsd:documentation/>
-                                          </xsd:annotation>
-                                    </xsd:element>
-                                    <xsd:element name="userpass" type="oval-def:EntityStateStringType" minOccurs="0" maxOccurs="1">
-                                          <xsd:annotation>
-                                                <xsd:documentation/>
-                                          </xsd:annotation>
-                                    </xsd:element>
-                                    <xsd:element name="directory_node" type="oval-def:EntityStateStringType" minOccurs="0" maxOccurs="1">
-                                          <xsd:annotation>
-                                                <xsd:documentation/>
-                                          </xsd:annotation>
-                                    </xsd:element>
-                                    <xsd:element name="maxChars" type="oval-def:EntityStateIntType" minOccurs="0" maxOccurs="1">
-                                          <xsd:annotation>
-                                                <xsd:documentation>Maximum number of characters allowed in a password.</xsd:documentation>
-                                          </xsd:annotation>
-                                    </xsd:element>
-                                    <xsd:element name="maxFailedLoginAttempts" type="oval-def:EntityStateIntType" minOccurs="0" maxOccurs="1">
-                                          <xsd:annotation>
-                                                <xsd:documentation>Maximum number of failed logins before the account is locked.</xsd:documentation>
-                                          </xsd:annotation>
-                                    </xsd:element>
-                                    <xsd:element name="minChars" type="oval-def:EntityStateIntType" minOccurs="0" maxOccurs="1">
-                                          <xsd:annotation>
-                                                <xsd:documentation>Minimum number of characters allowed in a password.</xsd:documentation>
-                                          </xsd:annotation>
-                                    </xsd:element>
-                                    <xsd:element name="passwordCannotBeName" type="oval-def:EntityStateBoolType" minOccurs="0" maxOccurs="1">
-                                          <xsd:annotation>
-                                                <xsd:documentation>Defines if the password is allowed to be the same as the username or not.</xsd:documentation>
-                                          </xsd:annotation>
-                                    </xsd:element>
-                                    <xsd:element name="requiresAlpha" type="oval-def:EntityStateBoolType" minOccurs="0" maxOccurs="1">
-                                          <xsd:annotation>
-                                                <xsd:documentation>Defines if the password must contain an alphabetical character or not.</xsd:documentation>
-                                          </xsd:annotation>
-                                    </xsd:element>
-                                    <xsd:element name="requiresNumeric" type="oval-def:EntityStateBoolType" minOccurs="0" maxOccurs="1">
-                                          <xsd:annotation>
-                                                <xsd:documentation>Defines if the password must contain an numeric character or not.</xsd:documentation>
-                                          </xsd:annotation>
-                                    </xsd:element>
-                              </xsd:sequence>
-                        </xsd:extension>
-                  </xsd:complexContent>
-            </xsd:complexType>
-      </xsd:element>
-      <!-- =============================================================================== -->
-      <!-- ============================  PWPOLICY TEST (59)  ============================= -->
-      <!-- =============================================================================== -->
-      <xsd:element name="pwpolicy59_test" substitutionGroup="oval-def:test">
-            <xsd:annotation>
-                  <xsd:documentation>This test retrieves password policy data from the 'pwpolicy -getpolicy -u target_user [-a username] [-p userpass] [-n directory_node]' output where username, userpass, and directory_node are optional. Please see the 'pwpolicy' man page for additional information.</xsd:documentation>
-                  <xsd:appinfo>
-                        <oval:element_mapping>
-                              <oval:test>pwpolicy59_test</oval:test>
-                              <oval:object>pwpolicy59_object</oval:object>
-                              <oval:state>pwpolicy59_state</oval:state>
-                              <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#macos">pwpolicy59_item</oval:item>
-                        </oval:element_mapping>
-                  </xsd:appinfo>
-				  <xsd:appinfo>
-						<oval:deprecated_info>
-							<oval:version>5.12</oval:version>
-							<oval:comment>This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.</oval:comment>
-						</oval:deprecated_info>
-					</xsd:appinfo>
-                  <xsd:appinfo>
-                        <sch:pattern id="macos-def_pwpolicy59_test">
-                              <sch:rule context="macos-def:pwpolicy59_test/macos-def:object">
-                                    <sch:assert test="@object_ref=ancestor::oval-def:oval_definitions/oval-def:objects/macos-def:pwpolicy59_object/@id"><sch:value-of select="../@id"/> - the object child element of an pwpolicy59_test must reference an pwpolicy59_object</sch:assert>
-                              </sch:rule>
-                              <sch:rule context="macos-def:pwpolicy59_test/macos-def:state">
-                                    <sch:assert test="@state_ref=ancestor::oval-def:oval_definitions/oval-def:states/macos-def:pwpolicy59_state/@id"><sch:value-of select="../@id"/> - the state child element of an pwpolicy59_test must reference an pwpolicy59_state</sch:assert>
-                              </sch:rule>
-                        </sch:pattern>
-                  </xsd:appinfo>
-            </xsd:annotation>
-            <xsd:complexType>
-                  <xsd:complexContent>
-                        <xsd:extension base="oval-def:TestType">
-                              <xsd:sequence>
-                                    <xsd:element name="object" type="oval-def:ObjectRefType"/>
-                                    <xsd:element name="state" type="oval-def:StateRefType" minOccurs="0" maxOccurs="unbounded"/>
-                              </xsd:sequence>
-                        </xsd:extension>
-                  </xsd:complexContent>
-            </xsd:complexType>
-      </xsd:element>
-      <xsd:element name="pwpolicy59_object" substitutionGroup="oval-def:object">
-            <xsd:annotation>
-                  <xsd:documentation>The pwpolicy59_object element is used by a pwpolicy59_test to define the object to be evaluated. Each object extends the standard ObjectType as defined in the oval-definitions-schema and one should refer to the ObjectType description for more information. The common set element allows complex objects to be created using filters and set logic. Again, please refer to the description of the set element in the oval-definitions-schema.</xsd:documentation>
-                  <xsd:appinfo>
-                        <sch:pattern id="macos-def_pwpolicy59_object_verify_filter_state">
-                              <sch:rule context="macos-def:pwpolicy59_object//oval-def:filter">
-                                    <sch:let name="parent_object" value="ancestor::macos-def:pwpolicy59_object"/>
-                                    <sch:let name="parent_object_id" value="$parent_object/@id"/>
-                                    <sch:let name="state_ref" value="."/>
-                                    <sch:let name="reffed_state" value="ancestor::oval-def:oval_definitions/oval-def:states/*[@id=$state_ref]"/>
-                                    <sch:let name="state_name" value="local-name($reffed_state)"/>
-                                    <sch:let name="state_namespace" value="namespace-uri($reffed_state)"/>
-                                    <sch:assert test="(($state_namespace='http://oval.mitre.org/XMLSchema/oval-definitions-5#macos') and ($state_name='pwpolicy59_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
-                              </sch:rule>
-                        </sch:pattern>
-                  </xsd:appinfo>
-            </xsd:annotation>
-            <xsd:complexType>
-                  <xsd:complexContent>
-                        <xsd:extension base="oval-def:ObjectType">
-                              <xsd:sequence>
-                                    <xsd:choice>
-                                          <xsd:element ref="oval-def:set"/>
-                                          <xsd:sequence>
-                                                <xsd:element name="target_user" type="oval-def:EntityObjectStringType" nillable="true">
-                                                      <xsd:annotation>
-                                                            <xsd:documentation>The target_user element specifies the user whose password policy information should be collected. If an operation other than equals is specified, the users on the system should be enumerated and the 'pwpolicy' command should be issued for each user that matches the target_user element. If the xsi:nil attribute is set to true, the global policy should be retrieved.</xsd:documentation>
-                                                      </xsd:annotation>
-                                                </xsd:element>
-                                                <xsd:element name="username" type="oval-def:EntityObjectStringType" nillable="true">
-                                                      <xsd:annotation>
-                                                            <xsd:documentation>The username element specifies the username of the authenticator. If the xsi:nil attribute is set to true, authentication to the directory node will not be performed (i.e. the '-a' and '-p' command line options will not be specified when issuing the 'pwpolicy' command) and the xsi:nil attribute of the userpass element should also be set to true.</xsd:documentation>
-                                                            <xsd:appinfo>
-                                                                  <sch:pattern id="macos-def_pwp59objusername">
-                                                                        <sch:rule context="macos-def:pwpolicy59_object/macos-def:username">
-                                                                              <sch:assert test="not((@xsi:nil='1' or @xsi:nil='true')) or ../macos-def:userpass/@xsi:nil='true' or ../macos-def:userpass/@xsi:nil='1'"><sch:value-of select="../@id"/> - userpass entity must be nil when username entity is nil</sch:assert>
-                                                                        </sch:rule>
-                                                                  </sch:pattern>
-                                                            </xsd:appinfo>
-                                                      </xsd:annotation>
-                                                </xsd:element>
-                                                <xsd:element name="userpass" type="oval-def:EntityObjectStringType" nillable="true">
-                                                      <xsd:annotation>
-                                                            <xsd:documentation>The userpass element specifies the password of the authenticator as specified by the username element. If the xsi:nil attribute is set to true, authentication to the directory node will not be performed (i.e. the '-a' and '-p' command line options will not be specified when issuing the 'pwpolicy' command) and the xsi:nil attribute of the username element should also be set to true.</xsd:documentation>
-                                                            <xsd:appinfo>
-                                                                  <sch:pattern id="macos-def_pwp59objuserpass">
-                                                                        <sch:rule context="macos-def:pwpolicy59_object/macos-def:userpass">
-                                                                              <sch:assert test="not(@operation) or @operation='equals'"><sch:value-of select="../@id"/> - operation attribute for the userpass entity of a pwpolicy59_object should be 'equals', note that this overrules the general operation attribute validation (i.e. follow this one)</sch:assert>
-                                                                              <sch:assert test="not((@xsi:nil='1' or @xsi:nil='true')) or ../macos-def:username/@xsi:nil='true' or ../macos-def:username/@xsi:nil='1'"><sch:value-of select="../@id"/> - username entity must be nil when userpass entity is nil</sch:assert>
-                                                                        </sch:rule>
-                                                                  </sch:pattern>
-                                                            </xsd:appinfo>
-                                                      </xsd:annotation>
-                                                </xsd:element>
-                                                <xsd:element name="directory_node" type="oval-def:EntityObjectStringType" nillable="true">
-                                                      <xsd:annotation>
-                                                            <xsd:documentation>The directory_node element specifies the directory node that you would like to retrieve the password policy information from. If the xsi:nil attribute is set to true, the default directory node is used (i.e. the '-n' command line option will not be specified when issuing the 'pwpolicy' command).</xsd:documentation>
-                                                            <xsd:appinfo>
-                                                                  <sch:pattern id="macos-def_pwp59dirnode">
-                                                                        <sch:rule context="macos-def:pwpolicy59_object/macos-def:directory_node">
-                                                                              <sch:assert test="not(@operation) or @operation='equals'"><sch:value-of select="../@id"/> - operation attribute for the directory_node entity of a pwpolicy59_object should be 'equals', note that this overrules the general operation attribute validation (i.e. follow this one)</sch:assert>
-                                                                        </sch:rule>
-                                                                  </sch:pattern>
-                                                            </xsd:appinfo>
-                                                      </xsd:annotation>
-                                                </xsd:element>
-                                                <xsd:element ref="oval-def:filter" minOccurs="0" maxOccurs="unbounded"/>
-                                          </xsd:sequence>
-                                    </xsd:choice>
-                              </xsd:sequence>
-                        </xsd:extension>
-                  </xsd:complexContent>
-            </xsd:complexType>
-      </xsd:element>
-      <xsd:element name="pwpolicy59_state" substitutionGroup="oval-def:state">
-            <xsd:annotation>
-                  <xsd:documentation>The pwpolicy59_state element defines the different information that can be used to evaluate the password policy for the target user in the specified directory node. Please refer to the individual elements in the schema for more details about what each represents.</xsd:documentation>
-            </xsd:annotation>
-            <xsd:complexType>
-                  <xsd:complexContent>
-                        <xsd:extension base="oval-def:StateType">
-                              <xsd:sequence>
-                                    <xsd:element name="target_user" type="oval-def:EntityStateStringType" minOccurs="0" maxOccurs="1">
-                                          <xsd:annotation>
-                                                <xsd:documentation>The target_user element specifies the user whose password policy information should be collected.</xsd:documentation>
-                                          </xsd:annotation>
-                                    </xsd:element>
-                                    <xsd:element name="username" type="oval-def:EntityStateStringType" minOccurs="0" maxOccurs="1">
-                                          <xsd:annotation>
-                                                <xsd:documentation>The username element specifies the username of the authenticator.</xsd:documentation>
-                                          </xsd:annotation>
-                                    </xsd:element>
-                                    <xsd:element name="userpass" type="oval-def:EntityStateStringType" minOccurs="0" maxOccurs="1">
-                                          <xsd:annotation>
-                                                <xsd:documentation>The userpass element specifies the password of the authenticator as specified by the username element.</xsd:documentation>
-                                          </xsd:annotation>
-                                    </xsd:element>
-                                    <xsd:element name="directory_node" type="oval-def:EntityStateStringType" minOccurs="0" maxOccurs="1">
-                                          <xsd:annotation>
-                                                <xsd:documentation>The directory_node element specifies the directory node that you would like to retrieve the password policy information from.</xsd:documentation>
-                                          </xsd:annotation>
-                                    </xsd:element>
-                                    <xsd:element name="maxChars" type="oval-def:EntityStateIntType" minOccurs="0" maxOccurs="1">
-                                          <xsd:annotation>
-                                                <xsd:documentation>Maximum number of characters allowed in a password.</xsd:documentation>
-                                          </xsd:annotation>
-                                    </xsd:element>
-                                    <xsd:element name="maxFailedLoginAttempts" type="oval-def:EntityStateIntType" minOccurs="0" maxOccurs="1">
-                                          <xsd:annotation>
-                                                <xsd:documentation>Maximum number of failed logins before the account is locked.</xsd:documentation>
-                                          </xsd:annotation>
-                                    </xsd:element>
-                                    <xsd:element name="minChars" type="oval-def:EntityStateIntType" minOccurs="0" maxOccurs="1">
-                                          <xsd:annotation>
-                                                <xsd:documentation>Minimum number of characters allowed in a password.</xsd:documentation>
-                                          </xsd:annotation>
-                                    </xsd:element>
-                                    <xsd:element name="passwordCannotBeName" type="oval-def:EntityStateBoolType" minOccurs="0" maxOccurs="1">
-                                          <xsd:annotation>
-                                                <xsd:documentation>Defines if the password is allowed to be the same as the username or not.</xsd:documentation>
-                                          </xsd:annotation>
-                                    </xsd:element>
-                                    <xsd:element name="requiresAlpha" type="oval-def:EntityStateBoolType" minOccurs="0" maxOccurs="1">
-                                          <xsd:annotation>
-                                                <xsd:documentation>Defines if the password must contain an alphabetical character or not.</xsd:documentation>
-                                          </xsd:annotation>
-                                    </xsd:element>
-                                    <xsd:element name="requiresNumeric" type="oval-def:EntityStateBoolType" minOccurs="0" maxOccurs="1">
-                                          <xsd:annotation>
-                                                <xsd:documentation>Defines if the password must contain an numeric character or not.</xsd:documentation>
-                                          </xsd:annotation>
-                                    </xsd:element>
-                                    <xsd:element name="maxMinutesUntilChangePassword" type="oval-def:EntityStateIntType" minOccurs="0" maxOccurs="1">
-                                          <xsd:annotation>
-                                                <xsd:documentation>Maximum number of minutes until the password must be changed.</xsd:documentation>
-                                          </xsd:annotation>
-                                    </xsd:element>
-                                    <xsd:element name="minMinutesUntilChangePassword" type="oval-def:EntityStateIntType" minOccurs="0" maxOccurs="1">
-                                          <xsd:annotation>
-                                                <xsd:documentation>Minimum number of minutes between password changes.</xsd:documentation>
-                                          </xsd:annotation>
-                                    </xsd:element>
-                                    <xsd:element name="requiresMixedCase" type="oval-def:EntityStateBoolType" minOccurs="0" maxOccurs="1">
-                                          <xsd:annotation>
-                                                <xsd:documentation>Defines if the password must contain upper and lower case characters or not.</xsd:documentation>
-                                          </xsd:annotation>
-                                    </xsd:element>
-                                    <xsd:element name="requiresSymbol" type="oval-def:EntityStateBoolType" minOccurs="0" maxOccurs="1">
-                                          <xsd:annotation>
-                                                <xsd:documentation>Defines if the password must contain a symbol character or not.</xsd:documentation>
-                                          </xsd:annotation>
-                                    </xsd:element>
-                                    <xsd:element name="minutesUntilFailedLoginReset" type="oval-def:EntityStateIntType" minOccurs="0" maxOccurs="1">
-                                          <xsd:annotation>
-                                                <xsd:documentation>Number of minutes after login has been disabled due to too many failed login attempts to wait before reenabling login.</xsd:documentation>
-                                          </xsd:annotation>
-                                    </xsd:element>
-                                    <xsd:element name="usingHistory" type="oval-def:EntityStateIntType" minOccurs="0" maxOccurs="1">
-                                          <xsd:annotation>
-                                                <xsd:documentation>0 = user can reuse the current pass-word, 1 = user cannot reuse the current password, 2-15 = user cannot reuse the last n passwords.</xsd:documentation>
-                                          </xsd:annotation>
-                                    </xsd:element>
-                                    <xsd:element name="canModifyPasswordforSelf" type="oval-def:EntityStateBoolType" minOccurs="0" maxOccurs="1">
-                                          <xsd:annotation>
-                                                <xsd:documentation>If true, the user can change the password.</xsd:documentation>
-                                          </xsd:annotation>
-                                    </xsd:element>
-                                    <xsd:element name="usingExpirationDate" type="oval-def:EntityStateBoolType" minOccurs="0" maxOccurs="1">
-                                          <xsd:annotation>
-                                                <xsd:documentation>If true, user is required to change password on the date in expirationDateGMT</xsd:documentation>
-                                          </xsd:annotation>
-                                    </xsd:element>
-                                    <xsd:element name="usingHardExpirationDate" type="oval-def:EntityStateBoolType" minOccurs="0" maxOccurs="1">
-                                          <xsd:annotation>
-                                                <xsd:documentation>If true, user's account is disabled on the date in hardExpireDateGMT</xsd:documentation>
-                                          </xsd:annotation>
-                                    </xsd:element>
-                                    <xsd:element name="expirationDateGMT" type="oval-def:EntityStateStringType" minOccurs="0" maxOccurs="1">
-                                          <xsd:annotation>
-                                                <xsd:documentation>Date for the password to expire, format is: mm/dd/yyyy. NOTE: The pwpolicy command returns the year as a two digit value, but OVAL uses four digit years; the pwpolicy value is converted to an OVAL compatible value.</xsd:documentation>
-                                          </xsd:annotation>
-                                    </xsd:element>
-                                    <xsd:element name="hardExpireDateGMT" type="oval-def:EntityStateStringType" minOccurs="0" maxOccurs="1">
-                                          <xsd:annotation>
-                                                <xsd:documentation>Date for the user's account to be disabled, format is: mm/dd/yyyy. NOTE: The pwpolicy command returns the year as a two digit value, but OVAL uses four digit years; the pwpolicy value is converted to an OVAL compatible value.</xsd:documentation>
-                                          </xsd:annotation>
-                                    </xsd:element>
-                                    <xsd:element name="maxMinutesUntilDisabled" type="oval-def:EntityStateIntType" minOccurs="0" maxOccurs="1">
-                                          <xsd:annotation>
-                                                <xsd:documentation>User's account is disabled after this interval</xsd:documentation>
-                                          </xsd:annotation>
-                                    </xsd:element>
-                                    <xsd:element name="maxMinutesOfNonUse" type="oval-def:EntityStateIntType" minOccurs="0" maxOccurs="1">
-                                          <xsd:annotation>
-                                                <xsd:documentation>User's account is disabled if it is not accessed by this interval</xsd:documentation>
-                                          </xsd:annotation>
-                                    </xsd:element>
-                                    <xsd:element name="newPasswordRequired" type="oval-def:EntityStateBoolType" minOccurs="0" maxOccurs="1">
-                                          <xsd:annotation>
-                                                <xsd:documentation>If true, the user will be prompted for a new password at the next authentication.</xsd:documentation>
-                                          </xsd:annotation>
-                                    </xsd:element>
-                                    <xsd:element name="notGuessablePattern" type="oval-def:EntityStateBoolType" minOccurs="0" maxOccurs="1">
-                                          <xsd:annotation>
-                                                <xsd:documentation/>
-                                          </xsd:annotation>
-                                    </xsd:element>
-                              </xsd:sequence>
-                        </xsd:extension>
-                  </xsd:complexContent>
-            </xsd:complexType>
-      </xsd:element>
-      <!-- =============================================================================== -->
       <!-- ============================ PWPOLICY TEST (5.12) ============================= -->
       <!-- =============================================================================== -->
       <xsd:element name="pwpolicy512_test" substitutionGroup="oval-def:test">
@@ -2998,7 +1411,7 @@
                               <oval:test>pwpolicy512_test</oval:test>
                               <oval:object>pwpolicy512_object</oval:object>
                               <oval:state>pwpolicy512_state</oval:state>
-                              <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#macos">pwpolicy512_item</oval:item>
+                              <oval:item target_namespace="urn:oval:v6:system-characteristics:macos">pwpolicy512_item</oval:item>
                         </oval:element_mapping>
                   </xsd:appinfo>
                   <xsd:appinfo>
@@ -3035,7 +1448,7 @@
                                     <sch:let name="reffed_state" value="ancestor::oval-def:oval_definitions/oval-def:states/*[@id=$state_ref]"/>
                                     <sch:let name="state_name" value="local-name($reffed_state)"/>
                                     <sch:let name="state_namespace" value="namespace-uri($reffed_state)"/>
-                                    <sch:assert test="(($state_namespace='http://oval.mitre.org/XMLSchema/oval-definitions-5#macos') and ($state_name='pwpolicy512_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
+                                    <sch:assert test="(($state_namespace='urn:oval:v6:definitions:macos') and ($state_name='pwpolicy512_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
                               </sch:rule>
                         </sch:pattern>
                   </xsd:appinfo>
@@ -3153,163 +1566,6 @@
             </xsd:complexType>
       </xsd:element>
       <!-- =============================================================================== -->
-      <!-- ===============================  RLIMIT TEST  ================================= -->
-      <!-- =============================================================================== -->
-      <xsd:element name="rlimit_test" substitutionGroup="oval-def:test">
-            <xsd:annotation>
-                  <xsd:documentation>The rlimit_test is used to check system resource limits for launchd. It is a singleton object. It extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information. The state element specifies the system setup elements to check.</xsd:documentation>
-                  <xsd:appinfo>
-                        <oval:element_mapping>
-                              <oval:test>rlimit_test</oval:test>
-                              <oval:object>rlimit_object</oval:object>
-                              <oval:state>rlimit_state</oval:state>
-                              <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#macos">rlimit_item</oval:item>
-                        </oval:element_mapping>
-                  </xsd:appinfo>
-					<xsd:appinfo>
-						<oval:deprecated_info>
-							<oval:version>5.12</oval:version>
-							<oval:comment>This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.</oval:comment>
-						</oval:deprecated_info>
-					</xsd:appinfo>
-                  <xsd:appinfo>
-                        <sch:pattern id="macos-def_rlimittst">
-                              <sch:rule context="macos-def:rlimit_test/macos-def:object">
-                                    <sch:assert test="@object_ref=ancestor::oval-def:oval_definitions/oval-def:objects/macos-def:rlimit_object/@id"><sch:value-of select="../@id"/> - the object child element of a rlimit_test must reference an rlimit_object</sch:assert>
-                              </sch:rule>
-                              <sch:rule context="macos-def:rlimit_test/macos-def:state">
-                                    <sch:assert test="@state_ref=ancestor::oval-def:oval_definitions/oval-def:states/macos-def:rlimit_state/@id"><sch:value-of select="../@id"/> - the state child element of a rlimit_test must reference an rlimit_state</sch:assert>
-                              </sch:rule>
-                        </sch:pattern>
-                  </xsd:appinfo>
-            </xsd:annotation>
-            <xsd:complexType>
-                  <xsd:complexContent>
-                        <xsd:extension base="oval-def:TestType">
-                              <xsd:sequence>
-                                    <xsd:element name="object" type="oval-def:ObjectRefType"/>
-                                    <xsd:element name="state" type="oval-def:StateRefType" minOccurs="0" maxOccurs="unbounded"/>
-                              </xsd:sequence>
-                        </xsd:extension>
-                  </xsd:complexContent>
-            </xsd:complexType>
-      </xsd:element>
-      <xsd:element name="rlimit_object" substitutionGroup="oval-def:object">
-            <xsd:annotation>
-                  <xsd:documentation>The rlimit_object is a singleton used to access resource limit information.</xsd:documentation>
-            </xsd:annotation>
-            <xsd:complexType>
-                  <xsd:complexContent>
-                        <xsd:extension base="oval-def:ObjectType"/>
-                  </xsd:complexContent>
-            </xsd:complexType>
-      </xsd:element>
-      <xsd:element name="rlimit_state" substitutionGroup="oval-def:state">
-            <xsd:annotation>
-                  <xsd:documentation>The rlimit_state element makes it possible to make assertions about the resource limits for launchd.</xsd:documentation>
-                  <xsd:documentation>A resource limit is specified as a soft (current) limit and a hard (max) limit. When a soft limit is exceeded a process may receive a signal (for example, if the cpu time or file size is exceeded), but it will be allowed to con-tinue continue tinue execution until it reaches the hard limit (or modifies its resource limit).</xsd:documentation>
-                  <xsd:documentation>For any 'unlimited' resource, the entity will have the status of 'does not exist'.</xsd:documentation>
-            </xsd:annotation>
-            <xsd:complexType>
-                  <xsd:complexContent>
-                        <xsd:extension base="oval-def:StateType">
-                              <xsd:sequence>
-                                    <xsd:element name="cpu_current" type="oval-def:EntityStateIntType" minOccurs="0" maxOccurs="1">
-                                          <xsd:annotation>
-                                                <xsd:documentation>The maximum amount of cpu time (in seconds) to be used by each process.</xsd:documentation>
-                                          </xsd:annotation>
-                                    </xsd:element>
-                                    <xsd:element name="cpu_max" type="oval-def:EntityStateIntType" minOccurs="0" maxOccurs="1">
-                                          <xsd:annotation>
-                                                <xsd:documentation>cpu hard limit.</xsd:documentation>
-                                          </xsd:annotation>
-                                    </xsd:element>
-                                    <xsd:element name="filesize_current" type="oval-def:EntityStateIntType" minOccurs="0" maxOccurs="1">
-                                          <xsd:annotation>
-                                                <xsd:documentation>The largest size (in bytes) file that may be created.</xsd:documentation>
-                                          </xsd:annotation>
-                                    </xsd:element>
-                                    <xsd:element name="filesize_max" type="oval-def:EntityStateIntType" minOccurs="0" maxOccurs="1">
-                                          <xsd:annotation>
-                                                <xsd:documentation>filesize hard limit.</xsd:documentation>
-                                          </xsd:annotation>
-                                    </xsd:element>
-                                    <xsd:element name="data_current" type="oval-def:EntityStateIntType" minOccurs="0" maxOccurs="1">
-                                          <xsd:annotation>
-                                                <xsd:documentation>The maximum size (in bytes) of the data segment for a process; this defines how far a program may extend its break with the sbrk(2) system call.</xsd:documentation>
-                                          </xsd:annotation>
-                                    </xsd:element>
-                                    <xsd:element name="data_max" type="oval-def:EntityStateIntType" minOccurs="0" maxOccurs="1">
-                                          <xsd:annotation>
-                                                <xsd:documentation>data hard limit.</xsd:documentation>
-                                          </xsd:annotation>
-                                    </xsd:element>
-                                    <xsd:element name="stack_current" type="oval-def:EntityStateIntType" minOccurs="0" maxOccurs="1">
-                                          <xsd:annotation>
-                                                <xsd:documentation>The maximum size (in bytes) of the stack segment for a process; this defines how far a program's stack segment may be extended. Stack extension is performed automatically by the system.</xsd:documentation>
-                                          </xsd:annotation>
-                                    </xsd:element>
-                                    <xsd:element name="stack_max" type="oval-def:EntityStateIntType" minOccurs="0" maxOccurs="1">
-                                          <xsd:annotation>
-                                                <xsd:documentation>stack hard limit.</xsd:documentation>
-                                          </xsd:annotation>
-                                    </xsd:element>
-                                    <xsd:element name="core_current" type="oval-def:EntityStateIntType" minOccurs="0" maxOccurs="1">
-                                          <xsd:annotation>
-                                                <xsd:documentation>The largest size (in bytes) core file that may be created.</xsd:documentation>
-                                          </xsd:annotation>
-                                    </xsd:element>
-                                    <xsd:element name="core_max" type="oval-def:EntityStateIntType" minOccurs="0" maxOccurs="1">
-                                          <xsd:annotation>
-                                                <xsd:documentation>core hard limit.</xsd:documentation>
-                                          </xsd:annotation>
-                                    </xsd:element>
-                                    <xsd:element name="rss_current" type="oval-def:EntityStateIntType" minOccurs="0" maxOccurs="1">
-                                          <xsd:annotation>
-                                                <xsd:documentation>The maximum size (in bytes) to which a process's resident set size may grow. This imposes a limit on the amount of physical memory to be given to a process; if memory is tight, the system will prefer to take memory from processes that are exceeding their declared resident set size.</xsd:documentation>
-                                          </xsd:annotation>
-                                    </xsd:element>
-                                    <xsd:element name="rss_max" type="oval-def:EntityStateIntType" minOccurs="0" maxOccurs="1">
-                                          <xsd:annotation>
-                                                <xsd:documentation>rss hard limit.</xsd:documentation>
-                                          </xsd:annotation>
-                                    </xsd:element>
-                                    <xsd:element name="memlock_current" type="oval-def:EntityStateIntType" minOccurs="0" maxOccurs="1">
-                                          <xsd:annotation>
-                                                <xsd:documentation>The maximum size (in bytes) which a process may lock into memory using the mlock(2) function.</xsd:documentation>
-                                          </xsd:annotation>
-                                    </xsd:element>
-                                    <xsd:element name="memlock_max" type="oval-def:EntityStateIntType" minOccurs="0" maxOccurs="1">
-                                          <xsd:annotation>
-                                                <xsd:documentation>memlock hard limit.</xsd:documentation>
-                                          </xsd:annotation>
-                                    </xsd:element>
-                                    <xsd:element name="maxproc_current" type="oval-def:EntityStateIntType" minOccurs="0" maxOccurs="1">
-                                          <xsd:annotation>
-                                                <xsd:documentation>The maximum number of simultaneous processes for this user id.</xsd:documentation>
-                                          </xsd:annotation>
-                                    </xsd:element>
-                                    <xsd:element name="maxproc_max" type="oval-def:EntityStateIntType" minOccurs="0" maxOccurs="1">
-                                          <xsd:annotation>
-                                                <xsd:documentation>maxproc hard limit.</xsd:documentation>
-                                          </xsd:annotation>
-                                    </xsd:element>
-                                    <xsd:element name="maxfiles_current" type="oval-def:EntityStateIntType" minOccurs="0" maxOccurs="1">
-                                          <xsd:annotation>
-                                                <xsd:documentation>The maximum number of open files for this process.</xsd:documentation>
-                                          </xsd:annotation>
-                                    </xsd:element>
-                                    <xsd:element name="maxfiles_max" type="oval-def:EntityStateIntType" minOccurs="0" maxOccurs="1">
-                                          <xsd:annotation>
-                                                <xsd:documentation>maxfiles hard limit.</xsd:documentation>
-                                          </xsd:annotation>
-                                    </xsd:element>
-                              </xsd:sequence>
-                        </xsd:extension>
-                  </xsd:complexContent>
-            </xsd:complexType>
-      </xsd:element>
-      <!-- =============================================================================== -->
       <!-- =======================  SOFTWAREUPDATE TEST  ================================= -->
       <!-- =============================================================================== -->
       <xsd:element name="softwareupdate_test" substitutionGroup="oval-def:test">
@@ -3320,7 +1576,7 @@
                               <oval:test>softwareupdate_test</oval:test>
                               <oval:object>softwareupdate_object</oval:object>
                               <oval:state>softwareupdate_state</oval:state>
-                              <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#macos">softwareupdate_item</oval:item>
+                              <oval:item target_namespace="urn:oval:v6:system-characteristics:macos">softwareupdate_item</oval:item>
                         </oval:element_mapping>
                   </xsd:appinfo>
                   <xsd:appinfo>
@@ -3389,7 +1645,7 @@
                               <oval:test>systemprofiler_test</oval:test>
                               <oval:object>systemprofiler_object</oval:object>
                               <oval:state>systemprofiler_state</oval:state>
-                              <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#macos">systemprofiler_item</oval:item>
+                              <oval:item target_namespace="urn:oval:v6:system-characteristics:macos">systemprofiler_item</oval:item>
                         </oval:element_mapping>
                   </xsd:appinfo>
                   <xsd:appinfo>
@@ -3427,7 +1683,7 @@
                                     <sch:let name="reffed_state" value="ancestor::oval-def:oval_definitions/oval-def:states/*[@id=$state_ref]"/>
                                     <sch:let name="state_name" value="local-name($reffed_state)"/>
                                     <sch:let name="state_namespace" value="namespace-uri($reffed_state)"/>
-                                    <sch:assert test="(($state_namespace='http://oval.mitre.org/XMLSchema/oval-definitions-5#macos') and ($state_name='systemprofiler_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
+                                    <sch:assert test="(($state_namespace='urn:oval:v6:definitions:macos') and ($state_name='systemprofiler_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
                               </sch:rule>
                         </sch:pattern>
                   </xsd:appinfo>
@@ -3503,7 +1759,7 @@
                               <oval:test>systemsetup_test</oval:test>
                               <oval:object>systemsetup_object</oval:object>
                               <oval:state>systemsetup_state</oval:state>
-                              <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#macos">systemsetup_item</oval:item>
+                              <oval:item target_namespace="urn:oval:v6:system-characteristics:macos">systemsetup_item</oval:item>
                         </oval:element_mapping>
                   </xsd:appinfo>
                   <xsd:appinfo>
@@ -3668,62 +1924,6 @@
                         <xsd:enumeration value="same">
                               <xsd:annotation>
                                     <xsd:documentation>The actual permission is the same as the expected permission.</xsd:documentation>
-                              </xsd:annotation>
-                        </xsd:enumeration>
-                        <xsd:enumeration value="">
-                              <xsd:annotation>
-                                    <xsd:documentation>The empty string value is permitted here to allow for empty elements associated with variable references.</xsd:documentation>
-                              </xsd:annotation>
-                        </xsd:enumeration>
-                  </xsd:restriction>
-            </xsd:simpleContent>
-      </xsd:complexType>
-      <xsd:complexType name="EntityStatePlistTypeType">
-            <xsd:annotation>
-                  <xsd:documentation>The EntityStatePlistTypeType complex type restricts a string value to the seven values CFString, CFNumber, CFBoolean, CFDate, CFData, CFArray, and CFDictionary that specify the datatype of the value associated with a property list preference key. The empty string is also allowed to support empty elements associated with variable references. Note that when using pattern matches and variables care must be taken to ensure that the regular expression and variable values align with the enumerated values.</xsd:documentation>
-                  <xsd:appinfo>
-                        <oval:deprecated_info>
-                              <oval:version>5.11.2:1.0</oval:version>
-                              <oval:reason>Used only by the deprecated plist_state and plist510_state.</oval:reason>
-                              <oval:comment>This enumeration has been deprecated and may be removed in a future version of the language.</oval:comment>
-                        </oval:deprecated_info>
-                  </xsd:appinfo>
-            </xsd:annotation>
-            <xsd:simpleContent>
-                  <xsd:restriction base="oval-def:EntityStateStringType">
-                        <xsd:enumeration value="CFString">
-                              <xsd:annotation>
-                                    <xsd:documentation>The CFString type is used to describe a preference key that has a string value. The OVAL string datatype should be used to represent CFString values.</xsd:documentation>
-                              </xsd:annotation>
-                        </xsd:enumeration>
-                        <xsd:enumeration value="CFNumber">
-                              <xsd:annotation>
-                                    <xsd:documentation>The CFNumber type is used to describe a preference key that has a integer or float value. The OVAL int and float datatypes should be used, as appropriate, to represent CFNumber values.</xsd:documentation>
-                              </xsd:annotation>
-                        </xsd:enumeration>
-                        <xsd:enumeration value="CFBoolean">
-                              <xsd:annotation>
-                                    <xsd:documentation>The CFBoolean type is used to describe a preference key that has a boolean value. The OVAL boolean datatype should be used to represent CFBoolean values.</xsd:documentation>
-                              </xsd:annotation>
-                        </xsd:enumeration>
-                        <xsd:enumeration value="CFDate">
-                              <xsd:annotation>
-                                    <xsd:documentation>The CFDate type is used to describe a preference key that has a date value. The OVAL string datatype should be used to represent CFDate values.</xsd:documentation>
-                              </xsd:annotation>
-                        </xsd:enumeration>
-                        <xsd:enumeration value="CFData">
-                              <xsd:annotation>
-                                    <xsd:documentation>The CFData type is used to describe a preference that has a base64-encoded binary value. The OVAL string datatype should be used to represent CFData values.</xsd:documentation>
-                              </xsd:annotation>
-                        </xsd:enumeration>
-                        <xsd:enumeration value="CFArray">
-                              <xsd:annotation>
-                                    <xsd:documentation>The CFArray type is used to describe a preference key that has a collection of values. This is represented as multiple value entities.</xsd:documentation>
-                              </xsd:annotation>
-                        </xsd:enumeration>
-                        <xsd:enumeration value="CFDictionary">
-                              <xsd:annotation>
-                                    <xsd:documentation>The CFDictionary type is used to describe a preference key that has a collection of key-value pairs. Note that the collection of CFDictionary values is not supported. If an attempt is made to collect a CFDictionary value, an error should be reported.</xsd:documentation>
                               </xsd:annotation>
                         </xsd:enumeration>
                         <xsd:enumeration value="">

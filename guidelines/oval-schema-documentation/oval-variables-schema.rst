@@ -1,8 +1,8 @@
 Open Vulnerability and Assessment Language: Core Variable  
 =========================================================
 * Schema: Core Variable  
-* Version: 5.12  
-* Release Date: 11/29/2024 09:00:00 AM
+* Version: 6.0  
+* Release Date: 1/24/2025 09:00:00 AM
 
 
 

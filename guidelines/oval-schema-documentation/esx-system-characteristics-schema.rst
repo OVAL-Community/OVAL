@@ -1,26 +1,43 @@
-Open Vulnerability and Assessment Language: VMware ESX server System Characteristics  
+Open Vulnerability and Assessment Language: VMware ESX System characteristics  
 =========================================================
-* Schema: VMware ESX server System Characteristics  
-* Version: 5.12  
-* Release Date: 11/29/2024 09:00:00 AM
+* Schema: VMware ESX System characteristics  
+* Version: 6.0  
+* Release Date: 1/24/2025 09:00:00 AM
 
-The following is a description of the elements, types, and attributes that compose the VMware ESX server specific system characteristic items found in Open Vulnerability and Assessment Language (OVAL). Each item is an extension of the standard test element defined in the Core Definition Schema. Through extension, each test inherits a set of elements and attributes that are shared amongst all OVAL tests. Each test is described in detail and should provide the information necessary to understand what each element and attribute represents. This document is intended for developers and assumes some familiarity with XML. A high level description of the interaction between the different tests and their relationship to the Core Definition Schema is not outlined here.
+The following is a proposal for the schemas for VMware ESX that will support assessment of ESX hosts and Virtual Machines
 
-This schema was originally developed by Yuzheng Zhou and Todd Dolinsky at Hewlett-Packard. The OVAL Schema is maintained by the OVAL Community. For more information, including how to get involved in the project and how to submit change requests, please visit the OVAL website at https://github.com/OVAL-Community/.
+The OVAL Schema is maintained by the OVAL Community. For more information, including how to get involved in the project and how to submit change requests, please visit the OVAL website at https://github.com/OVAL-Community/.
 
 Item Listing  
 ---------------------------------------------------------
-* :ref:`patch_item`  
-* :ref:`version_item`  
-* :ref:`visdkmanagedobject_item`  
+* :ref:`host_acceptancelevel_item`  
+* :ref:`host_vib_item`  
+* :ref:`host_module_item`  
+* :ref:`host_coredump_item`  
+* :ref:`host_webserverssl_item`  
+* :ref:`host_authentication_item`  
+* :ref:`host_account_item`  
+* :ref:`host_advancedsetting_item`  
+* :ref:`host_service_item`  
+* :ref:`host_ntpserver_item`  
+* :ref:`host_lockdown_item`  
+* :ref:`host_firewallexception_item`  
+* :ref:`host_busadapter_item`  
+* :ref:`host_vswitchpolicy_item`  
+* :ref:`vm_advancedsetting_item`  
+* :ref:`vm_device_item`  
+* :ref:`vm_harddiskdevice_item`  
+* :ref:`host_portgroup_item`  
+* :ref:`vds_item`  
+* :ref:`vds_portgroup_item`  
   
 ______________
   
-.. _patch_item:  
+.. _host_acceptancelevel_item:  
   
-< patch_item >  
+< host_acceptancelevel_item >  
 ---------------------------------------------------------
-Installation information about a specific patch in the VMware ESX server. This information can be retrieved by the "esxupdate query | grep ESX-xxxxxxx" command.
+
 
 **Extends:** oval-sc:ItemType
 
@@ -32,83 +49,641 @@ Child Elements
     * - Child Elements  
       - Type (MinOccurs..MaxOccurs)  
       - Desc.  
-    * - patch_number (Deprecated)  
+    * - acceptance_level  
+      - esx-sc:EntityItemAcceptanceLevelType (0..1)  
+      - The software acceptance level for the associated ESXi host.  
+  
+______________
+  
+.. _host_vib_item:  
+  
+< host_vib_item >  
+---------------------------------------------------------
+
+
+**Extends:** oval-sc:ItemType
+
+Child Elements  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. list-table:: Elements  
+    :header-rows: 1  
+  
+    * - Child Elements  
+      - Type (MinOccurs..MaxOccurs)  
+      - Desc.  
+    * - vib_name  
       - oval-sc:EntityItemStringType (0..1)  
-      - This is the patch number which identifies the patch being checked in current VMware ESX server. Many of the security bulletins for VMWARE ESX Server contain non-numerical characters in the patch number, therefore this entity has a datatype of string.  
-    * - patch_name  
+      - The VIB name  
+    * - acceptance_level  
+      - esx-sc:EntityItemAcceptanceLevelType (0..1)  
+      - The software acceptance level for the associated VIB  
+    * - creation_date  
       - oval-sc:EntityItemStringType (0..1)  
-      - The patch_name entity indetifies the name of the patch. For example: ESX-200603 or ESX350-200904401-BG. The value of this entity should correspond to the values returned under the "name" column of the "esxupdate query" command.  
-    * - knowledge_base_id  
-      - oval-sc:EntityItemIntType (0..1)  
-      - The knowledge_base_id entity specifies the knowledge base article identifier number associated with a given patch from ESX versions 3.0.2 and earlier. It is comprised of the numerical string at the end of the patch name. For example, the patch ESX-200603 would have a knowledge base identifier of 200603. For patches from ESX version 3.0.3 and later, the patch name uses a different format and does not include the knowledge base id. This entity should be marked with a status of 'does not exist' in those cases.  
-    * - bundle_id  
-      - oval-sc:EntityItemIntType (0..1)  
-      - The bundle_id entity specifies the unique ID for the patch. Note that for version 3.0.3 and version 3.5 this is comprised of the year and month the bundle was released and a 3-digit unique ID. It is in the format YYYYMM###. For example, the first patch released in January 2008 might have a BundleID of 200801001. For patches from ESX version 3.0.2 and earlier, this entity should be marked with a status of 'does not exist' since patch name has a different format and doesn't include a bundle id.  
-    * - classification  
-      - esx-sc:EntityItemClassificationType (0..1)  
-      - The classification entity specifies the type of patch. It can be one of: B - bug, U - update, S - security, or R - roll-up. For patches from ESX version 3.0.2 and earlier, this entity should be marked with a status of 'does not exist' since patch name has a different format and doesn't include a classification.  
-    * - support_level  
-      - esx-sc:EntityItemSupportLevelType (0..1)  
-      - The support_level entity specifies the support level of the patch. If can be one of: G - GA patch, H - hot patch, D - debugging patch, or C - custom patch. For patches from ESX version 3.0.2 and earlier, this entity should be marked with a status of 'does not exist' since patch name has a different format and doesn't include a support level.  
-    * - status  
+      - VIB Creation Date  
+    * - vendor  
+      - oval-sc:EntityItemStringType (0..1)  
+      - VIB Vendor  
+    * - version  
+      - oval-sc:EntityItemStringType (0..1)  
+      - VIB Version  
+  
+______________
+  
+.. _host_module_item:  
+  
+< host_module_item >  
+---------------------------------------------------------
+
+
+**Extends:** oval-sc:ItemType
+
+Child Elements  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. list-table:: Elements  
+    :header-rows: 1  
+  
+    * - Child Elements  
+      - Type (MinOccurs..MaxOccurs)  
+      - Desc.  
+    * - module_name  
+      - oval-sc:EntityItemStringType (0..1)  
+      - The name of the kernel module  
+    * - license  
+      - oval-sc:EntityItemStringType (0..1)  
+      - The name of the license holder for the kernel module.  
+    * - module_file  
+      - oval-sc:EntityItemStringType (0..1)  
+      - The path to the kernel module file.  
+    * - version  
+      - oval-sc:EntityItemStringType (0..1)  
+      - The kernel module version information.  
+    * - acceptance_level  
+      - esx-sc:EntityItemAcceptanceLevelType (0..1)  
+      - The software acceptance level of the kernel module.  
+  
+______________
+  
+.. _host_coredump_item:  
+  
+< host_coredump_item >  
+---------------------------------------------------------
+
+
+**Extends:** oval-sc:ItemType
+
+Child Elements  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. list-table:: Elements  
+    :header-rows: 1  
+  
+    * - Child Elements  
+      - Type (MinOccurs..MaxOccurs)  
+      - Desc.  
+    * - enabled  
       - oval-sc:EntityItemBoolType (0..1)  
-      - This is the installtaion status of the specific patch.  
-  
-______________
-  
-.. _version_item:  
-  
-< version_item >  
----------------------------------------------------------
-Information about the release and build version of VMware ESX server. This information can be retrieved by the "vmware -v" command or by checking the /proc/vmware/version file.
-
-**Extends:** oval-sc:ItemType
-
-Child Elements  
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-.. list-table:: Elements  
-    :header-rows: 1  
-  
-    * - Child Elements  
-      - Type (MinOccurs..MaxOccurs)  
-      - Desc.  
-    * - release  
-      - oval-sc:EntityItemVersionType (0..1)  
-      - This is the release of current VMware ESX server.  
-    * - build  
-      - oval-sc:EntityItemIntType (0..1)  
-      - This is the build version of current VMware ESX server.  
-  
-______________
-  
-.. _visdkmanagedobject_item:  
-  
-< visdkmanagedobject_item >  
----------------------------------------------------------
-The visdkmanagedobject_item is used to represent information about Managed Objects in the VMware Infrastructure.
-
-**Extends:** oval-sc:ItemType
-
-Child Elements  
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-.. list-table:: Elements  
-    :header-rows: 1  
-  
-    * - Child Elements  
-      - Type (MinOccurs..MaxOccurs)  
-      - Desc.  
-    * - property  
+      - Displays whether or not the ESXi dump collector is enabled for the ESXi host  
+    * - host_vnic  
       - oval-sc:EntityItemStringType (0..1)  
-      - The property entity holds a string that represents the object path and name of a particular setting for the Managed Entity. In the VMware Infrastructure SDK, property names are case-sensitive and thus case must be correct relative to the properties in the SDK. For example, a Virtual Machine might have ethernet0.connectionType of 'bridged'.  
-    * - value  
+      - The ESXi host's configured core dump destination vnic  
+    * - network_server_ip  
+      - oval-sc:EntityItemIPAddressStringType (0..1)  
+      - The ESXi host's configured core dump destination IP  
+    * - network_server_port  
+      - oval-sc:EntityItemIntType (0..1)  
+      - The ESXi host's configured core dump destination port  
+  
+______________
+  
+.. _host_webserverssl_item:  
+  
+< host_webserverssl_item >  
+---------------------------------------------------------
+
+
+**Extends:** oval-sc:ItemType
+
+Child Elements  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. list-table:: Elements  
+    :header-rows: 1  
+  
+    * - Child Elements  
+      - Type (MinOccurs..MaxOccurs)  
+      - Desc.  
+    * - certificate_is_valid  
+      - oval-sc:EntityItemBoolType (0..1)  
+      - Whether or not the ESXi host certificate is valid for current date  
+    * - issuer  
+      - oval-sc:EntityItemStringType (0..1)  
+      - The certificate issuer  
+    * - expires  
+      - oval-sc:EntityItemStringType (0..1)  
+      - The certificate expiration date and time (formatted as a string)  
+    * - days_till_expire  
+      - oval-sc:EntityItemIntType (0..1)  
+      - The number of days before the certificate expires  
+  
+______________
+  
+.. _host_authentication_item:  
+  
+< host_authentication_item >  
+---------------------------------------------------------
+
+
+**Extends:** oval-sc:ItemType
+
+Child Elements  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. list-table:: Elements  
+    :header-rows: 1  
+  
+    * - Child Elements  
+      - Type (MinOccurs..MaxOccurs)  
+      - Desc.  
+    * - domain  
+      - oval-sc:EntityItemStringType (0..1)  
+      - The name of the domain  
+    * - domain_membership_status  
+      - esx-sc:EntityItemDomainMembershipStatusType (0..1)  
+      - The status of the ESXi host's membership in the domain  
+  
+______________
+  
+.. _host_account_item:  
+  
+< host_account_item >  
+---------------------------------------------------------
+
+
+**Extends:** oval-sc:ItemType
+
+Child Elements  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. list-table:: Elements  
+    :header-rows: 1  
+  
+    * - Child Elements  
+      - Type (MinOccurs..MaxOccurs)  
+      - Desc.  
+    * - account_name  
+      - oval-sc:EntityItemStringType (0..1)  
+      -   
+    * - domain  
+      - oval-sc:EntityItemStringType (0..1)  
+      -   
+    * - description  
+      - oval-sc:EntityItemStringType (0..1)  
+      -   
+    * - shell_access_enabled  
+      - oval-sc:EntityItemBoolType (0..1)  
+      -   
+    * - role  
+      - oval-sc:EntityItemStringType (0..1)  
+      -   
+  
+______________
+  
+.. _host_advancedsetting_item:  
+  
+< host_advancedsetting_item >  
+---------------------------------------------------------
+
+
+**Extends:** oval-sc:ItemType
+
+Child Elements  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. list-table:: Elements  
+    :header-rows: 1  
+  
+    * - Child Elements  
+      - Type (MinOccurs..MaxOccurs)  
+      - Desc.  
+    * - advanced_setting_name  
+      - oval-sc:EntityItemStringType (0..1)  
+      - The host_advancedsetting_name element details the name of the VMHost's advanced configuration setting to collect.  
+    * - advanced_setting_value  
       - oval-sc:EntityItemAnySimpleType (0..unbounded)  
-      - The value entity holds a string that represents a value that's associated with the specified setting for the Managed Entity. Some properties will return an array of values. In such cases consider each value individually and then make final evaluation based on the entity_check attribute.  
+      - The advanced_setting_value element details the value of the VMHost's advanced configuration setting that was collected.  
   
-.. _EntityItemClassificationType:  
+______________
   
-== EntityItemClassificationType ==  
+.. _host_service_item:  
+  
+< host_service_item >  
 ---------------------------------------------------------
-The EntityItemClassificationType complex type restricts a string value to a specific set of values that describe the classification of a given ESX Server patch. The empty string is also allowed to support empty elements associated with error conditions.
+
+
+**Extends:** oval-sc:ItemType
+
+Child Elements  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. list-table:: Elements  
+    :header-rows: 1  
+  
+    * - Child Elements  
+      - Type (MinOccurs..MaxOccurs)  
+      - Desc.  
+    * - service_name  
+      - oval-sc:EntityItemStringType (0..1)  
+      - The service_name element details the name of the VMHost's service that was collected.  
+    * - service_label  
+      - oval-sc:EntityItemStringType (0..1)  
+      - Label  
+    * - service_policy  
+      - oval-sc:EntityItemStringType (0..1)  
+      - Policy  
+    * - service_running  
+      - oval-sc:EntityItemBoolType (0..1)  
+      - Running  
+    * - service_required  
+      - oval-sc:EntityItemBoolType (0..1)  
+      - Required?  
+  
+______________
+  
+.. _host_ntpserver_item:  
+  
+< host_ntpserver_item >  
+---------------------------------------------------------
+
+
+**Extends:** oval-sc:ItemType
+
+Child Elements  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. list-table:: Elements  
+    :header-rows: 1  
+  
+    * - Child Elements  
+      - Type (MinOccurs..MaxOccurs)  
+      - Desc.  
+    * - ntp_server_name  
+      - oval-sc:EntityItemStringType (0..unbounded)  
+      - NTPServerName, as retrieved from Get-VMHostNtpServer  
+  
+______________
+  
+.. _host_lockdown_item:  
+  
+< host_lockdown_item >  
+---------------------------------------------------------
+
+
+**Extends:** oval-sc:ItemType
+
+Child Elements  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. list-table:: Elements  
+    :header-rows: 1  
+  
+    * - Child Elements  
+      - Type (MinOccurs..MaxOccurs)  
+      - Desc.  
+    * - lockdown  
+      - esx-sc:EntityItemLockdownType (0..1)  
+      - Lockdown mode type  
+    * - lockdown_user  
+      - oval-sc:EntityItemStringType (0..unbounded)  
+      - The value identifying a user account that is allowed to connect when the ESXi host is in lockdown mode.  
+  
+______________
+  
+.. _host_firewallexception_item:  
+  
+< host_firewallexception_item >  
+---------------------------------------------------------
+
+
+**Extends:** oval-sc:ItemType
+
+Child Elements  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. list-table:: Elements  
+    :header-rows: 1  
+  
+    * - Child Elements  
+      - Type (MinOccurs..MaxOccurs)  
+      - Desc.  
+    * - firewall_exception_name  
+      - oval-sc:EntityItemStringType (0..1)  
+      -   
+    * - exception_enabled  
+      - oval-sc:EntityItemBoolType (0..1)  
+      -   
+    * - port  
+      - oval-sc:EntityItemIntType (0..1)  
+      -   
+    * - end_port  
+      - oval-sc:EntityItemIntType (0..1)  
+      -   
+    * - direction  
+      - esx-sc:EntityItemFirewallDirectionType (0..1)  
+      -   
+    * - protocol  
+      - oval-sc:EntityItemStringType (0..1)  
+      -   
+    * - service_name  
+      - oval-sc:EntityItemStringType (0..1)  
+      -   
+    * - service_running  
+      - oval-sc:EntityItemBoolType (0..1)  
+      -   
+    * - allowed_hosts_all_ip  
+      - oval-sc:EntityItemBoolType (0..1)  
+      -   
+  
+______________
+  
+.. _host_busadapter_item:  
+  
+< host_busadapter_item >  
+---------------------------------------------------------
+
+
+**Extends:** oval-sc:ItemType
+
+Child Elements  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. list-table:: Elements  
+    :header-rows: 1  
+  
+    * - Child Elements  
+      - Type (MinOccurs..MaxOccurs)  
+      - Desc.  
+    * - device_name  
+      - oval-sc:EntityItemStringType (0..1)  
+      - Specify the devices of the HBA you want to retrieve.  
+    * - busadapter_type  
+      - esx-sc:EntityItemBusAdapterType (0..1)  
+      - Specify the type of the HBAs you want to retrieve. The valid values are Block, FibreChannel, iSCSI, and ParallelSCSI.  
+    * - busadapter_key  
+      - oval-sc:EntityItemStringType (0..1)  
+      -   
+    * - busadapter_model  
+      - oval-sc:EntityItemStringType (0..1)  
+      -   
+    * - busadapter_pci  
+      - oval-sc:EntityItemStringType (0..1)  
+      -   
+    * - busadapter_driver  
+      - oval-sc:EntityItemStringType (0..1)  
+      -   
+    * - busadapter_bus  
+      - oval-sc:EntityItemIntType (0..1)  
+      -   
+    * - busadapter_status  
+      - oval-sc:EntityItemStringType (0..1)  
+      -   
+    * - chap_type  
+      - oval-sc:EntityItemStringType (0..1)  
+      - CHAP Type  
+    * - chap_name  
+      - oval-sc:EntityItemStringType (0..1)  
+      - CHAP Name  
+    * - mutual_chap_enabled  
+      - oval-sc:EntityItemBoolType (0..1)  
+      - Mutual CHAP enabled?  
+    * - mutual_chap_name  
+      - oval-sc:EntityItemStringType (0..1)  
+      - Mutual CHAP Name  
+  
+______________
+  
+.. _host_vswitchpolicy_item:  
+  
+< host_vswitchpolicy_item >  
+---------------------------------------------------------
+
+
+**Extends:** oval-sc:ItemType
+
+Child Elements  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. list-table:: Elements  
+    :header-rows: 1  
+  
+    * - Child Elements  
+      - Type (MinOccurs..MaxOccurs)  
+      - Desc.  
+    * - vswitch_name  
+      - oval-sc:EntityItemStringType (0..1)  
+      - vSwitch name  
+    * - mac_changes  
+      - esx-sc:EntityItemAcceptRejectType (0..1)  
+      - MAC changes allowed  
+    * - promiscuous_mode  
+      - esx-sc:EntityItemAcceptRejectType (0..1)  
+      - Promiscuous mode allowed  
+    * - forged_transmits  
+      - esx-sc:EntityItemAcceptRejectType (0..1)  
+      - Forged transmits allowed  
+  
+.. _VMItemBaseType:  
+  
+== VMItemBaseType ==  
+---------------------------------------------------------
+Base type for VM-based States
+
+**Extends:** oval-sc:ItemType
+
+Child Elements  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. list-table:: Elements  
+    :header-rows: 1  
+  
+    * - Child Elements  
+      - Type (MinOccurs..MaxOccurs)  
+      - Desc.  
+    * - vm_name  
+      - oval-sc:EntityItemStringType (0..1)  
+      - The name of the Virtual Machine on the ESXi host for which information is collected.  
+  
+______________
+  
+.. _vm_advancedsetting_item:  
+  
+< vm_advancedsetting_item >  
+---------------------------------------------------------
+
+
+**Extends:** esx-sc:VMItemBaseType
+
+Child Elements  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. list-table:: Elements  
+    :header-rows: 1  
+  
+    * - Child Elements  
+      - Type (MinOccurs..MaxOccurs)  
+      - Desc.  
+    * - advanced_setting_name  
+      - oval-sc:EntityItemStringType (0..1)  
+      - The advanced setting name  
+    * - advanced_setting_value  
+      - oval-sc:EntityItemAnySimpleType (0..unbounded)  
+      - The advanced setting value  
+  
+.. _VMDeviceItemType:  
+  
+== VMDeviceItemType ==  
+---------------------------------------------------------
+Base type for VM Devices
+
+**Extends:** esx-sc:VMItemBaseType
+
+Child Elements  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. list-table:: Elements  
+    :header-rows: 1  
+  
+    * - Child Elements  
+      - Type (MinOccurs..MaxOccurs)  
+      - Desc.  
+    * - device_type  
+      - esx-sc:EntityItemVMDeviceType (0..1)  
+      - The device type; one of the values in the enumeration (floppy, cdrom, parallel, etc).  
+    * - device_name  
+      - oval-sc:EntityItemStringType (0..1)  
+      - The Name of the device  
+    * - allow_guest_control  
+      - oval-sc:EntityItemBoolType (0..1)  
+      -   
+    * - connected  
+      - oval-sc:EntityItemBoolType (0..1)  
+      -   
+    * - start_connected  
+      - oval-sc:EntityItemBoolType (0..1)  
+      -   
+  
+______________
+  
+.. _vm_device_item:  
+  
+< vm_device_item >  
+---------------------------------------------------------
+
+
+**Extends:** esx-sc:VMDeviceItemType
+
+______________
+  
+.. _vm_harddiskdevice_item:  
+  
+< vm_harddiskdevice_item >  
+---------------------------------------------------------
+
+
+**Extends:** esx-sc:VMDeviceItemType
+
+Child Elements  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. list-table:: Elements  
+    :header-rows: 1  
+  
+    * - Child Elements  
+      - Type (MinOccurs..MaxOccurs)  
+      - Desc.  
+    * - persistence  
+      - esx-sc:EntityItemVMDevicePersistenceType (0..1)  
+      - The persistence policy (Persistent, NonPersistent, Undoable, IndependentPersistent, IndependentNonPersistent, or Unknown)  
+  
+______________
+  
+.. _host_portgroup_item:  
+  
+< host_portgroup_item >  
+---------------------------------------------------------
+
+
+**Extends:** oval-sc:ItemType
+
+Child Elements  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. list-table:: Elements  
+    :header-rows: 1  
+  
+    * - Child Elements  
+      - Type (MinOccurs..MaxOccurs)  
+      - Desc.  
+    * - port_group_name  
+      - oval-sc:EntityItemStringType (0..1)  
+      - PortGroup Name  
+    * - virtual_switch_name  
+      - oval-sc:EntityItemStringType (0..1)  
+      - Virtual Switch Name  
+    * - vlan_id  
+      - oval-sc:EntityItemIntType (0..1)  
+      - VlanID  
+  
+______________
+  
+.. _vds_item:  
+  
+< vds_item >  
+---------------------------------------------------------
+
+
+**Extends:** oval-sc:ItemType
+
+Child Elements  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. list-table:: Elements  
+    :header-rows: 1  
+  
+    * - Child Elements  
+      - Type (MinOccurs..MaxOccurs)  
+      - Desc.  
+    * - vds_name  
+      - oval-sc:EntityItemStringType (0..1)  
+      - The name of a vSphere Distributed Switch.  
+    * - vlan_mtu_health_check_enabled  
+      - oval-sc:EntityItemBoolType (0..1)  
+      - VLAN and MTU Health Check enabled?  
+    * - teaming_failover_health_check_enabled  
+      - oval-sc:EntityItemBoolType (0..1)  
+      - Teaming and Failover Health Check enabled?  
+  
+______________
+  
+.. _vds_portgroup_item:  
+  
+< vds_portgroup_item >  
+---------------------------------------------------------
+
+
+**Extends:** oval-sc:ItemType
+
+Child Elements  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. list-table:: Elements  
+    :header-rows: 1  
+  
+    * - Child Elements  
+      - Type (MinOccurs..MaxOccurs)  
+      - Desc.  
+    * - vds_name  
+      - oval-sc:EntityItemStringType (0..1)  
+      - The name of a vSphere Distributed Switch.  
+    * - portgroup_name  
+      - oval-sc:EntityItemStringType (0..1)  
+      - The name of a vSphere Distributed Portgroup.  
+    * - collector_ip_address  
+      - oval-sc:EntityItemIPAddressType (0..1)  
+      - Authorized collector IP Address to which Virtual Disributed Switch Netflow traffic is sent  
+    * - collector_port  
+      - oval-sc:EntityItemIntType (0..1)  
+      - Authorized collector Port to which Virtual Disributed Switch Netflow traffic is sent  
+    * - override_port_policies_enabled  
+      - oval-sc:EntityItemBoolType (0..1)  
+      - Override port policies enabled?  
+  
+.. _EntityItemAcceptanceLevelType:  
+  
+== EntityItemAcceptanceLevelType ==  
+---------------------------------------------------------
+
 
 **Restricts:** oval-sc:EntityItemStringType
 
@@ -117,22 +692,22 @@ The EntityItemClassificationType complex type restricts a string value to a spec
   
     * - Value  
       - Description  
-    * - B  
-      - | Bug patches fix minor flaws that affect product functionality or behavior. Bug patches are optional. Before they are applied, one should determine whether they are necessary for your environment.  
-    * - R  
-      - | Roll‐up patches contain any number of bundles for ESX Server 3.0.3 or ESX Server 3.5 hosts. They can contain bug patches, update patches, and security patches. They do not contain upgrade bundles for minor releases or update bundles for maintenance releases.  
-    * - S  
-      - | Security patches fix one or more potential security vulnerabilities in the product. They should be implemented immediately to prevent the vulnerabilities from being exploited.  
-    * - U  
-      - | Update patches can contain new driver updates and small non‐intrusive enhancements. Before they are applied, one should determine whether they are necessary for your environment.  
-    * -   
-      - | The empty string value is permitted here to allow for detailed error reporting.  
+    * - VMwareCertified  
+      - | VMwareCertified  
+    * - VMwareAccepted  
+      - | VMwareAccepted  
+    * - PartnerSupported  
+      - | PartnerSupported  
+    * - CommunitySupported  
+      - | CommunitySupported  
+    * - Unknown  
+      - | Unknown  
   
-.. _EntityItemSupportLevelType:  
+.. _EntityItemLockdownType:  
   
-== EntityItemSupportLevelType ==  
+== EntityItemLockdownType ==  
 ---------------------------------------------------------
-The EntityItemSupportLevelType complex type restricts a string value to a specific set of values that describe the support level of a given ESX Server patch. The empty string is also allowed to support empty elements associated with error conditions.
+
 
 **Restricts:** oval-sc:EntityItemStringType
 
@@ -141,14 +716,152 @@ The EntityItemSupportLevelType complex type restricts a string value to a specif
   
     * - Value  
       - Description  
-    * - C  
-      - | Custom patches are special fixes provided to a customer. They are usually specific to customer's environment, and are most likely not required by customers not reporting the issue. Custom patches have been tested in the customer's environment.  
-    * - D  
-      - | Debugging patches are released to all customers and are used by VMware to troubleshoot complex product issues. They can contain debug messages and code, and drivers. Debugging patches usually require VMware assistance to install.  
-    * - G  
-      - | GA patches are released to all customers and have been thoroughly tested. They contain fixes for ESX Server 3 software issues.  
-    * - H  
-      - | Hot patches are released to specific customers for solving critical problems specific to their environment. They contain fixes for security issues or problems that can potentially cause data loss or severe service disruptions. Hot patches should be implemented immediately.  
+    * - disabled  
+      - | disabled  
+    * - normal  
+      - | normal  
+    * - strict  
+      - | strict  
+  
+.. _EntityItemFirewallDirectionType:  
+  
+== EntityItemFirewallDirectionType ==  
+---------------------------------------------------------
+
+
+**Restricts:** oval-sc:EntityItemStringType
+
+.. list-table:: Enumeration Values  
+    :header-rows: 1  
+  
+    * - Value  
+      - Description  
+    * - inbound  
+      - | inbound  
+    * - outbound  
+      - | outbound  
+  
+.. _EntityItemVMDeviceType:  
+  
+== EntityItemVMDeviceType ==  
+---------------------------------------------------------
+
+
+**Restricts:** oval-sc:EntityItemStringType
+
+.. list-table:: Enumeration Values  
+    :header-rows: 1  
+  
+    * - Value  
+      - Description  
+    * - floppy  
+      - | Floppy Devices  
+    * - cdrom  
+      - | CDROM Devices  
+    * - parallel_port  
+      - | Parallel Ports  
+    * - serial_port  
+      - | Serial Ports  
+    * - usb  
+      - | USB Devices  
+    * - hard_disk  
+      - | Hard Disk Drives  
+  
+.. _EntityItemVMDevicePersistenceType:  
+  
+== EntityItemVMDevicePersistenceType ==  
+---------------------------------------------------------
+
+
+**Restricts:** oval-sc:EntityItemStringType
+
+.. list-table:: Enumeration Values  
+    :header-rows: 1  
+  
+    * - Value  
+      - Description  
+    * - Persistent  
+      - | Persistent  
+    * - NonPersistent  
+      - | NonPersistent  
+    * - Undoable  
+      - | Undoable  
+    * - IndependentPersistent  
+      - | IndependentPersistent  
+    * - IndependentNonPersistent  
+      - | IndependentNonPersistent  
+    * - Append  
+      - | Append  
+  
+.. _EntityItemBusAdapterType:  
+  
+== EntityItemBusAdapterType ==  
+---------------------------------------------------------
+
+
+**Restricts:** oval-sc:EntityItemStringType
+
+.. list-table:: Enumeration Values  
+    :header-rows: 1  
+  
+    * - Value  
+      - Description  
+    * - Block  
+      - | Block  
+    * - FibreChannel  
+      - | FibreChannel  
+    * - IScsi  
+      - | iSCSI  
+    * - ParallelScsi  
+      - | Parallel SCSI  
     * -   
-      - | The empty string value is permitted here to allow for detailed error reporting.  
+      - | The empty string value is permitted here to allow for empty elements associated with variable references.  
+  
+.. _EntityItemAcceptRejectType:  
+  
+== EntityItemAcceptRejectType ==  
+---------------------------------------------------------
+
+
+**Restricts:** oval-sc:EntityItemStringType
+
+.. list-table:: Enumeration Values  
+    :header-rows: 1  
+  
+    * - Value  
+      - Description  
+    * - Accept  
+      - | Accept Policy Changes  
+    * - Reject  
+      - | Reject Policy Changes  
+  
+.. _EntityItemDomainMembershipStatusType:  
+  
+== EntityItemDomainMembershipStatusType ==  
+---------------------------------------------------------
+
+
+**Restricts:** oval-sc:EntityItemStringType
+
+.. list-table:: Enumeration Values  
+    :header-rows: 1  
+  
+    * - Value  
+      - Description  
+    * - ClientTrustBroken  
+      - | ClientTrustBroken  
+    * - InconsistentTrust  
+      - | InconsistentTrust  
+    * - NoServers  
+      - | NoServers  
+    * - Ok  
+      - | Ok  
+    * - OtherProblem  
+      - | OtherProblem  
+    * - ServerTrustBroken  
+      - | ServerTrustBroken  
+    * - Unknown  
+      - | Unknown  
+    * -   
+      - | The empty string value is permitted here to allow for empty elements associated with variable references.  
   

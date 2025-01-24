@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-            xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5"
-            xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5"
+            xmlns:oval="urn:oval:v6:common"
+            xmlns:oval-def="urn:oval:v6:definitions"
             xmlns:ds="http://www.w3.org/2000/09/xmldsig#"
             xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-            targetNamespace="http://oval.mitre.org/XMLSchema/oval-definitions-5"
-            elementFormDefault="qualified" version="5.12">
-    <xsd:import namespace="http://oval.mitre.org/XMLSchema/oval-common-5" schemaLocation="oval-common-schema.xsd"/>
+            targetNamespace="urn:oval:v6:definitions"
+            elementFormDefault="qualified" version="6.0">
+    <xsd:import namespace="urn:oval:v6:common" schemaLocation="oval-common-schema.xsd"/>
     <xsd:import namespace="http://www.w3.org/2000/09/xmldsig#" schemaLocation="xmldsig-core-schema.xsd"/>
     <xsd:annotation>
         <xsd:documentation>The following is a description of the elements, types, and attributes that compose the core schema for encoding Open Vulnerability and Assessment Language (OVAL) Definitions. Some of the objects defined here are extended and enhanced by individual component schemas, which are described in separate documents. Each of the elements, types, and attributes that make up the Core Definition Schema are described in detail and should provide the information necessary to understand what each represents. This document is intended for developers and assumes some familiarity with XML. A high level description of the interaction between these objects is not outlined here.</xsd:documentation>
         <xsd:documentation>The OVAL Schema is maintained by OVAL Community. For more information, including how to get involved in the project and how to submit change requests, please visit the OVAL website at https://github.com/OVAL-Community/.</xsd:documentation>
         <xsd:appinfo>
             <schema>Core Definition</schema>
-            <version>5.12</version>
-            <date>11/29/2024 09:00:00 AM</date>
+            <version>6.0</version>
+            <date>1/24/2025 09:00:00 AM</date>
             <terms_of_use>This software is an open standard developed by multiple parties, including the United States Government (Government). The Government hereby grants you a non-exclusive, royalty-free, worldwide license to use, modify, and/or reproduce the software for any lawful purpose provided that you reproduce this License/Disclaimer language with any use/modification/copy of the software. The Government assumes no responsibility whatsoever for this software's use by other parties, and the software is provided "AS IS" without warranty or guarantee of any kind, express or implied, including, but not limited to, the warranties of merchantability, fitness for a particular purpose, and noninfringement. In no event shall the Government be liable for any claim, damages or other liability, whether in an action of contract, tort or other dealings in the software. The Government has no obligation hereunder to provide maintenance, support, updates, enhancements, or modifications to the software. Users may submit proposals and/or updates regarding the software, which proposals and/or updates the Government, at its sole discretion, can choose to incorporate into the software. Proposals and/or updates submitted to the Government by users must be accompanied by a license to such proposals and/or updates that is no more restrictive than this License/Disclaimer.</terms_of_use>
-            <sch:ns prefix="oval-def" uri="http://oval.mitre.org/XMLSchema/oval-definitions-5"/>
+            <sch:ns prefix="oval-def" urn="urn:oval:v6:definitions"/>
             <sch:ns prefix="xsi" uri="http://www.w3.org/2001/XMLSchema-instance"/>
         </xsd:appinfo>
     </xsd:annotation>
@@ -119,28 +119,28 @@
             <xsd:annotation>
                 <xsd:documentation>Requires each test reference to refer to a valid test id.</xsd:documentation>
             </xsd:annotation>
-            <xsd:selector xpath=".//*"/>
+            <xsd:selector xpath="encapsulated_definition/* | ./*" />
             <xsd:field xpath="@test_ref"/>
         </xsd:keyref>
         <xsd:keyref name="objectKeyRef" refer="oval-def:objectKey">
             <xsd:annotation>
                 <xsd:documentation>Requires each object reference to refer to a valid object id.</xsd:documentation>
             </xsd:annotation>
-            <xsd:selector xpath=".//*"/>
+            <xsd:selector xpath="encapsulated_definition/* | ./*" />
             <xsd:field xpath="@object_ref"/>
         </xsd:keyref>
         <xsd:keyref name="stateKeyRef" refer="oval-def:stateKey">
             <xsd:annotation>
                 <xsd:documentation>Requires each state reference to refer to a valid state id.</xsd:documentation>
             </xsd:annotation>
-            <xsd:selector xpath=".//*"/>
+            <xsd:selector xpath="encapsulated_definition/* | ./*" />
             <xsd:field xpath="@state_ref"/>
         </xsd:keyref>
         <xsd:keyref name="variableKeyRef" refer="oval-def:variableKey">
             <xsd:annotation>
                 <xsd:documentation>Requires each variable reference to refer to a valid variable id.</xsd:documentation>
             </xsd:annotation>
-            <xsd:selector xpath=".//*"/>
+            <xsd:selector xpath="encapsulated_definition/* | ./*" />
             <xsd:field xpath="@var_ref"/>
         </xsd:keyref>
         <xsd:keyref name="object_referenceKeyRef" refer="oval-def:objectKey">
@@ -158,32 +158,7 @@
             <xsd:field xpath="."/>
         </xsd:keyref>
     </xsd:element>
-    <xsd:element name="notes" substitutionGroup="oval:notes">
-        <xsd:annotation>
-            <xsd:documentation>The notes element is a container for one or more note child elements. It exists for backwards-compatibility purposes, for the pre-5.11.0 oval-def:NotesType, which has been replaced by the oval:notes element in 5.11.1.</xsd:documentation>
-            <xsd:appinfo>
-                <oval:deprecated_info>
-                    <oval:version>5.11.1</oval:version>
-                    <oval:reason>Replaced by the oval:notes element.</oval:reason>
-                    <oval:comment>This object has been deprecated and may be removed in a future version of the language.</oval:comment>
-                </oval:deprecated_info>
-                <sch:pattern id="oval_def_notes_dep">
-                    <sch:rule context="oval-def:notes">
-                        <sch:report test="true()">DEPRECATED ELEMENT: <sch:value-of select="name()"/> parent ID: <sch:value-of select="../@id"/></sch:report>
-                    </sch:rule>
-                </sch:pattern>
-            </xsd:appinfo>
-        </xsd:annotation>
-        <xsd:complexType>
-            <xsd:complexContent>
-                <xsd:extension base="oval:NotesType">
-                    <xsd:sequence>
-                        <xsd:element name="note" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
-                    </xsd:sequence>
-                </xsd:extension>
-            </xsd:complexContent>
-        </xsd:complexType>
-    </xsd:element>
+
     <!-- =============================================================================== -->
     <!-- =================================  GENERATOR  ================================= -->
     <!-- =============================================================================== -->
@@ -198,9 +173,10 @@
         <xsd:annotation>
             <xsd:documentation>The DefinitionsType complex type is a container for one or more definition elements. Each definition element describes a single OVAL Definition. Please refer to the description of the DefinitionType for more information about an individual definition.</xsd:documentation>
         </xsd:annotation>
-        <xsd:sequence>
-            <xsd:element ref="oval-def:definition" minOccurs="1" maxOccurs="unbounded"/>
-        </xsd:sequence>
+        <xsd:choice minOccurs="1" maxOccurs="unbounded">
+            <xsd:element ref="oval-def:definition" minOccurs="0" maxOccurs="unbounded"/>
+            <xsd:element ref="oval-def:encapsulated_definition" minOccurs="0" maxOccurs="unbounded"/>
+        </xsd:choice>
     </xsd:complexType>
     <xsd:element name="definition" type="oval-def:DefinitionType">
         <xsd:annotation>
@@ -223,13 +199,13 @@
         <xsd:sequence>
             <xsd:element ref="ds:Signature" minOccurs="0" maxOccurs="1"/>
             <xsd:element name="metadata" type="oval-def:MetadataType">
-                <xsd:unique name="UniqueAffectedFamily">
+                <!-- xsd:unique name="UniqueAffectedFamily">
                     <xsd:annotation>
                         <xsd:documentation>Each affected element must have a unique family attribute value.</xsd:documentation>
                     </xsd:annotation>
                     <xsd:selector xpath="oval-def:affected"/>
                     <xsd:field xpath="@family"/>
-                </xsd:unique>            
+                </xsd:unique -->            
             </xsd:element>
             <xsd:element ref="oval:notes" minOccurs="0" maxOccurs="1"/>
             <xsd:element name="criteria" type="oval-def:CriteriaType" minOccurs="0" maxOccurs="1"/>
@@ -239,6 +215,73 @@
         <xsd:attribute name="class" type="oval:ClassEnumeration" use="required"/>
         <xsd:attribute name="deprecated" type="xsd:boolean" use="optional" default="false"/>
     </xsd:complexType>
+    
+    <!-- _______NEW OVAL6 ENCAPSULTED DEFINITION TYPE__________ -->
+    
+     <xsd:element name="encapsulated_definition" type="oval-def:EncapsulatedDefinitionType">
+        <xsd:annotation>
+            <xsd:documentation>The encapsulated_definition element represents the globally defined element of type EncapsulatedDefinitionType. For more information please see the documentation on the EncapsulatedDefinitionType.</xsd:documentation>
+        </xsd:annotation>
+    </xsd:element>   
+    <xsd:complexType name="EncapsulatedDefinitionType">
+        <xsd:annotation>
+            <xsd:documentation>The EncapsulatedDefinitionType defines a single OVAL Definition. It differs from a 'DefinitionType' in that all other OVAL entities used by the  definition are contained in the definition. An encapsulated_definition is the a key structure in OVAL. It is analogous to the logical sentence or proposition: if a computer's state matches the configuration parameters laid out in the criteria, then that computer exhibits the state described. The EncapsulatedDefinitionType contains a section for various metadata related elements that describe the definition. This includes a description, version, affected system types, and reference information. The notes section of a definition should be used to hold information that might be helpful to someone examining the technical aspects of the definition. For example, why certain tests have been included in the criteria, or maybe a link to where further information can be found. The EncapsulatedDefinitionType also (unless the definition is deprecated) contains a criteria child element that joins individual tests together with a logical operator to specify the specific computer state being described.
+            </xsd:documentation>
+            <xsd:documentation>The required id attribute is the OVAL-ID of the EncapuslatedDefinition. The form of an OVAL-ID must follow the specific format described by the oval:DefinitionIDPattern. The required version attribute holds the current version of the encapsulated definition. Versions are integers, starting at 1 and incrementing every time a definition is modified. The required class attribute indicates the specific class to which the definition belongs. The class gives a hint to a user so they can know what the encapsulated definition writer is trying to say. See the definition of oval-def:ClassEnumeration for more information about the different valid classes. The optional deprecated attribute signifies that an id is no longer to be used or referenced but the information has been kept around for historic purposes.
+            </xsd:documentation>
+            <xsd:documentation>When the deprecated attribute is set to true, the encapsulated definition is considered to be deprecated. The criteria child element of a deprecated encapsulated definition is optional. If a deprecated encapsulated definition does not contain a criteria child element, the encapsulated definition must evaluate to "not evaluated". If a deprecated encapsulated definition contains a criteria child element, an interpreter should evaluate the encapsulated definition as if it were not deprecated, but an interpreter may evaluate the encapsulated definition to "not evaluated".
+            </xsd:documentation>
+            <xsd:appinfo>
+                <sch:pattern id="oval-def_required_criteria">
+                    <sch:rule context="oval-def:oval_definitions/oval-def:definitions/oval-def:definition[(@deprecated='false' or @deprecated='0') or not(@deprecated)]">
+                        <sch:assert test="oval-def:criteria">A valid OVAL Definition must contain a criteria unless the definition is a deprecated definition.</sch:assert>
+                    </sch:rule>
+                </sch:pattern>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element ref="ds:Signature" minOccurs="0" maxOccurs="1"/>
+            <xsd:element name="metadata" type="oval-def:MetadataType">
+                <!-- xsd:unique name="UniqueAffectedFamily">
+                    <xsd:annotation>
+                        <xsd:documentation>Each affected element must have a unique family attribute value.</xsd:documentation>
+                    </xsd:annotation>
+                    <xsd:selector xpath="oval-def:affected"/>
+                    <xsd:field xpath="@family"/>
+                </xsd:unique -->            
+            </xsd:element>
+            <xsd:element ref="oval:notes" minOccurs="0" maxOccurs="1"/>
+            <xsd:element name="criteria" type="oval-def:CriteriaType" minOccurs="0" maxOccurs="1"/>
+           <xsd:element name="tests" type="oval-def:TestsType" minOccurs="0" maxOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation>The optional tests section contains 1 or more tests.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="objects" type="oval-def:ObjectsType" minOccurs="0" maxOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation>The optional objects section contains 1 or more objects.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="states" type="oval-def:StatesType" minOccurs="0" maxOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation>The optional states section contains 1 or more states.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="variables" type="oval-def:VariablesType" minOccurs="0" maxOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation>The optional variables section contains 1 or more variables.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+        <xsd:attribute name="id" type="oval:DefinitionIDPattern" use="required"/>
+        <xsd:attribute name="version" type="xsd:nonNegativeInteger" use="required"/>
+        <xsd:attribute name="class" type="oval:ClassEnumeration" use="required"/>
+        <xsd:attribute name="deprecated" type="xsd:boolean" use="optional" default="false"/>
+    </xsd:complexType>
+        
+     
+<!-- _______ END NEW ENCAPSULATEDDEFINITIONTYPE_____ -->
+
     <xsd:complexType name="MetadataType">
         <xsd:annotation>
             <xsd:documentation>The MetadataType complex type contains all the metadata available to an OVAL Definition. This metadata is for informational purposes only and is not part of the criteria used to evaluate machine state. The required title child element holds a short string that is used to quickly identify the definition to a human user. The affected metadata item contains information about the system(s) for which the definition has been written. Remember that this is just metadata and not part of the criteria. Please refer to the AffectedType description for more information. The required description element contains a textual description of the configuration state being addressed by the OVAL Definition. In the case of a definition from the vulnerability class, the reference is usually the Common Vulnerability and Exposures (CVE) Identifier, and this description field corresponds with the CVE description.</xsd:documentation>
@@ -260,6 +303,13 @@
                     </xsd:annotation>
                     <xsd:selector xpath="oval-def:product"/>
                     <xsd:field xpath="."/>
+                </xsd:unique>
+		<xsd:unique name="UniqueAffectedFamily">
+                    <xsd:annotation>
+                        <xsd:documentation>Each affected element must have a unique family attribute value.</xsd:documentation>
+                    </xsd:annotation>
+                    <xsd:selector xpath="oval-def:affected"/>
+                    <xsd:field xpath="@family"/>
                 </xsd:unique>
             </xsd:element>
             <xsd:element name="reference" type="oval-def:ReferenceType" minOccurs="0" maxOccurs="unbounded"/>

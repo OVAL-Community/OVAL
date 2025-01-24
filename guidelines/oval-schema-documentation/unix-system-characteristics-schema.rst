@@ -1,8 +1,8 @@
 Open Vulnerability and Assessment Language: Unix System Characteristics  
 =========================================================
 * Schema: Unix System Characteristics  
-* Version: 5.12  
-* Release Date: 11/29/2024 09:00:00 AM
+* Version: 6.0  
+* Release Date: 1/24/2025 09:00:00 AM
 
 The following is a description of the elements, types, and attributes that compose the UNIX specific system characteristic items found in Open Vulnerability and Assessment Language (OVAL). Each item is an extension of the standard item element defined in the Core System Characteristic Schema. Through extension, each item inherits a set of elements and attributes that are shared amongst all OVAL Items. Each item is described in detail and should provide the information necessary to understand what each element and attribute represents. This document is intended for developers and assumes some familiarity with XML. A high level description of the interaction between the different tests and their relationship to the Core System Characteristic Schema is not outlined here.
 
@@ -10,52 +10,17 @@ The OVAL Schema is maintained by the OVAL Community. For more information, inclu
 
 Item Listing  
 ---------------------------------------------------------
-* :ref:`dnscache_item`  
 * :ref:`file_item`  
-* :ref:`fileextendedattribute_item`  
-* :ref:`gconf_item`  
-* :ref:`inetd_item`  
 * :ref:`interface_item`  
 * :ref:`password_item`  
-* :ref:`process_item`  
 * :ref:`process58_item`  
-* :ref:`routingtable_item`  
 * :ref:`runlevel_item`  
-* :ref:`sccs_item`  
 * :ref:`shadow_item`  
 * :ref:`sshd_item`  
 * :ref:`symlink_item`  
 * :ref:`sysctl_item`  
 * :ref:`uname_item`  
 * :ref:`xinetd_item`  
-  
-______________
-  
-.. _dnscache_item:  
-  
-< dnscache_item >  
----------------------------------------------------------
-The dnscache_item stores information retrieved from the DNS cache about a domain name, its time to live, and its corresponding IP addresses.
-
-**Extends:** oval-sc:ItemType
-
-Child Elements  
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-.. list-table:: Elements  
-    :header-rows: 1  
-  
-    * - Child Elements  
-      - Type (MinOccurs..MaxOccurs)  
-      - Desc.  
-    * - domain_name  
-      - oval-sc:EntityItemStringType (0..1)  
-      - The domain_name element contains a string that represents a domain name that was collected from the DNS cache on the local system.  
-    * - ttl  
-      - oval-sc:EntityItemIntType (0..1)  
-      - The ttl element contains an integer that represents the time to live in seconds of the DNS cache entry.  
-    * - ip_address  
-      - oval-sc:EntityItemIPAddressStringType (0..unbounded)  
-      - The ip_address element contains a string that represents an IP address associated with the specified domain name. Note that the IP address can be IPv4 or IPv6.  
   
 ______________
   
@@ -147,123 +112,6 @@ Child Elements
   
 ______________
   
-.. _fileextendedattribute_item:  
-  
-< fileextendedattribute_item >  
----------------------------------------------------------
-The file extended attribute item holds information about the individual file extended attributes found on a system. Each file extended attribute item contains path, filename, and attribute name information as well as the attribute's value. It extends the standard ItemType as defined in the oval-system-characteristics schema and one should refer to the ItemType description for more information.
-
-**Extends:** oval-sc:ItemType
-
-Child Elements  
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-.. list-table:: Elements  
-    :header-rows: 1  
-  
-    * - Child Elements  
-      - Type (MinOccurs..MaxOccurs)  
-      - Desc.  
-    * - filepath  
-      - oval-sc:EntityItemStringType (0..1)  
-      - The filepath element specifies the absolute path for a file on the machine. A directory cannot be specified as a filepath.  
-    * - path  
-      - oval-sc:EntityItemStringType (0..1)  
-      - The path element specifies the directory component of the absolute path to a file on the machine.  
-    * - filename  
-      - oval-sc:EntityItemStringType (0..1)  
-      - The name of the file. If the xsi:nil attribute is set to true, then the item being represented is the higher directory represented by the path entity.  
-    * - attribute_name  
-      - oval-sc:EntityItemStringType (0..1)  
-      - This is the extended attribute's name, identifier or key.  
-    * - value  
-      - oval-sc:EntityItemAnySimpleType (0..1)  
-      - This is the extended attribute's value or contents.  
-  
-______________
-  
-.. _gconf_item:  
-  
-< gconf_item >  
----------------------------------------------------------
-The gconf_item holds information about an individual GConf preference key found on a system. Each gconf_item contains a preference key, source, type, whether it's writable, the user who last modified it, the time it was last modified, whether it's the default value, as well as the preference key's value. It extends the standard ItemType as defined in the oval-system-characteristics schema and one should refer to the ItemType description for more information.
-
-**Extends:** oval-sc:ItemType
-
-Child Elements  
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-.. list-table:: Elements  
-    :header-rows: 1  
-  
-    * - Child Elements  
-      - Type (MinOccurs..MaxOccurs)  
-      - Desc.  
-    * - key  
-      - oval-sc:EntityItemStringType (0..1)  
-      - The preference key to check.  
-    * - source  
-      - oval-sc:EntityItemStringType (0..1)  
-      - The source used to look up the preference key.  
-    * - type  
-      - unix-sc:EntityItemGconfTypeType (0..1)  
-      - The type of the preference key.  
-    * - is_writable  
-      - oval-sc:EntityItemBoolType (0..1)  
-      - Is the preference key writable? If true, the preference key is writable. If false, the preference key is not writable.  
-    * - mod_user  
-      - oval-sc:EntityItemStringType (0..1)  
-      - The user who last modified the preference key.  
-    * - mod_time  
-      - oval-sc:EntityItemIntType (0..1)  
-      - The time the preference key was last modified in seconds since the Unix epoch. The Unix epoch is the time 00:00:00 UTC on January 1, 1970.  
-    * - is_default  
-      - oval-sc:EntityItemBoolType (0..1)  
-      - Is the preference key value the default value. If true, the preference key value is the default value. If false, the preference key value is not the default value.  
-    * - value  
-      - oval-sc:EntityItemAnySimpleType (0..unbounded)  
-      - The value of the preference key.  
-  
-______________
-  
-.. _inetd_item:  
-  
-< inetd_item >  
----------------------------------------------------------
-The inetd item holds information associated with different Internet services. It extends the standard ItemType as defined in the oval-system-characteristics schema and one should refer to the ItemType description for more information.
-
-**Extends:** oval-sc:ItemType
-
-Child Elements  
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-.. list-table:: Elements  
-    :header-rows: 1  
-  
-    * - Child Elements  
-      - Type (MinOccurs..MaxOccurs)  
-      - Desc.  
-    * - protocol  
-      - oval-sc:EntityItemStringType (0..1)  
-      - A recognized protocol listed in the file /etc/inet/protocols.  
-    * - service_name  
-      - oval-sc:EntityItemStringType (0..1)  
-      - The name of a valid service listed in the services file. For RPC services, the value of the service-name field consists of the RPC service name or program number, followed by a '/' (slash) and either a version number or a range of version numbers (for example, rstatd/2-4).  
-    * - server_program  
-      - oval-sc:EntityItemStringType (0..1)  
-      - Either the pathname of a server program to be invoked by inetd to perform the requested service, or the value internal if inetd itself provides the service.  
-    * - server_arguments  
-      - oval-sc:EntityItemStringType (0..1)  
-      - The arguments for running the service. These are either passed to the server program invoked by inetd, or used to configure a service provided by inetd. In the case of server programs, the arguments shall begin with argv[0], which is typically the name of the program. In the case of a service provided by inted, the first argument shall be the word "internal".  
-    * - endpoint_type  
-      - unix-sc:EntityItemEndpointType (0..1)  
-      - The endpoint type (aka, socket type) associated with the service.  
-    * - exec_as_user  
-      - oval-sc:EntityItemStringType (0..1)  
-      - The user id of the user the server program should run under. (This allows for running with less permission than root.)  
-    * - wait_status  
-      - unix-sc:EntityItemWaitStatusType (0..1)  
-      - This field has values wait or nowait. This entry specifies whether the server that is invoked by inetd will take over the listening socket associated with the service, and whether once launched, inetd will wait for that server to exit, if ever, before it resumes listening for new service requests.  
-  
-______________
-  
 .. _interface_item:  
   
 < interface_item >  
@@ -347,60 +195,6 @@ Child Elements
   
 ______________
   
-.. _process_item:  
-  
-< process_item > (Deprecated)  
----------------------------------------------------------
-Deprecation Info  
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-* Deprecated As Of Version 5.8  
-* Reason: The process_item has been deprecated and replaced by the process58_item. The entity 'command' was changed to 'command_line' in the process58_item to accurately describe what information is collected. Please see the process58_item for additional information.  
-  
-Output of /usr/bin/ps. See ps(1).
-
-**Extends:** oval-sc:ItemType
-
-Child Elements  
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-.. list-table:: Elements  
-    :header-rows: 1  
-  
-    * - Child Elements  
-      - Type (MinOccurs..MaxOccurs)  
-      - Desc.  
-    * - command  
-      - oval-sc:EntityItemStringType (0..1)  
-      - This specifies the command/program name about which data has has been collected.  
-    * - exec_time  
-      - oval-sc:EntityItemStringType (0..1)  
-      - This is the cumulative CPU time, formatted in [DD-]HH:MM:SS where DD is the number of days when execution time is 24 hours or more.  
-    * - pid  
-      - oval-sc:EntityItemIntType (0..1)  
-      - This is the process ID of the process.  
-    * - ppid  
-      - oval-sc:EntityItemIntType (0..1)  
-      - This is the process ID of the process's parent process.  
-    * - priority  
-      - oval-sc:EntityItemIntType (0..1)  
-      - This is the scheduling priority with which the process runs. This can be adjusted with the nice command or nice() system call.  
-    * - ruid  
-      - oval-sc:EntityItemIntType (0..1)  
-      - This is the real user id which represents the user who has created the process.  
-    * - scheduling_class  
-      - oval-sc:EntityItemStringType (0..1)  
-      - A platform specific characteristic maintained by the scheduler: RT (real-time), TS (timeshare), FF (fifo), SYS (system), etc.  
-    * - start_time  
-      - oval-sc:EntityItemStringType (0..1)  
-      - This is the time of day the process started formatted in HH:MM:SS if the same day the process started or formatted as MMM_DD (Ex.: Feb_5) if process started the previous day or further in the past.  
-    * - tty  
-      - oval-sc:EntityItemStringType (0..1)  
-      - This is the TTY on which the process was started, if applicable.  
-    * - user_id  
-      - oval-sc:EntityItemIntType (0..1)  
-      - This is the effective user id which represents the actual privileges of the process.  
-  
-______________
-  
 .. _process58_item:  
   
 < process58_item >  
@@ -465,37 +259,6 @@ Child Elements
   
 ______________
   
-.. _routingtable_item:  
-  
-< routingtable_item >  
----------------------------------------------------------
-The routingtable_item holds information about an individual routing table entry found in a system's primary routing table. Each routingtable_item contains a destination IP address, gateway, netmask, flags, and the name of the interface associated with it. It is important to note that only numerical addresses will be collected and that their symbolic representations will not be resolved. This equivalent to using the '-n' option with route(8) or netstat(8). It extends the standard ItemType as defined in the oval-system-characteristics schema and one should refer to the ItemType description for more information.
-
-**Extends:** oval-sc:ItemType
-
-Child Elements  
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-.. list-table:: Elements  
-    :header-rows: 1  
-  
-    * - Child Elements  
-      - Type (MinOccurs..MaxOccurs)  
-      - Desc.  
-    * - destination  
-      - oval-sc:EntityItemIPAddressType (0..1)  
-      - The destination IP address prefix of the routing table entry. This is the destination IP address and netmask/prefix-length expressed using CIDR notation.  
-    * - gateway  
-      - oval-sc:EntityItemIPAddressType (0..1)  
-      - The gateway of the specified routing table entry.  
-    * - flags  
-      - unix-sc:EntityItemRoutingTableFlagsType (0..unbounded)  
-      - The flags associated with the specified routing table entry.  
-    * - interface_name  
-      - oval-sc:EntityItemStringType (0..1)  
-      - The name of the interface associated with the routing table entry.  
-  
-______________
-  
 .. _runlevel_item:  
   
 < runlevel_item >  
@@ -524,60 +287,6 @@ Child Elements
     * - kill  
       - oval-sc:EntityItemBoolType (0..1)  
       - The kill entity specifies whether the service is scheduled to be killed at the runlevel.  
-  
-______________
-  
-.. _sccs_item:  
-  
-< sccs_item > (Deprecated)  
----------------------------------------------------------
-Deprecation Info  
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-* Deprecated As Of Version 5.10  
-* Reason: The sccs_item has been deprecated because the Source Code Control System (SCCS) is obsolete.  The sccs_item may be removed in a future version of the language.  
-  
-
-
-**Extends:** oval-sc:ItemType
-
-Child Elements  
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-.. list-table:: Elements  
-    :header-rows: 1  
-  
-    * - Child Elements  
-      - Type (MinOccurs..MaxOccurs)  
-      - Desc.  
-    * - filepath  
-      - oval-sc:EntityItemStringType (0..1)  
-      - Specifies the absolute path to an SCCS file. A directory cannot be specified as a filepath.  
-    * - path  
-      - oval-sc:EntityItemStringType (0..1)  
-      - The path element specifies the directory component of the absolute path to an SCCS file.  
-    * - filename  
-      - oval-sc:EntityItemStringType (0..1)  
-      - The name of an SCCS file.  
-    * - module_name  
-      - oval-sc:EntityItemStringType (0..1)  
-      -   
-    * - module_type  
-      - oval-sc:EntityItemStringType (0..1)  
-      -   
-    * - release  
-      - oval-sc:EntityItemStringType (0..1)  
-      -   
-    * - level  
-      - oval-sc:EntityItemStringType (0..1)  
-      -   
-    * - branch  
-      - oval-sc:EntityItemStringType (0..1)  
-      -   
-    * - sequence  
-      - oval-sc:EntityItemStringType (0..1)  
-      -   
-    * - what_string  
-      - oval-sc:EntityItemStringType (0..1)  
-      -   
   
 ______________
   

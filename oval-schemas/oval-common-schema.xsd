@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-            xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5"
+            xmlns:oval="urn:oval:v6:common"
             xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-            targetNamespace="http://oval.mitre.org/XMLSchema/oval-common-5"
-            elementFormDefault="qualified" version="5.12">
+            targetNamespace="urn:oval:v6:common"
+            elementFormDefault="qualified" version="6.0">
      <xsd:annotation>
           <xsd:documentation>The following is a description of the common types that are shared across the different schemas within Open Vulnerability and Assessment Language (OVAL). Each type is described in detail and should provide the information necessary to understand what each represents. This document is intended for developers and assumes some familiarity with XML. A high level description of the interaction between these type is not outlined here.</xsd:documentation>
           <xsd:documentation>The OVAL Schema is maintained by the OVAL Community. For more information, including how to get involved in the project and how to submit change requests, please visit the OVAL website at https://github.com/OVAL-Community/.</xsd:documentation>
           <xsd:appinfo>
                <schema>Core Common</schema>
-               <version>5.12</version>
-               <date>11/29/2024 09:00:00 AM</date>
+               <version>6.0</version>
+               <date>1/24/2025 09:00:00 AM</date>
                <terms_of_use>This software is an open standard developed by multiple parties, including the United States Government (Government). The Government hereby grants you a non-exclusive, royalty-free, worldwide license to use, modify, and/or reproduce the software for any lawful purpose provided that you reproduce this License/Disclaimer language with any use/modification/copy of the software. The Government assumes no responsibility whatsoever for this software's use by other parties, and the software is provided "AS IS" without warranty or guarantee of any kind, express or implied, including, but not limited to, the warranties of merchantability, fitness for a particular purpose, and noninfringement. In no event shall the Government be liable for any claim, damages or other liability, whether in an action of contract, tort or other dealings in the software. The Government has no obligation hereunder to provide maintenance, support, updates, enhancements, or modifications to the software. Users may submit proposals and/or updates regarding the software, which proposals and/or updates the Government, at its sole discretion, can choose to incorporate into the software. Proposals and/or updates submitted to the Government by users must be accompanied by a license to such proposals and/or updates that is no more restrictive than this License/Disclaimer.</terms_of_use>
-               <sch:ns prefix="oval" uri="http://oval.mitre.org/XMLSchema/oval-common-5"/>
-               <sch:ns prefix="oval-def" uri="http://oval.mitre.org/XMLSchema/oval-definitions-5"/>
+               <sch:ns prefix="oval" urn="urn:oval:v6:common"/>
+               <sch:ns prefix="oval-def" urn="urn:oval:v6:definitions"/>
           </xsd:appinfo>
      </xsd:annotation>
      <!-- =============================================================================== -->
@@ -261,25 +261,6 @@
                <xsd:enumeration value="at least one">
                     <xsd:annotation>
                           <xsd:documentation>A value of 'at least one' means that a final result of true is given if at least one of the individual results under consideration is true.</xsd:documentation>
-                    </xsd:annotation>
-               </xsd:enumeration>
-               <xsd:enumeration value="none exist">
-                    <xsd:annotation>
-                         <xsd:documentation>A value of 'none exists' means that a test evaluates to true if no matching object exists that satisfy the data requirements.</xsd:documentation>
-                         <xsd:appinfo>
-                              <oval:deprecated_info>
-                                   <oval:version>5.3</oval:version>
-                                   <oval:reason>Replaced by the 'none satisfy' value. In version 5.3 of the OVAL Language, the checking of existence and state were separated into two distinct checks CheckEnumeration (state) and ExistenceEnumeration (existence). Since CheckEnumeration is now used to specify how many objects should satisfy a given state for a test to return true, and no longer used for specifying how many objects must exist for a test to return true, a value of 'none exist' is no longer needed. See the 'none satisfy' value.</oval:reason>
-                                   <oval:comment>This value has been deprecated and will be removed in version 6.0 of the language.</oval:comment>
-                              </oval:deprecated_info>
-                              <sch:pattern id="oval_none_exist_value_dep">
-                                   <sch:rule context="oval-def:oval_definitions/oval-def:tests/child::*">
-                                        <sch:report test="@check='none exist'">
-                                             DEPRECATED ATTRIBUTE VALUE IN: <sch:value-of select="name()"/> ATTRIBUTE VALUE:
-                                        </sch:report>
-                                   </sch:rule>
-                              </sch:pattern>                        
-                         </xsd:appinfo>
                     </xsd:annotation>
                </xsd:enumeration>
                <xsd:enumeration value="none satisfy">
@@ -543,29 +524,14 @@ at_least_one_exists ||  0   |  0+  |  1+  |  0+  ||  Error
                <xsd:documentation>The FamilyEnumeration simple type is a listing of families that OVAL supports at this time.  Since new family values can only be added with new version of the schema, the value of 'undefined' is to be used when the desired family is not available.  Note that use of the undefined family value does not target all families, rather it means that some family other than one of the defined values is targeted.</xsd:documentation>
           </xsd:annotation>
           <xsd:restriction base="xsd:string">
-               <xsd:enumeration value="android">
-                    <xsd:annotation>
-                         <xsd:documentation>The android value describes the Android mobile operating system.</xsd:documentation>
-                    </xsd:annotation>
-               </xsd:enumeration>
                <xsd:enumeration value="asa">
                     <xsd:annotation>
                          <xsd:documentation>The asa value describes the Cisco ASA security devices.</xsd:documentation>
                     </xsd:annotation>
                </xsd:enumeration>
-               <xsd:enumeration value="apple_ios">
-                    <xsd:annotation>
-                         <xsd:documentation>The apple_ios value describes the iOS mobile operating system.</xsd:documentation>
-                    </xsd:annotation>
-               </xsd:enumeration>
                <xsd:enumeration value="aws">
                     <xsd:annotation>
                          <xsd:documentation>The aws value describes the Amazon Web Services platform.</xsd:documentation>
-                    </xsd:annotation>
-               </xsd:enumeration>
-               <xsd:enumeration value="catos">
-                    <xsd:annotation>
-                         <xsd:documentation>The catos value describes the Cisco CatOS operating system.</xsd:documentation>
                     </xsd:annotation>
                </xsd:enumeration>
                <xsd:enumeration value="ios">
@@ -591,11 +557,6 @@ at_least_one_exists ||  0   |  0+  |  1+  |  0+  ||  Error
                <xsd:enumeration value="panos">
                     <xsd:annotation>
                          <xsd:documentation>The panos value describes the Palo Alto Networks operating system.</xsd:documentation>
-                    </xsd:annotation>
-               </xsd:enumeration>
-               <xsd:enumeration value="pixos">
-                    <xsd:annotation>
-                         <xsd:documentation>The pixos value describes the Cisco PIX operating system.</xsd:documentation>
                     </xsd:annotation>
                </xsd:enumeration>
                <xsd:enumeration value="undefined">
