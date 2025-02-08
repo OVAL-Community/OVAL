@@ -5,7 +5,7 @@
 
 .. _welcome-to-the-guidelines:
 
-The OVAL Community Version 6.0 Documenation
+The OVAL Community Version 6.0 Documentation
 =========================================
 
 Welcome to the guidelines for OVAL, the Open Vulnerability and Assessment Language. These guidelines are designed to explain everything you need to know to start contributing to OVAL (or link you to places to ask questions, should the explanations not suffice), as well as provide a variety of standards and resources to the community.
