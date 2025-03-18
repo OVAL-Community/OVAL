@@ -1095,7 +1095,7 @@ A subexpression (using parentheses) can call out a piece of the matched stdout_l
                                           </xsd:annotation>
                                     </xsd:element>
                                     
-                                    <xsd:element name="command" type="oval-def:EntityStateAnySimpleType" minOccurs="1" maxOccurs="1">
+                                    <xsd:element name="command" type="oval-def:EntityStateAnySimpleType" minOccurs="0" maxOccurs="1">
                                           <xsd:annotation>
                                                 <xsd:documentation>The 'command' element specifies the command string to be run on the target system and must match the same element in the associated shellcommand_object, verbatim.</xsd:documentation>
                                           </xsd:annotation>
