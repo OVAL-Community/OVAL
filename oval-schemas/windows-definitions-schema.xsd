@@ -9305,12 +9305,6 @@
                           <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#windows">wuaupdatesearcher_item</oval:item>
                     </oval:element_mapping>
               </xsd:appinfo>
-					<xsd:appinfo>
-						<oval:deprecated_info>
-							<oval:version>5.12</oval:version>
-							<oval:comment>This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.</oval:comment>
-						</oval:deprecated_info>
-					</xsd:appinfo>
               <xsd:appinfo>
                 <sch:pattern id="win-def_wuaupdatesearchertst">
                     <sch:rule context="win-def:wuaupdatesearcher_test/win-def:object">
@@ -9392,16 +9386,56 @@
             <xsd:complexContent>
                 <xsd:extension base="oval-def:StateType">
                   <xsd:sequence>
-                      <xsd:element name="search_criteria" type="oval-def:EntityStateStringType" minOccurs="0">
+                      <xsd:element name="search_criteria" type="oval-def:EntityStateStringType" minOccurs="0" maxOccurs="1">
                           <xsd:annotation>
                               <xsd:documentation>The search_criteria entity specifies a string to examine the search criteria that was used to generate the object set.  Note that since this entity is part of the state, it is not used to determine the object set, but rather is used to test the search criteria that was actually used.</xsd:documentation>
                           </xsd:annotation>
                       </xsd:element>
-                      <xsd:element name="update_id" type="oval-def:EntityStateStringType" minOccurs="0">
+                      <xsd:element name="update_id" type="oval-def:EntityStateStringType" minOccurs="0" maxOccurs="1">
                           <xsd:annotation>
                               <xsd:documentation>The update_id enity specifies a string that represents a revision-independent identifier of an update.  This information is part of the IUpdateIdentity interface that is part of the result of the IUpdateSearcher interface's Search method.</xsd:documentation>
                           </xsd:annotation>
                       </xsd:element>
+					 <xsd:element name="title" type="oval-def:EntityStateStringType" minOccurs="0" maxOccurs="1">
+						 <xsd:annotation>
+							 <xsd:documentation>The title entity is the short text provided from Micrsoft related to the update ID</xsd:documentation>
+						 </xsd:annotation>
+					 </xsd:element>
+					 <xsd:element name="support_url" type="oval-def:EntityStateStringType" minOccurs="0" maxOccurs="1">
+						 <xsd:annotation>
+							 <xsd:documentation>The support entity is the URL provideded by Microsoft related to this update ID</xsd:documentation>
+						 </xsd:annotation>
+					 </xsd:element>
+                         <xsd:element name="is_installed" type="oval-def:EntityStateBoolType" minOccurs="0" maxOccurs="1">
+                             <xsd:annotation>
+                                 <xsd:documentation>The IsInstalled entity is the URL provided by Microsoft related to this update ID</xsd:documentation>
+                             </xsd:annotation>
+                         </xsd:element>
+                         <xsd:element name="is_hidden" type="oval-def:EntityStateBoolType" minOccurs="0" maxOccurs="1">
+                             <xsd:annotation>
+                                 <xsd:documentation>The IsHidden entity is the URL provided by Microsoft related to this update ID</xsd:documentation>
+                             </xsd:annotation>
+                         </xsd:element>
+                         <xsd:element name="msrc_severity" type="oval-def:EntityStateStringType" minOccurs="0" maxOccurs="1">
+                             <xsd:annotation>
+                                 <xsd:documentation>The Microsoft Security Response Center (MSRC) rating provided by Microsoft related to this update ID, includes 'Critical', 'Important', 'Moderate', 'Low', 'Unspecified', ''</xsd:documentation>
+                             </xsd:annotation>
+                         </xsd:element>
+						 <xsd:element name="last_deployment_change_time" type="oval-def:EntityStateStringType" minOccurs="0" maxOccurs="1">
+                             <xsd:annotation>
+                                 <xsd:documentation>The last published date of the update, provided by Microsoft related to this update ID</xsd:documentation>
+                             </xsd:annotation>
+                         </xsd:element>
+						 <xsd:element name="source" type="oval-def:EntityStateStringType" minOccurs="0" maxOccurs="1">
+                             <xsd:annotation>
+                                 <xsd:documentation>Text based field to document where the update information was obtained (Internet: Windows Update, WSUS (ip/port), Offline Cab file)</xsd:documentation>
+                             </xsd:annotation>
+                         </xsd:element>
+						 <xsd:element name="days_since_source_modified" type="oval-def:EntityStateIntType" minOccurs="0" maxOccurs="1">
+                             <xsd:annotation>
+                                 <xsd:documentation>The number of days since the wsusscn2.cab file was last modified.  If the source was Windows Update or WSUS, this value should be set to 0.</xsd:documentation>
+                             </xsd:annotation>
+                         </xsd:element>
                     </xsd:sequence>
                 </xsd:extension>
             </xsd:complexContent>
