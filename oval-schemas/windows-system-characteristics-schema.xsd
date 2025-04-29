@@ -1670,7 +1670,7 @@
                               </xsd:element>
                               <xsd:element name="days_since_last_logon" type="oval-sc:EntityItemIntType" minOccurs="0" maxOccurs="1">
                                    <xsd:annotation>
-                                        <xsd:documentation>The last_logon data, converted to days and then rounded to an integer. If the account is determined to be currently logged in, this date should be reported as 0.</xsd:documentation>
+                                        <xsd:documentation>The last_logon data, converted to days and then rounded down to the nearest integer (floor function). If the account is determined to be currently logged in, this date should be reported as 0.</xsd:documentation>
                                    </xsd:annotation>
                               </xsd:element>							  
                               <xsd:element name="enabled" type="oval-sc:EntityItemBoolType" minOccurs="0" maxOccurs="1">
