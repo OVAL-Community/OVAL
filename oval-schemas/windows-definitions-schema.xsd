@@ -4064,6 +4064,11 @@
                                                 <xsd:documentation>The logged_on element describes if the user account is currently logged on to the computer.</xsd:documentation>
                                           </xsd:annotation>
                                     </xsd:element>
+								  <xsd:element name="days_since_last_logon" type="oval-def:EntityStateIntType" minOccurs="0" maxOccurs="1">
+									   <xsd:annotation>
+											<xsd:documentation>The last_logon data, converted to days and then rounded to an integer.  If the account is determined to be currently logged in, this date should be reported as 0.</xsd:documentation>
+									   </xsd:annotation>
+								  </xsd:element>
                                     <xsd:element name="enabled" type="oval-def:EntityStateBoolType" minOccurs="0">
                                           <xsd:annotation>
                                                 <xsd:documentation>The enabled element describes if the user account is enabled or disabled.</xsd:documentation>
@@ -9305,6 +9310,12 @@
                           <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#windows">wuaupdatesearcher_item</oval:item>
                     </oval:element_mapping>
               </xsd:appinfo>
+					<xsd:appinfo>
+						<oval:deprecated_info>
+							<oval:version>5.12</oval:version>
+							<oval:comment>This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.</oval:comment>
+						</oval:deprecated_info>
+					</xsd:appinfo>
               <xsd:appinfo>
                 <sch:pattern id="win-def_wuaupdatesearchertst">
                     <sch:rule context="win-def:wuaupdatesearcher_test/win-def:object">
@@ -9421,14 +9432,14 @@
                                  <xsd:documentation>The Microsoft Security Response Center (MSRC) rating provided by Microsoft related to this update ID, includes 'Critical', 'Important', 'Moderate', 'Low', 'Unspecified', ''</xsd:documentation>
                              </xsd:annotation>
                          </xsd:element>
-						 <xsd:element name="last_deployment_change_time" type="oval-def:EntityStateStringType" minOccurs="0" maxOccurs="1">
+						 <xsd:element name="last_deployment_change_time" type="xsd:date" minOccurs="0" maxOccurs="1">
                              <xsd:annotation>
                                  <xsd:documentation>The last published date of the update, provided by Microsoft related to this update ID</xsd:documentation>
                              </xsd:annotation>
                          </xsd:element>
-						 <xsd:element name="source" type="oval-def:EntityStateStringType" minOccurs="0" maxOccurs="1">
+						 <xsd:element name="source" type="win-def:EntityStateWuaSourceType" minOccurs="0" maxOccurs="1">
                              <xsd:annotation>
-                                 <xsd:documentation>Text based field to document where the update information was obtained (Internet: Windows Update, WSUS (ip/port), Offline Cab file)</xsd:documentation>
+                                 <xsd:documentation>Where the update information was obtained.</xsd:documentation>
                              </xsd:annotation>
                          </xsd:element>
 						 <xsd:element name="days_since_source_modified" type="oval-def:EntityStateIntType" minOccurs="0" maxOccurs="1">
@@ -9454,6 +9465,30 @@
       <!-- =============================================================================== -->
       <!-- =============================================================================== -->
       <!-- =============================================================================== -->
+	 <xsd:complexType name="EntityStateWuaSourceType">
+          <xsd:annotation>
+               <xsd:documentation>The EntityStateWuaSourceType restricts a string value to a specific set of values: Windows_Update, WSUS and Offline_Cab_File</xsd:documentation>
+          </xsd:annotation>
+          <xsd:simpleContent>
+               <xsd:restriction base="oval-def:EntityStateStringType">
+                    <xsd:enumeration value="Windows_Update">
+                         <xsd:annotation>
+                              <xsd:documentation>Indicates the source for the wuaupdatesearcher_item is from Windows Update via the Internet</xsd:documentation>
+                         </xsd:annotation>
+                    </xsd:enumeration>
+                    <xsd:enumeration value="WSUS">
+                         <xsd:annotation>
+                              <xsd:documentation>Indicates the source for the wuaupdatesearcher_item is from an Intranet WSUS server</xsd:documentation>
+                         </xsd:annotation>
+                    </xsd:enumeration>
+                    <xsd:enumeration value="Offline_Cab_File">
+                         <xsd:annotation>
+                              <xsd:documentation>Indicates the source for the wuaupdatesearcher_item is from wsusscn2.cab file download from Microsoft</xsd:documentation>
+                         </xsd:annotation>
+                    </xsd:enumeration>
+               </xsd:restriction>
+          </xsd:simpleContent>
+     </xsd:complexType>
       <xsd:complexType name="EntityStateAddrTypeType">
             <xsd:annotation>
                   <xsd:documentation>The EntityStateAddrTypeType complex type restricts a string value to a specific set of values that describe address types associated with an interface. The empty string is also allowed to support empty element associated with variable references. Note that when using pattern matches and variables care must be taken to ensure that the regular expression and variable values align with the enumerated values.</xsd:documentation>
