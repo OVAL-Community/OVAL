@@ -9444,7 +9444,7 @@
                          </xsd:element>
 						 <xsd:element name="days_since_source_modified" type="oval-def:EntityStateIntType" minOccurs="0" maxOccurs="1">
                              <xsd:annotation>
-                                 <xsd:documentation>The number of days since the wsusscn2.cab file was last modified.  If the source was Windows Update or WSUS, this value should be set to 0.</xsd:documentation>
+                                 <xsd:documentation>The number of days since the wsusscn2.cab file was last modified, rounded down to the nearest integer (floor function).  If the source was Windows Update or WSUS, this value should be set to 0.</xsd:documentation>
                              </xsd:annotation>
                          </xsd:element>
                     </xsd:sequence>
