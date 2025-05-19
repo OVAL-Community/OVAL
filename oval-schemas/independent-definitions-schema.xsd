@@ -2700,7 +2700,12 @@ SERVERPROPERTY('IsClustered') AS [is_clustered]
                         </xsd:enumeration>
                         <xsd:enumeration value="powershell">
                               <xsd:annotation>
-                                    <xsd:documentation>The Microsoft Powershell prompt (powershell).</xsd:documentation>
+                                    <xsd:documentation>The Microsoft Windows OS Native Powershell prompt (powershell).</xsd:documentation>
+                              </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="pwsh">
+                              <xsd:annotation>
+                                    <xsd:documentation>The open source, cross platform Microsoft Powershell prompt (pwsh).  This shell is an application that can be installed on Windows, Linux or MacOS</xsd:documentation>
                               </xsd:annotation>
                         </xsd:enumeration>
                         <xsd:enumeration value="">
