@@ -3735,9 +3735,54 @@
                                  <xsd:documentation></xsd:documentation>
                              </xsd:annotation>
                          </xsd:element>
-                         <xsd:element name="update_id" type="oval-sc:EntityItemStringType" minOccurs="0" maxOccurs="unbounded">
+                         <xsd:element name="update_id" type="oval-sc:EntityItemStringType" minOccurs="0" maxOccurs="1">
                              <xsd:annotation>
                                  <xsd:documentation>The update_id entity specifies a string that represents a revision-independent identifier of an update.  This information is part of the IUpdateIdentity interface that is part of the result of the IUpdateSearcher interface's Search method.  Note that multiple update identifiers can be associated with a give search criteria and thus multiple entities can exist for this item.</xsd:documentation>
+                             </xsd:annotation>
+                         </xsd:element>
+                         <xsd:element name="title" type="oval-sc:EntityItemStringType" minOccurs="0" maxOccurs="1">
+                             <xsd:annotation>
+                                 <xsd:documentation>The Title entity is the short text provided from Micrsoft related to the update ID</xsd:documentation>
+                             </xsd:annotation>
+                         </xsd:element>
+                         <xsd:element name="support_url" type="oval-sc:EntityItemStringType" minOccurs="0" maxOccurs="1">
+                             <xsd:annotation>
+                                 <xsd:documentation>The SupportUrl entity is the URL provided by Microsoft related to this update ID</xsd:documentation>
+                             </xsd:annotation>
+                         </xsd:element>
+                         <xsd:element name="is_installed" type="oval-sc:EntityItemBoolType" minOccurs="0" maxOccurs="1">
+                             <xsd:annotation>
+                                 <xsd:documentation>The IsInstalled entity is the URL provided by Microsoft related to this update ID</xsd:documentation>
+                             </xsd:annotation>
+                         </xsd:element>
+                         <xsd:element name="is_hidden" type="oval-sc:EntityItemBoolType" minOccurs="0" maxOccurs="1">
+                             <xsd:annotation>
+                                 <xsd:documentation>The IsHidden entity is the URL provided by Microsoft related to this update ID</xsd:documentation>
+                             </xsd:annotation>
+                         </xsd:element>
+                         <xsd:element name="msrc_severity" type="oval-sc:EntityItemStringType" minOccurs="0" maxOccurs="1">
+                             <xsd:annotation>
+                                 <xsd:documentation>The Microsoft Security Response Center (MSRC) rating provided by Microsoft related to this update ID, includes 'Critical', 'Important', 'Moderate', 'Low', 'Unspecified', ''</xsd:documentation>
+                             </xsd:annotation>
+                         </xsd:element>
+						 <xsd:element name="last_deployment_change_time" type="xsd:date" minOccurs="0" maxOccurs="1">
+                             <xsd:annotation>
+                                 <xsd:documentation>The last published date of the update, provided by Microsoft related to this update ID</xsd:documentation>
+                             </xsd:annotation>
+                         </xsd:element>
+						 <xsd:element name="source" type="win-sc:EntityItemWuaSourceType" minOccurs="0" maxOccurs="1">
+                             <xsd:annotation>
+                                 <xsd:documentation>Where the update information was obtained.</xsd:documentation>
+                             </xsd:annotation>
+                         </xsd:element>
+						 <xsd:element name="source_path" type="oval-sc:EntityItemStringType" minOccurs="0" maxOccurs="1">
+                             <xsd:annotation>
+                                 <xsd:documentation>The URL used to the Windows Update Server, or full filepath to the offline cab file</xsd:documentation>
+                             </xsd:annotation>
+                         </xsd:element>
+						 <xsd:element name="days_since_source_modified" type="oval-sc:EntityItemIntType" minOccurs="0" maxOccurs="1">
+                             <xsd:annotation>
+                                 <xsd:documentation>The number of days since the wsusscn2.cab file was last modified, rounded down to the nearest integer (floor function).  If the source was Windows Update or WSUS, this value should be set to 0.</xsd:documentation>
                              </xsd:annotation>
                          </xsd:element>
                      </xsd:sequence>
@@ -5836,6 +5881,30 @@
                     <xsd:enumeration value="">
                          <xsd:annotation>
                               <xsd:documentation>The empty string value is permitted here to allow for detailed error reporting.</xsd:documentation>
+                         </xsd:annotation>
+                    </xsd:enumeration>
+               </xsd:restriction>
+          </xsd:simpleContent>
+     </xsd:complexType>
+	 <xsd:complexType name="EntityItemWuaSourceType">
+          <xsd:annotation>
+               <xsd:documentation>The EntityItemWuaSourceType restricts a string value to a specific set of values: Windows_Update, WSUS and Offline_Cab_File</xsd:documentation>
+          </xsd:annotation>
+          <xsd:simpleContent>
+               <xsd:restriction base="oval-sc:EntityItemStringType">
+                    <xsd:enumeration value="Windows_Update">
+                         <xsd:annotation>
+                              <xsd:documentation>Indicates the source for the wuaupdatesearcher_item is from Windows Update via the Internet</xsd:documentation>
+                         </xsd:annotation>
+                    </xsd:enumeration>
+                    <xsd:enumeration value="WSUS">
+                         <xsd:annotation>
+                              <xsd:documentation>Indicates the source for the wuaupdatesearcher_item is from an Intranet WSUS server</xsd:documentation>
+                         </xsd:annotation>
+                    </xsd:enumeration>
+                    <xsd:enumeration value="Offline_Cab_File">
+                         <xsd:annotation>
+                              <xsd:documentation>Indicates the source for the wuaupdatesearcher_item is from wsusscn2.cab file download from Microsoft</xsd:documentation>
                          </xsd:annotation>
                     </xsd:enumeration>
                </xsd:restriction>
