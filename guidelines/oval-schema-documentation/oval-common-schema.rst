@@ -1,8 +1,8 @@
 Open Vulnerability and Assessment Language: Core Common  
 =========================================================
 * Schema: Core Common  
-* Version: 5.12  
-* Release Date: 11/29/2024 09:00:00 AM
+* Version: 5.12.1  
+* Release Date: 05/23/2025 09:00:00 AM
 
 The following is a description of the common types that are shared across the different schemas within Open Vulnerability and Assessment Language (OVAL). Each type is described in detail and should provide the information necessary to understand what each represents. This document is intended for developers and assumes some familiarity with XML. A high level description of the interaction between these type is not outlined here.
 

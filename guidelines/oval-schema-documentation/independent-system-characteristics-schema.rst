@@ -1,8 +1,8 @@
 Open Vulnerability and Assessment Language: Independent System Characteristics  
 =========================================================
 * Schema: Independent System Characteristics  
-* Version: 5.12  
-* Release Date: 11/29/2024 09:00:00 AM
+* Version: 5.12.1  
+* Release Date: 05/23/2025 09:00:00 AM
 
 This document outlines the items of the OVAL System Characteristics XML schema that are independent of any specific family or platform. Each iten is an extention of a basic System Characteristics item defined in the core System Characteristics XML schema.
 
@@ -286,10 +286,10 @@ Child Elements
       - Type (MinOccurs..MaxOccurs)  
       - Desc.  
     * - shell  
-      - oval-sc:EntityItemShellType (1..1)  
+      - ind-sc:EntityItemShellType (1..1)  
       - The shell element contains the shell used (e.g. bash or powershell) to perform the command and should be taken, verbatim, from the associated object 'shell' element.  
     * - command  
-      - oval-sc::EntityItemStringType (1..1)  
+      - oval-sc:EntityItemStringType (1..1)  
       - The command element specifies the command string that was run on the target system and should be taken, verbatim, from the associated object 'command' element..  
     * - pattern  
       - oval-sc:EntityItemStringType (0..1)  
@@ -598,7 +598,9 @@ The EntityItemShellType restricts a string value to a specific set of shell comm
     * - cmd  
       - | The Microsoft Windows command prompt (cmd).  
     * - powershell  
-      - | The Microsoft Powershell prompt (powershell).  
+      - | The Microsoft Windows OS Native Powershell prompt (powershell).  
+    * - pwsh  
+      - | The open source, cross platform Microsoft Powershell prompt (pwsh). This shell is an application that can be installed on Windows, Linux or MacOS  
     * -   
       - | The empty string value is permitted here to allow for empty elements associated with variable references.  
     * -   

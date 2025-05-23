@@ -1,8 +1,8 @@
 Open Vulnerability and Assessment Language: Windows System Characteristics  
 =========================================================
 * Schema: Windows System Characteristics  
-* Version: 5.12  
-* Release Date: 11/29/2024 09:00:00 AM
+* Version: 5.12.1  
+* Release Date: 05/23/2025 09:00:00 AM
 
 The following is a description of the elements, types, and attributes that compose the Windows specific system characteristic items found in Open Vulnerability and Assessment Language (OVAL). Each item is an extension of the standard item element defined in the Core System Characteristic Schema. Through extension, each item inherits a set of elements and attributes that are shared amongst all OVAL Items. Each item is described in detail and should provide the information necessary to understand what each element and attribute represents. This document is intended for developers and assumes some familiarity with XML. A high level description of the interaction between the different tests and their relationship to the Core System Characteristic Schema is not outlined here.
 
@@ -1166,6 +1166,9 @@ Child Elements
     * - logged_on  
       - oval-sc:EntityItemBoolType (0..1)  
       - The logged_on element describes if the user account is currently logged on to the computer.  
+    * - days_since_last_logon  
+      - oval-sc:EntityItemIntType (0..1)  
+      - The last_logon data, converted to days and then rounded down to the nearest integer (floor function). If the account is determined to be currently logged in, this date should be reported as 0.  
     * - enabled  
       - oval-sc:EntityItemBoolType (0..1)  
       - The enabled element describes if the user account is enabled or disabled.  
@@ -2600,8 +2603,35 @@ Child Elements
       - oval-sc:EntityItemStringType (0..1)  
       -   
     * - update_id  
-      - oval-sc:EntityItemStringType (0..unbounded)  
+      - oval-sc:EntityItemStringType (0..1)  
       - The update_id entity specifies a string that represents a revision-independent identifier of an update. This information is part of the IUpdateIdentity interface that is part of the result of the IUpdateSearcher interface's Search method. Note that multiple update identifiers can be associated with a give search criteria and thus multiple entities can exist for this item.  
+    * - title  
+      - oval-sc:EntityItemStringType (0..1)  
+      - The Title entity is the short text provided from Micrsoft related to the update ID  
+    * - support_url  
+      - oval-sc:EntityItemStringType (0..1)  
+      - The SupportUrl entity is the URL provided by Microsoft related to this update ID  
+    * - is_installed  
+      - oval-sc:EntityItemBoolType (0..1)  
+      - The IsInstalled entity is the URL provided by Microsoft related to this update ID  
+    * - is_hidden  
+      - oval-sc:EntityItemBoolType (0..1)  
+      - The IsHidden entity is the URL provided by Microsoft related to this update ID  
+    * - msrc_severity  
+      - oval-sc:EntityItemStringType (0..1)  
+      - The Microsoft Security Response Center (MSRC) rating provided by Microsoft related to this update ID, includes 'Critical', 'Important', 'Moderate', 'Low', 'Unspecified', ''  
+    * - last_deployment_change_time  
+      - xsd:date (0..1)  
+      - The last published date of the update, provided by Microsoft related to this update ID  
+    * - source  
+      - win-sc:EntityItemWuaSourceType (0..1)  
+      - Where the update information was obtained.  
+    * - source_path  
+      - oval-sc:EntityItemStringType (0..1)  
+      - The URL used to the Windows Update Server, or full filepath to the offline cab file  
+    * - days_since_source_modified  
+      - oval-sc:EntityItemIntType (0..1)  
+      - The number of days since the wsusscn2.cab file was last modified, rounded down to the nearest integer (floor function). If the source was Windows Update or WSUS, this value should be set to 0.  
   
 ______________
   
@@ -3705,4 +3735,24 @@ The EntityItemUserRightType restricts a string value to a specific set of values
       - | This account right is required for an account to log on using the service logon type.  
     * -   
       - | The empty string value is permitted here to allow for detailed error reporting.  
+  
+.. _EntityItemWuaSourceType:  
+  
+== EntityItemWuaSourceType ==  
+---------------------------------------------------------
+The EntityItemWuaSourceType restricts a string value to a specific set of values: Windows_Update, WSUS and Offline_Cab_File
+
+**Restricts:** oval-sc:EntityItemStringType
+
+.. list-table:: Enumeration Values  
+    :header-rows: 1  
+  
+    * - Value  
+      - Description  
+    * - Windows_Update  
+      - | Indicates the source for the wuaupdatesearcher_item is from Windows Update via the Internet  
+    * - WSUS  
+      - | Indicates the source for the wuaupdatesearcher_item is from an Intranet WSUS server  
+    * - Offline_Cab_File  
+      - | Indicates the source for the wuaupdatesearcher_item is from wsusscn2.cab file download from Microsoft  
   
