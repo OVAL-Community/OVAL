@@ -1,8 +1,8 @@
 Open Vulnerability and Assessment Language: Palo Alto (PAN-OS) Definitions  
 =========================================================
 * Schema: Palo Alto (PAN-OS) Definitions  
-* Version: 5.12  
-* Release Date: 11/29/2024 09:00:00 AM
+* Version: 5.12.1  
+* Release Date: 05/23/2025 09:00:00 AM
 
 The following is a description of the elements, types, and attributes that compose the Palo Alto (PAN-OS)-specific tests found in Open Vulnerability and Assessment Language (OVAL). Each test is an extension of the standard test element defined in the Core Definition Schema. Through extension, each test inherits a set of elements and attributes that are shared amongst all OVAL tests. Each test is described in detail and should provide the information necessary to understand what each element and attribute represents. This document is intended for developers and assumes some familiarity with XML. A high level description of the interaction between the different tests and their relationship to the Core Definition Schema is not outlined here.
 

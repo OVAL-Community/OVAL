@@ -1,8 +1,8 @@
 Open Vulnerability and Assessment Language: Windows Definition  
 =========================================================
 * Schema: Windows Definition  
-* Version: 5.12  
-* Release Date: 11/29/2024 09:00:00 AM
+* Version: 5.12.1  
+* Release Date: 05/23/2025 09:00:00 AM
 
 The following is a description of the elements, types, and attributes that compose the Windows specific tests found in Open Vulnerability and Assessment Language (OVAL). Each test is an extension of the standard test element defined in the Core Definition Schema. Through extension, each test inherits a set of elements and attributes that are shared amongst all OVAL tests. Each test is described in detail and should provide the information necessary to understand what each element and attribute represents. This document is intended for developers and assumes some familiarity with XML. A high level description of the interaction between the different tests and their relationship to the Core Definition Schema is not outlined here.
 
@@ -10,56 +10,56 @@ The OVAL Schema is maintained by the OVAL Community. For more information, inclu
 
 Test Listing  
 ---------------------------------------------------------
-* :ref:`accesstoken_test`  
-* :ref:`activedirectory_test` 
-* :ref:`activedirectory57_test`  
-* :ref:`auditeventpolicy_test` 
+* :ref:`accesstoken_test` (Deprecated)  
+* :ref:`activedirectory_test` (Deprecated)  
+* :ref:`activedirectory57_test` (Deprecated)  
+* :ref:`auditeventpolicy_test` (Deprecated)  
 * :ref:`auditeventpolicysubcategories_test`  
 * :ref:`cmdlet_test`  
-* :ref:`dnscache_test`   
+* :ref:`dnscache_test` (Deprecated)  
 * :ref:`file_test`  
-* :ref:`fileauditedpermissions53_test`  
-* :ref:`fileauditedpermissions_test`  
+* :ref:`fileauditedpermissions53_test` (Deprecated)  
+* :ref:`fileauditedpermissions_test` (Deprecated)  
 * :ref:`fileeffectiverights53_test`  
-* :ref:`fileeffectiverights_test`   
-* :ref:`group_test`  
+* :ref:`fileeffectiverights_test` (Deprecated)  
+* :ref:`group_test` (Deprecated)  
 * :ref:`group_sid_test`  
-* :ref:`interface_test`   
-* :ref:`junction_test`  
-* :ref:`license_test`   
+* :ref:`interface_test` (Deprecated)  
+* :ref:`junction_test` (Deprecated)  
+* :ref:`license_test` (Deprecated)  
 * :ref:`lockoutpolicy_test`  
-* :ref:`metabase_test` 
+* :ref:`metabase_test` (Deprecated)  
 * :ref:`ntuser_test`  
 * :ref:`passwordpolicy_test`  
-* :ref:`peheader_test` 
-* :ref:`port_test` 
-* :ref:`printereffectiverights_test`
-* :ref:`process_test`  
-* :ref:`process58_test` 
+* :ref:`peheader_test` (Deprecated)  
+* :ref:`port_test` (Deprecated)  
+* :ref:`printereffectiverights_test` (Deprecated)  
+* :ref:`process_test` (Deprecated)  
+* :ref:`process58_test` (Deprecated)  
 * :ref:`registry_test`  
-* :ref:`regkeyauditedpermissions53_test`  
-* :ref:`regkeyauditedpermissions_test` 
+* :ref:`regkeyauditedpermissions53_test` (Deprecated)  
+* :ref:`regkeyauditedpermissions_test` (Deprecated)  
 * :ref:`regkeyeffectiverights53_test`  
-* :ref:`regkeyeffectiverights_test`   
+* :ref:`regkeyeffectiverights_test` (Deprecated)  
 * :ref:`service_test`  
-* :ref:`serviceeffectiverights_test` 
-* :ref:`sharedresource_test`  
-* :ref:`sharedresourceauditedpermissions_test`  
-* :ref:`sharedresourceeffectiverights_test`   
+* :ref:`serviceeffectiverights_test` (Deprecated)  
+* :ref:`sharedresource_test` (Deprecated)  
+* :ref:`sharedresourceauditedpermissions_test` (Deprecated)  
+* :ref:`sharedresourceeffectiverights_test` (Deprecated)  
 * :ref:`sid_test`  
 * :ref:`sid_sid_test`  
-* :ref:`systemmetric_test` 
-* :ref:`uac_test`  
-* :ref:`user_test` 
+* :ref:`systemmetric_test` (Deprecated)  
+* :ref:`uac_test` (Deprecated)  
+* :ref:`user_test` (Deprecated)  
 * :ref:`user_sid55_test`  
-* :ref:`user_sid_test`  
+* :ref:`user_sid_test` (Deprecated)  
 * :ref:`userright_test`  
 * :ref:`appcmd_test`  
 * :ref:`appcmdlistconfig_test`  
-* :ref:`volume_test` 
-* :ref:`wmi_test` 
+* :ref:`volume_test` (Deprecated)  
+* :ref:`wmi_test` (Deprecated)  
 * :ref:`wmi57_test`  
-* :ref:`wuaupdatesearcher_test` 
+* :ref:`wuaupdatesearcher_test` (Deprecated)  
   
 ______________
   
@@ -2655,6 +2655,9 @@ Child Elements
     * - logged_on  
       - oval-def:EntityStateBoolType (0..1)  
       - The logged_on element describes if the user account is currently logged on to the computer.  
+    * - days_since_last_logon  
+      - oval-def:EntityStateIntType (0..1)  
+      - The last_logon data, converted to days and then rounded down to the nearest integer (floor function). If the account is determined to be currently logged in, this date should be reported as 0.  
     * - enabled  
       - oval-def:EntityStateBoolType (0..1)  
       - The enabled element describes if the user account is enabled or disabled.  
@@ -6293,6 +6296,30 @@ Child Elements
     * - update_id  
       - oval-def:EntityStateStringType (0..1)  
       - The update_id enity specifies a string that represents a revision-independent identifier of an update. This information is part of the IUpdateIdentity interface that is part of the result of the IUpdateSearcher interface's Search method.  
+    * - title  
+      - oval-def:EntityStateStringType (0..1)  
+      - The title entity is the short text provided from Micrsoft related to the update ID  
+    * - support_url  
+      - oval-def:EntityStateStringType (0..1)  
+      - The support entity is the URL provideded by Microsoft related to this update ID  
+    * - is_installed  
+      - oval-def:EntityStateBoolType (0..1)  
+      - The IsInstalled entity is the URL provided by Microsoft related to this update ID  
+    * - is_hidden  
+      - oval-def:EntityStateBoolType (0..1)  
+      - The IsHidden entity is the URL provided by Microsoft related to this update ID  
+    * - msrc_severity  
+      - oval-def:EntityStateStringType (0..1)  
+      - The Microsoft Security Response Center (MSRC) rating provided by Microsoft related to this update ID, includes 'Critical', 'Important', 'Moderate', 'Low', 'Unspecified', ''  
+    * - last_deployment_change_time  
+      - xsd:date (0..1)  
+      - The last published date of the update, provided by Microsoft related to this update ID  
+    * - source  
+      - win-def:EntityStateWuaSourceType (0..1)  
+      - Where the update information was obtained.  
+    * - days_since_source_modified  
+      - oval-def:EntityStateIntType (0..1)  
+      - The number of days since the wsusscn2.cab file was last modified, rounded down to the nearest integer (floor function). If the source was Windows Update or WSUS, this value should be set to 0.  
   
 .. _WuaUpdateSearcherBehaviors:  
   
@@ -6312,6 +6339,26 @@ Attributes
       - xsd:boolean (optional *default*='true')  
       - 'include_superseded_updates' is a boolean flag that when set to true indicates that the search results should include updates that are superseded by other updates in the search results. When set to 'false' superseded updates should be excluded from the set of matching update items. The default value is 'true'.  
   
+  
+.. _EntityStateWuaSourceType:  
+  
+== EntityStateWuaSourceType ==  
+---------------------------------------------------------
+The EntityStateWuaSourceType restricts a string value to a specific set of values: Windows_Update, WSUS and Offline_Cab_File
+
+**Restricts:** oval-def:EntityStateStringType
+
+.. list-table:: Enumeration Values  
+    :header-rows: 1  
+  
+    * - Value  
+      - Description  
+    * - Windows_Update  
+      - | Indicates the source for the wuaupdatesearcher_item is from Windows Update via the Internet  
+    * - WSUS  
+      - | Indicates the source for the wuaupdatesearcher_item is from an Intranet WSUS server  
+    * - Offline_Cab_File  
+      - | Indicates the source for the wuaupdatesearcher_item is from wsusscn2.cab file download from Microsoft  
   
 ______________
   

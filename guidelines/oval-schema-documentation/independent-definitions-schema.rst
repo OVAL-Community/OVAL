@@ -1,8 +1,8 @@
 Open Vulnerability and Assessment Language: Independent Definition  
 =========================================================
 * Schema: Independent Definition  
-* Version: 5.12  
-* Release Date: 11/29/2024 09:00:00 AM
+* Version: 5.12.1  
+* Release Date: 05/23/2025 09:00:00 AM
 
 The following is a description of the elements, types, and attributes that compose the tests found in Open Vulnerability and Assessment Language (OVAL) that are independent of a specific piece of software. Each test is described in detail and should provide the information necessary to understand what each element and attribute represents. This document is intended for developers and assumes some familiarity with XML. A high level description of the interaction between the different tests and their relationship to the Core Definition Schema is not outlined here.
 
@@ -694,7 +694,7 @@ ______________
   
 < shellcommand_test >  
 ---------------------------------------------------------
-The shellcommand_test is used to check the values produced by the running of the 'command' (or script, but not an external script file) found in the object 'command' element. It extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information. The required object element references a shellcommand_object and the optional state element references a shellcommand_state that specifies the information to check. Since this test runs the command string supplied in the object command element, the content author should avoid writing command strings that may produce large amounts of output or that may be fragile causing errors and thus produce large amounts of error output. The command should produce well formed output that will result in one item stdout_line element for each line of output via STDOUT by the object evaluation. Similarly, in the item, for any output to STDERR, a stderr_line element will be created. IMPORTANT! - Since this test requires the running of code supplied by content and since OVAL interpreters commonly run with elevated privileges, significant responsibilty falls to the content author to DO NO HARM to the target system. This also requires that any content stream that employs this test MUST be from a known trusted source and be digitally signed. The use of any executables that are not supplied by the installed operating system is highly discouraged.
+The shellcommand_test is used to check the values produced by the running of the 'command', or a one-liner (but not an external script file, or a multiple-line embedded script) found in the object 'command' element. It extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information. The required object element references a shellcommand_object and the optional state element references a shellcommand_state that specifies the information to check. Since this test runs the command string supplied in the object command element, the content author should avoid writing command strings that may produce large amounts of output or that may be fragile causing errors and thus produce large amounts of error output. The command should produce well formed output that will result in one item stdout_line element for each line of output via STDOUT by the object evaluation. Similarly, in the item, for any output to STDERR, a stderr_line element will be created. IMPORTANT! - Since this test requires the running of code supplied by content and since OVAL interpreters commonly run with elevated privileges, significant responsibilty falls to the content author to DO NO HARM to the target system. This also requires that any content stream that employs this test MUST be from a known trusted source and be digitally signed. The use of any executables that are not supplied by the installed operating system is highly discouraged.
 
 **Extends:** oval-def:TestType
 
@@ -717,7 +717,7 @@ Child Elements
   
 < shellcommand_object >  
 ---------------------------------------------------------
-The shellcommand_object is used by a shellcommand_test to define a shell to use (e.g. sh, bash, ksh, etc.), a command (or shell script) to be run, and a pattern to filter result lines. The default shell is bash. Each object extends the standard ObjectType as defined in the oval-definitions-schema and one should refer to the ObjectType description for more information. The common set element allows complex objects to be created using filters and set logic. The evaluation of the object should always produce one item. If the command execution does not produce output, an item should still be created with the exit_status (AKA process exit code), a stdout entity with a status of 'does not exist', and any STDERR from the execution captured in stderr_line entities.
+The shellcommand_object is used by a shellcommand_test to define a shell to use (e.g. sh, bash, ksh, etc.), a command (or shell script) to be run, and a pattern to filter result lines. The default shell is bash. Each object extends the standard ObjectType as defined in the oval-definitions-schema and one should refer to the ObjectType description for more information. The common set element allows complex objects to be created using filters and set logic. The evaluation of the object should always produce at least one item. If the command execution does not produce output, an item should still be created with the exit_status (AKA process exit code), a stdout entity with a status of 'does not exist', and any STDERR from the execution captured in stderr_line entities. If the command returns multiple lines of standard out, mulitple items should be created, one for each line.
 
 **Extends:** oval-def:ObjectType
 
@@ -730,11 +730,11 @@ Child Elements
       - Type (MinOccurs..MaxOccurs)  
       - Desc.  
     * - shell  
-      - oval-def:EntityObjectShellType (1..1)  
+      - ind-def:EntityObjectShellType (1..1)  
       - The shell entity defines the specific shell to use (e.g. bash, csh, ksh, etc.). Any tool collecting information for this object will need to know the shell in order to use it properly.  
     * - command  
       - oval-def:EntityObjectStringType (1..1)  
-      - The command element specifies the command string to be run on the target system. Since this command string will be executed on the target system and since OVAL interpreters commonly run with elevated privileges, significant responsibilty falls to the content author to DO NO HARM. This also requires that any content stream that employs this test MUST be from a known trusted source and be digitally signed. The use of executables that are not supplied by the installed operating system is highly discouraged.  
+      - The command element specifies the command string to be run on the target system, which could be a single executable/binary or a one-liner which manipulates the output from one or more executables/binaries. Since this command string will be executed on the target system and since OVAL interpreters commonly run with elevated privileges, significant responsibilty falls to the content author to DO NO HARM. This also requires that any content stream that employs this test MUST be from a known trusted source and be digitally signed. The use of executables that are not supplied by the installed operating system is highly discouraged.  
     * - pattern  
       - oval-def:EntityObjectStringType (0..1)  
       - The 'pattern' is a regular expression that identifies lines in 'command' results that are to produce OVAL items. Any result line via STDOUT that matches the pattern is kept as an item stdout_line element. Any that do not are discarded. If the pattern element is empty or does not exist, all results lines are kept. A subexpression (using parentheses) can call out a piece of the matched stdout_line to test. For example, the pattern abc(.*)xyz would look for a block of text in the output that starts with abc and ends with xyz, with the subexpression being all the characters that exist in between. The value of the subexpression can then be tested using the subexpression entity of a shellcommand_state. Note that if the pattern, starting at the same point in the line, matches more than one block of text, then it matches the longest. For example, given output with abcdefxyzxyzabc, then the pattern abc(.*)xyz would match the block abcdefxyzxyz. Subexpressions also match the longest possible substrings, subject to the constraint that the whole match be as long as possible, with subexpressions starting earlier in the pattern taking priority over ones starting later.Note that when using regular expressions, OVAL supports a common subset of the regular expression character classes, operations, expressions and other lexical tokens defined within Perl 5's regular expression specification. For more information on the supported regular expression syntax in OVAL see: http://oval.mitre.org/language/about/re_support_5.6.html.  
@@ -759,10 +759,10 @@ Child Elements
       - Type (MinOccurs..MaxOccurs)  
       - Desc.  
     * - shell  
-      - oval-def:EntityStateShellType (0..1)  
+      - ind-def:EntityStateShellType (0..1)  
       - The 'shell' element contains the shell used to perform the command and must match the value in the associated object, verbatim.  
     * - command  
-      - oval-def:EntityStateAnySimpleType (1..1)  
+      - oval-def:EntityStateAnySimpleType (0..1)  
       - The 'command' element specifies the command string to be run on the target system and must match the same element in the associated shellcommand_object, verbatim.  
     * - pattern  
       - oval-def:EntityStateStringType (0..1)  
@@ -1679,7 +1679,9 @@ The EntityObjectShellType complex type defines a string entity value that is res
     * - cmd  
       - | The Microsoft Windows command prompt (cmd).  
     * - powershell  
-      - | The Microsoft Powershell prompt (powershell).  
+      - | The Microsoft Windows OS Native Powershell prompt (powershell).  
+    * - pwsh  
+      - | The open source, cross platform Microsoft Powershell prompt (pwsh). This shell is an application that can be installed on Windows, Linux or MacOS  
     * -   
       - | The empty string value is permitted here to allow for empty elements associated with variable references.  
   
