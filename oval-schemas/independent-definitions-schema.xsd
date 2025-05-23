@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-            xmlns:oval="urn:oval:v6:common"
-            xmlns:oval-def="urn:oval:v6:definitions"
-            xmlns:ind-def="urn:oval:v6:definitions:independent"
+            xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5"
+            xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5"
+            xmlns:ind-def="http://oval.mitre.org/XMLSchema/oval-definitions-5#independent"
             xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-            targetNamespace="urn:oval:v6:definitions:independent"
-            elementFormDefault="qualified" version="6.0">
-      <xsd:import namespace="urn:oval:v6:common" schemaLocation="oval-common-schema.xsd"/>
-      <xsd:import namespace="urn:oval:v6:definitions" schemaLocation="oval-definitions-schema.xsd"/>
+            targetNamespace="http://oval.mitre.org/XMLSchema/oval-definitions-5#independent"
+            elementFormDefault="qualified" version="5.12.1">
+      <xsd:import namespace="http://oval.mitre.org/XMLSchema/oval-common-5" schemaLocation="oval-common-schema.xsd"/>
+      <xsd:import namespace="http://oval.mitre.org/XMLSchema/oval-definitions-5" schemaLocation="oval-definitions-schema.xsd"/>
       <xsd:annotation>
             <xsd:documentation>The following is a description of the elements, types, and attributes that compose the tests found in Open Vulnerability and Assessment Language (OVAL) that are independent of a specific piece of software. Each test is described in detail and should provide the information necessary to understand what each element and attribute represents. This document is intended for developers and assumes some familiarity with XML. A high level description of the interaction between the different tests and their relationship to the Core Definition Schema is not outlined here.</xsd:documentation>
             <xsd:documentation>The OVAL Schema is maintained by the OVAL Community. For more information, including how to get involved in the project and how to submit change requests, please visit the OVAL website at https://github.com/OVAL-Community/.</xsd:documentation>
             <xsd:appinfo>
                   <schema>Independent Definition</schema>
-                  <version>6.0</version>
-                  <date>1/24/2025 09:00:00 AM</date>
+                  <version>5.12.1</version>
+                  <date>05/23/2025 09:00:00 AM</date>
                   <terms_of_use>This software is an open standard developed by multiple parties, including the United States Government (Government). The Government hereby grants you a non-exclusive, royalty-free, worldwide license to use, modify, and/or reproduce the software for any lawful purpose provided that you reproduce this License/Disclaimer language with any use/modification/copy of the software. The Government assumes no responsibility whatsoever for this software's use by other parties, and the software is provided "AS IS" without warranty or guarantee of any kind, express or implied, including, but not limited to, the warranties of merchantability, fitness for a particular purpose, and noninfringement. In no event shall the Government be liable for any claim, damages or other liability, whether in an action of contract, tort or other dealings in the software. The Government has no obligation hereunder to provide maintenance, support, updates, enhancements, or modifications to the software. Users may submit proposals and/or updates regarding the software, which proposals and/or updates the Government, at its sole discretion, can choose to incorporate into the software. Proposals and/or updates submitted to the Government by users must be accompanied by a license to such proposals and/or updates that is no more restrictive than this License/Disclaimer.</terms_of_use>
-                  <sch:ns prefix="oval-def" urn="urn:oval:v6:definitions"/>
-                  <sch:ns prefix="ind-def" urn="urn:oval:v6:definitions:independent"/>
+                  <sch:ns prefix="oval-def" uri="http://oval.mitre.org/XMLSchema/oval-definitions-5"/>
+                  <sch:ns prefix="ind-def" uri="http://oval.mitre.org/XMLSchema/oval-definitions-5#independent"/>
                   <sch:ns prefix="xsi" uri="http://www.w3.org/2001/XMLSchema-instance"/>
             </xsd:appinfo>
       </xsd:annotation>
@@ -33,7 +33,7 @@
                               <oval:test>family_test</oval:test>
                               <oval:object>family_object</oval:object>
                               <oval:state>family_state</oval:state>
-                              <oval:item target_namespace="urn:oval:v6:system-characteristics:independent">family_item</oval:item>
+                              <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#independent">family_item</oval:item>
                         </oval:element_mapping>
                   </xsd:appinfo>
                   <xsd:appinfo>
@@ -87,6 +87,191 @@
             </xsd:complexType>
       </xsd:element>
       <!-- =============================================================================== -->
+      <!-- ==============================  FILE HASH TEST  =============================== -->
+      <!-- =============================================================================== -->
+      <xsd:element name="filehash_test" substitutionGroup="oval-def:test">
+            <xsd:annotation>
+                  <xsd:documentation>The file hash test is used to check the hashes associated with a specified file. It extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information. The required object element references a filehash_object and the optional state element specifies the different hashes to check.</xsd:documentation>
+                  <xsd:appinfo>
+                        <oval:element_mapping>
+                              <oval:test>filehash_test</oval:test>
+                              <oval:object>filehash_object</oval:object>
+                              <oval:state>filehash_state</oval:state>
+                              <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#independent">filehash_item</oval:item>
+                        </oval:element_mapping>
+                  </xsd:appinfo>
+                  <xsd:appinfo>
+                        <oval:deprecated_info>
+                              <oval:version>5.8</oval:version>
+                              <oval:reason>Replaced by the filehash58_test.</oval:reason>
+                              <oval:comment>This object has been deprecated and may be removed in a future version of the language.</oval:comment>
+                        </oval:deprecated_info>
+                        <sch:pattern id="ind-def_filehash_test_dep">
+                              <sch:rule context="ind-def:filehash_test">
+                                    <sch:report test="true()">DEPRECATED TEST: <sch:value-of select="name()"/> ID: <sch:value-of select="@id"/></sch:report>
+                              </sch:rule>
+                        </sch:pattern>
+                  </xsd:appinfo>
+                  <xsd:appinfo>
+                        <sch:pattern id="ind-def_hashtst">
+                              <sch:rule context="ind-def:filehash_test/ind-def:object">
+                                    <sch:assert test="@object_ref=ancestor::oval-def:oval_definitions/oval-def:objects/ind-def:filehash_object/@id"><sch:value-of select="../@id"/> - the object child element of a filehash_test must reference a filesha1_object</sch:assert>
+                              </sch:rule>
+                              <sch:rule context="ind-def:filehash_test/ind-def:state">
+                                    <sch:assert test="@state_ref=ancestor::oval-def:oval_definitions/oval-def:states/ind-def:filehash_state/@id"><sch:value-of select="../@id"/> - the state child element of a filehash_test must reference a filesha1_state</sch:assert>
+                              </sch:rule>
+                        </sch:pattern>
+                  </xsd:appinfo>
+            </xsd:annotation>
+            <xsd:complexType>
+                  <xsd:complexContent>
+                        <xsd:extension base="oval-def:TestType">
+                              <xsd:sequence>
+                                    <xsd:element name="object" type="oval-def:ObjectRefType" />
+                                    <xsd:element name="state" type="oval-def:StateRefType" minOccurs="0" maxOccurs="unbounded"/>
+                              </xsd:sequence>
+                        </xsd:extension>
+                  </xsd:complexContent>
+            </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="filehash_object" substitutionGroup="oval-def:object">
+            <xsd:annotation>
+                  <xsd:documentation>The filehash_object element is used by a file hash test to define the specific file(s) to be evaluated. The filehash_object will only collect regular files on UNIX systems and FILE_TYPE_DISK files on Windows systems. Each object extends the standard ObjectType as defined in the oval-definitions-schema and one should refer to the ObjectType description for more information. The common set element allows complex objects to be created using filters and set logic. Again, please refer to the description of the set element in the oval-definitions-schema.</xsd:documentation>
+                  <xsd:documentation>A filehash_object defines the path and filename of the file(s). In addition, a number of behaviors may be provided that help guide the collection of objects. Please refer to the FileBehaviors complex type for more information about specific behaviors.</xsd:documentation>
+                  <xsd:documentation>The set of files to be evaluated may be identified with either a complete filepath or a path and filename. Only one of these options may be selected.</xsd:documentation>
+                  <xsd:documentation>It is important to note that the 'max_depth' and 'recurse_direction' attributes of the 'behaviors' element do not apply to the 'filepath' element, only to the 'path' and 'filename' elements.  This is because the 'filepath' element represents an absolute path to a particular file and it is not possible to recurse over a file.</xsd:documentation>
+                  <xsd:appinfo>
+                        <oval:deprecated_info>
+                              <oval:version>5.8</oval:version>
+                              <oval:reason>Replaced by the filehash58_object.</oval:reason>
+                              <oval:comment>This object has been deprecated and may be removed in a future version of the language.</oval:comment>
+                        </oval:deprecated_info>
+                        <sch:pattern id="ind-def_filehash_object_dep">
+                              <sch:rule context="ind-def:filehash_object">
+                                    <sch:report test="true()">DEPRECATED OBJECT: <sch:value-of select="name()"/> ID: <sch:value-of select="@id"/></sch:report>
+                              </sch:rule>
+                        </sch:pattern>
+                  </xsd:appinfo>
+            </xsd:annotation>
+            <xsd:complexType>
+                  <xsd:complexContent>
+                        <xsd:extension base="oval-def:ObjectType">
+                              <xsd:sequence>
+                                    <xsd:choice>
+                                          <xsd:element ref="oval-def:set"/>
+                                          <xsd:sequence>
+                                                <xsd:element name="behaviors" type="ind-def:FileBehaviors" minOccurs="0" maxOccurs="1"/>
+                                                <xsd:choice>
+                                                      <xsd:element name="filepath" type="oval-def:EntityObjectStringType">
+                                                            <xsd:annotation>
+                                                                  <xsd:documentation>The filepath element specifies the absolute path for a file on the machine. A directory cannot be specified as a filepath.</xsd:documentation>
+                                                                  <xsd:appinfo>
+                                                                        <sch:pattern id="ind-def_hashobjfilepath">
+                                                                              <sch:rule context="ind-def:filehash_object/ind-def:filepath">
+                                                                                    <sch:assert test="not(preceding-sibling::ind-def:behaviors[@max_depth or @recurse_direction])"><sch:value-of select="../@id"/> - the max_depth and recurse_direction behaviors are not allowed with a filepath entity</sch:assert>
+                                                                              </sch:rule>
+                                                                        </sch:pattern>
+                                                                        <sch:pattern id="ind-def_hashobjfilepath2">
+                                                                              <sch:rule context="ind-def:filehash_object/ind-def:filepath[not(@operation='equals' or not(@operation))]">
+                                                                                    <sch:assert test="not(preceding-sibling::ind-def:behaviors[@recurse_file_system='defined'])"><sch:value-of select="../@id"/> - the recurse_file_system behavior MUST not be set to 'defined' when a pattern match is used with a filepath entity.</sch:assert>
+                                                                              </sch:rule>
+                                                                        </sch:pattern>
+                                                                  </xsd:appinfo>
+                                                            </xsd:annotation>
+                                                      </xsd:element>
+                                                      <xsd:sequence>
+                                                          <xsd:element name="path" type="oval-def:EntityObjectStringType">
+                                                                <xsd:annotation>
+                                                                      <xsd:documentation>The path element specifies the directory component of the absolute path to a file on the machine.</xsd:documentation>
+                                                                      <xsd:appinfo>
+                                                                            <sch:pattern id="ind-def_hashobjpath">
+                                                                                  <sch:rule context="ind-def:filehash_object/ind-def:path[not(@operation='equals' or not(@operation))]">
+                                                                                        <sch:assert test="not(preceding-sibling::ind-def:behaviors[@recurse_file_system='defined'])"><sch:value-of select="../@id"/> - the recurse_file_system behavior MUST not be set to 'defined' when a pattern match is used with a path entity.</sch:assert>
+                                                                                        <sch:assert test="not(preceding-sibling::ind-def:behaviors[@max_depth])"><sch:value-of select="../@id"/> - the max_depth behavior MUST not be used when a pattern match is used with a path entity.</sch:assert>
+                                                                                        <sch:assert test="not(preceding-sibling::ind-def:behaviors[@recurse_direction])"><sch:value-of select="../@id"/> - the recurse_direction behavior MUST not be used when a pattern match is used with a path entity.</sch:assert>
+                                                                                        <sch:assert test="not(preceding-sibling::ind-def:behaviors[@recurse])"><sch:value-of select="../@id"/> - the recurse behavior MUST not be used when a pattern match is used with a path entity.</sch:assert>
+                                                                                  </sch:rule>
+                                                                            </sch:pattern>
+                                                                      </xsd:appinfo>
+                                                                </xsd:annotation>
+                                                          </xsd:element>
+                                                          <xsd:element name="filename" type="oval-def:EntityObjectStringType">
+                                                                <xsd:annotation>
+                                                                      <xsd:documentation>The filename element specifies the name of the file.</xsd:documentation>
+                                                                      <xsd:appinfo>
+                                                                            <sch:pattern id="ind-def_hashobjfilename">
+                                                                                  <sch:rule context="ind-def:filehash_object/ind-def:filename">
+                                                                                        <sch:assert test="(@var_ref and .='') or not(.='') or (.='' and @operation = 'pattern match')"><sch:value-of select="../@id"/> - filename entity cannot be empty unless the xsi:nil attribute is set to true or a var_ref is used</sch:assert>
+                                                                                  </sch:rule>
+                                                                            </sch:pattern>
+                                                                      </xsd:appinfo>
+                                                                </xsd:annotation>
+                                                          </xsd:element>
+                                                      </xsd:sequence>
+                                                </xsd:choice>
+                                          </xsd:sequence>
+                                    </xsd:choice>
+                              </xsd:sequence>
+                        </xsd:extension>
+                  </xsd:complexContent>
+            </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="filehash_state" substitutionGroup="oval-def:state">
+            <xsd:annotation>
+                  <xsd:documentation>The filehash_state element contains entities that are used to check the file path, name, and the different hashes associated with a specific file.</xsd:documentation>
+                  <xsd:appinfo>
+                        <oval:deprecated_info>
+                              <oval:version>5.8</oval:version>
+                              <oval:reason>Replaced by the filehash58_state.</oval:reason>
+                              <oval:comment>This object has been deprecated and may be removed in a future version of the language.</oval:comment>
+                        </oval:deprecated_info>
+                        <sch:pattern id="ind-def_filehash_state_dep">
+                              <sch:rule context="ind-def:filehash_state">
+                                    <sch:report test="true()">DEPRECATED STATE: <sch:value-of select="name()"/> ID: <sch:value-of select="@id"/></sch:report>
+                              </sch:rule>
+                        </sch:pattern>
+                  </xsd:appinfo>
+            </xsd:annotation>
+            <xsd:complexType>
+                  <xsd:complexContent>
+                        <xsd:extension base="oval-def:StateType">
+                              <xsd:sequence>
+                                    <xsd:element name="filepath" type="oval-def:EntityStateStringType" minOccurs="0">
+                                          <xsd:annotation>
+                                                <xsd:documentation>The filepath element specifies the absolute path for a file on the machine. A directory cannot be specified as a filepath.</xsd:documentation>
+                                          </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="path" type="oval-def:EntityStateStringType" minOccurs="0" maxOccurs="1">
+                                          <xsd:annotation>
+                                                <xsd:documentation>The path element specifies the directory component of the absolute path to a file on the machine.</xsd:documentation>
+                                          </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="filename" type="oval-def:EntityStateStringType" minOccurs="0" maxOccurs="1">
+                                          <xsd:annotation>
+                                                <xsd:documentation>The filename element specifies the name of the file.</xsd:documentation>
+                                          </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="md5" type="oval-def:EntityStateStringType" minOccurs="0" maxOccurs="1">
+                                          <xsd:annotation>
+                                                <xsd:documentation>The md5 element is the md5 hash of the file.</xsd:documentation>
+                                          </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="sha1" type="oval-def:EntityStateStringType" minOccurs="0" maxOccurs="1">
+                                          <xsd:annotation>
+                                                <xsd:documentation>The sha1 element is the sha1 hash of the file.</xsd:documentation>
+                                          </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="windows_view" type="ind-def:EntityStateWindowsViewType" minOccurs="0">
+                                          <xsd:annotation>
+                                                <xsd:documentation>The windows view value to which this was targeted. This is used to indicate which view (32-bit or 64-bit), the associated State applies to.  This entity only applies to 64-bit Microsoft Windows operating systems.</xsd:documentation>
+                                          </xsd:annotation>
+                                    </xsd:element>
+                              </xsd:sequence>
+                        </xsd:extension>
+                  </xsd:complexContent>
+            </xsd:complexType>
+      </xsd:element>
+      <!-- =============================================================================== -->
       <!-- ============================  FILE HASH TEST (58)  ============================ -->
       <!-- =============================================================================== -->
       <xsd:element name="filehash58_test" substitutionGroup="oval-def:test">
@@ -97,7 +282,7 @@
                               <oval:test>filehash58_test</oval:test>
                               <oval:object>filehash58_object</oval:object>
                               <oval:state>filehash58_state</oval:state>
-                              <oval:item target_namespace="urn:oval:v6:system-characteristics:independent">filehash58_item</oval:item>
+                              <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#independent">filehash58_item</oval:item>
                         </oval:element_mapping>
                   </xsd:appinfo>
                   <xsd:appinfo>
@@ -137,7 +322,7 @@
                                     <sch:let name="reffed_state" value="ancestor::oval-def:oval_definitions/oval-def:states/*[@id=$state_ref]"/>
                                     <sch:let name="state_name" value="local-name($reffed_state)"/>
                                     <sch:let name="state_namespace" value="namespace-uri($reffed_state)"/>
-                                    <sch:assert test="(($state_namespace='urn:oval:v6:definitions:independent') and ($state_name='filehash58_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
+                                    <sch:assert test="(($state_namespace='http://oval.mitre.org/XMLSchema/oval-definitions-5#independent') and ($state_name='filehash58_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
                               </sch:rule>
                         </sch:pattern>
                   </xsd:appinfo>
@@ -255,6 +440,122 @@
             </xsd:complexType>
       </xsd:element>
       <!-- =============================================================================== -->
+      <!-- =======================  ENVIRONMENT VARIABLE TEST  =========================== -->
+      <!-- =============================================================================== -->
+      <xsd:element name="environmentvariable_test" substitutionGroup="oval-def:test">
+            <xsd:annotation>
+                  <xsd:documentation>The environmentvariable_test element is used to check an environment variable found on the system. It extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information. The required object element references a environmentvariable_object and the optional state element specifies the metadata to check.</xsd:documentation>
+                  <xsd:appinfo>
+                        <oval:element_mapping>
+                              <oval:test>environmentvariable_test</oval:test>
+                              <oval:object>environmentvariable_object</oval:object>
+                              <oval:state>environmentvariable_state</oval:state>
+                              <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#independent">environmentvariable_item</oval:item>
+                        </oval:element_mapping>
+                  </xsd:appinfo>
+                  <xsd:appinfo>
+                        <oval:deprecated_info>
+                              <oval:version>5.8</oval:version>
+                              <oval:reason>Replaced by the environmentvariable58_test.</oval:reason>
+                              <oval:comment>This object has been deprecated and may be removed in a future version of the language.</oval:comment>
+                        </oval:deprecated_info>
+                        <sch:pattern id="ind-def_environmentvariable_test_dep">
+                              <sch:rule context="ind-def:environmentvariable_test">
+                                    <sch:report test="true()">DEPRECATED TEST: <sch:value-of select="name()"/> ID: <sch:value-of select="@id"/></sch:report>
+                              </sch:rule>
+                        </sch:pattern>
+                  </xsd:appinfo>
+                  <xsd:appinfo>
+                        <sch:pattern id="ind-def_envtst">
+                              <sch:rule context="ind-def:environmentvariable_test/ind-def:object">
+                                    <sch:assert test="@object_ref=ancestor::oval-def:oval_definitions/oval-def:objects/ind-def:environmentvariable_object/@id"><sch:value-of select="../@id"/> - the object child element of an environmentvariable_test must reference a environmentvariable_object</sch:assert>
+                              </sch:rule>
+                              <sch:rule context="ind-def:environmentvariable_test/ind-def:state">
+                                    <sch:assert test="@state_ref=ancestor::oval-def:oval_definitions/oval-def:states/ind-def:environmentvariable_state/@id"><sch:value-of select="../@id"/> - the state child element of an environmentvariable_test must reference a environmentvariable_state</sch:assert>
+                              </sch:rule>
+                        </sch:pattern>
+                  </xsd:appinfo>
+            </xsd:annotation>
+            <xsd:complexType>
+                  <xsd:complexContent>
+                        <xsd:extension base="oval-def:TestType">
+                              <xsd:sequence>
+                                    <xsd:element name="object" type="oval-def:ObjectRefType" />
+                                    <xsd:element name="state" type="oval-def:StateRefType" minOccurs="0" maxOccurs="unbounded"/>
+                              </xsd:sequence>
+                        </xsd:extension>
+                  </xsd:complexContent>
+            </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="environmentvariable_object" substitutionGroup="oval-def:object">
+            <xsd:annotation>
+                  <xsd:documentation>The environmentvariable_object element is used by an environment variable test to define the specific environment variable(s) to be evaluated. Each object extends the standard ObjectType as defined in the oval-definitions-schema and one should refer to the ObjectType description for more information. The common set element allows complex objects to be created using filters and set logic. Again, please refer to the description of the set element in the oval-definitions-schema.</xsd:documentation>
+                  <xsd:appinfo>
+                        <oval:deprecated_info>
+                              <oval:version>5.8</oval:version>
+                              <oval:reason>Replaced by the environmentvariable58_object.</oval:reason>
+                              <oval:comment>This object has been deprecated and may be removed in a future version of the language.</oval:comment>
+                        </oval:deprecated_info>
+                        <sch:pattern id="ind-def_environmentvariable_object_dep">
+                              <sch:rule context="ind-def:environmentvariable_object">
+                                    <sch:report test="true()">DEPRECATED OBJECT: <sch:value-of select="name()"/> ID: <sch:value-of select="@id"/></sch:report>
+                              </sch:rule>
+                        </sch:pattern>
+                  </xsd:appinfo>
+            </xsd:annotation>
+            <xsd:complexType>
+                  <xsd:complexContent>
+                        <xsd:extension base="oval-def:ObjectType">
+                              <xsd:sequence>
+                                    <xsd:choice>
+                                          <xsd:element ref="oval-def:set"/>
+                                          <xsd:element name="name" type="oval-def:EntityObjectStringType">
+                                                <xsd:annotation>
+                                                      <xsd:documentation>This element describes the name of an environment variable.</xsd:documentation>
+                                                </xsd:annotation>
+                                          </xsd:element>
+                                    </xsd:choice>
+                              </xsd:sequence>
+                        </xsd:extension>
+                  </xsd:complexContent>
+            </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="environmentvariable_state" substitutionGroup="oval-def:state">
+            <xsd:annotation>
+                  <xsd:documentation>The environmentvariable_state element contains two entities that are used to check the name of the specified environment variable and the value associated with it.</xsd:documentation>
+                  <xsd:appinfo>
+                        <oval:deprecated_info>
+                              <oval:version>5.8</oval:version>
+                              <oval:reason>Replaced by the environmentvariable58_state.</oval:reason>
+                              <oval:comment>This object has been deprecated and may be removed in a future version of the language.</oval:comment>
+                        </oval:deprecated_info>
+                        <sch:pattern id="ind-def_environmentvariable_state_dep">
+                              <sch:rule context="ind-def:environmentvariable_state">
+                                    <sch:report test="true()">DEPRECATED STATE: <sch:value-of select="name()"/> ID: <sch:value-of select="@id"/></sch:report>
+                              </sch:rule>
+                        </sch:pattern>
+                  </xsd:appinfo>
+            </xsd:annotation>
+            <xsd:complexType>
+                  <xsd:complexContent>
+                        <xsd:extension base="oval-def:StateType">
+                              <xsd:sequence>
+                                    <xsd:element name="name" type="oval-def:EntityStateStringType" minOccurs="0" maxOccurs="1">
+                                          <xsd:annotation>
+                                                <xsd:documentation>This element describes the name of an environment variable.</xsd:documentation>
+                                          </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="value" type="oval-def:EntityStateAnySimpleType" minOccurs="0" maxOccurs="1">
+                                          <xsd:annotation>
+                                                <xsd:documentation>The actual value of the specified environment variable.</xsd:documentation>
+                                          </xsd:annotation>
+                                    </xsd:element>
+                              </xsd:sequence>
+                        </xsd:extension>
+                  </xsd:complexContent>
+            </xsd:complexType>
+      </xsd:element>
+      <!-- =============================================================================== -->
       <!-- =======================  ENVIRONMENT VARIABLE TEST (58) ======================= -->
       <!-- =============================================================================== -->
       <xsd:element name="environmentvariable58_test" substitutionGroup="oval-def:test">
@@ -265,7 +566,7 @@
                               <oval:test>environmentvariable58_test</oval:test>
                               <oval:object>environmentvariable58_object</oval:object>
                               <oval:state>environmentvariable58_state</oval:state>
-                              <oval:item target_namespace="urn:oval:v6:system-characteristics:independent">environmentvariable58_item</oval:item>
+                              <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#independent">environmentvariable58_item</oval:item>
                         </oval:element_mapping>
                   </xsd:appinfo>
                   <xsd:appinfo>
@@ -302,7 +603,7 @@
                                     <sch:let name="reffed_state" value="ancestor::oval-def:oval_definitions/oval-def:states/*[@id=$state_ref]"/>
                                     <sch:let name="state_name" value="local-name($reffed_state)"/>
                                     <sch:let name="state_namespace" value="namespace-uri($reffed_state)"/>
-                                    <sch:assert test="(($state_namespace='urn:oval:v6:definitions:independent') and ($state_name='environmentvariable58_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
+                                    <sch:assert test="(($state_namespace='http://oval.mitre.org/XMLSchema/oval-definitions-5#independent') and ($state_name='environmentvariable58_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
                               </sch:rule>
                         </sch:pattern>
                   </xsd:appinfo>
@@ -361,6 +662,320 @@
             </xsd:complexType>
       </xsd:element>
       <!-- =============================================================================== -->
+      <!-- =================================  LDAP TEST  ================================= -->
+      <!-- =============================================================================== -->
+      <xsd:element name="ldap_test" substitutionGroup="oval-def:test">
+            <xsd:annotation>
+                  <xsd:documentation>The LDAP test is used to check information about specific entries in an LDAP directory. It extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information. The required object element references an ldap_object and the optional state element, ldap_state, specifies the metadata to check.</xsd:documentation>
+                  <xsd:appinfo>
+                        <oval:element_mapping>
+                              <oval:test>ldap_test</oval:test>
+                              <oval:object>ldap_object</oval:object>
+                              <oval:state>ldap_state</oval:state>
+                              <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#independent">ldap_item</oval:item>
+                        </oval:element_mapping>
+                  </xsd:appinfo>
+					<xsd:appinfo>
+						<oval:deprecated_info>
+							<oval:version>5.12</oval:version>
+							<oval:comment>This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.</oval:comment>
+						</oval:deprecated_info>
+					</xsd:appinfo>
+                  <xsd:appinfo>
+                        <sch:pattern id="ind-def_ldaptst">
+                              <sch:rule context="ind-def:ldap_test/ind-def:object">
+                                    <sch:assert test="@object_ref=ancestor::oval-def:oval_definitions/oval-def:objects/ind-def:ldap_object/@id"><sch:value-of select="../@id"/> - the object child element of an ldap_test must reference an ldap_object</sch:assert>
+                              </sch:rule>
+                              <sch:rule context="ind-def:ldap_test/ind-def:state">
+                                    <sch:assert test="@state_ref=ancestor::oval-def:oval_definitions/oval-def:states/ind-def:ldap_state/@id"><sch:value-of select="../@id"/> - the state child element of an ldap_test must reference an ldap_state</sch:assert>
+                              </sch:rule>
+                        </sch:pattern>
+                  </xsd:appinfo>
+            </xsd:annotation>
+            <xsd:complexType>
+                  <xsd:complexContent>
+                        <xsd:extension base="oval-def:TestType">
+                              <xsd:sequence>
+                                    <xsd:element name="object" type="oval-def:ObjectRefType"/>
+                                    <xsd:element name="state" type="oval-def:StateRefType" minOccurs="0" maxOccurs="unbounded"/>
+                              </xsd:sequence>
+                        </xsd:extension>
+                  </xsd:complexContent>
+            </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ldap_object" substitutionGroup="oval-def:object">
+            <xsd:annotation>
+                  <xsd:documentation>The ldap_object element is used by an LDAP test to define the objects to be evaluated based on a specified state. Each object extends the standard ObjectType as defined in the oval-definitions-schema and one should refer to the ObjectType description for more information. The common set element allows complex objects to be created using filters and set logic. Again, please refer to the description of the set element in the oval-definitions-schema.</xsd:documentation>
+            </xsd:annotation>
+            <xsd:complexType>
+                  <xsd:complexContent>
+                        <xsd:extension base="oval-def:ObjectType">
+                              <xsd:sequence>
+                                    <xsd:choice>
+                                          <xsd:element ref="oval-def:set"/>
+                                          <xsd:sequence>
+                                                <xsd:element name="behaviors" type="ind-def:LdapBehaviors" minOccurs="0" maxOccurs="1"/>
+                                                <xsd:element name="suffix" type="oval-def:EntityObjectStringType">
+                                                      <xsd:annotation>
+                                                            <xsd:documentation>Each object in an LDAP directory exists under a certain suffix (also known as a naming context). A suffix is defined as a single object in the Directory Information Tree (DIT) with every object in the tree subordinate to it.</xsd:documentation>
+                                                      </xsd:annotation>
+                                                </xsd:element>
+                                                <xsd:element name="relative_dn" type="oval-def:EntityObjectStringType" nillable="true">
+                                                      <xsd:annotation>
+                                                            <xsd:documentation>The relative_dn field is used to uniquely identify an object inside the specified suffix. It contains all of the parts of the object's distinguished name except those outlined by the suffix. If the xsi:nil attribute is set to true, then the object being specified is the higher level suffix. In this case, the relative_dn element should not be collected or used in analysis. Setting xsi:nil equal to true is different than using a .* pattern match, which says to collect every relative distinguished name under a given suffix.</xsd:documentation>
+                                                      </xsd:annotation>
+                                                </xsd:element>
+                                                <xsd:element name="attribute" type="oval-def:EntityObjectStringType" nillable="true">
+                                                      <xsd:annotation>
+                                                            <xsd:documentation>Specifies a named value contained by the object. If the xsi:nil attribute is set to true, the attribute element should not be collected or used in analysis. Setting xsi:nil equal to true is different than using a .* pattern match, which says to collect every attribute under a given relative distinguished name.</xsd:documentation>
+                                                      </xsd:annotation>
+                                                </xsd:element>
+                                          </xsd:sequence>
+                                    </xsd:choice>
+                              </xsd:sequence>
+                        </xsd:extension>
+                  </xsd:complexContent>
+            </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ldap_state" substitutionGroup="oval-def:state">
+            <xsd:annotation>
+                  <xsd:documentation>The ldap_state element defines the different information that can be used to evaluate the specified entries in an LDAP directory. An ldap_test will reference a specific instance of this state that defines the exact settings that need to be evaluated. Please refer to the individual elements in the schema for more details about what each represents.</xsd:documentation>
+            </xsd:annotation>
+            <xsd:complexType>
+                  <xsd:complexContent>
+                        <xsd:extension base="oval-def:StateType">
+                              <xsd:sequence>
+                                    <xsd:element name="suffix" type="oval-def:EntityStateStringType" minOccurs="0">
+                                          <xsd:annotation>
+                                                <xsd:documentation>Each object in an LDAP directory exists under a certain suffix (also known as a naming context). A suffix is defined as a single object in the Directory Information Tree (DIT) with every object in the tree subordinate to it.</xsd:documentation>
+                                          </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="relative_dn" type="oval-def:EntityStateStringType" minOccurs="0">
+                                          <xsd:annotation>
+                                                <xsd:documentation>The relative_dn field is used to uniquely identify an object inside the specified suffix. It contains all of the parts of the object's distinguished name except those outlined by the suffix.</xsd:documentation>
+                                          </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="attribute" type="oval-def:EntityStateStringType" minOccurs="0">
+                                          <xsd:annotation>
+                                                <xsd:documentation>Specifies a named value contained by the object.</xsd:documentation>
+                                          </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="object_class" type="oval-def:EntityStateStringType" minOccurs="0">
+                                          <xsd:annotation>
+                                                <xsd:documentation>The name of the class of which the object is an instance.</xsd:documentation>
+                                          </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="ldaptype" type="ind-def:EntityStateLdaptypeType" minOccurs="0">
+                                          <xsd:annotation>
+                                                <xsd:documentation>Specifies the type of information that the specified attribute represents.</xsd:documentation>
+                                          </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="value" type="oval-def:EntityStateAnySimpleType" minOccurs="0">
+                                          <xsd:annotation>
+                                                <xsd:documentation>The actual value of the specified LDAP attribute.</xsd:documentation>
+                                          </xsd:annotation>
+                                    </xsd:element>
+                              </xsd:sequence>
+                        </xsd:extension>
+                  </xsd:complexContent>
+            </xsd:complexType>
+      </xsd:element>
+      <xsd:complexType name="LdapBehaviors">
+            <xsd:annotation>
+                  <xsd:documentation>The LdapBehaviors complex type defines a number of behaviors that allow a more detailed definition of the ldap_object being specified.</xsd:documentation>
+            </xsd:annotation>
+            <xsd:attribute name="scope" use="optional" default="BASE">
+                  <xsd:annotation>
+                        <xsd:documentation>'scope' defines the depth from the base distinguished name to which the search should occur. The base distinguished name is the starting point of the search and is composed of the specified suffix and relative distinguished name. A value of 'BASE' indicates to search only the entry at the base distinguished name, a value of 'ONE' indicates to search all entries one level under the base distinguished name - but NOT including the base distinguished name, and a value of 'SUBTREE' indicates to search all entries at all levels under, and including, the specified base distinguished name. The default value is 'BASE'.</xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                              <xsd:enumeration value="BASE"/>
+                              <xsd:enumeration value="ONE"/>
+                              <xsd:enumeration value="SUBTREE"/>
+                        </xsd:restriction>
+                  </xsd:simpleType>
+            </xsd:attribute>
+      </xsd:complexType>
+      <!-- =============================================================================== -->
+      <!-- =================================  LDAP TEST (57)  ============================ -->
+      <!-- =============================================================================== -->
+      <xsd:element name="ldap57_test" substitutionGroup="oval-def:test">
+            <xsd:annotation>
+                  <xsd:documentation>The LDAP test is used to check information about specific entries in an LDAP directory. It extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information. The required object element references an ldap57_object and the optional state element, ldap57_state, specifies the metadata to check.</xsd:documentation>
+                  <xsd:documentation>Note that this test supports complex values that are in the form of a record. For simple (string based) value collection see the ldap_test.</xsd:documentation>
+                  <xsd:appinfo>
+                        <oval:element_mapping>
+                              <oval:test>ldap57_test</oval:test>
+                              <oval:object>ldap57_object</oval:object>
+                              <oval:state>ldap57_state</oval:state>
+                              <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#independent">ldap57_item</oval:item>
+                        </oval:element_mapping>
+                  </xsd:appinfo>
+                  <xsd:appinfo>
+                        <oval:deprecated_info>
+                              <oval:version>5.11.2</oval:version>
+                              <oval:reason>Use the original ldap_test. The ldap57_test suffers from ambiguity; it was never adequately specified, and it does not even seem possible to have structured data in the context of the enumerated LdaptypeTypes. Use the original ldap_test instead.</oval:reason>
+                              <oval:comment>This test has been deprecated and will be removed in version 6.0 of the language.</oval:comment>
+                        </oval:deprecated_info>
+                        <sch:pattern id="ind-def_ldap57_test_dep">
+                              <sch:rule context="ind-def:ldap57_test">
+                                    <sch:report test="true()">DEPRECATED TEST: <sch:value-of select="name()"/> ID: <sch:value-of select="@id"/></sch:report>
+                              </sch:rule>
+                        </sch:pattern>
+                  </xsd:appinfo>
+                  <xsd:appinfo>
+                        <sch:pattern id="ind-def_ldap57_test">
+                              <sch:rule context="ind-def:ldap57_test/ind-def:object">
+                                    <sch:assert test="@object_ref=ancestor::oval-def:oval_definitions/oval-def:objects/ind-def:ldap57_object/@id"><sch:value-of select="../@id"/> - the object child element of an ldap57_test must reference an ldap57_object</sch:assert>
+                              </sch:rule>
+                              <sch:rule context="ind-def:ldap57_test/ind-def:state">
+                                    <sch:assert test="@state_ref=ancestor::oval-def:oval_definitions/oval-def:states/ind-def:ldap57_state/@id"><sch:value-of select="../@id"/> - the state child element of an ldap57_test must reference an ldap57_state</sch:assert>
+                              </sch:rule>
+                        </sch:pattern>
+                  </xsd:appinfo>
+            </xsd:annotation>
+            <xsd:complexType>
+                  <xsd:complexContent>
+                        <xsd:extension base="oval-def:TestType">
+                              <xsd:sequence>
+                                    <xsd:element name="object" type="oval-def:ObjectRefType"/>
+                                    <xsd:element name="state" type="oval-def:StateRefType" minOccurs="0" maxOccurs="unbounded"/>
+                              </xsd:sequence>
+                        </xsd:extension>
+                  </xsd:complexContent>
+            </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ldap57_object" substitutionGroup="oval-def:object">
+            <xsd:annotation>
+                  <xsd:documentation>The ldap57_object element is used by an LDAP test to define the objects to be evaluated based on a specified state. Each object extends the standard ObjectType as defined in the oval-definitions-schema and one should refer to the ObjectType description for more information. The common set element allows complex objects to be created using filters and set logic. Again, please refer to the description of the set element in the oval-definitions-schema.</xsd:documentation>
+                  <xsd:documentation>Note that this object supports complex values that are in the form of a record. For simple (string based) value collection see the ldap_object.</xsd:documentation>
+                  <xsd:appinfo>
+                        <oval:deprecated_info>
+                              <oval:version>5.11.2</oval:version>
+                              <oval:reason>Use the original ldap_object. The ldap57_test suffers from ambiguity; it was never adequately specified, and it does not even seem possible to have structured data in the context of the enumerated LdaptypeTypes. Use the original ldap_test instead.</oval:reason>
+                              <oval:comment>This test has been deprecated and will be removed in version 6.0 of the language.</oval:comment>
+                        </oval:deprecated_info>
+                        <sch:pattern id="ind-def_ldap57_object_dep">
+                              <sch:rule context="ind-def:ldap57_object">
+                                    <sch:report test="true()">DEPRECATED TEST: <sch:value-of select="name()"/> ID: <sch:value-of select="@id"/></sch:report>
+                              </sch:rule>
+                        </sch:pattern>
+                  </xsd:appinfo>
+                  <xsd:appinfo>
+                        <sch:pattern id="ind-def_ldap57_object_verify_filter_state">
+                              <sch:rule context="ind-def:ldap57_object//oval-def:filter">
+                                    <sch:let name="parent_object" value="ancestor::ind-def:ldap57_object"/>
+                                    <sch:let name="parent_object_id" value="$parent_object/@id"/>
+                                    <sch:let name="state_ref" value="."/>
+                                    <sch:let name="reffed_state" value="ancestor::oval-def:oval_definitions/oval-def:states/*[@id=$state_ref]"/>
+                                    <sch:let name="state_name" value="local-name($reffed_state)"/>
+                                    <sch:let name="state_namespace" value="namespace-uri($reffed_state)"/>
+                                    <sch:assert test="(($state_namespace='http://oval.mitre.org/XMLSchema/oval-definitions-5#independent') and ($state_name='ldap57_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
+                              </sch:rule>
+                        </sch:pattern>
+                  </xsd:appinfo>
+            </xsd:annotation>
+            <xsd:complexType>
+                  <xsd:complexContent>
+                        <xsd:extension base="oval-def:ObjectType">
+                              <xsd:sequence>
+                                    <xsd:choice>
+                                          <xsd:element ref="oval-def:set"/>
+                                          <xsd:sequence>
+                                                <xsd:element name="behaviors" type="ind-def:LdapBehaviors" minOccurs="0" maxOccurs="1"/>
+                                                <xsd:element name="suffix" type="oval-def:EntityObjectStringType">
+                                                      <xsd:annotation>
+                                                            <xsd:documentation>Each object in an LDAP directory exists under a certain suffix (also known as a naming context). A suffix is defined as a single object in the Directory Information Tree (DIT) with every object in the tree subordinate to it.</xsd:documentation>
+                                                      </xsd:annotation>
+                                                </xsd:element>
+                                                <xsd:element name="relative_dn" type="oval-def:EntityObjectStringType" nillable="true">
+                                                      <xsd:annotation>
+                                                            <xsd:documentation>The relative_dn field is used to uniquely identify an object inside the specified suffix. It contains all of the parts of the object's distinguished name except those outlined by the suffix. If the xsi:nil attribute is set to true, then the object being specified is the higher level suffix. In this case, the relative_dn element should not be collected or used in analysis. Setting xsi:nil equal to true is different than using a .* pattern match, which says to collect every relative distinguished name under a given suffix.</xsd:documentation>
+                                                      </xsd:annotation>
+                                                </xsd:element>
+                                                <xsd:element name="attribute" type="oval-def:EntityObjectStringType" nillable="true">
+                                                      <xsd:annotation>
+                                                            <xsd:documentation>Specifies a named value contained by the object. If the xsi:nil attribute is set to true, the attribute element should not be collected or used in analysis. Setting xsi:nil equal to true is different than using a .* pattern match, which says to collect every attribute under a given relative distinguished name.</xsd:documentation>
+                                                      </xsd:annotation>
+                                                </xsd:element>
+                                                <xsd:element ref="oval-def:filter" minOccurs="0" maxOccurs="unbounded"/>
+                                          </xsd:sequence>
+                                    </xsd:choice>
+                              </xsd:sequence>
+                        </xsd:extension>
+                  </xsd:complexContent>
+            </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ldap57_state" substitutionGroup="oval-def:state">
+            <xsd:annotation>
+                  <xsd:documentation>The ldap57_state element defines the different information that can be used to evaluate the specified entries in an LDAP directory. An ldap57_test will reference a specific instance of this state that defines the exact settings that need to be evaluated. Please refer to the individual elements in the schema for more details about what each represents.</xsd:documentation>
+                  <xsd:documentation>Note that this state supports complex values that are in the form of a record. For simple (string based) value collection see the ldap_state.</xsd:documentation>
+                  <xsd:appinfo>
+                        <oval:deprecated_info>
+                              <oval:version>5.11.2</oval:version>
+                              <oval:reason>Use the original ldap_state. The ldap57_test suffers from ambiguity; it was never adequately specified, and it does not even seem possible to have structured data in the context of the enumerated LdaptypeTypes. Use the original ldap_test instead.</oval:reason>
+                              <oval:comment>This test has been deprecated and will be removed in version 6.0 of the language.</oval:comment>
+                        </oval:deprecated_info>
+                        <sch:pattern id="ind-def_ldap57_state_dep">
+                              <sch:rule context="ind-def:ldap57_state">
+                                    <sch:report test="true()">DEPRECATED TEST: <sch:value-of select="name()"/> ID: <sch:value-of select="@id"/></sch:report>
+                              </sch:rule>
+                        </sch:pattern>
+                  </xsd:appinfo>
+            </xsd:annotation>
+            <xsd:complexType>
+                  <xsd:complexContent>
+                        <xsd:extension base="oval-def:StateType">
+                              <xsd:sequence>
+                                    <xsd:element name="suffix" type="oval-def:EntityStateStringType" minOccurs="0">
+                                          <xsd:annotation>
+                                                <xsd:documentation>Each object in an LDAP directory exists under a certain suffix (also known as a naming context). A suffix is defined as a single object in the Directory Information Tree (DIT) with every object in the tree subordinate to it.</xsd:documentation>
+                                          </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="relative_dn" type="oval-def:EntityStateStringType" minOccurs="0">
+                                          <xsd:annotation>
+                                                <xsd:documentation>The relative_dn field is used to uniquely identify an object inside the specified suffix. It contains all of the parts of the object's distinguished name except those outlined by the suffix.</xsd:documentation>
+                                          </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="attribute" type="oval-def:EntityStateStringType" minOccurs="0">
+                                          <xsd:annotation>
+                                                <xsd:documentation>Specifies a named value contained by the object.</xsd:documentation>
+                                          </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="object_class" type="oval-def:EntityStateStringType" minOccurs="0">
+                                          <xsd:annotation>
+                                                <xsd:documentation>The name of the class of which the object is an instance.</xsd:documentation>
+                                          </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="ldaptype" type="ind-def:EntityStateLdaptypeType" minOccurs="0">
+                                          <xsd:annotation>
+                                                <xsd:documentation>Specifies the type of information that the specified attribute represents.</xsd:documentation>
+                                          </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="value" type="oval-def:EntityStateRecordType" minOccurs="0">
+                                          <xsd:annotation>
+                                                <xsd:documentation>The actual value of the specified LDAP attribute. Note that while an LDAP attribute can contain structured data where it is necessary to collect multiple related fields that can be described by the 'record' datatype, it is not always the case.  It also is possible that an LDAP attribute can contain only a single value or an array of values. In these cases, there is not a name to uniquely identify the corresponding field which is a requirement for fields in the 'record' datatype.  As a result, the name of the LDAP attribute will be used to uniquely identify the field and satisfy this requirement.</xsd:documentation>
+                                                <xsd:appinfo>
+                                                      <sch:pattern id="ind-def_ldap57stevalue">
+                                                            <sch:rule context="ind-def:ldap57_state/ind-def:value">
+                                                                  <sch:assert test="@datatype='record'"><sch:value-of select="../@id"/> - datatype attribute for the value entity of a ldap57_state must be 'record'</sch:assert>
+                                                            </sch:rule>
+                                                      </sch:pattern>
+                                                </xsd:appinfo>
+                                          </xsd:annotation>
+                                          <xsd:unique name="UniqueLdapValueFieldName">
+                                                <xsd:selector xpath="./oval-def:field"/>
+                                                <xsd:field xpath="@name"/>
+                                          </xsd:unique>
+                                    </xsd:element>
+                              </xsd:sequence>
+                        </xsd:extension>
+                  </xsd:complexContent>
+            </xsd:complexType>
+      </xsd:element>
+
+      <!-- =============================================================================== -->
       <!-- ============================  SHELLCOMMAND TEST  =============================== -->
       <!-- =============================================================================== -->
       <xsd:element name="shellcommand_test" substitutionGroup="oval-def:test">
@@ -377,7 +992,7 @@ IMPORTANT! - Since this test requires the running of code supplied by content an
                               <oval:test>shellcommand_test</oval:test>
                               <oval:object>shellcommand_object</oval:object>
                               <oval:state>shellcommand_state</oval:state>
-                              <oval:item target_namespace="urn:oval:v6:system-characteristics:independent">shellcommand_item</oval:item>
+                              <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#independent">shellcommand_item</oval:item>
                         </oval:element_mapping>
                   </xsd:appinfo>
                   <xsd:appinfo>
@@ -418,7 +1033,7 @@ The evaluation of the object should always produce at least one item. If the com
                                     <sch:let name="reffed_state" value="ancestor::oval-def:oval_definitions/oval-def:states/*[@id=$state_ref]"/>
                                     <sch:let name="state_name" value="local-name($reffed_state)"/>
                                     <sch:let name="state_namespace" value="namespace-uri($reffed_state)"/>
-                                    <sch:assert test="(($state_namespace='urn:oval:v6:definitions:independent') and ($state_name='shellcommand_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
+                                    <sch:assert test="(($state_namespace='http://oval.mitre.org/XMLSchema/oval-definitions-5#independent') and ($state_name='shellcommand_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
                               </sch:rule>
                         </sch:pattern>
                   </xsd:appinfo>
@@ -480,7 +1095,7 @@ A subexpression (using parentheses) can call out a piece of the matched stdout_l
                                           </xsd:annotation>
                                     </xsd:element>
                                     
-                                    <xsd:element name="command" type="oval-def:EntityStateAnySimpleType" minOccurs="1" maxOccurs="1">
+                                    <xsd:element name="command" type="oval-def:EntityStateAnySimpleType" minOccurs="0" maxOccurs="1">
                                           <xsd:annotation>
                                                 <xsd:documentation>The 'command' element specifies the command string to be run on the target system and must match the same element in the associated shellcommand_object, verbatim.</xsd:documentation>
                                           </xsd:annotation>
@@ -522,6 +1137,362 @@ A subexpression (using parentheses) can call out a piece of the matched stdout_l
                   </xsd:complexContent>
             </xsd:complexType>
       </xsd:element>
+	 
+	  
+      <!-- =============================================================================== -->
+      <!-- =================================  SQL TEST  ================================== -->
+      <!-- =============================================================================== -->
+      <xsd:element name="sql_test" substitutionGroup="oval-def:test">
+            <xsd:annotation>
+                  <xsd:documentation>The sql test is used to check information stored in a database. It is often the case that applications store configuration settings in a database as opposed to a file. This test has been designed to enable those settings to be tested. It extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information. The required object element references a wmi_object and the optional state element specifies the metadata to check.</xsd:documentation>
+                  <xsd:appinfo>
+                        <oval:element_mapping>
+                              <oval:test>sql_test</oval:test>
+                              <oval:object>sql_object</oval:object>
+                              <oval:state>sql_state</oval:state>
+                              <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#independent">sql_item</oval:item>
+                        </oval:element_mapping>
+                  </xsd:appinfo>
+                  <xsd:appinfo>
+                        <oval:deprecated_info>
+                              <oval:version>5.7</oval:version>
+                              <oval:reason>Replaced by the sql57_test. This test allows for single fields to be selected from a database. A new test was created to allow more than one field to be selected in one statement. See the sql57_test.</oval:reason>
+                              <oval:comment>This object has been deprecated and may be removed in a future version of the language.</oval:comment>
+                        </oval:deprecated_info>
+                        <sch:pattern id="ind-def_sql_test_dep">
+                              <sch:rule context="ind-def:sql_test">
+                                    <sch:report test="true()">DEPRECATED TEST: <sch:value-of select="name()"/> ID: <sch:value-of select="@id"/></sch:report>
+                              </sch:rule>
+                        </sch:pattern>
+                  </xsd:appinfo>
+                  <xsd:appinfo>
+                        <sch:pattern id="ind-def_sqltst">
+                              <sch:rule context="ind-def:sql_test/ind-def:object">
+                                    <sch:assert test="@object_ref=ancestor::oval-def:oval_definitions/oval-def:objects/ind-def:sql_object/@id"><sch:value-of select="../@id"/> - the object child element of a sql_test must reference a sql_object</sch:assert>
+                              </sch:rule>
+                              <sch:rule context="ind-def:sql_test/ind-def:state">
+                                    <sch:assert test="@state_ref=ancestor::oval-def:oval_definitions/oval-def:states/ind-def:sql_state/@id"><sch:value-of select="../@id"/> - the state child element of a sql_test must reference a sql_state</sch:assert>
+                              </sch:rule>
+                        </sch:pattern>
+                  </xsd:appinfo>
+            </xsd:annotation>
+            <xsd:complexType>
+                  <xsd:complexContent>
+                        <xsd:extension base="oval-def:TestType">
+                              <xsd:sequence>
+                                    <xsd:element name="object" type="oval-def:ObjectRefType"/>
+                                    <xsd:element name="state" type="oval-def:StateRefType" minOccurs="0" maxOccurs="unbounded"/>
+                              </xsd:sequence>
+                        </xsd:extension>
+                  </xsd:complexContent>
+            </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="sql_object" substitutionGroup="oval-def:object">
+            <xsd:annotation>
+                  <xsd:documentation>The sql_object element is used by a sql test to define the specific database and query to be evaluated. Connection information is supplied allowing the tool to connect to the desired database and a query is supplied to call out the desired setting. Each object extends the standard ObjectType as defined in the oval-definitions-schema and one should refer to the ObjectType description for more information. The common set element allows complex objects to be created using filters and set logic. Again, please refer to the description of the set element in the oval-definitions-schema.</xsd:documentation>
+                  <xsd:appinfo>
+                        <oval:deprecated_info>
+                              <oval:version>5.7</oval:version>
+                              <oval:reason>Replaced by the sql57_object. This object allows for single fields to be selected from a database. A new object was created to allow more than one field to be selected in one statement. See the sql57_object.</oval:reason>
+                              <oval:comment>This object has been deprecated and may be removed in a future version of the language.</oval:comment>
+                        </oval:deprecated_info>
+                        <sch:pattern id="ind-def_sql_object_dep">
+                              <sch:rule context="ind-def:sql_object">
+                                    <sch:report test="true()">DEPRECATED OBJECT: <sch:value-of select="name()"/> ID: <sch:value-of select="@id"/></sch:report>
+                              </sch:rule>
+                        </sch:pattern>
+                  </xsd:appinfo>
+            </xsd:annotation>
+            <xsd:complexType>
+                  <xsd:complexContent>
+                        <xsd:extension base="oval-def:ObjectType">
+                              <xsd:sequence>
+                                    <xsd:choice>
+                                          <xsd:element ref="oval-def:set"/>
+                                          <xsd:sequence>
+                                                <xsd:element name="engine" type="ind-def:EntityObjectEngineType">
+                                                      <xsd:annotation>
+                                                            <xsd:documentation>The engine entity defines the specific database engine to use. Any tool looking to collect information about this object will need to know the engine in order to use the appropriate drivers to establish a connection.</xsd:documentation>
+                                                            <xsd:appinfo>
+                                                                  <sch:pattern id="ind-def_sqlobjdengine">
+                                                                        <sch:rule context="ind-def:sql_object/ind-def:engine">
+                                                                            <sch:assert test="not(@operation) or @operation='equals'"><sch:value-of select="../@id"/> - operation attribute for the engine entity of an sql_object should be 'equals', note that this overrules the general operation attribute validation (i.e. follow this one)</sch:assert>
+                                                                        </sch:rule>
+                                                                  </sch:pattern>
+                                                            </xsd:appinfo>
+                                                      </xsd:annotation>
+                                                </xsd:element>
+                                                <xsd:element name="version" type="oval-def:EntityObjectStringType">
+                                                      <xsd:annotation>
+                                                            <xsd:documentation>The version entity defines the specific version of the database engine to use. This is also important in determining the correct driver to use for establishing a connection.</xsd:documentation>
+                                                            <xsd:appinfo>
+                                                                  <sch:pattern id="ind-def_sqlobjversion">
+                                                                        <sch:rule context="ind-def:sql_object/ind-def:version">
+                                                                            <sch:assert test="not(@operation) or @operation='equals'"><sch:value-of select="../@id"/> - operation attribute for the version entity of an sql_object should be 'equals', note that this overrules the general operation attribute validation (i.e. follow this one)</sch:assert>
+                                                                        </sch:rule>
+                                                                  </sch:pattern>
+                                                            </xsd:appinfo>
+                                                      </xsd:annotation>
+                                                </xsd:element>
+                                                <xsd:element name="connection_string" type="oval-def:EntityObjectStringType">
+                                                      <xsd:annotation>
+                                                            <xsd:documentation>The connection_string entity defines specific connection parameters to be used in connecting to the database. This will help a tool connect to the correct database.</xsd:documentation>
+                                                            <xsd:appinfo>
+                                                                  <sch:pattern id="ind-def_sqlobjconnection_string">
+                                                                        <sch:rule context="ind-def:sql_object/ind-def:connection_string">
+                                                                            <sch:assert test="not(@operation) or @operation='equals'"><sch:value-of select="../@id"/> - operation attribute for the connection_string entity of an sql_object should be 'equals', note that this overrules the general operation attribute validation (i.e. follow this one)</sch:assert>
+                                                                        </sch:rule>
+                                                                  </sch:pattern>
+                                                            </xsd:appinfo>
+                                                      </xsd:annotation>
+                                                </xsd:element>
+                                                <xsd:element name="sql" type="oval-def:EntityObjectStringType">
+                                                      <xsd:annotation>
+                                                            <xsd:documentation>The sql entity defines a query used to identify the object(s) to test against. Any valid SQL query is usable with one exception, at most one field is allowed in the SELECT portion of the query. For example SELECT name FROM ... is valid, as is SELECT 'true' FROM ..., but SELECT name, number FROM ... is not valid. This is because the result element in the data section is only designed to work against a single field.</xsd:documentation>
+                                                            <xsd:appinfo>
+                                                                  <sch:pattern id="ind-def_sqlobjsql">
+                                                                        <sch:rule context="ind-def:sql_object/ind-def:sql">
+                                                                            <sch:assert test="not(@operation) or @operation='equals'"><sch:value-of select="../@id"/> - operation attribute for the sql entity of an sql_object should be 'equals', note that this overrules the general operation attribute validation (i.e. follow this one)</sch:assert>
+                                                                        </sch:rule>
+                                                                  </sch:pattern>
+                                                            </xsd:appinfo>
+                                                      </xsd:annotation>
+                                                </xsd:element>
+                                          </xsd:sequence>
+                                    </xsd:choice>
+                              </xsd:sequence>
+                        </xsd:extension>
+                  </xsd:complexContent>
+            </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="sql_state" substitutionGroup="oval-def:state">
+            <xsd:annotation>
+                  <xsd:documentation>The sql_state element contains two entities that are used to check the name of the specified field and the value associated with it.</xsd:documentation>
+                  <xsd:appinfo>
+                        <oval:deprecated_info>
+                              <oval:version>5.7</oval:version>
+                              <oval:reason>Replaced by the sql57_state. This state allows for single fields to be selected from a database. A new state was created to allow more than one field to be selected in one statement. See the sql57_state.</oval:reason>
+                              <oval:comment>This state has been deprecated and may be removed in a future version of the language.</oval:comment>
+                        </oval:deprecated_info>
+                        <sch:pattern id="ind-def_sql_state_dep">
+                              <sch:rule context="ind-def:sql_state">
+                                    <sch:report test="true()">DEPRECATED STATE: <sch:value-of select="name()"/> ID: <sch:value-of select="@id"/></sch:report>
+                              </sch:rule>
+                        </sch:pattern>
+                  </xsd:appinfo>
+            </xsd:annotation>
+            <xsd:complexType>
+                  <xsd:complexContent>
+                        <xsd:extension base="oval-def:StateType">
+                              <xsd:sequence>
+                                    <xsd:element name="engine" type="ind-def:EntityStateEngineType" minOccurs="0">
+                                          <xsd:annotation>
+                                                <xsd:documentation>The engine entity defines a specific database engine.</xsd:documentation>
+                                          </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="version" type="oval-def:EntityStateStringType" minOccurs="0">
+                                          <xsd:annotation>
+                                                <xsd:documentation>The version entity defines a specific version of a given database engine.</xsd:documentation>
+                                          </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="connection_string" type="oval-def:EntityStateStringType" minOccurs="0">
+                                          <xsd:annotation>
+                                                <xsd:documentation>The connection_string entity defines a set of parameters that help identify the connection to the database.</xsd:documentation>
+                                          </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="sql" type="oval-def:EntityStateStringType" minOccurs="0">
+                                          <xsd:annotation>
+                                                <xsd:documentation>the sql entity defines a query used to identify the object(s) to test against.</xsd:documentation>
+                                          </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="result" type="oval-def:EntityStateAnySimpleType" minOccurs="0">
+                                          <xsd:annotation>
+                                                <xsd:documentation>The result entity specifies how to test objects in the result set of the specified SQL statement. Only one comparable field is allowed. So if the SQL statement look like 'SELECT name FROM ...', then a result entity with a value of 'Fred' would test the set of 'name' values returned by the SQL statement against the value 'Fred'.</xsd:documentation>
+                                          </xsd:annotation>
+                                    </xsd:element>
+                              </xsd:sequence>
+                        </xsd:extension>
+                  </xsd:complexContent>
+            </xsd:complexType>
+      </xsd:element>
+      <!-- =============================================================================== -->
+      <!-- =================================  SQL TEST (57)  ============================= -->
+      <!-- =============================================================================== -->
+      <xsd:element name="sql57_test" substitutionGroup="oval-def:test">
+            <xsd:annotation>
+                  <xsd:documentation>The sql test is used to check information stored in a database. It is often the case that applications store configuration settings in a database as opposed to a file. This test has been designed to enable those settings to be tested. It extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information. The required object element references a wmi_object and the optional state element specifies the metadata to check.</xsd:documentation>
+                  <xsd:appinfo>
+                        <oval:element_mapping>
+                              <oval:test>sql57_test</oval:test>
+                              <oval:object>sql57_object</oval:object>
+                              <oval:state>sql57_state</oval:state>
+                              <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#independent">sql57_item</oval:item>
+                        </oval:element_mapping>
+                  </xsd:appinfo>
+                  <xsd:appinfo>
+                        <oval:deprecated_info>
+                              <oval:version>5.12</oval:version>
+                              <oval:reason>Replaced by the sql512_test.  The sql512_test removes the connection string and replaces it with 'instance' and 'database' elements.  This allows the application to perform any necessary steps to connect, and providing a simple method for content authors to determine which database(s) to query.</oval:reason>
+                              <oval:comment>This object has been deprecated and may be removed in a future version of the language.</oval:comment>
+                        </oval:deprecated_info>
+                        <sch:pattern id="ind-def_sql57_test_dep">
+                              <sch:rule context="ind-def:sql57_test">
+                                    <sch:report test="true()">DEPRECATED TEST: <sch:value-of select="name()"/> ID: <sch:value-of select="@id"/></sch:report>
+                              </sch:rule>
+                        </sch:pattern>
+                  </xsd:appinfo>
+                  <xsd:appinfo>
+                        <sch:pattern id="ind-def_sql57_test">
+                              <sch:rule context="ind-def:sql57_test/ind-def:object">
+                                    <sch:assert test="@object_ref=ancestor::oval-def:oval_definitions/oval-def:objects/ind-def:sql57_object/@id"><sch:value-of select="../@id"/> - the object child element of a sql57_test must reference a sql57_object</sch:assert>
+                              </sch:rule>
+                              <sch:rule context="ind-def:sql57_test/ind-def:state">
+                                    <sch:assert test="@state_ref=ancestor::oval-def:oval_definitions/oval-def:states/ind-def:sql57_state/@id"><sch:value-of select="../@id"/> - the state child element of a sql57_test must reference a sql57_state</sch:assert>
+                              </sch:rule>
+                        </sch:pattern>
+                  </xsd:appinfo>
+            </xsd:annotation>
+            <xsd:complexType>
+                  <xsd:complexContent>
+                        <xsd:extension base="oval-def:TestType">
+                              <xsd:sequence>
+                                    <xsd:element name="object" type="oval-def:ObjectRefType"/>
+                                    <xsd:element name="state" type="oval-def:StateRefType" minOccurs="0" maxOccurs="unbounded"/>
+                              </xsd:sequence>
+                        </xsd:extension>
+                  </xsd:complexContent>
+            </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="sql57_object" substitutionGroup="oval-def:object">
+            <xsd:annotation>
+                  <xsd:documentation>The sql57_object element is used by a sql test to define the specific database and query to be evaluated. Connection information is supplied allowing the tool to connect to the desired database and a query is supplied to call out the desired setting. Each object extends the standard ObjectType as defined in the oval-definitions-schema and one should refer to the ObjectType description for more information. The common set element allows complex objects to be created using filters and set logic. Again, please refer to the description of the set element in the oval-definitions-schema.</xsd:documentation>
+                  <xsd:appinfo>
+                        <sch:pattern id="ind-def_sql57_object_verify_filter_state">
+                              <sch:rule context="ind-def:sql57_object//oval-def:filter">
+                                    <sch:let name="parent_object" value="ancestor::ind-def:sql57_object"/>
+                                    <sch:let name="parent_object_id" value="$parent_object/@id"/>
+                                    <sch:let name="state_ref" value="."/>
+                                    <sch:let name="reffed_state" value="ancestor::oval-def:oval_definitions/oval-def:states/*[@id=$state_ref]"/>
+                                    <sch:let name="state_name" value="local-name($reffed_state)"/>
+                                    <sch:let name="state_namespace" value="namespace-uri($reffed_state)"/>
+                                    <sch:assert test="(($state_namespace='http://oval.mitre.org/XMLSchema/oval-definitions-5#independent') and ($state_name='sql57_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
+                              </sch:rule>
+                        </sch:pattern>
+                  </xsd:appinfo>
+            </xsd:annotation>
+            <xsd:complexType>
+                  <xsd:complexContent>
+                        <xsd:extension base="oval-def:ObjectType">
+                              <xsd:sequence>
+                                    <xsd:choice>
+                                          <xsd:element ref="oval-def:set"/>
+                                          <xsd:sequence>
+                                                <xsd:element name="engine" type="ind-def:EntityObjectEngineType">
+                                                      <xsd:annotation>
+                                                            <xsd:documentation>The engine entity defines the specific database engine to use. Any tool looking to collect information about this object will need to know the engine in order to use the appropriate drivers to establish a connection.</xsd:documentation>
+                                                            <xsd:appinfo>
+                                                                  <sch:pattern id="ind-def_sql57_object_dengine">
+                                                                        <sch:rule context="ind-def:sql57_object/ind-def:engine">
+                                                                              <sch:assert test="not(@operation) or @operation='equals'"><sch:value-of select="../@id"/> - operation attribute for the engine entity of an sql57_object should be 'equals', note that this overrules the general operation attribute validation (i.e. follow this one)</sch:assert>
+                                                                        </sch:rule>
+                                                                  </sch:pattern>
+                                                            </xsd:appinfo>
+                                                      </xsd:annotation>
+                                                </xsd:element>
+                                                <xsd:element name="version" type="oval-def:EntityObjectStringType">
+                                                      <xsd:annotation>
+                                                            <xsd:documentation>The version entity defines the specific version of the database engine to use. This is also important in determining the correct driver to use for establishing a connection.</xsd:documentation>
+                                                            <xsd:appinfo>
+                                                                  <sch:pattern id="ind-def_sql57_object_version">
+                                                                        <sch:rule context="ind-def:sql57_object/ind-def:version">
+                                                                              <sch:assert test="not(@operation) or @operation='equals'"><sch:value-of select="../@id"/> - operation attribute for the version entity of an sql57_object should be 'equals', note that this overrules the general operation attribute validation (i.e. follow this one)</sch:assert>
+                                                                        </sch:rule>
+                                                                  </sch:pattern>
+                                                            </xsd:appinfo>
+                                                      </xsd:annotation>
+                                                </xsd:element>
+                                                <xsd:element name="connection_string" type="oval-def:EntityObjectStringType">
+                                                      <xsd:annotation>
+                                                            <xsd:documentation>The connection_string entity defines specific connection parameters to be used in connecting to the database. This will help a tool connect to the correct database.</xsd:documentation>
+                                                            <xsd:appinfo>
+                                                                  <sch:pattern id="ind-def_sql57_object_connection_string">
+                                                                        <sch:rule context="ind-def:sql57_object/ind-def:connection_string">
+                                                                              <sch:assert test="not(@operation) or @operation='equals'"><sch:value-of select="../@id"/> - operation attribute for the connection_string entity of an sql57_object should be 'equals', note that this overrules the general operation attribute validation (i.e. follow this one)</sch:assert>
+                                                                        </sch:rule>
+                                                                  </sch:pattern>
+                                                            </xsd:appinfo>
+                                                      </xsd:annotation>
+                                                </xsd:element>
+                                                <xsd:element name="sql" type="oval-def:EntityObjectStringType">
+                                                      <xsd:annotation>
+                                                            <xsd:documentation>The sql entity defines a query used to identify the object(s) to test against. Any valid SQL query is usable with one exception, all fields must be named in the SELECT portion of the query. For example, SELECT name, number FROM ... is valid. However, SELECT * FROM ... is not valid. This is because the record element in the state and item require a unique field name value to ensure that any query results can be evaluated consistently.</xsd:documentation>
+                                                            <xsd:appinfo>
+                                                                  <sch:pattern id="ind-def_sql57_object_sql">
+                                                                        <sch:rule context="ind-def:sql57_object/ind-def:sql">
+                                                                              <sch:assert test="not(@operation) or @operation='equals'"><sch:value-of select="../@id"/> - operation attribute for the sql entity of an sql57_object should be 'equals', note that this overrules the general operation attribute validation (i.e. follow this one)</sch:assert>
+                                                                        </sch:rule>
+                                                                  </sch:pattern>
+                                                            </xsd:appinfo>
+                                                      </xsd:annotation>
+                                                </xsd:element>
+                                                <xsd:element ref="oval-def:filter" minOccurs="0" maxOccurs="unbounded"/>
+                                          </xsd:sequence>
+                                    </xsd:choice>
+                              </xsd:sequence>
+                        </xsd:extension>
+                  </xsd:complexContent>
+            </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="sql57_state" substitutionGroup="oval-def:state">
+            <xsd:annotation>
+                  <xsd:documentation>The sql57_state element contains two entities that are used to check the name of the specified field and the value associated with it.</xsd:documentation>
+            </xsd:annotation>
+            <xsd:complexType>
+                  <xsd:complexContent>
+                        <xsd:extension base="oval-def:StateType">
+                              <xsd:sequence>
+                                    <xsd:element name="engine" type="ind-def:EntityStateEngineType" minOccurs="0">
+                                          <xsd:annotation>
+                                                <xsd:documentation>The engine entity defines a specific database engine.</xsd:documentation>
+                                          </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="version" type="oval-def:EntityStateStringType" minOccurs="0">
+                                          <xsd:annotation>
+                                                <xsd:documentation>The version entity defines a specific version of a given database engine.</xsd:documentation>
+                                          </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="connection_string" type="oval-def:EntityStateStringType" minOccurs="0">
+                                          <xsd:annotation>
+                                                <xsd:documentation>The connection_string entity defines a set of parameters that help identify the connection to the database.</xsd:documentation>
+                                          </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="sql" type="oval-def:EntityStateStringType" minOccurs="0">
+                                          <xsd:annotation>
+                                                <xsd:documentation>the sql entity defines a query used to identify the object(s) to test against.</xsd:documentation>
+                                          </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="result" type="oval-def:EntityStateRecordType" minOccurs="0">
+                                          <xsd:annotation>
+                                                <xsd:documentation>The result entity specifies how to test objects in the result set of the specified SQL statement.</xsd:documentation>
+                                                <xsd:appinfo>
+                                                      <sch:pattern id="ind-def_sql57steresult">
+                                                            <sch:rule context="ind-def:sql57_state/ind-def:result">
+                                                                  <sch:assert test="@datatype='record'"><sch:value-of select="../@id"/> - datatype attribute for the result entity of a sql57_state must be 'record'</sch:assert>
+                                                            </sch:rule>
+                                                      </sch:pattern>
+                                                </xsd:appinfo>
+                                          </xsd:annotation>
+                                          <xsd:unique name="UniqueSqlResultFieldName">
+                                                <xsd:selector xpath="./oval-def:field"/>
+                                                <xsd:field xpath="@name"/>
+                                          </xsd:unique>
+                                    </xsd:element>
+                              </xsd:sequence>
+                        </xsd:extension>
+                  </xsd:complexContent>
+            </xsd:complexType>
+      </xsd:element>
+
       <!-- ================================================================================ -->
       <!-- =================================  SQL TEST (512)  ============================= -->
       <!-- ================================================================================ -->
@@ -557,7 +1528,7 @@ A subexpression (using parentheses) can call out a piece of the matched stdout_l
                               <oval:test>sql512_test</oval:test>
                               <oval:object>sql512_object</oval:object>
                               <oval:state>sql512_state</oval:state>
-                              <oval:item target_namespace="urn:oval:v6:system-characteristics:independent">sql512_item</oval:item>
+                              <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#independent">sql512_item</oval:item>
                         </oval:element_mapping>
                   </xsd:appinfo>
                   <xsd:appinfo>
@@ -594,7 +1565,7 @@ A subexpression (using parentheses) can call out a piece of the matched stdout_l
                                     <sch:let name="reffed_state" value="ancestor::oval-def:oval_definitions/oval-def:states/*[@id=$state_ref]"/>
                                     <sch:let name="state_name" value="local-name($reffed_state)"/>
                                     <sch:let name="state_namespace" value="namespace-uri($reffed_state)"/>
-                                    <sch:assert test="(($state_namespace='urn:oval:v6:definitions:independent') and ($state_name='sql512_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
+                                    <sch:assert test="(($state_namespace='http://oval.mitre.org/XMLSchema/oval-definitions-5#independent') and ($state_name='sql512_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
                               </sch:rule>
                         </sch:pattern>
                   </xsd:appinfo>
@@ -734,7 +1705,7 @@ SERVERPROPERTY('IsClustered') AS [is_clustered]
                               <oval:test>textfilecontent54_test</oval:test>
                               <oval:object>textfilecontent54_object</oval:object>
                               <oval:state>textfilecontent54_state</oval:state>
-                              <oval:item target_namespace="urn:oval:v6:system-characteristics:independent">textfilecontent_item</oval:item>
+                              <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#independent">textfilecontent_item</oval:item>
                         </oval:element_mapping>
                   </xsd:appinfo>
                   <xsd:appinfo>
@@ -773,7 +1744,7 @@ SERVERPROPERTY('IsClustered') AS [is_clustered]
                                     <sch:let name="reffed_state" value="ancestor::oval-def:oval_definitions/oval-def:states/*[@id=$state_ref]"/>
                                     <sch:let name="state_name" value="local-name($reffed_state)"/>
                                     <sch:let name="state_namespace" value="namespace-uri($reffed_state)"/>
-                                    <sch:assert test="(($state_namespace='urn:oval:v6:definitions:independent') and ($state_name='textfilecontent54_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
+                                    <sch:assert test="(($state_namespace='http://oval.mitre.org/XMLSchema/oval-definitions-5#independent') and ($state_name='textfilecontent54_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
                               </sch:rule>
                         </sch:pattern>
                   </xsd:appinfo>
@@ -949,6 +1920,165 @@ SERVERPROPERTY('IsClustered') AS [is_clustered]
             </xsd:complexContent>
       </xsd:complexType>
       <!-- =============================================================================== -->
+      <!-- ==========================  TEXT FILE CONTENT TEST  =========================== -->
+      <!-- =============================================================================== -->
+      <xsd:element name="textfilecontent_test" substitutionGroup="oval-def:test">
+            <xsd:annotation>
+                  <xsd:documentation>The textfilecontent_test element is used to check the contents of a text file (aka a configuration file) by looking at individual lines. It extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information. The required object element references a textfilecontent_object and the optional state element specifies the metadata to check.</xsd:documentation>
+                  <xsd:appinfo>
+                        <oval:element_mapping>
+                              <oval:test>textfilecontent_test</oval:test>
+                              <oval:object>textfilecontent_object</oval:object>
+                              <oval:state>textfilecontent_state</oval:state>
+                              <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#independent">textfilecontent_item</oval:item>
+                        </oval:element_mapping>
+                  </xsd:appinfo>
+                  <xsd:appinfo>
+                        <oval:deprecated_info>
+                              <oval:version>5.4</oval:version>
+                              <oval:reason>Replaced by the textfilecontent54_test. Support for multi-line pattern matching and multi-instance matching was added. Therefore, a new test was created to reflect these changes. See the textfilecontent54_test.</oval:reason>
+                              <oval:comment>This test has been deprecated and will be removed in version 6.0 of the language.</oval:comment>
+                        </oval:deprecated_info>
+                        <sch:pattern id="ind-def_txttst_dep">
+                              <sch:rule context="ind-def:textfilecontent_test">
+                                    <sch:report test="true()">DEPRECATED TEST: <sch:value-of select="name()"/> ID: <sch:value-of select="@id"/></sch:report>
+                              </sch:rule>
+                        </sch:pattern>
+                  </xsd:appinfo>
+                  <xsd:appinfo>
+                        <sch:pattern id="ind-def_txttst">
+                              <sch:rule context="ind-def:textfilecontent_test/ind-def:object">
+                                    <sch:assert test="@object_ref=ancestor::oval-def:oval_definitions/oval-def:objects/ind-def:textfilecontent_object/@id"><sch:value-of select="../@id"/> - the object child element of a textfilecontent_test must reference a textfilecontent_object</sch:assert>
+                              </sch:rule>
+                              <sch:rule context="ind-def:textfilecontent_test/ind-def:state">
+                                    <sch:assert test="@state_ref=ancestor::oval-def:oval_definitions/oval-def:states/ind-def:textfilecontent_state/@id"><sch:value-of select="../@id"/> - the state child element of a textfilecontent_test must reference a textfilecontent_state</sch:assert>
+                              </sch:rule>
+                        </sch:pattern>
+                  </xsd:appinfo>
+            </xsd:annotation>
+            <xsd:complexType>
+                  <xsd:complexContent>
+                        <xsd:extension base="oval-def:TestType">
+                              <xsd:sequence>
+                                    <xsd:element name="object" type="oval-def:ObjectRefType" />
+                                    <xsd:element name="state" type="oval-def:StateRefType" minOccurs="0" maxOccurs="unbounded"/>
+                              </xsd:sequence>
+                        </xsd:extension>
+                  </xsd:complexContent>
+            </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="textfilecontent_object" substitutionGroup="oval-def:object">
+            <xsd:annotation>
+                  <xsd:documentation>The textfilecontent_object element is used by a text file content test to define the specific line(s) of a file(s) to be evaluated. The textfilecontent_object will only collect regular files on UNIX systems and FILE_TYPE_DISK files on Windows systems. Each object extends the standard ObjectType as defined in the oval-definitions-schema and one should refer to the ObjectType description for more information. The common set element allows complex objects to be created using filters and set logic. Again, please refer to the description of the set element in the oval-definitions-schema.</xsd:documentation>
+                  <xsd:appinfo>
+                        <oval:deprecated_info>
+                              <oval:version>5.4</oval:version>
+                              <oval:reason>Replaced by the textfilecontent54_object. Support for multi-line pattern matching and multi-instance matching was added. Therefore, a new object was created to reflect these changes. See the textfilecontent54_object.</oval:reason>
+                              <oval:comment>This object has been deprecated and will be removed in version 6.0 of the language.</oval:comment>
+                        </oval:deprecated_info>
+                        <sch:pattern id="ind-def_txtobj_dep">
+                              <sch:rule context="ind-def:textfilecontent_object">
+                                    <sch:report test="true()">DEPRECATED OBJECT: <sch:value-of select="name()"/> ID: <sch:value-of select="@id"/></sch:report>
+                              </sch:rule>
+                        </sch:pattern>
+                  </xsd:appinfo>
+            </xsd:annotation>
+            <xsd:complexType>
+                  <xsd:complexContent>
+                        <xsd:extension base="oval-def:ObjectType">
+                              <xsd:sequence>
+                                    <xsd:choice>
+                                          <xsd:element ref="oval-def:set"/>
+                                          <xsd:sequence>
+                                                <xsd:element name="behaviors" type="ind-def:FileBehaviors" minOccurs="0" maxOccurs="1"/>
+                                                <xsd:element name="path" type="oval-def:EntityObjectStringType">
+                                                      <xsd:annotation>
+                                                            <xsd:documentation>The path element specifies the directory component of the absolute path to a file on the machine.</xsd:documentation>
+                                                      </xsd:annotation>
+                                                </xsd:element>
+                                                <xsd:element name="filename" type="oval-def:EntityObjectStringType">
+                                                      <xsd:annotation>
+                                                            <xsd:documentation>The filename element specifies the name of the file.</xsd:documentation>
+                                                            <xsd:appinfo>
+                                                                  <sch:pattern id="ind-def_txtobjfilename">
+                                                                        <sch:rule context="ind-def:textfilecontent_object/ind-def:filename">
+                                                                              <sch:assert test="(@var_ref and .='') or not(.='') or (.='' and @operation = 'pattern match')"><sch:value-of select="../@id"/> - filename entity cannot be empty unless the xsi:nil attribute is set to true or a var_ref is used</sch:assert>
+                                                                        </sch:rule>
+                                                                  </sch:pattern>
+                                                            </xsd:appinfo>
+                                                      </xsd:annotation>
+                                                </xsd:element>
+                                                <xsd:element name="line" type="oval-def:EntityObjectStringType">
+                                                      <xsd:annotation>
+                                                            <xsd:documentation>The line element represents a line in the file and is represented using a regular expression. A single subexpression can be called out using parentheses. The value of this subexpression can then be checked using a textfilecontent_state.</xsd:documentation>
+                                                            <xsd:documentation>Note that when using regular expressions, OVAL supports a common subset of the regular expression character classes, operations, expressions and other lexical tokens defined within Perl 5's regular expression specification. For more information on the supported regular expression syntax in OVAL see: http://oval.mitre.org/language/about/re_support_5.6.html.</xsd:documentation>
+                                                            <xsd:appinfo>
+                                                                  <sch:pattern id="ind-def_txtobjline">
+                                                                        <sch:rule context="ind-def:textfilecontent_object/ind-def:line">
+                                                                              <sch:assert test="@operation='pattern match'"><sch:value-of select="../@id" /> - operation attribute for the line entity of a textfilecontent_object should be 'pattern match'</sch:assert>
+                                                                        </sch:rule>
+                                                                  </sch:pattern>
+                                                            </xsd:appinfo>
+                                                      </xsd:annotation>
+                                                </xsd:element>
+                                          </xsd:sequence>
+                                    </xsd:choice>
+                              </xsd:sequence>
+                        </xsd:extension>
+                  </xsd:complexContent>
+            </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="textfilecontent_state" substitutionGroup="oval-def:state">
+            <xsd:annotation>
+                  <xsd:documentation>The textfilecontent_state element contains entities that are used to check the file path and name, as well as the line in question and the value of the specific subexpression.</xsd:documentation>
+                  <xsd:appinfo>
+                        <oval:deprecated_info>
+                              <oval:version>5.4</oval:version>
+                              <oval:reason>Replaced by the textfilecontent54_state. Support for multi-line pattern matching and multi-instance matching was added. Therefore, a new state was created to reflect these changes. See the textfilecontent54_state.</oval:reason>
+                              <oval:comment>This state has been deprecated and will be removed in version 6.0 of the language.</oval:comment>
+                        </oval:deprecated_info>
+                        <sch:pattern id="ind-def_txtste_dep">
+                              <sch:rule context="ind-def:textfilecontent_state">
+                                    <sch:report test="true()">DEPRECATED STATE: <sch:value-of select="name()"/> ID: <sch:value-of select="@id"/></sch:report>
+                              </sch:rule>
+                        </sch:pattern>
+                  </xsd:appinfo>
+            </xsd:annotation>
+            <xsd:complexType>
+                  <xsd:complexContent>
+                        <xsd:extension base="oval-def:StateType">
+                              <xsd:sequence>
+                                    <xsd:element name="path" type="oval-def:EntityStateStringType" minOccurs="0" maxOccurs="1">
+                                          <xsd:annotation>
+                                                <xsd:documentation>The path element specifies the directory component of the absolute path to a file on the machine.</xsd:documentation>
+                                          </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="filename" type="oval-def:EntityStateStringType" minOccurs="0" maxOccurs="1">
+                                          <xsd:annotation>
+                                                <xsd:documentation>The name of the file.</xsd:documentation>
+                                          </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="line" type="oval-def:EntityStateStringType" minOccurs="0" maxOccurs="1">
+                                          <xsd:annotation>
+                                                <xsd:documentation>The line element represents a line in the file that was collected.</xsd:documentation>
+                                          </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="subexpression" type="oval-def:EntityStateAnySimpleType" minOccurs="0" maxOccurs="1">
+                                          <xsd:annotation>
+                                                <xsd:documentation>Each subexpression in the regular expression of the line element is then tested against the value specified in the subexpression element.</xsd:documentation>
+                                          </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="windows_view" type="ind-def:EntityStateWindowsViewType" minOccurs="0">
+                                          <xsd:annotation>
+                                                <xsd:documentation>The windows view value to which this was targeted. This is used to indicate which view (32-bit or 64-bit), the associated State applies to.  This entity only applies to 64-bit Microsoft Windows operating systems.</xsd:documentation>
+                                          </xsd:annotation>
+                                    </xsd:element>
+                              </xsd:sequence>
+                        </xsd:extension>
+                  </xsd:complexContent>
+            </xsd:complexType>
+      </xsd:element>
+      <!-- =============================================================================== -->
       <!-- ===============================  UNKNOWN TEST  ================================ -->
       <!-- =============================================================================== -->
       <xsd:element name="unknown_test" substitutionGroup="oval-def:test">
@@ -972,7 +2102,7 @@ SERVERPROPERTY('IsClustered') AS [is_clustered]
                               <oval:test>variable_test</oval:test>
                               <oval:object>variable_object</oval:object>
                               <oval:state>variable_state</oval:state>
-                              <oval:item target_namespace="urn:oval:v6:system-characteristics:independent">variable_item</oval:item>
+                              <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#independent">variable_item</oval:item>
                         </oval:element_mapping>
                   </xsd:appinfo>
                   <xsd:appinfo>
@@ -1009,7 +2139,7 @@ SERVERPROPERTY('IsClustered') AS [is_clustered]
                                     <sch:let name="reffed_state" value="ancestor::oval-def:oval_definitions/oval-def:states/*[@id=$state_ref]"/>
                                     <sch:let name="state_name" value="local-name($reffed_state)"/>
                                     <sch:let name="state_namespace" value="namespace-uri($reffed_state)"/>
-                                    <sch:assert test="(($state_namespace='urn:oval:v6:definitions:independent') and ($state_name='variable_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
+                                    <sch:assert test="(($state_namespace='http://oval.mitre.org/XMLSchema/oval-definitions-5#independent') and ($state_name='variable_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
                               </sch:rule>
                         </sch:pattern>
                   </xsd:appinfo>
@@ -1094,7 +2224,7 @@ SERVERPROPERTY('IsClustered') AS [is_clustered]
                               <oval:test>xmlfilecontent_test</oval:test>
                               <oval:object>xmlfilecontent_object</oval:object>
                               <oval:state>xmlfilecontent_state</oval:state>
-                              <oval:item target_namespace="urn:oval:v6:system-characteristics:independent">xmlfilecontent_item</oval:item>
+                              <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#independent">xmlfilecontent_item</oval:item>
                         </oval:element_mapping>
                   </xsd:appinfo>
                   <xsd:appinfo>
@@ -1133,7 +2263,7 @@ SERVERPROPERTY('IsClustered') AS [is_clustered]
                                     <sch:let name="reffed_state" value="ancestor::oval-def:oval_definitions/oval-def:states/*[@id=$state_ref]"/>
                                     <sch:let name="state_name" value="local-name($reffed_state)"/>
                                     <sch:let name="state_namespace" value="namespace-uri($reffed_state)"/>
-                                    <sch:assert test="(($state_namespace='urn:oval:v6:definitions:independent') and ($state_name='xmlfilecontent_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
+                                    <sch:assert test="(($state_namespace='http://oval.mitre.org/XMLSchema/oval-definitions-5#independent') and ($state_name='xmlfilecontent_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
                               </sch:rule>
                         </sch:pattern>
                   </xsd:appinfo>
@@ -1268,7 +2398,7 @@ SERVERPROPERTY('IsClustered') AS [is_clustered]
                               <oval:test>yamlfilecontent_test</oval:test>
                               <oval:object>yamlfilecontent_object</oval:object>
                               <oval:state>yamlfilecontent_state</oval:state>
-                              <oval:item target_namespace="urn:oval:v6:system-characteristics:independent">yamlfilecontent_item</oval:item>
+                              <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#independent">yamlfilecontent_item</oval:item>
                         </oval:element_mapping>
                   </xsd:appinfo>
                   <xsd:appinfo>
@@ -1307,7 +2437,7 @@ SERVERPROPERTY('IsClustered') AS [is_clustered]
                                     <sch:let name="reffed_state" value="ancestor::oval-def:oval_definitions/oval-def:states/*[@id=$state_ref]"/>
                                     <sch:let name="state_name" value="local-name($reffed_state)"/>
                                     <sch:let name="state_namespace" value="namespace-uri($reffed_state)"/>
-                                    <sch:assert test="(($state_namespace='urn:oval:v6:definitions:independent') and ($state_name='yamlfilecontent_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
+                                    <sch:assert test="(($state_namespace='http://oval.mitre.org/XMLSchema/oval-definitions-5#independent') and ($state_name='yamlfilecontent_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
                               </sch:rule>
                         </sch:pattern>
                   </xsd:appinfo>
@@ -1570,7 +2700,12 @@ SERVERPROPERTY('IsClustered') AS [is_clustered]
                         </xsd:enumeration>
                         <xsd:enumeration value="powershell">
                               <xsd:annotation>
-                                    <xsd:documentation>The Microsoft Powershell prompt (powershell).</xsd:documentation>
+                                    <xsd:documentation>The Microsoft Windows OS Native Powershell prompt (powershell).</xsd:documentation>
+                              </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="pwsh">
+                              <xsd:annotation>
+                                    <xsd:documentation>The open source, cross platform Microsoft Powershell prompt (pwsh).  This shell is an application that can be installed on Windows, Linux or MacOS</xsd:documentation>
                               </xsd:annotation>
                         </xsd:enumeration>
                         <xsd:enumeration value="">
@@ -1909,6 +3044,16 @@ SERVERPROPERTY('IsClustered') AS [is_clustered]
             </xsd:annotation>
             <xsd:simpleContent>
                   <xsd:restriction base="oval-def:EntityStateStringType">
+                        <xsd:enumeration value="android">
+                              <xsd:annotation>
+                                    <xsd:documentation>The android value describes the Android mobile operating system.</xsd:documentation>
+                              </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="apple_ios">
+                              <xsd:annotation>
+                                    <xsd:documentation>The apple_ios value describes the iOS mobile operating system.</xsd:documentation>
+                              </xsd:annotation>
+                        </xsd:enumeration>
                         <xsd:enumeration value="asa">
                               <xsd:annotation>
                                     <xsd:documentation>The asa value describes the Cisco ASA security devices.</xsd:documentation>
@@ -1917,6 +3062,11 @@ SERVERPROPERTY('IsClustered') AS [is_clustered]
                         <xsd:enumeration value="aws">
                               <xsd:annotation>
                                     <xsd:documentation>The aws value describes the Amazon Web Services platform.</xsd:documentation>
+                              </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="catos">
+                              <xsd:annotation>
+                                    <xsd:documentation>The catos value describes the Cisco CatOS operating system.</xsd:documentation>
                               </xsd:annotation>
                         </xsd:enumeration>
                         <xsd:enumeration value="ios">
@@ -1942,6 +3092,11 @@ SERVERPROPERTY('IsClustered') AS [is_clustered]
                         <xsd:enumeration value="panos">
                               <xsd:annotation>
                                     <xsd:documentation>The panos value describes the Palo Alto Networks operating system.</xsd:documentation>
+                              </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="pixos">
+                              <xsd:annotation>
+                                    <xsd:documentation>The pixos value describes the Cisco PIX operating system.</xsd:documentation>
                               </xsd:annotation>
                         </xsd:enumeration>
                         <xsd:enumeration value="undefined">
@@ -2077,6 +3232,348 @@ SERVERPROPERTY('IsClustered') AS [is_clustered]
             <xsd:simpleContent>
                   <xsd:restriction base="oval-def:EntityStateStringType">
                         <xsd:pattern value="(oval:[A-Za-z0-9_\-\.]+:var:[1-9][0-9]*){0,}"/>
+                  </xsd:restriction>
+            </xsd:simpleContent>
+      </xsd:complexType>
+      <xsd:complexType name="EntityStateLdaptypeType">
+            <xsd:annotation>
+                  <xsd:documentation>The EntityStateLdaptypeType complex type restricts a string value to a specific set of values that specify the different types of information that an ldap attribute can represent. The empty string is also allowed to support empty elements associated with variable references.</xsd:documentation>
+            </xsd:annotation>
+            <xsd:simpleContent>
+                  <xsd:restriction base="oval-def:EntityStateStringType">
+                        <xsd:enumeration value="LDAPTYPE_ACI_ITEM">
+                            <xsd:annotation>
+                                <xsd:documentation>ACI Item, corresponding to OID 1.3.6.1.4.1.1466.115.121.1.1</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="LDAPTYPE_ACCESS_POINT">
+                            <xsd:annotation>
+                                <xsd:documentation>Access Point, corresponding to OID 1.3.6.1.4.1.1466.115.121.1.2</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="LDAPTYPE_ATTRIBUTE_TYPE_DESCRIP_STRING">
+                            <xsd:annotation>
+                                <xsd:documentation>Attribute Type Description, corresponding to OID 1.3.6.1.4.1.1466.115.121.1.3</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="LDAPTYPE_AUDIO">
+                            <xsd:annotation>
+                                <xsd:documentation>Audio, corresponding to OID 1.3.6.1.4.1.1466.115.121.1.4</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="LDAPTYPE_BINARY">
+                            <xsd:annotation>
+                                <xsd:documentation>Binary, corresponding to OID 1.3.6.1.4.1.1466.115.121.1.5</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="LDAPTYPE_BIT_STRING">
+                            <xsd:annotation>
+                                <xsd:documentation>Bit String, corresponding to OID 1.3.6.1.4.1.1466.115.121.1.6</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="LDAPTYPE_BOOLEAN">
+                            <xsd:annotation>
+                                <xsd:documentation>Boolean, corresponding to OID 1.3.6.1.4.1.1466.115.121.1.7</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="LDAPTYPE_CERTIFICATE">
+                            <xsd:annotation>
+                                <xsd:documentation>Certificate, corresponding to OID 1.3.6.1.4.1.1466.115.121.1.8</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="LDAPTYPE_CERTIFICATE_LIST">
+                            <xsd:annotation>
+                                <xsd:documentation>Certificate List, corresponding to OID 1.3.6.1.4.1.1466.115.121.1.9</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="LDAPTYPE_CERTIFICATE_PAIR">
+                            <xsd:annotation>
+                                <xsd:documentation>Certificate Pair, corresponding to OID 1.3.6.1.4.1.1466.115.121.1.10</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="LDAPTYPE_COUNTRY_STRING">
+                            <xsd:annotation>
+                                <xsd:documentation>Country String, corresponding to OID 1.3.6.1.4.1.1466.115.121.1.11</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="LDAPTYPE_DN_STRING">
+                            <xsd:annotation>
+                                <xsd:documentation>DN, corresponding to OID 1.3.6.1.4.1.1466.115.121.1.12</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="LDAPTYPE_DATA_QUALITY_SYNTAX">
+                            <xsd:annotation>
+                                <xsd:documentation>Data Quality Syntax, corresponding to OID 1.3.6.1.4.1.1466.115.121.1.13</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="LDAPTYPE_DELIVERY_METHOD">
+                            <xsd:annotation>
+                                <xsd:documentation>Delivery Method, corresponding to OID 1.3.6.1.4.1.1466.115.121.1.14</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="LDAPTYPE_DIRECTORY_STRING">
+                            <xsd:annotation>
+                                <xsd:documentation>Directory String, corresponding to OID 1.3.6.1.4.1.1466.115.121.1.15</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="LDAPTYPE_DIR_CONTENT_RULE_DESCRIPTION">
+                            <xsd:annotation>
+                                <xsd:documentation>DIT Content Rule Description, corresponding to OID 1.3.6.1.4.1.1466.115.121.1.16</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="LDAPTYPE_DIT_STRUCTURE_RULE_DESCRIPTION">
+                            <xsd:annotation>
+                                <xsd:documentation>DIT Structure Rule Description, corresponding to OID 1.3.6.1.4.1.1466.115.121.1.17</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="LDAPTYPE_DL_SUBMIT_PERMISSION">
+                            <xsd:annotation>
+                                <xsd:documentation>DL Submit Permission, corresponding to OID Y  1.3.6.1.4.1.1466.115.121.1.18</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="LDAPTYPE_DSA_QUALITY_SYNTAX">
+                            <xsd:annotation>
+                                <xsd:documentation>DSA Quality Syntax, corresponding to OID 1.3.6.1.4.1.1466.115.121.1.19</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="LDAPTYPE_DSE_TYPE">
+                            <xsd:annotation>
+                                <xsd:documentation>DSE Type, corresponding to OID 1.3.6.1.4.1.1466.115.121.1.20</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="LDAPTYPE_ENHANCED_GUIDE">
+                            <xsd:annotation>
+                                <xsd:documentation>Enhanced Guide, corresponding to OID 1.3.6.1.4.1.1466.115.121.1.21</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="LDAPTYPE_FAX_TEL_NUMBER">
+                            <xsd:annotation>
+                                <xsd:documentation>Facsimile Telephone Number, corresponding to OID 1.3.6.1.4.1.1466.115.121.1.22</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="LDAPTYPE_FAX">
+                            <xsd:annotation>
+                                <xsd:documentation>Fax, corresponding to OID 1.3.6.1.4.1.1466.115.121.1.23</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="LDAPTYPE_GENERALIZED_TIME">
+                            <xsd:annotation>
+                                <xsd:documentation>Generalized Time, corresponding to OID 1.3.6.1.4.1.1466.115.121.1.24</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="LDAPTYPE_GUIDE">
+                            <xsd:annotation>
+                                <xsd:documentation>Guide, corresponding to OID 1.3.6.1.4.1.1466.115.121.1.25</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="LDAPTYPE_IA5_STRING">
+                            <xsd:annotation>
+                                <xsd:documentation>IA5 String, corresponding to OID 1.3.6.1.4.1.1466.115.121.1.26</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="LDAPTYPE_INTEGER">
+                            <xsd:annotation>
+                                <xsd:documentation>INTEGER, corresponding to OID 1.3.6.1.4.1.1466.115.121.1.27</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="LDAPTYPE_JPEG">
+                            <xsd:annotation>
+                                <xsd:documentation>JPEG, corresponding to OID 1.3.6.1.4.1.1466.115.121.1.28</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="LDAPTYPE_LDAP_SYNTAX_DESCRIPTION">
+                            <xsd:annotation>
+                                <xsd:documentation>LDAP Syntax Description, corresponding to OID 1.3.6.1.4.1.1466.115.121.1.54</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="LDAPTYPE_LDAP_SCHEMA_DEFINITION">
+                            <xsd:annotation>
+                                <xsd:documentation>LDAP Schema Definition, corresponding to OID 1.3.6.1.4.1.1466.115.121.1.56</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="LDAPTYPE_LDAP_SCHEMA_DESCRIPTION">
+                            <xsd:annotation>
+                                <xsd:documentation>LDAP Schema Description, corresponding to OID 1.3.6.1.4.1.1466.115.121.1.57</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="LDAPTYPE_MASTER_AND_SHADOW_ACCESS_POINTS">
+                            <xsd:annotation>
+                                <xsd:documentation>Master And Shadow Access Points, corresponding to OID 1.3.6.1.4.1.1466.115.121.1.29</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="LDAPTYPE_MATCHING_RULE_DESCRIPTION">
+                            <xsd:annotation>
+                                <xsd:documentation>Matching Rule Description, corresponding to OID 1.3.6.1.4.1.1466.115.121.1.30</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="LDAPTYPE_MATCHING_RULE_USE_DESCRIPTION">
+                            <xsd:annotation>
+                                <xsd:documentation>Matching Rule Use Description, corresponding to OID 1.3.6.1.4.1.1466.115.121.1.31</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="LDAPTYPE_MAIL_PREFERENCE">
+                            <xsd:annotation>
+                                <xsd:documentation>Mail Preference, corresponding to OID 1.3.6.1.4.1.1466.115.121.1.32</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="LDAPTYPE_MHS_OR_ADDRESS">
+                            <xsd:annotation>
+                                <xsd:documentation>MHS OR Address, corresponding to OID 1.3.6.1.4.1.1466.115.121.1.33</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="LDAPTYPE_MODIFY_RIGHTS">
+                            <xsd:annotation>
+                                <xsd:documentation>Modify Rights, corresponding to OID 1.3.6.1.4.1.1466.115.121.1.55</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="LDAPTYPE_NAME_AND_OPTIONAL_UID">
+                            <xsd:annotation>
+                                <xsd:documentation>Name And Optional UID, corresponding to OID 1.3.6.1.4.1.1466.115.121.1.34</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="LDAPTYPE_NAME_FORM_DESCRIPTION">
+                            <xsd:annotation>
+                                <xsd:documentation>Name Form Description, corresponding to OID 1.3.6.1.4.1.1466.115.121.1.35</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="LDAPTYPE_NUMERIC_STRING">
+                            <xsd:annotation>
+                                <xsd:documentation>Numeric String, corresponding to OID 1.3.6.1.4.1.1466.115.121.1.36</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="LDAPTYPE_OBJECT_CLASS_DESCRIP_STRING">
+                            <xsd:annotation>
+                                <xsd:documentation>Object Class Description, corresponding to OID 1.3.6.1.4.1.1466.115.121.1.37</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="LDAPTYPE_OCTET_STRING">
+                            <xsd:annotation>
+                                <xsd:documentation>Octet String, corresponding to OID 1.3.6.1.4.1.1466.115.121.1.40</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="LDAPTYPE_OID">
+                            <xsd:annotation>
+                                <xsd:documentation>OID, corresponding to OID 1.3.6.1.4.1.1466.115.121.1.38</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="LDAPTYPE_MAILBOX">
+                            <xsd:annotation>
+                                <xsd:documentation>Other Mailbox, corresponding to OID 1.3.6.1.4.1.1466.115.121.1.39</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="LDAPTYPE_POSTAL_ADDRESS">
+                            <xsd:annotation>
+                                <xsd:documentation>Postal Address, corresponding to OID 1.3.6.1.4.1.1466.115.121.1.41</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="LDAPTYPE_PROTOCOL_INFORMATION">
+                            <xsd:annotation>
+                                <xsd:documentation>Protocol Information, corresponding to OID 1.3.6.1.4.1.1466.115.121.1.42</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="LDAPTYPE_PRESENTATION_ADDRESS">
+                            <xsd:annotation>
+                                <xsd:documentation>Presentation Address, corresponding to OID 1.3.6.1.4.1.1466.115.121.1.43</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="LDAPTYPE_PRINTABLE_STRING">
+                            <xsd:annotation>
+                                <xsd:documentation>Printable String, corresponding to OID 1.3.6.1.4.1.1466.115.121.1.44</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="LDAPTYPE_SUBSTRING_ASSERTION">
+                            <xsd:annotation>
+                                <xsd:documentation>Substring Assertion, corresponding to OID 1.3.6.1.4.1.1466.115.121.1.58</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="LDAPTYPE_SUBTREE_SPECIFICATION">
+                            <xsd:annotation>
+                                <xsd:documentation>Subtree Specification, corresponding to OID 1.3.6.1.4.1.1466.115.121.1.45</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="LDAPTYPE_SUPPLIER_INFORMATION">
+                            <xsd:annotation>
+                                <xsd:documentation>Supplier Information, corresponding to OID 1.3.6.1.4.1.1466.115.121.1.46</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="LDAPTYPE_SUPPLIER_OR_CONSUMER">
+                            <xsd:annotation>
+                                <xsd:documentation>Supplier Or Consumer, corresponding to OID 1.3.6.1.4.1.1466.115.121.1.47</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="LDAPTYPE_SUPPLIER_AND_CONSUMER">
+                            <xsd:annotation>
+                                <xsd:documentation>Supplier And Consumer, corresponding to OID 1.3.6.1.4.1.1466.115.121.1.48</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="LDAPTYPE_SUPPORTED_ALGORITHM">
+                            <xsd:annotation>
+                                <xsd:documentation>Supported Algorithm, corresponding to OID 1.3.6.1.4.1.1466.115.121.1.49</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="LDAPTYPE_TELEPHONE_NUMBER">
+                            <xsd:annotation>
+                                <xsd:documentation>Telephone Number, corresponding to OID 1.3.6.1.4.1.1466.115.121.1.50</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="LDAPTYPE_TELEX_TERMINAL_ID">
+                            <xsd:annotation>
+                                <xsd:documentation>Teletex Terminal Identifier, corresponding to OID 1.3.6.1.4.1.1466.115.121.1.51</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="LDAPTYPE_TELEX_NUMBER">
+                            <xsd:annotation>
+                                <xsd:documentation>Telex Number, corresponding to OID 1.3.6.1.4.1.1466.115.121.1.52</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="LDAPTYPE_UTC_TIME">
+                            <xsd:annotation>
+                                <xsd:documentation>UTC Time, corresponding to OID 1.3.6.1.4.1.1466.115.121.1.53</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="LDAPTYPE_TIMESTAMP">
+                            <xsd:annotation>
+                                <xsd:documentation>The data is of a time stamp in seconds.</xsd:documentation>
+                                <xsd:appinfo>
+                                    <oval:deprecated_info>
+                                        <oval:version>5.7</oval:version>
+                                        <oval:reason>This value was accidently carried over from the win-def:EntityStateAdstypeType as it was used as a template for the ind-def:EntityStateLdaptypeType.</oval:reason>
+                                        <oval:comment>This value has been deprecated and will be removed in version 6.0 of the language.</oval:comment>
+                                    </oval:deprecated_info>
+                                    <sch:pattern id="ind-def_ldaptype_timestamp_value_dep">
+                                        <sch:rule context="oval-def:oval_definitions/oval-def:states/ind-def:ldap_state/ind-def:ldaptype|oval-def:oval_definitions/oval-def:states/ind-def:ldap57_state/ind-def:ldaptype">
+                                            <sch:report test=".='LDAPTYPE_TIMESTAMP'">
+                                                                    DEPRECATED ELEMENT VALUE IN: ldap_state ELEMENT VALUE: <sch:value-of select="."/>
+                                                              </sch:report>
+                                        </sch:rule>
+                                    </sch:pattern>
+                                </xsd:appinfo>
+                            </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="LDAPTYPE_EMAIL">
+                            <xsd:annotation>
+                                <xsd:documentation>The data is of an e-mail message.</xsd:documentation>
+                                <xsd:appinfo>
+                                    <oval:deprecated_info>
+                                        <oval:version>5.7</oval:version>
+                                        <oval:reason>This value was accidently carried over from the win-def:EntityStateAdstypeType as it was used as a template for the ind-def:EntityStateLdaptypeType.</oval:reason>
+                                        <oval:comment>This value has been deprecated and will be removed in version 6.0 of the language.</oval:comment>
+                                    </oval:deprecated_info>
+                                    <sch:pattern id="ind-def_ldaptype_email_value_dep">
+                                        <sch:rule context="oval-def:oval_definitions/oval-def:states/ind-def:ldap_state/ind-def:ldaptype|oval-def:oval_definitions/oval-def:states/ind-def:ldap57_state/ind-def:ldaptype">
+                                            <sch:report test=".='LDAPTYPE_EMAIL'">
+                                                                    DEPRECATED ELEMENT VALUE IN: ldap_state ELEMENT VALUE: <sch:value-of select="."/>
+                                                              </sch:report>
+                                        </sch:rule>
+                                    </sch:pattern>
+                                </xsd:appinfo>
+                            </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="">
+                            <xsd:annotation>
+                                <xsd:documentation>The empty string value is permitted here to allow for empty elements associated with variable references.</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:enumeration>
                   </xsd:restriction>
             </xsd:simpleContent>
       </xsd:complexType>

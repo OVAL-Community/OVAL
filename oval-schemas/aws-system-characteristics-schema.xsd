@@ -1,5 +1,5 @@
-<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:oval-sc="urn:oval:v6:system-characteristics" xmlns:oval="urn:oval:v6:common" xmlns:aws-sc="urn:oval:v6:system-characteristics:aws" xmlns:sch="http://purl.oclc.org/dsdl/schematron" targetNamespace="urn:oval:v6:system-characteristics:aws" elementFormDefault="qualified" version="6.0">
-    <xsd:import namespace="urn:oval:v6:system-characteristics" schemaLocation="oval-system-characteristics-schema.xsd"/>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:oval-sc="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:aws-sc="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#aws" xmlns:sch="http://purl.oclc.org/dsdl/schematron" targetNamespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#aws" elementFormDefault="qualified" version="5.12.1">
+    <xsd:import namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5" schemaLocation="oval-system-characteristics-schema.xsd"/>
     
     <xsd:annotation>
         <xsd:documentation>
@@ -17,8 +17,8 @@
         </xsd:documentation>
         <xsd:appinfo>
             <schema>Amazon Web Services System Characteristics</schema>
-            <version>6.0</version>
-            <date>1/24/2025 09:00:00 AM</date>
+            <version>5.12.1</version>
+            <date>05/23/2025 09:00:00 AM</date>
             <terms_of_use>
                 For the portion subject to the copyright in the United States: Copyright (c) 2016 United States Government. All Rights 
                 Reserved. Copyright (c) 2016, Center for Internet Security. All rights reserved. The contents of this file are subject 
@@ -26,8 +26,8 @@
                 language governing permissions and limitations for use of this schema. When distributing copies of the OVAL Schema, 
                 this license header must be included. 
             </terms_of_use>
-            <sch:ns prefix="oval-sc" urn="urn:oval:v6:system-characteristics"/>
-            <sch:ns prefix="aws-sc" urn="urn:oval:v6:system-characteristics:aws"/>
+            <sch:ns prefix="oval-sc" uri="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5"/>
+            <sch:ns prefix="aws-sc" uri="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#aws"/>
             <sch:ns prefix="xsi" uri="http://www.w3.org/2001/XMLSchema-instance"/>
         </xsd:appinfo>
     </xsd:annotation>

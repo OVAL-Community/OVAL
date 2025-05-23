@@ -5,13 +5,15 @@
 
 .. _welcome-to-the-guidelines:
 
-The OVAL Community Version 6.0 Documentation
+The OVAL Community Version 5.12.1 Documentation
+
 =========================================
 
 Welcome to the guidelines for OVAL, the Open Vulnerability and Assessment Language. These guidelines are designed to explain everything you need to know to start contributing to OVAL (or link you to places to ask questions, should the explanations not suffice), as well as provide a variety of standards and resources to the community.
 
 If you are looking for documentation for documentation on previous versions of OVAL
 
+* OVAL version 6.0:  https://oval-community-guidelines.readthedocs.io/en/6.0_release/
 * OVAL version 5.12:  https://oval-community-guidelines.readthedocs.io/en/5.12_release/
 * OVAL version 5.11.2:  https://oval-community-guidelines.readthedocs.io/en/5.11.2_release/
 
@@ -26,12 +28,6 @@ What is OVAL?
 -------------
 
 OVAL is an open language built by security experts, system administrators, and software developers to universalize assessment and reporting on the state of computer systems.
-
-What changed in version 6.0?
---------------------------
-* Removed all deprecated items from OVAL 5.12, in order to substantially decrease the size/complexity of the language.  This was accomplished without removing any functionality from currently published SCAP/OVAL content.  140 different OVAL deprecated tests were removed from 5.12 to 6.0, along with several entire platforms.
-* Added the concept of an 'encapsulated definition', which allows for OVAL definition files to have a new element called 'encapsulated_definition', which contains all of the tests, objects, states and variables needed to perform the given defintion.  This was added to allow content to be easier to write, maintain, and merge with other files.
-* Added new schemas for Vmware ESX and Kubernetes
 
 Who is the OVAL Community?
 --------------------------

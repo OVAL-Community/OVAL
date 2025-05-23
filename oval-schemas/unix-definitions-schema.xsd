@@ -1,26 +1,133 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-            xmlns:oval-def="urn:oval:v6:definitions"
-            xmlns:oval="urn:oval:v6:common"
-            xmlns:unix-def="urn:oval:v6:definitions:unix"
+            xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5"
+            xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5"
+            xmlns:unix-def="http://oval.mitre.org/XMLSchema/oval-definitions-5#unix"
             xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-            targetNamespace="urn:oval:v6:definitions:unix"
-            elementFormDefault="qualified" version="6.0">
-      <xsd:import namespace="urn:oval:v6:definitions" schemaLocation="oval-definitions-schema.xsd"/>
-      <xsd:import namespace="urn:oval:v6:common" schemaLocation="oval-common-schema.xsd"/>
+            targetNamespace="http://oval.mitre.org/XMLSchema/oval-definitions-5#unix"
+            elementFormDefault="qualified" version="5.12.1">
+      <xsd:import namespace="http://oval.mitre.org/XMLSchema/oval-definitions-5" schemaLocation="oval-definitions-schema.xsd"/>
+      <xsd:import namespace="http://oval.mitre.org/XMLSchema/oval-common-5" schemaLocation="oval-common-schema.xsd"/>
       <xsd:annotation>
             <xsd:documentation>The following is a description of the elements, types, and attributes that compose generic UNIX tests found in Open Vulnerability and Assessment Language (OVAL). Each test is an extension of the standard test element defined in the Core Definition Schema. Through extension, each test inherits a set of elements and attributes that are shared amongst all OVAL tests. Each test is described in detail and should provide the information necessary to understand what each element and attribute represents. This document is intended for developers and assumes some familiarity with XML. A high level description of the interaction between the different tests and their relationship to the Core Definition Schema is not outlined here.</xsd:documentation>
             <xsd:documentation>The OVAL Schema is maintained by the OVAL Community. For more information, including how to get involved in the project and how to submit change requests, please visit the OVAL website at https://github.com/OVAL-Community/.</xsd:documentation>
             <xsd:appinfo>
                   <schema>UNIX Definition</schema>
-                  <version>6.0</version>
-                  <date>1/24/2025 09:00:00 AM</date>
+                  <version>5.12.1</version>
+                  <date>05/23/2025 09:00:00 AM</date>
                   <terms_of_use>This software is an open standard developed by multiple parties, including the United States Government (Government). The Government hereby grants you a non-exclusive, royalty-free, worldwide license to use, modify, and/or reproduce the software for any lawful purpose provided that you reproduce this License/Disclaimer language with any use/modification/copy of the software. The Government assumes no responsibility whatsoever for this software's use by other parties, and the software is provided "AS IS" without warranty or guarantee of any kind, express or implied, including, but not limited to, the warranties of merchantability, fitness for a particular purpose, and noninfringement. In no event shall the Government be liable for any claim, damages or other liability, whether in an action of contract, tort or other dealings in the software. The Government has no obligation hereunder to provide maintenance, support, updates, enhancements, or modifications to the software. Users may submit proposals and/or updates regarding the software, which proposals and/or updates the Government, at its sole discretion, can choose to incorporate into the software. Proposals and/or updates submitted to the Government by users must be accompanied by a license to such proposals and/or updates that is no more restrictive than this License/Disclaimer.</terms_of_use>
-                  <sch:ns prefix="oval-def" urn="urn:oval:v6:definitions"/>
-                  <sch:ns prefix="unix-def" urn="urn:oval:v6:definitions:unix"/>
+                  <sch:ns prefix="oval-def" uri="http://oval.mitre.org/XMLSchema/oval-definitions-5"/>
+                  <sch:ns prefix="unix-def" uri="http://oval.mitre.org/XMLSchema/oval-definitions-5#unix"/>
                   <sch:ns prefix="xsi" uri="http://www.w3.org/2001/XMLSchema-instance"/>
             </xsd:appinfo>
       </xsd:annotation>
+      <!-- =============================================================================== -->
+      <!-- ===============================  DNS CACHE TEST  ============================== -->
+      <!-- =============================================================================== -->
+      <xsd:element name="dnscache_test" substitutionGroup="oval-def:test">
+            <xsd:annotation>
+                  <xsd:documentation>The dnscache_test is used to check the time to live and IP addresses associated with a domain name.  The time to live and IP addresses for a particular domain name are retrieved from the DNS cache on the local system. It extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information. The required object element references a dnscache_object and the optional state element specifies the metadata to check.</xsd:documentation>
+                  <xsd:appinfo>
+                        <oval:element_mapping>
+                              <oval:test>dnscache_test</oval:test>
+                              <oval:object>dnscache_object</oval:object>
+                              <oval:state>dnscache_state</oval:state>
+                              <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#unix">dnscache_item</oval:item>
+                        </oval:element_mapping>
+                  </xsd:appinfo>
+					<xsd:appinfo>
+						<oval:deprecated_info>
+							<oval:version>5.12</oval:version>
+							<oval:comment>This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.</oval:comment>
+						</oval:deprecated_info>
+					</xsd:appinfo>
+                  <xsd:appinfo>
+                        <sch:pattern id="unix-def_dnscachetst">
+                              <sch:rule context="unix-def:dnscache_test/unix-def:object">
+                                    <sch:assert test="@object_ref=ancestor::oval-def:oval_definitions/oval-def:objects/unix-def:dnscache_object/@id"><sch:value-of select="../@id"/> - the object child element of a dnscache_test must reference a dnscache_object</sch:assert>
+                              </sch:rule>
+                              <sch:rule context="unix-def:dnscache_test/unix-def:state">
+                                    <sch:assert test="@state_ref=ancestor::oval-def:oval_definitions/oval-def:states/unix-def:dnscache_state/@id"><sch:value-of select="../@id"/> - the state child element of a dnscache_test must reference a dnscache_state</sch:assert>
+                              </sch:rule>
+                        </sch:pattern>
+                  </xsd:appinfo>
+            </xsd:annotation>
+            <xsd:complexType>
+                  <xsd:complexContent>
+                        <xsd:extension base="oval-def:TestType">
+                              <xsd:sequence>
+                                    <xsd:element name="object" type="oval-def:ObjectRefType" />
+                                    <xsd:element name="state" type="oval-def:StateRefType" minOccurs="0" maxOccurs="unbounded"/>
+                              </xsd:sequence>
+                        </xsd:extension>
+                  </xsd:complexContent>
+            </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="dnscache_object" substitutionGroup="oval-def:object">
+            <xsd:annotation>
+                  <xsd:documentation>The dnscache_object is used by the dnscache_test to specify the domain name(s) that should be collected from the DNS cache on the local system. Each object extends the standard ObjectType as defined in the oval-definitions-schema and one should refer to the ObjectType description for more information. The common set element allows complex objects to be created using filters and set logic. Again, please refer to the description of the set element in the oval-definitions-schema.</xsd:documentation>
+                  <xsd:appinfo>
+                        <sch:pattern id="unix-def_dnscache_object_verify_filter_state">
+                              <sch:rule context="unix-def:dnscache_object//oval-def:filter">
+                                    <sch:let name="parent_object" value="ancestor::unix-def:dnscache_object"/>
+                                    <sch:let name="parent_object_id" value="$parent_object/@id"/>
+                                    <sch:let name="state_ref" value="."/>
+                                    <sch:let name="reffed_state" value="ancestor::oval-def:oval_definitions/oval-def:states/*[@id=$state_ref]"/>
+                                    <sch:let name="state_name" value="local-name($reffed_state)"/>
+                                    <sch:let name="state_namespace" value="namespace-uri($reffed_state)"/>
+                                    <sch:assert test="(($state_namespace='http://oval.mitre.org/XMLSchema/oval-definitions-5#unix') and ($state_name='dnscache_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
+                              </sch:rule>
+                        </sch:pattern>
+                  </xsd:appinfo>
+            </xsd:annotation>
+            <xsd:complexType>
+                  <xsd:complexContent>
+                        <xsd:extension base="oval-def:ObjectType">
+                              <xsd:sequence>
+                                    <xsd:choice>
+                                          <xsd:element ref="oval-def:set"/>
+                                          <xsd:sequence>
+                                                <xsd:element name="domain_name" type="oval-def:EntityObjectStringType">
+                                                      <xsd:annotation>
+                                                            <xsd:documentation>The domain_name element specifies the domain name(s) that should be collected from the DNS cache on the local system.</xsd:documentation>
+                                                      </xsd:annotation>
+                                                </xsd:element>
+                                                <xsd:element ref="oval-def:filter" minOccurs="0" maxOccurs="unbounded"/>
+                                          </xsd:sequence>
+                                    </xsd:choice>
+                              </xsd:sequence>
+                        </xsd:extension>
+                  </xsd:complexContent>
+            </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="dnscache_state" substitutionGroup="oval-def:state">
+            <xsd:annotation>
+                  <xsd:documentation>The dnscache_state contains three entities that are used to check the domain name, time to live, and IP addresses associated with the DNS cache entry.</xsd:documentation>
+            </xsd:annotation>
+            <xsd:complexType>
+                  <xsd:complexContent>
+                        <xsd:extension base="oval-def:StateType">
+                              <xsd:sequence>
+                                    <xsd:element name="domain_name" type="oval-def:EntityStateStringType" minOccurs="0" maxOccurs="1">
+                                          <xsd:annotation>
+                                                <xsd:documentation>The domain_name element contains a string that represents a domain name that was collected from the DNS cache on the local system.</xsd:documentation>
+                                          </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="ttl" type="oval-def:EntityStateIntType" minOccurs="0" maxOccurs="1">
+                                          <xsd:annotation>
+                                                <xsd:documentation>The ttl element contains an integer that represents the time to live in seconds of the DNS cache entry.</xsd:documentation>
+                                          </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="ip_address" type="oval-def:EntityStateIPAddressStringType" minOccurs="0" maxOccurs="1">
+                                          <xsd:annotation>
+                                                <xsd:documentation>The ip_address element contains a string that represents an IP address associated with the specified domain name that was collected from the DNS cache on the local system. Note that the IP address can be IPv4 or IPv6.</xsd:documentation>
+                                          </xsd:annotation>
+                                    </xsd:element>
+                              </xsd:sequence>
+                        </xsd:extension>
+                  </xsd:complexContent>
+            </xsd:complexType>
+      </xsd:element>
       <!-- =============================================================================== -->
       <!-- =================================  FILE TEST  ================================= -->
       <!-- =============================================================================== -->
@@ -32,7 +139,7 @@
                               <oval:test>file_test</oval:test>
                               <oval:object>file_object</oval:object>
                               <oval:state>file_state</oval:state>
-                              <oval:item target_namespace="urn:oval:v6:system-characteristics:unix">file_item</oval:item>
+                              <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#unix">file_item</oval:item>
                         </oval:element_mapping>
                   </xsd:appinfo>
                   <xsd:appinfo>
@@ -72,7 +179,7 @@
                                     <sch:let name="reffed_state" value="ancestor::oval-def:oval_definitions/oval-def:states/*[@id=$state_ref]"/>
                                     <sch:let name="state_name" value="local-name($reffed_state)"/>
                                     <sch:let name="state_namespace" value="namespace-uri($reffed_state)"/>
-                                    <sch:assert test="(($state_namespace='urn:oval:v6:definitions:unix') and ($state_name='file_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
+                                    <sch:assert test="(($state_namespace='http://oval.mitre.org/XMLSchema/oval-definitions-5#unix') and ($state_name='file_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
                               </sch:rule>
                         </sch:pattern>
                   </xsd:appinfo>
@@ -387,7 +494,40 @@
                   </xsd:annotation>
                   <xsd:simpleType>
                         <xsd:restriction base="xsd:string">
+                              <xsd:enumeration value="none">
+                                <xsd:annotation>
+                                  <xsd:appinfo>
+                                    <oval:deprecated_info>
+                                      <oval:version>5.4</oval:version>
+                                      <oval:reason>The values 'files', 'files and directories', and 'none' are being removed because it is not possible to recurse files and the value 'none' was intended to mean no recursion, however, this is already covered by the recurse_direction attribute.</oval:reason>
+                                      <oval:comment>These values have been deprecated and will be removed in version 6.0 of the language.</oval:comment>
+                                    </oval:deprecated_info>
+                                  </xsd:appinfo>
+                                </xsd:annotation>                                
+                              </xsd:enumeration>
+                              <xsd:enumeration value="files">
+                                <xsd:annotation>
+                                  <xsd:appinfo>
+                                    <oval:deprecated_info>
+                                      <oval:version>5.4</oval:version>
+                                      <oval:reason>The values 'files', 'files and directories', and 'none' are being removed because it is not possible to recurse files and the value 'none' was intended to mean no recursion, however, this is already covered by the recurse_direction attribute.</oval:reason>
+                                      <oval:comment>These values have been deprecated and will be removed in version 6.0 of the language.</oval:comment>
+                                    </oval:deprecated_info>
+                                    </xsd:appinfo>
+                                </xsd:annotation>
+                              </xsd:enumeration>
                               <xsd:enumeration value="directories"/>
+                              <xsd:enumeration value="files and directories">
+                                <xsd:annotation>
+                                  <xsd:appinfo>
+                                    <oval:deprecated_info>
+                                      <oval:version>5.4</oval:version>
+                                      <oval:reason>The values 'files', 'files and directories', and 'none' are being removed because it is not possible to recurse files and the value 'none' was intended to mean no recursion, however, this is already covered by the recurse_direction attribute.</oval:reason>
+                                      <oval:comment>These values have been deprecated and will be removed in version 6.0 of the language.</oval:comment>
+                                    </oval:deprecated_info>
+                                  </xsd:appinfo>
+                                </xsd:annotation>                                
+                              </xsd:enumeration>
                               <xsd:enumeration value="symlinks"/>
                               <xsd:enumeration value="symlinks and directories"/>
                         </xsd:restriction>
@@ -420,6 +560,455 @@
                   </xsd:simpleType>
             </xsd:attribute>
       </xsd:complexType>
+      <!-- ================================================================================ -->
+      <!-- ==========================  FILE EXTENDED ATTRIBUTE TEST  ====================== -->
+      <!-- ================================================================================ -->
+      <xsd:element name="fileextendedattribute_test" substitutionGroup="oval-def:test">
+            <xsd:annotation>
+                  <xsd:documentation>The file extended attribute test is used to check extended attribute values associated with UNIX files, of the sort returned by the getfattr command or getxattr() system call. It extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information. The required object element references a fileextendedattribute_object and the optional state element specifies the extended attributes to check.</xsd:documentation>
+                  <xsd:documentation>NOTE: Solaris has a very different implementation of "extended attributes" in which the attributes are really an orthogonal directory hierarchy of files. See the Solaris documentation for more details. The file extended attribute test only handles simple name/value pairs as implemented by most other UNIX derived operating systems.</xsd:documentation>
+                  <xsd:appinfo>
+                        <oval:element_mapping>
+                              <oval:test>fileextendedattribute_test</oval:test>
+                              <oval:object>fileextendedattribute_object</oval:object>
+                              <oval:state>fileextendedattribute_state</oval:state>
+                              <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#unix">fileextendedattribute_item</oval:item>
+                        </oval:element_mapping>
+                  </xsd:appinfo>
+					<xsd:appinfo>
+						<oval:deprecated_info>
+							<oval:version>5.12</oval:version>
+							<oval:comment>This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.</oval:comment>
+						</oval:deprecated_info>
+					</xsd:appinfo>
+                  <xsd:appinfo>
+                        <sch:pattern id="unix-def_file_ea_tst">
+                              <sch:rule context="unix-def:filextendedattribute_test/unix-def:object">
+                                    <sch:assert test="@object_ref=ancestor::oval-def:oval_definitions/oval-def:objects/unix-def:fileextendedattribute_object/@id"><sch:value-of select="../@id"/> - the object child element of a fileextendedattribute_test must reference a fileextendedattribute_object</sch:assert>
+                              </sch:rule>
+                              <sch:rule context="unix-def:fileextendedattribute_test/unix-def:state">
+                                    <sch:assert test="@state_ref=ancestor::oval-def:oval_definitions/oval-def:states/unix-def:fileextendedattribute_state/@id"><sch:value-of select="../@id"/> - the state child element of a fileextendedattribute_test must reference a fileextendedattribute_state</sch:assert>
+                              </sch:rule>
+                        </sch:pattern>
+                  </xsd:appinfo>
+            </xsd:annotation>
+            <xsd:complexType>
+                  <xsd:complexContent>
+                        <xsd:extension base="oval-def:TestType">
+                              <xsd:sequence>
+                                    <xsd:element name="object" type="oval-def:ObjectRefType" />
+                                    <xsd:element name="state" type="oval-def:StateRefType" minOccurs="0" maxOccurs="unbounded"/>
+                              </xsd:sequence>
+                        </xsd:extension>
+                  </xsd:complexContent>
+            </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="fileextendedattribute_object" substitutionGroup="oval-def:object">
+            <xsd:annotation>
+                  <xsd:documentation>The fileextendedattribute_object element is used by a file extended attribute test to define the specific file(s) and attribute(s) to be evaluated. The fileextendedattribute_object will collect all UNIX file types (directory, regular file, character device, block device, fifo, symbolic link, and socket). Each object extends the standard ObjectType as defined in the oval-definitions-schema and one should refer to the ObjectType description for more information. The common set element allows complex objects to be created using filters and set logic. Again, please refer to the description of the set element in the oval-definitions-schema.</xsd:documentation>
+                  <xsd:documentation>A file extended attribute object defines the path, filename and attribute name. In addition, a number of behaviors may be provided that help guide the collection of objects. Please refer to the FileExtendedAttributeBehaviors complex type for more information about specific behaviors.</xsd:documentation>
+                  <xsd:documentation>The set of files to be evaluated may be identified with either a complete filepath or a path and filename. Only one of these options may be selected.</xsd:documentation>
+                  <xsd:documentation>It is important to note that the 'max_depth' and 'recurse_direction' attributes of the 'behaviors' element do not apply to the 'filepath' element, only to the 'path' and 'filename' elements.  This is because the 'filepath' element represents an absolute path to a particular file and it is not possible to recurse over a file.</xsd:documentation>
+                  <xsd:appinfo>
+                        <sch:pattern id="unix-def_fileextendedattribute_object_verify_filter_state">
+                              <sch:rule context="unix-def:fileextendedattribute_object//oval-def:filter">
+                                    <sch:let name="parent_object" value="ancestor::unix-def:fileextendedattribute_object"/>
+                                    <sch:let name="parent_object_id" value="$parent_object/@id"/>
+                                    <sch:let name="state_ref" value="."/>
+                                    <sch:let name="reffed_state" value="ancestor::oval-def:oval_definitions/oval-def:states/*[@id=$state_ref]"/>
+                                    <sch:let name="state_name" value="local-name($reffed_state)"/>
+                                    <sch:let name="state_namespace" value="namespace-uri($reffed_state)"/>
+                                    <sch:assert test="(($state_namespace='http://oval.mitre.org/XMLSchema/oval-definitions-5#unix') and ($state_name='fileextendedattribute_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
+                              </sch:rule>
+                        </sch:pattern>
+                  </xsd:appinfo>
+            </xsd:annotation>
+            <xsd:complexType>
+                  <xsd:complexContent>
+                        <xsd:extension base="oval-def:ObjectType">
+                              <xsd:sequence>
+                                    <xsd:choice>
+                                          <xsd:element ref="oval-def:set"/>
+                                          <xsd:sequence>
+                                                <xsd:element name="behaviors" type="unix-def:FileBehaviors" minOccurs="0" maxOccurs="1"/>
+                                                <xsd:choice>
+                                                      <xsd:element name="filepath" type="oval-def:EntityObjectStringType">
+                                                            <xsd:annotation>
+                                                                  <xsd:documentation>The filepath element specifies the absolute path for a file on the machine. A directory cannot be specified as a filepath.</xsd:documentation>
+                                                                  <xsd:appinfo>
+                                                                        <sch:pattern id="unix-def_file_ea_objfilepath">
+                                                                              <sch:rule context="unix-def:fileextendedattribute_object/unix-def:filepath">
+                                                                                    <sch:assert test="not(preceding-sibling::unix-def:behaviors[@max_depth or @recurse or @recurse_direction])"><sch:value-of select="../@id"/> - the max_depth, recurse, and recurse_direction behaviors are not allowed with a filepath entity</sch:assert>
+                                                                              </sch:rule>
+                                                                        </sch:pattern>
+                                                                        <sch:pattern id="unix-def_file_ea_objfilepath2">
+                                                                              <sch:rule context="unix-def:fileextendedattribute_object/unix-def:filepath[not(@operation='equals' or not(@operation))]">
+                                                                                    <sch:assert test="not(preceding-sibling::unix-def:behaviors[@recurse_file_system='defined'])"><sch:value-of select="../@id"/> - the recurse_file_system behavior MUST not be set to 'defined' when a pattern match is used with a filepath entity.</sch:assert>
+                                                                              </sch:rule>
+                                                                        </sch:pattern>
+                                                                  </xsd:appinfo>
+                                                            </xsd:annotation>
+                                                      </xsd:element>
+                                                      <xsd:sequence>
+                                                          <xsd:element name="path" type="oval-def:EntityObjectStringType">
+                                                                <xsd:annotation>
+                                                                      <xsd:documentation>The path element specifies the directory component of the absolute path to a file on the machine.</xsd:documentation>
+                                                                      <xsd:appinfo>
+                                                                            <sch:pattern id="unix-def_file_ea_objpath">
+                                                                                  <sch:rule context="unix-def:fileextendedattribute_object/unix-def:path[not(@operation='equals' or not(@operation))]">
+                                                                                        <sch:assert test="not(preceding-sibling::unix-def:behaviors[@recurse_file_system='defined'])"><sch:value-of select="../@id"/> - the recurse_file_system behavior MUST not be set to 'defined' when a pattern match is used with a path entity.</sch:assert>
+                                                                                        <sch:assert test="not(preceding-sibling::unix-def:behaviors[@max_depth])"><sch:value-of select="../@id"/> - the max_depth behavior MUST not be used when a pattern match is used with a path entity.</sch:assert>
+                                                                                        <sch:assert test="not(preceding-sibling::unix-def:behaviors[@recurse_direction])"><sch:value-of select="../@id"/> - the recurse_direction behavior MUST not be used when a pattern match is used with a path entity.</sch:assert>
+                                                                                        <sch:assert test="not(preceding-sibling::unix-def:behaviors[@recurse])"><sch:value-of select="../@id"/> - the recurse behavior MUST not be used when a pattern match is used with a path entity.</sch:assert>
+                                                                                  </sch:rule>
+                                                                            </sch:pattern>
+                                                                      </xsd:appinfo>
+                                                                </xsd:annotation>
+                                                          </xsd:element>
+                                                          <xsd:element name="filename" type="oval-def:EntityObjectStringType"  nillable="true">
+                                                                <xsd:annotation>
+                                                                      <xsd:documentation>The filename element specifies the name of a file to evaluate. If the xsi:nil attribute is set to true, then the object being specified is the higher level directory object (not all the files in the directory).  In this case, the filename element should not be used during collection and would result in the unique set of items being the directories themselves. For example, one would set xsi:nil to true if the desire was to test the attributes associated with a directory. Setting xsi:nil equal to true is different than using a .* pattern match, which says to collect every file under a given path.</xsd:documentation>
+                                                                      <xsd:appinfo>
+                                                                            <sch:pattern id="unix-def_fileextendedattribute_objectfilename">
+                                                                                  <sch:rule context="unix-def:fileextendedattribute_object/unix-def:filename">
+                                                                                        <sch:assert test="(@var_ref and .='') or ((@xsi:nil='1' or @xsi:nil='true') and .='') or not(.='') or (.='' and @operation = 'pattern match')"><sch:value-of select="../@id"/> - filename entity cannot be empty unless the xsi:nil attribute is set to true or a var_ref is used</sch:assert>
+                                                                                  </sch:rule>
+                                                                            </sch:pattern>
+                                                                      </xsd:appinfo>
+                                                                </xsd:annotation>
+                                                          </xsd:element>
+                                                      </xsd:sequence>
+                                                </xsd:choice>
+                                                <xsd:element name="attribute_name" type="oval-def:EntityObjectStringType">
+                                                      <xsd:annotation>
+                                                            <xsd:documentation>The attribute_name element specifies the name of an extended attribute to evaluate.</xsd:documentation>
+                                                      </xsd:annotation>
+                                                </xsd:element>
+                                                <xsd:element ref="oval-def:filter" minOccurs="0" maxOccurs="unbounded"/>
+                                          </xsd:sequence>
+                                    </xsd:choice>
+                              </xsd:sequence>
+                        </xsd:extension>
+                  </xsd:complexContent>
+            </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="fileextendedattribute_state" substitutionGroup="oval-def:state">
+            <xsd:annotation>
+                  <xsd:documentation>The fileextendedattribute_state element defines an extended attribute associated with a UNIX file. This includes the path, filename, attribute name, and attribute value.</xsd:documentation>
+            </xsd:annotation>
+            <xsd:complexType>
+                  <xsd:complexContent>
+                        <xsd:extension base="oval-def:StateType">
+                              <xsd:sequence>
+                                    <xsd:element name="filepath" type="oval-def:EntityStateStringType" minOccurs="0">
+                                          <xsd:annotation>
+                                                <xsd:documentation>The filepath element specifies the absolute path for a file on the machine. A directory can be specified as a filepath.</xsd:documentation>
+                                          </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="path" type="oval-def:EntityStateStringType" minOccurs="0" maxOccurs="1">
+                                          <xsd:annotation>
+                                                <xsd:documentation>The path element specifies the directory component of the absolute path to a file on the machine.</xsd:documentation>
+                                          </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="filename" type="oval-def:EntityStateStringType" minOccurs="0" maxOccurs="1">
+                                          <xsd:annotation>
+                                                <xsd:documentation>The name of the file.</xsd:documentation>
+                                          </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="attribute_name" type="oval-def:EntityStateStringType" minOccurs="0" maxOccurs="1">
+                                          <xsd:annotation>
+                                                <xsd:documentation>This is the extended attribute's name, identifier or key.</xsd:documentation>
+                                          </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="value" type="oval-def:EntityStateAnySimpleType" minOccurs="0" maxOccurs="1">
+                                          <xsd:annotation>
+                                                <xsd:documentation>The value entity represents the extended attribute's value or contents. To test for an attribute with no value assigned to it, this entity would be used with an empty value.</xsd:documentation>
+                                          </xsd:annotation>
+                                    </xsd:element>
+                              </xsd:sequence>
+                        </xsd:extension>
+                  </xsd:complexContent>
+            </xsd:complexType>
+      </xsd:element>      
+      <!-- =============================================================================== -->
+      <!-- =================================  GCONF TEST  ================================ -->
+      <!-- =============================================================================== -->
+      <xsd:element name="gconf_test" substitutionGroup="oval-def:test">
+            <xsd:annotation>
+                  <xsd:documentation>The gconf_test is used to check the attributes and value(s) associated with GConf preference keys. It extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information. The required object element references a gconf_object and the optional gconf_state element specifies the data to check.</xsd:documentation>
+                  <xsd:appinfo>
+                        <oval:element_mapping>
+                              <oval:test>gconf_test</oval:test>
+                              <oval:object>gconf_object</oval:object>
+                              <oval:state>gconf_state</oval:state>
+                              <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#unix">gconf_item</oval:item>
+                        </oval:element_mapping>
+                  </xsd:appinfo>
+					<xsd:appinfo>
+						<oval:deprecated_info>
+							<oval:version>5.12</oval:version>
+							<oval:comment>This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.</oval:comment>
+						</oval:deprecated_info>
+					</xsd:appinfo>	
+                  <xsd:appinfo>
+                        <sch:pattern id="unix-def_gconf_test">
+                              <sch:rule context="unix-def:gconf_test/unix-def:object">
+                                    <sch:assert test="@object_ref=ancestor::oval-def:oval_definitions/oval-def:objects/unix-def:gconf_object/@id"><sch:value-of select="../@id"/> - the object child element of a gconf_test must reference an gconf_object</sch:assert>
+                              </sch:rule>
+                              <sch:rule context="unix-def:gconf_test/unix-def:state">
+                                    <sch:assert test="@state_ref=ancestor::oval-def:oval_definitions/oval-def:states/unix-def:gconf_state/@id"><sch:value-of select="../@id"/> - the state child element of a gconf_test must reference an gconf_state</sch:assert>
+                              </sch:rule>
+                        </sch:pattern>
+                  </xsd:appinfo>
+            </xsd:annotation>
+            <xsd:complexType>
+                  <xsd:complexContent>
+                        <xsd:extension base="oval-def:TestType">
+                              <xsd:sequence>
+                                    <xsd:element name="object" type="oval-def:ObjectRefType" />
+                                    <xsd:element name="state" type="oval-def:StateRefType" minOccurs="0" maxOccurs="unbounded"/>
+                              </xsd:sequence>
+                        </xsd:extension>
+                  </xsd:complexContent>
+            </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="gconf_object" substitutionGroup="oval-def:object">
+            <xsd:annotation>
+                  <xsd:documentation>The gconf_object element is used by a gconf_test to define the preference keys to collect and the sources from which to collect the preference keys. Each object extends the standard ObjectType as defined in the oval-definitions-schema and one should refer to the ObjectType description for more information. The common set element allows complex objects to be created using filters and set logic. Again, please refer to the description of the set element in the oval-definitions-schema.</xsd:documentation>
+                  <xsd:appinfo>
+                        <sch:pattern id="unix-def_gconf_object_verify_filter_state">
+                              <sch:rule context="unix-def:gconf_object//oval-def:filter">
+                                    <sch:let name="parent_object" value="ancestor::unix-def:gconf_object"/>
+                                    <sch:let name="parent_object_id" value="$parent_object/@id"/>
+                                    <sch:let name="state_ref" value="."/>
+                                    <sch:let name="reffed_state" value="ancestor::oval-def:oval_definitions/oval-def:states/*[@id=$state_ref]"/>
+                                    <sch:let name="state_name" value="local-name($reffed_state)"/>
+                                    <sch:let name="state_namespace" value="namespace-uri($reffed_state)"/>
+                                    <sch:assert test="(($state_namespace='http://oval.mitre.org/XMLSchema/oval-definitions-5#unix') and ($state_name='gconf_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
+                              </sch:rule>
+                        </sch:pattern>
+                  </xsd:appinfo>
+            </xsd:annotation>
+            <xsd:complexType>
+                  <xsd:complexContent>
+                        <xsd:extension base="oval-def:ObjectType">
+                              <xsd:sequence>
+                                    <xsd:choice>
+                                          <xsd:element ref="oval-def:set"/>
+                                          <xsd:sequence>
+                                                <xsd:element name="key" type="oval-def:EntityObjectStringType">
+                                                      <xsd:annotation>
+                                                            <xsd:documentation>This is the preference key to check.</xsd:documentation>
+                                                      </xsd:annotation>
+                                                </xsd:element>
+                                                <xsd:element name="source" type="oval-def:EntityObjectStringType" nillable="true">
+                                                      <xsd:annotation>
+                                                            <xsd:documentation>The source element specifies the source from which to collect the preference key. The source is represented by the absolute path to a GConf XML file as XML is the current backend for GConf.  Note that other backends may become available in the future. If the xsi:nil attribute is set to 'true', the preference key is looked up using the GConf daemon. Otherwise, the preference key is looked up using the values specified in this entity.</xsd:documentation>
+                                                            <xsd:appinfo>
+                                                                  <sch:pattern id="unix-def_gconfobjsource">
+                                                                        <sch:rule context="unix-def:gconf_object/unix-def:source">
+                                                                              <sch:assert test="not(@operation) or @operation='equals'">
+                                                                                    <sch:value-of select="../@id"/> - operation attribute for the source entity of a gconf_object should be 'equals'
+                                                                              </sch:assert>
+                                                                        </sch:rule>
+                                                                  </sch:pattern>
+                                                            </xsd:appinfo>
+                                                      </xsd:annotation>
+                                                </xsd:element>
+                                                <xsd:element ref="oval-def:filter" minOccurs="0" maxOccurs="unbounded"/>
+                                          </xsd:sequence>
+                                    </xsd:choice>
+                              </xsd:sequence>
+                        </xsd:extension>
+                  </xsd:complexContent>
+            </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="gconf_state" substitutionGroup="oval-def:state">
+            <xsd:annotation>
+                  <xsd:documentation>The gconf_state element defines the different information that can be used to evaluate the specified GConf preference key. This includes the preference key, source, type, whether it's writable, the user who last modified it, the time it was last modified, whether it's the default value, as well as the preference key's value. Please refer to the individual elements in the schema for more details about what each represents.</xsd:documentation>
+            </xsd:annotation>
+            <xsd:complexType>
+                  <xsd:complexContent>
+                        <xsd:extension base="oval-def:StateType">
+                              <xsd:sequence>
+                                    <xsd:element name="key" type="oval-def:EntityStateStringType" minOccurs="0" maxOccurs="1">
+                                          <xsd:annotation>
+                                                <xsd:documentation>The preference key to check.</xsd:documentation>
+                                          </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="source" type="oval-def:EntityStateStringType" minOccurs="0" maxOccurs="1">
+                                          <xsd:annotation>
+                                                <xsd:documentation>The source used to look up the preference key.</xsd:documentation>
+                                          </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="type" type="unix-def:EntityStateGconfTypeType" minOccurs="0" maxOccurs="1">
+                                          <xsd:annotation>
+                                                <xsd:documentation>The type of the preference key.</xsd:documentation>
+                                          </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="is_writable" type="oval-def:EntityStateBoolType" minOccurs="0" maxOccurs="1">
+                                          <xsd:annotation>
+                                                <xsd:documentation>Is the preference key writable? If true, the preference key is writable. If false, the preference key is not writable.</xsd:documentation>
+                                          </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="mod_user" type="oval-def:EntityStateStringType" minOccurs="0" maxOccurs="1">
+                                          <xsd:annotation>
+                                                <xsd:documentation>The user who last modified the preference key.</xsd:documentation>
+                                          </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="mod_time" type="oval-def:EntityStateIntType" minOccurs="0" maxOccurs="1">
+                                          <xsd:annotation>
+                                                <xsd:documentation>The time the preference key was last modified in seconds since the Unix epoch. The Unix epoch is the time 00:00:00 UTC on January 1, 1970.</xsd:documentation>
+                                          </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="is_default" type="oval-def:EntityStateBoolType" minOccurs="0" maxOccurs="1">
+                                          <xsd:annotation>
+                                                <xsd:documentation>Is the preference key value the default value. If true, the preference key value is the default value. If false, the preference key value is not the default value.</xsd:documentation>
+                                          </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="value" type="oval-def:EntityStateAnySimpleType" minOccurs="0" maxOccurs="1">
+                                          <xsd:annotation>
+                                                <xsd:documentation>The value of the preference key.</xsd:documentation>
+                                          </xsd:annotation>
+                                    </xsd:element>
+                              </xsd:sequence>
+                        </xsd:extension>
+                  </xsd:complexContent>
+            </xsd:complexType>
+      </xsd:element>
+      <!-- =============================================================================== -->
+      <!-- ================================  INETD TEST  ================================= -->
+      <!-- =============================================================================== -->
+      <xsd:element name="inetd_test" substitutionGroup="oval-def:test">
+            <xsd:annotation>
+                  <xsd:documentation>The inetd test is used to check information associated with different Internet services. It extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information. The required object element references an inetd_object and the optional state element specifies the information to check.</xsd:documentation>
+                  <xsd:appinfo>
+                        <oval:element_mapping>
+                              <oval:test>inetd_test</oval:test>
+                              <oval:object>inetd_object</oval:object>
+                              <oval:state>inetd_state</oval:state>
+                              <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#unix">inetd_item</oval:item>
+                        </oval:element_mapping>
+                  </xsd:appinfo>
+					<xsd:appinfo>
+						<oval:deprecated_info>
+							<oval:version>5.12</oval:version>
+							<oval:comment>This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.</oval:comment>
+						</oval:deprecated_info>
+					</xsd:appinfo>
+                  <xsd:appinfo>
+                        <sch:pattern id="unix-def_inetdtst">
+                              <sch:rule context="unix-def:inetd_test/unix-def:object">
+                                    <sch:assert test="@object_ref=ancestor::oval-def:oval_definitions/oval-def:objects/unix-def:inetd_object/@id"><sch:value-of select="../@id"/> - the object child element of an inetd_test must reference an inetd_object</sch:assert>
+                              </sch:rule>
+                              <sch:rule context="unix-def:inetd_test/unix-def:state">
+                                    <sch:assert test="@state_ref=ancestor::oval-def:oval_definitions/oval-def:states/unix-def:inetd_state/@id"><sch:value-of select="../@id"/> - the state child element of an inetd_test must reference an inetd_state</sch:assert>
+                              </sch:rule>
+                        </sch:pattern>
+                  </xsd:appinfo>
+            </xsd:annotation>
+            <xsd:complexType>
+                  <xsd:complexContent>
+                        <xsd:extension base="oval-def:TestType">
+                              <xsd:sequence>
+                                    <xsd:element name="object" type="oval-def:ObjectRefType" />
+                                    <xsd:element name="state" type="oval-def:StateRefType" minOccurs="0" maxOccurs="unbounded"/>
+                              </xsd:sequence>
+                        </xsd:extension>
+                  </xsd:complexContent>
+            </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="inetd_object" substitutionGroup="oval-def:object">
+            <xsd:annotation>
+                  <xsd:documentation>The inetd_object element is used by an inetd test to define the specific protocol-service to be evaluated. Each object extends the standard ObjectType as defined in the oval-definitions-schema and one should refer to the ObjectType description for more information. The common set element allows complex objects to be created using filters and set logic. Again, please refer to the description of the set element in the oval-definitions-schema.</xsd:documentation>
+                  <xsd:documentation>An inetd object consists of a protocol entity and a service_name entity that identifies the specific service to be tested.</xsd:documentation>
+                  <xsd:appinfo>
+                        <sch:pattern id="unix-def_inetd_object_verify_filter_state">
+                              <sch:rule context="unix-def:inetd_object//oval-def:filter">
+                                    <sch:let name="parent_object" value="ancestor::unix-def:inetd_object"/>
+                                    <sch:let name="parent_object_id" value="$parent_object/@id"/>
+                                    <sch:let name="state_ref" value="."/>
+                                    <sch:let name="reffed_state" value="ancestor::oval-def:oval_definitions/oval-def:states/*[@id=$state_ref]"/>
+                                    <sch:let name="state_name" value="local-name($reffed_state)"/>
+                                    <sch:let name="state_namespace" value="namespace-uri($reffed_state)"/>
+                                    <sch:assert test="(($state_namespace='http://oval.mitre.org/XMLSchema/oval-definitions-5#unix') and ($state_name='inetd_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
+                              </sch:rule>
+                        </sch:pattern>
+                  </xsd:appinfo>
+            </xsd:annotation>
+            <xsd:complexType>
+                  <xsd:complexContent>
+                        <xsd:extension base="oval-def:ObjectType">
+                              <xsd:sequence>
+                                    <xsd:choice>
+                                          <xsd:element ref="oval-def:set"/>
+                                          <xsd:sequence>
+                                                <xsd:element name="protocol" type="oval-def:EntityObjectStringType">
+                                                      <xsd:annotation>
+                                                            <xsd:documentation>A recognized protocol listed in the file /etc/inet/protocols.</xsd:documentation>
+                                                      </xsd:annotation>
+                                                </xsd:element>
+                                                <xsd:element name="service_name" type="oval-def:EntityObjectStringType">
+                                                      <xsd:annotation>
+                                                            <xsd:documentation>The name of a valid service listed in the services file. For RPC services, the value of the service-name field consists of the RPC service name or program number, followed by a '/' (slash) and either a version number or a range of version numbers (for example, rstatd/2-4).</xsd:documentation>
+                                                      </xsd:annotation>
+                                                </xsd:element>
+                                                <xsd:element ref="oval-def:filter" minOccurs="0" maxOccurs="unbounded"/>
+                                          </xsd:sequence>
+                                    </xsd:choice>
+                              </xsd:sequence>
+                        </xsd:extension>
+                  </xsd:complexContent>
+            </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="inetd_state" substitutionGroup="oval-def:state">
+            <xsd:annotation>
+                  <xsd:documentation>The inetd_state element defines the different information associated with a specific Internet service. Please refer to the individual elements in the schema for more details about what each represents.</xsd:documentation>
+            </xsd:annotation>
+            <xsd:complexType>
+                  <xsd:complexContent>
+                        <xsd:extension base="oval-def:StateType">
+                              <xsd:sequence>
+                                    <xsd:element name="protocol" type="oval-def:EntityStateStringType" minOccurs="0" maxOccurs="1">
+                                          <xsd:annotation>
+                                                <xsd:documentation>A recognized protocol listed in the file /etc/inet/protocols.</xsd:documentation>
+                                          </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="service_name" type="oval-def:EntityStateStringType" minOccurs="0" maxOccurs="1">
+                                          <xsd:annotation>
+                                                <xsd:documentation>The name of a valid service listed in the services file. For RPC services, the value of the service-name field consists of the RPC service name or program number, followed by a '/' (slash) and either a version number or a range of version numbers (for example, rstatd/2-4).</xsd:documentation>
+                                          </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="server_program" type="oval-def:EntityStateStringType" minOccurs="0" maxOccurs="1">
+                                          <xsd:annotation>
+                                                <xsd:documentation>Either the pathname of a server program to be invoked by inetd to perform the requested service, or the value internal if inetd itself provides the service.</xsd:documentation>
+                                          </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="server_arguments" type="oval-def:EntityStateStringType" minOccurs="0" maxOccurs="1">
+                                          <xsd:annotation>
+                                                <xsd:documentation>The arguments for running the service.  These are either passed to the server program invoked by inetd, or used to configure a service provided by inetd.  In the case of server programs, the arguments shall begin with argv[0], which is typically the name of the program.  In the case of a service provided by inted, the first argument shall be the word "internal".</xsd:documentation>
+                                          </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="endpoint_type" type="unix-def:EntityStateEndpointType" minOccurs="0" maxOccurs="1">
+                                          <xsd:annotation>
+                                                <xsd:documentation>The endpoint type (aka, socket type) associated with the service.</xsd:documentation>
+                                          </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="exec_as_user" type="oval-def:EntityStateStringType" minOccurs="0" maxOccurs="1">
+                                          <xsd:annotation>
+                                                <xsd:documentation>The user id of the user the server program should run under.  (This allows for running with less permission than root.)</xsd:documentation>
+                                          </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="wait_status" type="unix-def:EntityStateWaitStatusType" minOccurs="0" maxOccurs="1">
+                                          <xsd:annotation>
+                                                <xsd:documentation>This field has values wait or nowait. This entry specifies whether the server that is invoked by inetd will take over the listening socket associated with the service, and whether once launched, inetd will wait for that server to exit, if ever, before it resumes listening for new service requests.</xsd:documentation>
+                                          </xsd:annotation>
+                                    </xsd:element>
+                              </xsd:sequence>
+                        </xsd:extension>
+                  </xsd:complexContent>
+            </xsd:complexType>
+      </xsd:element>
       <!-- =============================================================================== -->
       <!-- ==============================  INTERFACE TEST  =============================== -->
       <!-- =============================================================================== -->
@@ -431,7 +1020,7 @@
                               <oval:test>interface_test</oval:test>
                               <oval:object>interface_object</oval:object>
                               <oval:state>interface_state</oval:state>
-                              <oval:item target_namespace="urn:oval:v6:system-characteristics:unix">interface_item</oval:item>
+                              <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#unix">interface_item</oval:item>
                         </oval:element_mapping>
                   </xsd:appinfo>
                   <xsd:appinfo>
@@ -469,7 +1058,7 @@
                                     <sch:let name="reffed_state" value="ancestor::oval-def:oval_definitions/oval-def:states/*[@id=$state_ref]"/>
                                     <sch:let name="state_name" value="local-name($reffed_state)"/>
                                     <sch:let name="state_namespace" value="namespace-uri($reffed_state)"/>
-                                    <sch:assert test="(($state_namespace='urn:oval:v6:definitions:unix') and ($state_name='interface_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
+                                    <sch:assert test="(($state_namespace='http://oval.mitre.org/XMLSchema/oval-definitions-5#unix') and ($state_name='interface_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
                               </sch:rule>
                         </sch:pattern>
                   </xsd:appinfo>
@@ -554,7 +1143,7 @@
                               <oval:test>password_test</oval:test>
                               <oval:object>password_object</oval:object>
                               <oval:state>password_state</oval:state>
-                              <oval:item target_namespace="urn:oval:v6:system-characteristics:unix">password_item</oval:item>
+                              <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#unix">password_item</oval:item>
                         </oval:element_mapping>
                   </xsd:appinfo>
                   <xsd:appinfo>
@@ -592,7 +1181,7 @@
                                     <sch:let name="reffed_state" value="ancestor::oval-def:oval_definitions/oval-def:states/*[@id=$state_ref]"/>
                                     <sch:let name="state_name" value="local-name($reffed_state)"/>
                                     <sch:let name="state_namespace" value="namespace-uri($reffed_state)"/>
-                                    <sch:assert test="(($state_namespace='urn:oval:v6:definitions:unix') and ($state_name='password_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
+                                    <sch:assert test="(($state_namespace='http://oval.mitre.org/XMLSchema/oval-definitions-5#unix') and ($state_name='password_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
                               </sch:rule>
                         </sch:pattern>
                   </xsd:appinfo>
@@ -700,6 +1289,160 @@
             </xsd:complexType>
       </xsd:element>
       <!-- =============================================================================== -->
+      <!-- ===============================  PROCESS TEST  ================================ -->
+      <!-- =============================================================================== -->
+      <xsd:element name="process_test" substitutionGroup="oval-def:test">
+            <xsd:annotation>
+                  <xsd:documentation>The process test is used to check information found in the UNIX processes. It is equivalent to parsing the output of the ps command. It extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information. The required object element references a process_object and the optional state element specifies the process information to check.</xsd:documentation>
+                  <xsd:appinfo>
+                        <oval:element_mapping>
+                              <oval:test>process_test</oval:test>
+                              <oval:object>process_object</oval:object>
+                              <oval:state>process_state</oval:state>
+                              <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#unix">process_item</oval:item>
+                        </oval:element_mapping>
+                  </xsd:appinfo>
+                  <xsd:appinfo>
+                        <oval:deprecated_info>
+                              <oval:version>5.8</oval:version>
+                              <oval:reason>The process_test has been deprecated and replaced by the process58_test. The command line of a process cannot be used to uniquely identify a process. As a result, the pid entity was added to the process58_object. Please see the process58_test for additional information.</oval:reason>
+                        </oval:deprecated_info>
+                        <sch:pattern id="unix-def_processtst_dep">
+                              <sch:rule context="unix-def:process_test">
+                                    <sch:report test="true()">DEPRECATED TEST: <sch:value-of select="name()"/> ID: <sch:value-of select="@id"/></sch:report>
+                              </sch:rule>
+                        </sch:pattern>
+                  </xsd:appinfo>
+                  <xsd:appinfo>
+                        <sch:pattern id="unix-def_processtst">
+                              <sch:rule context="unix-def:process_test/unix-def:object">
+                                    <sch:assert test="@object_ref=ancestor::oval-def:oval_definitions/oval-def:objects/unix-def:process_object/@id"><sch:value-of select="../@id"/> - the object child element of a process_test must reference a process_object</sch:assert>
+                              </sch:rule>
+                              <sch:rule context="unix-def:process_test/unix-def:state">
+                                    <sch:assert test="@state_ref=ancestor::oval-def:oval_definitions/oval-def:states/unix-def:process_state/@id"><sch:value-of select="../@id"/> - the state child element of a process_test must reference a process_state</sch:assert>
+                              </sch:rule>
+                        </sch:pattern>
+                  </xsd:appinfo>
+            </xsd:annotation>
+            <xsd:complexType>
+                  <xsd:complexContent>
+                        <xsd:extension base="oval-def:TestType">
+                              <xsd:sequence>
+                                    <xsd:element name="object" type="oval-def:ObjectRefType" />
+                                    <xsd:element name="state" type="oval-def:StateRefType" minOccurs="0" maxOccurs="unbounded"/>
+                              </xsd:sequence>
+                        </xsd:extension>
+                  </xsd:complexContent>
+            </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="process_object" substitutionGroup="oval-def:object">
+            <xsd:annotation>
+                  <xsd:documentation>The process_object element is used by a process test to define the specific process(es) to be evaluated. Each object extends the standard ObjectType as defined in the oval-definitions-schema and one should refer to the ObjectType description for more information. The common set element allows complex objects to be created using filters and set logic. Again, please refer to the description of the set element in the oval-definitions-schema.</xsd:documentation>
+                  <xsd:documentation>A process object defines the command line used to start the process(es).</xsd:documentation>
+                  <xsd:appinfo>
+                        <oval:deprecated_info>
+                              <oval:version>5.8</oval:version>
+                              <oval:reason>The process_object has been deprecated and replaced by the process58_object. The command line of a process cannot be used to uniquely identify a process. As a result, the pid entity was added to the process58_object. Please see the process58_object for additional information.</oval:reason>
+                        </oval:deprecated_info>
+                        <sch:pattern id="unix-def_processobj_dep">
+                              <sch:rule context="unix-def:process_object">
+                                    <sch:report test="true()">DEPRECATED OBJECT: <sch:value-of select="name()"/> ID: <sch:value-of select="@id"/></sch:report>
+                              </sch:rule>
+                        </sch:pattern>
+                  </xsd:appinfo>
+            </xsd:annotation>
+            <xsd:complexType>
+                  <xsd:complexContent>
+                        <xsd:extension base="oval-def:ObjectType">
+                              <xsd:sequence>
+                                    <xsd:choice>
+                                          <xsd:element ref="oval-def:set"/>
+                                          <xsd:element name="command" type="oval-def:EntityObjectStringType">
+                                                <xsd:annotation>
+                                                      <xsd:documentation>The command element specifies the command/program name to check.</xsd:documentation>
+                                                </xsd:annotation>
+                                          </xsd:element>
+                                    </xsd:choice>
+                              </xsd:sequence>
+                        </xsd:extension>
+                  </xsd:complexContent>
+            </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="process_state" substitutionGroup="oval-def:state">
+            <xsd:annotation>
+                  <xsd:documentation>The process_state element defines the different metadata associated with a UNIX process. This includes the command line, pid, ppid, priority, and user id. Please refer to the individual elements in the schema for more details about what each represents.</xsd:documentation>
+                  <xsd:appinfo>
+                        <oval:deprecated_info>
+                              <oval:version>5.8</oval:version>
+                              <oval:reason>The process_state has been deprecated and replaced by the process58_state. The command line of a process cannot be used to uniquely identify a process. As a result, the pid entity was added to the process58_object. Please see the process58_state for additional information.</oval:reason>
+                        </oval:deprecated_info>
+                        <sch:pattern id="unix-def_processste_dep">
+                              <sch:rule context="unix-def:process_state">
+                                    <sch:report test="true()">DEPRECATED STATE: <sch:value-of select="name()"/> ID: <sch:value-of select="@id"/></sch:report>
+                              </sch:rule>
+                        </sch:pattern>
+                  </xsd:appinfo>
+            </xsd:annotation>
+            <xsd:complexType>
+                  <xsd:complexContent>
+                        <xsd:extension base="oval-def:StateType">
+                              <xsd:sequence>
+                                    <xsd:element name="command" type="oval-def:EntityStateStringType" minOccurs="0" maxOccurs="1">
+                                          <xsd:annotation>
+                                                <xsd:documentation>The command element specifies the command/program name to check.</xsd:documentation>
+                                          </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="exec_time" type="oval-def:EntityStateStringType" minOccurs="0" maxOccurs="1">
+                                          <xsd:annotation>
+                                                <xsd:documentation>This is the cumulative CPU time, formatted in [DD-]HH:MM:SS where DD is the number of days when execution time is 24 hours or more.</xsd:documentation>
+                                          </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="pid" type="oval-def:EntityStateIntType" minOccurs="0" maxOccurs="1">
+                                          <xsd:annotation>
+                                                <xsd:documentation>This is the process ID of the process.</xsd:documentation>
+                                          </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="ppid" type="oval-def:EntityStateIntType" minOccurs="0" maxOccurs="1">
+                                          <xsd:annotation>
+                                                <xsd:documentation>This is the process ID of the process's parent process.</xsd:documentation>
+                                          </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="priority" type="oval-def:EntityStateIntType" minOccurs="0" maxOccurs="1">
+                                          <xsd:annotation>
+                                                <xsd:documentation>This is the scheduling priority with which the process runs. This can be adjusted with the nice command or nice() system call.</xsd:documentation>
+                                          </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="ruid" type="oval-def:EntityStateIntType" minOccurs="0" maxOccurs="1">
+                                          <xsd:annotation>
+                                                <xsd:documentation>This is the real user id which represents the user who has created the process.</xsd:documentation>
+                                          </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="scheduling_class" type="oval-def:EntityStateStringType" minOccurs="0" maxOccurs="1">
+                                          <xsd:annotation>
+                                                <xsd:documentation>A platform specific characteristic maintained by the scheduler: RT (real-time), TS (timeshare), FF (fifo), SYS (system), etc.</xsd:documentation>
+                                          </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="start_time" type="oval-def:EntityStateStringType" minOccurs="0" maxOccurs="1">
+                                          <xsd:annotation>
+                                                <xsd:documentation>This is the time of day the process started formatted in HH:MM:SS if the same day the process started or formatted as MMM_DD (Ex.: Feb_5) if process started the previous day or further in the past.</xsd:documentation>
+                                          </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="tty" type="oval-def:EntityStateStringType" minOccurs="0" maxOccurs="1">
+                                          <xsd:annotation>
+                                                <xsd:documentation>This is the TTY on which the process was started, if applicable.</xsd:documentation>
+                                          </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="user_id" type="oval-def:EntityStateIntType" minOccurs="0" maxOccurs="1">
+                                          <xsd:annotation>
+                                                <xsd:documentation>This is the effective user id which represents the actual privileges of the process.</xsd:documentation>
+                                          </xsd:annotation>
+                                    </xsd:element>
+                              </xsd:sequence>
+                        </xsd:extension>
+                  </xsd:complexContent>
+            </xsd:complexType>
+      </xsd:element>
+      <!-- =============================================================================== -->
       <!-- ============================  PROCESS TEST (58)  ============================== -->
       <!-- =============================================================================== -->
       <xsd:element name="process58_test" substitutionGroup="oval-def:test">
@@ -710,7 +1453,7 @@
                               <oval:test>process58_test</oval:test>
                               <oval:object>process58_object</oval:object>
                               <oval:state>process58_state</oval:state>
-                              <oval:item target_namespace="urn:oval:v6:system-characteristics:unix">process58_item</oval:item>
+                              <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#unix">process58_item</oval:item>
                         </oval:element_mapping>
                   </xsd:appinfo>
                   <xsd:appinfo>
@@ -748,7 +1491,7 @@
                                     <sch:let name="reffed_state" value="ancestor::oval-def:oval_definitions/oval-def:states/*[@id=$state_ref]"/>
                                     <sch:let name="state_name" value="local-name($reffed_state)"/>
                                     <sch:let name="state_namespace" value="namespace-uri($reffed_state)"/>
-                                    <sch:assert test="(($state_namespace='urn:oval:v6:definitions:unix') and ($state_name='process58_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
+                                    <sch:assert test="(($state_namespace='http://oval.mitre.org/XMLSchema/oval-definitions-5#unix') and ($state_name='process58_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
                               </sch:rule>
                         </sch:pattern>
                   </xsd:appinfo>
@@ -867,6 +1610,118 @@
             </xsd:complexType>
       </xsd:element>
       <!-- =============================================================================== -->
+      <!-- =============================  ROUTING TABLE TEST  ============================ -->
+      <!-- =============================================================================== -->
+      <xsd:element name="routingtable_test" substitutionGroup="oval-def:test">
+            <xsd:annotation>
+                  <xsd:documentation>The routingtable_test is used to check information about the IPv4 and IPv6 routing table entries found in a system's primary routing table. It is important to note that only numerical addresses will be collected and that their symbolic representations will not be resolved. This equivalent to using the '-n' option with route(8) or netstat(8). It extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information. The required object element references a routingtable_object and the optional routingtable_state element specifies the data to check.</xsd:documentation>
+                  <xsd:appinfo>
+                        <oval:element_mapping>
+                              <oval:test>routingtable_test</oval:test>
+                              <oval:object>routingtable_object</oval:object>
+                              <oval:state>routingtable_state</oval:state>
+                              <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#unix">routingtable_item</oval:item>
+                        </oval:element_mapping>
+                  </xsd:appinfo>
+					<xsd:appinfo>
+						<oval:deprecated_info>
+							<oval:version>5.12</oval:version>
+							<oval:comment>This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.</oval:comment>
+						</oval:deprecated_info>
+					</xsd:appinfo>
+                  <xsd:appinfo>
+                        <sch:pattern id="unix-def_routingtable_test">
+                              <sch:rule context="unix-def:routingtable_test/unix-def:object">
+                                    <sch:assert test="@object_ref=ancestor::oval-def:oval_definitions/oval-def:objects/unix-def:routingtable_object/@id"><sch:value-of select="../@id"/> - the object child element of a routingtable_test must reference an routingtable_object</sch:assert>
+                              </sch:rule>
+                              <sch:rule context="unix-def:routingtable_test/unix-def:state">
+                                    <sch:assert test="@state_ref=ancestor::oval-def:oval_definitions/oval-def:states/unix-def:routingtable_state/@id"><sch:value-of select="../@id"/> - the state child element of a routingtable_test must reference an routingtable_state</sch:assert>
+                              </sch:rule>
+                        </sch:pattern>
+                  </xsd:appinfo>
+            </xsd:annotation>
+            <xsd:complexType>
+                  <xsd:complexContent>
+                        <xsd:extension base="oval-def:TestType">
+                              <xsd:sequence>
+                                    <xsd:element name="object" type="oval-def:ObjectRefType" />
+                                    <xsd:element name="state" type="oval-def:StateRefType" minOccurs="0" maxOccurs="unbounded"/>
+                              </xsd:sequence>
+                        </xsd:extension>
+                  </xsd:complexContent>
+            </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="routingtable_object" substitutionGroup="oval-def:object">
+            <xsd:annotation>
+                  <xsd:documentation>The routingtable_object element is used by a routingtable_test to define the destination IP address(es), found in a system's primary routing table, to collect. Each object extends the standard ObjectType as defined in the oval-definitions-schema and one should refer to the ObjectType description for more information. The common set element allows complex objects to be created using filters and set logic. Again, please refer to the description of the set element in the oval-definitions-schema.</xsd:documentation>
+                  <xsd:appinfo>
+                        <sch:pattern id="unix-def_routingtable_object_verify_filter_state">
+                              <sch:rule context="unix-def:routingtable_object//oval-def:filter">
+                                    <sch:let name="parent_object" value="ancestor::unix-def:routingtable_object"/>
+                                    <sch:let name="parent_object_id" value="$parent_object/@id"/>
+                                    <sch:let name="state_ref" value="."/>
+                                    <sch:let name="reffed_state" value="ancestor::oval-def:oval_definitions/oval-def:states/*[@id=$state_ref]"/>
+                                    <sch:let name="state_name" value="local-name($reffed_state)"/>
+                                    <sch:let name="state_namespace" value="namespace-uri($reffed_state)"/>
+                                    <sch:assert test="(($state_namespace='http://oval.mitre.org/XMLSchema/oval-definitions-5#unix') and ($state_name='routingtable_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
+                              </sch:rule>
+                        </sch:pattern>
+                  </xsd:appinfo>
+            </xsd:annotation>
+            <xsd:complexType>
+                  <xsd:complexContent>
+                        <xsd:extension base="oval-def:ObjectType">
+                              <xsd:sequence>
+                                    <xsd:choice>
+                                          <xsd:element ref="oval-def:set"/>
+                                          <xsd:sequence>
+                                                <xsd:element name="destination" type="oval-def:EntityObjectIPAddressType">
+                                                      <xsd:annotation>
+                                                            <xsd:documentation>This is the destination IP address of the routing table entry to check.</xsd:documentation>
+                                                      </xsd:annotation>
+                                                </xsd:element>
+                                                <xsd:element ref="oval-def:filter" minOccurs="0" maxOccurs="unbounded"/>
+                                          </xsd:sequence>
+                                    </xsd:choice>
+                              </xsd:sequence>
+                        </xsd:extension>
+                  </xsd:complexContent>
+            </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="routingtable_state" substitutionGroup="oval-def:state">
+            <xsd:annotation>
+                  <xsd:documentation>The routingtable_state element defines the different information that can be used to check an entry found in a system's primary routing table. This includes the destination IP address, gateway, netmask, flags, and the name of the interface associated with it. Please refer to the individual elements in the schema for more details about what each represents.</xsd:documentation>
+            </xsd:annotation>
+            <xsd:complexType>
+                  <xsd:complexContent>
+                        <xsd:extension base="oval-def:StateType">
+                              <xsd:sequence>
+                                    <xsd:element name="destination" type="oval-def:EntityStateIPAddressType" minOccurs="0" maxOccurs="1">
+                                          <xsd:annotation>
+                                                <xsd:documentation>The destination IP address prefix of the routing table entry. This is the destination IP address and netmask/prefix-length expressed using CIDR notation.</xsd:documentation>
+                                          </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="gateway" type="oval-def:EntityStateIPAddressType" minOccurs="0" maxOccurs="1">
+                                          <xsd:annotation>
+                                                <xsd:documentation>The gateway of the specified routing table entry.</xsd:documentation>
+                                          </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="flags" type="unix-def:EntityStateRoutingTableFlagsType" minOccurs="0" maxOccurs="1">
+                                          <xsd:annotation>
+                                                <xsd:documentation>The flags associated with the specified routing table entry.</xsd:documentation>
+                                          </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="interface_name" type="oval-def:EntityStateStringType" minOccurs="0" maxOccurs="1">
+                                          <xsd:annotation>
+                                                <xsd:documentation>The name of the interface associated with the routing table entry.</xsd:documentation>
+                                          </xsd:annotation>
+                                    </xsd:element>
+                              </xsd:sequence>
+                        </xsd:extension>
+                  </xsd:complexContent>
+            </xsd:complexType>
+      </xsd:element>
+      <!-- =============================================================================== -->
       <!-- ===============================  RUNLEVEL TEST  =============================== -->
       <!-- =============================================================================== -->
       <xsd:element name="runlevel_test" substitutionGroup="oval-def:test">
@@ -877,7 +1732,7 @@
                               <oval:test>runlevel_test</oval:test>
                               <oval:object>runlevel_object</oval:object>
                               <oval:state>runlevel_state</oval:state>
-                              <oval:item target_namespace="urn:oval:v6:system-characteristics:unix">runlevel_item</oval:item>
+                              <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#unix">runlevel_item</oval:item>
                         </oval:element_mapping>
                   </xsd:appinfo>
                   <xsd:appinfo>
@@ -914,7 +1769,7 @@
                                     <sch:let name="reffed_state" value="ancestor::oval-def:oval_definitions/oval-def:states/*[@id=$state_ref]"/>
                                     <sch:let name="state_name" value="local-name($reffed_state)"/>
                                     <sch:let name="state_namespace" value="namespace-uri($reffed_state)"/>
-                                    <sch:assert test="(($state_namespace='urn:oval:v6:definitions:unix') and ($state_name='runlevel_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
+                                    <sch:assert test="(($state_namespace='http://oval.mitre.org/XMLSchema/oval-definitions-5#unix') and ($state_name='runlevel_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
                               </sch:rule>
                         </sch:pattern>
                   </xsd:appinfo>
@@ -978,6 +1833,226 @@
             </xsd:complexType>
       </xsd:element>
       <!-- =============================================================================== -->
+      <!-- =================================  SCCS TEST  ================================= -->
+      <!-- =============================================================================== -->
+      <xsd:element name="sccs_test" substitutionGroup="oval-def:test">
+            <xsd:annotation>
+                  <xsd:documentation/>
+                  <xsd:appinfo>
+                        <oval:element_mapping>
+                              <oval:test>sccs_test</oval:test>
+                              <oval:object>sccs_object</oval:object>
+                              <oval:state>sccs_state</oval:state>
+                              <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#unix">sccs_item</oval:item>
+                        </oval:element_mapping>
+                  </xsd:appinfo>
+					<xsd:appinfo>
+						<oval:deprecated_info>
+							<oval:version>5.12</oval:version>
+							<oval:comment>This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.</oval:comment>
+						</oval:deprecated_info>
+					</xsd:appinfo>
+                  <xsd:appinfo>
+                        <oval:deprecated_info>
+                              <oval:version>5.10</oval:version>
+                              <oval:reason>The sccs_test has been deprecated because the Source Code Control System (SCCS) is obsolete.  The sccs_test may be removed in a future version of the language.</oval:reason>
+                        </oval:deprecated_info>
+                        <sch:pattern id="unix-def_sccstst_dep">
+                              <sch:rule context="unix-def:sccs_test">
+                                    <sch:report test="true()">DEPRECATED TEST: <sch:value-of select="name()"/> ID: <sch:value-of select="@id"/></sch:report>
+                              </sch:rule>
+                        </sch:pattern>
+                  </xsd:appinfo>
+                  <xsd:appinfo>
+                        <sch:pattern id="unix-def_sccstst">
+                              <sch:rule context="unix-def:sccs_test/unix-def:object">
+                                    <sch:assert test="@object_ref=ancestor::oval-def:oval_definitions/oval-def:objects/unix-def:sccs_object/@id"><sch:value-of select="../@id"/> - the object child element of a sccs_test must reference a sccs_object</sch:assert>
+                              </sch:rule>
+                              <sch:rule context="unix-def:sccs_test/unix-def:state">
+                                    <sch:assert test="@state_ref=ancestor::oval-def:oval_definitions/oval-def:states/unix-def:sccs_state/@id"><sch:value-of select="../@id"/> - the state child element of a sccs_test must reference a sccs_state</sch:assert>
+                              </sch:rule>
+                        </sch:pattern>
+                  </xsd:appinfo>
+            </xsd:annotation>
+            <xsd:complexType>
+                  <xsd:complexContent>
+                        <xsd:extension base="oval-def:TestType">
+                              <xsd:sequence>
+                                    <xsd:element name="object" type="oval-def:ObjectRefType" />
+                                    <xsd:element name="state" type="oval-def:StateRefType" minOccurs="0" maxOccurs="unbounded"/>
+                              </xsd:sequence>
+                        </xsd:extension>
+                  </xsd:complexContent>
+            </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="sccs_object" substitutionGroup="oval-def:object">
+            <xsd:annotation>
+                  <xsd:documentation>The set of files to be evaluated may be identified with either a complete filepath or a path and filename. Only one of these options may be selected.</xsd:documentation>
+                  <xsd:documentation>It is important to note that the 'max_depth' and 'recurse_direction' attributes of the 'behaviors' element do not apply to the 'filepath' element, only to the 'path' and 'filename' elements.  This is because the 'filepath' element represents an absolute path to a particular file and it is not possible to recurse over a file.</xsd:documentation>
+                  <xsd:appinfo>
+                        <oval:deprecated_info>
+                              <oval:version>5.10</oval:version>
+                              <oval:reason>The sccs_object has been deprecated because the Source Code Control System (SCCS) is obsolete.  The sccs_object may be removed in a future version of the language.</oval:reason>
+                        </oval:deprecated_info>
+                        <sch:pattern id="unix-def_sccsobj_dep">
+                              <sch:rule context="unix-def:sccs_object">
+                                    <sch:report test="true()">DEPRECATED OBJECT: <sch:value-of select="name()"/> ID: <sch:value-of select="@id"/></sch:report>
+                              </sch:rule>
+                        </sch:pattern>
+                  </xsd:appinfo>
+                  <xsd:appinfo>
+                        <sch:pattern id="unix-def_sccs_object_verify_filter_state">
+                              <sch:rule context="unix-def:sccs_object//oval-def:filter">
+                                    <sch:let name="parent_object" value="ancestor::unix-def:sccs_object"/>
+                                    <sch:let name="parent_object_id" value="$parent_object/@id"/>
+                                    <sch:let name="state_ref" value="."/>
+                                    <sch:let name="reffed_state" value="ancestor::oval-def:oval_definitions/oval-def:states/*[@id=$state_ref]"/>
+                                    <sch:let name="state_name" value="local-name($reffed_state)"/>
+                                    <sch:let name="state_namespace" value="namespace-uri($reffed_state)"/>
+                                    <sch:assert test="(($state_namespace='http://oval.mitre.org/XMLSchema/oval-definitions-5#unix') and ($state_name='sccs_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
+                              </sch:rule>
+                        </sch:pattern>
+                  </xsd:appinfo>
+            </xsd:annotation>
+            <xsd:complexType>
+                  <xsd:complexContent>
+                        <xsd:extension base="oval-def:ObjectType">
+                              <xsd:sequence>
+                                    <xsd:choice>
+                                          <xsd:element ref="oval-def:set"/>
+                                          <xsd:sequence>
+                                                <xsd:element name="behaviors" type="unix-def:FileBehaviors" minOccurs="0" maxOccurs="1"/>
+                                                <xsd:choice>
+                                                      <xsd:element name="filepath" type="oval-def:EntityObjectStringType">
+                                                            <xsd:annotation>
+                                                                  <xsd:documentation>The filepath element specifies the absolute path for a file on the machine. A directory cannot be specified as a filepath.</xsd:documentation>
+                                                                  <xsd:appinfo>
+                                                                        <sch:pattern id="unix-def_sccsobjfilepath">
+                                                                              <sch:rule context="unix-def:sccs_object/unix-def:filepath">
+                                                                                    <sch:assert test="not(preceding-sibling::unix-def:behaviors[@max_depth or @recurse or @recurse_direction])"><sch:value-of select="../@id"/> - the max_depth, recurse, and recurse_direction behaviors are not allowed with a filepath entity</sch:assert>
+                                                                              </sch:rule>
+                                                                        </sch:pattern>                                                                        
+                                                                        <sch:pattern id="unix-def_sccsobjfilepath2">
+                                                                              <sch:rule context="unix-def:sccs_object/unix-def:filepath[not(@operation='equals' or not(@operation))]">
+                                                                                    <sch:assert test="not(preceding-sibling::unix-def:behaviors[@recurse_file_system='defined'])"><sch:value-of select="../@id"/> - the recurse_file_system behavior MUST not be set to 'defined' when a pattern match is used with a filepath entity.</sch:assert>
+                                                                              </sch:rule>
+                                                                        </sch:pattern>
+                                                                  </xsd:appinfo>
+                                                            </xsd:annotation>
+                                                      </xsd:element>
+                                                      <xsd:sequence>
+                                                          <xsd:element name="path" type="oval-def:EntityObjectStringType">
+                                                                <xsd:annotation>
+                                                                      <xsd:documentation>The path element specifies the directory component of the absolute path to an SCCS file.</xsd:documentation>
+                                                                      <xsd:appinfo>
+                                                                            <sch:pattern id="unix-def_sccsobjpath">
+                                                                                  <sch:rule context="unix-def:sccs_object/unix-def:path[not(@operation='equals' or not(@operation))]">
+                                                                                        <sch:assert test="not(preceding-sibling::unix-def:behaviors[@recurse_file_system='defined'])"><sch:value-of select="../@id"/> - the recurse_file_system behavior MUST not be set to 'defined' when a pattern match is used with a path entity.</sch:assert>
+                                                                                        <sch:assert test="not(preceding-sibling::unix-def:behaviors[@max_depth])"><sch:value-of select="../@id"/> - the max_depth behavior MUST not be used when a pattern match is used with a path entity.</sch:assert>
+                                                                                        <sch:assert test="not(preceding-sibling::unix-def:behaviors[@recurse_direction])"><sch:value-of select="../@id"/> - the recurse_direction behavior MUST not be used when a pattern match is used with a path entity.</sch:assert>
+                                                                                        <sch:assert test="not(preceding-sibling::unix-def:behaviors[@recurse])"><sch:value-of select="../@id"/> - the recurse behavior MUST not be used when a pattern match is used with a path entity.</sch:assert>
+                                                                                  </sch:rule>
+                                                                            </sch:pattern>
+                                                                      </xsd:appinfo>
+                                                                </xsd:annotation>
+                                                          </xsd:element>
+                                                          <xsd:element name="filename" type="oval-def:EntityObjectStringType">
+                                                                <xsd:annotation>
+                                                                      <xsd:documentation>The name of an SCCS file.</xsd:documentation>
+                                                                      <xsd:appinfo>
+                                                                            <sch:pattern id="unix-def_sccs_objectfilename">
+                                                                                  <sch:rule context="unix-def:sccs_object/unix-def:filename">
+                                                                                        <sch:assert test="(@var_ref and .='') or not(.='') or (.='' and @operation = 'pattern match')"><sch:value-of select="../@id"/> - filename entity cannot be empty unless the xsi:nil attribute is set to true or a var_ref is used</sch:assert>
+                                                                                  </sch:rule>
+                                                                            </sch:pattern>
+                                                                      </xsd:appinfo>
+                                                                </xsd:annotation>
+                                                          </xsd:element>
+                                                      </xsd:sequence>
+                                                </xsd:choice>
+                                                <xsd:element ref="oval-def:filter" minOccurs="0" maxOccurs="unbounded"/>
+                                          </xsd:sequence>
+                                    </xsd:choice>
+                              </xsd:sequence>
+                        </xsd:extension>
+                  </xsd:complexContent>
+            </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="sccs_state" substitutionGroup="oval-def:state">
+            <xsd:annotation>
+                  <xsd:documentation/>
+                  <xsd:appinfo>
+                        <oval:deprecated_info>
+                              <oval:version>5.10</oval:version>
+                              <oval:reason>The sccs_state has been deprecated because the Source Code Control System (SCCS) is obsolete.  The sccs_state may be removed in a future version of the language.</oval:reason>
+                        </oval:deprecated_info>
+                        <sch:pattern id="unix-def_sccsste_dep">
+                              <sch:rule context="unix-def:sccs_state">
+                                    <sch:report test="true()">DEPRECATED STATE: <sch:value-of select="name()"/> ID: <sch:value-of select="@id"/></sch:report>
+                              </sch:rule>
+                        </sch:pattern>
+                  </xsd:appinfo>
+            </xsd:annotation>
+            <xsd:complexType>
+                  <xsd:complexContent>
+                        <xsd:extension base="oval-def:StateType">
+                              <xsd:sequence>
+                                    <xsd:element name="filepath" type="oval-def:EntityStateStringType" minOccurs="0">
+                                          <xsd:annotation>
+                                                <xsd:documentation>The filepath element specifies the absolute path for a file on the machine. A directory cannot be specified as a filepath.</xsd:documentation>
+                                          </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="path" type="oval-def:EntityStateStringType" minOccurs="0" maxOccurs="1">
+                                          <xsd:annotation>
+                                                <xsd:documentation>The path element specifies the directory component of the absolute path to an SCCS file.</xsd:documentation>
+                                          </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="filename" type="oval-def:EntityStateStringType" minOccurs="0" maxOccurs="1">
+                                          <xsd:annotation>
+                                                <xsd:documentation>This is the name of a SCCS file.</xsd:documentation>
+                                          </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="module_name" type="oval-def:EntityStateStringType" minOccurs="0" maxOccurs="1">
+                                          <xsd:annotation>
+                                                <xsd:documentation/>
+                                          </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="module_type" type="oval-def:EntityStateStringType" minOccurs="0" maxOccurs="1">
+                                          <xsd:annotation>
+                                                <xsd:documentation/>
+                                          </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="release" type="oval-def:EntityStateStringType" minOccurs="0" maxOccurs="1">
+                                          <xsd:annotation>
+                                                <xsd:documentation/>
+                                          </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="level" type="oval-def:EntityStateStringType" minOccurs="0" maxOccurs="1">
+                                          <xsd:annotation>
+                                                <xsd:documentation/>
+                                          </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="branch" type="oval-def:EntityStateStringType" minOccurs="0" maxOccurs="1">
+                                          <xsd:annotation>
+                                                <xsd:documentation/>
+                                          </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="sequence" type="oval-def:EntityStateStringType" minOccurs="0" maxOccurs="1">
+                                          <xsd:annotation>
+                                                <xsd:documentation/>
+                                          </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="what_string" type="oval-def:EntityStateStringType" minOccurs="0" maxOccurs="1">
+                                          <xsd:annotation>
+                                                <xsd:documentation/>
+                                          </xsd:annotation>
+                                    </xsd:element>
+                              </xsd:sequence>
+                        </xsd:extension>
+                  </xsd:complexContent>
+            </xsd:complexType>
+      </xsd:element>
+      <!-- =============================================================================== -->
       <!-- ================================  SHADOW TEST  ================================ -->
       <!-- =============================================================================== -->
       <xsd:element name="shadow_test" substitutionGroup="oval-def:test">
@@ -988,7 +2063,7 @@
                               <oval:test>shadow_test</oval:test>
                               <oval:object>shadow_object</oval:object>
                               <oval:state>shadow_state</oval:state>
-                              <oval:item target_namespace="urn:oval:v6:system-characteristics:unix">shadow_item</oval:item>
+                              <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#unix">shadow_item</oval:item>
                         </oval:element_mapping>
                   </xsd:appinfo>
                   <xsd:appinfo>
@@ -1026,7 +2101,7 @@
                                     <sch:let name="reffed_state" value="ancestor::oval-def:oval_definitions/oval-def:states/*[@id=$state_ref]"/>
                                     <sch:let name="state_name" value="local-name($reffed_state)"/>
                                     <sch:let name="state_namespace" value="namespace-uri($reffed_state)"/>
-                                    <sch:assert test="(($state_namespace='urn:oval:v6:definitions:unix') and ($state_name='shadow_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
+                                    <sch:assert test="(($state_namespace='http://oval.mitre.org/XMLSchema/oval-definitions-5#unix') and ($state_name='shadow_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
                               </sch:rule>
                         </sch:pattern>
                   </xsd:appinfo>
@@ -1228,7 +2303,7 @@
                               <oval:test>sshd_test</oval:test>
                               <oval:object>sshd_object</oval:object>
                               <oval:state>sshd_state</oval:state>
-                              <oval:item target_namespace="urn:oval:v6:system-characteristics:unix">sshd_item</oval:item>
+                              <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#unix">sshd_item</oval:item>
                         </oval:element_mapping>
                   </xsd:appinfo>
                   <xsd:appinfo>
@@ -1270,7 +2345,7 @@
                                     <sch:let name="reffed_state" value="ancestor::oval-def:oval_definitions/oval-def:states/*[@id=$state_ref]"/>
                                     <sch:let name="state_name" value="local-name($reffed_state)"/>
                                     <sch:let name="state_namespace" value="namespace-uri($reffed_state)"/>
-                                    <sch:assert test="(($state_namespace='urn:oval:v6:definitions:unix') and ($state_name='sshd_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
+                                    <sch:assert test="(($state_namespace='http://oval.mitre.org/XMLSchema/oval-definitions-5#unix') and ($state_name='sshd_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
                               </sch:rule>
                         </sch:pattern>
                   </xsd:appinfo>
@@ -1339,7 +2414,7 @@
                               <oval:test>symlink_test</oval:test>
                               <oval:object>symlink_object</oval:object>
                               <oval:state>symlink_state</oval:state>
-                              <oval:item target_namespace="urn:oval:v6:system-characteristics:unix">symlink_item</oval:item>
+                              <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#unix">symlink_item</oval:item>
                         </oval:element_mapping>
                   </xsd:appinfo>
                   <xsd:appinfo>
@@ -1377,7 +2452,7 @@
                                     <sch:let name="reffed_state" value="ancestor::oval-def:oval_definitions/oval-def:states/*[@id=$state_ref]"/>
                                     <sch:let name="state_name" value="local-name($reffed_state)"/>
                                     <sch:let name="state_namespace" value="namespace-uri($reffed_state)"/>
-                                    <sch:assert test="(($state_namespace='urn:oval:v6:definitions:unix') and ($state_name='symlink_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
+                                    <sch:assert test="(($state_namespace='http://oval.mitre.org/XMLSchema/oval-definitions-5#unix') and ($state_name='symlink_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
                               </sch:rule>
                         </sch:pattern>
                   </xsd:appinfo>
@@ -1436,7 +2511,7 @@
                               <oval:test>sysctl_test</oval:test>
                               <oval:object>sysctl_object</oval:object>
                               <oval:state>sysctl_state</oval:state>
-                              <oval:item target_namespace="urn:oval:v6:system-characteristics:unix">sysctl_item</oval:item>
+                              <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#unix">sysctl_item</oval:item>
                         </oval:element_mapping>
                   </xsd:appinfo>
                   <xsd:appinfo>
@@ -1473,7 +2548,7 @@
                                     <sch:let name="reffed_state" value="ancestor::oval-def:oval_definitions/oval-def:states/*[@id=$state_ref]"/>
                                     <sch:let name="state_name" value="local-name($reffed_state)"/>
                                     <sch:let name="state_namespace" value="namespace-uri($reffed_state)"/>
-                                    <sch:assert test="(($state_namespace='urn:oval:v6:definitions:unix') and ($state_name='sysctl_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
+                                    <sch:assert test="(($state_namespace='http://oval.mitre.org/XMLSchema/oval-definitions-5#unix') and ($state_name='sysctl_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
                               </sch:rule>
                         </sch:pattern>
                   </xsd:appinfo>
@@ -1532,7 +2607,7 @@
                               <oval:test>uname_test</oval:test>
                               <oval:object>uname_object</oval:object>
                               <oval:state>uname_state</oval:state>
-                              <oval:item target_namespace="urn:oval:v6:system-characteristics:unix">uname_item</oval:item>
+                              <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#unix">uname_item</oval:item>
                         </oval:element_mapping>
                   </xsd:appinfo>
                   <xsd:appinfo>
@@ -1621,7 +2696,7 @@
                               <oval:test>xinetd_test</oval:test>
                               <oval:object>xinetd_object</oval:object>
                               <oval:state>xinetd_state</oval:state>
-                              <oval:item target_namespace="urn:oval:v6:system-characteristics:unix">xinetd_item</oval:item>
+                              <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#unix">xinetd_item</oval:item>
                         </oval:element_mapping>
                   </xsd:appinfo>
                   <xsd:appinfo>
@@ -1659,7 +2734,7 @@
                                     <sch:let name="reffed_state" value="ancestor::oval-def:oval_definitions/oval-def:states/*[@id=$state_ref]"/>
                                     <sch:let name="state_name" value="local-name($reffed_state)"/>
                                     <sch:let name="state_namespace" value="namespace-uri($reffed_state)"/>
-                                    <sch:assert test="(($state_namespace='urn:oval:v6:definitions:unix') and ($state_name='xinetd_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
+                                    <sch:assert test="(($state_namespace='http://oval.mitre.org/XMLSchema/oval-definitions-5#unix') and ($state_name='xinetd_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
                               </sch:rule>
                         </sch:pattern>
                   </xsd:appinfo>
