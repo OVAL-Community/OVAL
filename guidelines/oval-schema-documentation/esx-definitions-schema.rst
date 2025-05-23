@@ -1,43 +1,35 @@
-Open Vulnerability and Assessment Language: Vmware ESX Definitions  
+Open Vulnerability and Assessment Language: VMware ESX server Definition  
 =========================================================
-* Schema: Vmware ESX Definitions  
-* Version: 6.0  
-* Release Date: 1/24/2025 09:00:00 AM
+* Schema: VMware ESX server Definition  
+* Version: 5.12.1  
+* Release Date: 05/23/2025 09:00:00 AM
 
-The following is a proposal for the esx-def tests and esx-sc: items that will support assessments of VMware ESXi hosts and Virtual Machines.
+The following is a description of the elements, types, and attributes that compose the VMware ESX server specific tests found in Open Vulnerability and Assessment Language (OVAL). Each test is an extension of the standard test element defined in the Core Definition Schema. Through extension, each test inherits a set of elements and attributes that are shared amongst all OVAL tests. Each test is described in detail and should provide the information necessary to understand what each element and attribute represents. This document is intended for developers and assumes some familiarity with XML. A high level description of the interaction between the different tests and their relationship to the Core Definition Schema is not outlined here.
 
-The OVAL Schema is maintained by the OVAL Community. For more information, including how to get involved in the project and how to submit change requests, please visit the OVAL website at https://github.com/OVAL-Community/.
+This schema was originally developed by Yuzheng Zhou and Todd Dolinsky at Hewlett-Packard. The OVAL Schema is maintained by the OVAL Community. For more information, including how to get involved in the project and how to submit change requests, please visit the OVAL website at https://github.com/OVAL-Community/.
 
 Test Listing  
 ---------------------------------------------------------
-* :ref:`host_acceptancelevel_test`  
-* :ref:`host_vib_test`  
-* :ref:`host_module_test`  
-* :ref:`host_coredump_test`  
-* :ref:`host_webserverssl_test`  
-* :ref:`host_authentication_test`  
-* :ref:`host_account_test`  
-* :ref:`host_advancedsetting_test`  
-* :ref:`host_service_test`  
-* :ref:`host_ntpserver_test`  
-* :ref:`host_lockdown_test`  
-* :ref:`host_firewallexception_test`  
-* :ref:`host_busadapter_test`  
-* :ref:`host_vswitchpolicy_test`  
-* :ref:`vm_advancedsetting_test`  
-* :ref:`vm_device_test`  
-* :ref:`vm_harddiskdevice_test`  
-* :ref:`host_portgroup_test`  
-* :ref:`vds_test`  
-* :ref:`vds_portgroup_test`  
+* :ref:`patch56_test` (Deprecated)  
+* :ref:`patch_test` (Deprecated)  
+* :ref:`version_test` (Deprecated)  
+* :ref:`visdkmanagedobject_test` (Deprecated)  
   
 ______________
   
-.. _host_acceptancelevel_test:  
+.. _patch56_test:  
   
-< host_acceptancelevel_test >  
+< patch56_test > (Deprecated)  
 ---------------------------------------------------------
-The host_acceptancelevel_test is used to determine if the software installed for the VMHost represents untested code. It extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information. The required object element references a host_acceptancelevel_object and the optional state element specifies the data to check.
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* Deprecated As Of Version 5.12  
+* Reason:   
+* Comment: This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.  
+  
+The patch56_test reveals the installation status of a specific patch or patches in VMware ESX Server. This information can be retrieved by the "esxupdate query" command. It extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information. The required object element references a patch56_object and the optional state element referencing a patch56_state specifies the metadata to check.
+
+Note that different from previous versions, ESX Server 3.0.3 and ESX Server 3.5 use the following patch naming convention: {ProductName}{VersionNumber}-{BundleID}-{Classification}{SupportLevel}. Please refer to http://www.vmware.com/pdf/vi3_35/esx_3/r35/vi3_35_25_esxupdate.pdf for more detailed information.
 
 **Extends:** oval-def:TestType
 
@@ -56,17 +48,13 @@ Child Elements
       - oval-def:StateRefType (0..unbounded)  
       -   
   
-Example  
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+.. _patch56_object:  
   
-______________
-XML
-
-.. _host_acceptancelevel_object:  
-  
-< host_acceptancelevel_object >  
+< patch56_object >  
 ---------------------------------------------------------
-The host_acceptancelevel_object element is used by the host_acceptancelevel_test to define the object to be evaluated. Each object extends the standard ObjecType as defined in the oval-definitions-schema and one should refer to the ObjectType description for more information. The common set element allows complex objects to be created using filters and set logic. Again, please refer to the description of the set element in the oval-definitions-schema.
+The patch56_object element is used by a patch56_test to define those objects to be evaluated against a specified state. Each object extends the standard ObjectType as defined in the oval-definitions-schema and one should refer to the ObjectType description for more information. The common set element allows complex objects to be created using filters and set logic. Again, please refer to the description of the set element in the oval-definitions-schema.
+
+A patch56_object consists of a single patch_name entity that identifies the patch to be checked.
 
 **Extends:** oval-def:ObjectType
 
@@ -78,89 +66,21 @@ Child Elements
     * - Child Elements  
       - Type (MinOccurs..MaxOccurs)  
       - Desc.  
-    * - oval-def:filter  
-      - n/a (0..unbounded)  
+    * - behaviors  
+      - esx-def:Patch56Behaviors (0..1)  
       -   
-  
-.. _host_acceptancelevel_state:  
-  
-< host_acceptancelevel_state >  
----------------------------------------------------------
-The host_acceptancelevel_state element defines the information that can be used to evaluate the specified ESXi hosts acceptance level information.
-
-**Extends:** oval-def:StateType
-
-Child Elements  
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-.. list-table:: Elements  
-    :header-rows: 1  
-  
-    * - Child Elements  
-      - Type (MinOccurs..MaxOccurs)  
-      - Desc.  
-    * - acceptance_level  
-      - esx-def:EntityStateAcceptanceLevelType (0..1)  
-      - The software acceptance level for the associated ESXi host.  
-  
-______________
-  
-.. _host_vib_test:  
-  
-< host_vib_test >  
----------------------------------------------------------
-The host_vib_test is used to test various properties of software installed for a vSphere Installation Bundle (VIB). A VIB is a collection of files that are packaged into an archive. The VIB contains a signature file that is used to verify the level of trust. It extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information. The required object element references a host_vib_object and the optional state element specifies the data to check.
-
-**Extends:** oval-def:TestType
-
-Child Elements  
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-.. list-table:: Elements  
-    :header-rows: 1  
-  
-    * - Child Elements  
-      - Type (MinOccurs..MaxOccurs)  
-      - Desc.  
-    * - object  
-      - oval-def:ObjectRefType (1..1)  
-      -   
-    * - state  
-      - oval-def:StateRefType (0..unbounded)  
-      -   
-  
-Example  
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-  
-______________
-XML
-
-.. _host_vib_object:  
-  
-< host_vib_object >  
----------------------------------------------------------
-The host_vib_object element is used by the host_vib_test to define the object to be evaluated. Each object extends the standard ObjecType as defined in the oval-definitions-schema and one should refer to the ObjectType description for more information. The common set element allows complex objects to be created using filters and set logic. Again, please refer to the description of the set element in the oval-definitions-schema.
-
-**Extends:** oval-def:ObjectType
-
-Child Elements  
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-.. list-table:: Elements  
-    :header-rows: 1  
-  
-    * - Child Elements  
-      - Type (MinOccurs..MaxOccurs)  
-      - Desc.  
-    * - vib_name  
+    * - patch_name  
       - oval-def:EntityObjectStringType (1..1)  
-      - The name of the VIB to collect.  
+      - The patch name entity indetifies a specific patch or set of patches to be checked on the system. For example: ESX-200603 or ESX350-200904401-BG. The value of this entity should correspond to the values returned under the "name" column of the "esxupdate query" command.  
     * - oval-def:filter  
       - n/a (0..unbounded)  
       -   
   
-.. _host_vib_state:  
+.. _patch56_state:  
   
-< host_vib_state >  
+< patch56_state >  
 ---------------------------------------------------------
-The host_vib_state element defines the information that can be used to evaluate the specified VIB information.
+The patch56_state element defines the different information that can be used to evaluate the specified VMware ESX Serer patch. Please refer to the individual elements in the schema for more details about what each represents.
 
 **Extends:** oval-def:StateType
 
@@ -172,31 +92,57 @@ Child Elements
     * - Child Elements  
       - Type (MinOccurs..MaxOccurs)  
       - Desc.  
-    * - vib_name  
+    * - patch_name  
       - oval-def:EntityStateStringType (0..1)  
-      - The VIB name  
-    * - acceptance_level  
-      - esx-def:EntityStateAcceptanceLevelType (0..1)  
-      - The software acceptance level for the associated VIB  
-    * - creation_date  
-      - oval-def:EntityStateStringType (0..1)  
-      - VIB Creation Date  
-    * - vendor  
-      - oval-def:EntityStateStringType (0..1)  
-      - VIB Vendor  
-    * - version  
-      - oval-def:EntityStateStringType (0..1)  
-      - VIB Version  
+      - The patch_name entity indetifies the name of a patch to test for. For example: ESX-200603 or ESX350-200904401-BG. The value of this entity should correspond to the values returned under the "name" column of the "esxupdate query" command.  
+    * - knowledge_base_id  
+      - oval-def:EntityStateIntType (0..1)  
+      - The knowledge_base_id entity specifies a given knowledge base article identifier number. This entity is valid for ESX versions 3.0.2 and earlier. It is comprised of the numerical string at the end of the patch name. For example, the patch ESX-200603 would have a knowledge base identifier of 200603.  
+    * - bundle_id  
+      - oval-def:EntityStateIntType (0..1)  
+      - The bundle_id entity specifies a unique ID for the patch. This entity is valid for ESX version 3.0.3 and version 3.5 and is comprised of the year and month the bundle was released and a 3-digit unique ID. It is in the format YYYYMM###. For example, the first patch released in January 2008 might have a BundleID of 200801001.  
+    * - classification  
+      - esx-def:EntityStateClassificationType (0..1)  
+      - The classification entity specifies the type of patch. It can be one of: B - bug, U - update, S - security, or R - roll-up. This entity is valid for ESX version 3.0.3 and later.  
+    * - support_level  
+      - esx-def:EntityStateSupportLevelType (0..1)  
+      - The support_level entity specifies a support level to test for. If can be one of: G - GA patch, H - hot patch, D - debugging patch, or C - custom patch. This entity is valid for ESX version 3.0.3 and later.  
+    * - status  
+      - oval-def:EntityStateBoolType (0..1)  
+      - The status entity specifies an installation status of a patch to test for. A value of 'true' is used to signify that a given patch is intalled.  
+  
+.. _Patch56Behaviors:  
+  
+== Patch56Behaviors ==  
+---------------------------------------------------------
+The Patch56Behaviors complex type defines a number of behaviors that allow a more detailed definition of the patch56_object being specified. Note that using these behaviors may result in some unique results. For example, a double negative type condition might be created where an object entity says include everything except a specific item, but a behavior is used that might then add that item back in.
+
+Attributes  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. list-table:: Attributes  
+    :header-rows: 1  
+  
+    * - Attribute  
+      - Type  
+      - Desc.  
+    * - supersedence  
+      - Restriction of xsd:boolean (optional *default*='false')  
+      - 'supersedence' specifies that the object should also match any superseding patches to the one being specified. In other words, if set to True the resulting object set would be the original patch specified plus any superseding patches. The default value is 'false' meaning the object should only match the specified patch.  
+  
   
 ______________
   
-.. _host_module_test:  
+.. _patch_test:  
   
-< host_module_test >  
+< patch_test > (Deprecated)  
 ---------------------------------------------------------
-The host_modules_test is used to determine if any ESXi host's loaded kernel modules lack valid digital signatures. It extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information. The required object element references a host_modules_object and the optional state element specifies the data to check.
-
-VMware provides digital signatures for kernel modules. By default the ESXi host does not permit loading of kernel modules that lack a valid digital signature. However, this behavior can be overridden allowing unauthorized kernel modules to be loaded. Untested or malicious kernel modules loaded on the ESXi host can put the host at risk for instability and/or exploitation.
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* Deprecated As Of Version 5.6  
+* Reason: Replaced by the patch56_test. The deprecated patch_test has a bug where the patch name entity is defined as a string in the object yet is defined as an int in the state.  Additional state entities have also been added to the new patch56_test.  
+* Comment: This test has been deprecated and will be removed in version 6.0 of the language.  
+  
+The patch test reveals the installation status of a specific patch in the VMware ESX server. This information can be retrieved by the "esxupdate query | grep ESX-xxxxxxx" command. It extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information. The required object element references a patch_object and the optional state element specifies the metadata to check.
 
 **Extends:** oval-def:TestType
 
@@ -215,17 +161,19 @@ Child Elements
       - oval-def:StateRefType (0..unbounded)  
       -   
   
-Example  
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+.. _patch_object:  
   
-______________
-XML
-
-.. _host_module_object:  
-  
-< host_module_object >  
+< patch_object > (Deprecated)  
 ---------------------------------------------------------
-The host_module_object element is used by the host_module_test to define the object to be evaluated. Each object extends the standard ObjectType as defined in the oval-definitions-schema and one should refer to the ObjectType description for more information. The common set element allows complex objects to be created using filters and set logic. Again, please refer to the description of the set element in the oval-definitions-schema.
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* Deprecated As Of Version 5.6  
+* Reason: Replaced by the patch56_object. The deprecated patch_test has a bug where the patch name entity is defined as a string in the object yet is defined as an int in the state.  Additional state entities have also been added to the new patch56_test.  
+* Comment: This object has been deprecated and will be removed in version 6.0 of the language.  
+  
+The patch_object element is used by a patch test to define those objects to be evaluated based on a specified state. Each object extends the standard ObjectType as defined in the oval-definitions-schema and one should refer to the ObjectType description for more information. The common set element allows complex objects to be created using filters and set logic. Again, please refer to the description of the set element in the oval-definitions-schema.
+
+A patch_object consists of a single patch_number entity that identifies the patch to be checked.
 
 **Extends:** oval-def:ObjectType
 
@@ -237,18 +185,24 @@ Child Elements
     * - Child Elements  
       - Type (MinOccurs..MaxOccurs)  
       - Desc.  
-    * - module_name  
-      - oval-def:EntityObjectStringType (1..1)  
-      - The name of the kernel module to collect.  
-    * - oval-def:filter  
-      - n/a (0..unbounded)  
+    * - behaviors  
+      - esx-def:PatchBehaviors (0..1)  
       -   
+    * - patch_number  
+      - oval-def:EntityObjectStringType (1..1)  
+      - The patch_number entity identifies the patch to be checked. Many of the security bulletins for VMWARE ESX Server contain non-numerical characters in the patch number, therefore this entity has a datatype of string.  
   
-.. _host_module_state:  
+.. _patch_state:  
   
-< host_module_state >  
+< patch_state > (Deprecated)  
 ---------------------------------------------------------
-The host_module_state element defines the information that can be used to evaluate the specified ESXi hosts loaded kernel module information.
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* Deprecated As Of Version 5.6  
+* Reason: Replaced by the patch56_state. The deprecated patch_test has a bug where the patch name entity is defined as a string in the object yet is defined as an int in the state.  Additional state entities have also been added to the new patch56_test.  
+* Comment: This object has been deprecated and will be removed in version 6.0 of the language.  
+  
+The patch_state element defines the information about a specific patch. The patch_number element identifies this patch, and the status element reveals the installation status of this patch in the VMware ESX server. For instance, after the "esxupdate query | grep ESX-2559638" command is run, the result is either a string similar to "ESX-2559638 15:27:17 04/05/07 Update info rpm for ESX 3.0.1." or empty.
 
 **Extends:** oval-def:StateType
 
@@ -260,111 +214,117 @@ Child Elements
     * - Child Elements  
       - Type (MinOccurs..MaxOccurs)  
       - Desc.  
-    * - module_name  
+    * - patch_number  
       - oval-def:EntityStateStringType (0..1)  
-      - The name of the kernel module  
-    * - license  
-      - oval-def:EntityStateStringType (0..1)  
-      - The name of the license holder for the kernel module.  
-    * - module_file  
-      - oval-def:EntityStateStringType (0..1)  
-      - The path to the kernel module file.  
-    * - version  
+      - This is the patch number of a specific patch which will be checked in current VMware ESX server. Many of the security bulletins for VMWARE ESX Server contain non-numerical characters in the patch nubmer, therefore this entity has a datatype of string.  
+    * - status  
+      - oval-def:EntityStateBoolType (0..1)  
+      - This is the installation status of a specific patch in current VMware ESX server.  
+  
+.. _PatchBehaviors:  
+  
+== PatchBehaviors == (Deprecated)  
+---------------------------------------------------------
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* Deprecated As Of Version 5.6  
+* Reason: Replaced by Patch56Behaviors. The deprecated patch_test has a bug where the patch name entity is defined as a string in the object yet is defined as an int in the state.  Additional state entities have also been added to the new patch56_test.  
+* Comment: These behaviors have been deprecated and will be removed in version 6.0 of the language.  
+  
+The PatchBehaviors complex type defines a number of behaviors that allow a more detailed definition of the patch_object being specified. Note that using these behaviors may result in some unique results. For example, a double negative type condition might be created where an object entity says include everything except a specific item, but a behavior is used that might then add that item back in.
+
+Attributes  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. list-table:: Attributes  
+    :header-rows: 1  
+  
+    * - Attribute  
+      - Type  
+      - Desc.  
+    * - supersedence  
+      - Restriction of xsd:boolean (optional *default*='false')  
+      - 'supersedence' specifies that the object should also match any superseding patches to the one being specified. In other words, if set to True the resulting object set would be the original patch specified plus any superseding patches. The default value is 'false' meaning the object should only match the specified patch.  
+  
+  
+______________
+  
+.. _version_test:  
+  
+< version_test > (Deprecated)  
+---------------------------------------------------------
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* Deprecated As Of Version 5.12  
+* Reason:   
+* Comment: This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.  
+  
+The version test reveals information about the release and build version of the VMware ESX server. This information can be retrieved by the "vmware -v" command or by checking the /proc/vmware/version file. It extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information. The required object element references a version_object and the optional state element specifies the metadata to check.
+
+**Extends:** oval-def:TestType
+
+Child Elements  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. list-table:: Elements  
+    :header-rows: 1  
+  
+    * - Child Elements  
+      - Type (MinOccurs..MaxOccurs)  
+      - Desc.  
+    * - object  
+      - oval-def:ObjectRefType (1..1)  
+      -   
+    * - state  
+      - oval-def:StateRefType (0..unbounded)  
+      -   
+  
+.. _version_object:  
+  
+< version_object >  
+---------------------------------------------------------
+The version_object element is used by a version test to define those objects to be evaluated based on a specified state. There is actually only one object relating to version and this is the ESX server as a whole. Therefore, there are no child entities defined. Any OVAL Test written to check version will reference the same version_object which is basically an empty object element.
+
+**Extends:** oval-def:ObjectType
+
+.. _version_state:  
+  
+< version_state >  
+---------------------------------------------------------
+The version_state element defines the information about the release and build version. The release and build elements specify the release and build information of the VMware ESX server respectively. For instance, if the output of "vmware -v" command is "VMware ESX Server 3.0.1 build-39823", then release is equal to "3.0.1" and build is equal to "39823".
+
+**Extends:** oval-def:StateType
+
+Child Elements  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. list-table:: Elements  
+    :header-rows: 1  
+  
+    * - Child Elements  
+      - Type (MinOccurs..MaxOccurs)  
+      - Desc.  
+    * - release  
       - oval-def:EntityStateVersionType (0..1)  
-      - The kernel module version information.  
-    * - acceptance_level  
-      - esx-def:EntityStateAcceptanceLevelType (0..1)  
-      - The software acceptance level of the kernel module.  
-  
-______________
-  
-.. _host_coredump_test:  
-  
-< host_coredump_test >  
----------------------------------------------------------
-The host_coredump_test is used to validate the configuration of a centralized location to collect ESXi host core dumps. The VMware vSphere Network Dump Collector service allows for collecting diagnostic information from a host that experiences a critical fault. It extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information. The required object element references a host_coredump_object and the optional state element specifies the data to check.
-
-**Extends:** oval-def:TestType
-
-Child Elements  
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-.. list-table:: Elements  
-    :header-rows: 1  
-  
-    * - Child Elements  
-      - Type (MinOccurs..MaxOccurs)  
-      - Desc.  
-    * - object  
-      - oval-def:ObjectRefType (1..1)  
-      -   
-    * - state  
-      - oval-def:StateRefType (0..unbounded)  
-      -   
-  
-Example  
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-  
-______________
-XML
-
-.. _host_coredump_object:  
-  
-< host_coredump_object >  
----------------------------------------------------------
-The host_coredump_object element is used by the host_coredump_test to define the object to be evaluated. Each object extends the standard ObjectType as defined in the oval-definitions-schema and one should refer to the ObjectType description for more information. The common set element allows complex objects to be created using filters and set logic. Again, please refer to the description of the set element in the oval-definitions-schema.
-
-**Extends:** oval-def:ObjectType
-
-Child Elements  
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-.. list-table:: Elements  
-    :header-rows: 1  
-  
-    * - Child Elements  
-      - Type (MinOccurs..MaxOccurs)  
-      - Desc.  
-    * - oval-def:filter  
-      - n/a (0..unbounded)  
-      -   
-  
-.. _host_coredump_state:  
-  
-< host_coredump_state >  
----------------------------------------------------------
-The host_coredump_state element defines the information that can be used to evaluate the specified ESXi hosts core dump information.
-
-**Extends:** oval-def:StateType
-
-Child Elements  
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-.. list-table:: Elements  
-    :header-rows: 1  
-  
-    * - Child Elements  
-      - Type (MinOccurs..MaxOccurs)  
-      - Desc.  
-    * - enabled  
-      - oval-def:EntityStateBoolType (0..1)  
-      - Displays whether or not the ESXi dump collector is enabled for the ESXi host  
-    * - host_vnic  
-      - oval-def:EntityStateStringType (0..1)  
-      - The ESXi host's configured core dump destination vnic  
-    * - network_server_ip  
-      - oval-def:EntityStateIPAddressStringType (0..1)  
-      - The ESXi host's configured core dump destination IP  
-    * - network_server_port  
+      - This is the release version of current VMware ESX server.  
+    * - build  
       - oval-def:EntityStateIntType (0..1)  
-      - The ESXi host's configured core dump destination port  
+      - This is the build version of current VMware ESX server.  
   
 ______________
   
-.. _host_webserverssl_test:  
+.. _visdkmanagedobject_test:  
   
-< host_webserverssl_test >  
+< visdkmanagedobject_test > (Deprecated)  
 ---------------------------------------------------------
-The host_webserverssl_test is used to determine if any expired or revoked SSL certificates exist on the ESXi host. It extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information. The required object element references a host_webserverssl_object and the optional state element specifies the data to check.
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* Deprecated As Of Version 5.12  
+* Reason:   
+* Comment: This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.  
+  
+The visdkmanagedobject_test is used to check information about Managed Objects in the VMware Infrastructure. This test extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information. The required object element references a visdkmanagedobject _object and the optional state element specifies the metadata to check.
 
-Leaving expired or revoked certificates on your vCenter Server system can compromise your environment. By default, each ESXi host does not have Certificate Revocation Lists (CRL) checking available. Revoked certificates must be checked and removed manually. Replacing certificates will avoid having users get used to clicking through browser warnings. The warning might be an indication of a man-in-the-middle attack, and only inspection of the certificate and thumbprint can guard against such attacks.
+This test has been introduced to enable standardized automated assessments of configuration settings in cloud computing components. All aspects of the VMware cloud can be considered in this test due to the VMware Infrastructure. Whether it is a Virutal Machine, a Host System, or even a Data Center, properties are defined in ways that can be enumerated in a common methodology. The VI SDK Programming Guide located at http://www.vmware.com/support/developer/vc-sdk/visdk400pubs/sdk40programmingguide.pdf serves as a great resource. Chapter 3 discusses the Managed Entities enumerated in the behaviors.
+
+There are several Managed Entities in the VMware Infrastructure which have been enumerated in ViSdkManagedEntityBehaviors to enable interpreters to execute efficient interrogations. This test is designed for an interpreter to access Managed Entity properties (settings) via the VI SDK webservice. An example use case is to interrogate all virtual machines to ensure that a particular security setting is enabled. Some properties serve to configure the Virtual Machine, while others can be used to identify. For example, sets and filters can be used to create a set of all Virtual Machines where bridged networking is employed, and then perform an OVAL state evaluation against each of those Virtual Machines. This concept applies to all properties across all Managed Entities. Use the ViSdkManagedEntityBehaviors to avoid enumerating all Managed Objects when only one type should be considered.
 
 **Extends:** oval-def:TestType
 
@@ -383,17 +343,11 @@ Child Elements
       - oval-def:StateRefType (0..unbounded)  
       -   
   
-Example  
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+.. _visdkmanagedobject_object:  
   
-______________
-XML
-
-.. _host_webserverssl_object:  
-  
-< host_webserverssl_object >  
+< visdkmanagedobject_object >  
 ---------------------------------------------------------
-The host_webserverssl_object element is used by the host_webserverssl_test to define the object to be evaluated. Each object extends the standard ObjectType as defined in the oval-definitions-schema and one should refer to the ObjectType description for more information. The common set element allows complex objects to be created using filters and set logic. Again, please refer to the description of the set element in the oval-definitions-schema.
+The visdkmanagedobject_object element is used by the visdkmanagedobject_test to define those objects to be evaluated based on a specified state.
 
 **Extends:** oval-def:ObjectType
 
@@ -405,172 +359,21 @@ Child Elements
     * - Child Elements  
       - Type (MinOccurs..MaxOccurs)  
       - Desc.  
-    * - oval-def:filter  
-      - n/a (0..unbounded)  
+    * - behaviors  
+      - esx-def:ViSdkManagedEntityBehaviors (0..1)  
       -   
-  
-.. _host_webserverssl_state:  
-  
-< host_webserverssl_state >  
----------------------------------------------------------
-The host_webserverssl_state element defines the information that can be used to evaluate the specified ESXi hosts web server ssl certificate information.
-
-**Extends:** oval-def:StateType
-
-Child Elements  
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-.. list-table:: Elements  
-    :header-rows: 1  
-  
-    * - Child Elements  
-      - Type (MinOccurs..MaxOccurs)  
-      - Desc.  
-    * - certificate_is_valid  
-      - oval-def:EntityStateBoolType (0..1)  
-      - Whether or not the ESXi host certificate is valid for current date  
-    * - issuer  
-      - oval-def:EntityStateStringType (0..1)  
-      - The certificate issuer  
-    * - expires  
-      - oval-def:EntityStateStringType (0..1)  
-      - The certificate expiration date and time (formatted as a string)  
-    * - days_till_expire  
-      - oval-def:EntityStateIntType (0..1)  
-      - The number of days before the certificate expires  
-  
-______________
-  
-.. _host_authentication_test:  
-  
-< host_authentication_test >  
----------------------------------------------------------
-The host_authentication_test is used to determine if ESXi is configured to use a directory service such as Active Directory to manage users and groups. It extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information. The required object element references a host_authentication_object and the optional state element specifies the data to check.
-
-**Extends:** oval-def:TestType
-
-Child Elements  
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-.. list-table:: Elements  
-    :header-rows: 1  
-  
-    * - Child Elements  
-      - Type (MinOccurs..MaxOccurs)  
-      - Desc.  
-    * - object  
-      - oval-def:ObjectRefType (1..1)  
-      -   
-    * - state  
-      - oval-def:StateRefType (0..unbounded)  
-      -   
-  
-Example  
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-  
-______________
-XML
-
-.. _host_authentication_object:  
-  
-< host_authentication_object >  
----------------------------------------------------------
-The host_authentication_object element is used by the host_authentication_test to define the object to be evaluated. Each object extends the standard ObjectType as defined in the oval-definitions-schema and one should refer to the ObjectType description for more information. The common set element allows complex objects to be created using filters and set logic. Again, please refer to the description of the set element in the oval-definitions-schema.
-
-**Extends:** oval-def:ObjectType
-
-Child Elements  
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-.. list-table:: Elements  
-    :header-rows: 1  
-  
-    * - Child Elements  
-      - Type (MinOccurs..MaxOccurs)  
-      - Desc.  
-    * - oval-def:filter  
-      - n/a (0..unbounded)  
-      -   
-  
-.. _host_authentication_state:  
-  
-< host_authentication_state >  
----------------------------------------------------------
-The host_authentication_state element defines the information that can be used to evaluate the specified ESXi hosts domain and domain membership information.
-
-**Extends:** oval-def:StateType
-
-Child Elements  
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-.. list-table:: Elements  
-    :header-rows: 1  
-  
-    * - Child Elements  
-      - Type (MinOccurs..MaxOccurs)  
-      - Desc.  
-    * - domain  
-      - oval-def:EntityStateStringType (0..1)  
-      - The name of the domain  
-    * - domain_membership_status  
-      - esx-def:EntityStateDomainMembershipStatusType (0..1)  
-      - The status of the ESXi host's membership in the domain  
-  
-______________
-  
-.. _host_account_test:  
-  
-< host_account_test >  
----------------------------------------------------------
-The host_account_test is used to determine certain aspects of the user accounts on an ESXi host. It extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information. The required object element references a host_account_object and the optional state element specifies the data to check.
-
-**Extends:** oval-def:TestType
-
-Child Elements  
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-.. list-table:: Elements  
-    :header-rows: 1  
-  
-    * - Child Elements  
-      - Type (MinOccurs..MaxOccurs)  
-      - Desc.  
-    * - object  
-      - oval-def:ObjectRefType (1..1)  
-      -   
-    * - state  
-      - oval-def:StateRefType (0..unbounded)  
-      -   
-  
-Example  
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-  
-______________
-XML
-
-.. _host_account_object:  
-  
-< host_account_object >  
----------------------------------------------------------
-The host_account_object element is used by the host_account_test to define the object to be evaluated. Each object extends the standard ObjectType as defined in the oval-definitions-schema and one should refer to the ObjectType description for more information. The common set element allows complex objects to be created using filters and set logic. Again, please refer to the description of the set element in the oval-definitions-schema.
-
-**Extends:** oval-def:ObjectType
-
-Child Elements  
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-.. list-table:: Elements  
-    :header-rows: 1  
-  
-    * - Child Elements  
-      - Type (MinOccurs..MaxOccurs)  
-      - Desc.  
-    * - account_name  
+    * - property  
       - oval-def:EntityObjectStringType (1..1)  
-      - The account_name element details the name of the VMHost's user account to collect.  
+      - The property entity holds a string that represents the object path path and name of a particular setting for the Managed Entity. In the VMware Infrastructure SDK, property names are case-sensitive and thus case must be correct relative to the properties in the SDK. For example, a Virtual Machine might have ethernet0.connectionType of 'bridged'.  
     * - oval-def:filter  
       - n/a (0..unbounded)  
       -   
   
-.. _host_account_state:  
+.. _visdkmanagedobject_state:  
   
-< host_account_state >  
+< visdkmanagedobject_state >  
 ---------------------------------------------------------
-The host_account_state element defines the information that can be used to evaluate the specified ESXi host user account information.
+The visdkmanagedobject_state elements enumerates the different properties a Managed Entity might have. Managed Entities have the same object structure. However, fields within that object structure will be blank (null) if they do not apply to that Managed Entity.
 
 **Extends:** oval-def:StateType
 
@@ -582,1157 +385,37 @@ Child Elements
     * - Child Elements  
       - Type (MinOccurs..MaxOccurs)  
       - Desc.  
-    * - account_name  
+    * - property  
       - oval-def:EntityStateStringType (0..1)  
-      - The user account name on the ESXi host  
-    * - domain  
-      - oval-def:EntityStateStringType (0..1)  
-      - The name of the domain to which the user account belongs  
-    * - description  
-      - oval-def:EntityStateStringType (0..1)  
-      - Descriptive information about the user account  
-    * - shell_access_enabled  
-      - oval-def:EntityStateBoolType (0..1)  
-      - true if ESXi shell access is enabled for the user account; false otherwise  
-    * - role  
-      - oval-def:EntityStateStringType (0..1)  
-      - the role granted to the host account  
-  
-______________
-  
-.. _host_advancedsetting_test:  
-  
-< host_advancedsetting_test >  
----------------------------------------------------------
-The host_advancedsetting_test is used to collect advanced configuration information from an ESXi host. This test extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information. The required object element references a host_advancedconfig_object and the optional state element specifies the metadata to check.
-
-**Extends:** oval-def:TestType
-
-Child Elements  
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-.. list-table:: Elements  
-    :header-rows: 1  
-  
-    * - Child Elements  
-      - Type (MinOccurs..MaxOccurs)  
-      - Desc.  
-    * - object  
-      - oval-def:ObjectRefType (1..1)  
-      -   
-    * - state  
-      - oval-def:StateRefType (0..unbounded)  
-      -   
-  
-Example  
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-  
-______________
-XML
-
-.. _host_advancedsetting_object:  
-  
-< host_advancedsetting_object >  
----------------------------------------------------------
-The host_advancedsetting_object element is used by the host_advancedconfig_test to define those objects to be evaluated based on a specified state.
-
-**Extends:** oval-def:ObjectType
-
-Child Elements  
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-.. list-table:: Elements  
-    :header-rows: 1  
-  
-    * - Child Elements  
-      - Type (MinOccurs..MaxOccurs)  
-      - Desc.  
-    * - advanced_setting_name  
-      - oval-def:EntityObjectStringType (1..1)  
-      - The host_advancedsetting_name element details the name of the VMHost's advanced configuration setting to collect.  
-    * - oval-def:filter  
-      - n/a (0..unbounded)  
-      -   
-  
-.. _host_advancedsetting_state:  
-  
-< host_advancedsetting_state >  
----------------------------------------------------------
-The host_advancedsetting_state details the values which may be applied to a given advanced configuration item.
-
-**Extends:** oval-def:StateType
-
-Child Elements  
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-.. list-table:: Elements  
-    :header-rows: 1  
-  
-    * - Child Elements  
-      - Type (MinOccurs..MaxOccurs)  
-      - Desc.  
-    * - advanced_setting_name  
-      - oval-def:EntityStateStringType (0..1)  
-      - The advanced_setting_name element details the name of the Host's advanced configuration setting to collect.  
-    * - advanced_setting_value  
+      - The property entity holds a string that represents the object path and name of a particular setting for the Managed Entity. In the VMware Infrastructure SDK, property names are case-sensitive and thus case must be correct relative to the properties in the SDK. For example, a Virtual Machine might have ethernet0.connectionType of 'bridged'.  
+    * - value  
       - oval-def:EntityStateAnySimpleType (0..1)  
-      - The advanced_setting_value element details the value of the Host's advanced configuration setting that was collected.  
+      - The value entity holds a string that represents a value that's associated with the specified setting for the Managed Entity. Some properties will return an array of values. In such cases consider each value individually and then make final evaluation based on the entity_check attribute.  
   
-______________
+.. _ViSdkManagedEntityBehaviors:  
   
-.. _host_service_test:  
-  
-< host_service_test >  
+== ViSdkManagedEntityBehaviors ==  
 ---------------------------------------------------------
-The host_service_test is used to collect service-related configuration information from an ESXi host. This test extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information. The required object element references a host_service_object and the optional state element specifies the metadata to check.
+The ViSdkManagedEntityBehaviors complex type defines a number of behaviors that allow a more detailed definition of the visdkmanagedobject_object being specified. Note that using these behaviors is *highly* encouraged because enumerating all Managed Objects in an inventory hierarchy could cause performance problems. Interpreters should enumerate only the entities specified by the behavior prior to set/filter logic and evaluation.
 
-**Extends:** oval-def:TestType
-
-Child Elements  
+Attributes  
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-.. list-table:: Elements  
+.. list-table:: Attributes  
     :header-rows: 1  
   
-    * - Child Elements  
-      - Type (MinOccurs..MaxOccurs)  
+    * - Attribute  
+      - Type  
       - Desc.  
-    * - object  
-      - oval-def:ObjectRefType (1..1)  
-      -   
-    * - state  
-      - oval-def:StateRefType (0..unbounded)  
-      -   
+    * - managed_entity_type  
+      - Restriction of xsd:string (optional *default*='VirtualMachine') ('ClusterComputerResource', 'ComputeResource', 'Datacenter', 'Datastore', 'DistributedVirtualPortgroup', 'DistributedVirtualSwitch', 'Folder', 'HostSystem', 'Network', 'ResourcePool', 'VirtualApp', 'VirtualMachine')  
+      - The 'managed_entity_type' defines the type of managed object from which the property and value should be collected.  
   
-Example  
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   
-______________
-XML
-
-.. _host_service_object:  
+.. _EntityStateClassificationType:  
   
-< host_service_object >  
+== EntityStateClassificationType ==  
 ---------------------------------------------------------
-The host_service_object element is used by the host_service_test to define the object to be evaluated. Each object extends the standard ObjectType as defined in the oval-definitions-schema and one should refer to the ObjectType description for more information. The common set element allows complex objects to be created using filters and set logic. Again, please refer to the description of the set element in the oval-definitions-schema.
-
-**Extends:** oval-def:ObjectType
-
-Child Elements  
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-.. list-table:: Elements  
-    :header-rows: 1  
-  
-    * - Child Elements  
-      - Type (MinOccurs..MaxOccurs)  
-      - Desc.  
-    * - service_name  
-      - oval-def:EntityObjectStringType (1..1)  
-      - The service_name element details the name of the Host's service setting to collect.  
-    * - oval-def:filter  
-      - n/a (0..unbounded)  
-      -   
-  
-.. _host_service_state:  
-  
-< host_service_state >  
----------------------------------------------------------
-The host_service_state details the values which may be applied to a given ESXi host's service item.
-
-**Extends:** oval-def:StateType
-
-Child Elements  
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-.. list-table:: Elements  
-    :header-rows: 1  
-  
-    * - Child Elements  
-      - Type (MinOccurs..MaxOccurs)  
-      - Desc.  
-    * - service_name  
-      - oval-def:EntityStateStringType (0..1)  
-      - The host_service_name element details the name of the VMHost's service setting to collect.  
-    * - service_label  
-      - oval-def:EntityStateStringType (0..1)  
-      - Descriptive information regarding the service  
-    * - service_policy  
-      - oval-def:EntityStateStringType (0..1)  
-      - The activation policy for the host service.  
-    * - service_running  
-      - oval-def:EntityStateBoolType (0..1)  
-      - true if the service is currently running; false otherwise  
-    * - service_required  
-      - oval-def:EntityStateBoolType (0..1)  
-      - true if the service is required to be running on the host; false otherwise  
-  
-______________
-  
-.. _host_ntpserver_test:  
-  
-< host_ntpserver_test >  
----------------------------------------------------------
-The host_ntpserver_test is used to collect configuration information for any NTP servers added to an ESXi host. This test extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information. The required object element references a host_ntpserver_object and the optional state element specifies the metadata to check.
-
-**Extends:** oval-def:TestType
-
-Child Elements  
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-.. list-table:: Elements  
-    :header-rows: 1  
-  
-    * - Child Elements  
-      - Type (MinOccurs..MaxOccurs)  
-      - Desc.  
-    * - object  
-      - oval-def:ObjectRefType (1..1)  
-      -   
-    * - state  
-      - oval-def:StateRefType (0..unbounded)  
-      -   
-  
-Example  
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-  
-______________
-XML
-
-.. _host_ntpserver_object:  
-  
-< host_ntpserver_object >  
----------------------------------------------------------
-The host_ntpserver_object element is used by the host_ntpserver_test to define the object to be evaluated. Each object extends the standard ObjectType as defined in the oval-definitions-schema and one should refer to the ObjectType description for more information. The common set element allows complex objects to be created using filters and set logic. Again, please refer to the description of the set element in the oval-definitions-schema.
-
-**Extends:** oval-def:ObjectType
-
-Child Elements  
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-.. list-table:: Elements  
-    :header-rows: 1  
-  
-    * - Child Elements  
-      - Type (MinOccurs..MaxOccurs)  
-      - Desc.  
-    * - oval-def:filter  
-      - n/a (0..unbounded)  
-      -   
-  
-.. _host_ntpserver_state:  
-  
-< host_ntpserver_state >  
----------------------------------------------------------
-The host_ntpserver_state details the values which may be applied to a given ESXi host's NTP Server configuration.
-
-**Extends:** oval-def:StateType
-
-Child Elements  
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-.. list-table:: Elements  
-    :header-rows: 1  
-  
-    * - Child Elements  
-      - Type (MinOccurs..MaxOccurs)  
-      - Desc.  
-    * - ntp_server_name  
-      - oval-def:EntityStateStringType (0..1)  
-      - The domain name or the IP address of the NTP server(s) added to the host  
-  
-______________
-  
-.. _host_lockdown_test:  
-  
-< host_lockdown_test >  
----------------------------------------------------------
-The host_lockdown_test is used to collect lockdown mode configuration information for an ESXi host. This test extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information. The required object element references a host_lockdown_object and the optional state element specifies the metadata to check.
-
-**Extends:** oval-def:TestType
-
-Child Elements  
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-.. list-table:: Elements  
-    :header-rows: 1  
-  
-    * - Child Elements  
-      - Type (MinOccurs..MaxOccurs)  
-      - Desc.  
-    * - object  
-      - oval-def:ObjectRefType (1..1)  
-      -   
-    * - state  
-      - oval-def:StateRefType (0..unbounded)  
-      -   
-  
-Example  
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-  
-______________
-XML
-
-.. _host_lockdown_object:  
-  
-< host_lockdown_object >  
----------------------------------------------------------
-The host_lockdown_object element is used by the host_lockdown_test to define the object to be evaluated. Each object extends the standard ObjectType as defined in the oval-definitions-schema and one should refer to the ObjectType description for more information. The common set element allows complex objects to be created using filters and set logic. Again, please refer to the description of the set element in the oval-definitions-schema.
-
-**Extends:** oval-def:ObjectType
-
-Child Elements  
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-.. list-table:: Elements  
-    :header-rows: 1  
-  
-    * - Child Elements  
-      - Type (MinOccurs..MaxOccurs)  
-      - Desc.  
-    * - oval-def:filter  
-      - n/a (0..unbounded)  
-      -   
-  
-.. _host_lockdown_state:  
-  
-< host_lockdown_state >  
----------------------------------------------------------
-The host_lockdown_state details the values which may be applied to a given ESXi host's Lockdown mode configuration.
-
-**Extends:** oval-def:StateType
-
-Child Elements  
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-.. list-table:: Elements  
-    :header-rows: 1  
-  
-    * - Child Elements  
-      - Type (MinOccurs..MaxOccurs)  
-      - Desc.  
-    * - lockdown  
-      - esx-def:EntityStateLockdownType (0..1)  
-      - If lockdown mode is active, all management must be done from vCenter to ensure proper permissions and roles are being applied.  
-    * - lockdown_user  
-      - oval-def:EntityStateStringType (0..1)  
-      - The value identifying a user account that is allowed to connect when the ESXi host is in lockdown mode.  
-  
-______________
-  
-.. _host_firewallexception_test:  
-  
-< host_firewallexception_test >  
----------------------------------------------------------
-The host_firewallexception_test is used to collect ESXi firewall configuration information for an ESXi host. This test extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information. The required object element references a host_firewallexception_object and the optional state element specifies the metadata to check.
-
-**Extends:** oval-def:TestType
-
-Child Elements  
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-.. list-table:: Elements  
-    :header-rows: 1  
-  
-    * - Child Elements  
-      - Type (MinOccurs..MaxOccurs)  
-      - Desc.  
-    * - object  
-      - oval-def:ObjectRefType (1..1)  
-      -   
-    * - state  
-      - oval-def:StateRefType (0..unbounded)  
-      -   
-  
-Example  
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-  
-______________
-XML
-
-.. _host_firewallexception_object:  
-  
-< host_firewallexception_object >  
----------------------------------------------------------
-The host_firewallexception_object element is used by the host_firewallexception_test to define the object to be evaluated. Each object extends the standard ObjectType as defined in the oval-definitions-schema and one should refer to the ObjectType description for more information. The common set element allows complex objects to be created using filters and set logic. Again, please refer to the description of the set element in the oval-definitions-schema.
-
-**Extends:** oval-def:ObjectType
-
-Child Elements  
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-.. list-table:: Elements  
-    :header-rows: 1  
-  
-    * - Child Elements  
-      - Type (MinOccurs..MaxOccurs)  
-      - Desc.  
-    * - firewall_exception_name  
-      - oval-def:EntityObjectStringType (1..1)  
-      - Firewall exception name.  
-    * - oval-def:filter  
-      - n/a (0..unbounded)  
-      -   
-  
-.. _host_firewallexception_state:  
-  
-< host_firewallexception_state >  
----------------------------------------------------------
-The host_firewallexception_state details the values which may be applied to a given ESXi host's firewall configuration.
-
-**Extends:** oval-def:StateType
-
-Child Elements  
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-.. list-table:: Elements  
-    :header-rows: 1  
-  
-    * - Child Elements  
-      - Type (MinOccurs..MaxOccurs)  
-      - Desc.  
-    * - firewall_exception_name  
-      - oval-def:EntityStateStringType (0..1)  
-      - The name of the firewall exception  
-    * - exception_enabled  
-      - oval-def:EntityStateBoolType (0..1)  
-      - Whether or not the exception is enabled  
-    * - port  
-      - oval-def:EntityStateIntType (0..1)  
-      - The port number  
-    * - end_port  
-      - oval-def:EntityStateIntType (0..1)  
-      - For a port range, the ending port number  
-    * - direction  
-      - esx-def:EntityStateFirewallDirectionType (0..1)  
-      - The port direction  
-    * - protocol  
-      - oval-def:EntityStateStringType (0..1)  
-      - The protocols included in the firewall exception  
-    * - service_name  
-      - oval-def:EntityStateStringType (0..1)  
-      - The service associated with this firewall exception  
-    * - service_running  
-      - oval-def:EntityStateBoolType (0..1)  
-      - If the value is true, the specified firewall exceptions are enabled. If false, the firewall exceptions are disabled.  
-    * - allowed_hosts_all_ip  
-      - oval-def:EntityStateBoolType (0..1)  
-      - If the value is true, the specified firewall exceptions are valid for all ip addresses.  
-  
-______________
-  
-.. _host_busadapter_test:  
-  
-< host_busadapter_test >  
----------------------------------------------------------
-The host_busadapter_test is used to collect information about ESXi host bus adapters. This test extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information. The required object element references a host_busadapter_object and the optional state element specifies the metadata to check.
-
-**Extends:** oval-def:TestType
-
-Child Elements  
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-.. list-table:: Elements  
-    :header-rows: 1  
-  
-    * - Child Elements  
-      - Type (MinOccurs..MaxOccurs)  
-      - Desc.  
-    * - object  
-      - oval-def:ObjectRefType (1..1)  
-      -   
-    * - state  
-      - oval-def:StateRefType (0..unbounded)  
-      -   
-  
-Example  
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-  
-______________
-XML
-
-.. _host_busadapter_object:  
-  
-< host_busadapter_object >  
----------------------------------------------------------
-The host_busadapter_object element is used by the host_busadapter_test to define the object to be evaluated. Each object extends the standard ObjectType as defined in the oval-definitions-schema and one should refer to the ObjectType description for more information. The common set element allows complex objects to be created using filters and set logic. Again, please refer to the description of the set element in the oval-definitions-schema.
-
-**Extends:** oval-def:ObjectType
-
-Child Elements  
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-.. list-table:: Elements  
-    :header-rows: 1  
-  
-    * - Child Elements  
-      - Type (MinOccurs..MaxOccurs)  
-      - Desc.  
-    * - busadapter_type  
-      - esx-def:EntityObjectBusAdapterType (1..1)  
-      - Specify the type of the HBAs you want to retrieve. The valid values are Block, FibreChannel, iSCSI, and ParallelSCSI.  
-    * - oval-def:filter  
-      - n/a (0..unbounded)  
-      -   
-  
-.. _host_busadapter_state:  
-  
-< host_busadapter_state >  
----------------------------------------------------------
-The host_busadapter_state details the values which may be applied to a given ESXi host's bus adapters.
-
-**Extends:** oval-def:StateType
-
-Child Elements  
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-.. list-table:: Elements  
-    :header-rows: 1  
-  
-    * - Child Elements  
-      - Type (MinOccurs..MaxOccurs)  
-      - Desc.  
-    * - device_name  
-      - oval-def:EntityStateStringType (0..1)  
-      -   
-    * - busadapter_type  
-      - esx-def:EntityStateBusAdapterType (0..1)  
-      -   
-    * - busadapter_key  
-      - oval-def:EntityStateStringType (0..1)  
-      -   
-    * - busadapter_model  
-      - oval-def:EntityStateStringType (0..1)  
-      -   
-    * - busadapter_pci  
-      - oval-def:EntityStateStringType (0..1)  
-      -   
-    * - busadapter_driver  
-      - oval-def:EntityStateStringType (0..1)  
-      -   
-    * - busadapter_bus  
-      - oval-def:EntityStateIntType (0..1)  
-      -   
-    * - busadapter_status  
-      - oval-def:EntityStateStringType (0..1)  
-      -   
-    * - chap_type  
-      - oval-def:EntityStateStringType (0..1)  
-      -   
-    * - chap_name  
-      - oval-def:EntityStateStringType (0..1)  
-      -   
-    * - mutual_chap_enabled  
-      - oval-def:EntityStateBoolType (0..1)  
-      -   
-    * - mutual_chap_name  
-      - oval-def:EntityStateStringType (0..1)  
-      -   
-  
-______________
-  
-.. _host_vswitchpolicy_test:  
-  
-< host_vswitchpolicy_test >  
----------------------------------------------------------
-The host_vswitch_policy_test is used to collect information about various vSwitch policies on ESXi host vSwitches. This test extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information. The required object element references a host_vswitch_policy_object and the optional state element specifies the metadata to check.
-
-**Extends:** oval-def:TestType
-
-Child Elements  
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-.. list-table:: Elements  
-    :header-rows: 1  
-  
-    * - Child Elements  
-      - Type (MinOccurs..MaxOccurs)  
-      - Desc.  
-    * - object  
-      - oval-def:ObjectRefType (1..1)  
-      -   
-    * - state  
-      - oval-def:StateRefType (0..unbounded)  
-      -   
-  
-Example  
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-  
-______________
-XML
-
-.. _host_vswitchpolicy_object:  
-  
-< host_vswitchpolicy_object >  
----------------------------------------------------------
-The host_vswitch_policy_object element is used by the host_vswitch_policy_test to define the object to be evaluated. Each object extends the standard ObjectType as defined in the oval-definitions-schema and one should refer to the ObjectType description for more information. The common set element allows complex objects to be created using filters and set logic. Again, please refer to the description of the set element in the oval-definitions-schema.
-
-**Extends:** oval-def:ObjectType
-
-Child Elements  
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-.. list-table:: Elements  
-    :header-rows: 1  
-  
-    * - Child Elements  
-      - Type (MinOccurs..MaxOccurs)  
-      - Desc.  
-    * - vswitch_name  
-      - oval-def:EntityObjectStringType (1..1)  
-      - Specify the names of the virtual switches you want to retrieve.  
-    * - oval-def:filter  
-      - n/a (0..unbounded)  
-      -   
-  
-.. _host_vswitchpolicy_state:  
-  
-< host_vswitchpolicy_state >  
----------------------------------------------------------
-The host_vswitch_policy_state details the values which may be applied to the properties of an ESXi host's virtual switches.
-
-**Extends:** oval-def:StateType
-
-Child Elements  
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-.. list-table:: Elements  
-    :header-rows: 1  
-  
-    * - Child Elements  
-      - Type (MinOccurs..MaxOccurs)  
-      - Desc.  
-    * - vswitch_name  
-      - oval-def:EntityStateStringType (0..1)  
-      - Specify the names of the virtual switches you want to retrieve.  
-    * - mac_changes  
-      - esx-def:EntityStateAcceptRejectType (0..1)  
-      - Get the vSwitch MAC Address Change policy for each vSwitch.  
-    * - promiscuous_mode  
-      - esx-def:EntityStateAcceptRejectType (0..1)  
-      - Get the vSwitch Promiscuous Mode policy for each vSwitch.  
-    * - forged_transmits  
-      - esx-def:EntityStateAcceptRejectType (0..1)  
-      - Get the vSwitch Forged Transmits policy for each vSwitch  
-  
-.. _VMObjectBaseType:  
-  
-== VMObjectBaseType ==  
----------------------------------------------------------
-Base type for VM-based Objects
-
-**Extends:** oval-def:ObjectType
-
-Child Elements  
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-.. list-table:: Elements  
-    :header-rows: 1  
-  
-    * - Child Elements  
-      - Type (MinOccurs..MaxOccurs)  
-      - Desc.  
-    * - vm_name  
-      - oval-def:EntityObjectStringType (1..1)  
-      - The name of the Virtual Machine on the ESXi host for which to collect the device settings.  
-  
-.. _VMStateBaseType:  
-  
-== VMStateBaseType ==  
----------------------------------------------------------
-Base type for VM-based States
-
-**Extends:** oval-def:StateType
-
-Child Elements  
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-.. list-table:: Elements  
-    :header-rows: 1  
-  
-    * - Child Elements  
-      - Type (MinOccurs..MaxOccurs)  
-      - Desc.  
-    * - vm_name  
-      - oval-def:EntityStateStringType (0..1)  
-      - The name of the Virtual Machine on the ESXi host for which information is collected.  
-  
-______________
-  
-.. _vm_advancedsetting_test:  
-  
-< vm_advancedsetting_test >  
----------------------------------------------------------
-The vm_advancedsetting_test is used to collect information about various virtual machine settings on an ESXi host. This test extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information. The required object element references a vm_advancedsetting_object and the optional state element specifies the metadata to check.
-
-**Extends:** oval-def:TestType
-
-Child Elements  
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-.. list-table:: Elements  
-    :header-rows: 1  
-  
-    * - Child Elements  
-      - Type (MinOccurs..MaxOccurs)  
-      - Desc.  
-    * - object  
-      - oval-def:ObjectRefType (1..1)  
-      -   
-    * - state  
-      - oval-def:StateRefType (0..unbounded)  
-      -   
-  
-Example  
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-  
-______________
-XML
-
-.. _vm_advancedsetting_object:  
-  
-< vm_advancedsetting_object >  
----------------------------------------------------------
-The vm_advancedsetting_object element is used by the vm_advancedsetting_test to define the object to be evaluated. Each object extends the standard ObjectType as defined in the oval-definitions-schema and one should refer to the ObjectType description for more information. The common set element allows complex objects to be created using filters and set logic. Again, please refer to the description of the set element in the oval-definitions-schema.
-
-**Extends:** esx-def:VMObjectBaseType
-
-Child Elements  
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-.. list-table:: Elements  
-    :header-rows: 1  
-  
-    * - Child Elements  
-      - Type (MinOccurs..MaxOccurs)  
-      - Desc.  
-    * - advanced_setting_name  
-      - oval-def:EntityObjectStringType (1..1)  
-      - The name of the advanced setting to be collected  
-    * - oval-def:filter  
-      - n/a (0..unbounded)  
-      -   
-  
-.. _vm_advancedsetting_state:  
-  
-< vm_advancedsetting_state >  
----------------------------------------------------------
-The vm_advancedsetting_state details the values which may be applied to the properties of an ESXi host's virtual machines.
-
-**Extends:** esx-def:VMStateBaseType
-
-Child Elements  
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-.. list-table:: Elements  
-    :header-rows: 1  
-  
-    * - Child Elements  
-      - Type (MinOccurs..MaxOccurs)  
-      - Desc.  
-    * - advanced_setting_name  
-      - oval-def:EntityStateStringType (0..1)  
-      - The name of the advanced setting to be collected  
-    * - advanced_setting_value  
-      - oval-def:EntityStateAnySimpleType (0..1)  
-      - The advanced setting value  
-  
-.. _VMDeviceStateType:  
-  
-== VMDeviceStateType ==  
----------------------------------------------------------
-Base type for VM Devices
-
-**Extends:** esx-def:VMStateBaseType
-
-Child Elements  
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-.. list-table:: Elements  
-    :header-rows: 1  
-  
-    * - Child Elements  
-      - Type (MinOccurs..MaxOccurs)  
-      - Desc.  
-    * - device_type  
-      - esx-def:EntityStateVMDeviceType (0..1)  
-      - The device type; one of the values in the enumeration (floppy, cdrom, parallel, etc).  
-    * - device_name  
-      - oval-def:EntityStateStringType (0..1)  
-      - The name of the device  
-    * - allow_guest_control  
-      - oval-def:EntityStateBoolType (0..1)  
-      -   
-    * - connected  
-      - oval-def:EntityStateBoolType (0..1)  
-      -   
-    * - start_connected  
-      - oval-def:EntityStateBoolType (0..1)  
-      -   
-  
-______________
-  
-.. _vm_device_test:  
-  
-< vm_device_test >  
----------------------------------------------------------
-The vm_device_test is used to collect information about various virtual machine device settings on an ESXi host. This test extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information. The required object element references a vm_device_object and the optional state element specifies the metadata to check.
-
-**Extends:** oval-def:TestType
-
-Child Elements  
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-.. list-table:: Elements  
-    :header-rows: 1  
-  
-    * - Child Elements  
-      - Type (MinOccurs..MaxOccurs)  
-      - Desc.  
-    * - object  
-      - oval-def:ObjectRefType (1..1)  
-      -   
-    * - state  
-      - oval-def:StateRefType (0..unbounded)  
-      -   
-  
-Example  
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-  
-______________
-XML
-
-.. _vm_device_object:  
-  
-< vm_device_object >  
----------------------------------------------------------
-The vm_device_object element is used by the vm_device_test to define the object to be evaluated. Each object extends the standard ObjectType as defined in the oval-definitions-schema and one should refer to the ObjectType description for more information. The common set element allows complex objects to be created using filters and set logic. Again, please refer to the description of the set element in the oval-definitions-schema.
-
-**Extends:** esx-def:VMObjectBaseType
-
-Child Elements  
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-.. list-table:: Elements  
-    :header-rows: 1  
-  
-    * - Child Elements  
-      - Type (MinOccurs..MaxOccurs)  
-      - Desc.  
-    * - device_type  
-      - esx-def:EntityObjectVMDeviceType (1..1)  
-      - The device type; one of the values in the enumeration (floppy, cdrom, parallel, etc).  
-    * - oval-def:filter  
-      - n/a (0..unbounded)  
-      -   
-  
-.. _vm_device_state:  
-  
-< vm_device_state >  
----------------------------------------------------------
-The vm_device_state details the values which may be applied to the properties of devices attached to an ESXi host's virtual machines.
-
-**Extends:** esx-def:VMDeviceStateType
-
-______________
-  
-.. _vm_harddiskdevice_test:  
-  
-< vm_harddiskdevice_test >  
----------------------------------------------------------
-The vm_harddisk_device_test is used to collect information about hard disk device settings on an ESXi host. This test extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information. The required object element references a vm_harddisk_device_object and the optional state element specifies the metadata to check.
-
-**Extends:** oval-def:TestType
-
-Child Elements  
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-.. list-table:: Elements  
-    :header-rows: 1  
-  
-    * - Child Elements  
-      - Type (MinOccurs..MaxOccurs)  
-      - Desc.  
-    * - object  
-      - oval-def:ObjectRefType (1..1)  
-      -   
-    * - state  
-      - oval-def:StateRefType (0..unbounded)  
-      -   
-  
-Example  
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-  
-______________
-XML
-
-.. _vm_harddiskdevice_object:  
-  
-< vm_harddiskdevice_object >  
----------------------------------------------------------
-The vm_harddisk_device_object element is used by the vm_harddisk_device_test to define the object to be evaluated. Each object extends the standard ObjectType as defined in the oval-definitions-schema and one should refer to the ObjectType description for more information. The common set element allows complex objects to be created using filters and set logic. Again, please refer to the description of the set element in the oval-definitions-schema.
-
-**Extends:** esx-def:VMObjectBaseType
-
-Child Elements  
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-.. list-table:: Elements  
-    :header-rows: 1  
-  
-    * - Child Elements  
-      - Type (MinOccurs..MaxOccurs)  
-      - Desc.  
-    * - oval-def:filter  
-      - n/a (0..unbounded)  
-      -   
-  
-.. _vm_harddiskdevice_state:  
-  
-< vm_harddiskdevice_state >  
----------------------------------------------------------
-The vm_harddisk_device_state details the values which may be applied to the properties of hard disk devices attached to an ESXi host's virtual machines.
-
-**Extends:** esx-def:VMDeviceStateType
-
-Child Elements  
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-.. list-table:: Elements  
-    :header-rows: 1  
-  
-    * - Child Elements  
-      - Type (MinOccurs..MaxOccurs)  
-      - Desc.  
-    * - persistence  
-      - esx-def:EntityStateVMDevicePersistenceType (0..1)  
-      - The persistence policy (Persistent, NonPersistent, Undoable, IndependentPersistent, IndependentNonPersistent, or Unknown  
-  
-______________
-  
-.. _host_portgroup_test:  
-  
-< host_portgroup_test >  
----------------------------------------------------------
-The host_portgroup_test is used to retrieve the available port groups of hosts, virtual machines, and virtual switches. This test extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information. The required object element references a host_portgroup_object and the optional state element specifies the metadata to check.
-
-**Extends:** oval-def:TestType
-
-Child Elements  
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-.. list-table:: Elements  
-    :header-rows: 1  
-  
-    * - Child Elements  
-      - Type (MinOccurs..MaxOccurs)  
-      - Desc.  
-    * - object  
-      - oval-def:ObjectRefType (1..1)  
-      -   
-    * - state  
-      - oval-def:StateRefType (0..unbounded)  
-      -   
-  
-Example  
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-  
-______________
-XML
-
-.. _host_portgroup_object:  
-  
-< host_portgroup_object >  
----------------------------------------------------------
-The host_portgroup_object element is used by the host_portgroup_test to define the object to be evaluated. Each object extends the standard ObjectType as defined in the oval-definitions-schema and one should refer to the ObjectType description for more information. The common set element allows complex objects to be created using filters and set logic. Again, please refer to the description of the set element in the oval-definitions-schema.
-
-**Extends:** oval-def:ObjectType
-
-Child Elements  
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-.. list-table:: Elements  
-    :header-rows: 1  
-  
-    * - Child Elements  
-      - Type (MinOccurs..MaxOccurs)  
-      - Desc.  
-    * - port_group_name  
-      - oval-def:EntityObjectStringType (1..1)  
-      - Specify the names of the port groups you want to retrieve.  
-    * - virtual_switch_name  
-      - oval-def:EntityObjectStringType (1..1)  
-      - Specify the virtual switches for which you want to retrieve their port groups.  
-    * - oval-def:filter  
-      - n/a (0..unbounded)  
-      -   
-  
-.. _host_portgroup_state:  
-  
-< host_portgroup_state >  
----------------------------------------------------------
-The host_portgroup_state details the values which may be applied to the port groups of hosts, virtual machines, and virtual switches.
-
-**Extends:** oval-def:StateType
-
-Child Elements  
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-.. list-table:: Elements  
-    :header-rows: 1  
-  
-    * - Child Elements  
-      - Type (MinOccurs..MaxOccurs)  
-      - Desc.  
-    * - port_group_name  
-      - oval-def:EntityStateStringType (0..1)  
-      - The names of the port groups you want to retrieve  
-    * - virtual_switch_name  
-      - oval-def:EntityStateStringType (0..1)  
-      - The virtual switches for which you want to retrieve their port groups.  
-    * - vlan_id  
-      - oval-def:EntityStateIntType (0..1)  
-      - The ID of the VLan  
-  
-______________
-  
-.. _vds_test:  
-  
-< vds_test >  
----------------------------------------------------------
-This test extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information. The required object element references a vds_object and the optional state element specifies the metadata to check.
-
-**Extends:** oval-def:TestType
-
-Child Elements  
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-.. list-table:: Elements  
-    :header-rows: 1  
-  
-    * - Child Elements  
-      - Type (MinOccurs..MaxOccurs)  
-      - Desc.  
-    * - object  
-      - oval-def:ObjectRefType (1..1)  
-      -   
-    * - state  
-      - oval-def:StateRefType (0..unbounded)  
-      -   
-  
-Example  
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-  
-______________
-XML
-
-.. _vds_object:  
-  
-< vds_object >  
----------------------------------------------------------
-The vds_object element is used by the vds_test to define the object to be evaluated. Each object extends the standard ObjectType as defined in the oval-definitions-schema and one should refer to the ObjectType description for more information. The common set element allows complex objects to be created using filters and set logic. Again, please refer to the description of the set element in the oval-definitions-schema.
-
-**Extends:** oval-def:ObjectType
-
-Child Elements  
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-.. list-table:: Elements  
-    :header-rows: 1  
-  
-    * - Child Elements  
-      - Type (MinOccurs..MaxOccurs)  
-      - Desc.  
-    * - vds_name  
-      - oval-def:EntityObjectStringType (1..1)  
-      - The name of a vSphere Distributed Switch  
-    * - oval-def:filter  
-      - n/a (0..unbounded)  
-      -   
-  
-.. _vds_state:  
-  
-< vds_state >  
----------------------------------------------------------
-The vds_state details the values which may be applied to vSphere Distributed Switch.
-
-**Extends:** oval-def:StateType
-
-Child Elements  
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-.. list-table:: Elements  
-    :header-rows: 1  
-  
-    * - Child Elements  
-      - Type (MinOccurs..MaxOccurs)  
-      - Desc.  
-    * - vds_name  
-      - oval-def:EntityStateStringType (0..1)  
-      - The name of a vSphere Distributed Switch  
-    * - vlan_mtu_health_check_enabled  
-      - oval-def:EntityStateBoolType (0..1)  
-      - VLAN and MTU Health Check enabled?  
-    * - teaming_failover_health_check_enabled  
-      - oval-def:EntityStateBoolType (0..1)  
-      - Teaming and Failover Health Check enabled?  
-  
-______________
-  
-.. _vds_portgroup_test:  
-  
-< vds_portgroup_test >  
----------------------------------------------------------
-This test extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information. The required object element references a vds_portgroup_object and the optional state element specifies the metadata to check.
-
-**Extends:** oval-def:TestType
-
-Child Elements  
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-.. list-table:: Elements  
-    :header-rows: 1  
-  
-    * - Child Elements  
-      - Type (MinOccurs..MaxOccurs)  
-      - Desc.  
-    * - object  
-      - oval-def:ObjectRefType (1..1)  
-      -   
-    * - state  
-      - oval-def:StateRefType (0..unbounded)  
-      -   
-  
-Example  
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-  
-______________
-XML
-
-.. _vds_portgroup_object:  
-  
-< vds_portgroup_object >  
----------------------------------------------------------
-The vds_portgroup_object element is used by the vds_portgroup_test to define the object to be evaluated. Each object extends the standard ObjectType as defined in the oval-definitions-schema and one should refer to the ObjectType description for more information. The common set element allows complex objects to be created using filters and set logic. Again, please refer to the description of the set element in the oval-definitions-schema.
-
-**Extends:** oval-def:ObjectType
-
-Child Elements  
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-.. list-table:: Elements  
-    :header-rows: 1  
-  
-    * - Child Elements  
-      - Type (MinOccurs..MaxOccurs)  
-      - Desc.  
-    * - vds_name  
-      - oval-def:EntityObjectStringType (1..1)  
-      - The name of a vSphere Distributed Switch  
-    * - portgroup_name  
-      - oval-def:EntityObjectStringType (1..1)  
-      - The name of a vSphere Distributed port group  
-    * - oval-def:filter  
-      - n/a (0..unbounded)  
-      -   
-  
-.. _vds_portgroup_state:  
-  
-< vds_portgroup_state >  
----------------------------------------------------------
-The vds_portgroup_state details the values which may be applied to vSphere Distributed Switch portgroup.
-
-**Extends:** oval-def:StateType
-
-Child Elements  
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-.. list-table:: Elements  
-    :header-rows: 1  
-  
-    * - Child Elements  
-      - Type (MinOccurs..MaxOccurs)  
-      - Desc.  
-    * - vds_name  
-      - oval-def:EntityStateStringType (0..1)  
-      - The name of a vSphere Distributed Switch  
-    * - portgroup_name  
-      - oval-def:EntityStateStringType (0..1)  
-      - The name of a vSphere Distributed port group  
-    * - collector_ip_address  
-      - oval-def:EntityStateIPAddressType (0..1)  
-      - Authorized collector IP Address to which Virtual Disributed Switch Netflow traffic is sent  
-    * - collector_port  
-      - oval-def:EntityStateIntType (0..1)  
-      - Authorized collector Port to which Virtual Disributed Switch Netflow traffic is sent  
-    * - override_port_policies_enabled  
-      - oval-def:EntityStateBoolType (0..1)  
-      - Port-level configuration overrides enabled?  
-  
-.. _EntityStateAcceptanceLevelType:  
-  
-== EntityStateAcceptanceLevelType ==  
----------------------------------------------------------
-
+The EntityStateClassificationType complex type restricts a string value to a specific set of values that describe the classification of a given ESX Server patch. The empty string is also allowed to support an empty element associated with variable references. Note that when using pattern matches and variables care must be taken to ensure that the regular expression and variable values align with the enumerated values.
 
 **Restricts:** oval-def:EntityStateStringType
 
@@ -1741,24 +424,22 @@ Child Elements
   
     * - Value  
       - Description  
-    * - VMwareCertified  
-      - | Created, tested and signed by VMware  
-    * - VMwareAccepted  
-      - | Created by a VMware partner but tested and signed by VMware  
-    * - PartnerSupported  
-      - | Created, tested and signed by a certified VMware partner  
-    * - CommunitySupported  
-      - | Not been tested by VMware or a VMware partner  
-    * - Unknown  
-      - | Unknown  
+    * - B  
+      - | Bug patches fix minor flaws that affect product functionality or behavior. Bug patches are optional. Before they are applied, one should determine whether they are necessary for your environment.  
+    * - R  
+      - | Roll‐up patches contain any number of bundles for ESX Server 3.0.3 or ESX Server 3.5 hosts. They can contain bug patches, update patches, and security patches. They do not contain upgrade bundles for minor releases or update bundles for maintenance releases.  
+    * - S  
+      - | Security patches fix one or more potential security vulnerabilities in the product. They should be implemented immediately to prevent the vulnerabilities from being exploited.  
+    * - U  
+      - | Update patches can contain new driver updates and small non‐intrusive enhancements. Before they are applied, one should determine whether they are necessary for your environment.  
     * -   
-      - | The empty string value is permitted here to allow for empty elements associated with variable references.  
+      - | The empty string is also allowed to support an empty element associated with variable references.  
   
-.. _EntityStateFirewallDirectionType:  
+.. _EntityStateSupportLevelType:  
   
-== EntityStateFirewallDirectionType ==  
+== EntityStateSupportLevelType ==  
 ---------------------------------------------------------
-
+The EntityStateSupportLevelType complex type restricts a string value to a specific set of values that describe the support level of a given ESX Server patch. The empty string is also allowed to support an empty element associated with variable references. Note that when using pattern matches and variables care must be taken to ensure that the regular expression and variable values align with the enumerated values.
 
 **Restricts:** oval-def:EntityStateStringType
 
@@ -1767,242 +448,14 @@ Child Elements
   
     * - Value  
       - Description  
-    * - inbound  
-      - | inbound  
-    * - outbound  
-      - | outbound  
+    * - C  
+      - | Custom patches are special fixes provided to a customer. They are usually specific to customer's environment, and are most likely not required by customers not reporting the issue. Custom patches have been tested in the customer's environment.  
+    * - D  
+      - | Debugging patches are released to all customers and are used by VMware to troubleshoot complex product issues. They can contain debug messages and code, and drivers. Debugging patches usually require VMware assistance to install.  
+    * - G  
+      - | GA patches are released to all customers and have been thoroughly tested. They contain fixes for ESX Server 3 software issues.  
+    * - H  
+      - | Hot patches are released to specific customers for solving critical problems specific to their environment. They contain fixes for security issues or problems that can potentially cause data loss or severe service disruptions. Hot patches should be implemented immediately.  
     * -   
-      - | The empty string value is permitted here to allow for empty elements associated with variable references.  
-  
-.. _EntityStateLockdownType:  
-  
-== EntityStateLockdownType ==  
----------------------------------------------------------
-
-
-**Restricts:** oval-def:EntityStateStringType
-
-.. list-table:: Enumeration Values  
-    :header-rows: 1  
-  
-    * - Value  
-      - Description  
-    * - disabled  
-      - | disabled  
-    * - normal  
-      - | normal  
-    * - strict  
-      - | strict  
-    * -   
-      - | The empty string value is permitted here to allow for empty elements associated with variable references.  
-  
-.. _EntityObjectVMDeviceType:  
-  
-== EntityObjectVMDeviceType ==  
----------------------------------------------------------
-
-
-**Restricts:** oval-def:EntityObjectStringType
-
-.. list-table:: Enumeration Values  
-    :header-rows: 1  
-  
-    * - Value  
-      - Description  
-    * - floppy  
-      - | Floppy Devices  
-    * - cdrom  
-      - | CDROM Devices  
-    * - parallel_port  
-      - | Parallel Ports  
-    * - serial_port  
-      - | Serial Ports  
-    * - usb  
-      - | USB Devices  
-    * - hard_disk  
-      - | Hard Disk Drives  
-  
-.. _EntityStateVMDeviceType:  
-  
-== EntityStateVMDeviceType ==  
----------------------------------------------------------
-
-
-**Restricts:** oval-def:EntityStateStringType
-
-.. list-table:: Enumeration Values  
-    :header-rows: 1  
-  
-    * - Value  
-      - Description  
-    * - floppy  
-      - | Floppy Devices  
-    * - cdrom  
-      - | CDROM Devices  
-    * - parallel_port  
-      - | Parallel Ports  
-    * - serial_port  
-      - | Serial Ports  
-    * - usb  
-      - | USB Devices  
-    * - hard_disk  
-      - | Hard Disk Drives  
-    * -   
-      - | The empty string value is permitted here to allow for empty elements associated with variable references.  
-  
-.. _EntityStateVMDevicePersistenceType:  
-  
-== EntityStateVMDevicePersistenceType ==  
----------------------------------------------------------
-
-
-**Restricts:** oval-def:EntityStateStringType
-
-.. list-table:: Enumeration Values  
-    :header-rows: 1  
-  
-    * - Value  
-      - Description  
-    * - Persistent  
-      - | Persistent  
-    * - NonPersistent  
-      - | NonPersistent  
-    * - Undoable  
-      - | Undoable  
-    * - IndependentPersistent  
-      - | IndependentPersistent  
-    * - IndependentNonPersistent  
-      - | IndependentNonPersistent  
-    * - Append  
-      - | Append  
-    * -   
-      - | The empty string value is permitted here to allow for empty elements associated with variable references.  
-  
-.. _EntityObjectBusAdapterType:  
-  
-== EntityObjectBusAdapterType ==  
----------------------------------------------------------
-The EntityObjectBusAdapterType restricts a string value to a specific set of values: block, fibrechannel, iscsi, and parallelscsi. These values describe the different host bus adapter types on an ESXi server. The empty string is also allowed to support empty element associated with variable references. Note that when using pattern matches and variables care must be taken to ensure that the regular expression and variable values align with the enumerated values.
-
-**Restricts:** oval-def:EntityObjectStringType
-
-.. list-table:: Enumeration Values  
-    :header-rows: 1  
-  
-    * - Value  
-      - Description  
-    * - Block  
-      - | Block  
-    * - FibreChannel  
-      - | FibreChannel  
-    * - IScsi  
-      - | iSCSI  
-    * - ParallelScsi  
-      - | Parallel SCSI  
-    * -   
-      - | The empty string value is permitted here to allow for empty elements associated with variable references.  
-  
-.. _EntityStateBusAdapterType:  
-  
-== EntityStateBusAdapterType ==  
----------------------------------------------------------
-
-
-**Restricts:** oval-def:EntityStateStringType
-
-.. list-table:: Enumeration Values  
-    :header-rows: 1  
-  
-    * - Value  
-      - Description  
-    * - Block  
-      - | Block  
-    * - FibreChannel  
-      - | FibreChannel  
-    * - IScsi  
-      - | iSCSI  
-    * - ParallelScsi  
-      - | Parallel SCSI  
-    * -   
-      - | The empty string value is permitted here to allow for empty elements associated with variable references.  
-  
-.. _EntityStateAcceptRejectType:  
-  
-== EntityStateAcceptRejectType ==  
----------------------------------------------------------
-
-
-**Restricts:** oval-def:EntityStateStringType
-
-.. list-table:: Enumeration Values  
-    :header-rows: 1  
-  
-    * - Value  
-      - Description  
-    * - Accept  
-      - | Accept Policy Changes  
-    * - Reject  
-      - | Reject Policy Changes  
-    * -   
-      - | The empty string value is permitted here to allow for empty elements associated with variable references.  
-  
-.. _EntityObjectDomainMembershipStatusType:  
-  
-== EntityObjectDomainMembershipStatusType ==  
----------------------------------------------------------
-
-
-**Restricts:** oval-def:EntityObjectStringType
-
-.. list-table:: Enumeration Values  
-    :header-rows: 1  
-  
-    * - Value  
-      - Description  
-    * - ClientTrustBroken  
-      - | ClientTrustBroken  
-    * - InconsistentTrust  
-      - | InconsistentTrust  
-    * - NoServers  
-      - | NoServers  
-    * - Ok  
-      - | Ok  
-    * - OtherProblem  
-      - | OtherProblem  
-    * - ServerTrustBroken  
-      - | ServerTrustBroken  
-    * - Unknown  
-      - | Unknown  
-    * -   
-      - | The empty string value is permitted here to allow for empty elements associated with variable references.  
-  
-.. _EntityStateDomainMembershipStatusType:  
-  
-== EntityStateDomainMembershipStatusType ==  
----------------------------------------------------------
-
-
-**Restricts:** oval-def:EntityStateStringType
-
-.. list-table:: Enumeration Values  
-    :header-rows: 1  
-  
-    * - Value  
-      - Description  
-    * - ClientTrustBroken  
-      - | ClientTrustBroken  
-    * - InconsistentTrust  
-      - | InconsistentTrust  
-    * - NoServers  
-      - | NoServers  
-    * - Ok  
-      - | Ok  
-    * - OtherProblem  
-      - | OtherProblem  
-    * - ServerTrustBroken  
-      - | ServerTrustBroken  
-    * - Unknown  
-      - | Unknown  
-    * -   
-      - | The empty string value is permitted here to allow for empty elements associated with variable references.  
+      - | The empty string is also allowed to support an empty element associated with variable references.  
   

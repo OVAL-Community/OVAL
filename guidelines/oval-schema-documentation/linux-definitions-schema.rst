@@ -1,8 +1,8 @@
 Open Vulnerability and Assessment Language: Linux Definition  
 =========================================================
 * Schema: Linux Definition  
-* Version: 6.0  
-* Release Date: 1/24/2025 09:00:00 AM
+* Version: 5.12.1  
+* Release Date: 05/23/2025 09:00:00 AM
 
 The following is a description of the elements, types, and attributes that compose the Linux specific tests found in Open Vulnerability and Assessment Language (OVAL). Each test is an extension of the standard test element defined in the Core Definition Schema. Through extension, each test inherits a set of elements and attributes that are shared amongst all OVAL tests. Each test is described in detail and should provide the information necessary to understand what each element and attribute represents. This document is intended for developers and assumes some familiarity with XML. A high level description of the interaction between the different tests and their relationship to the Core Definition Schema is not outlined here.
 
@@ -12,15 +12,18 @@ Test Listing
 ---------------------------------------------------------
 * :ref:`apparmorstatus_test`  
 * :ref:`dpkginfo_test`  
+* :ref:`iflisteners_test` (Deprecated)  
 * :ref:`inetlisteningservers_test`  
 * :ref:`kernelmodule_test`  
 * :ref:`partition_test`  
 * :ref:`rpminfo_test`  
+* :ref:`rpmverify_test` (Deprecated)  
 * :ref:`rpmverifyfile_test`  
 * :ref:`rpmverifypackage_test`  
 * :ref:`selinuxboolean_test`  
 * :ref:`selinuxsecuritycontext_test`  
 * :ref:`sestatus_test`  
+* :ref:`slackwarepkginfo_test` (Deprecated)  
 * :ref:`systemdunitdependency_test`  
 * :ref:`systemdunitproperty_test`  
   
@@ -179,6 +182,95 @@ Child Elements
     * - evr  
       - Restriction of oval-def:EntityStateAnySimpleType. See schema for details. (0..1)  
       - This represents the epoch, upstream_version, and debian_revision fields, for a Debian package, as a single version string. It has the form "EPOCH:UPSTREAM_VERSION-DEBIAN_REVISION". Note that a null epoch (or '(none)' as returned by dpkg) is equivalent to '0' and would hence have the form 0:UPSTREAM_VERSION-DEBIAN_REVISION.  
+  
+______________
+  
+.. _iflisteners_test:  
+  
+< iflisteners_test > (Deprecated)  
+---------------------------------------------------------
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* Deprecated As Of Version 5.12  
+* Reason:   
+* Comment: This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.  
+  
+The iflisteners_test is used to check what applications such as packet sniffers that are bound to an interface on the system. This is limited to applications that are listening on AF_PACKET sockets. Furthermore, only applications bound to an ethernet interface should be collected. It extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information. The required object element references an iflisteners_object and the optional iflisteners_state element specifies the data to check.
+
+**Extends:** oval-def:TestType
+
+Child Elements  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. list-table:: Elements  
+    :header-rows: 1  
+  
+    * - Child Elements  
+      - Type (MinOccurs..MaxOccurs)  
+      - Desc.  
+    * - object  
+      - oval-def:ObjectRefType (1..1)  
+      -   
+    * - state  
+      - oval-def:StateRefType (0..unbounded)  
+      -   
+  
+.. _iflisteners_object:  
+  
+< iflisteners_object >  
+---------------------------------------------------------
+The iflisteners_object element is used by an iflisteners_test to define the specific interface to be evaluated. Each object extends the standard ObjectType as defined in the oval-definitions-schema and one should refer to the ObjectType description for more information. The common set element allows complex objects to be created using filters and set logic. Again, please refer to the description of the set element in the oval-definitions-schema.
+
+**Extends:** oval-def:ObjectType
+
+Child Elements  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. list-table:: Elements  
+    :header-rows: 1  
+  
+    * - Child Elements  
+      - Type (MinOccurs..MaxOccurs)  
+      - Desc.  
+    * - interface_name  
+      - oval-def:EntityObjectStringType (1..1)  
+      - The interface_name entity specifies the name of the interface (eth0, eth1, fw0, etc.) to check.  
+    * - oval-def:filter  
+      - n/a (0..unbounded)  
+      -   
+  
+.. _iflisteners_state:  
+  
+< iflisteners_state >  
+---------------------------------------------------------
+The iflisteners_state element defines the different information that can be used to evaluate the specified applications that are listening on interfaces on the system. This includes the interface name, protocol, hardware address, program name, pid, and user id. Please refer to the individual elements in the schema for more details about what each represents.
+
+**Extends:** oval-def:StateType
+
+Child Elements  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. list-table:: Elements  
+    :header-rows: 1  
+  
+    * - Child Elements  
+      - Type (MinOccurs..MaxOccurs)  
+      - Desc.  
+    * - interface_name  
+      - oval-def:EntityStateStringType (0..1)  
+      - This is the name of the interface (eth0, eth1, fw0, etc.).  
+    * - protocol  
+      - linux-def:EntityStateProtocolType (0..1)  
+      - This is the physical layer protocol used by the AF_PACKET socket.  
+    * - hw_address  
+      - oval-def:EntityStateStringType (0..1)  
+      - This is the hardware address associated with the interface.  
+    * - program_name  
+      - oval-def:EntityStateStringType (0..1)  
+      - This is the name of the communicating program.  
+    * - pid  
+      - oval-def:EntityStateIntType (0..1)  
+      - The pid is the process ID of a specific process.  
+    * - user_id  
+      - oval-def:EntityStateIntType (0..1)  
+      - The numeric user id, or uid, is the third column of each user's entry in /etc/passwd. It represents the owner, and thus privilege level, of the specified program.  
   
 ______________
   
@@ -578,6 +670,216 @@ Attributes
   
 ______________
   
+.. _rpmverify_test:  
+  
+< rpmverify_test > (Deprecated)  
+---------------------------------------------------------
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* Deprecated As Of Version 5.12  
+* Reason:   
+* Comment: This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.  
+  
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* Deprecated As Of Version 5.10  
+* Reason: Replaced by the rpmverifyfile_test and the rpmverifypackage_test. The rpmverify_test was split into two tests to distinguish between the verification of the files in an rpm and the verification of an rpm as a whole. By making this distinction, content authoring is simplified and information is no longer duplicated across items. See the rpmverifyfile_test and rpmverifypackage_test.  
+* Comment: This test has been deprecated and will be removed in version 6.0 of the language.  
+  
+The rpmverify_test is used to verify the integrity of installed RPMs. This test aligns with the rpm -V command for verifying RPMs. It extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information. The required object element references a rpmverify_object and the optional state element specifies the data to check.
+
+**Extends:** oval-def:TestType
+
+Child Elements  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. list-table:: Elements  
+    :header-rows: 1  
+  
+    * - Child Elements  
+      - Type (MinOccurs..MaxOccurs)  
+      - Desc.  
+    * - object  
+      - oval-def:ObjectRefType (1..1)  
+      -   
+    * - state  
+      - oval-def:StateRefType (0..unbounded)  
+      -   
+  
+.. _rpmverify_object:  
+  
+< rpmverify_object > (Deprecated)  
+---------------------------------------------------------
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* Deprecated As Of Version 5.10  
+* Reason: Replaced by the rpmverifyfile_object and rpmverifypackage_object. The rpmverify_test was split into two tests to distinguish between the verification of the files in an rpm and the verification of an rpm as a whole. By making this distinction, content authoring is simplified and information is no longer duplicated across items. See the rpmverifyfile_object and rpmverifypackage_object.  
+* Comment: This object has been deprecated and will be removed in version 6.0 of the language.  
+  
+The rpmverify_object element is used by a rpmverify_test to define a set of files within a set of RPMs to verify. Each object extends the standard ObjectType as defined in the oval-definitions-schema and one should refer to the ObjectType description for more information. The common set element allows complex objects to be created using filters and set logic. Again, please refer to the description of the set element in the oval-definitions-schema.
+
+**Extends:** oval-def:ObjectType
+
+Child Elements  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. list-table:: Elements  
+    :header-rows: 1  
+  
+    * - Child Elements  
+      - Type (MinOccurs..MaxOccurs)  
+      - Desc.  
+    * - behaviors  
+      - linux-def:RpmVerifyBehaviors (0..1)  
+      -   
+    * - name  
+      - oval-def:EntityObjectStringType (1..1)  
+      - This is the package name to check.  
+    * - filepath  
+      - oval-def:EntityObjectStringType (1..1)  
+      - The filepath element specifies the absolute path for a file or directory in the specified package.  
+    * - oval-def:filter  
+      - n/a (0..unbounded)  
+      -   
+  
+.. _rpmverify_state:  
+  
+< rpmverify_state > (Deprecated)  
+---------------------------------------------------------
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* Deprecated As Of Version 5.10  
+* Reason: Replaced by the rpmverifyfile_state and rpmverifypackage_state. The rpmverify_test was split into two tests to distinguish between the verification of the files in an rpm and the verification of an rpm as a whole. By making this distinction, content authoring is simplified and information is no longer duplicated across items. See the rpmverifyfile_state and rpmverifypackage_state.  
+* Comment: This state has been deprecated and will be removed in version 6.0 of the language.  
+  
+The rpmverify_state element defines the different information that can be used to evaluate the specified rpm. This includes the architecture, epoch number, and version numbers. Most of this information can be obtained through the rpm function. Please refer to the individual elements in the schema for more details about what each represents.
+
+**Extends:** oval-def:StateType
+
+Child Elements  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. list-table:: Elements  
+    :header-rows: 1  
+  
+    * - Child Elements  
+      - Type (MinOccurs..MaxOccurs)  
+      - Desc.  
+    * - name  
+      - oval-def:EntityStateStringType (0..1)  
+      - This is the package name to check.  
+    * - filepath  
+      - oval-def:EntityStateStringType (0..1)  
+      - The filepath element specifies the absolute path for a file or directory in the specified package.  
+    * - size_differs  
+      - linux-def:EntityStateRpmVerifyResultType (0..1)  
+      - The size_differs entity aligns with the first character ('S' flag) in the character string in the output generated by running rpm –V on a specific file.  
+    * - mode_differs  
+      - linux-def:EntityStateRpmVerifyResultType (0..1)  
+      - The mode_differs entity aligns with the second character ('M' flag) in the character string in the output generated by running rpm –V on a specific file.  
+    * - md5_differs  
+      - linux-def:EntityStateRpmVerifyResultType (0..1)  
+      - The md5_differs entity aligns with the third character ('5' flag) in the character string in the output generated by running rpm –V on a specific file.  
+    * - device_differs  
+      - linux-def:EntityStateRpmVerifyResultType (0..1)  
+      - The device_differs entity aligns with the fourth character ('D' flag) in the character string in the output generated by running rpm –V on a specific file.  
+    * - link_mismatch  
+      - linux-def:EntityStateRpmVerifyResultType (0..1)  
+      - The link_mismatch entity aligns with the fifth character ('L' flag) in the character string in the output generated by running rpm –V on a specific file.  
+    * - ownership_differs  
+      - linux-def:EntityStateRpmVerifyResultType (0..1)  
+      - The ownership_differs entity aligns with the sixth character ('U' flag) in the character string in the output generated by running rpm –V on a specific file.  
+    * - group_differs  
+      - linux-def:EntityStateRpmVerifyResultType (0..1)  
+      - The group_differs entity aligns with the seventh character ('U' flag) in the character string in the output generated by running rpm –V on a specific file.  
+    * - mtime_differs  
+      - linux-def:EntityStateRpmVerifyResultType (0..1)  
+      - The mtime_differs entity aligns with the eighth character ('T' flag) in the character string in the output generated by running rpm –V on a specific file.  
+    * - capabilities_differ  
+      - linux-def:EntityStateRpmVerifyResultType (0..1)  
+      - The size_differs entity aligns with the ninth character ('P' flag) in the character string in the output generated by running rpm –V on a specific file.  
+    * - configuration_file  
+      - oval-def:EntityStateBoolType (0..1)  
+      - The configuration_file entity represents the configuration file attribute marker that may be present on a file.  
+    * - documentation_file  
+      - oval-def:EntityStateBoolType (0..1)  
+      - The documentation_file entity represents the documenation file attribute marker that may be present on a file.  
+    * - ghost_file  
+      - oval-def:EntityStateBoolType (0..1)  
+      - The ghost_file entity represents the ghost file attribute marker that may be present on a file.  
+    * - license_file  
+      - oval-def:EntityStateBoolType (0..1)  
+      - The license_file entity represents the license file attribute marker that may be present on a file.  
+    * - readme_file  
+      - oval-def:EntityStateBoolType (0..1)  
+      - The readme_file entity represents the readme file attribute marker that may be present on a file.  
+  
+.. _RpmVerifyBehaviors:  
+  
+== RpmVerifyBehaviors == (Deprecated)  
+---------------------------------------------------------
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* Deprecated As Of Version 5.10  
+* Reason: Replaced by the RpmVerifyFileBehaviors and the RpmVerifyPackageBehaviors. The RpmVerifyBehaviors complex type is used by the rpmverify_test which was split into two tests to distinguish between the verification of the files in an rpm and the verification of an rpm as a whole. By making this distinction, content authoring is simplified and information is no longer duplicated across items. The new tests utilize the RpmVerifyFileBehaviors and RpmVerifyPackageBehaviors complex types, and as a result, the RpmVerifyBehaviors complex type is no longer needed.  
+* Comment: This complex type has been deprecated and will be removed in version 6.0 of the language.  
+  
+The RpmVerifyBehaviors complex type defines a set of behaviors that for controlling how installed rpms are verified. These behaviors align with the verify-options of the rpm command with the addition of two behaviors that will indicate that a file with a given attribute marker should not be collected.
+
+Attributes  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. list-table:: Attributes  
+    :header-rows: 1  
+  
+    * - Attribute  
+      - Type  
+      - Desc.  
+    * - nodeps  
+      - xsd:boolean (optional *default*='false')  
+      - 'nodeps' when true this behavior means, don't verify dependencies of packages.  
+    * - nodigest  
+      - xsd:boolean (optional *default*='false')  
+      - 'nodigest' when true this behavior means, don't verify package or header digests when reading.  
+    * - nofiles  
+      - xsd:boolean (optional *default*='false')  
+      - 'nofiles' when true this behavior means, don't verify any attributes of package files.  
+    * - noscripts  
+      - xsd:boolean (optional *default*='false')  
+      - 'noscripts' when true this behavior means, don't execute the %verifyscript scriptlet (if any).  
+    * - nosignature  
+      - xsd:boolean (optional *default*='false')  
+      - 'nosignature' when true this behavior means, don't verify package or header signatures when reading.  
+    * - nolinkto  
+      - xsd:boolean (optional *default*='false')  
+      - 'nolinkto' when true this behavior means, don't verify symbolic links attribute.  
+    * - nomd5  
+      - xsd:boolean (optional *default*='false')  
+      - 'nomd5' when true this behavior means, don't verify the file md5 attribute.  
+    * - nosize  
+      - xsd:boolean (optional *default*='false')  
+      - 'nosize' when true this behavior means, don't verify the file size attribute.  
+    * - nouser  
+      - xsd:boolean (optional *default*='false')  
+      - 'nouser' when true this behavior means, don't verify the file owner attribute.  
+    * - nogroup  
+      - xsd:boolean (optional *default*='false')  
+      - 'nogroup' when true this behavior means, don't verify the file group owner attribute.  
+    * - nomtime  
+      - xsd:boolean (optional *default*='false')  
+      - 'nomtime' when true this behavior means, don't verify the file mtime attribute.  
+    * - nomode  
+      - xsd:boolean (optional *default*='false')  
+      - 'nomode' when true this behavior means, don't verify the file mode attribute.  
+    * - nordev  
+      - xsd:boolean (optional *default*='false')  
+      - 'nordev' when true this behavior means, don't verify the file rdev attribute.  
+    * - noconfigfiles  
+      - xsd:boolean (optional *default*='false')  
+      - 'noconfigfiles' when true this behavior means, skip files that are marked with the %config attribute marker.  
+    * - noghostfiles  
+      - xsd:boolean (optional *default*='false')  
+      - 'noghostfiles' when true this behavior means, skip files that are maked with %ghost attribute marker.  
+  
+  
+______________
+  
 .. _rpmverifyfile_test:  
   
 < rpmverifyfile_test >  
@@ -685,6 +987,9 @@ Child Elements
     * - mode_differs  
       - linux-def:EntityStateRpmVerifyResultType (0..1)  
       - The mode_differs entity aligns with the second character ('M' flag) in the character string in the output generated by running rpm –V on a specific file.  
+    * - md5_differs (Deprecated)  
+      - linux-def:EntityStateRpmVerifyResultType (0..1)  
+      - The md5_differs entity aligns with the third character ('5' flag) in the character string in the output generated by running rpm –V on a specific file.  
     * - filedigest_differs  
       - linux-def:EntityStateRpmVerifyResultType (0..1)  
       - The filedigest_differs entity aligns with the third character ('5' flag) in the character string in the output generated by running rpm –V on a specific file. This replaces the md5_differs entity due to naming changes for verification and reporting options.  
@@ -739,6 +1044,9 @@ Attributes
     * - nolinkto  
       - xsd:boolean (optional *default*='false')  
       - 'nolinkto' when true this behavior means, don't verify symbolic links attribute.  
+    * - nomd5 (Deprecated)  
+      - xsd:boolean (optional *default*='false')  
+      - 'nomd5' when true this behavior means, don't verify the file md5 attribute.  
     * - nosize  
       - xsd:boolean (optional *default*='false')  
       - 'nosize' when true this behavior means, don't verify the file size attribute.  
@@ -871,9 +1179,15 @@ Child Elements
     * - dependency_check_passed  
       - oval-def:EntityStateBoolType (0..1)  
       - The dependency_check_passed entity indicates whether or not the dependency check passed. If the dependency check is not performed, due to the 'nodeps' behavior, this entity must not be collected.  
+    * - digest_check_passed (Deprecated)  
+      - oval-def:EntityStateBoolType (0..1)  
+      - The digest_check_passed entity indicates whether or not the verification of the package or header digests passed. If the digest check is not performed, due to the 'nodigest' behavior, this entity must not be collected.  
     * - verification_script_successful  
       - oval-def:EntityStateBoolType (0..1)  
       - The verification_script_successful entity indicates whether or not the verification script executed successfully. If the verification script is not executed, due to the 'noscripts' behavior, this entity must not be collected.  
+    * - signature_check_passed (Deprecated)  
+      - oval-def:EntityStateBoolType (0..1)  
+      - The signature_check_passed entity indicates whether or not the verification of the package or header signatures passed. If the signature check is not performed, due to the 'nosignature' behavior, this entity must not be collected.  
   
 .. _RpmVerifyPackageBehaviors:  
   
@@ -892,9 +1206,15 @@ Attributes
     * - nodeps  
       - xsd:boolean (optional *default*='false')  
       - 'nodeps' when true this behavior means, don't verify dependencies of packages.  
+    * - nodigest (Deprecated)  
+      - xsd:boolean (optional *default*='false')  
+      - 'nodigest' when true this behavior means, don't verify package or header digests when reading.  
     * - noscripts  
       - xsd:boolean (optional *default*='false')  
       - 'noscripts' when true this behavior means, don't execute the %verifyscript scriptlet (if any).  
+    * - nosignature (Deprecated)  
+      - xsd:boolean (optional *default*='false')  
+      - 'nosignature' when true this behavior means, don't verify package or header signatures when reading.  
   
   
 ______________
@@ -1160,6 +1480,91 @@ Child Elements
   
 ______________
   
+.. _slackwarepkginfo_test:  
+  
+< slackwarepkginfo_test > (Deprecated)  
+---------------------------------------------------------
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* Deprecated As Of Version 5.12  
+* Reason:   
+* Comment: This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.  
+  
+The slackware package info test is used to check information associated with a given Slackware package. It extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information. The required object element references a slackwarepkginfo_object and the optional state element specifies the data to check.
+
+**Extends:** oval-def:TestType
+
+Child Elements  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. list-table:: Elements  
+    :header-rows: 1  
+  
+    * - Child Elements  
+      - Type (MinOccurs..MaxOccurs)  
+      - Desc.  
+    * - object  
+      - oval-def:ObjectRefType (1..1)  
+      -   
+    * - state  
+      - oval-def:StateRefType (0..unbounded)  
+      -   
+  
+.. _slackwarepkginfo_object:  
+  
+< slackwarepkginfo_object >  
+---------------------------------------------------------
+The slackwarepkginfo_object element is used by a slackware package info test to define the object to be evaluated. Each object extends the standard ObjectType as defined in the oval-definitions-schema and one should refer to the ObjectType description for more information. The common set element allows complex objects to be created using filters and set logic. Again, please refer to the description of the set element in the oval-definitions-schema.
+
+A slackware package info object consists of a single name entity that identifies the package being checked.
+
+**Extends:** oval-def:ObjectType
+
+Child Elements  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. list-table:: Elements  
+    :header-rows: 1  
+  
+    * - Child Elements  
+      - Type (MinOccurs..MaxOccurs)  
+      - Desc.  
+    * - name  
+      - oval-def:EntityObjectStringType (1..1)  
+      - This is the package name to check.  
+    * - oval-def:filter  
+      - n/a (0..unbounded)  
+      -   
+  
+.. _slackwarepkginfo_state:  
+  
+< slackwarepkginfo_state >  
+---------------------------------------------------------
+The slackwarepkginfo_state element defines the different information that can be used to evaluate the specified package. This includes the version, architecture, and revision. Please refer to the individual elements in the schema for more details about what each represents.
+
+**Extends:** oval-def:StateType
+
+Child Elements  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. list-table:: Elements  
+    :header-rows: 1  
+  
+    * - Child Elements  
+      - Type (MinOccurs..MaxOccurs)  
+      - Desc.  
+    * - name  
+      - oval-def:EntityStateStringType (0..1)  
+      - This is the package name to check.  
+    * - version  
+      - Restriction of oval-def:EntityStateAnySimpleType. See schema for details. (0..1)  
+      - This is the version number of the package.  
+    * - architecture  
+      - oval-def:EntityStateStringType (0..1)  
+      -   
+    * - revision  
+      - oval-def:EntityStateStringType (0..1)  
+      -   
+  
+______________
+  
 .. _systemdunitdependency_test:  
   
 < systemdunitdependency_test >  
@@ -1360,6 +1765,122 @@ The EntityStateRpmVerifyResultType complex type restricts a string value to the 
       - | 'fail' indicates that the test failed and is equivalent to a bold charcter in the test result string reported by the rpm -V command.  
     * - not performed  
       - | 'not performed' indicates that the test could not be performed and is equivalent to the '?' value reported by the rpm -V command.  
+    * -   
+      - | The empty string value is permitted here to allow for empty elements associated with variable references.  
+  
+.. _EntityStateProtocolType:  
+  
+== EntityStateProtocolType ==  
+---------------------------------------------------------
+The EntityStateProtocolType complex type restricts a string value to the set of physical layer protocols used by AF_PACKET sockets. The empty string is also allowed to support the empty element associated with variable references. Note that when using pattern matches and variables care must be taken to ensure that the regular expression and variable values align with the enumerated values.
+
+**Restricts:** oval-def:EntityStateStringType
+
+.. list-table:: Enumeration Values  
+    :header-rows: 1  
+  
+    * - Value  
+      - Description  
+    * - ETH_P_LOOP  
+      - | Ethernet loopback packet.  
+    * - ETH_P_PUP  
+      - | Xerox PUP packet.  
+    * - ETH_P_PUPAT  
+      - | Xerox PUP Address Transport packet.  
+    * - ETH_P_IP  
+      - | Internet protocol packet.  
+    * - ETH_P_X25  
+      - | CCITT X.25 packet.  
+    * - ETH_P_ARP  
+      - | Address resolution packet.  
+    * - ETH_P_BPQ  
+      - | G8BPQ AX.25 ethernet packet.  
+    * - ETH_P_IEEEPUP  
+      - | Xerox IEEE802.3 PUP packet.  
+    * - ETH_P_IEEEPUPAT  
+      - | Xerox IEEE802.3 PUP address transport packet.  
+    * - ETH_P_DEC  
+      - | DEC assigned protocol.  
+    * - ETH_P_DNA_DL  
+      - | DEC DNA Dump/Load.  
+    * - ETH_P_DNA_RC  
+      - | DEC DNA Remote Console.  
+    * - ETH_P_DNA_RT  
+      - | DEC DNA Routing.  
+    * - ETH_P_LAT  
+      - | DEC LAT.  
+    * - ETH_P_DIAG  
+      - | DEC Diagnostics.  
+    * - ETH_P_CUST  
+      - | DEC Customer use.  
+    * - ETH_P_SCA  
+      - | DEC Systems Comms Arch.  
+    * - ETH_P_RARP  
+      - | Reverse address resolution packet.  
+    * - ETH_P_ATALK  
+      - | Appletalk DDP.  
+    * - ETH_P_AARP  
+      - | Appletalk AARP.  
+    * - ETH_P_8021Q  
+      - | 802.1Q VLAN Extended Header.  
+    * - ETH_P_IPX  
+      - | IPX over DIX.  
+    * - ETH_P_IPV6  
+      - | IPv6 over bluebook.  
+    * - ETH_P_SLOW  
+      - | Slow Protocol. See 802.3ad 43B.  
+    * - ETH_P_WCCP  
+      - | Web-cache coordination protocol.  
+    * - ETH_P_PPP_DISC  
+      - | PPPoE discovery messages.  
+    * - ETH_P_PPP_SES  
+      - | PPPoE session messages.  
+    * - ETH_P_MPLS_UC  
+      - | MPLS Unicast traffic.  
+    * - ETH_P_MPLS_MC  
+      - | MPLS Multicast traffic.  
+    * - ETH_P_ATMMPOA  
+      - | MultiProtocol Over ATM.  
+    * - ETH_P_ATMFATE  
+      - | Frame-based ATM Transport over Ethernet.  
+    * - ETH_P_AOE  
+      - | ATA over Ethernet.  
+    * - ETH_P_TIPC  
+      - | TIPC.  
+    * - ETH_P_802_3  
+      - | Dummy type for 802.3 frames.  
+    * - ETH_P_AX25  
+      - | Dummy protocol id for AX.25.  
+    * - ETH_P_ALL  
+      - | Every packet.  
+    * - ETH_P_802_2  
+      - | 802.2 frames.  
+    * - ETH_P_SNAP  
+      - | Internal only.  
+    * - ETH_P_DDCMP  
+      - | DEC DDCMP: Internal only  
+    * - ETH_P_WAN_PPP  
+      - | Dummy type for WAN PPP frames.  
+    * - ETH_P_PPP_MP  
+      - | Dummy type for PPP MP frames.  
+    * - ETH_P_PPPTALK  
+      - | Dummy type for Atalk over PPP.  
+    * - ETH_P_LOCALTALK  
+      - | Localtalk pseudo type.  
+    * - ETH_P_TR_802_2  
+      - | 802.2 frames.  
+    * - ETH_P_MOBITEX  
+      - | Mobitex.  
+    * - ETH_P_CONTROL  
+      - | Card specific control frames.  
+    * - ETH_P_IRDA  
+      - | Linux-IrDA.  
+    * - ETH_P_ECONET  
+      - | Acorn Econet.  
+    * - ETH_P_HDLC  
+      - | HDLC frames.  
+    * - ETH_P_ARCNET  
+      - | 1A for ArcNet.  
     * -   
       - | The empty string value is permitted here to allow for empty elements associated with variable references.  
   

@@ -1,8 +1,8 @@
 Open Vulnerability and Assessment Language: Core Common  
 =========================================================
 * Schema: Core Common  
-* Version: 6.0  
-* Release Date: 1/24/2025 09:00:00 AM
+* Version: 5.12.1  
+* Release Date: 05/23/2025 09:00:00 AM
 
 The following is a description of the common types that are shared across the different schemas within Open Vulnerability and Assessment Language (OVAL). Each type is described in detail and should provide the information necessary to understand what each represents. This document is intended for developers and assumes some familiarity with XML. A high level description of the interaction between these type is not outlined here.
 
@@ -217,6 +217,11 @@ The CheckEnumeration simple type defines acceptable check values, which are used
       - | A value of 'all' means that a final result of true is given if all the individual results under consideration are true.  
     * - at least one  
       - | A value of 'at least one' means that a final result of true is given if at least one of the individual results under consideration is true.  
+    * - none exist (Deprecated)  
+      - | A value of 'none exists' means that a test evaluates to true if no matching object exists that satisfy the data requirements.  
+        | **Deprecated As Of Version:** 5.3  
+        | **Reason:** Replaced by the 'none satisfy' value. In version 5.3 of the OVAL Language, the checking of existence and state were separated into two distinct checks CheckEnumeration (state) and ExistenceEnumeration (existence). Since CheckEnumeration is now used to specify how many objects should satisfy a given state for a test to return true, and no longer used for specifying how many objects must exist for a test to return true, a value of 'none exist' is no longer needed. See the 'none satisfy' value.  
+        | **Comment:** This value has been deprecated and will be removed in version 6.0 of the language.  
     * - none satisfy  
       - | A value of 'none satisfy' means that a final result of true is given if none the individual results under consideration are true.  
     * - only one  
@@ -473,10 +478,16 @@ The FamilyEnumeration simple type is a listing of families that OVAL supports at
   
     * - Value  
       - Description  
+    * - android  
+      - | The android value describes the Android mobile operating system.  
     * - asa  
       - | The asa value describes the Cisco ASA security devices.  
+    * - apple_ios  
+      - | The apple_ios value describes the iOS mobile operating system.  
     * - aws  
       - | The aws value describes the Amazon Web Services platform.  
+    * - catos  
+      - | The catos value describes the Cisco CatOS operating system.  
     * - ios  
       - | The ios value describes the Cisco IOS operating system.  
     * - iosxe  
@@ -487,6 +498,8 @@ The FamilyEnumeration simple type is a listing of families that OVAL supports at
       - | The macos value describes the Mac operating system.  
     * - panos  
       - | The panos value describes the Palo Alto Networks operating system.  
+    * - pixos  
+      - | The pixos value describes the Cisco PIX operating system.  
     * - undefined  
       - | The undefined value is to be used when the desired family is not available.  
     * - unix  

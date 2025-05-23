@@ -1,8 +1,8 @@
 Open Vulnerability and Assessment Language: Linux System Characteristics  
 =========================================================
 * Schema: Linux System Characteristics  
-* Version: 6.0  
-* Release Date: 1/24/2025 09:00:00 AM
+* Version: 5.12.1  
+* Release Date: 05/23/2025 09:00:00 AM
 
 The following is a description of the elements, types, and attributes that compose the Linux specific system characteristic items found in Open Vulnerability and Assessment Language (OVAL). Each item is an extension of the standard item element defined in the Core System Characteristic Schema. Through extension, each item inherits a set of elements and attributes that are shared amongst all OVAL Items. Each item is described in detail and should provide the information necessary to understand what each element and attribute represents. This document is intended for developers and assumes some familiarity with XML. A high level description of the interaction between the different tests and their relationship to the Core System Characteristic Schema is not outlined here.
 
@@ -12,15 +12,18 @@ Item Listing
 ---------------------------------------------------------
 * :ref:`apparmorstatus_item`  
 * :ref:`dpkginfo_item`  
+* :ref:`iflisteners_item`  
 * :ref:`inetlisteningserver_item`  
 * :ref:`kernelmodule_item`  
 * :ref:`partition_item`  
 * :ref:`rpminfo_item`  
+* :ref:`rpmverify_item`  
 * :ref:`rpmverifyfile_item`  
 * :ref:`rpmverifypackage_item`  
 * :ref:`selinuxboolean_item`  
 * :ref:`selinuxsecuritycontext_item`  
 * :ref:`sestatus_item`  
+* :ref:`slackwarepkginfo_item`  
 * :ref:`systemdunitdependency_item`  
 * :ref:`systemdunitproperty_item`  
   
@@ -100,6 +103,43 @@ Child Elements
     * - evr  
       - Restriction of oval-sc:EntityItemAnySimpleType. See schema for details. (0..1)  
       - This type represents the epoch, upstream_version, and debian_revision fields, for a Debian package, as a single version string. It has the form "EPOCH:UPSTREAM_VERSION-DEBIAN_REVISION". Note that a null epoch (or '(none)' as returned by dpkg) is equivalent to '0' and would hence have the form 0:UPSTREAM_VERSION-DEBIAN_REVISION.  
+  
+______________
+  
+.. _iflisteners_item:  
+  
+< iflisteners_item >  
+---------------------------------------------------------
+An iflisteners_item stores the results of checking for applications that are bound to an interface on the system. Only applications that are bound to an ethernet interface should be collected.
+
+**Extends:** oval-sc:ItemType
+
+Child Elements  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. list-table:: Elements  
+    :header-rows: 1  
+  
+    * - Child Elements  
+      - Type (MinOccurs..MaxOccurs)  
+      - Desc.  
+    * - interface_name  
+      - oval-sc:EntityItemStringType (0..1)  
+      - This is the name of the interface (eth0, eth1, fw0, etc.).  
+    * - protocol  
+      - linux-sc:EntityItemProtocolType (0..1)  
+      - This is the physical layer protocol used by the AF_PACKET socket.  
+    * - hw_address  
+      - oval-sc:EntityItemStringType (0..1)  
+      - This is the hardware address associated with the interface.  
+    * - program_name  
+      - oval-sc:EntityItemStringType (0..1)  
+      - This is the name of the communicating program.  
+    * - pid  
+      - oval-sc:EntityItemIntType (0..1)  
+      - This is the process ID of the process. The process in question is that of the program communicating on the network.  
+    * - user_id  
+      - oval-sc:EntityItemIntType (0..1)  
+      - The numeric user id, or uid, is the third column of each user's entry in /etc/passwd. It represents the owner, and thus privilege level, of the specified program.  
   
 ______________
   
@@ -277,6 +317,79 @@ Child Elements
   
 ______________
   
+.. _rpmverify_item:  
+  
+< rpmverify_item > (Deprecated)  
+---------------------------------------------------------
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* Deprecated As Of Version 5.10  
+* Reason: Replaced by the rpmverifyfile_item and rpmverifypackage_item. The rpmverify_item was split into two items to distinguish between the verification of the files in an rpm and the verification of an rpm as a whole. By making this distinction, content authoring is simplified and information is no longer duplicated across items. See the rpmverifyfile_item and rpmverifypackage_item.  
+* Comment: This state has been deprecated and will be removed in version 6.0 of the language.  
+  
+This item stores rpm verification results similar to what is produced by the rpm -V command.
+
+**Extends:** oval-sc:ItemType
+
+Child Elements  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. list-table:: Elements  
+    :header-rows: 1  
+  
+    * - Child Elements  
+      - Type (MinOccurs..MaxOccurs)  
+      - Desc.  
+    * - name  
+      - oval-sc:EntityItemStringType (0..1)  
+      - This is the package name to check.  
+    * - filepath  
+      - oval-sc:EntityItemStringType (0..1)  
+      - The filepath element specifies the absolute path for a file or directory in the specified package.  
+    * - size_differs  
+      - linux-sc:EntityItemRpmVerifyResultType (0..1)  
+      - The size_differs entity aligns with the first character ('S' flag) in the character string in the output generated by running rpm –V on a specific file.  
+    * - mode_differs  
+      - linux-sc:EntityItemRpmVerifyResultType (0..1)  
+      - The mode_differs entity aligns with the second character ('M' flag) in the character string in the output generated by running rpm –V on a specific file.  
+    * - md5_differs  
+      - linux-sc:EntityItemRpmVerifyResultType (0..1)  
+      - The md5_differs entity aligns with the third character ('5' flag) in the character string in the output generated by running rpm –V on a specific file.  
+    * - device_differs  
+      - linux-sc:EntityItemRpmVerifyResultType (0..1)  
+      - The device_differs entity aligns with the fourth character ('D' flag) in the character string in the output generated by running rpm –V on a specific file.  
+    * - link_mismatch  
+      - linux-sc:EntityItemRpmVerifyResultType (0..1)  
+      - The link_mismatch entity aligns with the fifth character ('L' flag) in the character string in the output generated by running rpm –V on a specific file.  
+    * - ownership_differs  
+      - linux-sc:EntityItemRpmVerifyResultType (0..1)  
+      - The ownership_differs entity aligns with the sixth character ('U' flag) in the character string in the output generated by running rpm –V on a specific file.  
+    * - group_differs  
+      - linux-sc:EntityItemRpmVerifyResultType (0..1)  
+      - The group_differs entity aligns with the seventh character ('U' flag) in the character string in the output generated by running rpm –V on a specific file.  
+    * - mtime_differs  
+      - linux-sc:EntityItemRpmVerifyResultType (0..1)  
+      - The mtime_differs entity aligns with the eighth character ('T' flag) in the character string in the output generated by running rpm –V on a specific file.  
+    * - capabilities_differ  
+      - linux-sc:EntityItemRpmVerifyResultType (0..1)  
+      - The size_differs entity aligns with the ninth character ('P' flag) in the character string in the output generated by running rpm –V on a specific file.  
+    * - configuration_file  
+      - oval-sc:EntityItemBoolType (0..1)  
+      - The configuration_file entity represents the configuration file attribute marker that may be present on a file.  
+    * - documentation_file  
+      - oval-sc:EntityItemBoolType (0..1)  
+      - The documentation_file entity represents the documenation file attribute marker that may be present on a file.  
+    * - ghost_file  
+      - oval-sc:EntityItemBoolType (0..1)  
+      - The ghost_file entity represents the ghost file attribute marker that may be present on a file.  
+    * - license_file  
+      - oval-sc:EntityItemBoolType (0..1)  
+      - The license_file entity represents the license file attribute marker that may be present on a file.  
+    * - readme_file  
+      - oval-sc:EntityItemBoolType (0..1)  
+      - The readme_file entity represents the readme file attribute marker that may be present on a file.  
+  
+______________
+  
 .. _rpmverifyfile_item:  
   
 < rpmverifyfile_item >  
@@ -320,6 +433,9 @@ Child Elements
     * - mode_differs  
       - linux-sc:EntityItemRpmVerifyResultType (0..1)  
       - The mode_differs entity aligns with the second character ('M' flag) in the character string in the output generated by running rpm –V on a specific file.  
+    * - md5_differs (Deprecated)  
+      - linux-sc:EntityItemRpmVerifyResultType (0..1)  
+      - The md5_differs entity aligns with the third character ('5' flag) in the character string in the output generated by running rpm –V on a specific file.  
     * - filedigest_differs  
       - linux-sc:EntityItemRpmVerifyResultType (0..1)  
       - The filedigest_differs entity aligns with the third character ('5' flag) in the character string in the output generated by running rpm –V on a specific file. This replaces the md5_differs entity due to naming changes for verification and reporting options.  
@@ -396,9 +512,15 @@ Child Elements
     * - dependency_check_passed  
       - oval-sc:EntityItemBoolType (0..1)  
       - The dependency_check_passed entity indicates whether or not the dependency check passed. If the dependency check is not performed, due to the 'nodeps' behavior, this entity must not be collected.  
+    * - digest_check_passed (Deprecated)  
+      - oval-sc:EntityItemBoolType (0..1)  
+      - The digest_check_passed entity indicates whether or not the verification of the package or header digests passed. If the digest check is not performed, due to the 'nodigest' behavior, this entity must not be collected.  
     * - verification_script_successful  
       - oval-sc:EntityItemBoolType (0..1)  
       - The verification_script_successful entity indicates whether or not the verification script executed successfully. If the verification script is not executed, due to the 'noscripts' behavior, this entity must not be collected.  
+    * - signature_check_passed (Deprecated)  
+      - oval-sc:EntityItemBoolType (0..1)  
+      - The signature_check_passed entity indicates whether or not the verification of the package or header signatures passed. If the signature check is not performed, due to the 'nosignature' behavior, this entity must not be collected.  
   
 ______________
   
@@ -528,6 +650,37 @@ Child Elements
   
 ______________
   
+.. _slackwarepkginfo_item:  
+  
+< slackwarepkginfo_item >  
+---------------------------------------------------------
+This item describes info related to Slackware packages. It extends the standard ItemType as defined in the oval-system-characteristics schema and one should refer to the ItemType description for more information.
+
+**Extends:** oval-sc:ItemType
+
+Child Elements  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. list-table:: Elements  
+    :header-rows: 1  
+  
+    * - Child Elements  
+      - Type (MinOccurs..MaxOccurs)  
+      - Desc.  
+    * - name  
+      - oval-sc:EntityItemStringType (0..1)  
+      - This is the pakage name to check.  
+    * - version  
+      - Restriction of oval-sc:EntityItemAnySimpleType. See schema for details. (0..1)  
+      - This is the version number of the pakage.  
+    * - architecture  
+      - oval-sc:EntityItemStringType (0..1)  
+      - This is the architecture the package is designed for.  
+    * - revision  
+      - oval-sc:EntityItemStringType (0..1)  
+      - This is the revision of the package.  
+  
+______________
+  
 .. _systemdunitdependency_item:  
   
 < systemdunitdependency_item >  
@@ -598,6 +751,122 @@ The EntityItemRpmVerifyResultType complex type restricts a string value to the s
       - | 'fail' indicates that the test failed and is equivalent to a bold charcter in the test result string reported by the rpm -V command.  
     * - not performed  
       - | 'not performed' indicates that the test could not be performed and is equivalent to the '?' value reported by the rpm -V command.  
+    * -   
+      - | The empty string value is permitted here to allow for detailed error reporting.  
+  
+.. _EntityItemProtocolType:  
+  
+== EntityItemProtocolType ==  
+---------------------------------------------------------
+The EntityStateProtocolType complex type restricts a string value to the set of physical layer protocols used by AF_PACKET sockets. The empty string is also allowed to support the empty element associated with variable references. Note that when using pattern matches and variables care must be taken to ensure that the regular expression and variable values align with the enumerated values.
+
+**Restricts:** oval-sc:EntityItemStringType
+
+.. list-table:: Enumeration Values  
+    :header-rows: 1  
+  
+    * - Value  
+      - Description  
+    * - ETH_P_LOOP  
+      - | Ethernet loopback packet.  
+    * - ETH_P_PUP  
+      - | Xerox PUP packet.  
+    * - ETH_P_PUPAT  
+      - | Xerox PUP Address Transport packet.  
+    * - ETH_P_IP  
+      - | Internet protocol packet.  
+    * - ETH_P_X25  
+      - | CCITT X.25 packet.  
+    * - ETH_P_ARP  
+      - | Address resolution packet.  
+    * - ETH_P_BPQ  
+      - | G8BPQ AX.25 ethernet packet.  
+    * - ETH_P_IEEEPUP  
+      - | Xerox IEEE802.3 PUP packet.  
+    * - ETH_P_IEEEPUPAT  
+      - | Xerox IEEE802.3 PUP address transport packet.  
+    * - ETH_P_DEC  
+      - | DEC assigned protocol.  
+    * - ETH_P_DNA_DL  
+      - | DEC DNA Dump/Load.  
+    * - ETH_P_DNA_RC  
+      - | DEC DNA Remote Console.  
+    * - ETH_P_DNA_RT  
+      - | DEC DNA Routing.  
+    * - ETH_P_LAT  
+      - | DEC LAT.  
+    * - ETH_P_DIAG  
+      - | DEC Diagnostics.  
+    * - ETH_P_CUST  
+      - | DEC Customer use.  
+    * - ETH_P_SCA  
+      - | DEC Systems Comms Arch.  
+    * - ETH_P_RARP  
+      - | Reverse address resolution packet.  
+    * - ETH_P_ATALK  
+      - | Appletalk DDP.  
+    * - ETH_P_AARP  
+      - | Appletalk AARP.  
+    * - ETH_P_8021Q  
+      - | 802.1Q VLAN Extended Header.  
+    * - ETH_P_IPX  
+      - | IPX over DIX.  
+    * - ETH_P_IPV6  
+      - | IPv6 over bluebook.  
+    * - ETH_P_SLOW  
+      - | Slow Protocol. See 802.3ad 43B.  
+    * - ETH_P_WCCP  
+      - | Web-cache coordination protocol.  
+    * - ETH_P_PPP_DISC  
+      - | PPPoE discovery messages.  
+    * - ETH_P_PPP_SES  
+      - | PPPoE session messages.  
+    * - ETH_P_MPLS_UC  
+      - | MPLS Unicast traffic.  
+    * - ETH_P_MPLS_MC  
+      - | MPLS Multicast traffic.  
+    * - ETH_P_ATMMPOA  
+      - | MultiProtocol Over ATM.  
+    * - ETH_P_ATMFATE  
+      - | Frame-based ATM Transport over Ethernet.  
+    * - ETH_P_AOE  
+      - | ATA over Ethernet.  
+    * - ETH_P_TIPC  
+      - | TIPC.  
+    * - ETH_P_802_3  
+      - | Dummy type for 802.3 frames.  
+    * - ETH_P_AX25  
+      - | Dummy protocol id for AX.25.  
+    * - ETH_P_ALL  
+      - | Every packet.  
+    * - ETH_P_802_2  
+      - | 802.2 frames.  
+    * - ETH_P_SNAP  
+      - | Internal only.  
+    * - ETH_P_DDCMP  
+      - | DEC DDCMP: Internal only  
+    * - ETH_P_WAN_PPP  
+      - | Dummy type for WAN PPP frames.  
+    * - ETH_P_PPP_MP  
+      - | Dummy type for PPP MP frames.  
+    * - ETH_P_PPPTALK  
+      - | Dummy type for Atalk over PPP.  
+    * - ETH_P_LOCALTALK  
+      - | Localtalk pseudo type.  
+    * - ETH_P_TR_802_2  
+      - | 802.2 frames.  
+    * - ETH_P_MOBITEX  
+      - | Mobitex.  
+    * - ETH_P_CONTROL  
+      - | Card specific control frames.  
+    * - ETH_P_IRDA  
+      - | Linux-IrDA.  
+    * - ETH_P_ECONET  
+      - | Acorn Econet.  
+    * - ETH_P_HDLC  
+      - | HDLC frames.  
+    * - ETH_P_ARCNET  
+      - | 1A for ArcNet.  
     * -   
       - | The empty string value is permitted here to allow for detailed error reporting.  
   

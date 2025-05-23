@@ -1,8 +1,8 @@
 Open Vulnerability and Assessment Language: AIX System Characteristics  
 =========================================================
 * Schema: AIX System Characteristics  
-* Version: 6.0  
-* Release Date: 1/24/2025 09:00:00 AM
+* Version: 5.12.1  
+* Release Date: 05/23/2025 09:00:00 AM
 
 The following is a description of the elements, types, and attributes that compose the AIX specific system characteristic items found in Open Vulnerability and Assessment Language (OVAL). Each item is an extension of the standard test element defined in the Core Definition Schema. Through extension, each test inherits a set of elements and attributes that are shared amongst all OVAL tests. Each test is described in detail and should provide the information necessary to understand what each element and attribute represents. This document is intended for developers and assumes some familiarity with XML. A high level description of the interaction between the different tests and their relationship to the Core Definition Schema is not outlined here.
 
@@ -18,6 +18,7 @@ Item Listing
 * :ref:`securitystanza_item`  
 * :ref:`useraccount_item`  
 * :ref:`nfso_item`  
+* :ref:`no_item`  
 * :ref:`oslevel_item`  
   
 ______________
@@ -252,6 +253,31 @@ Child Elements
     * - tunable  
       - oval-sc:EntityItemStringType (0..1)  
       - The name of the target parameter to be queried by the /usr/sbin/nfso command. Examples include nfs_max_read_size and nfs_max_write_size.  
+    * - value  
+      - oval-sc:EntityItemAnySimpleType (0..1)  
+      - The value entity defines the value assigned to the tunable parameter being examined.  
+  
+______________
+  
+.. _no_item:  
+  
+< no_item >  
+---------------------------------------------------------
+The no_item is used to hold information related to the /usr/sbin/no command and the tunable parameters it manages. Currently, /usr/sbin/no is used to configure network tuning parameters. The /usr/sbin/no command sets or displays current or next boot values for network tuning parameters. The /usr/sbin/no command queries the named parameter, retrieves the value associated with the specified parameter, and displays it.
+
+**Extends:** oval-sc:ItemType
+
+Child Elements  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. list-table:: Elements  
+    :header-rows: 1  
+  
+    * - Child Elements  
+      - Type (MinOccurs..MaxOccurs)  
+      - Desc.  
+    * - tunable  
+      - oval-sc:EntityItemStringType (0..1)  
+      - The name of the target parameter to be queried by the /usr/sbin/no command. Examples include ip_forwarding and tcp_keepalive_interval.  
     * - value  
       - oval-sc:EntityItemAnySimpleType (0..1)  
       - The value entity defines the value assigned to the tunable parameter being examined.  
