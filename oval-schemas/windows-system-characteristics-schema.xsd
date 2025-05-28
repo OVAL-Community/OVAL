@@ -3264,12 +3264,12 @@
                               </xsd:element>
                               <xsd:element name="full_name" type="oval-sc:EntityItemStringType" minOccurs="0" maxOccurs="1">
                                    <xsd:annotation>
-                                        <xsd:documentation>A Unicode string that contains the full name of the user. This string can be a NULL string, or it can have any number of characters before the terminating null character.</xsd:documentation>
+                                        <xsd:documentation>A string that contains the full name of the user. </xsd:documentation>
                                    </xsd:annotation>
                               </xsd:element>
                               <xsd:element name="comment" type="oval-sc:EntityItemStringType" minOccurs="0" maxOccurs="1">
                                    <xsd:annotation>
-                                        <xsd:documentation>A Unicode string that contains a comment to associate with the user account. The string can be a NULL string, or it can have any number of characters before the terminating null character.</xsd:documentation>
+                                        <xsd:documentation>A string that contains a comment to associate with the user account.</xsd:documentation>
                                    </xsd:annotation>
                               </xsd:element>
                               <xsd:element name="password_age_days" type="oval-sc:EntityItemIntType" minOccurs="0" maxOccurs="1">
@@ -3381,12 +3381,12 @@
 				</xsd:element>
 				<xsd:element name="full_name" type="oval-sc:EntityItemStringType" minOccurs="0" maxOccurs="1">
 				   <xsd:annotation>
-						<xsd:documentation>A Unicode string that contains the full name of the user. This string can be a NULL string, or it can have any number of characters before the terminating null character.</xsd:documentation>
+						<xsd:documentation>A string that contains the full name of the user. </xsd:documentation>
 				   </xsd:annotation>
 				</xsd:element>
 				<xsd:element name="comment" type="oval-sc:EntityItemStringType" minOccurs="0" maxOccurs="1">
 				   <xsd:annotation>
-						<xsd:documentation>A Unicode string that contains a comment to associate with the user account. The string can be a NULL string, or it can have any number of characters before the terminating null character.</xsd:documentation>
+						<xsd:documentation>A string that contains a comment to associate with the user account.</xsd:documentation>
 				   </xsd:annotation>
 				</xsd:element>
 				<xsd:element name="password_age_days" type="oval-sc:EntityItemIntType" minOccurs="0" maxOccurs="1">
