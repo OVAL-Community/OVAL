@@ -1,0 +1,42 @@
+name: Manual Workflow with Commit
+
+on:
+  workflow_dispatch:
+    inputs:
+      commit_message:
+        description: 'Commit message for the changes'
+        required: true
+        default: 'Automated changes'
+
+jobs:
+  run_script_and_commit:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Run Bash Script
+        run: |
+          cd $GITHUB_WORKSPACE/tools
+          bash generate_rst.sh
+          cd $GITHUB_WORKSPACE
+
+      - name: Configure Git User
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "GitHub Actions Bot"
+
+      - name: Commit and Push changes
+        run: |
+          git add ./oval-schemas
+          git commit -m "${{ github.event.inputs.commit_message }}"
+          git push origin HEAD:${GITHUB_REF##*/}  # Push to the same branch that triggered the workflow
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
