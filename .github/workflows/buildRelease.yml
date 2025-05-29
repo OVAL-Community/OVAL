@@ -29,3 +29,28 @@ jobs:
         run: |
             VERSION=$(echo $TAG | sed -nre 's/^[^0-9]*(([0-9]+\.)*[0-9]+).*/\1/p')
             gh release upload $TAG schemas-${VERSION}.zip oval_docs-${VERSION}.zip --clobber --repo $OWNER/$REPO
+
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Run Bash Script
+        run: |
+          cd $GITHUB_WORKSPACE/tools
+          bash generate_rst.sh
+          cd $GITHUB_WORKSPACE
+
+      - name: Configure Git User
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "GitHub Actions Bot"
+
+      - name: Commit and Push changes
+        run: |
+          git add ./oval-schemas
+          git commit -m "${{ github.event.inputs.commit_message }}"
+          git push origin HEAD:${GITHUB_REF##*/}  # Push to the same branch that triggered the workflow
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
