@@ -59,7 +59,7 @@ Test Listing
 * :ref:`volume_test` (Deprecated)  
 * :ref:`wmi_test` (Deprecated)  
 * :ref:`wmi57_test`  
-* :ref:`wuaupdatesearcher_test` (Deprecated)  
+* :ref:`wuaupdatesearcher_test`  
   
 ______________
   
@@ -5442,13 +5442,13 @@ Child Elements
       - The date and time when the last logon occurred. This value is stored as the number of seconds that have elapsed since 00:00:00, January 1, 1970, GMT. If the target system is a domain controller, this data is maintained separately on each backup domain controller (BDC) in the domain. To obtain an accurate value, you must query each BDC in the domain. The last logoff occurred at the time indicated by the largest retrieved value.  
     * - full_name  
       - oval-def:EntityStateStringType (0..1)  
-      - A Unicode string that contains the full name of the user. This string can be a NULL string, or it can have any number of characters before the terminating null character.  
+      - A string that contains the full name of the user.  
     * - comment  
       - oval-def:EntityStateStringType (0..1)  
-      - A Unicode string that contains a comment to associate with the user account. The string can be a NULL string, or it can have any number of characters before the terminating null character.  
+      - A string that contains a comment to associate with the user account.  
     * - password_age_days  
       - oval-def:EntityStateIntType (0..1)  
-      - The number of days that have elapsed since the password was last changed. This data should be rounded up to the nearest integer.  
+      - The number of days that have elapsed since the password was last changed. This data should be rounded down to the nearest integer (floor function).  
     * - lockout  
       - oval-def:EntityStateBoolType (0..1)  
       - The account is currently locked out.  
@@ -5565,6 +5565,15 @@ Child Elements
     * - group  
       - oval-def:EntityStateStringType (0..1)  
       - A string that represents the name of a particular group. In Windows, group names are case-insensitive. As a result, it is recommended that the case-insensitive operations are used for this entity. In a domain environment, groups should be identified in the form: "domain\group name". For local groups use: "computer name\group name". For built-in accounts on the system, use the group name without a domain.If the specified user belongs to more than one group, then multiple group elements should exist. If the specified user is not a member of a single group, then a single group element should exist with a status of 'does not exist'. If there is an error determining the groups that the user belongs to, then a single group element should be included with a status of 'error'.  
+    * - full_name  
+      - oval-def:EntityStateStringType (0..1)  
+      - A string that contains the full name of the user.  
+    * - comment  
+      - oval-def:EntityStateStringType (0..1)  
+      - A string that contains a comment to associate with the user account.  
+    * - password_age_days  
+      - oval-def:EntityStateIntType (0..1)  
+      - The number of full days that have elapsed since the password was last changed. This data should be rounded down to the nearest integer, (floor function).  
   
 ______________
   
@@ -6219,14 +6228,8 @@ ______________
   
 .. _wuaupdatesearcher_test:  
   
-< wuaupdatesearcher_test > (Deprecated)  
+< wuaupdatesearcher_test >  
 ---------------------------------------------------------
-Deprecation Info  
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-* Deprecated As Of Version 5.12  
-* Reason:   
-* Comment: This test has been deprecated due to lack of documented usage and will be removed in version 6.0 of the language.  
-  
 The wuaupdatesearcher_test is used to evaluate patch level in a Windows environment utilizing the WUA (Windows Update Agent) interface. It is based on the Search method of the IUpdateSearcher interface found in the WUA API. It extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information. The required object element references a wuaupdatesearcher_object and the optional state element specifies the metadata to check.
 
 Note that WUA can work off of many different sources including WSUS, update.microsoft.com, and a local cab file. The content source is specific to a given system evaluating a wuaupdatesearcher_test and thus is not defined by this test. The tool being used for evaluation should determine what content source is best for the system being assessed and then evaluate this test based on that selection.
