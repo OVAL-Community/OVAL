@@ -1,3 +1,11 @@
+# OVAL 5.12.1 Official Release
+
+For a complete list of changes, please refer to:
+- https://github.com/OVAL-Community/OVAL/issues?q=is%3Aissue+milestone%3A5.12.1+is%3Aclosed
+
+To download a copy of the OVAL 5.12.2 schema, and offline HTML files, view the following and download the release zips from the Assets.
+- https://github.com/OVAL-Community/OVAL/releases/tag/v5.12.1
+
 # OVAL 6.0 Official Release
 
 **01/24/2025**
