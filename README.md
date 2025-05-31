@@ -37,7 +37,7 @@ To download a copy of the OVAL 5.12 schema, and offline HTML files, view the fol
 
 For OVAL 5.12.1 Documenation:  https://oval-community-guidelines.readthedocs.io/en/5.12.1_release/
 
-For OVAL 6.0 Documentation https://oval-community-guidelines.readthedocs.io/en/latest/
+For OVAL 6.0 Documentation https://oval-community-guidelines.readthedocs.io/en/6.0_release/
 
 For OVAL 5.12 Documenation:  https://oval-community-guidelines.readthedocs.io/en/5.12_release/
 
