@@ -1022,7 +1022,7 @@ IMPORTANT! - Since this test requires the running of code supplied by content an
             <xsd:annotation>
                   <xsd:documentation>The shellcommand_object is used by a shellcommand_test to define a shell to use (e.g. sh, bash, ksh, etc.), a command (or shell script) to be run, and a pattern to filter result lines. The default shell is bash.  Each object extends the standard ObjectType as defined in the oval-definitions-schema and one should refer to the ObjectType description for more information. The common set element allows complex objects to be created using filters and set logic.
                   
-The evaluation of the object should always produce at least one item. If the command execution does not produce output, an item should still be created with the exit_status (AKA process exit code), a stdout entity with a status of 'does not exist', and any STDERR from the execution captured in stderr_line entities.  If the command returns multiple lines of standard out, mulitple items should be created, one for each line.                 
+The evaluation of the object should always produce one item. If the command execution does not produce output, an item should still be created with the exit_status (AKA process exit code), a stdout entity with a status of 'does not exist', and any STDERR from the execution captured in stderr_line entities.
 				  </xsd:documentation>
                   <xsd:appinfo>
                         <sch:pattern id="ind-def_shellcommand_object_verify_filter_state">
