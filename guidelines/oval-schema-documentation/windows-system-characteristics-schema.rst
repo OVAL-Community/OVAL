@@ -2630,7 +2630,7 @@ Child Elements
       - oval-sc:EntityItemStringType (0..1)  
       - The Microsoft Security Response Center (MSRC) rating provided by Microsoft related to this update ID, includes 'Critical', 'Important', 'Moderate', 'Low', 'Unspecified', ''  
     * - last_deployment_change_time  
-      - xsd:date (0..1)  
+      - oval-sc:EntityItemDateType (0..1)  
       - The last published date of the update, provided by Microsoft related to this update ID  
     * - source  
       - win-sc:EntityItemWuaSourceType (0..1)  

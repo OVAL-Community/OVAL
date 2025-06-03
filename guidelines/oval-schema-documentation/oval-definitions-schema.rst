@@ -2168,6 +2168,29 @@ Attributes
   
 **Simple Content:**  Restricts xsd:string
 
+.. _EntityStateDateType:  
+  
+== EntityStateDateType ==  
+---------------------------------------------------------
+The EntityDateType type is extended by the entities of an individual OVAL State. This type provides uniformity to each state entity by including the attributes found in the EntityStateSimpleBaseType. This specific type is an XML date.
+
+**Restricts:** oval-def:EntityStateSimpleBaseType
+
+Attributes  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. list-table:: Attributes  
+    :header-rows: 1  
+  
+    * - Attribute  
+      - Type  
+      - Desc.  
+    * - datatype  
+      - oval:SimpleDatatypeEnumeration (optional *fixed*='string')  
+      - (No Description)  
+  
+  
+**Simple Content:**  Restricts xsd:date
+
 .. _EntityStateBinaryType:  
   
 == EntityStateBinaryType ==  

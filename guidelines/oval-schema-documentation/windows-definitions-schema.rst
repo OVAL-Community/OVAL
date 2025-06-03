@@ -6315,7 +6315,7 @@ Child Elements
       - oval-def:EntityStateStringType (0..1)  
       - The Microsoft Security Response Center (MSRC) rating provided by Microsoft related to this update ID, includes 'Critical', 'Important', 'Moderate', 'Low', 'Unspecified', ''  
     * - last_deployment_change_time  
-      - xsd:date (0..1)  
+      - oval-def:EntityStateDateType (0..1)  
       - The last published date of the update, provided by Microsoft related to this update ID  
     * - source  
       - win-def:EntityStateWuaSourceType (0..1)  
@@ -6362,6 +6362,8 @@ The EntityStateWuaSourceType restricts a string value to a specific set of value
       - | Indicates the source for the wuaupdatesearcher_item is from an Intranet WSUS server  
     * - Offline_Cab_File  
       - | Indicates the source for the wuaupdatesearcher_item is from wsusscn2.cab file download from Microsoft  
+    * -   
+      - | The empty string value is permitted here to allow for empty elements associated with variable references.  
   
 ______________
   
