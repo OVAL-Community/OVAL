@@ -9441,7 +9441,7 @@
                                  <xsd:documentation>The Microsoft Security Response Center (MSRC) rating provided by Microsoft related to this update ID, includes 'Critical', 'Important', 'Moderate', 'Low', 'Unspecified', ''</xsd:documentation>
                              </xsd:annotation>
                          </xsd:element>
-						 <xsd:element name="last_deployment_change_time" type="xsd:date" minOccurs="0" maxOccurs="1">
+						 <xsd:element name="last_deployment_change_time" type="oval-def:EntityStateDateType" minOccurs="0" maxOccurs="1">
                              <xsd:annotation>
                                  <xsd:documentation>The last published date of the update, provided by Microsoft related to this update ID</xsd:documentation>
                              </xsd:annotation>

@@ -471,6 +471,21 @@
             </xsd:restriction>
         </xsd:simpleContent>
     </xsd:complexType>
+	
+    <xsd:complexType name="EntityItemDateType">
+        <xsd:annotation>
+            <xsd:documentation>The EntityDateType type is extended by the entities of an individual OVAL State.   This type provides uniformity to each entity by including the attributes found in the EntityItemSimpleBaseType. This specific type is an XML date.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleContent>
+            <xsd:restriction base="oval-sc:EntityItemSimpleBaseType">
+                <xsd:simpleType>
+                    <xsd:restriction base="xsd:date"/>
+                </xsd:simpleType>
+                <xsd:attribute name="datatype" type="oval:SimpleDatatypeEnumeration" use="optional" fixed="string"/>
+            </xsd:restriction>
+        </xsd:simpleContent>
+    </xsd:complexType>
+	
     <xsd:complexType name="EntityItemBinaryType">
         <xsd:annotation>
             <xsd:documentation>The EntityItemBinaryType type is extended by the entities of an individual item. This type provides uniformity to each entity by including the attributes found in the EntityItemSimpleBaseType. This specific type describes simple binary data. The empty string is also allowed for cases where there was an error in the data collection of an entity and a status needs to be reported.</xsd:documentation>
