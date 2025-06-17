@@ -931,7 +931,7 @@
                                     </xsd:element>
                                     <xsd:element name="distribution_group_management" type="win-def:EntityStateAuditType" minOccurs="0">
                                           <xsd:annotation>
-                                                <xsd:documentation>Audit the events produced by changes to distribution groups. This state corresponds with the following GUID specified in ntsecapi.h: 0cce9238-69ae-11d9-bed3-505054503030. This state corresponds with the following Advanced Audit Policy:  Account Management: Audit Distribution Account Management</xsd:documentation>
+                                                <xsd:documentation>Audit the events produced by changes to distribution groups. This state corresponds with the following GUID specified in ntsecapi.h: 0cce9238-69ae-11d9-bed3-505054503030. This state corresponds with the following Advanced Audit Policy:  Account Management: Audit Distribution Group Management</xsd:documentation>
                                           </xsd:annotation>
                                     </xsd:element>
                                     <xsd:element name="other_account_management_events" type="win-def:EntityStateAuditType" minOccurs="0">
