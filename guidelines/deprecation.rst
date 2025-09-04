@@ -1,7 +1,7 @@
 .. _deprecation:
-.. raw:: html
 
-   <h2>OVAL Language Deprecation Policy</h2>
+OVAL Language Deprecation Policy
+===============
 
 .. raw:: html
 
