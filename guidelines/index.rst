@@ -67,6 +67,7 @@ License
    developer-guides/index
    release-streams
    versioning
+   deprecation
    oval-content-repos
    oval-support-declarations
    mailing-lists
