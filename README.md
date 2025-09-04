@@ -1,6 +1,6 @@
 # OVAL 5.12.1 Official Release
 
-**05/30/2025**
+**06/03/2025**
 For a complete list of changes, please refer to:
 - https://github.com/OVAL-Community/OVAL/issues?q=is%3Aissue+milestone%3A5.12.1+is%3Aclosed
 
