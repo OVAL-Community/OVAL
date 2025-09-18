@@ -63,4 +63,51 @@
             </xsd:complexContent>
         </xsd:complexType>
     </xsd:element>
+    
+    <!-- =============================================================================== -->
+    <!-- ===============================  VERSION ITEM  ================================ -->
+    <!-- =============================================================================== -->
+    <xsd:element name="version_item" substitutionGroup="oval-sc:item">
+        <xsd:annotation>
+            <xsd:documentation>This item stores results from checking the contents of an XML configuration.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="oval-def:StateType">
+                    <xsd:sequence>
+                        <xsd:element name="major_version" type="oval-def:EntityStateIntType" minOccurs="0" maxOccurs="1">
+                            <xsd:annotation>
+                                <xsd:documentation>The major_version entity is used to check the major version piece of the version string. The value is an integer and in the example 10.1.14-h9 the major version is '10'.</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:element>
+                        <xsd:element name="minor_version" type="oval-def:EntityStateIntType" minOccurs="0" maxOccurs="1">
+                            <xsd:annotation>
+                                <xsd:documentation>The minor_version entity is used to check the minor version piece of the version string. The value is an integer and in the example 10.1.14-h9 the minor version is '1'.</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:element>
+                        <xsd:element name="release" type="oval-def:EntityStateIntType" minOccurs="0" maxOccurs="1">
+                            <xsd:annotation>
+                                <xsd:documentation>The release entity is used to check the release piece of the version string. The value is an integer and in the example 10.1.14-h9 the release is '14'.</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:element>
+                        <xsd:element name="hotfix" type="oval-def:EntityStateIntType" minOccurs="0" maxOccurs="1">
+                            <xsd:annotation>
+                                <xsd:documentation>The hotfix entity is used to check the hotfix piece of the version string. The value is an integer and in the example 10.1.14-h9 the hotfix is '9'.</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:element>
+                        <xsd:element name="version_string" type="oval-def:EntityStateAnySimpleType" minOccurs="0" maxOccurs="1">
+                            <xsd:annotation>
+                                <xsd:documentation>The version_string entity is used to check the sw-version raw string output of a PAN-OS XML API request. The value is an string and the example 10.1.14-h9. This is entirely controlled by operator attributes.</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:element>
+                        <xsd:element name="model_name" type="oval-def:EntityStateStringType" minOccurs="0" maxOccurs="1">
+                            <xsd:annotation>
+                                <xsd:documentation>The model_name entity is used to check the model string output of a PAN-OS XML API request.</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
 </xsd:schema>
