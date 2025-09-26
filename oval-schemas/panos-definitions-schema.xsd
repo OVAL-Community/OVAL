@@ -168,4 +168,97 @@
             </xsd:complexContent>
         </xsd:complexType>
     </xsd:element>
+
+    <!-- ============================================================================ -->
+    <!-- ================================ VERSION TEST  ============================= -->
+    <!-- ============================================================================ -->
+    <xsd:element name="version_test" substitutionGroup="oval-def:test">
+        <xsd:annotation>
+              <xsd:documentation>The version_test is used to check the version from a PAN-OS XML API request. 
+              This is a request to the API at "https://[PAN-OS-DEVICE]/api/?type=op&amp;cmd=&lt;show&gt;&lt;system&gt;&lt;info&gt;&lt;/info&gt;&lt;/system&gt;&lt;/show&gt;".
+              The response to this request is an XML payload rooted with a "response" element and including device-specific information.
+              It extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information. The required object element references a version_object and the optional state element specifies the data to check.</xsd:documentation>
+              <xsd:appinfo>
+                    <oval:element_mapping>
+                          <oval:test>version_test</oval:test>
+                          <oval:object>version_object</oval:object>
+                          <oval:state>version_state</oval:state>
+                          <oval:item target_namespace="urn:oval:v6:system-characteristics:panos">version_item</oval:item>
+                    </oval:element_mapping>
+              </xsd:appinfo>
+              <xsd:appinfo>
+                    <sch:pattern id="panos-def_versiontst">
+                          <sch:rule context="panos-def:version_test/panos-def:object">
+                                <sch:assert test="@object_ref=ancestor::oval-def:oval_definitions/oval-def:objects/panos-def:version_object/@id"><sch:value-of select="../@id"/> - the object child element of a version_test must reference a version_object</sch:assert>
+                          </sch:rule>
+                          <sch:rule context="panos-def:version_test/panos-def:state">
+                                <sch:assert test="@state_ref=ancestor::oval-def:oval_definitions/oval-def:states/panos-def:version_state/@id"><sch:value-of select="../@id"/> - the state child element of a version_test must reference a version_state</sch:assert>
+                          </sch:rule>
+                    </sch:pattern>
+              </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexType>
+              <xsd:complexContent>
+                    <xsd:extension base="oval-def:TestType">
+                          <xsd:sequence>
+                                <xsd:element name="object" type="oval-def:ObjectRefType" />
+                                <xsd:element name="state" type="oval-def:StateRefType" minOccurs="0" maxOccurs="unbounded"/>
+                          </xsd:sequence>
+                    </xsd:extension>
+              </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="version_object" substitutionGroup="oval-def:object">
+          <xsd:annotation>
+                <xsd:documentation>The version_object element is used by a version_test to define the different version information associated with an PANOS system. There is actually only one object relating to version and this is the system as a whole. Therefore, there are no child entities defined. Any OVAL Test written to check version will reference the same version_object which is basically an empty object element.</xsd:documentation>
+          </xsd:annotation>
+          <xsd:complexType>
+                <xsd:complexContent>
+                      <xsd:extension base="oval-def:ObjectType"/>
+                </xsd:complexContent>
+          </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="version_state" substitutionGroup="oval-def:state">
+          <xsd:annotation>
+                <xsd:documentation>The version_state element defines the version information held within a PANOS Release.</xsd:documentation>
+          </xsd:annotation>
+          <xsd:complexType>
+                <xsd:complexContent>
+                      <xsd:extension base="oval-def:StateType">
+                            <xsd:sequence>
+                                <xsd:element name="major_version" type="oval-def:EntityStateIntType" minOccurs="0" maxOccurs="1">
+                                    <xsd:annotation>
+                                        <xsd:documentation>The major_version entity is used to check the major version piece of the version string. The value is an integer and in the example 10.1.14-h9 the major version is '10'.</xsd:documentation>
+                                    </xsd:annotation>
+                                </xsd:element>
+                                <xsd:element name="minor_version" type="oval-def:EntityStateIntType" minOccurs="0" maxOccurs="1">
+                                    <xsd:annotation>
+                                        <xsd:documentation>The minor_version entity is used to check the minor version piece of the version string. The value is an integer and in the example 10.1.14-h9 the minor version is '1'.</xsd:documentation>
+                                    </xsd:annotation>
+                                </xsd:element>
+                                <xsd:element name="release" type="oval-def:EntityStateIntType" minOccurs="0" maxOccurs="1">
+                                    <xsd:annotation>
+                                        <xsd:documentation>The release entity is used to check the release piece of the version string. The value is an integer and in the example 10.1.14-h9 the release is '14'.</xsd:documentation>
+                                    </xsd:annotation>
+                                </xsd:element>
+                                <xsd:element name="hotfix" type="oval-def:EntityStateIntType" minOccurs="0" maxOccurs="1">
+                                    <xsd:annotation>
+                                        <xsd:documentation>The Hotfix entity is used to check the hotfix piece of the version string. The value is an integer and in the example 10.1.14-h9 the hotfix is '9'.</xsd:documentation>
+                                    </xsd:annotation>
+                                </xsd:element>
+                                <xsd:element name="version_string" type="oval-def:EntityStateAnySimpleType" minOccurs="0" maxOccurs="1">
+                                    <xsd:annotation>
+                                        <xsd:documentation>The version_string entity is used to check the sw-version raw string output of a PAN-OS XML API request. The value is an string and the example 10.1.14-h9</xsd:documentation>
+                                    </xsd:annotation>
+                                </xsd:element>
+                                <xsd:element name="model_name" type="oval-def:EntityStateStringType" minOccurs="0" maxOccurs="1">
+                                    <xsd:annotation>
+                                        <xsd:documentation>The model_name entity is used to check the model string output of a PAN-OS XML API request.</xsd:documentation>
+                                    </xsd:annotation>
+                                </xsd:element>
+                            </xsd:sequence>
+                      </xsd:extension>
+                </xsd:complexContent>
+          </xsd:complexType>
+    </xsd:element>
 </xsd:schema>
