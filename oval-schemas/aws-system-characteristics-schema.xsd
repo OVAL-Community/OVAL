@@ -1,4 +1,4 @@
-<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:oval-sc="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:aws-sc="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#aws" xmlns:sch="http://purl.oclc.org/dsdl/schematron" targetNamespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#aws" elementFormDefault="qualified" version="5.12.1">
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:oval-sc="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:aws-sc="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#aws" xmlns:sch="http://purl.oclc.org/dsdl/schematron" targetNamespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#aws" elementFormDefault="qualified" version="5.12.2">
     <xsd:import namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5" schemaLocation="oval-system-characteristics-schema.xsd"/>
     
     <xsd:annotation>
@@ -17,8 +17,8 @@
         </xsd:documentation>
         <xsd:appinfo>
             <schema>Amazon Web Services System Characteristics</schema>
-            <version>5.12.1</version>
-            <date>05/23/2025 09:00:00 AM</date>
+            <version>5.12.2</version>
+            <date>11/25/2025 09:00:00 AM</date>
             <terms_of_use>
                 For the portion subject to the copyright in the United States: Copyright (c) 2016 United States Government. All Rights 
                 Reserved. Copyright (c) 2016, Center for Internet Security. All rights reserved. The contents of this file are subject 
