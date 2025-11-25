@@ -1,8 +1,8 @@
 Open Vulnerability and Assessment Language: Independent Definition  
 =========================================================
 * Schema: Independent Definition  
-* Version: 5.12.1  
-* Release Date: 05/23/2025 09:00:00 AM
+* Version: 5.12.2  
+* Release Date: 11/25/2025 09:00:00 AM
 
 The following is a description of the elements, types, and attributes that compose the tests found in Open Vulnerability and Assessment Language (OVAL) that are independent of a specific piece of software. Each test is described in detail and should provide the information necessary to understand what each element and attribute represents. This document is intended for developers and assumes some familiarity with XML. A high level description of the interaction between the different tests and their relationship to the Core Definition Schema is not outlined here.
 
@@ -771,13 +771,13 @@ Child Elements
       - oval-def:EntityStateIntType (0..1)  
       - The 'exit_status' entity represents the exist status returned by the system for the execution of the object command.  
     * - stdout_line  
-      - oval-def:EntityStateAnySimpleType (0..unbounded)  
+      - oval-def:EntityStateAnySimpleType (0..1)  
       - The 'stdout_line' entity represents a line from the STDOUT output of a successful run of the command string that matched the specified object pattern.  
     * - subexpression  
       - oval-def:EntityStateAnySimpleType (0..1)  
       - The subexpression entity represents a value to test against the subexpression in the specified pattern. If multiple subexpressions are specified in the pattern, this value is tested against all of them. For example, if the pattern abc(.*)mno(.*)xyp was supplied, and the state specifies a subexpression value of enabled, then the test would check that both (or at least one, none, etc. depending on the entity_check attribute) of the subexpressions have a value of enabled.  
     * - stderr_line  
-      - oval-def:EntityStateStringType (0..unbounded)  
+      - oval-def:EntityStateStringType (0..1)  
       - The 'stderr_line' element contains any and all output to STDERR from a run of the object command. Each line of STDERR should create an additional 'stderr_line' element.  
   
 ______________

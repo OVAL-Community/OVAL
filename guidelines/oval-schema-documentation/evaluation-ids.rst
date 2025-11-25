@@ -1,8 +1,8 @@
 Open Vulnerability and Assessment Language: OVAL Definition Interpreter - Evaluation Id Schema  
 =========================================================
 * Schema: OVAL Definition Interpreter - Evaluation Id Schema  
-* Version: 5.12.1  
-* Release Date: 05/23/2025 09:00:00 AM
+* Version: 5.12.2  
+* Release Date: 11/25/2025 09:00:00 AM
 
 This schema defines an xml format for inputing a set of OVAL Definition ids into the reference OVAL Interpreter for evaluation.
 
