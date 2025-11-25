@@ -1,8 +1,8 @@
 Open Vulnerability and Assessment Language: Unix System Characteristics  
 =========================================================
 * Schema: Unix System Characteristics  
-* Version: 5.12.1  
-* Release Date: 05/23/2025 09:00:00 AM
+* Version: 5.12.2  
+* Release Date: 11/25/2025 09:00:00 AM
 
 The following is a description of the elements, types, and attributes that compose the UNIX specific system characteristic items found in Open Vulnerability and Assessment Language (OVAL). Each item is an extension of the standard item element defined in the Core System Characteristic Schema. Through extension, each item inherits a set of elements and attributes that are shared amongst all OVAL Items. Each item is described in detail and should provide the information necessary to understand what each element and attribute represents. This document is intended for developers and assumes some familiarity with XML. A high level description of the interaction between the different tests and their relationship to the Core System Characteristic Schema is not outlined here.
 
@@ -10,15 +10,15 @@ The OVAL Schema is maintained by the OVAL Community. For more information, inclu
 
 Item Listing  
 ---------------------------------------------------------
-* :ref:`dnscache_item`  
-* :ref:`file_item`  
+* :ref:`dnscache_item_unix`  
+* :ref:`file_item_unix`  
 * :ref:`fileextendedattribute_item`  
 * :ref:`gconf_item`  
 * :ref:`inetd_item`  
-* :ref:`interface_item`  
+* :ref:`interface_item_unix`  
 * :ref:`password_item`  
 * :ref:`process_item`  
-* :ref:`process58_item`  
+* :ref:`process58_item_unix`  
 * :ref:`routingtable_item`  
 * :ref:`runlevel_item`  
 * :ref:`sccs_item`  
@@ -31,7 +31,7 @@ Item Listing
   
 ______________
   
-.. _dnscache_item:  
+.. _dnscache_item_unix:  
   
 < dnscache_item >  
 ---------------------------------------------------------
@@ -59,7 +59,7 @@ Child Elements
   
 ______________
   
-.. _file_item:  
+.. _file_item_unix:  
   
 < file_item >  
 ---------------------------------------------------------
@@ -264,7 +264,7 @@ Child Elements
   
 ______________
   
-.. _interface_item:  
+.. _interface_item_unix:  
   
 < interface_item >  
 ---------------------------------------------------------
@@ -401,7 +401,7 @@ Child Elements
   
 ______________
   
-.. _process58_item:  
+.. _process58_item_unix:  
   
 < process58_item >  
 ---------------------------------------------------------

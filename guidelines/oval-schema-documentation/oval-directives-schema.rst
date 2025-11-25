@@ -1,8 +1,8 @@
 Open Vulnerability and Assessment Language: Core Directives  
 =========================================================
 * Schema: Core Directives  
-* Version: 5.12.1  
-* Release Date: 05/23/2025 09:00:00 AM
+* Version: 5.12.2  
+* Release Date: 11/25/2025 09:00:00 AM
 
 The following is a description of the elements, types, and attributes that compose the core schema for encoding Open Vulnerability and Assessment Language (OVAL) Directives. Each of the elements, types, and attributes that make up the Core Directives Schema are described in detail and should provide the information necessary to understand what each object represents. This document is intended for developers and assumes some familiarity with XML. A high level description of the interaction between these objects is not outlined here.
 

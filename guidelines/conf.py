@@ -24,9 +24,9 @@ copyright = '2018, COPYRIGHT STATEMENT TBD.'
 author = 'The OVAL community with notable contributions by David Ries (jovalcm.com), Adam Montville (cisecurity.org), and Bill Munyan (cisecurity.org).'
 
 # The short X.Y version
-version = '5.12.1'
+version = '5.12.2'
 # The full version, including alpha/beta/rc tags
-release = '5.12.1'
+release = '5.12.2'
 
 
 # -- General configuration ---------------------------------------------------
