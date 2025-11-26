@@ -5,7 +5,7 @@
 
 .. _welcome-to-the-guidelines:
 
-The OVAL Community Version 5.12.1 Documentation
+The OVAL Community Version 5.12.2 Documentation
 
 =========================================
 
@@ -13,6 +13,7 @@ Welcome to the guidelines for OVAL, the Open Vulnerability and Assessment Langua
 
 If you are looking for documentation for documentation on previous versions of OVAL
 
+* OVAL version 5.12.1:  https://oval-community-guidelines.readthedocs.io/en/5.12.1_release/
 * OVAL version 6.0:  https://oval-community-guidelines.readthedocs.io/en/6.0_release/
 * OVAL version 5.12:  https://oval-community-guidelines.readthedocs.io/en/5.12_release/
 * OVAL version 5.11.2:  https://oval-community-guidelines.readthedocs.io/en/5.11.2_release/
