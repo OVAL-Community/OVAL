@@ -11,12 +11,12 @@ The OVAL Community Version 5.12.2 Documentation
 
 Welcome to the guidelines for OVAL, the Open Vulnerability and Assessment Language. These guidelines are designed to explain everything you need to know to start contributing to OVAL (or link you to places to ask questions, should the explanations not suffice), as well as provide a variety of standards and resources to the community.
 
+OVAL 5.12.2 is designed to align with NIST's SCAP 1.4 release.
+
 If you are looking for documentation for documentation on previous versions of OVAL
 
-* OVAL version 5.12.1:  https://oval-community-guidelines.readthedocs.io/en/5.12.1_release/
-* OVAL version 6.0:  https://oval-community-guidelines.readthedocs.io/en/6.0_release/
-* OVAL version 5.12:  https://oval-community-guidelines.readthedocs.io/en/5.12_release/
-* OVAL version 5.11.2:  https://oval-community-guidelines.readthedocs.io/en/5.11.2_release/
+* OVAL version 5.11.2 (SCAP 1.3):  https://oval-community-guidelines.readthedocs.io/en/5.11.2_release/
+* OVAL version 6.0 (Future SCAP 3.0):  https://oval-community-guidelines.readthedocs.io/en/v6.0/
 
 **Notice:**
 
