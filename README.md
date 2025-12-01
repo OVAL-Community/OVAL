@@ -1,3 +1,13 @@
+# OVAL 5.12.2 Official Release
+The OVAL board is proud to announce the release of OVAL 5.12.2 which is intended to align with NIST's upcoming SCAP 1.4 release.  
+
+**12/01/2025**
+For a complete list of changes, please refer to:
+- [https://github.com/OVAL-Community/OVAL/issues?q=is%3Aissue+milestone%3A5.12.2+is%3Aclosed](https://github.com/OVAL-Community/OVAL/pulls?q=is%3Apr+is%3Aclosed+milestone%3A5.12.2)
+ 
+To download a copy of the OVAL 5.12.2 schema, and offline HTML files, view the following and download the release zips from the Assets.
+- https://github.com/OVAL-Community/OVAL/releases/tag/v5.12.2
+
 # OVAL 5.12.1 Official Release
 
 **06/03/2025**
@@ -8,6 +18,8 @@ To download a copy of the OVAL 5.12.2 schema, and offline HTML files, view the f
 - https://github.com/OVAL-Community/OVAL/releases/tag/v5.12.1
 
 # OVAL 6.0 Official Release
+**12/01/2025**
+Note:  OVAL 6.0.x development is now on hold, pending future discussions with NIST on SCAP 3.0.   OVAL 5.12.x should be used for all 'stable' SCAP development at this time.
 
 **01/24/2025**
 The OVAL board is proud to announce the release of OVAL 6.0, which is the first 'major' release of OVAL in nearly 20 years.   OVAL 5.0 was released back in 2006!
@@ -35,13 +47,11 @@ To download a copy of the OVAL 5.12 schema, and offline HTML files, view the fol
 
 # The OVAL Language Documentation
 
-For OVAL 5.12.1 Documenation:  https://oval-community-guidelines.readthedocs.io/en/5.12.1_release/
+For OVAL 5.12.2 Documenation:  tps://oval-community-guidelines.readthedocs.io/en/v5.12.2/
 
-For OVAL 6.0 Documentation https://oval-community-guidelines.readthedocs.io/en/6.0_release/
+For OVAL 6.0 Documentation https://oval-community-guidelines.readthedocs.io/en/v6.0/
 
-For OVAL 5.12 Documenation:  https://oval-community-guidelines.readthedocs.io/en/5.12_release/
-
-For OVAL 5.11.2 Documentation https://oval-community-guidelines.readthedocs.io/en/5.11.2_release/
+For OVAL 5.11.2 Documentation https://oval-community-guidelines.readthedocs.io/en/5.11.2_release
 
 # Notice:
 
