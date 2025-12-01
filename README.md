@@ -47,11 +47,11 @@ To download a copy of the OVAL 5.12 schema, and offline HTML files, view the fol
 
 # The OVAL Language Documentation
 
-For OVAL 5.12.2 Documenation:  tps://oval-community-guidelines.readthedocs.io/en/v5.12.2/
+For OVAL 5.12.2 Documenation (SCAP 1.4):  https://oval-community-guidelines.readthedocs.io/en/v5.12.2/
 
-For OVAL 6.0 Documentation https://oval-community-guidelines.readthedocs.io/en/v6.0/
+For OVAL 5.11.2 Documentation (SCAP 1.3): https://oval-community-guidelines.readthedocs.io/en/5.11.2_release
 
-For OVAL 5.11.2 Documentation https://oval-community-guidelines.readthedocs.io/en/5.11.2_release
+For OVAL 6.0 Documentation (Future SCAP 3.0): https://oval-community-guidelines.readthedocs.io/en/v6.0/
 
 # Notice:
 
