@@ -1,8 +1,8 @@
 Open Vulnerability and Assessment Language: UNIX Definition  
 =========================================================
 * Schema: UNIX Definition  
-* Version: 5.12.1  
-* Release Date: 05/23/2025 09:00:00 AM
+* Version: 5.12.2  
+* Release Date: 11/25/2025 09:00:00 AM
 
 The following is a description of the elements, types, and attributes that compose generic UNIX tests found in Open Vulnerability and Assessment Language (OVAL). Each test is an extension of the standard test element defined in the Core Definition Schema. Through extension, each test inherits a set of elements and attributes that are shared amongst all OVAL tests. Each test is described in detail and should provide the information necessary to understand what each element and attribute represents. This document is intended for developers and assumes some familiarity with XML. A high level description of the interaction between the different tests and their relationship to the Core Definition Schema is not outlined here.
 
@@ -10,15 +10,15 @@ The OVAL Schema is maintained by the OVAL Community. For more information, inclu
 
 Test Listing  
 ---------------------------------------------------------
-* :ref:`dnscache_test` (Deprecated)  
-* :ref:`file_test`  
+* :ref:`dnscache_test_unix` (Deprecated)  
+* :ref:`file_test_unix`  
 * :ref:`fileextendedattribute_test` (Deprecated)  
 * :ref:`gconf_test` (Deprecated)  
 * :ref:`inetd_test` (Deprecated)  
-* :ref:`interface_test`  
+* :ref:`interface_test_unix`  
 * :ref:`password_test`  
 * :ref:`process_test` (Deprecated)  
-* :ref:`process58_test`  
+* :ref:`process58_test_unix`  
 * :ref:`routingtable_test` (Deprecated)  
 * :ref:`runlevel_test`  
 * :ref:`sccs_test` (Deprecated)  
@@ -31,7 +31,7 @@ Test Listing
   
 ______________
   
-.. _dnscache_test:  
+.. _dnscache_test_unix:  
   
 < dnscache_test > (Deprecated)  
 ---------------------------------------------------------
@@ -111,7 +111,7 @@ Child Elements
   
 ______________
   
-.. _file_test:  
+.. _file_test_unix:  
   
 < file_test >  
 ---------------------------------------------------------
@@ -596,7 +596,7 @@ Child Elements
   
 ______________
   
-.. _interface_test:  
+.. _interface_test_unix:  
   
 < interface_test >  
 ---------------------------------------------------------
@@ -888,7 +888,7 @@ Child Elements
   
 ______________
   
-.. _process58_test:  
+.. _process58_test_unix:  
   
 < process58_test >  
 ---------------------------------------------------------
