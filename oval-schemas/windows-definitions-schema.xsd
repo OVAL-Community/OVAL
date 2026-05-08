@@ -3931,6 +3931,8 @@
                   <xsd:documentation>The ntuser test is used to check metadata associated with Windows ntuser.dat files. It extends the standard TestType as defined in the oval-definitions-schema and
                         one should refer to the TestType description for more information. The required object element references a ntuser_object and the optional state element specifies the ntuser
                         data to check.</xsd:documentation>
+						
+						<xsd:documentation>To ensure consistent results across OVAL interpreters, application developers should refer to documentation in the ntuser_item when implenting this test.</xsd:documentation>
                   <xsd:appinfo>
                         <oval:element_mapping>
                               <oval:test>ntuser_test</oval:test>
@@ -4035,11 +4037,13 @@
                                     <xsd:element name="key" type="oval-def:EntityStateStringType" minOccurs="0">
                                           <xsd:annotation>
                                                 <xsd:documentation>This element describes a registry key normally found in the HKCU hive to be tested.</xsd:documentation>
+												<xsd:documentation>Note:  The key not existing on the target does not impact the overall existence of the ntuser_item.</xsd:documentation>
                                           </xsd:annotation>
                                     </xsd:element>
                                     <xsd:element name="name" type="oval-def:EntityStateStringType" minOccurs="0">
                                           <xsd:annotation>
                                                 <xsd:documentation>This element describes the name of a value of a registry key.</xsd:documentation>
+												<xsd:documentation>Note:  The name not existing on the target does not impact the overall existence of the ntuser_item.</xsd:documentation>
                                           </xsd:annotation>
                                     </xsd:element>
                                     <xsd:element name="sid" type="oval-def:EntityStateStringType" minOccurs="0">
@@ -4062,16 +4066,18 @@
                                     <xsd:element name="logged_on" type="oval-def:EntityStateBoolType" minOccurs="0">
                                           <xsd:annotation>
                                                 <xsd:documentation>The logged_on element describes if the user account is currently logged on to the computer.</xsd:documentation>
+												<xsd:documentation>This can be determined by comparing the SID’s against those populated in HKEY_USERS</xsd:documentation>
                                           </xsd:annotation>
                                     </xsd:element>
 								  <xsd:element name="days_since_last_logon" type="oval-def:EntityStateIntType" minOccurs="0" maxOccurs="1">
 									   <xsd:annotation>
-											<xsd:documentation>The last_logon data, converted to days and then rounded down to the nearest integer (floor function). If the account is determined to be currently logged in, this date should be reported as 0.</xsd:documentation>
+											<xsd:documentation>The last_logon data which can be obtained from the LocalProfileLoadTimeHigh and LocalProfileLoadTimeLow values, converted to days and then rounded down to the nearest integer (floor function). If the account is determined to be currently logged in, this date should be reported as 0.</xsd:documentation>
 									   </xsd:annotation>
 								  </xsd:element>
                                     <xsd:element name="enabled" type="oval-def:EntityStateBoolType" minOccurs="0">
                                           <xsd:annotation>
                                                 <xsd:documentation>The enabled element describes if the user account is enabled or disabled.</xsd:documentation>
+												<xsd:documentation>Note: For domain users, if a domain controller is not available, this will not return data.  If using this data for a filter to include enabled accounts, it’s recommended to exclude accounts that are have been determined to be disabled, vs including ones that are enabled, as the later may filter out accounts for which the domain controller could not return data.</xsd:documentation>
                                           </xsd:annotation>
                                     </xsd:element>
                                     <xsd:element name="date_modified" type="oval-def:EntityStateIntType" minOccurs="0">
@@ -4088,6 +4094,7 @@
                                     <xsd:element name="filepath" type="oval-def:EntityStateStringType" minOccurs="0">
                                           <xsd:annotation>
                                                 <xsd:documentation>This element describes the filepath of the ntuser.dat file.</xsd:documentation>
+												<xsd:documentation>The existance of each ntuser.dat file determines the overall ntuser_item existence.</xsd:documentation>
                                           </xsd:annotation>
                                     </xsd:element>
                                     <xsd:element name="last_write_time" type="oval-def:EntityStateIntType" minOccurs="0">
