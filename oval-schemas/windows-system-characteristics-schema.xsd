@@ -3714,7 +3714,7 @@
                               </xsd:element>
                               <xsd:element name="wql" type="oval-sc:EntityItemStringType" minOccurs="0" maxOccurs="1">
                                    <xsd:annotation>
-                                        <xsd:documentation>A WQL query used to identify the object(s) specified. Any valid WQL query is allowed with one exception, all fields must be named. For example SELECT name, age FROM ... is valid, but SELECT * FROM ... is not valid. This is because the record entity supports only named fields.</xsd:documentation>
+                                        <xsd:documentation>A valid WQL query used to identify the object(s) to test against. All fields must be named in the SELECT portion of the query. For example SELECT name, age FROM ... is valid. However, SELECT * FROM ... is not valid. This is because the record element in the state and item require a unique field name value to ensure that any query results can be evaluated consistently. Due to limitations of the record element, only queries returning simple datatypes are supported. An error should be reported on a field returning a complex datatype.</xsd:documentation>
                                    </xsd:annotation>
                               </xsd:element>
                               <xsd:element name="result" type="oval-sc:EntityItemRecordType" minOccurs="0" maxOccurs="unbounded">
