@@ -1045,6 +1045,7 @@ The evaluation of the object should always produce one item. If the command exec
                                     <xsd:choice>
                                           <xsd:element ref="oval-def:set"/>
                                           <xsd:sequence>
+												<xsd:element name="behaviors" type="ind-def:ShellCommandBehaviors" minOccurs="0"/>
                                                 <xsd:element name="shell" type="ind-def:EntityObjectShellType" minOccurs="1" maxOccurs="1" >
                                                       <xsd:annotation>
                                                             <xsd:documentation>The shell entity defines the specific shell to use (e.g. bash, csh, ksh, etc.). Any tool collecting information for this object will need to know the shell in order to use it properly.</xsd:documentation>
@@ -1137,7 +1138,21 @@ A subexpression (using parentheses) can call out a piece of the matched stdout_l
                   </xsd:complexContent>
             </xsd:complexType>
       </xsd:element>
-	 
+      <xsd:complexType name="ShellCommandBehaviors">
+            <xsd:annotation>
+                  <xsd:documentation>The ShellCommandBehaviors complex type defines behaviors that allow content authors to determine when a shellcommand item may have a status set to 'error'.  By default all shellcommands are set to 'exist', with any error data captured as part of the stderr_line elment and exit_status element.</xsd:documentation>
+            </xsd:annotation>
+			<xsd:attribute name="error_if_exit_status_not_0" type="xsd:boolean" use="optional" default="false">
+				  <xsd:annotation>
+						<xsd:documentation>'error_if_exit_status_not_0' enables the OVAL interpeter to set the shellcommand item to a status of 'error' if exit_status is not set to 0.  The default is false.</xsd:documentation>
+				  </xsd:annotation>
+			</xsd:attribute>
+			<xsd:attribute name="error_if_stderr_exists" type="xsd:boolean" use="optional" default="false">
+				  <xsd:annotation>
+						<xsd:documentation>'error_if_stderr_exists' enables the OVAL interpeter to set the shellcommand item to a status of 'error' if data is returned to stderr.  The default is false.</xsd:documentation>
+				  </xsd:annotation>
+			</xsd:attribute>
+      </xsd:complexType>	 
 	  
       <!-- =============================================================================== -->
       <!-- =================================  SQL TEST  ================================== -->
