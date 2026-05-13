@@ -1680,7 +1680,8 @@
                               <xsd:element name="logged_on" type="oval-sc:EntityItemBoolType" minOccurs="0" maxOccurs="1">
                                    <xsd:annotation>
                                         <xsd:documentation>The logged_on element describes if the user account is currently logged on to the computer.</xsd:documentation>
-										<xsd:documentation>This can be determined by comparing the SIDs collected from the ProfileList against those populated in HKEY_USERS</xsd:documentation>
+										<xsd:documentation>This can be determined by comparing the SIDs collected from the ProfileList against those populated in HKEY_USERS\&lt;SID&gt;</xsd:documentation>
+										<xsd:documentation>HKEY_USERS: Contains all the actively loaded user profiles on the computer.  https://learn.microsoft.com/en-us/troubleshoot/windows-server/performance/windows-registry-advanced-users</xsd:documentation>
                                    </xsd:annotation>
                               </xsd:element>
                               <xsd:element name="days_since_last_logon" type="oval-sc:EntityItemIntType" minOccurs="0" maxOccurs="1">
