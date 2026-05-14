@@ -4064,7 +4064,9 @@
                                     <xsd:element name="logged_on" type="oval-def:EntityStateBoolType" minOccurs="0">
                                           <xsd:annotation>
                                                 <xsd:documentation>The logged_on element describes if the user account is currently logged on to the computer.</xsd:documentation>
-												<xsd:documentation>This can be determined by comparing the SID’s against those populated in HKEY_USERS.</xsd:documentation>
+												<xsd:documentation>This can be determined by comparing the SIDs collected from the ProfileList against those populated in HKEY_USERS\&lt;SID&gt;</xsd:documentation>
+												<xsd:documentation>HKEY_USERS: Contains all the actively loaded user profiles on the computer.  https://learn.microsoft.com/en-us/troubleshoot/windows-server/performance/windows-registry-advanced-users</xsd:documentation>
+												<xsd:documentation>This data can also be obtained by other various Windows API's such as a combination of win32_logonsession and win32_loggedonuser, but the specifics are beyond the scope of OVAL documentation.</xsd:documentation>
                                           </xsd:annotation>
                                     </xsd:element>
 								  <xsd:element name="days_since_last_logon" type="oval-def:EntityStateIntType" minOccurs="0" maxOccurs="1">
