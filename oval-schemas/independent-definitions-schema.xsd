@@ -1916,6 +1916,19 @@ SERVERPROPERTY('IsClustered') AS [is_clustered]
                                     <xsd:documentation>'singleline' enables single line semantics in the regular expression provided by the pattern entity. This behavior is intended to align with the Perl regular expression 's' modifier: if true, the '.' metacharacter will match newlines. If false, it will not.  The default is false.</xsd:documentation>
                               </xsd:annotation>
                         </xsd:attribute>
+						<xsd:attribute name="item_creation" use="optional" default="all_object_elements_fullfilled">
+							  <xsd:annotation>
+									<xsd:documentation>For 'all_object_elements_fullfilled', items are only created when the entire object requirements are met (filepath, pattern, instance).</xsd:documentation>
+									<xsd:documentation>For 'filepath_exists', items are created for each filepath on the system that matches the filepath/path/filname object requirement.  This option will prevent false negatives in instances where text files exist that match the filepath object requirements, but do not contain the required pattern inside the file, which prevents item creation.</xsd:documentation>
+									<xsd:documentation></xsd:documentation>
+							  </xsd:annotation>
+							  <xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										  <xsd:enumeration value="all_object_elements_fullfilled"/>
+										  <xsd:enumeration value="filepath_exists"/>
+									</xsd:restriction>
+							  </xsd:simpleType>
+						</xsd:attribute>	
                   </xsd:extension>
             </xsd:complexContent>
       </xsd:complexType>
@@ -2275,7 +2288,7 @@ SERVERPROPERTY('IsClustered') AS [is_clustered]
                                     <xsd:choice>
                                           <xsd:element ref="oval-def:set"/>
                                           <xsd:sequence>
-                                                <xsd:element name="behaviors" type="ind-def:FileBehaviors" minOccurs="0" maxOccurs="1"/>
+                                                <xsd:element name="behaviors" type="ind-def:XMLFileContentBehaviors" minOccurs="0" maxOccurs="1"/>
                                                 <xsd:choice>
                                                       <xsd:element name="filepath" type="oval-def:EntityObjectStringType">
                                                             <xsd:annotation>
@@ -2387,6 +2400,31 @@ SERVERPROPERTY('IsClustered') AS [is_clustered]
                   </xsd:complexContent>
             </xsd:complexType>
       </xsd:element>
+	  
+      <xsd:complexType name="XMLFileContentBehaviors">
+            <xsd:annotation>
+                  <xsd:documentation>The XMLFileContentBehaviors complex type defines a number of behaviors that allow a more detailed definition of the xmlfilecontent_object being specified.  Note that using these behaviors may result in some unique results.  For example, a double negative type condition might be created where an object entity says include everything except a specific item, but a behavior is used that might then add that item back in.</xsd:documentation>
+                  <xsd:documentation>It is important to note that the 'max_depth' and 'recurse_direction' attributes of the 'behaviors' element do not apply to the 'filepath' element, only to the 'path' and 'filename' elements.  This is because the 'filepath' element represents an absolute path to a particular file and it is not possible to recurse over a file.</xsd:documentation>
+                  <xsd:documentation>The XMLFileContentBehaviors extend the ind-def:FileBehaviors and therefore include the behaviors defined by that type.</xsd:documentation>
+            </xsd:annotation>
+            <xsd:complexContent>
+                  <xsd:extension base="ind-def:FileBehaviors">
+						<xsd:attribute name="item_creation" use="optional" default="all_object_elements_fullfilled">
+							  <xsd:annotation>
+									<xsd:documentation>For 'all_object_elements_fullfilled', items are only created when the entire object requirements are met (filepath, xpath).</xsd:documentation>
+									<xsd:documentation>For 'filepath_exists', items are created for each filepath on the system that matches the filepath/path/filname object requirement.  This option will prevent false negatives in instances where XML files exist that match the filepath object requirements, but do not contain the required xpath inside the file, which prevents item creation.</xsd:documentation>
+									<xsd:documentation></xsd:documentation>
+							  </xsd:annotation>
+							  <xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										  <xsd:enumeration value="all_object_elements_fullfilled"/>
+										  <xsd:enumeration value="filepath_exists"/>
+									</xsd:restriction>
+							  </xsd:simpleType>
+						</xsd:attribute>	
+                  </xsd:extension>
+            </xsd:complexContent>
+      </xsd:complexType>
       <!-- =============================================================================== -->
       <!-- ===========================  YAML FILE CONTENT TEST  ========================== -->
       <!-- =============================================================================== -->
