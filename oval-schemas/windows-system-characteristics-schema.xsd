@@ -1693,7 +1693,7 @@
                               </xsd:element>	
 							<xsd:element name="user_has_signed_into_explorer" type="oval-sc:EntityItemBoolType" minOccurs="0" maxOccurs="1">
 								<xsd:annotation>
-									<xsd:documentation>The user_has_signed_into_explorer element describes if the user account has ever interactively logged into Windows Explorer.  This is important as User GPO's are applied when a user logs into Windows Explorer, and are not applied for non-interactive logins such as SSH or WinRM.  Those non-interactive logins may cause false positives, and content authors may want to filter them out.</xsd:documentation>
+									<xsd:documentation>The user_has_signed_into_explorer element describes if the user account has ever run Windows Explorer. This is a practical indicator of accounts using interactive (desktop/GUI) sessions and is not set by non-interactive logon methods such as WinRM or SSH. Content authors may use this element to exclude non-interactive users from user policy checks.</xsd:documentation>
 									<xsd:documentation>This can be determined by gathering the Software\Microsoft\Windows\CurrentVersion\Explorer\UserSigned value for the given ntuser.dat profile, 1 = true and 0 = false.</xsd:documentation>
 								</xsd:annotation>
 							</xsd:element>							  
