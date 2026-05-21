@@ -1711,7 +1711,6 @@
                               <xsd:element name="filepath" type="oval-sc:EntityItemStringType" minOccurs="0" maxOccurs="1">
                                    <xsd:annotation>
                                         <xsd:documentation>This element describes the filepath of the ntuser.dat file.</xsd:documentation>
-										<xsd:documentation>The existance of each ntuser.dat file determines the overall ntuser_item existence.</xsd:documentation>
                                    </xsd:annotation>
                               </xsd:element>
                               <xsd:element name="last_write_time" type="oval-sc:EntityItemIntType" minOccurs="0" maxOccurs="1">
