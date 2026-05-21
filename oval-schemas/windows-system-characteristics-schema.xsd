@@ -1629,6 +1629,20 @@
      <xsd:element name="ntuser_item" substitutionGroup="oval-sc:item">
           <xsd:annotation>
                <xsd:documentation>The windows ntuser_item specifies information that can be collected from a particular ntuser.dat file.</xsd:documentation>
+<xsd:documentation>To ensure consistent results across OVAL interpreters, the following implementation methods are recommended.  Note that there may be other technical ways to obtain the data, which vendors may choose to implement.</xsd:documentation>
+<xsd:documentation>1.	Finding Human User Profiles </xsd:documentation>
+<xsd:documentation>	 a.	Obtain a list of User Profiles from the following registry key, where each subkey is a profile that may be included in scope for this test</xsd:documentation>
+<xsd:documentation>		i.	HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\WindowsNT\CurrentVersion\ProfileList</xsd:documentation>
+<xsd:documentation>	 b.	Determine which user profiles are from ‘human’ users</xsd:documentation>
+<xsd:documentation>		i.	Exclude profiles for LocalService, Network service etc.. by excluding subkeys in the format of S-1-5-&lt;number*gt;</xsd:documentation>
+<xsd:documentation>		ii.	Exclude profiles for Per-Service SIDs by excluding subkeys in the format of S-1-5-80-&lt;number*gt;-&lt;number*gt;-&lt;number*gt;-&lt;number*gt;-&lt;number*gt;</xsd:documentation>
+<xsd:documentation>		iii. Include Local and Domain User SIDs by including subkeys match the format of S-1-5-21-&lt;number*gt;-&lt;number*gt;-&lt;number*gt;-&lt;number*gt;</xsd:documentation>
+<xsd:documentation>	 c.	Obtain ntuser filepath from the ProfileImagePath value of 'human' profiles</xsd:documentation>
+<xsd:documentation>2.	Gathering per user registry key data</xsd:documentation>
+<xsd:documentation>	a.	If a user is logged in, their ntuser.dat file will be locked and the OVAL interpreter will not be able to read it, the OVAL interpreter will need to obtain that data from HKEY_USERS\&lt;sid_of_logged_in_user&gt;</xsd:documentation>
+<xsd:documentation>	b.	If a user is not logged in, the OVAL interpreter will need to obtain the data directly from the users ntuser.dat file.</xsd:documentation>
+<xsd:documentation>	Note: There are many different methods depenending on programming language to parse ntuser.dat files, and each OVAL interpreter may choose their own methods.</xsd:documentation>
+<xsd:documentation>	If no other programming language native methods are available, it is advised not to load the ntuser.dat file directly from its original location, as it will lock the file and prevent that user from logging into Windows.</xsd:documentation>
           </xsd:annotation>
           <xsd:complexType>
                <xsd:complexContent>

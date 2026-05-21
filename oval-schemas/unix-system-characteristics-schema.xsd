@@ -761,7 +761,20 @@
      <xsd:element name="runlevel_item" substitutionGroup="oval-sc:item">
           <xsd:annotation>
                <xsd:documentation>The runlevel item holds information about the start or kill state of a specified service at a given runlevel. Each runlevel item contains service name and runlevel information as well as start and kill information. It extends the standard ItemType as defined in the oval-system-characteristics schema and one should refer to the ItemType description for more information.</xsd:documentation>
-          </xsd:annotation>
+          
+		        <xsd:appinfo>
+                    <oval:deprecated_info>
+                         <oval:version>5.12.3</oval:version>
+                         <oval:reason>The runlevel_item has been deprecated because runlevel is obsolete.  The runlevel_item may be removed in a future version of the language.</oval:reason>
+                    </oval:deprecated_info>
+                    <sch:pattern id="unix-sc_runlevelitem_dep">
+                         <sch:rule context="unix-sc:runlevel_item">
+                              <sch:report test="true()">DEPRECATED ITEM: <sch:value-of select="name()"/> ID: <sch:value-of select="@id"/></sch:report>
+                         </sch:rule>
+                    </sch:pattern>
+               </xsd:appinfo>
+		  
+		  </xsd:annotation>
           <xsd:complexType>
                <xsd:complexContent>
                     <xsd:extension base="oval-sc:ItemType">
@@ -1177,7 +1190,20 @@
      <xsd:element name="xinetd_item" substitutionGroup="oval-sc:item">
           <xsd:annotation>
                <xsd:documentation>The xinetd item holds information associated with different Internet services. It extends the standard ItemType as defined in the oval-system-characteristics schema and one should refer to the ItemType description for more information.</xsd:documentation>
-          </xsd:annotation>
+          
+		        <xsd:appinfo>
+                    <oval:deprecated_info>
+                         <oval:version>5.12.3</oval:version>
+                         <oval:reason>The xinetd_item has been deprecated because xinetd is obsolete.  The xinetd_item may be removed in a future version of the language.</oval:reason>
+                    </oval:deprecated_info>
+                    <sch:pattern id="unix-sc_xinetditem_dep">
+                         <sch:rule context="unix-sc:xinetd_item">
+                              <sch:report test="true()">DEPRECATED ITEM: <sch:value-of select="name()"/> ID: <sch:value-of select="@id"/></sch:report>
+                         </sch:rule>
+                    </sch:pattern>
+               </xsd:appinfo>
+		  		  
+		  </xsd:annotation>
           <xsd:complexType>
                <xsd:complexContent>
                     <xsd:extension base="oval-sc:ItemType">

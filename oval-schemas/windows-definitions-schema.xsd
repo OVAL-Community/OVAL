@@ -1852,6 +1852,15 @@
                         <xsd:restriction base="xsd:string">
                               <xsd:enumeration value="none"/>
                               <xsd:enumeration value="up"/>
+								<xsd:annotation>
+									<xsd:appinfo>
+										<oval:deprecated_info>
+											<oval:version>5.12.3</oval:version>
+											<oval:reason>The value of 'up' is being removed because it is unused in the language and adds unneeded complexity to OVAL Interpreters.</oval:reason>
+											<oval:comment>These values have been deprecated and will be removed in version 6.0.1 of the language.</oval:comment>
+										</oval:deprecated_info>
+									</xsd:appinfo>
+								</xsd:annotation>
                               <xsd:enumeration value="down"/>
                         </xsd:restriction>
                   </xsd:simpleType>
@@ -3931,6 +3940,8 @@
                   <xsd:documentation>The ntuser test is used to check metadata associated with Windows ntuser.dat files. It extends the standard TestType as defined in the oval-definitions-schema and
                         one should refer to the TestType description for more information. The required object element references a ntuser_object and the optional state element specifies the ntuser
                         data to check.</xsd:documentation>
+						
+						<xsd:documentation>To ensure consistent results across OVAL interpreters, application developers should refer to documentation in the ntuser_item when implenting this test.</xsd:documentation>
                   <xsd:appinfo>
                         <oval:element_mapping>
                               <oval:test>ntuser_test</oval:test>
@@ -4062,11 +4073,15 @@
                                     <xsd:element name="logged_on" type="oval-def:EntityStateBoolType" minOccurs="0">
                                           <xsd:annotation>
                                                 <xsd:documentation>The logged_on element describes if the user account is currently logged on to the computer.</xsd:documentation>
+												<xsd:documentation>This can be determined by comparing the SIDs collected from the ProfileList against those populated in HKEY_USERS\&lt;SID&gt;</xsd:documentation>
+												<xsd:documentation>HKEY_USERS: Contains all the actively loaded user profiles on the computer.  https://learn.microsoft.com/en-us/troubleshoot/windows-server/performance/windows-registry-advanced-users</xsd:documentation>
+												<xsd:documentation>This data can also be obtained by other various Windows API's such as a combination of win32_logonsession and win32_loggedonuser, but the specifics are beyond the scope of OVAL documentation.</xsd:documentation>
                                           </xsd:annotation>
                                     </xsd:element>
 								  <xsd:element name="days_since_last_logon" type="oval-def:EntityStateIntType" minOccurs="0" maxOccurs="1">
 									   <xsd:annotation>
-											<xsd:documentation>The last_logon data, converted to days and then rounded down to the nearest integer (floor function). If the account is determined to be currently logged in, this date should be reported as 0.</xsd:documentation>
+											<xsd:documentation>The last_logon data which can be obtained from the LocalProfileLoadTimeHigh and LocalProfileLoadTimeLow registry values from HKLM\Software\Microsoft\Windows NT\CurrentVersion\ProfileList\&lt;SID&gt;, converted to days and then rounded down to the nearest integer (floor function). If the account is determined to be currently logged in, this date should be reported as 0.</xsd:documentation>
+											<xsd:documentation>For more information, refer to https://learn.microsoft.com/en-us/troubleshoot/windows-server/support-tools/scripts-to-retrieve-profile-age</xsd:documentation>
 									   </xsd:annotation>
 								  </xsd:element>
 								    <xsd:element name="user_has_signed_into_explorer" type="oval-def:EntityStateBoolType" minOccurs="0">
@@ -4078,6 +4093,7 @@
                                     <xsd:element name="enabled" type="oval-def:EntityStateBoolType" minOccurs="0">
                                           <xsd:annotation>
                                                 <xsd:documentation>The enabled element describes if the user account is enabled or disabled.</xsd:documentation>
+												<xsd:documentation>Note: For domain users, if a domain controller is not available, this will not return data, and should be reported with a status of 'not collected'.  If using this data for a filter to include enabled accounts, it’s recommended to exclude accounts that are have been determined to be disabled, vs including ones that are enabled, as the later may filter out accounts for which the domain controller could not return data.</xsd:documentation>
                                           </xsd:annotation>
                                     </xsd:element>
                                     <xsd:element name="date_modified" type="oval-def:EntityStateIntType" minOccurs="0">
@@ -4170,6 +4186,15 @@
                         <xsd:restriction base="xsd:string">
                               <xsd:enumeration value="none"/>
                               <xsd:enumeration value="up"/>
+							  	<xsd:annotation>
+									<xsd:appinfo>
+										<oval:deprecated_info>
+											<oval:version>5.12.3</oval:version>
+											<oval:reason>The value of 'up' is being removed because it is unused in the language and adds unneeded complexity to OVAL Interpreters.</oval:reason>
+											<oval:comment>These values have been deprecated and will be removed in version 6.0.1 of the language.</oval:comment>
+										</oval:deprecated_info>
+									</xsd:appinfo>
+								</xsd:annotation>
                               <xsd:enumeration value="down"/>
                         </xsd:restriction>
                   </xsd:simpleType>
@@ -4190,6 +4215,20 @@
                         </xsd:restriction>
                   </xsd:simpleType>
             </xsd:attribute>
+            <xsd:attribute name="item_creation" use="optional" default="key_and_name_exist">
+                  <xsd:annotation>
+                        <xsd:documentation>For 'key_and_name_exist', items are only created when an ntuser.dat file includes the key and name provided in the ntuser object.</xsd:documentation>
+                        <xsd:documentation>For 'every_ntuser', items are created for each relavent ntuser.dat found on the system. This option will prevent false negatives in instances where each ntuser.dat file must contain the required key/name/value in order to pass, but the file is lacking the key/name required to normally satisfy the creation of an ntuser item.</xsd:documentation>
+                        <xsd:documentation></xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                              <xsd:enumeration value="key_and_name_exist"/>
+                              <xsd:enumeration value="every_ntuser"/>
+                        </xsd:restriction>
+                  </xsd:simpleType>
+            </xsd:attribute>			
+
       </xsd:complexType>
       <!-- =============================================================================== -->
       <!-- ===========================  PASSWORD POLICY TEST  ============================ -->
@@ -5529,6 +5568,15 @@
                         <xsd:restriction base="xsd:string">
                               <xsd:enumeration value="none"/>
                               <xsd:enumeration value="up"/>
+							  	<xsd:annotation>
+									<xsd:appinfo>
+										<oval:deprecated_info>
+											<oval:version>5.12.3</oval:version>
+											<oval:reason>The value of 'up' is being removed because it is unused in the language and adds unneeded complexity to OVAL Interpreters.</oval:reason>
+											<oval:comment>These values have been deprecated and will be removed in version 6.0.1 of the language.</oval:comment>
+										</oval:deprecated_info>
+									</xsd:appinfo>
+								</xsd:annotation>
                               <xsd:enumeration value="down"/>
                         </xsd:restriction>
                   </xsd:simpleType>
