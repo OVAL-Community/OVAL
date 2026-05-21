@@ -444,9 +444,14 @@
                               </xsd:element>
                               <xsd:element name="inet_addr" type="oval-sc:EntityItemIPAddressStringType" minOccurs="0" maxOccurs="1">
                                    <xsd:annotation>
-                                        <xsd:documentation>The inet_addr entity is the IP address of the specific interface. Note that the IP address can be IPv4 or IPv6. If the IP address is an IPv6 address, this entity should be expressed as an IPv6 address prefix using CIDR notation and the netmask entity should not be collected.</xsd:documentation>
+                                        <xsd:documentation>The inet_addr entity is the IPv4 address of the specific interface. If this entity is collected, the netmask entity should also be collected.</xsd:documentation>
                                    </xsd:annotation>
                               </xsd:element>
+                             <xsd:element name="ipv6_inet_addr" type="oval-sc:EntityItemIPAddressStringType" minOccurs="0" maxOccurs="unbounded">
+                                   <xsd:annotation>
+                                         <xsd:documentation>This is the IPv6 address of the interface expressed using CIDR notation.  If populated the netmask entity will not be collected.</xsd:documentation>
+                                   </xsd:annotation>
+                             </xsd:element>
                               <xsd:element name="broadcast_addr" type="oval-sc:EntityItemIPAddressStringType" minOccurs="0" maxOccurs="1">
                                    <xsd:annotation>
                                         <xsd:documentation>The broadcast_addr entity is the broadcast IP address for this interface's network. Note that the IP address can be IPv4 or IPv6.</xsd:documentation>
@@ -454,7 +459,7 @@
                               </xsd:element>
                               <xsd:element name="netmask" type="oval-sc:EntityItemIPAddressStringType" minOccurs="0" maxOccurs="1">
                                    <xsd:annotation>
-                                        <xsd:documentation>This is the bitmask used to calculate the interface's IP network. The network number is calculated by bitwise-ANDing this with the IP address. The host number on that network is calculated by bitwise-XORing this with the IP address. Note that if the inet_addr entity contains an IPv6 address prefix, this entity should not be collected.</xsd:documentation>
+                                        <xsd:documentation>This is the bitmask used to calculate the interface's IPv4 network. The network number is calculated by bitwise-ANDing this with the IPv4 address. The host number on that network is calculated by bitwise-XORing this with the IPv4 address.</xsd:documentation>
                                    </xsd:annotation>
                               </xsd:element>
                               <xsd:element name="flag" type="oval-sc:EntityItemStringType" minOccurs="0" maxOccurs="unbounded">
