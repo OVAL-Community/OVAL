@@ -1736,6 +1736,17 @@
                         </oval:element_mapping>
                   </xsd:appinfo>
                   <xsd:appinfo>
+                        <oval:deprecated_info>
+                              <oval:version>5.12.3</oval:version>
+                              <oval:reason>The runlevel_test has been deprecated because runlevel is obsolete.  The runlevel_test may be removed in a future version of the language.</oval:reason>
+                        </oval:deprecated_info>
+                        <sch:pattern id="unix-def_runleveltst_dep">
+                              <sch:rule context="unix-def:runlevel_test">
+                                    <sch:report test="true()">DEPRECATED TEST: <sch:value-of select="name()"/> ID: <sch:value-of select="@id"/></sch:report>
+                              </sch:rule>
+                        </sch:pattern>
+                  </xsd:appinfo>
+                  <xsd:appinfo>
                         <sch:pattern id="unix-def_runleveltst">
                               <sch:rule context="unix-def:runlevel_test/unix-def:object">
                                     <sch:assert test="@object_ref=ancestor::oval-def:oval_definitions/oval-def:objects/unix-def:runlevel_object/@id"><sch:value-of select="../@id"/> - the object child element of a runlevel_test must reference a runlevel_object</sch:assert>
@@ -2699,6 +2710,19 @@
                               <oval:item target_namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#unix">xinetd_item</oval:item>
                         </oval:element_mapping>
                   </xsd:appinfo>
+				  
+                  <xsd:appinfo>
+                        <oval:deprecated_info>
+                              <oval:version>5.12.3</oval:version>
+                              <oval:reason>The xinetd_test has been deprecated because xinetd is obsolete.  The xinetd_test may be removed in a future version of the language.</oval:reason>
+                        </oval:deprecated_info>
+                        <sch:pattern id="unix-def_xinetttst_dep">
+                              <sch:rule context="unix-def:xinetd_test">
+                                    <sch:report test="true()">DEPRECATED TEST: <sch:value-of select="name()"/> ID: <sch:value-of select="@id"/></sch:report>
+                              </sch:rule>
+                        </sch:pattern>
+                  </xsd:appinfo>
+				  
                   <xsd:appinfo>
                         <sch:pattern id="unix-def_xinetdtst">
                               <sch:rule context="unix-def:xinetd_test/unix-def:object">
