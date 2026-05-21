@@ -4169,7 +4169,7 @@
 										<oval:deprecated_info>
 											<oval:version>5.12.3</oval:version>
 											<oval:reason>The value of 'up' is being removed because it is unused in the language and adds unneeded complexity to OVAL Interpreters.</oval:reason>
-											<oval:comment>These values have been deprecated and will be removed in version 6.0 of the language.</oval:comment>
+											<oval:comment>These values have been deprecated and will be removed in version 6.0.1 of the language.</oval:comment>
 										</oval:deprecated_info>
 									</xsd:appinfo>
 								</xsd:annotation>
@@ -5537,7 +5537,7 @@
 										<oval:deprecated_info>
 											<oval:version>5.12.3</oval:version>
 											<oval:reason>The value of 'up' is being removed because it is unused in the language and adds unneeded complexity to OVAL Interpreters.</oval:reason>
-											<oval:comment>These values have been deprecated and will be removed in version 6.0 of the language.</oval:comment>
+											<oval:comment>These values have been deprecated and will be removed in version 6.0.1 of the language.</oval:comment>
 										</oval:deprecated_info>
 									</xsd:appinfo>
 								</xsd:annotation>
