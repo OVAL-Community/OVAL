@@ -1851,7 +1851,7 @@
                   <xsd:simpleType>
                         <xsd:restriction base="xsd:string">
                               <xsd:enumeration value="none"/>
-                              <xsd:enumeration value="up"/>
+                              <xsd:enumeration value="up">
 								<xsd:annotation>
 									<xsd:appinfo>
 										<oval:deprecated_info>
@@ -1861,6 +1861,7 @@
 										</oval:deprecated_info>
 									</xsd:appinfo>
 								</xsd:annotation>
+                              </xsd:enumeration>
                               <xsd:enumeration value="down"/>
                         </xsd:restriction>
                   </xsd:simpleType>
@@ -4179,8 +4180,8 @@
                   <xsd:simpleType>
                         <xsd:restriction base="xsd:string">
                               <xsd:enumeration value="none"/>
-                              <xsd:enumeration value="up"/>
-							  	<xsd:annotation>
+                              <xsd:enumeration value="up">
+								<xsd:annotation>
 									<xsd:appinfo>
 										<oval:deprecated_info>
 											<oval:version>5.12.3</oval:version>
@@ -4189,6 +4190,7 @@
 										</oval:deprecated_info>
 									</xsd:appinfo>
 								</xsd:annotation>
+                              </xsd:enumeration>
                               <xsd:enumeration value="down"/>
                         </xsd:restriction>
                   </xsd:simpleType>
@@ -5561,8 +5563,8 @@
                   <xsd:simpleType>
                         <xsd:restriction base="xsd:string">
                               <xsd:enumeration value="none"/>
-                              <xsd:enumeration value="up"/>
-							  	<xsd:annotation>
+                              <xsd:enumeration value="up">
+								<xsd:annotation>
 									<xsd:appinfo>
 										<oval:deprecated_info>
 											<oval:version>5.12.3</oval:version>
@@ -5571,6 +5573,7 @@
 										</oval:deprecated_info>
 									</xsd:appinfo>
 								</xsd:annotation>
+                              </xsd:enumeration>
                               <xsd:enumeration value="down"/>
                         </xsd:restriction>
                   </xsd:simpleType>
