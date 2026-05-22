@@ -9304,7 +9304,7 @@
                                                 </xsd:element>
                                                 <xsd:element name="wql" type="oval-def:EntityObjectStringType">
                                                       <xsd:annotation>
-                                                            <xsd:documentation>A WQL query used to identify the object(s) to test against. Any valid WQL query is usable with one exception, all fields must be named in the SELECT portion of the query. For example SELECT name, age FROM ... is valid. However, SELECT * FROM ... is not valid. This is because the record element in the state and item require a unique field name value to ensure that any query results can be evaluated consistently.</xsd:documentation>
+                                                            <xsd:documentation>A valid WQL query used to identify the object(s) to test against. All fields must be named in the SELECT portion of the query. For example SELECT name, age FROM ... is valid. However, SELECT * FROM ... is not valid. This is because the record element in the state and item require a unique field name value to ensure that any query results can be evaluated consistently. Due to limitations of the record element, only queries returning simple datatypes are supported. An error should be reported on a field returning a complex datatype.</xsd:documentation>
                                                             <xsd:appinfo>
                                                                   <sch:pattern id="win-def_wmi57objwql">
                                                                         <sch:rule context="win-def:wmi57_object/win-def:wql">
@@ -9337,7 +9337,7 @@
                                     </xsd:element>
                                     <xsd:element name="wql" type="oval-def:EntityStateStringType" minOccurs="0">
                                           <xsd:annotation>
-                                                <xsd:documentation>A WQL query used to identify the object(s) to test against. Any valid WQL query is usable with one exception, all fields must be named in the SELECT portion of the query. For example SELECT name, age FROM ... is valid. However, SELECT * FROM ... is not valid. This is because the record element in the state and item require a unique field name value to ensure that any query results can be evaluated consistantly.</xsd:documentation>
+                                                <xsd:documentation>A valid WQL query used to identify the object(s) to test against. All fields must be named in the SELECT portion of the query. For example SELECT name, age FROM ... is valid. However, SELECT * FROM ... is not valid. This is because the record element in the state and item require a unique field name value to ensure that any query results can be evaluated consistently. Due to limitations of the record element, only queries returning simple datatypes are supported. An error should be reported on a field returning a complex datatype.</xsd:documentation>
                                           </xsd:annotation>
                                     </xsd:element>
                                     <xsd:element name="result" type="oval-def:EntityStateRecordType" minOccurs="0">
