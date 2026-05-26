@@ -264,7 +264,14 @@
                                     <xsd:element name="windows_view" type="ind-def:EntityStateWindowsViewType" minOccurs="0">
                                           <xsd:annotation>
                                                 <xsd:documentation>The windows view value to which this was targeted. This is used to indicate which view (32-bit or 64-bit), the associated State applies to.  This entity only applies to 64-bit Microsoft Windows operating systems.</xsd:documentation>
-                                          </xsd:annotation>
+												<xsd:appinfo>
+													<oval:deprecated_info>
+														<oval:version>5.12.3</oval:version>
+														<oval:reason>Unused in production content and adds unneeded complexity to OVAL interpeters.  The equivalent data can be obtained by other existing OVAL methods.</oval:reason>
+														<oval:comment>This element has been deprecated and will be removed in version 6.0.1 of the language.</oval:comment>
+													</oval:deprecated_info>
+												</xsd:appinfo>
+										  </xsd:annotation>
                                     </xsd:element>
                               </xsd:sequence>
                         </xsd:extension>
@@ -432,7 +439,14 @@
                                     <xsd:element name="windows_view" type="ind-def:EntityStateWindowsViewType" minOccurs="0">
                                           <xsd:annotation>
                                                 <xsd:documentation>The windows view value to which this was targeted. This is used to indicate which view (32-bit or 64-bit), the associated State applies to.  This entity only applies to 64-bit Microsoft Windows operating systems.</xsd:documentation>
-                                          </xsd:annotation>
+												<xsd:appinfo>
+													<oval:deprecated_info>
+														<oval:version>5.12.3</oval:version>
+														<oval:reason>Unused in production content and adds unneeded complexity to OVAL interpeters.  The equivalent data can be obtained by other existing OVAL methods.</oval:reason>
+														<oval:comment>This element has been deprecated and will be removed in version 6.0.1 of the language.</oval:comment>
+													</oval:deprecated_info>
+												</xsd:appinfo>
+										  </xsd:annotation>
                                     </xsd:element>
                               </xsd:sequence>
                         </xsd:extension>
@@ -1901,7 +1915,14 @@ SERVERPROPERTY('IsClustered') AS [is_clustered]
                                     <xsd:element name="windows_view" type="ind-def:EntityStateWindowsViewType" minOccurs="0">
                                           <xsd:annotation>
                                                 <xsd:documentation>The windows view value to which this was targeted. This is used to indicate which view (32-bit or 64-bit), the associated State applies to.  This entity only applies to 64-bit Microsoft Windows operating systems.</xsd:documentation>
-                                          </xsd:annotation>
+												<xsd:appinfo>
+													<oval:deprecated_info>
+														<oval:version>5.12.3</oval:version>
+														<oval:reason>Unused in production content and adds unneeded complexity to OVAL interpeters.  The equivalent data can be obtained by other existing OVAL methods.</oval:reason>
+														<oval:comment>This element has been deprecated and will be removed in version 6.0.1 of the language.</oval:comment>
+													</oval:deprecated_info>
+												</xsd:appinfo>
+										  </xsd:annotation>
                                     </xsd:element>
                               </xsd:sequence>
                         </xsd:extension>
@@ -2086,7 +2107,14 @@ SERVERPROPERTY('IsClustered') AS [is_clustered]
                                     <xsd:element name="windows_view" type="ind-def:EntityStateWindowsViewType" minOccurs="0">
                                           <xsd:annotation>
                                                 <xsd:documentation>The windows view value to which this was targeted. This is used to indicate which view (32-bit or 64-bit), the associated State applies to.  This entity only applies to 64-bit Microsoft Windows operating systems.</xsd:documentation>
-                                          </xsd:annotation>
+												<xsd:appinfo>
+													<oval:deprecated_info>
+														<oval:version>5.12.3</oval:version>
+														<oval:reason>Unused in production content and adds unneeded complexity to OVAL interpeters.  The equivalent data can be obtained by other existing OVAL methods.</oval:reason>
+														<oval:comment>This element has been deprecated and will be removed in version 6.0.1 of the language.</oval:comment>
+													</oval:deprecated_info>
+												</xsd:appinfo>
+										  </xsd:annotation>
                                     </xsd:element>
                               </xsd:sequence>
                         </xsd:extension>
@@ -2395,7 +2423,14 @@ SERVERPROPERTY('IsClustered') AS [is_clustered]
                                     <xsd:element name="windows_view" type="ind-def:EntityStateWindowsViewType" minOccurs="0">
                                           <xsd:annotation>
                                                 <xsd:documentation>The windows view value to which this was targeted. This is used to indicate which view (32-bit or 64-bit), the associated State applies to.  This entity only applies to 64-bit Microsoft Windows operating systems.</xsd:documentation>
-                                          </xsd:annotation>
+												<xsd:appinfo>
+													<oval:deprecated_info>
+														<oval:version>5.12.3</oval:version>
+														<oval:reason>Unused in production content and adds unneeded complexity to OVAL interpeters.  The equivalent data can be obtained by other existing OVAL methods.</oval:reason>
+														<oval:comment>This element has been deprecated and will be removed in version 6.0.1 of the language.</oval:comment>
+													</oval:deprecated_info>
+												</xsd:appinfo>
+										  </xsd:annotation>
                                     </xsd:element>
                               </xsd:sequence>
                         </xsd:extension>
@@ -2597,7 +2632,14 @@ SERVERPROPERTY('IsClustered') AS [is_clustered]
                                     <xsd:element name="windows_view" type="ind-def:EntityStateWindowsViewType" minOccurs="0">
                                           <xsd:annotation>
                                                 <xsd:documentation>The windows view value to which this was targeted. This is used to indicate which view (32-bit or 64-bit), the associated State applies to.  This entity only applies to 64-bit Microsoft Windows operating systems.</xsd:documentation>
-                                          </xsd:annotation>
+												<xsd:appinfo>
+													<oval:deprecated_info>
+														<oval:version>5.12.3</oval:version>
+														<oval:reason>Unused in production content and adds unneeded complexity to OVAL interpeters.  The equivalent data can be obtained by other existing OVAL methods.</oval:reason>
+														<oval:comment>This element has been deprecated and will be removed in version 6.0.1 of the language.</oval:comment>
+													</oval:deprecated_info>
+												</xsd:appinfo>
+										  </xsd:annotation>
                                     </xsd:element>
                               </xsd:sequence>
                         </xsd:extension>
@@ -2678,7 +2720,14 @@ SERVERPROPERTY('IsClustered') AS [is_clustered]
                   <xsd:annotation>
                         <xsd:documentation>64-bit versions of Windows provide an alternate file system and registry views to 32-bit applications. This behavior allows the OVAL Object to specify which view should be examined. This behavior only applies to 64-bit Windows, and must not be applied on other platforms.</xsd:documentation>
                         <xsd:documentation>Note that the values have the following meaning: '64_bit' – Indicates that the 64-bit view on 64-bit Windows operating systems must be examined. On a 32-bit system, the Object must be evaluated without applying the behavior. '32_bit' – Indicates that the 32-bit view must be examined. On a 32-bit system, the Object must be evaluated without applying the behavior. It is recommended that the corresponding 'windows_view' entity be set on the OVAL Items that are collected when this behavior is used to distinguish between the OVAL Items that are collected in the 32-bit or 64-bit views.</xsd:documentation>
-                  </xsd:annotation>
+						<xsd:appinfo>
+							<oval:deprecated_info>
+								<oval:version>5.12.3</oval:version>
+								<oval:reason>Unused in production content and adds unneeded complexity to OVAL interpeters.  The equivalent data can be obtained by other existing OVAL methods.</oval:reason>
+								<oval:comment>This attribute has been deprecated and will be removed in version 6.0.1 of the language.</oval:comment>
+							</oval:deprecated_info>
+						</xsd:appinfo>
+				  </xsd:annotation>
                   <xsd:simpleType>
                         <xsd:restriction base="xsd:string">
                               <xsd:enumeration value="32_bit"/>
