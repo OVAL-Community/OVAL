@@ -1027,7 +1027,14 @@
                               <xsd:element name="windows_view" type="win-sc:EntityItemWindowsViewType" minOccurs="0">
                                    <xsd:annotation>
                                         <xsd:documentation>The windows view value from which this OVAL Item was collected. This is used to indicate from which view (32-bit or 64-bit), the associated Item was collected. A value of '32_bit' indicates the Item was collected from the 32-bit view.  A value of '64-bit' indicates the Item was collected from the 64-bit view. Omitting this entity removes any assertion about which view the Item was collected from, and therefore it is strongly suggested that this entity be set.</xsd:documentation>
-                                   </xsd:annotation>
+										<xsd:appinfo>
+											<oval:deprecated_info>
+												<oval:version>5.12.3</oval:version>
+												<oval:reason>Unused in production content and adds unneeded complexity to OVAL interpeters.  The equivalent data can be obtained by other existing OVAL methods.</oval:reason>
+												<oval:comment>This element has been deprecated and will be removed in version 6.0.1 of the language.</oval:comment>
+											</oval:deprecated_info>
+										</xsd:appinfo>
+									</xsd:annotation>
                               </xsd:element>
                          </xsd:sequence>
                     </xsd:extension>
@@ -1168,7 +1175,14 @@
                               <xsd:element name="windows_view" type="win-sc:EntityItemWindowsViewType" minOccurs="0">
                                    <xsd:annotation>
                                         <xsd:documentation>The windows view value from which this OVAL Item was collected. This is used to indicate from which view (32-bit or 64-bit), the associated Item was collected. A value of '32_bit' indicates the Item was collected from the 32-bit view.  A value of '64-bit' indicates the Item was collected from the 64-bit view. Omitting this entity removes any assertion about which view the Item was collected from, and therefore it is strongly suggested that this entity be set.</xsd:documentation>
-                                   </xsd:annotation>
+                                   			<xsd:appinfo>
+												<oval:deprecated_info>
+													<oval:version>5.12.3</oval:version>
+													<oval:reason>Unused in production content and adds unneeded complexity to OVAL interpeters.  The equivalent data can be obtained by other existing OVAL methods.</oval:reason>
+													<oval:comment>This element has been deprecated and will be removed in version 6.0.1 of the language.</oval:comment>
+												</oval:deprecated_info>
+											</xsd:appinfo>
+								   </xsd:annotation>
                               </xsd:element>
                          </xsd:sequence>
                     </xsd:extension>
@@ -1309,7 +1323,14 @@
                               <xsd:element name="windows_view" type="win-sc:EntityItemWindowsViewType" minOccurs="0">
                                    <xsd:annotation>
                                         <xsd:documentation>The windows view value from which this OVAL Item was collected. This is used to indicate from which view (32-bit or 64-bit), the associated Item was collected. A value of '32_bit' indicates the Item was collected from the 32-bit view.  A value of '64-bit' indicates the Item was collected from the 64-bit view. Omitting this entity removes any assertion about which view the Item was collected from, and therefore it is strongly suggested that this entity be set.</xsd:documentation>
-                                   </xsd:annotation>
+										<xsd:appinfo>
+											<oval:deprecated_info>
+												<oval:version>5.12.3</oval:version>
+												<oval:reason>Unused in production content and adds unneeded complexity to OVAL interpeters.  The equivalent data can be obtained by other existing OVAL methods.</oval:reason>
+												<oval:comment>This element has been deprecated and will be removed in version 6.0.1 of the language.</oval:comment>
+											</oval:deprecated_info>
+										</xsd:appinfo>
+								   </xsd:annotation>
                               </xsd:element>
                          </xsd:sequence>
                     </xsd:extension>
@@ -1489,7 +1510,14 @@
                               <xsd:element name="windows_view" type="win-sc:EntityItemWindowsViewType" minOccurs="0">
                                    <xsd:annotation>
                                         <xsd:documentation>The windows view value from which this OVAL Item was collected. This is used to indicate from which view (32-bit or 64-bit), the associated Item was collected. A value of '32_bit' indicates the Item was collected from the 32-bit view.  A value of '64-bit' indicates the Item was collected from the 64-bit view. Omitting this entity removes any assertion about which view the Item was collected from, and therefore it is strongly suggested that this entity be set.</xsd:documentation>
-                                   </xsd:annotation>
+										<xsd:appinfo>
+											<oval:deprecated_info>
+												<oval:version>5.12.3</oval:version>
+												<oval:reason>Unused in production content and adds unneeded complexity to OVAL interpeters.  The equivalent data can be obtained by other existing OVAL methods.</oval:reason>
+												<oval:comment>This element has been deprecated and will be removed in version 6.0.1 of the language.</oval:comment>
+											</oval:deprecated_info>
+										</xsd:appinfo>
+								   </xsd:annotation>
                               </xsd:element>
                          </xsd:sequence>
                     </xsd:extension>
@@ -2079,7 +2107,14 @@
                               <xsd:element name="loader_flags" type="oval-sc:EntityItemIntType" minOccurs="0" maxOccurs="1">
                                    <xsd:annotation>
                                         <xsd:documentation>The loader_flags entity is an unsigned 32-bit integer (DWORD) that specifies the loader flags of the header.</xsd:documentation>
-                                   </xsd:annotation>
+										<xsd:appinfo>
+											<oval:deprecated_info>
+												<oval:version>5.12.3</oval:version>
+												<oval:reason>Unused in production content and adds unneeded complexity to OVAL interpeters.  The equivalent data can be obtained by other existing OVAL methods.</oval:reason>
+												<oval:comment>This element has been deprecated and will be removed in version 6.0.1 of the language.</oval:comment>
+											</oval:deprecated_info>
+										</xsd:appinfo>
+								   </xsd:annotation>
                               </xsd:element>
                               <xsd:element name="number_of_rva_and_sizes" type="oval-sc:EntityItemIntType" minOccurs="0" maxOccurs="1">
                                    <xsd:annotation>
@@ -2094,7 +2129,14 @@
                               <xsd:element name="windows_view" type="win-sc:EntityItemWindowsViewType" minOccurs="0">
                                    <xsd:annotation>
                                         <xsd:documentation>The windows view value from which this OVAL Item was collected. This is used to indicate from which view (32-bit or 64-bit), the associated Item was collected. A value of '32_bit' indicates the Item was collected from the 32-bit view.  A value of '64-bit' indicates the Item was collected from the 64-bit view. Omitting this entity removes any assertion about which view the Item was collected from, and therefore it is strongly suggested that this entity be set.</xsd:documentation>
-                                   </xsd:annotation>
+										<xsd:appinfo>
+											<oval:deprecated_info>
+												<oval:version>5.12.3</oval:version>
+												<oval:reason>Unused in production content and adds unneeded complexity to OVAL interpeters.  The equivalent data can be obtained by other existing OVAL methods.</oval:reason>
+												<oval:comment>This element has been deprecated and will be removed in version 6.0.1 of the language.</oval:comment>
+											</oval:deprecated_info>
+										</xsd:appinfo>
+								   </xsd:annotation>
                               </xsd:element>
                          </xsd:sequence>
                     </xsd:extension>
@@ -2372,7 +2414,14 @@
                               <xsd:element name="windows_view" type="win-sc:EntityItemWindowsViewType" minOccurs="0">
                                    <xsd:annotation>
                                         <xsd:documentation>The windows view value from which this OVAL Item was collected. This is used to indicate from which view (32-bit or 64-bit), the associated Item was collected. A value of '32_bit' indicates the Item was collected from the 32-bit view.  A value of '64-bit' indicates the Item was collected from the 64-bit view. Omitting this entity removes any assertion about which view the Item was collected from, and therefore it is strongly suggested that this entity be set.</xsd:documentation>
-                                   </xsd:annotation>
+										<xsd:appinfo>
+											<oval:deprecated_info>
+												<oval:version>5.12.3</oval:version>
+												<oval:reason>Unused in production content and adds unneeded complexity to OVAL interpeters.  The equivalent data can be obtained by other existing OVAL methods.</oval:reason>
+												<oval:comment>This element has been deprecated and will be removed in version 6.0.1 of the language.</oval:comment>
+											</oval:deprecated_info>
+										</xsd:appinfo>
+								   </xsd:annotation>
                               </xsd:element>
                          </xsd:sequence>
                     </xsd:extension>
@@ -2519,7 +2568,14 @@
                               <xsd:element name="windows_view" type="win-sc:EntityItemWindowsViewType" minOccurs="0">
                                    <xsd:annotation>
                                         <xsd:documentation>The windows view value from which this OVAL Item was collected. This is used to indicate from which view (32-bit or 64-bit), the associated Item was collected. A value of '32_bit' indicates the Item was collected from the 32-bit view.  A value of '64-bit' indicates the Item was collected from the 64-bit view. Omitting this entity removes any assertion about which view the Item was collected from, and therefore it is strongly suggested that this entity be set.</xsd:documentation>
-                                   </xsd:annotation>
+										<xsd:appinfo>
+											<oval:deprecated_info>
+												<oval:version>5.12.3</oval:version>
+												<oval:reason>Unused in production content and adds unneeded complexity to OVAL interpeters.  The equivalent data can be obtained by other existing OVAL methods.</oval:reason>
+												<oval:comment>This element has been deprecated and will be removed in version 6.0.1 of the language.</oval:comment>
+											</oval:deprecated_info>
+										</xsd:appinfo>
+								   </xsd:annotation>
                               </xsd:element>
                          </xsd:sequence>
                     </xsd:extension>
@@ -2666,7 +2722,14 @@
                               <xsd:element name="windows_view" type="win-sc:EntityItemWindowsViewType" minOccurs="0">
                                    <xsd:annotation>
                                         <xsd:documentation>The windows view value from which this OVAL Item was collected. This is used to indicate from which view (32-bit or 64-bit), the associated Item was collected. A value of '32_bit' indicates the Item was collected from the 32-bit view.  A value of '64-bit' indicates the Item was collected from the 64-bit view. Omitting this entity removes any assertion about which view the Item was collected from, and therefore it is strongly suggested that this entity be set.</xsd:documentation>
-                                   </xsd:annotation>
+										<xsd:appinfo>
+											<oval:deprecated_info>
+												<oval:version>5.12.3</oval:version>
+												<oval:reason>Unused in production content and adds unneeded complexity to OVAL interpeters.  The equivalent data can be obtained by other existing OVAL methods.</oval:reason>
+												<oval:comment>This element has been deprecated and will be removed in version 6.0.1 of the language.</oval:comment>
+											</oval:deprecated_info>
+										</xsd:appinfo>
+								   </xsd:annotation>
                               </xsd:element>
                          </xsd:sequence>
                     </xsd:extension>
