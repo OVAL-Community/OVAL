@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
             xmlns:oval-sc="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5"
-            xmlns:panos-sc="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#panos"
             xmlns:sch="http://purl.oclc.org/dsdl/schematron"
             targetNamespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#panos"
             elementFormDefault="qualified" version="5.12.3">
