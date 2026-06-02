@@ -2,7 +2,6 @@
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
             xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5"
             xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5"
-            xmlns:panos-def="http://oval.mitre.org/XMLSchema/oval-definitions-5#panos"
             xmlns:sch="http://purl.oclc.org/dsdl/schematron"
             targetNamespace="http://oval.mitre.org/XMLSchema/oval-definitions-5#panos"
             elementFormDefault="qualified" version="5.12.3">
