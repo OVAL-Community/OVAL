@@ -20,17 +20,18 @@ Current Members
 
 * Organizational
 
-  * `Arctic Wolf <https://arcticwolf.com>`_ - Adam Biggs, Max Ullman
+  * `Arctic Wolf <https://arcticwolf.com>`_ - Adam Biggs, Donald Patterson 
   * `Canonical <https://canonical.com/>`_ - Eduardo Barretto
   * `Cisco <https://www.cisco.com/>`_ - Omar Santos
   * `Center for Internet Security <https://www.cisecurity.org>`_ - Justin Burr, Tim Rosner
-  * `Defense Information Systems Agency (DISA) <https://www.disa.mil/>`_ - Jamaal Spearman, Brady Alleman, Brian Snodgrass
+  * `Defense Information Systems Agency (DISA) <https://www.disa.mil/>`_ - Jamaal Spearman, Brady Alleman, Brian Snodgrass, Graham Burkholder
   * `HCL Group <https://hcl.com/>`_ - Anurag Srivastava
   * `Modulo <https://www.modulo.com/>`_ - Alberto Bastos
   * `National Institute of Standards and Technology (NIST) <https://www.nist.gov/>`_ - Dragos Prisaca, Bob Gendler
-  * `Naval Information Warfare Center (NIWC) Atlantic <https://www.niwcatlantic.navy.mil/>`_ - Jack Vander Pol, Daniel Harris, John Ulmer
+  * `Naval Information Warfare Center (NIWC) Atlantic <https://www.niwcatlantic.navy.mil/>`_ - Jack Vander Pol, Daniel Harris, John Ulmer, Bryan Wilson
   * `Red Hat, Inc. <https://www.redhat.com/>`_ - Evgeny Kolesnikov, Watson Sato
   * `SecPod Technologies <https://www.secpod.com/>`_ - Chandrashekhar B
+  *  `TeraSense <https://www.terasense.net/>`_ - Tim Cook
   * `Venable <https://www.venable.com/>`_ - Stephen Banghart
 
 * Individual
@@ -86,6 +87,7 @@ Past Members
   * Rosario Gangemi
   * Stephen Quinn
   * Stephen Pillero
+  * Max Ullman
 
 
 Responsibilities
