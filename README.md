@@ -1,9 +1,19 @@
+# OVAL 5.12.3 Official Release
+The OVAL board is proud to announce the release of OVAL 5.12.3 which is intended to align with NIST's upcoming SCAP 1.4 release.  
+
+**06/04/2026**
+For a complete list of changes, please refer to:
+- https://github.com/OVAL-Community/OVAL/issues?q=is%3Aissue+milestone%3A5.12.3+is%3Aclosed
+ 
+To download a copy of the OVAL 5.12.3 schema, and offline HTML files, view the following and download the release zips from the Assets.
+- https://github.com/OVAL-Community/OVAL/releases/tag/v5.12.3
+
 # OVAL 5.12.2 Official Release
-The OVAL board is proud to announce the release of OVAL 5.12.2 which is intended to align with NIST's upcoming SCAP 1.4 release.  
+The OVAL board is proud to announce the release of OVAL 5.12.2.
 
 **12/01/2025**
 For a complete list of changes, please refer to:
-- [https://github.com/OVAL-Community/OVAL/issues?q=is%3Aissue+milestone%3A5.12.2+is%3Aclosed](https://github.com/OVAL-Community/OVAL/pulls?q=is%3Apr+is%3Aclosed+milestone%3A5.12.2)
+- https://github.com/OVAL-Community/OVAL/issues?q=is%3Aissue+milestone%3A5.12.2+is%3Aclosed
  
 To download a copy of the OVAL 5.12.2 schema, and offline HTML files, view the following and download the release zips from the Assets.
 - https://github.com/OVAL-Community/OVAL/releases/tag/v5.12.2
