@@ -4134,6 +4134,12 @@
 											<xsd:documentation>For more information, refer to https://learn.microsoft.com/en-us/troubleshoot/windows-server/support-tools/scripts-to-retrieve-profile-age</xsd:documentation>
 									   </xsd:annotation>
 								  </xsd:element>
+								    <xsd:element name="user_has_signed_into_explorer" type="oval-def:EntityStateBoolType" minOccurs="0">
+                                          <xsd:annotation>
+                                                <xsd:documentation>The user_has_signed_into_explorer element describes if the user account has ever executed explorer.exe. This is a practical indicator of accounts using interactive (desktop/GUI) sessions and is not set by non-interactive logon methods such as WinRM or SSH. Content authors may use this element to exclude non-interactive users from user policy checks.</xsd:documentation>
+												<xsd:documentation>This can be determined by gathering the Software\Microsoft\Windows\CurrentVersion\Explorer\UserSigned value for the given ntuser.dat profile, 1 = true and 0 = false.</xsd:documentation>
+                                          </xsd:annotation>
+                                    </xsd:element>
                                     <xsd:element name="enabled" type="oval-def:EntityStateBoolType" minOccurs="0">
                                           <xsd:annotation>
                                                 <xsd:documentation>The enabled element describes if the user account is enabled or disabled.</xsd:documentation>
