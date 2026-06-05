@@ -1956,7 +1956,7 @@ SERVERPROPERTY('IsClustered') AS [is_clustered]
 							  <xsd:annotation>
 									<xsd:documentation>For 'all_object_elements_fullfilled', items are only created when the entire object requirements are met (filepath, pattern, instance).</xsd:documentation>
 									<xsd:documentation>For 'filepath_exists', items are created for each filepath on the system that matches the filepath/path/filname object requirement.  This option will prevent false negatives in instances where text files exist that match the filepath object requirements, but do not contain the required pattern inside the file, which prevents item creation.</xsd:documentation>
-									<xsd:documentation></xsd:documentation>
+									<xsd:documentation>If the 'item_creation' behavior causes collection of an OVAL item with status of 'exists', the associated system_characteristics object(s) will reflect the existence of that collected item.</xsd:documentation>
 							  </xsd:annotation>
 							  <xsd:simpleType>
 									<xsd:restriction base="xsd:string">
@@ -2463,7 +2463,7 @@ SERVERPROPERTY('IsClustered') AS [is_clustered]
 							  <xsd:annotation>
 									<xsd:documentation>For 'all_object_elements_fullfilled', items are only created when the entire object requirements are met (filepath, xpath).</xsd:documentation>
 									<xsd:documentation>For 'filepath_exists', items are created for each filepath on the system that matches the filepath/path/filname object requirement.  This option will prevent false negatives in instances where XML files exist that match the filepath object requirements, but do not contain the required xpath inside the file, which prevents item creation.</xsd:documentation>
-									<xsd:documentation></xsd:documentation>
+									<xsd:documentation>If the 'item_creation' behavior causes collection of an OVAL item with status of 'exists', the associated system_characteristics object(s) will reflect the existence of that collected item.</xsd:documentation>
 							  </xsd:annotation>
 							  <xsd:simpleType>
 									<xsd:restriction base="xsd:string">
