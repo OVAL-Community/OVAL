@@ -1252,7 +1252,7 @@ Attributes
       - Restriction of xsd:string (optional *default*='all_object_elements_fullfilled') ('all_object_elements_fullfilled', 'filepath_exists')  
       - For 'all_object_elements_fullfilled', items are only created when the entire object requirements are met (filepath, pattern, instance).  
 For 'filepath_exists', items are created for each filepath on the system that matches the filepath/path/filname object requirement. This option will prevent false negatives in instances where text files exist that match the filepath object requirements, but do not contain the required pattern inside the file, which prevents item creation.  
-  
+If the 'item_creation' behavior causes collection of an OVAL item with status of 'exists', the associated system_characteristics object(s) will reflect the existence of that collected item.  
   
   
 ______________
@@ -1563,7 +1563,7 @@ Attributes
       - Restriction of xsd:string (optional *default*='all_object_elements_fullfilled') ('all_object_elements_fullfilled', 'filepath_exists')  
       - For 'all_object_elements_fullfilled', items are only created when the entire object requirements are met (filepath, xpath).  
 For 'filepath_exists', items are created for each filepath on the system that matches the filepath/path/filname object requirement. This option will prevent false negatives in instances where XML files exist that match the filepath object requirements, but do not contain the required xpath inside the file, which prevents item creation.  
-  
+If the 'item_creation' behavior causes collection of an OVAL item with status of 'exists', the associated system_characteristics object(s) will reflect the existence of that collected item.  
   
   
 ______________
