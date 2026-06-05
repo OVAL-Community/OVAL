@@ -1,8 +1,8 @@
 Open Vulnerability and Assessment Language: Independent Definition  
 =========================================================
 * Schema: Independent Definition  
-* Version: 5.12.2  
-* Release Date: 11/25/2025 09:00:00 AM
+* Version: 5.12.3  
+* Release Date: 06/04/2026 09:00:00 AM
 
 The following is a description of the elements, types, and attributes that compose the tests found in Open Vulnerability and Assessment Language (OVAL) that are independent of a specific piece of software. Each test is described in detail and should provide the information necessary to understand what each element and attribute represents. This document is intended for developers and assumes some familiarity with XML. A high level description of the interaction between the different tests and their relationship to the Core Definition Schema is not outlined here.
 
@@ -190,7 +190,7 @@ Child Elements
     * - sha1  
       - oval-def:EntityStateStringType (0..1)  
       - The sha1 element is the sha1 hash of the file.  
-    * - windows_view  
+    * - windows_view (Deprecated)  
       - ind-def:EntityStateWindowsViewType (0..1)  
       - The windows view value to which this was targeted. This is used to indicate which view (32-bit or 64-bit), the associated State applies to. This entity only applies to 64-bit Microsoft Windows operating systems.  
   
@@ -291,7 +291,7 @@ Child Elements
     * - hash  
       - oval-def:EntityStateStringType (0..1)  
       - The hash entity specifies the result of applying the hash algorithm to the file.  
-    * - windows_view  
+    * - windows_view (Deprecated)  
       - ind-def:EntityStateWindowsViewType (0..1)  
       - The windows view value to which this was targeted. This is used to indicate which view (32-bit or 64-bit), the associated State applies to. This entity only applies to 64-bit Microsoft Windows operating systems.  
   
@@ -729,6 +729,9 @@ Child Elements
     * - Child Elements  
       - Type (MinOccurs..MaxOccurs)  
       - Desc.  
+    * - behaviors  
+      - ind-def:ShellCommandBehaviors (0..1)  
+      -   
     * - shell  
       - ind-def:EntityObjectShellType (1..1)  
       - The shell entity defines the specific shell to use (e.g. bash, csh, ksh, etc.). Any tool collecting information for this object will need to know the shell in order to use it properly.  
@@ -779,6 +782,28 @@ Child Elements
     * - stderr_line  
       - oval-def:EntityStateStringType (0..1)  
       - The 'stderr_line' element contains any and all output to STDERR from a run of the object command. Each line of STDERR should create an additional 'stderr_line' element.  
+  
+.. _ShellCommandBehaviors:  
+  
+== ShellCommandBehaviors ==  
+---------------------------------------------------------
+The ShellCommandBehaviors complex type defines behaviors that allow content authors to determine when a shellcommand item may have a status set to 'error'. By default all shellcommands are set to 'exist', with any error data captured as part of the stderr_line elment and exit_status element.
+
+Attributes  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. list-table:: Attributes  
+    :header-rows: 1  
+  
+    * - Attribute  
+      - Type  
+      - Desc.  
+    * - error_if_exit_status_not_0  
+      - xsd:boolean (optional *default*='false')  
+      - 'error_if_exit_status_not_0' enables the OVAL interpeter to set the shellcommand item to a status of 'error' if exit_status is not set to 0. The default is false.  
+    * - error_if_stderr_exists  
+      - xsd:boolean (optional *default*='false')  
+      - 'error_if_stderr_exists' enables the OVAL interpeter to set the shellcommand item to a status of 'error' if data is returned to stderr. The default is false.  
+  
   
 ______________
   
@@ -1190,7 +1215,7 @@ Child Elements
     * - subexpression  
       - oval-def:EntityStateAnySimpleType (0..1)  
       - The subexpression entity represents a value to test against the subexpression in the specified pattern. If multiple subexpressions are specified in the pattern, this value is tested against all of them. For example, if the pattern abc(.*)mno(.*)xyp was supplied, and the state specifies a subexpression value of enabled, then the test would check that both (or at least one, none, etc. depending on the entity_check attribute) of the subexpressions have a value of enabled.  
-    * - windows_view  
+    * - windows_view (Deprecated)  
       - ind-def:EntityStateWindowsViewType (0..1)  
       - The windows view value to which this was targeted. This is used to indicate which view (32-bit or 64-bit), the associated State applies to. This entity only applies to 64-bit Microsoft Windows operating systems.  
   
@@ -1223,6 +1248,11 @@ Attributes
     * - singleline  
       - xsd:boolean (optional *default*='false')  
       - 'singleline' enables single line semantics in the regular expression provided by the pattern entity. This behavior is intended to align with the Perl regular expression 's' modifier: if true, the '.' metacharacter will match newlines. If false, it will not. The default is false.  
+    * - item_creation  
+      - Restriction of xsd:string (optional *default*='all_object_elements_fullfilled') ('all_object_elements_fullfilled', 'filepath_exists')  
+      - For 'all_object_elements_fullfilled', items are only created when the entire object requirements are met (filepath, pattern, instance).  
+For 'filepath_exists', items are created for each filepath on the system that matches the filepath/path/filname object requirement. This option will prevent false negatives in instances where text files exist that match the filepath object requirements, but do not contain the required pattern inside the file, which prevents item creation.  
+  
   
   
 ______________
@@ -1325,7 +1355,7 @@ Child Elements
     * - subexpression  
       - oval-def:EntityStateAnySimpleType (0..1)  
       - Each subexpression in the regular expression of the line element is then tested against the value specified in the subexpression element.  
-    * - windows_view  
+    * - windows_view (Deprecated)  
       - ind-def:EntityStateWindowsViewType (0..1)  
       - The windows view value to which this was targeted. This is used to indicate which view (32-bit or 64-bit), the associated State applies to. This entity only applies to 64-bit Microsoft Windows operating systems.  
   
@@ -1456,7 +1486,7 @@ Child Elements
       - Type (MinOccurs..MaxOccurs)  
       - Desc.  
     * - behaviors  
-      - ind-def:FileBehaviors (0..1)  
+      - ind-def:XMLFileContentBehaviors (0..1)  
       -   
     * - filepath  
       - oval-def:EntityObjectStringType (1..1)  
@@ -1505,9 +1535,36 @@ Child Elements
     * - value_of  
       - oval-def:EntityStateAnySimpleType (0..1)  
       - The value_of element checks the value(s) of the text node(s) or attribute(s) found.  
-    * - windows_view  
+    * - windows_view (Deprecated)  
       - ind-def:EntityStateWindowsViewType (0..1)  
       - The windows view value to which this was targeted. This is used to indicate which view (32-bit or 64-bit), the associated State applies to. This entity only applies to 64-bit Microsoft Windows operating systems.  
+  
+.. _XMLFileContentBehaviors:  
+  
+== XMLFileContentBehaviors ==  
+---------------------------------------------------------
+The XMLFileContentBehaviors complex type defines a number of behaviors that allow a more detailed definition of the xmlfilecontent_object being specified. Note that using these behaviors may result in some unique results. For example, a double negative type condition might be created where an object entity says include everything except a specific item, but a behavior is used that might then add that item back in.
+
+It is important to note that the 'max_depth' and 'recurse_direction' attributes of the 'behaviors' element do not apply to the 'filepath' element, only to the 'path' and 'filename' elements. This is because the 'filepath' element represents an absolute path to a particular file and it is not possible to recurse over a file.
+
+The XMLFileContentBehaviors extend the ind-def:FileBehaviors and therefore include the behaviors defined by that type.
+
+**Extends:** ind-def:FileBehaviors
+
+Attributes  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. list-table:: Attributes  
+    :header-rows: 1  
+  
+    * - Attribute  
+      - Type  
+      - Desc.  
+    * - item_creation  
+      - Restriction of xsd:string (optional *default*='all_object_elements_fullfilled') ('all_object_elements_fullfilled', 'filepath_exists')  
+      - For 'all_object_elements_fullfilled', items are only created when the entire object requirements are met (filepath, xpath).  
+For 'filepath_exists', items are created for each filepath on the system that matches the filepath/path/filname object requirement. This option will prevent false negatives in instances where XML files exist that match the filepath object requirements, but do not contain the required xpath inside the file, which prevents item creation.  
+  
+  
   
 ______________
   
@@ -1610,7 +1667,7 @@ Child Elements
     * - value  
       - oval-def:EntityStateRecordType (0..1)  
       - The value entity specifies how to test objects in the value set of the specified YAML Path. To define tests for a single scalar value or a list of scalar values (where there is no key to associate), set the name attribute of the field element to '#'. Due to the limitation of the record type field names could not contain uppercase letters, they should be converted to the lowercase and escaped using the '^' symbol (the '^' symbol should be escaped as well). For example, to check a value associated with 'myCamelCase^Key' set the name attribute of the field to 'my^camel^case^^^key'. The check is entirely controlled by operator attributes of the field element.  
-    * - windows_view  
+    * - windows_view (Deprecated)  
       - ind-def:EntityStateWindowsViewType (0..1)  
       - The windows view value to which this was targeted. This is used to indicate which view (32-bit or 64-bit), the associated State applies to. This entity only applies to 64-bit Microsoft Windows operating systems.  
   
@@ -1640,14 +1697,14 @@ Note that this behavior only applies with the equality operation on the path ent
       - 'recurse' defines how to recurse into the path entity, in other words what to follow during recursion. Options include symlinks, directories, or both. Note that a max-depth other than 0 has to be specified for recursion to take place and for this attribute to mean anything. Also note that on Windows, the 'symlink' value is equivalent to the 'junction' recurse value in win-def:FileBehaviors.  
 Note that this behavior only applies with the equality operation on the path entity.  
     * - recurse_direction  
-      - Restriction of xsd:string (optional *default*='none') ('none', 'up', 'down')  
+      - Restriction of xsd:string (optional *default*='none') ('none', '~~up~~', 'down')  
       - 'recurse_direction' defines the direction to recurse, either 'up' to parent directories, or 'down' into child directories. The default value is 'none' for no recursion.  
 Note that this behavior only applies with the equality operation on the path entity.  
     * - recurse_file_system  
       - Restriction of xsd:string (optional *default*='all') ('all', 'local', 'defined')  
       - 'recurse_file_system' defines the file system limitation of any searching and applies to all operations as specified on the path or filepath entity. The value of 'local' limits the search scope to local file systems (as opposed to file systems mounted from an external system). The value of 'defined' keeps any recursion within the file system that the file_object (path+filename or filepath) has specified. For example, on Windows, if the path specified was "C:\", you would search only the C: drive, not other filesystems mounted to descendant paths. Similarly, on UNIX, if the path specified was "/", you would search only the filesystem mounted there, not other filesystems mounted to descendant paths. The value of 'defined' only applies when an equality operation is used for searching because the path or filepath entity must explicitly define a file system. The default value is 'all' meaning to search all available file systems for data collection.  
 Note that in most cases it is recommended that the value of 'local' be used to ensure that file system searching is limited to only the local file systems. Searching 'all' file systems may have performance implications.  
-    * - windows_view  
+    * - windows_view (Deprecated)  
       - Restriction of xsd:string (optional *default*='64_bit') ('32_bit', '64_bit')  
       - 64-bit versions of Windows provide an alternate file system and registry views to 32-bit applications. This behavior allows the OVAL Object to specify which view should be examined. This behavior only applies to 64-bit Windows, and must not be applied on other platforms.  
 Note that the values have the following meaning: '64_bit' – Indicates that the 64-bit view on 64-bit Windows operating systems must be examined. On a 32-bit system, the Object must be evaluated without applying the behavior. '32_bit' – Indicates that the 32-bit view must be examined. On a 32-bit system, the Object must be evaluated without applying the behavior. It is recommended that the corresponding 'windows_view' entity be set on the OVAL Items that are collected when this behavior is used to distinguish between the OVAL Items that are collected in the 32-bit or 64-bit views.  

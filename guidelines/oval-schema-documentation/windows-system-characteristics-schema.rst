@@ -1,8 +1,8 @@
 Open Vulnerability and Assessment Language: Windows System Characteristics  
 =========================================================
 * Schema: Windows System Characteristics  
-* Version: 5.12.2  
-* Release Date: 11/25/2025 09:00:00 AM
+* Version: 5.12.3  
+* Release Date: 06/04/2026 09:00:00 AM
 
 The following is a description of the elements, types, and attributes that compose the Windows specific system characteristic items found in Open Vulnerability and Assessment Language (OVAL). Each item is an extension of the standard item element defined in the Core System Characteristic Schema. Through extension, each item inherits a set of elements and attributes that are shared amongst all OVAL Items. Each item is described in detail and should provide the information necessary to understand what each element and attribute represents. This document is intended for developers and assumes some familiarity with XML. A high level description of the interaction between the different tests and their relationship to the Core System Characteristic Schema is not outlined here.
 
@@ -700,7 +700,7 @@ Child Elements
     * - product_version  
       - Restriction of oval-sc:EntityItemAnySimpleType. See schema for details. (0..1)  
       - This entity defines the product version held within the version-information structure. This may not necessarily be a string compatible with the OVAL version datatype, in which case the string datatype should be used.  
-    * - windows_view  
+    * - windows_view (Deprecated)  
       - win-sc:EntityItemWindowsViewType (0..1)  
       - The windows view value from which this OVAL Item was collected. This is used to indicate from which view (32-bit or 64-bit), the associated Item was collected. A value of '32_bit' indicates the Item was collected from the 32-bit view. A value of '64-bit' indicates the Item was collected from the 64-bit view. Omitting this entity removes any assertion about which view the Item was collected from, and therefore it is strongly suggested that this entity be set.  
   
@@ -794,7 +794,7 @@ Child Elements
     * - file_write_attributes  
       - win-sc:EntityItemAuditType (0..1)  
       - Grants the right to change file attributes.  
-    * - windows_view  
+    * - windows_view (Deprecated)  
       - win-sc:EntityItemWindowsViewType (0..1)  
       - The windows view value from which this OVAL Item was collected. This is used to indicate from which view (32-bit or 64-bit), the associated Item was collected. A value of '32_bit' indicates the Item was collected from the 32-bit view. A value of '64-bit' indicates the Item was collected from the 64-bit view. Omitting this entity removes any assertion about which view the Item was collected from, and therefore it is strongly suggested that this entity be set.  
   
@@ -888,7 +888,7 @@ Child Elements
     * - file_write_attributes  
       - oval-sc:EntityItemBoolType (0..1)  
       - Grants the right to change file attributes.  
-    * - windows_view  
+    * - windows_view (Deprecated)  
       - win-sc:EntityItemWindowsViewType (0..1)  
       - The windows view value from which this OVAL Item was collected. This is used to indicate from which view (32-bit or 64-bit), the associated Item was collected. A value of '32_bit' indicates the Item was collected from the 32-bit view. A value of '64-bit' indicates the Item was collected from the 64-bit view. Omitting this entity removes any assertion about which view the Item was collected from, and therefore it is strongly suggested that this entity be set.  
   
@@ -1030,7 +1030,7 @@ Child Elements
     * - canonical_path  
       - oval-sc:EntityItemStringType (1..1)  
       - Specifies the canonical path for the target of the Windows junction specified by the path.  
-    * - windows_view  
+    * - windows_view (Deprecated)  
       - win-sc:EntityItemWindowsViewType (0..1)  
       - The windows view value from which this OVAL Item was collected. This is used to indicate from which view (32-bit or 64-bit), the associated Item was collected. A value of '32_bit' indicates the Item was collected from the 32-bit view. A value of '64-bit' indicates the Item was collected from the 64-bit view. Omitting this entity removes any assertion about which view the Item was collected from, and therefore it is strongly suggested that this entity be set.  
   
@@ -1138,6 +1138,34 @@ ______________
 ---------------------------------------------------------
 The windows ntuser_item specifies information that can be collected from a particular ntuser.dat file.
 
+To ensure consistent results across OVAL interpreters, the following implementation methods are recommended. Note that there may be other technical ways to obtain the data, which vendors may choose to implement.
+
+1. Finding Human User Profiles
+
+a. Obtain a list of User Profiles from the following registry key, where each subkey is a profile that may be included in scope for this test
+
+i. HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\WindowsNT\CurrentVersion\ProfileList
+
+b. Determine which user profiles are from ‘human’ users
+
+i. Exclude profiles for LocalService, Network service etc.. by excluding subkeys in the format of S-1-5-<number*gt;
+
+ii. Exclude profiles for Per-Service SIDs by excluding subkeys in the format of S-1-5-80-<number*gt;-<number*gt;-<number*gt;-<number*gt;-<number*gt;
+
+iii. Include Local and Domain User SIDs by including subkeys match the format of S-1-5-21-<number*gt;-<number*gt;-<number*gt;-<number*gt;
+
+c. Obtain ntuser filepath from the ProfileImagePath value of 'human' profiles
+
+2. Gathering per user registry key data
+
+a. If a user is logged in, their ntuser.dat file will be locked and the OVAL interpreter will not be able to read it, the OVAL interpreter will need to obtain that data from HKEY_USERS\<sid_of_logged_in_user>
+
+b. If a user is not logged in, the OVAL interpreter will need to obtain the data directly from the users ntuser.dat file.
+
+Note: There are many different methods depenending on programming language to parse ntuser.dat files, and each OVAL interpreter may choose their own methods.
+
+If no other programming language native methods are available, it is advised not to load the ntuser.dat file directly from its original location, as it will lock the file and prevent that user from logging into Windows.
+
 **Extends:** oval-sc:ItemType
 
 Child Elements  
@@ -1165,13 +1193,16 @@ Child Elements
       - The account_type element describes if the user account is a local account or domain account.  
     * - logged_on  
       - oval-sc:EntityItemBoolType (0..1)  
-      - The logged_on element describes if the user account is currently logged on to the computer.  
+      - The logged_on element describes if the user account is currently logged on to the computer.This can be determined by comparing the SIDs collected from the ProfileList against those populated in HKEY_USERS\<SID>HKEY_USERS: Contains all the actively loaded user profiles on the computer. https://learn.microsoft.com/en-us/troubleshoot/windows-server/performance/windows-registry-advanced-usersThis data can also be obtained by other various Windows API's such as a combination of win32_logonsession and win32_loggedonuser, but the specifics are beyond the scope of OVAL documentation.  
     * - days_since_last_logon  
       - oval-sc:EntityItemIntType (0..1)  
-      - The last_logon data, converted to days and then rounded down to the nearest integer (floor function). If the account is determined to be currently logged in, this date should be reported as 0.  
+      - The last_logon data which can be obtained from the LocalProfileLoadTimeHigh and LocalProfileLoadTimeLow registry values from HKLM\Software\Microsoft\Windows NT\CurrentVersion\ProfileList\<SID>, converted to days and then rounded down to the nearest integer (floor function). If the account is determined to be currently logged in, this date should be reported as 0.For more information, refer to https://learn.microsoft.com/en-us/troubleshoot/windows-server/support-tools/scripts-to-retrieve-profile-age  
+    * - user_has_signed_into_explorer  
+      - oval-sc:EntityItemBoolType (0..1)  
+      - The user_has_signed_into_explorer element describes if the user account has ever executed explorer.exe. This is a practical indicator of accounts using interactive (desktop/GUI) sessions and is not set by non-interactive logon methods such as WinRM or SSH. Content authors may use this element to exclude non-interactive users from user policy checks.This can be determined by gathering the Software\Microsoft\Windows\CurrentVersion\Explorer\UserSigned value for the given ntuser.dat profile, 1 = true and 0 = false.  
     * - enabled  
       - oval-sc:EntityItemBoolType (0..1)  
-      - The enabled element describes if the user account is enabled or disabled.  
+      - The enabled element describes if the user account is enabled or disabled.Note: For domain users, if a domain controller is not available, this will not return data, and should be reported with a status of 'not collected'. If using this data for a filter to include enabled accounts, it’s recommended to exclude accounts that are have been determined to be disabled, vs including ones that are enabled, as the later may filter out accounts for which the domain controller could not return data.  
     * - date_modified  
       - oval-sc:EntityItemIntType (0..1)  
       - Time of last modification of file. The string should represent the FILETIME structure which is a 64-bit value representing the number of 100-nanosecond intervals since January 1, 1601 (UTC).  
@@ -1405,7 +1436,7 @@ Child Elements
     * - size_of_heap_commit  
       - oval-sc:EntityItemIntType (0..1)  
       - The time_date_stamp entity is an unsigned 32-bit integer (DWORD) that specifies the number of bytes to commit for the local heap.  
-    * - loader_flags  
+    * - loader_flags (Deprecated)  
       - oval-sc:EntityItemIntType (0..1)  
       - The loader_flags entity is an unsigned 32-bit integer (DWORD) that specifies the loader flags of the header.  
     * - number_of_rva_and_sizes  
@@ -1414,7 +1445,7 @@ Child Elements
     * - real_number_of_directory_entries  
       - oval-sc:EntityItemIntType (0..1)  
       - The real_number_of_directory_entries entity is the real number of data directory entries in the remainder of the optional header calculated by enumerating the directory entries.  
-    * - windows_view  
+    * - windows_view (Deprecated)  
       - win-sc:EntityItemWindowsViewType (0..1)  
       - The windows view value from which this OVAL Item was collected. This is used to indicate from which view (32-bit or 64-bit), the associated Item was collected. A value of '32_bit' indicates the Item was collected from the 32-bit view. A value of '64-bit' indicates the Item was collected from the 64-bit view. Omitting this entity removes any assertion about which view the Item was collected from, and therefore it is strongly suggested that this entity be set.  
   
@@ -1610,7 +1641,7 @@ Child Elements
     * - expanded_value  
       - oval-sc:EntityItemAnySimpleType (0..1)  
       - For registry values of type REG_EXPAND_SZ, this entity contains the expanded value. Otherwise, it should not exist.  
-    * - windows_view  
+    * - windows_view (Deprecated)  
       - win-sc:EntityItemWindowsViewType (0..1)  
       - The windows view value from which this OVAL Item was collected. This is used to indicate from which view (32-bit or 64-bit), the associated Item was collected. A value of '32_bit' indicates the Item was collected from the 32-bit view. A value of '64-bit' indicates the Item was collected from the 64-bit view. Omitting this entity removes any assertion about which view the Item was collected from, and therefore it is strongly suggested that this entity be set.  
   
@@ -1701,7 +1732,7 @@ Child Elements
     * - key_wow64_res  
       - win-sc:EntityItemAuditType (0..1)  
       -   
-    * - windows_view  
+    * - windows_view (Deprecated)  
       - win-sc:EntityItemWindowsViewType (0..1)  
       - The windows view value from which this OVAL Item was collected. This is used to indicate from which view (32-bit or 64-bit), the associated Item was collected. A value of '32_bit' indicates the Item was collected from the 32-bit view. A value of '64-bit' indicates the Item was collected from the 64-bit view. Omitting this entity removes any assertion about which view the Item was collected from, and therefore it is strongly suggested that this entity be set.  
   
@@ -1792,7 +1823,7 @@ Child Elements
     * - key_wow64_res  
       - oval-sc:EntityItemBoolType (0..1)  
       -   
-    * - windows_view  
+    * - windows_view (Deprecated)  
       - win-sc:EntityItemWindowsViewType (0..1)  
       - The windows view value from which this OVAL Item was collected. This is used to indicate from which view (32-bit or 64-bit), the associated Item was collected. A value of '32_bit' indicates the Item was collected from the 32-bit view. A value of '64-bit' indicates the Item was collected from the 64-bit view. Omitting this entity removes any assertion about which view the Item was collected from, and therefore it is strongly suggested that this entity be set.  
   
@@ -2585,7 +2616,7 @@ Child Elements
       - The WMI namespaces of the specific object.  
     * - wql  
       - oval-sc:EntityItemStringType (0..1)  
-      - A WQL query used to identify the object(s) specified. Any valid WQL query is allowed with one exception, all fields must be named. For example SELECT name, age FROM ... is valid, but SELECT * FROM ... is not valid. This is because the record entity supports only named fields.  
+      - A valid WQL query used to identify the object(s) to test against. All fields must be named in the SELECT portion of the query. For example SELECT name, age FROM ... is valid. However, SELECT * FROM ... is not valid. This is because the record element in the state and item require a unique field name value to ensure that any query results can be evaluated consistently. Due to limitations of the record element, only queries returning simple datatypes are supported. An error should be reported on a field returning a complex datatype.  
     * - result  
       - oval-sc:EntityItemRecordType (0..unbounded)  
       - The result entity holds the results of the specified WQL statement.  

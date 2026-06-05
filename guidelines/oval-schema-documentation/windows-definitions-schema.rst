@@ -1,8 +1,8 @@
 Open Vulnerability and Assessment Language: Windows Definition  
 =========================================================
 * Schema: Windows Definition  
-* Version: 5.12.2  
-* Release Date: 11/25/2025 09:00:00 AM
+* Version: 5.12.3  
+* Release Date: 06/04/2026 09:00:00 AM
 
 The following is a description of the elements, types, and attributes that compose the Windows specific tests found in Open Vulnerability and Assessment Language (OVAL). Each test is an extension of the standard test element defined in the Core Definition Schema. Through extension, each test inherits a set of elements and attributes that are shared amongst all OVAL tests. Each test is described in detail and should provide the information necessary to understand what each element and attribute represents. This document is intended for developers and assumes some familiarity with XML. A high level description of the interaction between the different tests and their relationship to the Core Definition Schema is not outlined here.
 
@@ -1163,7 +1163,7 @@ Child Elements
     * - product_version  
       - Restriction of oval-def:EntityStateAnySimpleType. See schema for details. (0..1)  
       - This entity defines the product version held within the version-information structure. This may not necessarily be a string compatible with the OVAL version datatype, in which case the string datatype should be used.  
-    * - windows_view  
+    * - windows_view (Deprecated)  
       - win-def:EntityStateWindowsViewType (0..1)  
       - The windows view value to which this was targeted. This is used to indicate which view (32-bit or 64-bit), the associated State applies to.  
   
@@ -1193,14 +1193,14 @@ Note that this behavior only applies with the equality operation on the path ent
       - 'recurse' defines how to recurse into the path entity, in other words what to follow during recursion. Options include junctions, directories, or both (a junction on Windows is equivalent to a symlink on Unix). Note that a max-depth other than 0 has to be specified for recursion to take place and for this attribute to mean anything.  
 Note that this behavior only applies with the equality operation on the path entity.  
     * - recurse_direction  
-      - Restriction of xsd:string (optional *default*='none') ('none', 'up', 'down')  
+      - Restriction of xsd:string (optional *default*='none') ('none', '~~up~~', 'down')  
       - 'recurse_direction' defines the direction, either 'up' to parent directories, or 'down' into child directories to recursively search for files. When recursing up or down, one is limited by the max_depth behavior. Note that it is not an error if max_depth specifies a certain level of recursion and that level does not exist. Recursing should only go as deep as available. The default value is 'none' for no recursion.  
 Note that this behavior only applies with the equality operation on the path entity.  
     * - recurse_file_system  
       - Restriction of xsd:string (optional *default*='all') ('all', 'local', 'defined')  
       - 'recurse_file_system' defines the file system limitation of any searching and applies to all operations as specified on the path or filepath entity. The value of 'local' limits the search scope to local file systems (as opposed to file systems mounted from an external system). The value of 'defined' keeps any recursion within the file system that the file_object (path+filename or filepath) has specified. For example, if the path specified was "C:\", you would search only the C: drive, not other filesystems mounted to descendant paths. The value of 'defined' only applies when an equality operation is used for searching because the path or filepath entity must explicitly define a file system. The default value is 'all' meaning to search all available file systems for data collection.  
 Note that in most cases it is recommended that the value of 'local' be used to ensure that file system searching is limited to only the local file systems. Searching 'all' file systems may have performance implications.  
-    * - windows_view  
+    * - windows_view (Deprecated)  
       - Restriction of xsd:string (optional *default*='64_bit') ('32_bit', '64_bit')  
       - 64-bit versions of Windows provide an alternate file system and registry views to 32-bit applications. This behavior allows the OVAL Object to state which view should be examined. This behavior only applies to 64-bit Windows, and must not be applied on other platforms.  
 Note that the values have the following meaning: '64_bit' - Indicates that the 64-bit view on 64-bit Windows operating systems must be examined. On a 32-bit system, the Object must be evaluated without applying the behavior. '32_bit' - Indicates that the 32-bit view must be examined. On a 32-bit system, the Object must be evaluated without applying the behavior. It is recommended that the corresponding 'windows_view' entity be set on the OVAL Items that are collected when this behavior is used to distinguish between OVAL Items that were collected in the 32-bit or 64-bit views.  
@@ -1366,7 +1366,7 @@ Child Elements
     * - file_write_attributes  
       - win-def:EntityStateAuditType (0..1)  
       - Grants the right to change file attributes.  
-    * - windows_view  
+    * - windows_view (Deprecated)  
       - win-def:EntityStateWindowsViewType (0..1)  
       - The windows view value to which this was targeted. This is used to indicate which view (32-bit or 64-bit), the associated State applies to.  
   
@@ -1554,7 +1554,7 @@ Child Elements
     * - file_write_attributes  
       - win-def:EntityStateAuditType (0..1)  
       - Grants the right to change file attributes.  
-    * - windows_view  
+    * - windows_view (Deprecated)  
       - win-def:EntityStateWindowsViewType (0..1)  
       - The windows view value to which this was targeted. This is used to indicate which view (32-bit or 64-bit), the associated State applies to.  
   
@@ -1744,7 +1744,7 @@ Child Elements
     * - file_write_attributes  
       - oval-def:EntityStateBoolType (0..1)  
       - Grants the right to change file, or directory, attributes.  
-    * - windows_view  
+    * - windows_view (Deprecated)  
       - win-def:EntityStateWindowsViewType (0..1)  
       - The windows view value to which this was targeted. This is used to indicate which view (32-bit or 64-bit), the associated State applies to.  
   
@@ -1932,7 +1932,7 @@ Child Elements
     * - file_write_attributes  
       - oval-def:EntityStateBoolType (0..1)  
       - Grants the right to change file, or directory, attributes.  
-    * - windows_view  
+    * - windows_view (Deprecated)  
       - win-def:EntityStateWindowsViewType (0..1)  
       - The windows view value to which this was targeted. This is used to indicate which view (32-bit or 64-bit), the associated State applies to.  
   
@@ -2327,7 +2327,7 @@ Child Elements
     * - canonical_path  
       - oval-def:EntityStateStringType (0..1)  
       - Specifies the canonical path for the target of a Windows junction specified by the path.  
-    * - windows_view  
+    * - windows_view (Deprecated)  
       - win-def:EntityStateWindowsViewType (0..1)  
       - The windows view value to which this was targeted. This is used to indicate which view (32-bit or 64-bit), the associated State applies to.  
   
@@ -2575,6 +2575,8 @@ ______________
 ---------------------------------------------------------
 The ntuser test is used to check metadata associated with Windows ntuser.dat files. It extends the standard TestType as defined in the oval-definitions-schema and one should refer to the TestType description for more information. The required object element references a ntuser_object and the optional state element specifies the ntuser data to check.
 
+To ensure consistent results across OVAL interpreters, application developers should refer to documentation in the ntuser_item when implenting this test.
+
 **Extends:** oval-def:TestType
 
 Child Elements  
@@ -2654,13 +2656,16 @@ Child Elements
       - The account_type element describes if the user account is a local account or domain account.  
     * - logged_on  
       - oval-def:EntityStateBoolType (0..1)  
-      - The logged_on element describes if the user account is currently logged on to the computer.  
+      - The logged_on element describes if the user account is currently logged on to the computer.This can be determined by comparing the SIDs collected from the ProfileList against those populated in HKEY_USERS\<SID>HKEY_USERS: Contains all the actively loaded user profiles on the computer. https://learn.microsoft.com/en-us/troubleshoot/windows-server/performance/windows-registry-advanced-usersThis data can also be obtained by other various Windows API's such as a combination of win32_logonsession and win32_loggedonuser, but the specifics are beyond the scope of OVAL documentation.  
     * - days_since_last_logon  
       - oval-def:EntityStateIntType (0..1)  
-      - The last_logon data, converted to days and then rounded down to the nearest integer (floor function). If the account is determined to be currently logged in, this date should be reported as 0.  
+      - The last_logon data which can be obtained from the LocalProfileLoadTimeHigh and LocalProfileLoadTimeLow registry values from HKLM\Software\Microsoft\Windows NT\CurrentVersion\ProfileList\<SID>, converted to days and then rounded down to the nearest integer (floor function). If the account is determined to be currently logged in, this date should be reported as 0.For more information, refer to https://learn.microsoft.com/en-us/troubleshoot/windows-server/support-tools/scripts-to-retrieve-profile-age  
+    * - user_has_signed_into_explorer  
+      - oval-def:EntityStateBoolType (0..1)  
+      - The user_has_signed_into_explorer element describes if the user account has ever executed explorer.exe. This is a practical indicator of accounts using interactive (desktop/GUI) sessions and is not set by non-interactive logon methods such as WinRM or SSH. Content authors may use this element to exclude non-interactive users from user policy checks.This can be determined by gathering the Software\Microsoft\Windows\CurrentVersion\Explorer\UserSigned value for the given ntuser.dat profile, 1 = true and 0 = false.  
     * - enabled  
       - oval-def:EntityStateBoolType (0..1)  
-      - The enabled element describes if the user account is enabled or disabled.  
+      - The enabled element describes if the user account is enabled or disabled.Note: For domain users, if a domain controller is not available, this will not return data, and should be reported with a status of 'not collected'. If using this data for a filter to include enabled accounts, it’s recommended to exclude accounts that are have been determined to be disabled, vs including ones that are enabled, as the later may filter out accounts for which the domain controller could not return data.  
     * - date_modified  
       - oval-def:EntityStateIntType (0..1)  
       - Time of last modification of file. The integer should represent the FILETIME structure which is a 64-bit value representing the number of 100-nanosecond intervals since January 1, 1601 (UTC).  
@@ -2704,13 +2709,18 @@ The Default User's directory which contains the ntuser.dat file is stored in the
 Note that the default recurse_direction behavior is 'none' so even though max_depth specifies no limitation by default, the recurse_direction behavior turns recursion off.  
 Note that this behavior only applies with the equality operation on the key entity.  
     * - recurse_direction  
-      - Restriction of xsd:string (optional *default*='none') ('none', 'up', 'down')  
+      - Restriction of xsd:string (optional *default*='none') ('none', '~~up~~', 'down')  
       - 'recurse_direction' defines the direction, either 'up' to parent keys, or 'down' into child keys to recursively search for registry keys. When recursing up or down, one is limited by the max_depth behavior. Note that it is not an error if max_depth specifies a certain level of recursion and that level does not exist. Recursing should only go as deep as available. The default value is 'none' for no recursion.  
 Note that this behavior only applies with the equality operation on the key entity.  
-    * - windows_view  
+    * - windows_view (Deprecated)  
       - Restriction of xsd:string (optional *default*='64_bit') ('32_bit', '64_bit')  
       - 64-bit versions of Windows provide an alternate file system and registry views to 32-bit applications. This behavior allows the OVAL Object to specify which view should be examined. This behavior only applies to 64-bit Windows, and must not be applied on other platforms.  
 Note that the values have the following meaning: '64_bit' – Indicates that the 64-bit view on 64-bit Windows operating systems must be examined. On a 32-bit system, the Object must be evaluated without applying the behavior. '32_bit' – Indicates that the 32-bit view must be examined. On a 32-bit system, the Object must be evaluated without applying the behavior. It is recommended that the corresponding 'windows_view' entity be set on the OVAL Items that are collected when this behavior is used to distinguish between the OVAL Items that are collected in the 32-bit or 64-bit views.  
+    * - item_creation  
+      - Restriction of xsd:string (optional *default*='key_and_name_exist') ('key_and_name_exist', 'every_ntuser')  
+      - For 'key_and_name_exist', items are only created when an ntuser.dat file includes the key and name provided in the ntuser object.  
+For 'every_ntuser', items are created for each relavent ntuser.dat found on the system. This option will prevent false negatives in instances where each ntuser.dat file must contain the required key/name/value in order to pass, but the file is lacking the key/name required to normally satisfy the creation of an ntuser item.  
+  
   
   
 ______________
@@ -3036,7 +3046,7 @@ Child Elements
     * - real_number_of_directory_entries  
       - oval-def:EntityStateIntType (0..1)  
       - The real_number_of_directory_entries entity is the real number of data directory entries in the remainder of the optional header calculated by enumerating the directory entries.  
-    * - windows_view  
+    * - windows_view (Deprecated)  
       - win-def:EntityStateWindowsViewType (0..1)  
       - The windows view value to which this was targeted. This is used to indicate which view (32-bit or 64-bit), the associated State applies to.  
   
@@ -3581,7 +3591,7 @@ Child Elements
     * - expanded_value  
       - oval-def:EntityStateAnySimpleType (0..1)  
       - For registry values of type REG_EXPAND_SZ, this entity contains the expanded value. Otherwise, it should not exist.  
-    * - windows_view  
+    * - windows_view (Deprecated)  
       - win-def:EntityStateWindowsViewType (0..1)  
       - The windows view value to which this was targeted. This is used to indicate which view (32-bit or 64-bit), the associated State applies to.  
   
@@ -3605,10 +3615,10 @@ Attributes
 Note that the default recurse_direction behavior is 'none' so even though max_depth specifies no limitation by default, the recurse_direction behavior turns recursion off.  
 Note that this behavior only applies with the equality operation on the key entity.  
     * - recurse_direction  
-      - Restriction of xsd:string (optional *default*='none') ('none', 'up', 'down')  
+      - Restriction of xsd:string (optional *default*='none') ('none', '~~up~~', 'down')  
       - 'recurse_direction' defines the direction, either 'up' to parent keys, or 'down' into child keys to recursively search for registry keys. When recursing up or down, one is limited by the max_depth behavior. Note that it is not an error if max_depth specifies a certain level of recursion and that level does not exist. Recursing should only go as deep as available. The default value is 'none' for no recursion.  
 Note that this behavior only applies with the equality operation on the key entity.  
-    * - windows_view  
+    * - windows_view (Deprecated)  
       - Restriction of xsd:string (optional *default*='64_bit') ('32_bit', '64_bit')  
       - 64-bit versions of Windows provide an alternate file system and registry views to 32-bit applications. This behavior allows the OVAL Object to specify which view should be examined. This behavior only applies to 64-bit Windows, and must not be applied on other platforms.  
 Note that the values have the following meaning: '64_bit' - Indicates that the 64-bit view on 64-bit Windows operating systems must be examined. On a 32-bit system, the Object must be evaluated without applying the behavior. '32_bit' - Indicates that the 32-bit view must be examined. On a 32-bit system, the Object must be evaluated without applying the behavior. It is recommended that the corresponding 'windows_view' entity be set on the OVAL Items that are collected when this behavior is used to distinguish between the OVAL Items that are collected in the 32-bit or 64-bit views.  
@@ -3764,7 +3774,7 @@ Child Elements
     * - key_wow64_res  
       - win-def:EntityStateAuditType (0..1)  
       -   
-    * - windows_view  
+    * - windows_view (Deprecated)  
       - win-def:EntityStateWindowsViewType (0..1)  
       - The windows view value to which this was targeted. This is used to indicate which view (32-bit or 64-bit), the associated State applies to.  
   
@@ -3950,7 +3960,7 @@ Child Elements
     * - key_wow64_res  
       - win-def:EntityStateAuditType (0..1)  
       -   
-    * - windows_view  
+    * - windows_view (Deprecated)  
       - win-def:EntityStateWindowsViewType (0..1)  
       - The windows view value to which this was targeted. This is used to indicate which view (32-bit or 64-bit), the associated State applies to.  
   
@@ -4130,7 +4140,7 @@ Child Elements
     * - key_wow64_res  
       - oval-def:EntityStateBoolType (0..1)  
       -   
-    * - windows_view  
+    * - windows_view (Deprecated)  
       - win-def:EntityStateWindowsViewType (0..1)  
       - The windows view value to which this was targeted. This is used to indicate which view (32-bit or 64-bit), the associated State applies to.  
   
@@ -4312,7 +4322,7 @@ Child Elements
     * - key_wow64_res  
       - oval-def:EntityStateBoolType (0..1)  
       -   
-    * - windows_view  
+    * - windows_view (Deprecated)  
       - win-def:EntityStateWindowsViewType (0..1)  
       - The windows view value to which this was targeted. This is used to indicate which view (32-bit or 64-bit), the associated State applies to.  
   
@@ -6193,7 +6203,7 @@ Child Elements
       - Specifies which WMI namespace to look under. Each WMI provider normally registers its own WMI namespace and then all its classes within that namespace. For example, all Win32 WMI classes can be found in the namespace "root\cimv2", all IIS WMI classes can be found at "root\microsoftiisv2", and all LDAP WMI classes can be found at "root\directory\ldap".  
     * - wql  
       - oval-def:EntityObjectStringType (1..1)  
-      - A WQL query used to identify the object(s) to test against. Any valid WQL query is usable with one exception, all fields must be named in the SELECT portion of the query. For example SELECT name, age FROM ... is valid. However, SELECT * FROM ... is not valid. This is because the record element in the state and item require a unique field name value to ensure that any query results can be evaluated consistently.  
+      - A valid WQL query used to identify the object(s) to test against. All fields must be named in the SELECT portion of the query. For example SELECT name, age FROM ... is valid. However, SELECT * FROM ... is not valid. This is because the record element in the state and item require a unique field name value to ensure that any query results can be evaluated consistently. Due to limitations of the record element, only queries returning simple datatypes are supported. An error should be reported on a field returning a complex datatype.  
     * - oval-def:filter  
       - n/a (0..unbounded)  
       -   
@@ -6219,7 +6229,7 @@ Child Elements
       - Specifies which WMI namespace to look under. Each WMI provider normally registers its own WMI namespace and then all its classes within that namespace. For example, all Win32 WMI classes can be found in the namespace "root\cimv2", all IIS WMI classes can be found at "root\microsoftiisv2", and all LDAP WMI classes can be found at "root\directory\ldap".  
     * - wql  
       - oval-def:EntityStateStringType (0..1)  
-      - A WQL query used to identify the object(s) to test against. Any valid WQL query is usable with one exception, all fields must be named in the SELECT portion of the query. For example SELECT name, age FROM ... is valid. However, SELECT * FROM ... is not valid. This is because the record element in the state and item require a unique field name value to ensure that any query results can be evaluated consistantly.  
+      - A valid WQL query used to identify the object(s) to test against. All fields must be named in the SELECT portion of the query. For example SELECT name, age FROM ... is valid. However, SELECT * FROM ... is not valid. This is because the record element in the state and item require a unique field name value to ensure that any query results can be evaluated consistently. Due to limitations of the record element, only queries returning simple datatypes are supported. An error should be reported on a field returning a complex datatype.  
     * - result  
       - oval-def:EntityStateRecordType (0..1)  
       - The result element specifies how to test items in the result set of the specified WQL statement.  

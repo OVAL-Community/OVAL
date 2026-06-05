@@ -1,8 +1,8 @@
 Open Vulnerability and Assessment Language: Independent System Characteristics  
 =========================================================
 * Schema: Independent System Characteristics  
-* Version: 5.12.2  
-* Release Date: 11/25/2025 09:00:00 AM
+* Version: 5.12.3  
+* Release Date: 06/04/2026 09:00:00 AM
 
 This document outlines the items of the OVAL System Characteristics XML schema that are independent of any specific family or platform. Each iten is an extention of a basic System Characteristics item defined in the core System Characteristics XML schema.
 
@@ -87,7 +87,7 @@ Child Elements
     * - sha1  
       - oval-sc:EntityItemStringType (0..1)  
       - The sha1 hash of the file  
-    * - windows_view  
+    * - windows_view (Deprecated)  
       - ind-sc:EntityItemWindowsViewType (0..1)  
       - The windows view value from which this OVAL Item was collected. This is used to indicate from which view (32-bit or 64-bit), the associated Item was collected. A value of '32_bit' indicates the Item was collected from the 32-bit view. A value of '64-bit' indicates the Item was collected from the 64-bit view. Omitting this entity removes any assertion about which view the Item was collected from, and therefore it is strongly suggested that this entity be set. This entity only applies to 64-bit Microsoft Windows operating systems.  
   
@@ -124,7 +124,7 @@ Child Elements
     * - hash  
       - oval-sc:EntityItemStringType (0..1)  
       - The result of applying the hash algorithm to the file.  
-    * - windows_view  
+    * - windows_view (Deprecated)  
       - ind-sc:EntityItemWindowsViewType (0..1)  
       - The windows view value from which this OVAL Item was collected. This is used to indicate from which view (32-bit or 64-bit), the associated Item was collected. A value of '32_bit' indicates the Item was collected from the 32-bit view. A value of '64-bit' indicates the Item was collected from the 64-bit view. Omitting this entity removes any assertion about which view the Item was collected from, and therefore it is strongly suggested that this entity be set. This entity only applies to 64-bit Microsoft Windows operating systems.  
   
@@ -466,7 +466,7 @@ Child Elements
     * - subexpression  
       - oval-sc:EntityItemAnySimpleType (0..unbounded)  
       - The subexpression entity represents the value of a subexpression in the specified pattern. If multiple subexpressions are specified in the pattern, then multiple entities are presented. Note that the textfilecontent_state in the definition schema only allows a single subexpression entity. This means that the test will check that all (or at least one, none, etc.) the subexpressions pass the same check. This means that the order of multiple subexpression entities in the item does not matter.  
-    * - windows_view  
+    * - windows_view (Deprecated)  
       - ind-sc:EntityItemWindowsViewType (0..1)  
       - The windows view value from which this OVAL Item was collected. This is used to indicate from which view (32-bit or 64-bit), the associated Item was collected. A value of '32_bit' indicates the Item was collected from the 32-bit view. A value of '64-bit' indicates the Item was collected from the 64-bit view. Omitting this entity removes any assertion about which view the Item was collected from, and therefore it is strongly suggested that this entity be set. This entity only applies to 64-bit Microsoft Windows operating systems.  
   
@@ -528,7 +528,7 @@ Child Elements
     * - value_of  
       - oval-sc:EntityItemAnySimpleType (0..unbounded)  
       - The value_of element checks the value(s) of the text node(s) or attribute(s) found. How this is used is entirely controlled by operator attributes.  
-    * - windows_view  
+    * - windows_view (Deprecated)  
       - ind-sc:EntityItemWindowsViewType (0..1)  
       - The windows view value from which this OVAL Item was collected. This is used to indicate from which view (32-bit or 64-bit), the associated Item was collected. A value of '32_bit' indicates the Item was collected from the 32-bit view. A value of '64-bit' indicates the Item was collected from the 64-bit view. Omitting this entity removes any assertion about which view the Item was collected from, and therefore it is strongly suggested that this entity be set. This entity only applies to 64-bit Microsoft Windows operating systems.  
   
@@ -568,7 +568,7 @@ Child Elements
     * - value  
       - oval-sc:EntityItemRecordType (0..unbounded)  
       - The value entity holds the target(s) of the specified YAML Path. A single scalar value or a list of scalar values (where there is no key to associate) would have the name attribute of the field element set to '#'. Due to the limitation of the record type field names could not contain uppercase letters, they will be converted to the lowercase and escaped using the '^' symbol (the '^' symbol would be escaped as well). For example 'myCamelCase^Key' would be collected as 'my^camel^case^^^key'.  
-    * - windows_view  
+    * - windows_view (Deprecated)  
       - ind-sc:EntityItemWindowsViewType (0..1)  
       - The windows view value from which this OVAL Item was collected. This is used to indicate from which view (32-bit or 64-bit), the associated Item was collected. A value of '32_bit' indicates the Item was collected from the 32-bit view. A value of '64-bit' indicates the Item was collected from the 64-bit view. Omitting this entity removes any assertion about which view the Item was collected from, and therefore it is strongly suggested that this entity be set. This entity only applies to 64-bit Microsoft Windows operating systems.  
   
