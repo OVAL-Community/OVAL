@@ -8,7 +8,7 @@ OVAL 5.11.2 Documentation (SCAP 1.3): https://oval-community-guidelines.readthed
 ## OVAL 5.12.3 Official Release
 The OVAL board is proud to announce the release of OVAL 5.12.3 which is intended to align with NIST's upcoming SCAP 1.4 release.  
 
-**06/04/2026**
+**06/05/2026**
 For a complete list of changes, please refer to:
 - https://github.com/OVAL-Community/OVAL/issues?q=is%3Aissue+milestone%3A5.12.3+is%3Aclosed
  
