@@ -5,7 +5,7 @@
             xmlns:win-sc="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#windows"
             xmlns:sch="http://purl.oclc.org/dsdl/schematron"
             targetNamespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#windows"
-            elementFormDefault="qualified" version="5.12.2">
+            elementFormDefault="qualified" version="5.12.3">
      <xsd:import namespace="http://oval.mitre.org/XMLSchema/oval-common-5" schemaLocation="oval-common-schema.xsd"/>
      <xsd:import namespace="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5" schemaLocation="oval-system-characteristics-schema.xsd"/>
      <xsd:annotation>
@@ -13,8 +13,8 @@
           <xsd:documentation>The OVAL Schema is maintained by the OVAL Community. For more information, including how to get involved in the project and how to submit change requests, please visit the OVAL website at https://github.com/OVAL-Community/.</xsd:documentation>
           <xsd:appinfo>
                <schema>Windows System Characteristics</schema>
-               <version>5.12.2</version>
-               <date>11/25/2025 09:00:00 AM</date>
+               <version>5.12.3</version>
+               <date>06/04/2026 09:00:00 AM</date>
                <terms_of_use>This software is an open standard developed by multiple parties, including the United States Government (Government). The Government hereby grants you a non-exclusive, royalty-free, worldwide license to use, modify, and/or reproduce the software for any lawful purpose provided that you reproduce this License/Disclaimer language with any use/modification/copy of the software. The Government assumes no responsibility whatsoever for this software's use by other parties, and the software is provided "AS IS" without warranty or guarantee of any kind, express or implied, including, but not limited to, the warranties of merchantability, fitness for a particular purpose, and noninfringement. In no event shall the Government be liable for any claim, damages or other liability, whether in an action of contract, tort or other dealings in the software. The Government has no obligation hereunder to provide maintenance, support, updates, enhancements, or modifications to the software. Users may submit proposals and/or updates regarding the software, which proposals and/or updates the Government, at its sole discretion, can choose to incorporate into the software. Proposals and/or updates submitted to the Government by users must be accompanied by a license to such proposals and/or updates that is no more restrictive than this License/Disclaimer.</terms_of_use><sch:ns prefix="oval-sc" uri="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5"/>
                <sch:ns prefix="win-sc" uri="http://oval.mitre.org/XMLSchema/oval-system-characteristics-5#windows"/>
               <sch:ns prefix="xsi" uri="http://www.w3.org/2001/XMLSchema-instance"/>
@@ -1027,7 +1027,14 @@
                               <xsd:element name="windows_view" type="win-sc:EntityItemWindowsViewType" minOccurs="0">
                                    <xsd:annotation>
                                         <xsd:documentation>The windows view value from which this OVAL Item was collected. This is used to indicate from which view (32-bit or 64-bit), the associated Item was collected. A value of '32_bit' indicates the Item was collected from the 32-bit view.  A value of '64-bit' indicates the Item was collected from the 64-bit view. Omitting this entity removes any assertion about which view the Item was collected from, and therefore it is strongly suggested that this entity be set.</xsd:documentation>
-                                   </xsd:annotation>
+										<xsd:appinfo>
+											<oval:deprecated_info>
+												<oval:version>5.12.3</oval:version>
+												<oval:reason>Unused in production content and adds unneeded complexity to OVAL interpeters.  The equivalent data can be obtained by other existing OVAL methods.</oval:reason>
+												<oval:comment>This element has been deprecated and will be removed in version 6.0.1 of the language.</oval:comment>
+											</oval:deprecated_info>
+										</xsd:appinfo>
+									</xsd:annotation>
                               </xsd:element>
                          </xsd:sequence>
                     </xsd:extension>
@@ -1168,7 +1175,14 @@
                               <xsd:element name="windows_view" type="win-sc:EntityItemWindowsViewType" minOccurs="0">
                                    <xsd:annotation>
                                         <xsd:documentation>The windows view value from which this OVAL Item was collected. This is used to indicate from which view (32-bit or 64-bit), the associated Item was collected. A value of '32_bit' indicates the Item was collected from the 32-bit view.  A value of '64-bit' indicates the Item was collected from the 64-bit view. Omitting this entity removes any assertion about which view the Item was collected from, and therefore it is strongly suggested that this entity be set.</xsd:documentation>
-                                   </xsd:annotation>
+                                   			<xsd:appinfo>
+												<oval:deprecated_info>
+													<oval:version>5.12.3</oval:version>
+													<oval:reason>Unused in production content and adds unneeded complexity to OVAL interpeters.  The equivalent data can be obtained by other existing OVAL methods.</oval:reason>
+													<oval:comment>This element has been deprecated and will be removed in version 6.0.1 of the language.</oval:comment>
+												</oval:deprecated_info>
+											</xsd:appinfo>
+								   </xsd:annotation>
                               </xsd:element>
                          </xsd:sequence>
                     </xsd:extension>
@@ -1309,7 +1323,14 @@
                               <xsd:element name="windows_view" type="win-sc:EntityItemWindowsViewType" minOccurs="0">
                                    <xsd:annotation>
                                         <xsd:documentation>The windows view value from which this OVAL Item was collected. This is used to indicate from which view (32-bit or 64-bit), the associated Item was collected. A value of '32_bit' indicates the Item was collected from the 32-bit view.  A value of '64-bit' indicates the Item was collected from the 64-bit view. Omitting this entity removes any assertion about which view the Item was collected from, and therefore it is strongly suggested that this entity be set.</xsd:documentation>
-                                   </xsd:annotation>
+										<xsd:appinfo>
+											<oval:deprecated_info>
+												<oval:version>5.12.3</oval:version>
+												<oval:reason>Unused in production content and adds unneeded complexity to OVAL interpeters.  The equivalent data can be obtained by other existing OVAL methods.</oval:reason>
+												<oval:comment>This element has been deprecated and will be removed in version 6.0.1 of the language.</oval:comment>
+											</oval:deprecated_info>
+										</xsd:appinfo>
+								   </xsd:annotation>
                               </xsd:element>
                          </xsd:sequence>
                     </xsd:extension>
@@ -1489,7 +1510,14 @@
                               <xsd:element name="windows_view" type="win-sc:EntityItemWindowsViewType" minOccurs="0">
                                    <xsd:annotation>
                                         <xsd:documentation>The windows view value from which this OVAL Item was collected. This is used to indicate from which view (32-bit or 64-bit), the associated Item was collected. A value of '32_bit' indicates the Item was collected from the 32-bit view.  A value of '64-bit' indicates the Item was collected from the 64-bit view. Omitting this entity removes any assertion about which view the Item was collected from, and therefore it is strongly suggested that this entity be set.</xsd:documentation>
-                                   </xsd:annotation>
+										<xsd:appinfo>
+											<oval:deprecated_info>
+												<oval:version>5.12.3</oval:version>
+												<oval:reason>Unused in production content and adds unneeded complexity to OVAL interpeters.  The equivalent data can be obtained by other existing OVAL methods.</oval:reason>
+												<oval:comment>This element has been deprecated and will be removed in version 6.0.1 of the language.</oval:comment>
+											</oval:deprecated_info>
+										</xsd:appinfo>
+								   </xsd:annotation>
                               </xsd:element>
                          </xsd:sequence>
                     </xsd:extension>
@@ -1629,6 +1657,20 @@
      <xsd:element name="ntuser_item" substitutionGroup="oval-sc:item">
           <xsd:annotation>
                <xsd:documentation>The windows ntuser_item specifies information that can be collected from a particular ntuser.dat file.</xsd:documentation>
+<xsd:documentation>To ensure consistent results across OVAL interpreters, the following implementation methods are recommended.  Note that there may be other technical ways to obtain the data, which vendors may choose to implement.</xsd:documentation>
+<xsd:documentation>1.	Finding Human User Profiles </xsd:documentation>
+<xsd:documentation>	 a.	Obtain a list of User Profiles from the following registry key, where each subkey is a profile that may be included in scope for this test</xsd:documentation>
+<xsd:documentation>		i.	HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\WindowsNT\CurrentVersion\ProfileList</xsd:documentation>
+<xsd:documentation>	 b.	Determine which user profiles are from ‘human’ users</xsd:documentation>
+<xsd:documentation>		i.	Exclude profiles for LocalService, Network service etc.. by excluding subkeys in the format of S-1-5-&lt;number*gt;</xsd:documentation>
+<xsd:documentation>		ii.	Exclude profiles for Per-Service SIDs by excluding subkeys in the format of S-1-5-80-&lt;number*gt;-&lt;number*gt;-&lt;number*gt;-&lt;number*gt;-&lt;number*gt;</xsd:documentation>
+<xsd:documentation>		iii. Include Local and Domain User SIDs by including subkeys match the format of S-1-5-21-&lt;number*gt;-&lt;number*gt;-&lt;number*gt;-&lt;number*gt;</xsd:documentation>
+<xsd:documentation>	 c.	Obtain ntuser filepath from the ProfileImagePath value of 'human' profiles</xsd:documentation>
+<xsd:documentation>2.	Gathering per user registry key data</xsd:documentation>
+<xsd:documentation>	a.	If a user is logged in, their ntuser.dat file will be locked and the OVAL interpreter will not be able to read it, the OVAL interpreter will need to obtain that data from HKEY_USERS\&lt;sid_of_logged_in_user&gt;</xsd:documentation>
+<xsd:documentation>	b.	If a user is not logged in, the OVAL interpreter will need to obtain the data directly from the users ntuser.dat file.</xsd:documentation>
+<xsd:documentation>	Note: There are many different methods depenending on programming language to parse ntuser.dat files, and each OVAL interpreter may choose their own methods.</xsd:documentation>
+<xsd:documentation>	If no other programming language native methods are available, it is advised not to load the ntuser.dat file directly from its original location, as it will lock the file and prevent that user from logging into Windows.</xsd:documentation>
           </xsd:annotation>
           <xsd:complexType>
                <xsd:complexContent>
@@ -1666,16 +1708,27 @@
                               <xsd:element name="logged_on" type="oval-sc:EntityItemBoolType" minOccurs="0" maxOccurs="1">
                                    <xsd:annotation>
                                         <xsd:documentation>The logged_on element describes if the user account is currently logged on to the computer.</xsd:documentation>
-                                   </xsd:annotation>
+										<xsd:documentation>This can be determined by comparing the SIDs collected from the ProfileList against those populated in HKEY_USERS\&lt;SID&gt;</xsd:documentation>
+										<xsd:documentation>HKEY_USERS: Contains all the actively loaded user profiles on the computer.  https://learn.microsoft.com/en-us/troubleshoot/windows-server/performance/windows-registry-advanced-users</xsd:documentation>
+										<xsd:documentation>This data can also be obtained by other various Windows API's such as a combination of win32_logonsession and win32_loggedonuser, but the specifics are beyond the scope of OVAL documentation.</xsd:documentation>
+								   </xsd:annotation>
                               </xsd:element>
                               <xsd:element name="days_since_last_logon" type="oval-sc:EntityItemIntType" minOccurs="0" maxOccurs="1">
-                                   <xsd:annotation>
-                                        <xsd:documentation>The last_logon data, converted to days and then rounded down to the nearest integer (floor function). If the account is determined to be currently logged in, this date should be reported as 0.</xsd:documentation>
-                                   </xsd:annotation>
-                              </xsd:element>							  
+								   <xsd:annotation>
+										<xsd:documentation>The last_logon data which can be obtained from the LocalProfileLoadTimeHigh and LocalProfileLoadTimeLow registry values from HKLM\Software\Microsoft\Windows NT\CurrentVersion\ProfileList\&lt;SID&gt;, converted to days and then rounded down to the nearest integer (floor function). If the account is determined to be currently logged in, this date should be reported as 0.</xsd:documentation>
+										<xsd:documentation>For more information, refer to https://learn.microsoft.com/en-us/troubleshoot/windows-server/support-tools/scripts-to-retrieve-profile-age</xsd:documentation>
+								   </xsd:annotation>
+                              </xsd:element>	
+							<xsd:element name="user_has_signed_into_explorer" type="oval-sc:EntityItemBoolType" minOccurs="0" maxOccurs="1">
+								<xsd:annotation>
+									<xsd:documentation>The user_has_signed_into_explorer element describes if the user account has ever executed explorer.exe. This is a practical indicator of accounts using interactive (desktop/GUI) sessions and is not set by non-interactive logon methods such as WinRM or SSH. Content authors may use this element to exclude non-interactive users from user policy checks.</xsd:documentation>
+									<xsd:documentation>This can be determined by gathering the Software\Microsoft\Windows\CurrentVersion\Explorer\UserSigned value for the given ntuser.dat profile, 1 = true and 0 = false.</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>							  
                               <xsd:element name="enabled" type="oval-sc:EntityItemBoolType" minOccurs="0" maxOccurs="1">
                                    <xsd:annotation>
                                         <xsd:documentation>The enabled element describes if the user account is enabled or disabled.</xsd:documentation>
+										<xsd:documentation>Note: For domain users, if a domain controller is not available, this will not return data, and should be reported with a status of 'not collected'.  If using this data for a filter to include enabled accounts, it’s recommended to exclude accounts that are have been determined to be disabled, vs including ones that are enabled, as the later may filter out accounts for which the domain controller could not return data.</xsd:documentation>
                                    </xsd:annotation>
                               </xsd:element>
                               <xsd:element name="date_modified" type="oval-sc:EntityItemIntType" minOccurs="0" maxOccurs="1">
@@ -2060,7 +2113,14 @@
                               <xsd:element name="loader_flags" type="oval-sc:EntityItemIntType" minOccurs="0" maxOccurs="1">
                                    <xsd:annotation>
                                         <xsd:documentation>The loader_flags entity is an unsigned 32-bit integer (DWORD) that specifies the loader flags of the header.</xsd:documentation>
-                                   </xsd:annotation>
+										<xsd:appinfo>
+											<oval:deprecated_info>
+												<oval:version>5.12.3</oval:version>
+												<oval:reason>Unused in production content and adds unneeded complexity to OVAL interpeters.  The equivalent data can be obtained by other existing OVAL methods.</oval:reason>
+												<oval:comment>This element has been deprecated and will be removed in version 6.0.1 of the language.</oval:comment>
+											</oval:deprecated_info>
+										</xsd:appinfo>
+								   </xsd:annotation>
                               </xsd:element>
                               <xsd:element name="number_of_rva_and_sizes" type="oval-sc:EntityItemIntType" minOccurs="0" maxOccurs="1">
                                    <xsd:annotation>
@@ -2075,7 +2135,14 @@
                               <xsd:element name="windows_view" type="win-sc:EntityItemWindowsViewType" minOccurs="0">
                                    <xsd:annotation>
                                         <xsd:documentation>The windows view value from which this OVAL Item was collected. This is used to indicate from which view (32-bit or 64-bit), the associated Item was collected. A value of '32_bit' indicates the Item was collected from the 32-bit view.  A value of '64-bit' indicates the Item was collected from the 64-bit view. Omitting this entity removes any assertion about which view the Item was collected from, and therefore it is strongly suggested that this entity be set.</xsd:documentation>
-                                   </xsd:annotation>
+										<xsd:appinfo>
+											<oval:deprecated_info>
+												<oval:version>5.12.3</oval:version>
+												<oval:reason>Unused in production content and adds unneeded complexity to OVAL interpeters.  The equivalent data can be obtained by other existing OVAL methods.</oval:reason>
+												<oval:comment>This element has been deprecated and will be removed in version 6.0.1 of the language.</oval:comment>
+											</oval:deprecated_info>
+										</xsd:appinfo>
+								   </xsd:annotation>
                               </xsd:element>
                          </xsd:sequence>
                     </xsd:extension>
@@ -2353,7 +2420,14 @@
                               <xsd:element name="windows_view" type="win-sc:EntityItemWindowsViewType" minOccurs="0">
                                    <xsd:annotation>
                                         <xsd:documentation>The windows view value from which this OVAL Item was collected. This is used to indicate from which view (32-bit or 64-bit), the associated Item was collected. A value of '32_bit' indicates the Item was collected from the 32-bit view.  A value of '64-bit' indicates the Item was collected from the 64-bit view. Omitting this entity removes any assertion about which view the Item was collected from, and therefore it is strongly suggested that this entity be set.</xsd:documentation>
-                                   </xsd:annotation>
+										<xsd:appinfo>
+											<oval:deprecated_info>
+												<oval:version>5.12.3</oval:version>
+												<oval:reason>Unused in production content and adds unneeded complexity to OVAL interpeters.  The equivalent data can be obtained by other existing OVAL methods.</oval:reason>
+												<oval:comment>This element has been deprecated and will be removed in version 6.0.1 of the language.</oval:comment>
+											</oval:deprecated_info>
+										</xsd:appinfo>
+								   </xsd:annotation>
                               </xsd:element>
                          </xsd:sequence>
                     </xsd:extension>
@@ -2500,7 +2574,14 @@
                               <xsd:element name="windows_view" type="win-sc:EntityItemWindowsViewType" minOccurs="0">
                                    <xsd:annotation>
                                         <xsd:documentation>The windows view value from which this OVAL Item was collected. This is used to indicate from which view (32-bit or 64-bit), the associated Item was collected. A value of '32_bit' indicates the Item was collected from the 32-bit view.  A value of '64-bit' indicates the Item was collected from the 64-bit view. Omitting this entity removes any assertion about which view the Item was collected from, and therefore it is strongly suggested that this entity be set.</xsd:documentation>
-                                   </xsd:annotation>
+										<xsd:appinfo>
+											<oval:deprecated_info>
+												<oval:version>5.12.3</oval:version>
+												<oval:reason>Unused in production content and adds unneeded complexity to OVAL interpeters.  The equivalent data can be obtained by other existing OVAL methods.</oval:reason>
+												<oval:comment>This element has been deprecated and will be removed in version 6.0.1 of the language.</oval:comment>
+											</oval:deprecated_info>
+										</xsd:appinfo>
+								   </xsd:annotation>
                               </xsd:element>
                          </xsd:sequence>
                     </xsd:extension>
@@ -2647,7 +2728,14 @@
                               <xsd:element name="windows_view" type="win-sc:EntityItemWindowsViewType" minOccurs="0">
                                    <xsd:annotation>
                                         <xsd:documentation>The windows view value from which this OVAL Item was collected. This is used to indicate from which view (32-bit or 64-bit), the associated Item was collected. A value of '32_bit' indicates the Item was collected from the 32-bit view.  A value of '64-bit' indicates the Item was collected from the 64-bit view. Omitting this entity removes any assertion about which view the Item was collected from, and therefore it is strongly suggested that this entity be set.</xsd:documentation>
-                                   </xsd:annotation>
+										<xsd:appinfo>
+											<oval:deprecated_info>
+												<oval:version>5.12.3</oval:version>
+												<oval:reason>Unused in production content and adds unneeded complexity to OVAL interpeters.  The equivalent data can be obtained by other existing OVAL methods.</oval:reason>
+												<oval:comment>This element has been deprecated and will be removed in version 6.0.1 of the language.</oval:comment>
+											</oval:deprecated_info>
+										</xsd:appinfo>
+								   </xsd:annotation>
                               </xsd:element>
                          </xsd:sequence>
                     </xsd:extension>
@@ -3714,7 +3802,7 @@
                               </xsd:element>
                               <xsd:element name="wql" type="oval-sc:EntityItemStringType" minOccurs="0" maxOccurs="1">
                                    <xsd:annotation>
-                                        <xsd:documentation>A WQL query used to identify the object(s) specified. Any valid WQL query is allowed with one exception, all fields must be named. For example SELECT name, age FROM ... is valid, but SELECT * FROM ... is not valid. This is because the record entity supports only named fields.</xsd:documentation>
+                                        <xsd:documentation>A valid WQL query used to identify the object(s) to test against. All fields must be named in the SELECT portion of the query. For example SELECT name, age FROM ... is valid. However, SELECT * FROM ... is not valid. This is because the record element in the state and item require a unique field name value to ensure that any query results can be evaluated consistently. Due to limitations of the record element, only queries returning simple datatypes are supported. An error should be reported on a field returning a complex datatype.</xsd:documentation>
                                    </xsd:annotation>
                               </xsd:element>
                               <xsd:element name="result" type="oval-sc:EntityItemRecordType" minOccurs="0" maxOccurs="unbounded">

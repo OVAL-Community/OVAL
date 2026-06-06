@@ -1,8 +1,8 @@
 Open Vulnerability and Assessment Language: Unix System Characteristics  
 =========================================================
 * Schema: Unix System Characteristics  
-* Version: 5.12.2  
-* Release Date: 11/25/2025 09:00:00 AM
+* Version: 5.12.3  
+* Release Date: 06/04/2026 09:00:00 AM
 
 The following is a description of the elements, types, and attributes that compose the UNIX specific system characteristic items found in Open Vulnerability and Assessment Language (OVAL). Each item is an extension of the standard item element defined in the Core System Characteristic Schema. Through extension, each item inherits a set of elements and attributes that are shared amongst all OVAL Items. Each item is described in detail and should provide the information necessary to understand what each element and attribute represents. This document is intended for developers and assumes some familiarity with XML. A high level description of the interaction between the different tests and their relationship to the Core System Characteristic Schema is not outlined here.
 
@@ -498,8 +498,13 @@ ______________
   
 .. _runlevel_item:  
   
-< runlevel_item >  
+< runlevel_item > (Deprecated)  
 ---------------------------------------------------------
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* Deprecated As Of Version 5.12.3  
+* Reason: The runlevel_item has been deprecated because runlevel is obsolete.  The runlevel_item may be removed in a future version of the language.  
+  
 The runlevel item holds information about the start or kill state of a specified service at a given runlevel. Each runlevel item contains service name and runlevel information as well as start and kill information. It extends the standard ItemType as defined in the oval-system-characteristics schema and one should refer to the ItemType description for more information.
 
 **Extends:** oval-sc:ItemType
@@ -747,8 +752,13 @@ ______________
   
 .. _xinetd_item:  
   
-< xinetd_item >  
+< xinetd_item > (Deprecated)  
 ---------------------------------------------------------
+Deprecation Info  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* Deprecated As Of Version 5.12.3  
+* Reason: The xinetd_item has been deprecated because xinetd is obsolete.  The xinetd_item may be removed in a future version of the language.  
+  
 The xinetd item holds information associated with different Internet services. It extends the standard ItemType as defined in the oval-system-characteristics schema and one should refer to the ItemType description for more information.
 
 **Extends:** oval-sc:ItemType

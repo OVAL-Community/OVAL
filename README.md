@@ -1,14 +1,31 @@
-# OVAL 5.12.2 Official Release
-The OVAL board is proud to announce the release of OVAL 5.12.2 which is intended to align with NIST's upcoming SCAP 1.4 release.  
+# The OVAL Language Documentation
+
+OVAL 5.12.3 Documenation (SCAP 1.4):  https://oval-community-guidelines.readthedocs.io/en/v5.12.3/
+
+OVAL 5.11.2 Documentation (SCAP 1.3): https://oval-community-guidelines.readthedocs.io/en/5.11.2_release
+
+# Releases
+## OVAL 5.12.3 Official Release
+The OVAL board is proud to announce the release of OVAL 5.12.3 which is intended to align with NIST's upcoming SCAP 1.4 release.  
+
+**06/05/2026**
+For a complete list of changes, please refer to:
+- https://github.com/OVAL-Community/OVAL/issues?q=is%3Aissue+milestone%3A5.12.3+is%3Aclosed
+ 
+To download a copy of the OVAL 5.12.3 schema, and offline HTML files, view the following and download the release zips from the Assets.
+- https://github.com/OVAL-Community/OVAL/releases/tag/v5.12.3
+
+## OVAL 5.12.2 Official Release
+The OVAL board is proud to announce the release of OVAL 5.12.2.
 
 **12/01/2025**
 For a complete list of changes, please refer to:
-- [https://github.com/OVAL-Community/OVAL/issues?q=is%3Aissue+milestone%3A5.12.2+is%3Aclosed](https://github.com/OVAL-Community/OVAL/pulls?q=is%3Apr+is%3Aclosed+milestone%3A5.12.2)
+- https://github.com/OVAL-Community/OVAL/issues?q=is%3Aissue+milestone%3A5.12.2+is%3Aclosed
  
 To download a copy of the OVAL 5.12.2 schema, and offline HTML files, view the following and download the release zips from the Assets.
 - https://github.com/OVAL-Community/OVAL/releases/tag/v5.12.2
 
-# OVAL 5.12.1 Official Release
+## OVAL 5.12.1 Official Release
 
 **06/03/2025**
 For a complete list of changes, please refer to:
@@ -17,7 +34,7 @@ For a complete list of changes, please refer to:
 To download a copy of the OVAL 5.12.2 schema, and offline HTML files, view the following and download the release zips from the Assets.
 - https://github.com/OVAL-Community/OVAL/releases/tag/v5.12.1
 
-# OVAL 6.0 Official Release
+## OVAL 6.0 Official Release
 **12/01/2025**
 Note:  OVAL 6.0.x development is now on hold, pending future discussions with NIST on SCAP 3.0.   OVAL 5.12.x should be used for all 'stable' SCAP development at this time.
 
@@ -34,7 +51,7 @@ For a complete list of changes, please refer to:
 To download a copy of the OVAL 6.0 schema, and offline HTML files, view the following and download the release zips from the Assets.
 - https://github.com/OVAL-Community/OVAL/releases/tag/v6.0
 
-# OVAL 5.12 Official Release
+## OVAL 5.12 Official Release
 
 **12/04/2024**
 After several years of work with contributions from numerous OVAL developers and board members, we are proud to announce the release of OVAL 5.12.  For a list of changes, please view:
@@ -44,14 +61,6 @@ For a complete list of changes, please refer to:
 
 To download a copy of the OVAL 5.12 schema, and offline HTML files, view the following and download the release zips from the Assets.
 - https://github.com/OVAL-Community/OVAL/releases/tag/v5.12
-
-# The OVAL Language Documentation
-
-For OVAL 5.12.2 Documenation (SCAP 1.4):  https://oval-community-guidelines.readthedocs.io/en/v5.12.2/
-
-For OVAL 5.11.2 Documentation (SCAP 1.3): https://oval-community-guidelines.readthedocs.io/en/5.11.2_release
-
-For OVAL 6.0 Documentation (Future SCAP 3.0): https://oval-community-guidelines.readthedocs.io/en/v6.0/
 
 # Notice:
 
