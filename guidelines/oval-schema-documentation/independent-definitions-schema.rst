@@ -799,10 +799,10 @@ Attributes
       - Desc.  
     * - error_if_exit_status_not_0  
       - xsd:boolean (optional *default*='false')  
-      - 'error_if_exit_status_not_0' enables the OVAL interpeter to set the shellcommand item to a status of 'error' if exit_status is not set to 0. The default is false.  
+      - 'error_if_exit_status_not_0' enables the OVAL interpeter to set the corresponding shellcommand system-characteristicsobject with a flag of 'error' if exit_status is not set to 0. The default is false.  
     * - error_if_stderr_exists  
       - xsd:boolean (optional *default*='false')  
-      - 'error_if_stderr_exists' enables the OVAL interpeter to set the shellcommand item to a status of 'error' if data is returned to stderr. The default is false.  
+      - 'error_if_stderr_exists' enables the OVAL interpeter to set the corresponding shellcommand system-characteristics object with a flag of 'error' if data is returned to stderr. The default is false.  
   
   
 ______________
@@ -1250,8 +1250,8 @@ Attributes
       - 'singleline' enables single line semantics in the regular expression provided by the pattern entity. This behavior is intended to align with the Perl regular expression 's' modifier: if true, the '.' metacharacter will match newlines. If false, it will not. The default is false.  
     * - item_creation  
       - Restriction of xsd:string (optional *default*='all_object_elements_fullfilled') ('all_object_elements_fullfilled', 'filepath_exists')  
-      - For 'all_object_elements_fullfilled', items are only created when the entire object requirements are met (filepath, pattern, instance).  
-For 'filepath_exists', items are created for each filepath on the system that matches the filepath/path/filname object requirement. This option will prevent false negatives in instances where text files exist that match the filepath object requirements, but do not contain the required pattern inside the file, which prevents item creation.  
+      - For 'all_object_elements_fullfilled', items are only created when the entire object requirements are met (filepath, pattern, instance). In other words, items are created only when both a designated file exists and the specified pattern matches at least once within its contents.  
+For 'filepath_exists', items are created for each filepath on the system that matches the filepath/path/filname object requirement, whether or not there are any matches to the specified pattern. This option can be used to prevent false negatives in instances where text files exist that match the filepath object requirements, but do not contain the required pattern inside the file, which would otherwise prevent item creation.  
 If the 'item_creation' behavior causes collection of an OVAL item with status of 'exists', the associated system_characteristics object(s) will reflect the existence of that collected item.  
   
   
