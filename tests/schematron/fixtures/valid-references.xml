@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<oval-def:oval_definitions
+    xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5"
+    xmlns:junos-def="http://oval.mitre.org/XMLSchema/oval-definitions-5#junos">
+    <oval-def:tests>
+        <junos-def:show_test id="oval:org.example:tst:1">
+            <junos-def:object object_ref="oval:org.example:obj:1"/>
+            <junos-def:state state_ref="oval:org.example:ste:1"/>
+        </junos-def:show_test>
+    </oval-def:tests>
+    <oval-def:objects>
+        <junos-def:show_object id="oval:org.example:obj:1"/>
+    </oval-def:objects>
+    <oval-def:states>
+        <junos-def:show_state id="oval:org.example:ste:1"/>
+    </oval-def:states>
+</oval-def:oval_definitions>

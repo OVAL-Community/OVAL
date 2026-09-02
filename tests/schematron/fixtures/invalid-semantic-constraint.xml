@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<oval-def:oval_definitions
+    xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5"
+    xmlns:junos-def="http://oval.mitre.org/XMLSchema/oval-definitions-5#junos">
+    <oval-def:objects>
+        <junos-def:xml_config_object id="oval:org.example:obj:1">
+            <junos-def:xpath operation="pattern match">/configuration/system</junos-def:xpath>
+        </junos-def:xml_config_object>
+    </oval-def:objects>
+</oval-def:oval_definitions>

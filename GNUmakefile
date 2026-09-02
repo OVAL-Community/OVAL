@@ -6,11 +6,14 @@ SAXON_LIB=rsrc/Saxon-HE.jar
 DOCS=docs
 OVAL_SRC=oval-schemas
 OVAL_DOCS:=$(foreach schema, $(shell find $(OVAL_SRC) -name *.xsd ! -name xmldsig*), $(DOCS)/$(notdir $(basename $(schema))).html)
+PYTHON?=python3
+SCHEMATRON_BUILD_DIR=build/schematron
 
 all: ${SAXON_LIB} oval_docs-${OVAL_VERSION}.zip schemas-${OVAL_VERSION}.zip
 
 clean:
 	rm -rf $(DOCS)
+	rm -rf $(SCHEMATRON_BUILD_DIR)
 	rm -f schemas-*.zip
 	rm -f oval_docs-*.zip
 	rm -f ${SAXON_LIB}
@@ -31,5 +34,13 @@ $(DOCS)/index.html: rsrc/index.html
 ovaldocs:
 	$(MAKE) -j$(NUMPROCS) $(OVAL_DOCS)
 
+schematron:
+	$(PYTHON) tools/check_schematron.py --schemas $(OVAL_SRC) --output $(SCHEMATRON_BUILD_DIR)
+
+check-schematron:
+	$(PYTHON) -m unittest discover -s tests/schematron -v
+
 $(DOCS)/%.html: $(OVAL_SRC)/%.xsd
 	java -jar $(SAXON_LIB) -s:$< -xsl:tools/oval_xsd2html.xsl -o:$@
+
+.PHONY: all clean ovaldocs schematron check-schematron
