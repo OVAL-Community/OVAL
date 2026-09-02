@@ -310,7 +310,7 @@
                     <sch:rule context="aws-def:apicontent_test/aws-def:object">
                         <sch:assert test="@object_ref=ancestor::oval-def:oval_definitions/oval-def:objects/aws-def:apicontent_object/@id"><sch:value-of select="../@id"/> - the object child element of a apicontent_test must reference a apicontent_object</sch:assert>
                     </sch:rule>
-                    <sch:rule context="aws-def:api_test/aws-def:state">
+                    <sch:rule context="aws-def:apicontent_test/aws-def:state">
                         <sch:assert test="@state_ref=ancestor::oval-def:oval_definitions/oval-def:states/aws-def:apicontent_state/@id"><sch:value-of select="../@id"/> - the state child element of a apicontent_test must reference a apicontent_state</sch:assert>
                     </sch:rule>
                 </sch:pattern>

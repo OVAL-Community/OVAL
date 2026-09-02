@@ -18,6 +18,26 @@
                   <terms_of_use>This software is an open standard developed by multiple parties, including the United States Government (Government). The Government hereby grants you a non-exclusive, royalty-free, worldwide license to use, modify, and/or reproduce the software for any lawful purpose provided that you reproduce this License/Disclaimer language with any use/modification/copy of the software. The Government assumes no responsibility whatsoever for this software's use by other parties, and the software is provided "AS IS" without warranty or guarantee of any kind, express or implied, including, but not limited to, the warranties of merchantability, fitness for a particular purpose, and noninfringement. In no event shall the Government be liable for any claim, damages or other liability, whether in an action of contract, tort or other dealings in the software. The Government has no obligation hereunder to provide maintenance, support, updates, enhancements, or modifications to the software. Users may submit proposals and/or updates regarding the software, which proposals and/or updates the Government, at its sole discretion, can choose to incorporate into the software. Proposals and/or updates submitted to the Government by users must be accompanied by a license to such proposals and/or updates that is no more restrictive than this License/Disclaimer.</terms_of_use><sch:ns prefix="oval-def" uri="http://oval.mitre.org/XMLSchema/oval-definitions-5"/>
                   <sch:ns prefix="win-def" uri="http://oval.mitre.org/XMLSchema/oval-definitions-5#windows"/>
                   <sch:ns prefix="xsi" uri="http://www.w3.org/2001/XMLSchema-instance"/>
+            <sch:pattern id="win-def_missing_reference_checks">
+                <sch:rule context="win-def:license_test/win-def:object">
+                    <sch:assert test="@object_ref=ancestor::oval-def:oval_definitions/oval-def:objects/win-def:license_object/@id"><sch:value-of select="../@id"/> - the object child element of a license_test must reference a license_object</sch:assert>
+                </sch:rule>
+                <sch:rule context="win-def:license_test/win-def:state">
+                    <sch:assert test="@state_ref=ancestor::oval-def:oval_definitions/oval-def:states/win-def:license_state/@id"><sch:value-of select="../@id"/> - the state child element of a license_test must reference a license_state</sch:assert>
+                </sch:rule>
+                <sch:rule context="win-def:peheader_test/win-def:object">
+                    <sch:assert test="@object_ref=ancestor::oval-def:oval_definitions/oval-def:objects/win-def:peheader_object/@id"><sch:value-of select="../@id"/> - the object child element of a peheader_test must reference a peheader_object</sch:assert>
+                </sch:rule>
+                <sch:rule context="win-def:peheader_test/win-def:state">
+                    <sch:assert test="@state_ref=ancestor::oval-def:oval_definitions/oval-def:states/win-def:peheader_state/@id"><sch:value-of select="../@id"/> - the state child element of a peheader_test must reference a peheader_state</sch:assert>
+                </sch:rule>
+                <sch:rule context="win-def:systemmetric_test/win-def:object">
+                    <sch:assert test="@object_ref=ancestor::oval-def:oval_definitions/oval-def:objects/win-def:systemmetric_object/@id"><sch:value-of select="../@id"/> - the object child element of a systemmetric_test must reference a systemmetric_object</sch:assert>
+                </sch:rule>
+                <sch:rule context="win-def:systemmetric_test/win-def:state">
+                    <sch:assert test="@state_ref=ancestor::oval-def:oval_definitions/oval-def:states/win-def:systemmetric_state/@id"><sch:value-of select="../@id"/> - the state child element of a systemmetric_test must reference a systemmetric_state</sch:assert>
+                </sch:rule>
+            </sch:pattern>
             </xsd:appinfo>
       </xsd:annotation>
       <!-- =============================================================================== -->

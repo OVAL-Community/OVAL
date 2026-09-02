@@ -18,6 +18,30 @@
             <sch:ns prefix="oval-def" uri="http://oval.mitre.org/XMLSchema/oval-definitions-5"/>
             <sch:ns prefix="junos-def" uri="http://oval.mitre.org/XMLSchema/oval-definitions-5#junos"/>
             <sch:ns prefix="xsi" uri="http://www.w3.org/2001/XMLSchema-instance"/>
+            <sch:pattern id="junos-def_showtst">
+                <sch:rule context="junos-def:show_test/junos-def:object">
+                    <sch:assert test="@object_ref=ancestor::oval-def:oval_definitions/oval-def:objects/junos-def:show_object/@id"><sch:value-of select="../@id"/> - the object child element of a show_test must reference a show_object</sch:assert>
+                </sch:rule>
+                <sch:rule context="junos-def:show_test/junos-def:state">
+                    <sch:assert test="@state_ref=ancestor::oval-def:oval_definitions/oval-def:states/junos-def:show_state/@id"><sch:value-of select="../@id"/> - the state child element of a show_test must reference a show_state</sch:assert>
+                </sch:rule>
+            </sch:pattern>
+            <sch:pattern id="junos-def_versiontst">
+                <sch:rule context="junos-def:version_test/junos-def:object">
+                    <sch:assert test="@object_ref=ancestor::oval-def:oval_definitions/oval-def:objects/junos-def:version_object/@id"><sch:value-of select="../@id"/> - the object child element of a version_test must reference a version_object</sch:assert>
+                </sch:rule>
+                <sch:rule context="junos-def:version_test/junos-def:state">
+                    <sch:assert test="@state_ref=ancestor::oval-def:oval_definitions/oval-def:states/junos-def:version_state/@id"><sch:value-of select="../@id"/> - the state child element of a version_test must reference a version_state</sch:assert>
+                </sch:rule>
+            </sch:pattern>
+            <sch:pattern id="junos-def_xmlshowtst">
+                <sch:rule context="junos-def:xml_show_test/junos-def:object">
+                    <sch:assert test="@object_ref=ancestor::oval-def:oval_definitions/oval-def:objects/junos-def:xml_show_object/@id"><sch:value-of select="../@id"/> - the object child element of a xml_show_test must reference a xml_show_object</sch:assert>
+                </sch:rule>
+                <sch:rule context="junos-def:xml_show_test/junos-def:state">
+                    <sch:assert test="@state_ref=ancestor::oval-def:oval_definitions/oval-def:states/junos-def:xml_show_state/@id"><sch:value-of select="../@id"/> - the state child element of a xml_show_test must reference a xml_show_state</sch:assert>
+                </sch:rule>
+            </sch:pattern>
         </xsd:appinfo>
     </xsd:annotation>
     <!-- ============================================================================ -->

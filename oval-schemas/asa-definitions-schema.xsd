@@ -1154,12 +1154,12 @@
 						</oval:deprecated_info>
 					</xsd:appinfo>
                   <xsd:appinfo>
-                        <sch:pattern id="asatst">
+                        <sch:pattern id="asa-def_tcp_maptst">
                               <sch:rule context="asa-def:tcp_map_test/asa-def:object">
-                                    <sch:assert test="@object_ref=ancestor::oval-def:oval_definitions/oval-def:objects/asa-def:service_policy_object/@id"><sch:value-of select="../@id"/> - the object child element of an service_policy_test must reference an service_policy_object</sch:assert>
+                                    <sch:assert test="@object_ref=ancestor::oval-def:oval_definitions/oval-def:objects/asa-def:tcp_map_object/@id"><sch:value-of select="../@id"/> - the object child element of a tcp_map_test must reference a tcp_map_object</sch:assert>
                               </sch:rule>
                               <sch:rule context="asa-def:tcp_map_test/asa-def:state">
-                                    <sch:assert test="@state_ref=ancestor::oval-def:oval_definitions/oval-def:states/asa-def:service_policy_state/@id"><sch:value-of select="../@id"/> - the state child element of an service_policy_test must reference an service_policy_state</sch:assert>
+                                    <sch:assert test="@state_ref=ancestor::oval-def:oval_definitions/oval-def:states/asa-def:tcp_map_state/@id"><sch:value-of select="../@id"/> - the state child element of a tcp_map_test must reference a tcp_map_state</sch:assert>
                               </sch:rule>
                         </sch:pattern>
                   </xsd:appinfo>
