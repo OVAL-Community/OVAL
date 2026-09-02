@@ -17,6 +17,11 @@ SCH_NS = "http://purl.oclc.org/dsdl/schematron"
 OVAL_COMMON_NS = "http://oval.mitre.org/XMLSchema/oval-common-5"
 NS = {"xsd": XSD_NS, "sch": SCH_NS, "oval": OVAL_COMMON_NS}
 QNAME = re.compile(r"(?<![@\w.-])([A-Za-z_][\w.-]*):([A-Za-z_][\w.-]*)")
+# A single parent/child step, e.g. "win-def:registry_test/win-def:object". Deeper
+# paths and "//" descendant steps are deliberately not matched.
+CHILD_STEP = re.compile(
+    r"^([A-Za-z_][\w.-]*):([A-Za-z_][\w.-]*)/([A-Za-z_][\w.-]*):([A-Za-z_][\w.-]*)$"
+)
 EXCLUDED_SCHEMAS = {"evaluation-ids.xsd", "xmldsig-core-schema.xsd"}
 # Instance section that each top-level substitution group lands in.
 SECTIONS = {"oval-def:test": "tests", "oval-def:object": "objects", "oval-def:state": "states"}
@@ -86,6 +91,8 @@ class Audit:
                     if prefix and prefix not in declared
                 }
             )
+            target_namespace = document.getroot().get("targetNamespace")
+            children = child_elements(document)
             for rule in document.xpath("//sch:rule[@context]", namespaces=NS):
                 context = rule.get("context", "")
                 for prefix, name in QNAME.findall(context):
@@ -96,6 +103,26 @@ class Audit:
                         self.error(
                             path,
                             f"unknown element {prefix}:{name} in context {context!r}",
+                        )
+                # Both names existing somewhere in the namespace is not enough:
+                # the child has to belong to the parent the context names.
+                for step in context.split("|"):
+                    match = CHILD_STEP.match(step.strip())
+                    if not match:
+                        continue
+                    parent_prefix, parent, child_prefix, child = match.groups()
+                    if target_namespace not in (
+                        declared.get(parent_prefix),
+                        declared.get(child_prefix),
+                    ):
+                        continue
+                    if declared.get(parent_prefix) != declared.get(child_prefix):
+                        continue
+                    if parent in children and child not in children[parent]:
+                        self.error(
+                            path,
+                            f"{parent} has no {child} child, so context {step.strip()!r} "
+                            "can never match",
                         )
 
     def audit_reference_coverage(self) -> None:
@@ -214,6 +241,17 @@ def element_mappings(document: etree._ElementTree) -> dict[str, tuple[str | None
         if test:
             mappings[test] = (child_text(mapping, "object"), child_text(mapping, "state"))
     return mappings
+
+
+def child_elements(document: etree._ElementTree) -> dict[str, set[str]]:
+    """Named descendants declared inside each top-level element."""
+    return {
+        element.get("name"): {
+            child.get("name")
+            for child in element.xpath(".//xsd:element[@name]", namespaces=NS)
+        }
+        for element in document.xpath("/xsd:schema/xsd:element[@name]", namespaces=NS)
+    }
 
 
 def section_elements(document: etree._ElementTree) -> list[etree._Element]:
