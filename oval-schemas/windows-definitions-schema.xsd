@@ -38,6 +38,17 @@
                     <sch:assert test="@state_ref=ancestor::oval-def:oval_definitions/oval-def:states/win-def:systemmetric_state/@id"><sch:value-of select="../@id"/> - the state child element of a systemmetric_test must reference a systemmetric_state</sch:assert>
                 </sch:rule>
             </sch:pattern>
+            <sch:pattern id="win-def_peheader_object_verify_filter_state">
+                <sch:rule context="win-def:peheader_object//oval-def:filter">
+                    <sch:let name="parent_object" value="ancestor::win-def:peheader_object"/>
+                    <sch:let name="parent_object_id" value="$parent_object/@id"/>
+                    <sch:let name="state_ref" value="."/>
+                    <sch:let name="reffed_state" value="ancestor::oval-def:oval_definitions/oval-def:states/*[@id=$state_ref]"/>
+                    <sch:let name="state_name" value="local-name($reffed_state)"/>
+                    <sch:let name="state_namespace" value="namespace-uri($reffed_state)"/>
+                    <sch:assert test="(($state_namespace='http://oval.mitre.org/XMLSchema/oval-definitions-5#windows') and ($state_name='peheader_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type.</sch:assert>
+                </sch:rule>
+            </sch:pattern>
             </xsd:appinfo>
       </xsd:annotation>
       <!-- =============================================================================== -->
@@ -3731,6 +3742,19 @@
       <xsd:element name="license_object" substitutionGroup="oval-def:object">
             <xsd:annotation>
                   <xsd:documentation>The license_object element is used by a license_test to define the object to be evaluated. Each object extends the standard ObjectType as defined in the oval-definitions-schema and one should refer to the ObjectType description for more information. The common set element allows complex objects to be created using filters and set logic. Again, please refer to the description of the set element in the oval-definitions-schema.</xsd:documentation>
+                  <xsd:appinfo>
+                        <sch:pattern id="win-def_license_object_verify_filter_state">
+                              <sch:rule context="win-def:license_object//oval-def:filter">
+                                    <sch:let name="parent_object" value="ancestor::win-def:license_object"/>
+                                    <sch:let name="parent_object_id" value="$parent_object/@id"/>
+                                    <sch:let name="state_ref" value="."/>
+                                    <sch:let name="reffed_state" value="ancestor::oval-def:oval_definitions/oval-def:states/*[@id=$state_ref]"/>
+                                    <sch:let name="state_name" value="local-name($reffed_state)"/>
+                                    <sch:let name="state_namespace" value="namespace-uri($reffed_state)"/>
+                                    <sch:assert test="(($state_namespace='http://oval.mitre.org/XMLSchema/oval-definitions-5#windows') and ($state_name='license_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
+                              </sch:rule>
+                        </sch:pattern>
+                  </xsd:appinfo>
             </xsd:annotation>
             <xsd:complexType>
                   <xsd:complexContent>
@@ -8033,6 +8057,19 @@
       <xsd:element name="systemmetric_object" substitutionGroup="oval-def:object">
             <xsd:annotation>
                   <xsd:documentation>The system metric object element is used by a system metric test to define the object to be evaluated. Each object extends the standard ObjectType as defined in the oval-definitions-schema and one should refer to the ObjectType description for more information. The common set element allows complex objects to be created using filters and set logic. Again, please refer to the description of the set element in the oval-definitions-schema.</xsd:documentation>
+                  <xsd:appinfo>
+                        <sch:pattern id="win-def_systemmetric_object_verify_filter_state">
+                              <sch:rule context="win-def:systemmetric_object//oval-def:filter">
+                                    <sch:let name="parent_object" value="ancestor::win-def:systemmetric_object"/>
+                                    <sch:let name="parent_object_id" value="$parent_object/@id"/>
+                                    <sch:let name="state_ref" value="."/>
+                                    <sch:let name="reffed_state" value="ancestor::oval-def:oval_definitions/oval-def:states/*[@id=$state_ref]"/>
+                                    <sch:let name="state_name" value="local-name($reffed_state)"/>
+                                    <sch:let name="state_namespace" value="namespace-uri($reffed_state)"/>
+                                    <sch:assert test="(($state_namespace='http://oval.mitre.org/XMLSchema/oval-definitions-5#windows') and ($state_name='systemmetric_state'))">State referenced in filter for <sch:value-of select="name($parent_object)"/> '<sch:value-of select="$parent_object_id"/>' is of the wrong type. </sch:assert>
+                              </sch:rule>
+                        </sch:pattern>
+                  </xsd:appinfo>
             </xsd:annotation>
             <xsd:complexType>
                   <xsd:complexContent>
