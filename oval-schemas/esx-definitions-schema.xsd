@@ -19,6 +19,7 @@
                   <sch:ns prefix="oval-def" uri="http://oval.mitre.org/XMLSchema/oval-definitions-5"/>
                   <sch:ns prefix="esx-def" uri="http://oval.mitre.org/XMLSchema/oval-definitions-5#esx"/>
                   <sch:ns prefix="xsi" uri="http://www.w3.org/2001/XMLSchema-instance"/>
+                  <sch:pattern id="esx-def_declared_deprecations"><sch:rule context="esx-def:patch56_test | esx-def:version_test | esx-def:visdkmanagedobject_test"><sch:report test="true()">DEPRECATED ELEMENT: <sch:value-of select="name()"/> ID: <sch:value-of select="@id"/></sch:report></sch:rule></sch:pattern>
             </xsd:appinfo>
       </xsd:annotation>
       <!-- =============================================================================== -->

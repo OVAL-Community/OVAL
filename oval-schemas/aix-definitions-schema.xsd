@@ -18,6 +18,7 @@
                   <sch:ns prefix="oval-def" uri="http://oval.mitre.org/XMLSchema/oval-definitions-5"/>
                   <sch:ns prefix="aix-def" uri="http://oval.mitre.org/XMLSchema/oval-definitions-5#aix"/>
                   <sch:ns prefix="xsi" uri="http://www.w3.org/2001/XMLSchema-instance"/>
+                  <sch:pattern id="aix-def_declared_deprecations"><sch:rule context="aix-def:interim_fix_test | aix-def:no_test | aix-def:oslevel_test"><sch:report test="true()">DEPRECATED ELEMENT: <sch:value-of select="name()"/> ID: <sch:value-of select="@id"/></sch:report></sch:rule></sch:pattern>
             </xsd:appinfo>
       </xsd:annotation>
       <!-- =============================================================================== -->

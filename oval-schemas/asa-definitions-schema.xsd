@@ -19,6 +19,7 @@
                   <sch:ns prefix="oval-def" uri="http://oval.mitre.org/XMLSchema/oval-definitions-5" />
                   <sch:ns prefix="asa-def" uri="http://oval.mitre.org/XMLSchema/oval-definitions-5#asa" />
                   <sch:ns prefix="xsi" uri="http://www.w3.org/2001/XMLSchema-instance" />
+                  <sch:pattern id="asa-def_declared_deprecations"><sch:rule context="asa-def:acl_test | asa-def:class_map_test | asa-def:interface_test | asa-def:policy_map_test | asa-def:service_policy_test | asa-def:snmp_host_test | asa-def:snmp_user_test | asa-def:snmp_group_test | asa-def:tcp_map_test"><sch:report test="true()">DEPRECATED ELEMENT: <sch:value-of select="name()"/> ID: <sch:value-of select="@id"/></sch:report></sch:rule></sch:pattern>
             </xsd:appinfo>
       </xsd:annotation>
       <!-- =============================================================================== -->

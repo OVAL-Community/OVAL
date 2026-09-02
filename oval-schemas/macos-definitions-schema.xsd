@@ -19,6 +19,7 @@
                   <sch:ns prefix="oval-def" uri="http://oval.mitre.org/XMLSchema/oval-definitions-5"/>
                   <sch:ns prefix="macos-def" uri="http://oval.mitre.org/XMLSchema/oval-definitions-5#macos"/>
                   <sch:ns prefix="xsi" uri="http://www.w3.org/2001/XMLSchema-instance"/>
+                  <sch:pattern id="macos-def_declared_deprecations"><sch:rule context="macos-def:corestorage_test | macos-def:inetlisteningserver510_test | macos-def:nvram_test | macos-def:pwpolicy59_test | macos-def:rlimit_test"><sch:report test="true()">DEPRECATED ELEMENT: <sch:value-of select="name()"/> ID: <sch:value-of select="@id"/></sch:report></sch:rule></sch:pattern>
             </xsd:appinfo>
       </xsd:annotation>
       <!-- =============================================================================== -->

@@ -18,6 +18,7 @@
             <sch:ns prefix="oval-def" uri="http://oval.mitre.org/XMLSchema/oval-definitions-5"/>
             <sch:ns prefix="junos-def" uri="http://oval.mitre.org/XMLSchema/oval-definitions-5#junos"/>
             <sch:ns prefix="xsi" uri="http://www.w3.org/2001/XMLSchema-instance"/>
+            <sch:pattern id="junos-def_declared_deprecations"><sch:rule context="junos-def:xml_config_test | junos-def:version_test | junos-def:xml_show_test"><sch:report test="true()">DEPRECATED ELEMENT: <sch:value-of select="name()"/> ID: <sch:value-of select="@id"/></sch:report></sch:rule></sch:pattern>
             <sch:pattern id="junos-def_showtst">
                 <sch:rule context="junos-def:show_test/junos-def:object">
                     <sch:assert test="@object_ref=ancestor::oval-def:oval_definitions/oval-def:objects/junos-def:show_object/@id"><sch:value-of select="../@id"/> - the object child element of a show_test must reference a show_object</sch:assert>

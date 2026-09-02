@@ -20,6 +20,7 @@
             <sch:ns prefix="oval-def" uri="http://oval.mitre.org/XMLSchema/oval-definitions-5"/>
             <sch:ns prefix="iosxe-def" uri="http://oval.mitre.org/XMLSchema/oval-definitions-5#iosxe"/>
             <sch:ns prefix="xsi" uri="http://www.w3.org/2001/XMLSchema-instance"/>
+            <sch:pattern id="iosxe-def_declared_deprecations"><sch:rule context="iosxe-def:router_test | iosxe-def:acl_test | iosxe-def:snmpview_test"><sch:report test="true()">DEPRECATED ELEMENT: <sch:value-of select="name()"/> ID: <sch:value-of select="@id"/></sch:report></sch:rule></sch:pattern>
             <sch:pattern id="iosxe-def_interface_object_verify_filter_state">
                 <sch:rule context="iosxe-def:interface_object//oval-def:filter">
                     <sch:let name="parent_object" value="ancestor::iosxe-def:interface_object"/>

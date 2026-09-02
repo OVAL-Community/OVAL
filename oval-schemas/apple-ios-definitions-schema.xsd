@@ -20,6 +20,7 @@
       <sch:ns prefix="oval-def" uri="http://oval.mitre.org/XMLSchema/oval-definitions-5"/>
       <sch:ns prefix="apple-ios-def" uri="http://oval.mitre.org/XMLSchema/oval-definitions-5#apple_ios"/>
       <sch:ns prefix="xsi" uri="http://www.w3.org/2001/XMLSchema-instance"/>
+      <sch:pattern id="apple-ios-def_declared_deprecations"><sch:rule context="apple-ios-def:globalrestrictions_test | apple-ios-def:passcodepolicy_test | apple-ios-def:profile_test"><sch:report test="true()">DEPRECATED ELEMENT: <sch:value-of select="name()"/> ID: <sch:value-of select="@id"/></sch:report></sch:rule></sch:pattern>
     </xsd:appinfo>
   </xsd:annotation>
   <!-- =============================================================================== -->

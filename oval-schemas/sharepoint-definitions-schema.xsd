@@ -21,6 +21,7 @@
                   <sch:ns prefix="oval-def" uri="http://oval.mitre.org/XMLSchema/oval-definitions-5"/>
                   <sch:ns prefix="sp-def" uri="http://oval.mitre.org/XMLSchema/oval-definitions-5#sharepoint"/>
                   <sch:ns prefix="xsi" uri="http://www.w3.org/2001/XMLSchema-instance"/>
+                  <sch:pattern id="sp-def_declared_deprecations"><sch:rule context="sp-def:spwebapplication_test | sp-def:spgroup_test | sp-def:spweb_test | sp-def:splist_test | sp-def:spantivirussettings_test | sp-def:spsiteadministration_test | sp-def:spsite_test | sp-def:spcrawlrule_test | sp-def:spjobdefinition510_test | sp-def:bestbet_test | sp-def:infopolicycoll_test | sp-def:spdiagnosticsservice_test | sp-def:spdiagnosticslevel_test | sp-def:sppolicyfeature_test | sp-def:sppolicy_test"><sch:report test="true()">DEPRECATED ELEMENT: <sch:value-of select="name()"/> ID: <sch:value-of select="@id"/></sch:report></sch:rule></sch:pattern>
             </xsd:appinfo>
       </xsd:annotation>
       <!-- =============================================================================== -->

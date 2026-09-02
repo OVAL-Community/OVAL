@@ -19,6 +19,7 @@
                <sch:ns prefix="oval-def" uri="http://oval.mitre.org/XMLSchema/oval-definitions-5"/>
                <sch:ns prefix="linux-def" uri="http://oval.mitre.org/XMLSchema/oval-definitions-5#linux"/>
                <sch:ns prefix="xsi" uri="http://www.w3.org/2001/XMLSchema-instance"/>
+               <sch:pattern id="linux-def_declared_deprecations"><sch:rule context="linux-def:iflisteners_test | linux-def:slackwarepkginfo_test"><sch:report test="true()">DEPRECATED ELEMENT: <sch:value-of select="name()"/> ID: <sch:value-of select="@id"/></sch:report></sch:rule></sch:pattern>
           </xsd:appinfo>
      </xsd:annotation>
      <!-- =============================================================================== -->

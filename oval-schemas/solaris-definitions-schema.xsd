@@ -18,6 +18,7 @@
                   <sch:ns prefix="oval-def" uri="http://oval.mitre.org/XMLSchema/oval-definitions-5"/>
                   <sch:ns prefix="sol-def" uri="http://oval.mitre.org/XMLSchema/oval-definitions-5#solaris"/>
                   <sch:ns prefix="xsi" uri="http://www.w3.org/2001/XMLSchema-instance"/>
+                  <sch:pattern id="sol-def_declared_deprecations"><sch:rule context="sol-def:facet_test | sol-def:image_test | sol-def:isainfo_test | sol-def:ndd_test | sol-def:package_test | sol-def:package511_test | sol-def:packageavoidlist_test | sol-def:packagecheck_test | sol-def:packagefreezelist_test | sol-def:packagepublisher_test | sol-def:patch54_test | sol-def:variant_test | sol-def:virtualizationinfo_test"><sch:report test="true()">DEPRECATED ELEMENT: <sch:value-of select="name()"/> ID: <sch:value-of select="@id"/></sch:report></sch:rule></sch:pattern>
             </xsd:appinfo>
       </xsd:annotation>
       <!-- =============================================================================== -->

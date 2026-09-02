@@ -18,6 +18,7 @@
       <sch:ns prefix="oval-def" uri="http://oval.mitre.org/XMLSchema/oval-definitions-5"/>
       <sch:ns prefix="android-def" uri="http://oval.mitre.org/XMLSchema/oval-definitions-5#android"/>
       <sch:ns prefix="xsi" uri="http://www.w3.org/2001/XMLSchema-instance"/>
+      <sch:pattern id="android-def_declared_deprecations"><sch:rule context="android-def:appmanager_test | android-def:bluetooth_test | android-def:camera_test | android-def:certificate_test | android-def:devicesettings_test | android-def:encryption_test | android-def:locationservice_test | android-def:network_test | android-def:password_test | android-def:systemdetails_test | android-def:wifi_test | android-def:wifinetwork_test | android-def:telephony_test"><sch:report test="true()">DEPRECATED ELEMENT: <sch:value-of select="name()"/> ID: <sch:value-of select="@id"/></sch:report></sch:rule></sch:pattern>
     </xsd:appinfo>
   </xsd:annotation>
   <!-- =============================================================================== -->
