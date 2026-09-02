@@ -67,8 +67,8 @@
             <xsd:documentation>The config_object element is used by a config_test to define the object to be evaluated. Each object extends the standard ObjectType as defined in the oval-definitions-schema and one should refer to the ObjectType description for more information. The common set element allows complex objects to be created using filters and set logic. Again, please refer to the description of the set element in the oval-definitions-schema.</xsd:documentation>
             <xsd:documentation>A config_object consists of an xpath entity that contains an XPATH 1.0 query to perform on the NETCONF get-config response XML data.  The response data is assumed to consist of a &lt;data&gt; entity in the urn:ietf:params:xml:ns:netconf:base:1.0 XML namespace, with arbitrary (i.e., vendor-specific) child nodes.</xsd:documentation>
             <xsd:appinfo>
-                <sch:pattern id="netconf-def_netconf_object_verify_filter_state">
-                    <sch:rule context="netconf-def:netconf_object//oval-def:filter">
+                <sch:pattern id="netconf-def_config_object_verify_filter_state">
+                    <sch:rule context="netconf-def:config_object//oval-def:filter">
                         <sch:let name="parent_object" value="ancestor::netconf-def:config_object"/>
                         <sch:let name="parent_object_id" value="$parent_object/@id"/>
                         <sch:let name="state_ref" value="."/>

@@ -771,7 +771,7 @@ The evaluation of the object should always produce one item.  If the object eval
                                         <xsd:documentation>The value entity holds the target(s) of the specified YAML Path. A single scalar value or a list of scalar values (where there is no key to associate) would have the name attribute of the field element set to '#'. Due to the limitation of the record type field names could not contain uppercase letters, they will be converted to the lowercase and escaped using the '^' symbol (the '^' symbol would be escaped as well). For example 'myCamelCase^Key' would be collected as 'my^camel^case^^^key'.</xsd:documentation>
                                         <xsd:appinfo>
                                              <sch:pattern id="ind-sc_yamlfile_itemvalue">
-                                                  <sch:rule context="ind-sc:yamlfile_item/ind-sc:value">
+                                          <sch:rule context="ind-sc:yamlfilecontent_item/ind-sc:value">
                                                        <sch:assert test="@datatype='record'"><sch:value-of select="../@id"/> - datatype attribute for the value entity of a yamlfile_item must be 'record'</sch:assert>
                                                   </sch:rule>
                                              </sch:pattern>

@@ -423,7 +423,7 @@
                   <xsd:documentation>The disabledservice_object element is used by a disabledservice_test to define the service domain to be evaluated. It is a singleton object. Each object extends the standard ObjectType as defined in the oval-definitions-schema and one should refer to the ObjectType description for more information. The common set element allows complex objects to be created using filters and set logic. Again, please refer to the description of the set element in the oval-definitions-schema.</xsd:documentation>
                   <xsd:appinfo>
                         <sch:pattern id="macos-def_disabledsvc_object_verify_filter_state">
-                              <sch:rule context="macos-def:macos_object//oval-def:filter">
+                              <sch:rule context="macos-def:disabledservice_object//oval-def:filter">
                                     <sch:let name="parent_object" value="ancestor::macos-def:disabledservice_object"/>
                                     <sch:let name="parent_object_id" value="$parent_object/@id"/>
                                     <sch:let name="state_ref" value="."/>
@@ -1698,7 +1698,7 @@
                   <xsd:documentation>A launchd_object consists of a label (name) entity that contains the name of the agent/daemon whose attributes will be queried.</xsd:documentation>
                   <xsd:appinfo>
                         <sch:pattern id="macos-def_launchd_object_verify_filter_state">
-                              <sch:rule context="macos-def:macos_object//oval-def:filter">
+                              <sch:rule context="macos-def:launchd_object//oval-def:filter">
                                     <sch:let name="parent_object" value="ancestor::macos-def:launchd_object"/>
                                     <sch:let name="parent_object_id" value="$parent_object/@id"/>
                                     <sch:let name="state_ref" value="."/>
@@ -1901,7 +1901,7 @@
                   <xsd:documentation>The nvram512_object element is used by an nvram512_test to define the service domain to be evaluated. Each object extends the standard ObjectType as defined in the oval-definitions-schema and one should refer to the ObjectType description for more information. The common set element allows complex objects to be created using filters and set logic. Again, please refer to the description of the set element in the oval-definitions-schema.</xsd:documentation>
                   <xsd:appinfo>
                         <sch:pattern id="macos-def_nvram512_object_verify_filter_state">
-                              <sch:rule context="macos-def:macos_object//oval-def:filter">
+                              <sch:rule context="macos-def:nvram512_object//oval-def:filter">
                                     <sch:let name="parent_object" value="ancestor::macos-def:nvram512_object"/>
                                     <sch:let name="parent_object_id" value="$parent_object/@id"/>
                                     <sch:let name="state_ref" value="."/>

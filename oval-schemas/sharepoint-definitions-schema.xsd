@@ -1669,11 +1669,11 @@
 					</xsd:appinfo>
                   <xsd:appinfo>
                         <sch:pattern id="sp-def_infopolicycolltst">
-                              <sch:rule context="sp-def:policycoll_test/sp-def:object">
-                                    <sch:assert test="@object_ref=ancestor::oval-def:oval_definitions/oval-def:objects/sp-def:policycoll_object/@id"><sch:value-of select="../@id"/> - the object child element of a policycoll_test must reference an policycoll_object</sch:assert>
+                              <sch:rule context="sp-def:infopolicycoll_test/sp-def:object">
+                                    <sch:assert test="@object_ref=ancestor::oval-def:oval_definitions/oval-def:objects/sp-def:infopolicycoll_object/@id"><sch:value-of select="../@id"/> - the object child element of an infopolicycoll_test must reference an infopolicycoll_object</sch:assert>
                               </sch:rule>
-                              <sch:rule context="sp-def:policycoll_test/sp-def:state">
-                                    <sch:assert test="@state_ref=ancestor::oval-def:oval_definitions/oval-def:states/sp-def:policycoll_state/@id"><sch:value-of select="../@id"/> - the state child element of a policycoll_test must reference an policycoll_state</sch:assert>
+                              <sch:rule context="sp-def:infopolicycoll_test/sp-def:state">
+                                    <sch:assert test="@state_ref=ancestor::oval-def:oval_definitions/oval-def:states/sp-def:infopolicycoll_state/@id"><sch:value-of select="../@id"/> - the state child element of an infopolicycoll_test must reference an infopolicycoll_state</sch:assert>
                               </sch:rule>
                         </sch:pattern>
                   </xsd:appinfo>

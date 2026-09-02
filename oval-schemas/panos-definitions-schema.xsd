@@ -95,8 +95,8 @@
                 child nodes.
             </xsd:documentation>
             <xsd:appinfo>
-                <sch:pattern id="panos-def_paloalto_object_verify_filter_state">
-                    <sch:rule context="panos-def:paloalto_object//oval-def:filter">
+                <sch:pattern id="panos-def_config_object_verify_filter_state">
+                    <sch:rule context="panos-def:config_object//oval-def:filter">
                         <sch:let name="parent_object" value="ancestor::panos-def:config_object"/>
                         <sch:let name="parent_object_id" value="$parent_object/@id"/>
                         <sch:let name="state_ref" value="."/>

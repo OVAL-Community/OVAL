@@ -2656,7 +2656,7 @@ SERVERPROPERTY('IsClustered') AS [is_clustered]
                                                 <xsd:documentation>The value entity specifies how to test objects in the value set of the specified YAML Path. To define tests for a single scalar value or a list of scalar values (where there is no key to associate), set the name attribute of the field element to '#'. Due to the limitation of the record type field names could not contain uppercase letters, they should be converted to the lowercase and escaped using the '^' symbol (the '^' symbol should be escaped as well). For example, to check a value associated with 'myCamelCase^Key' set the name attribute of the field to 'my^camel^case^^^key'. The check is entirely controlled by operator attributes of the field element.</xsd:documentation>
                                                 <xsd:appinfo>
                                                       <sch:pattern id="ind-def_yamlfilestevalue">
-                                                            <sch:rule context="ind-def:yamlfile_state/ind-def:value">
+                                                <sch:rule context="ind-def:yamlfilecontent_state/ind-def:value">
                                                                   <sch:assert test="@datatype='record'"><sch:value-of select="../@id"/> - datatype attribute for the value entity of a yamlfile_state must be 'record'</sch:assert>
                                                             </sch:rule>
                                                       </sch:pattern>

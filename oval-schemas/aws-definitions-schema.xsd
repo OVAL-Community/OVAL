@@ -566,10 +566,10 @@
             </xsd:appinfo>
             <xsd:appinfo>
                 <sch:pattern id="aws-def_credentialreportusertst">
-                    <sch:rule context="aws-def:test/aws-def:object">
+                    <sch:rule context="aws-def:credentialreportuser_test/aws-def:object">
                         <sch:assert test="@object_ref = ancestor::oval-def:oval_definitions/oval-def:objects/aws-def:credentialreportuser_object/@id"><sch:value-of select="../@id"/> - the object child element of a credentialreportuser_test must reference a credentialreportuser_object</sch:assert>
                     </sch:rule>
-                    <sch:rule context="aws-def:test/aws-def:state">
+                    <sch:rule context="aws-def:credentialreportuser_test/aws-def:state">
                         <sch:assert test="@state_ref = ancestor::oval-def:oval_definitions/oval-def:states/aws-def:credentialreportuser_state/@id"><sch:value-of select="../@id"/> - the state child element of a credentialreportuser_test must reference a credentialreportuser_state</sch:assert>
                     </sch:rule>
                 </sch:pattern>
@@ -754,10 +754,10 @@
             </xsd:appinfo>
             <xsd:appinfo>
                 <sch:pattern id="aws-def_credentialreportkeytst">
-                    <sch:rule context="aws-def:test/aws-def:object">
+                    <sch:rule context="aws-def:credentialreportkey_test/aws-def:object">
                         <sch:assert test="@object_ref = ancestor::oval-def:oval_definitions/oval-def:objects/aws-def:credentialreportkey_object/@id"><sch:value-of select="../@id"/> - the object child element of a credentialreportkey_test must reference a credentialreportkey_object</sch:assert>
                     </sch:rule>
-                    <sch:rule context="aws-def:test/aws-def:state">
+                    <sch:rule context="aws-def:credentialreportkey_test/aws-def:state">
                         <sch:assert test="@state_ref = ancestor::oval-def:oval_definitions/oval-def:states/aws-def:credentialreportkey_state/@id"><sch:value-of select="../@id"/> - the state child element of a credentialreportkey_test must reference a credentialreportkey_state</sch:assert>
                     </sch:rule>
                 </sch:pattern>
@@ -932,10 +932,10 @@
             </xsd:appinfo>
             <xsd:appinfo>
                 <sch:pattern id="aws-def_credentialreportcerttst">
-                    <sch:rule context="aws-def:test/aws-def:object">
+                    <sch:rule context="aws-def:credentialreportcert_test/aws-def:object">
                         <sch:assert test="@object_ref = ancestor::oval-def:oval_definitions/oval-def:objects/aws-def:credentialreportcert_object/@id"><sch:value-of select="../@id"/> - the object child element of a credentialreportcert_test must reference a credentialreportcert_object</sch:assert>
                     </sch:rule>
-                    <sch:rule context="aws-def:test/aws-def:state">
+                    <sch:rule context="aws-def:credentialreportcert_test/aws-def:state">
                         <sch:assert test="@state_ref = ancestor::oval-def:oval_definitions/oval-def:states/aws-def:credentialreportcert_state/@id"><sch:value-of select="../@id"/> - the state child element of a credentialreportcert_test must reference a credentialreportcert_state</sch:assert>
                     </sch:rule>
                 </sch:pattern>

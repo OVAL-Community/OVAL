@@ -593,7 +593,7 @@
 					</xsd:appinfo>
                   <xsd:appinfo>
                         <sch:pattern id="unix-def_file_ea_tst">
-                              <sch:rule context="unix-def:filextendedattribute_test/unix-def:object">
+                              <sch:rule context="unix-def:fileextendedattribute_test/unix-def:object">
                                     <sch:assert test="@object_ref=ancestor::oval-def:oval_definitions/oval-def:objects/unix-def:fileextendedattribute_object/@id"><sch:value-of select="../@id"/> - the object child element of a fileextendedattribute_test must reference a fileextendedattribute_object</sch:assert>
                               </sch:rule>
                               <sch:rule context="unix-def:fileextendedattribute_test/unix-def:state">
