@@ -1079,8 +1079,8 @@ A subexpression (using parentheses) can call out a piece of the matched stdout_l
 															</xsd:documentation>
                                                             <xsd:documentation>Note that when using regular expressions, OVAL supports a common subset of the regular expression character classes, operations, expressions and other lexical tokens defined within Perl 5's regular expression specification. For more information on the supported regular expression syntax in OVAL see: http://oval.mitre.org/language/about/re_support_5.6.html.</xsd:documentation>
                                                             <xsd:appinfo>
-                                                                  <sch:pattern id="ind-def_txt54objpattern">
-                                                                        <sch:rule context="ind-def:textfilecontent54_object/ind-def:pattern">
+                                                                  <sch:pattern id="ind-def_shellcommandobjpattern">
+                                                                        <sch:rule context="ind-def:shellcommand_object/ind-def:pattern">
                                                                               <sch:assert test="@operation='pattern match'"><sch:value-of select="../@id" /> - operation attribute for the pattern entity of a shellcommand_object should be 'pattern match'</sch:assert>
                                                                         </sch:rule>
                                                                   </sch:pattern>
@@ -1119,9 +1119,9 @@ A subexpression (using parentheses) can call out a piece of the matched stdout_l
                                           <xsd:annotation>
                                                 <xsd:documentation>The 'pattern' is a regular expression that identifies lines in 'command' results that are to produce OVAL items and must match the same element in the associated shellcommand_object, verbatim.</xsd:documentation>
                                                 <xsd:appinfo>
-                                                      <sch:pattern id="ind-def_txt54objpattern">
-                                                            <sch:rule context="ind-def:textfilecontent54_state/ind-def:pattern">
-                                                                  <sch:assert test="@operation='pattern match'"><sch:value-of select="../@id" /> - operation attribute for the pattern entity of a shellcommand_object should be 'pattern match'</sch:assert>
+                                                      <sch:pattern id="ind-def_shellcommandstatepattern">
+                                                            <sch:rule context="ind-def:shellcommand_state/ind-def:pattern">
+                                                                  <sch:assert test="not(@operation) or @operation='equals'"><sch:value-of select="../@id" /> - operation attribute for the pattern entity of a shellcommand_state should be 'equals'</sch:assert>
                                                             </sch:rule>
                                                       </sch:pattern>
                                                 </xsd:appinfo>
