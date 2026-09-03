@@ -12,6 +12,7 @@ jobs:
       CLEAN_FILES: |
         guidelines
         tools
+        tests
         .gitignore
         README.md
         readthedocs.yaml

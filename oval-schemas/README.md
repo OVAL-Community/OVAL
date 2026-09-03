@@ -5,7 +5,7 @@ If you are after a human-readable description of those schemas, check out [OVAL 
 
 ISO Schematron rules are embedded in `xsd:appinfo` elements in these XSD files. The embedded rules are authoritative; standalone `.sch` files are generated build artifacts and are not committed.
 
-Install the Python tooling dependencies and run the complete audit and regression suite:
+Install the Python tooling dependencies and run the complete audit and regression suite. These commands need a full checkout of the OVAL repository, since release branches contain only the schemas.
 
 ```sh
 python3 -m pip install -r tools/requirements.txt
